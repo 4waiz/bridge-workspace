@@ -1,0 +1,186 @@
+:root {
+  --bridge-brand-primary: #ff5622;
+  --bridge-brand-primary-hover: #d9481b;
+  --bridge-brand-primary-soft: rgba(255, 86, 34, 0.12);
+  --bridge-brand-ink: #434b51;
+  --bridge-brand-ink-strong: #2f363b;
+  --bridge-brand-muted: #72787d;
+  --bridge-brand-focus: rgba(255, 86, 34, 0.22);
+}
+
+html[data-theme='light'] {
+  --bridge-brand-bg: #f5f1ec;
+  --bridge-brand-surface: #ffffff;
+  --bridge-brand-surface-alt: #fbf8f5;
+  --bridge-brand-border: #d7d1ca;
+  --bridge-brand-border-strong: #c6beb7;
+  --bridge-brand-sidebar: #f0ebe5;
+  --bridge-brand-canvas: #f7f4f1;
+  --bridge-brand-grid: rgba(67, 75, 81, 0.08);
+  --bridge-brand-grid-strong: rgba(67, 75, 81, 0.13);
+  --bridge-brand-text-primary: var(--bridge-brand-ink);
+  --bridge-brand-text-secondary: #697076;
+  --bridge-brand-icon: #4a5157;
+  --bridge-brand-hover: rgba(67, 75, 81, 0.07);
+  --bridge-brand-overlay: #fffdfb;
+  --bridge-brand-modal: rgba(30, 35, 40, 0.12);
+}
+
+html[data-theme='dark'] {
+  --bridge-brand-bg: #181d21;
+  --bridge-brand-surface: #1f252a;
+  --bridge-brand-surface-alt: #242b30;
+  --bridge-brand-border: rgba(255, 255, 255, 0.08);
+  --bridge-brand-border-strong: rgba(255, 255, 255, 0.14);
+  --bridge-brand-sidebar: #171c20;
+  --bridge-brand-canvas: #1c2227;
+  --bridge-brand-grid: rgba(214, 219, 223, 0.08);
+  --bridge-brand-grid-strong: rgba(214, 219, 223, 0.14);
+  --bridge-brand-text-primary: rgba(255, 255, 255, 0.94);
+  --bridge-brand-text-secondary: rgba(255, 255, 255, 0.62);
+  --bridge-brand-icon: rgba(255, 255, 255, 0.82);
+  --bridge-brand-hover: rgba(255, 255, 255, 0.08);
+  --bridge-brand-overlay: #20272c;
+  --bridge-brand-modal: rgba(17, 20, 24, 0.48);
+}
+
+html[data-theme] {
+  --affine-brand-color: var(--bridge-brand-primary);
+  --affine-primary-color: var(--bridge-brand-primary);
+  --affine-secondary-color: var(--bridge-brand-primary-soft);
+  --affine-tertiary-color: rgba(255, 86, 34, 0.06);
+  --affine-hover-color: var(--bridge-brand-hover);
+  --affine-icon-color: var(--bridge-brand-icon);
+  --affine-icon-secondary: var(--bridge-brand-muted);
+  --affine-border-color: var(--bridge-brand-border);
+  --affine-divider-color: var(--bridge-brand-border);
+  --affine-placeholder-color: var(--bridge-brand-muted);
+  --affine-quote-color: var(--bridge-brand-muted);
+  --affine-link-color: var(--bridge-brand-primary);
+  --affine-edgeless-grid-color: var(--bridge-brand-grid);
+  --affine-edgeless-grid-strong-color: var(--bridge-brand-grid-strong);
+  --affine-text-emphasis-color: var(--bridge-brand-ink-strong);
+  --affine-text-primary-color: var(--bridge-brand-text-primary);
+  --affine-text-secondary-color: var(--bridge-brand-text-secondary);
+  --affine-blue: var(--bridge-brand-primary);
+  --affine-background-primary-color: var(--bridge-brand-bg);
+  --affine-background-secondary-color: var(--bridge-brand-surface-alt);
+  --affine-background-modal-color: var(--bridge-brand-modal);
+  --affine-background-overlay-panel-color: var(--bridge-brand-overlay);
+  --affine-background-code-block: var(--bridge-brand-surface-alt);
+  --affine-background-tertiary-color: var(--bridge-brand-surface);
+  --affine-v2-button-primary: var(--bridge-brand-primary);
+  --affine-v2-icon-activated: var(--bridge-brand-primary);
+  --affine-v2-icon-primary: var(--bridge-brand-icon);
+  --affine-v2-text-primary: var(--bridge-brand-text-primary);
+  --affine-v2-text-secondary: var(--bridge-brand-text-secondary);
+  --affine-v2-text-placeholder: var(--bridge-brand-muted);
+  --affine-v2-layer-background-primary: var(--bridge-brand-bg);
+  --affine-v2-layer-background-hoverOverlay: var(--bridge-brand-hover);
+  --affine-v2-layer-background-modal: var(--bridge-brand-modal);
+  --affine-v2-layer-background-overlayPanel: var(--bridge-brand-overlay);
+  --affine-v2-layer-background-secondary: var(--bridge-brand-surface-alt);
+  --affine-v2-layer-insideBorder-border: var(--bridge-brand-border);
+  --affine-v2-layer-insideBorder-primaryBorder: var(--bridge-brand-border-strong);
+  --affine-v2-dialog-background-primary: var(--bridge-brand-overlay);
+  --affine-v2-button-secondary: var(--bridge-brand-surface);
+  --affine-v2-button-innerBlackBorder: var(--bridge-brand-border-strong);
+  --affine-v2-tab-divider-divider: var(--bridge-brand-border);
+  --affine-v2-tab-tabBackground-default: var(--bridge-brand-surface-alt);
+  --affine-v2-tab-tabBackground-active: var(--bridge-brand-surface);
+  --affine-v2-tab-fontColor-default: var(--bridge-brand-text-secondary);
+  --affine-v2-tab-fontColor-hover: var(--bridge-brand-text-primary);
+  --affine-v2-tab-fontColor-active: var(--bridge-brand-ink-strong);
+  --affine-v2-tab-iconColor-default: var(--bridge-brand-muted);
+  --affine-v2-tab-iconColor-hover: var(--bridge-brand-primary);
+  --affine-v2-tab-iconColor-active: var(--bridge-brand-primary);
+}
+
+html,
+body {
+  color: var(--bridge-brand-text-primary);
+  background: var(--bridge-brand-bg);
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[role='button']:focus-visible,
+a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--bridge-brand-focus);
+}
+
+[data-testid='app-sidebar-wrapper'],
+[data-testid='app-sidebar'] {
+  background: linear-gradient(
+    180deg,
+    var(--bridge-brand-sidebar) 0%,
+    var(--bridge-brand-surface-alt) 100%
+  );
+}
+
+[data-testid='app-sidebar-wrapper'] {
+  border-right: 1px solid var(--bridge-brand-border);
+}
+
+[data-testid='app-sidebar'] [data-active='true'] {
+  background: linear-gradient(
+    180deg,
+    var(--bridge-brand-primary-soft) 0%,
+    rgba(255, 86, 34, 0.08) 100%
+  ) !important;
+  color: var(--bridge-brand-ink-strong);
+}
+
+[data-testid='app-sidebar'] [data-active='true'] svg {
+  color: var(--bridge-brand-primary);
+}
+
+[data-testid='workbench-tab'] {
+  border: 1px solid transparent;
+}
+
+[data-testid='workbench-tab'][data-active='true'] {
+  border-color: var(--bridge-brand-border-strong);
+  box-shadow:
+    0 10px 24px rgba(24, 29, 33, 0.06),
+    0 0 0 1px var(--bridge-brand-border-strong);
+}
+
+[data-testid='split-view-label'][data-active='true'] {
+  box-shadow: inset 0 2px 0 var(--bridge-brand-primary);
+}
+
+[data-testid='settings-sidebar'] {
+  background: linear-gradient(
+    180deg,
+    var(--bridge-brand-sidebar) 0%,
+    var(--bridge-brand-surface-alt) 100%
+  );
+  border-right: 1px solid var(--bridge-brand-border);
+}
+
+[data-testid='settings-sidebar'] .active {
+  background: linear-gradient(
+    180deg,
+    var(--bridge-brand-primary-soft) 0%,
+    rgba(255, 86, 34, 0.08) 100%
+  ) !important;
+}
+
+[data-testid='open-in-app-card'],
+[role='dialog'] {
+  box-shadow: 0 18px 50px rgba(24, 29, 33, 0.12);
+}
+
+button[data-radix-collection-item],
+button,
+.button,
+[data-testid='open-in-app-card'] a {
+  transition:
+    background-color 0.16s ease,
+    border-color 0.16s ease,
+    color 0.16s ease,
+    box-shadow 0.16s ease;
+}
