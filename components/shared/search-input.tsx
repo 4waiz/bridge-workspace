@@ -1,0 +1,25 @@
+import { Search } from "lucide-react";
+
+import { Input } from "@/components/ui/input";
+
+export function SearchInput({
+  placeholder,
+  value,
+  onChange,
+}: {
+  placeholder: string;
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  return (
+    <div className="relative">
+      <Search className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-muted-foreground" />
+      <Input
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        placeholder={placeholder}
+        className="pl-11"
+      />
+    </div>
+  );
+}
