@@ -36,19 +36,19 @@ export async function buildShowcaseWorkspace(
 
   const docsService = workspace.scope.get(DocsService);
 
-  // should jump to "Getting Started"
+  // should jump to the primary starter page
   const defaultDoc = docsService.list.docs$.value.find(p =>
-    p.title$.value.startsWith('Getting Started')
+    p.title$.value.startsWith('Bridge Workspace')
   );
   const folderTutorialDoc = docsService.list.docs$.value.find(p =>
-    p.title$.value.startsWith('How to use folder and Tags')
+    p.title$.value.startsWith('Using Folders and Tags')
   );
 
   // create default organize
   if (folderTutorialDoc) {
     const organizeService = workspace.scope.get(OrganizeService);
     const folderId = organizeService.folderTree.rootFolder.createFolder(
-      'First Folder',
+      'Bridge Folder',
       organizeService.folderTree.rootFolder.indexAt('after')
     );
     const firstFolderNode =

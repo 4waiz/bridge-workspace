@@ -15,7 +15,7 @@ export const AuthHeader: FC<{
         <BrandLogo className="logo" height={28} />
         {title}
       </p>
-      <p>{subTitle}</p>
+      {subTitle ? <p>{subTitle}</p> : null}
     </div>
   );
 };

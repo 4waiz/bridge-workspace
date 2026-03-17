@@ -16,7 +16,7 @@ let _instance: i18n | null = null;
 function applyBranding<T>(value: T): T {
   if (typeof value === 'string') {
     const replacements: Array<[string, string]> = [
-      ['AFFiNE Cloud', 'BridgeWS Cloud'],
+      ['AFFiNE Cloud', 'BridgeWS'],
       ['AFFiNE AI', 'BridgeWS AI'],
       ['AFFiNE.Pro', 'awaizahmed.com'],
       ['ai.affine.pro', 'awaizahmed.com'],

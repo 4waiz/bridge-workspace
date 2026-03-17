@@ -61,7 +61,7 @@ export interface PlanCardProps {
   scrollRef?: React.RefObject<HTMLDivElement>;
 }
 export const CloudPlanLayout = ({
-  title = 'BridgeWS Cloud',
+  title = 'BridgeWS',
   caption,
   select,
   toggle,

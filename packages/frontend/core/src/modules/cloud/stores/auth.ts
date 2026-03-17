@@ -58,6 +58,10 @@ export class AuthStore extends Store {
   }
 
   async fetchSession() {
+    if (BUILD_CONFIG.isWeb && !environment.isSelfHosted) {
+      return { user: null };
+    }
+
     const url = `/api/auth/session`;
     const options: RequestInit = {
       headers: {
@@ -131,6 +135,10 @@ export class AuthStore extends Store {
   }
 
   async checkUserByEmail(email: string) {
+    if (BUILD_CONFIG.isWeb && !environment.isSelfHosted) {
+      throw new Error('Authentication is disabled in local mode.');
+    }
+
     const res = await this.fetchService.fetch('/api/auth/preflight', {
       method: 'POST',
       body: JSON.stringify({ email }),

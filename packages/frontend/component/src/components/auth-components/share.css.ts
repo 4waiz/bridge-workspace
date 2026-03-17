@@ -12,10 +12,7 @@ export const authHeaderWrapper = style({
   marginBottom: '20px',
 });
 globalStyle(`${authHeaderWrapper} .logo`, {
-  fontSize: cssVar('fontH3'),
-  fontWeight: 600,
-  color: cssVar('black'),
-  marginRight: '6px',
+  marginRight: '10px',
   verticalAlign: 'middle',
 });
 

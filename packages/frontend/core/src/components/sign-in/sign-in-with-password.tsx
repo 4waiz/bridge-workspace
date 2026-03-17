@@ -55,9 +55,6 @@ export const SignInWithPasswordStep = ({
       c => c.type === ServerDeploymentType.Selfhosted
     )
   );
-  const serverName = useLiveData(
-    serverService.server.config$.selector(c => c.serverName)
-  );
 
   const verifyToken = useLiveData(captchaService.verifyToken$);
   const needCaptcha = useLiveData(captchaService.needCaptcha$);
@@ -132,10 +129,7 @@ export const SignInWithPasswordStep = ({
 
   return (
     <AuthContainer>
-      <AuthHeader
-        title={t['com.affine.auth.sign.in']()}
-        subTitle={serverName}
-      />
+      <AuthHeader title={t['com.affine.auth.sign.in']()} />
 
       <AuthContent>
         <AuthInput

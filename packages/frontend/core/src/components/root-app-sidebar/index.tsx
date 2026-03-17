@@ -1,7 +1,6 @@
 // Import is already correct, no changes needed
 import {
   AddPageButton,
-  AppDownloadButton,
   AppSidebar,
   MenuItem,
   MenuLinkItem,
@@ -9,7 +8,6 @@ import {
   SidebarContainer,
   SidebarScrollableContainer,
 } from '@affine/core/modules/app-sidebar/views';
-import { ExternalMenuLinkItem } from '@affine/core/modules/app-sidebar/views/menu-item/external-menu-link-item';
 import { AuthService, ServerService } from '@affine/core/modules/cloud';
 import { WorkspaceDialogService } from '@affine/core/modules/dialogs';
 import { FeatureFlagService } from '@affine/core/modules/feature-flag';
@@ -18,17 +16,10 @@ import type { Workspace } from '@affine/core/modules/workspace';
 import { useI18n } from '@affine/i18n';
 import { track } from '@affine/track';
 import type { Store } from '@blocksuite/affine/store';
-import {
-  AiOutlineIcon,
-  AllDocsIcon,
-  ImportIcon,
-  JournalIcon,
-  SettingsIcon,
-} from '@blocksuite/icons/rc';
+import { AllDocsIcon, ImportIcon, SettingsIcon } from '@blocksuite/icons/rc';
 import { useLiveData, useService, useServices } from '@toeverything/infra';
 import type { ReactElement } from 'react';
 import { memo, useCallback } from 'react';
-import { BRAND_SITE_URL } from '@affine/component/brand';
 
 import {
   CollapsibleSection,
@@ -84,34 +75,6 @@ const AllDocsButton = () => {
     <MenuLinkItem icon={<AllDocsIcon />} active={allPageActive} to={'/all'}>
       <span data-testid="all-pages">
         {t['com.affine.workspaceSubPath.all']()}
-      </span>
-    </MenuLinkItem>
-  );
-};
-
-const AIChatButton = () => {
-  const t = useI18n();
-  const featureFlagService = useService(FeatureFlagService);
-  const serverService = useService(ServerService);
-  const serverFeatures = useLiveData(serverService.server.features$);
-  const enableAI = useLiveData(featureFlagService.flags.enable_ai.$);
-
-  const { workbenchService } = useServices({
-    WorkbenchService,
-  });
-  const workbench = workbenchService.workbench;
-  const aiChatActive = useLiveData(
-    workbench.location$.selector(location => location.pathname === '/chat')
-  );
-
-  if (!enableAI || !serverFeatures?.copilot) {
-    return null;
-  }
-
-  return (
-    <MenuLinkItem icon={<AiOutlineIcon />} active={aiChatActive} to={'/chat'}>
-      <span data-testid="ai-chat">
-        {t['com.affine.workspaceSubPath.chat']()}
       </span>
     </MenuLinkItem>
   );
@@ -194,8 +157,8 @@ export const RootAppSidebar = memo((): ReactElement => {
         <div className={workspaceAndUserWrapper}>
           <div className={workspaceWrapper}>
             <WorkspaceNavigator
-              showEnableCloudButton
-              showSyncStatus
+              showEnableCloudButton={false}
+              showSyncStatus={false}
               open={workspaceSelectorOpen}
               onOpenChange={onWorkspaceSelectorOpenChange}
               dense
@@ -215,7 +178,6 @@ export const RootAppSidebar = memo((): ReactElement => {
         <AllDocsButton />
         <AppSidebarJournalButton />
         {sessionStatus === 'authenticated' && <NotificationButton />}
-        <AIChatButton />
         <MenuItem
           data-testid="slider-bar-workspace-setting-button"
           icon={<SettingsIcon />}
@@ -247,16 +209,11 @@ export const RootAppSidebar = memo((): ReactElement => {
           </MenuItem>
           <InviteMembersButton />
           <TemplateDocEntrance />
-          <ExternalMenuLinkItem
-            href={BRAND_SITE_URL}
-            icon={<JournalIcon />}
-            label={t['com.affine.app-sidebar.learn-more']()}
-          />
         </CollapsibleSection>
       </SidebarScrollableContainer>
       <SidebarContainer className={bottomContainer}>
         <SidebarAudioPlayer />
-        {BUILD_CONFIG.isElectron ? <UpdaterButton /> : <AppDownloadButton />}
+        {BUILD_CONFIG.isElectron ? <UpdaterButton /> : null}
       </SidebarContainer>
     </AppSidebar>
   );

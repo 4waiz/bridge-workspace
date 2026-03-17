@@ -53,9 +53,6 @@ export const SignInStep = ({
 }) => {
   const t = useI18n();
   const serverService = useService(ServerService);
-  const serverName = useLiveData(
-    serverService.server.config$.selector(c => c.serverName)
-  );
   const versionError = useSelfhostLoginVersionGuard(serverService.server);
   const isSelfhosted = useLiveData(
     serverService.server.config$.selector(
@@ -131,10 +128,7 @@ export const SignInStep = ({
   if (versionError && isSelfhosted) {
     return (
       <AuthContainer>
-        <AuthHeader
-          title={t['com.affine.auth.sign.in']()}
-          subTitle={serverName}
-        />
+        <AuthHeader title={t['com.affine.auth.sign.in']()} />
         <AuthContent>
           <div>{versionError}</div>
         </AuthContent>
@@ -144,10 +138,7 @@ export const SignInStep = ({
 
   return (
     <AuthContainer>
-      <AuthHeader
-        title={t['com.affine.auth.sign.in']()}
-        subTitle={serverName}
-      />
+      <AuthHeader title={t['com.affine.auth.sign.in']()} />
 
       <AuthContent>
         <OAuth redirectUrl={state.redirectUrl} />

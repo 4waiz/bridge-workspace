@@ -28,7 +28,9 @@ export class ServersService extends Service {
           const server = this.framework.createEntity(Server, {
             serverMetadata: metadata,
           });
-          server.revalidateConfig();
+          if (!(BUILD_CONFIG.isWeb && !environment.isSelfHosted)) {
+            server.revalidateConfig();
+          }
           server.scope.eventBus.emit(ServerStarted, server);
           const ref = this.serverPool.put(metadata.id, server);
           return ref;

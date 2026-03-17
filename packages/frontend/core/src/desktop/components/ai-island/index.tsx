@@ -3,6 +3,7 @@ import { useLiveData, useService } from '@toeverything/infra';
 import clsx from 'clsx';
 import { useCallback, useEffect, useState } from 'react';
 
+import { useEnableAI } from '../../../components/hooks/affine/use-enable-ai';
 import { IslandContainer } from './container';
 import { AIIcon } from './icons';
 import { aiIslandBtn, aiIslandWrapper, toolStyle } from './styles.css';
@@ -15,6 +16,7 @@ const hideChat: Array<string | ((path: string) => boolean)> = [
 export const AIIsland = () => {
   // to make sure ai island is hidden first and animate in
   const [hide, setHide] = useState(true);
+  const enableAI = useEnableAI();
 
   const workbench = useService(WorkbenchService).workbench;
   const activeView = useLiveData(workbench.activeView$);
@@ -48,6 +50,10 @@ export const AIIsland = () => {
       workbench.closeSidebar();
     }
   }, [activeView, haveChatTab, hide, workbench]);
+
+  if (!enableAI) {
+    return null;
+  }
 
   return (
     <IslandContainer className={clsx(toolStyle, { hide })}>

@@ -29,6 +29,9 @@ export function assertRspackSupportedPackageName(name: string) {
 
 const IN_CI = !!process.env.CI;
 const httpProxyMiddlewareLogLevel = IN_CI ? 'silent' : 'error';
+const enableBackendProxy =
+  process.env.SELF_HOSTED === 'true' ||
+  process.env.ENABLE_BACKEND_PROXY === 'true';
 
 export const DEFAULT_DEV_SERVER_CONFIG: RspackDevServerConfiguration = {
   host: '0.0.0.0',
@@ -57,22 +60,24 @@ export const DEFAULT_DEV_SERVER_CONFIG: RspackDevServerConfiguration = {
       },
     ],
   },
-  proxy: [
-    {
-      context: '/api',
-      target: 'http://localhost:3010',
-      logLevel: httpProxyMiddlewareLogLevel,
-    },
-    {
-      context: '/socket.io',
-      target: 'http://localhost:3010',
-      ws: true,
-      logLevel: httpProxyMiddlewareLogLevel,
-    },
-    {
-      context: '/graphql',
-      target: 'http://localhost:3010',
-      logLevel: httpProxyMiddlewareLogLevel,
-    },
-  ],
+  proxy: enableBackendProxy
+    ? [
+        {
+          context: '/api',
+          target: 'http://localhost:3010',
+          logLevel: httpProxyMiddlewareLogLevel,
+        },
+        {
+          context: '/socket.io',
+          target: 'http://localhost:3010',
+          ws: true,
+          logLevel: httpProxyMiddlewareLogLevel,
+        },
+        {
+          context: '/graphql',
+          target: 'http://localhost:3010',
+          logLevel: httpProxyMiddlewareLogLevel,
+        },
+      ]
+    : undefined,
 };

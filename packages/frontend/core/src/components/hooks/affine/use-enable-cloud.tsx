@@ -36,6 +36,8 @@ export const useEnableCloud = () => {
 
   const { jumpToPage } = useNavigateHelper();
 
+  const localOnlyMode = BUILD_CONFIG.isWeb && !environment.isSelfHosted;
+
   const enableCloud = useCallback(
     async (ws: Workspace | null, options?: ConfirmEnableCloudOptions) => {
       try {
@@ -82,6 +84,16 @@ export const useEnableCloud = () => {
 
   const confirmEnableCloud = useCallback(
     (ws: Workspace, options?: ConfirmEnableCloudOptions) => {
+      if (localOnlyMode) {
+        notify.warning({
+          title: 'BridgeWS is running in local-only mode.',
+          message:
+            'Cloud sync and sign-in are disabled until a server is configured.',
+        });
+        options?.onFinished?.();
+        return;
+      }
+
       const { onSuccess, onFinished, serverId, openPageId } = options ?? {};
 
       const closeOnSuccess = () => {

@@ -8,7 +8,8 @@
   --bridge-brand-focus: rgba(255, 86, 34, 0.22);
 }
 
-html[data-theme='light'] {
+html[data-theme='light'],
+[data-theme='light'] {
   --bridge-brand-bg: #f5f1ec;
   --bridge-brand-surface: #ffffff;
   --bridge-brand-surface-alt: #fbf8f5;
@@ -26,7 +27,8 @@ html[data-theme='light'] {
   --bridge-brand-modal: rgba(30, 35, 40, 0.12);
 }
 
-html[data-theme='dark'] {
+html[data-theme='dark'],
+[data-theme='dark'] {
   --bridge-brand-bg: #181d21;
   --bridge-brand-surface: #1f252a;
   --bridge-brand-surface-alt: #242b30;
@@ -44,7 +46,8 @@ html[data-theme='dark'] {
   --bridge-brand-modal: rgba(17, 20, 24, 0.48);
 }
 
-html[data-theme] {
+html[data-theme],
+[data-theme] {
   --affine-brand-color: var(--bridge-brand-primary);
   --affine-primary-color: var(--bridge-brand-primary);
   --affine-secondary-color: var(--bridge-brand-primary-soft);
@@ -81,7 +84,9 @@ html[data-theme] {
   --affine-v2-layer-background-overlayPanel: var(--bridge-brand-overlay);
   --affine-v2-layer-background-secondary: var(--bridge-brand-surface-alt);
   --affine-v2-layer-insideBorder-border: var(--bridge-brand-border);
-  --affine-v2-layer-insideBorder-primaryBorder: var(--bridge-brand-border-strong);
+  --affine-v2-layer-insideBorder-primaryBorder: var(
+    --bridge-brand-border-strong
+  );
   --affine-v2-dialog-background-primary: var(--bridge-brand-overlay);
   --affine-v2-button-secondary: var(--bridge-brand-surface);
   --affine-v2-button-innerBlackBorder: var(--bridge-brand-border-strong);

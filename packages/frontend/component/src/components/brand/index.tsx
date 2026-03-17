@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
 
 export const BRAND_NAME = 'BridgeWS';
-export const BRAND_CLOUD_NAME = 'BridgeWS Cloud';
+export const BRAND_CLOUD_NAME = BRAND_NAME;
 export const BRAND_AI_NAME = 'BridgeWS AI';
 export const BRAND_CREATOR_NAME = 'Awaiz Ahmed';
 export const BRAND_SITE_URL = 'https://awaizahmed.com';

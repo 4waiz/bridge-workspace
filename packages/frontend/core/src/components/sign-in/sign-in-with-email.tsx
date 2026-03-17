@@ -162,10 +162,7 @@ export const SignInWithEmailStep = ({
     </>
   ) : (
     <AuthContainer>
-      <AuthHeader
-        title={t['com.affine.auth.sign.in']()}
-        subTitle={t['com.affine.auth.sign.in.sent.email.subtitle']()}
-      />
+      <AuthHeader title={t['com.affine.auth.sign.in']()} />
       <AuthContent>
         <p>
           <Trans
