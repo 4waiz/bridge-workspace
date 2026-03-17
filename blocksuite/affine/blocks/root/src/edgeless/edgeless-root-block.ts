@@ -79,23 +79,26 @@ export class EdgelessRootBlockComponent extends BlockComponent<
       height: 100%;
       background-color: var(--affine-background-primary-color);
       background-image:
-        linear-gradient(
-          var(--affine-edgeless-grid-color) 1px,
-          transparent 1px
-        ),
+        linear-gradient(var(--affine-edgeless-grid-color) 1px, transparent 1px),
         linear-gradient(
           90deg,
           var(--affine-edgeless-grid-color) 1px,
           transparent 1px
         ),
         linear-gradient(
-          var(--affine-edgeless-grid-strong-color, var(--affine-edgeless-grid-color))
+          var(
+              --affine-edgeless-grid-strong-color,
+              var(--affine-edgeless-grid-color)
+            )
             1px,
           transparent 1px
         ),
         linear-gradient(
           90deg,
-          var(--affine-edgeless-grid-strong-color, var(--affine-edgeless-grid-color))
+          var(
+              --affine-edgeless-grid-strong-color,
+              var(--affine-edgeless-grid-color)
+            )
             1px,
           transparent 1px
         );
@@ -332,7 +335,7 @@ export class EdgelessRootBlockComponent extends BlockComponent<
 
     this.disposables.add(
       editPropsStore.slots.storageUpdated.subscribe(({ key, value }) => {
-        if (key !== 'showGrid') return;
+        if (key !== 'showGrid' || typeof value !== 'boolean') return;
         this._showGrid = value;
         this.requestUpdate();
       })

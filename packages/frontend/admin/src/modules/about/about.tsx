@@ -1,44 +1,33 @@
+import {
+  BRAND_CREATOR_NAME,
+  BRAND_NAME,
+  BRAND_SITE_URL,
+} from '@affine/component/brand';
 import { buttonVariants } from '@affine/admin/components/ui/button';
 import { Separator } from '@affine/admin/components/ui/separator';
 import { cn } from '@affine/admin/utils';
-import {
-  AlbumIcon,
-  ChevronRightIcon,
-  GithubIcon,
-  MailWarningIcon,
-  UploadCloudIcon,
-} from 'lucide-react';
+import { AlbumIcon, ChevronRightIcon, MailWarningIcon } from 'lucide-react';
 
 type Channel = 'stable' | 'canary' | 'beta' | 'internal';
 
 const appNames = {
-  stable: 'AFFiNE',
-  canary: 'AFFiNE Canary',
-  beta: 'AFFiNE Beta',
-  internal: 'AFFiNE Internal',
+  stable: BRAND_NAME,
+  canary: `${BRAND_NAME} Canary`,
+  beta: `${BRAND_NAME} Beta`,
+  internal: `${BRAND_NAME} Internal`,
 } satisfies Record<Channel, string>;
 const appName = appNames[BUILD_CONFIG.appBuildType];
 
 const links = [
   {
-    href: BUILD_CONFIG.githubUrl,
-    icon: <GithubIcon size={20} />,
-    label: 'Star AFFiNE on GitHub',
-  },
-  {
-    href: BUILD_CONFIG.githubUrl,
-    icon: <MailWarningIcon size={20} />,
-    label: 'Report an Issue',
-  },
-  {
-    href: 'https://docs.affine.pro/docs/self-host-affine',
+    href: BRAND_SITE_URL,
     icon: <AlbumIcon size={20} />,
-    label: 'Self-host Document',
+    label: 'Visit awaizahmed.com',
   },
   {
-    href: 'https://affine.pro/pricing/?type=selfhost#table',
-    icon: <UploadCloudIcon size={20} />,
-    label: 'Upgrade to Team',
+    href: BRAND_SITE_URL,
+    icon: <MailWarningIcon size={20} />,
+    label: `Created by ${BRAND_CREATOR_NAME}`,
   },
 ];
 
@@ -46,7 +35,7 @@ export function AboutAFFiNE() {
   return (
     <div className="flex flex-col h-full gap-3 py-5 px-6 w-full">
       <div className="flex items-center">
-        <span className="text-xl font-semibold">About AFFiNE</span>
+        <span className="text-xl font-semibold">{`About ${BRAND_NAME}`}</span>
       </div>
       <div className="overflow-y-auto space-y-[10px]">
         <div className="flex flex-col rounded-md border">

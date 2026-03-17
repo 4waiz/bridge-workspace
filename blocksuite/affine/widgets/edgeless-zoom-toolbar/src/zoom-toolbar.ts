@@ -157,7 +157,7 @@ export class EdgelessZoomToolbar extends WithDisposable(LitElement) {
     );
     this.disposables.add(
       editPropsStore.slots.storageUpdated.subscribe(({ key, value }) => {
-        if (key !== 'showGrid') return;
+        if (key !== 'showGrid' || typeof value !== 'boolean') return;
         this._showGrid = value;
         this.requestUpdate();
       })

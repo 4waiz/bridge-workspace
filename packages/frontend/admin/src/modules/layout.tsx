@@ -1,3 +1,4 @@
+import { BRAND_NAME } from '@affine/component/brand';
 import {
   ResizablePanel,
   ResizablePanelGroup,
@@ -206,7 +207,7 @@ export const LeftPanel = ({
           </Button>
         </SheetTrigger>
         <SheetHeader className="hidden">
-          <SheetTitle>AFFiNE</SheetTitle>
+          <SheetTitle>{BRAND_NAME}</SheetTitle>
           <SheetDescription>
             Admin panel for managing accounts, AI, config, and settings
           </SheetDescription>
@@ -223,7 +224,7 @@ export const LeftPanel = ({
               )}
             >
               <Logo />
-              AFFiNE
+              {BRAND_NAME}
             </div>
             <Separator />
             <Nav />
@@ -265,7 +266,7 @@ export const LeftPanel = ({
           >
             <Logo />
           </span>
-          {!isCollapsed && 'AFFiNE'}
+          {!isCollapsed && BRAND_NAME}
         </div>
         <Nav isCollapsed={isCollapsed} />
       </div>

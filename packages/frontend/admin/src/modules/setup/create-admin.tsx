@@ -1,3 +1,4 @@
+import { BRAND_NAME } from '@affine/component/brand';
 import { Input } from '@affine/admin/components/ui/input';
 import { Label } from '@affine/admin/components/ui/label';
 import { useCallback } from 'react';
@@ -56,7 +57,7 @@ export const CreateAdmin = ({
             Create Administrator Account
           </h1>
           <p className="text-sm text-muted-foreground">
-            This account can also be used to log in as an AFFiNE user.
+            This account can also be used to log in as a {BRAND_NAME} user.
           </p>
         </div>
         <div className="flex flex-col gap-9">

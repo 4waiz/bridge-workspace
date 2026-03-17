@@ -1,3 +1,4 @@
+import { BRAND_SITE_URL } from '@affine/component/brand';
 import { Trans, useI18n } from '@affine/i18n';
 import clsx from 'clsx';
 import { useCallback } from 'react';
@@ -40,7 +41,7 @@ export const EditorLoading = ({
                   1: (
                     <a
                       style={{ color: 'var(--affine-primary-color)' }}
-                      href="https://affine.pro/redirect/discord"
+                      href={BRAND_SITE_URL}
                       target="__blank"
                     />
                   ),

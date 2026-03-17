@@ -1,8 +1,8 @@
 import type { CSSProperties } from 'react';
 
-export const BRAND_NAME = 'Bridge Workspace';
-export const BRAND_CLOUD_NAME = 'Bridge Workspace Cloud';
-export const BRAND_AI_NAME = 'Bridge Workspace AI';
+export const BRAND_NAME = 'BridgeWS';
+export const BRAND_CLOUD_NAME = 'BridgeWS Cloud';
+export const BRAND_AI_NAME = 'BridgeWS AI';
 export const BRAND_CREATOR_NAME = 'Awaiz Ahmed';
 export const BRAND_SITE_URL = 'https://awaizahmed.com';
 export const BRAND_LOGO_SRC = '/imgs/bridge-logo.png';

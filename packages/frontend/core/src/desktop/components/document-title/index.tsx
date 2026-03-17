@@ -1,3 +1,4 @@
+import { BRAND_NAME } from '@affine/component/brand';
 import { NotificationCountService } from '@affine/core/modules/notification';
 import { WorkbenchService } from '@affine/core/modules/workbench';
 import { useLiveData, useService } from '@toeverything/infra';
@@ -13,11 +14,10 @@ export const DocumentTitle = () => {
   useEffect(() => {
     const prefix = notificationCount > 0 ? `(${notificationCount}) ` : '';
     document.title =
-      prefix +
-      (viewTitle ? `${viewTitle} - Bridge Workspace` : 'Bridge Workspace');
+      prefix + (viewTitle ? `${viewTitle} - ${BRAND_NAME}` : BRAND_NAME);
 
     return () => {
-      document.title = 'Bridge Workspace';
+      document.title = BRAND_NAME;
     };
   }, [notificationCount, viewTitle]);
 

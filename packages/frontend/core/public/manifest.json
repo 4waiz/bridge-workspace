@@ -1,9 +1,9 @@
 {
-  "name": "Bridge Workspace",
-  "short_name": "Bridge Workspace",
-  "description": "Bridge Workspace merges docs, whiteboards, and databases into one enterprise workspace.",
+  "name": "BridgeWS",
+  "short_name": "BridgeWS",
+  "description": "BridgeWS merges docs, whiteboards, and databases into one enterprise workspace.",
   "start_url": "/?source=pwa",
-  "background_color": "#ffffff",
+  "background_color": "#f5f1ec",
   "display": "standalone",
   "scope": "/",
   "icons": [

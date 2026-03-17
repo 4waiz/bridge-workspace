@@ -34,10 +34,10 @@ export const appIconMap = {
 } satisfies Record<Channel, string>;
 
 export const appNames = {
-  stable: 'Bridge Workspace',
-  canary: 'Bridge Workspace Canary',
-  beta: 'Bridge Workspace Beta',
-  internal: 'Bridge Workspace Internal',
+  stable: 'BridgeWS',
+  canary: 'BridgeWS Canary',
+  beta: 'BridgeWS Beta',
+  internal: 'BridgeWS Internal',
 } satisfies Record<Channel, string>;
 
 export const appSchemaUrl = z.custom<string>(

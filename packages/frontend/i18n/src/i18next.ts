@@ -15,16 +15,23 @@ let _instance: i18n | null = null;
 
 function applyBranding<T>(value: T): T {
   if (typeof value === 'string') {
-    return [
-      ['AFFiNE Cloud', 'Bridge Workspace Cloud'],
-      ['AFFiNE AI', 'Bridge Workspace AI'],
+    const replacements: Array<[string, string]> = [
+      ['AFFiNE Cloud', 'BridgeWS Cloud'],
+      ['AFFiNE AI', 'BridgeWS AI'],
       ['AFFiNE.Pro', 'awaizahmed.com'],
       ['ai.affine.pro', 'awaizahmed.com'],
       ['app.affine.pro', 'awaizahmed.com'],
       ['docs.affine.pro', 'awaizahmed.com'],
       ['affine.pro', 'awaizahmed.com'],
-      ['AFFiNE', 'Bridge Workspace'],
-    ].reduce((text, [from, to]) => text.split(from).join(to), value) as T;
+      ['AFFiNE', 'BridgeWS'],
+    ];
+
+    let brandedValue: string = value;
+    replacements.forEach(([from, to]) => {
+      brandedValue = brandedValue.split(from).join(to);
+    });
+
+    return brandedValue as T;
   }
 
   if (Array.isArray(value)) {
@@ -90,7 +97,9 @@ export const getOrCreateI18n = (): i18n => {
         partialBundledLanguages: true,
         resources: {
           [defaultLng]: {
-            translation: applyBranding(SUPPORTED_LANGUAGES[defaultLng].resource),
+            translation: applyBranding(
+              SUPPORTED_LANGUAGES[defaultLng].resource
+            ),
           },
         },
         interpolation: {

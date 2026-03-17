@@ -1,3 +1,4 @@
+import { BRAND_NAME, BrandLogo } from '@affine/component/brand';
 import { Button } from '@affine/admin/components/ui/button';
 import { Input } from '@affine/admin/components/ui/input';
 import { Label } from '@affine/admin/components/ui/label';
@@ -9,7 +10,6 @@ import { toast } from 'sonner';
 
 import { affineFetch } from '../../fetch-utils';
 import { isAdmin, useCurrentUser, useRevalidateCurrentUser } from '../common';
-import logo from './logo.svg';
 
 export function Auth() {
   const currentUser = useCurrentUser();
@@ -82,9 +82,12 @@ export function Auth() {
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
-            <h1 className="text-3xl font-bold">Login</h1>
+            <div className="flex justify-center">
+              <BrandLogo height={32} />
+            </div>
+            <h1 className="text-3xl font-bold">{BRAND_NAME} Admin</h1>
             <p className="text-balance text-muted-foreground">
-              Enter your email below to login to your account
+              Enter your email below to log in to your administrator account.
             </p>
           </div>
           <form onSubmit={login} action="#">
@@ -120,11 +123,9 @@ export function Auth() {
         </div>
       </div>
       <div className="hidden bg-muted lg:flex lg:justify-center">
-        <img
-          src={logo}
-          alt="Image"
-          className="h-1/2 object-cover dark:brightness-[0.2] dark:grayscale relative top-1/4 "
-        />
+        <div className="relative top-1/4 flex items-center justify-center">
+          <BrandLogo height={120} width={320} />
+        </div>
       </div>
     </div>
   );

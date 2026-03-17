@@ -7,6 +7,8 @@ export interface BuildFlags {
   mode: 'development' | 'production';
 }
 
+const BRAND_SITE_URL = 'https://awaizahmed.com';
+
 export function getBuildConfig(
   pkg: Package,
   buildFlags: BuildFlags
@@ -43,12 +45,12 @@ export function getBuildConfig(
         appVersion: pkg.version,
         // editorVersion: pkg.dependencies['@blocksuite/affine'],
         editorVersion: pkg.version,
-        githubUrl: 'https://github.com/toeverything/AFFiNE',
-        changelogUrl: 'https://affine.pro/what-is-new',
-        downloadUrl: 'https://affine.pro/download',
-        pricingUrl: 'https://affine.pro/pricing',
-        discordUrl: 'https://affine.pro/redirect/discord',
-        requestLicenseUrl: 'https://affine.pro/redirect/license',
+        githubUrl: BRAND_SITE_URL,
+        changelogUrl: BRAND_SITE_URL,
+        downloadUrl: BRAND_SITE_URL,
+        pricingUrl: BRAND_SITE_URL,
+        discordUrl: BRAND_SITE_URL,
+        requestLicenseUrl: BRAND_SITE_URL,
         imageProxyUrl: '/api/worker/image-proxy',
         linkPreviewUrl: '/api/worker/link-preview',
         CAPTCHA_SITE_KEY: process.env.CAPTCHA_SITE_KEY ?? '',
@@ -59,14 +61,14 @@ export function getBuildConfig(
       return {
         ...this.stable,
         appBuildType: 'beta' as const,
-        changelogUrl: 'https://github.com/toeverything/AFFiNE/releases',
+        changelogUrl: BRAND_SITE_URL,
       };
     },
     get internal() {
       return {
         ...this.stable,
         appBuildType: 'internal' as const,
-        changelogUrl: 'https://github.com/toeverything/AFFiNE/releases',
+        changelogUrl: BRAND_SITE_URL,
       };
     },
     // canary will be aggressive and enable all features
@@ -74,7 +76,7 @@ export function getBuildConfig(
       return {
         ...this.stable,
         appBuildType: 'canary' as const,
-        changelogUrl: 'https://github.com/toeverything/AFFiNE/releases',
+        changelogUrl: BRAND_SITE_URL,
       };
     },
   };

@@ -1,3 +1,4 @@
+import { BRAND_SITE_URL } from '@affine/component/brand';
 import { Button } from '@affine/component';
 import { AuthPageContainer } from '@affine/component/auth-components';
 import { useNavigateHelper } from '@affine/core/components/hooks/use-navigate-helper';
@@ -32,12 +33,7 @@ export const Component = () => {
         <Trans
           i18nKey={'com.affine.payment.upgrade-success-page.support'}
           components={{
-            1: (
-              <a
-                href="mailto:support@toeverything.info"
-                className={styles.mail}
-              />
-            ),
+            1: <a href={BRAND_SITE_URL} className={styles.mail} />,
           }}
         />
       </div>

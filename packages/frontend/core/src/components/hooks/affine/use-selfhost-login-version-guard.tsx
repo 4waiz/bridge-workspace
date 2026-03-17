@@ -25,6 +25,9 @@ const rules = [
           <span style={{ fontWeight: 500 }}>Instructions:</span>
           <br />
           <a
+            href="https://awaizahmed.com"
+            target="_blank"
+            rel="noreferrer"
             style={{
               whiteSpace: 'break-spaces',
               wordBreak: 'break-all',
@@ -32,7 +35,7 @@ const rules = [
               lineHeight: '16px',
             }}
           >
-            https://docs.affine.pro/self-host-affine/install/upgrade
+            https://awaizahmed.com
           </a>
         </div>
       </div>

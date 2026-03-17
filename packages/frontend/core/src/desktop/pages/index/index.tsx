@@ -1,3 +1,4 @@
+import { BRAND_CLOUD_NAME } from '@affine/component/brand';
 import { DefaultServerService } from '@affine/core/modules/cloud';
 import { DesktopApiService } from '@affine/core/modules/desktop-api';
 import { WorkspacesService } from '@affine/core/modules/workspace';
@@ -75,11 +76,7 @@ export const Component = ({
     if (createOnceRef.current) return;
     createOnceRef.current = true;
     // TODO: support selfhosted
-    buildShowcaseWorkspace(
-      workspacesService,
-      'affine-cloud',
-      'Bridge Workspace Cloud'
-    )
+    buildShowcaseWorkspace(workspacesService, 'affine-cloud', BRAND_CLOUD_NAME)
       .then(({ meta, defaultDocId }) => {
         if (defaultDocId) {
           jumpToPage(meta.id, defaultDocId);

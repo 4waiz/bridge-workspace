@@ -59,7 +59,7 @@ export const getPublicPath = (BUILD_CONFIG: BUILD_CONFIG_TYPE) => {
   }
 };
 
-const DESCRIPTION = `There can be more than Notion and Miro. AFFiNE is a next-gen knowledge base that brings planning, sorting and creating all together.`;
+const DESCRIPTION = `BridgeWS unifies docs, whiteboards, and databases in one enterprise workspace.`;
 
 const gitShortHash = once(() => {
   const { GITHUB_SHA } = process.env;
