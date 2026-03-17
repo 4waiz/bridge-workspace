@@ -7,17 +7,85 @@ import { AIIsland } from '@affine/core/desktop/components/ai-island';
 import { AppContainer } from '@affine/core/desktop/components/app-container';
 import { DocumentTitle } from '@affine/core/desktop/components/document-title';
 import { WorkspaceDialogs } from '@affine/core/desktop/dialogs';
+import { DocsService } from '@affine/core/modules/doc';
+import { OrganizeService } from '@affine/core/modules/organize';
 import { PeekViewManagerModal } from '@affine/core/modules/peek-view';
 import { QuotaCheck } from '@affine/core/modules/quota';
 import { WorkbenchService } from '@affine/core/modules/workbench';
 import { WorkspaceService } from '@affine/core/modules/workspace';
 import { LiveData, useLiveData, useService } from '@toeverything/infra';
 import type { PropsWithChildren } from 'react';
+import { useEffect } from 'react';
 
 export const WorkspaceLayout = function WorkspaceLayout({
   children,
 }: PropsWithChildren) {
   const currentWorkspace = useService(WorkspaceService).workspace;
+  const currentWorkspaceName = useLiveData(currentWorkspace?.name$);
+
+  useEffect(() => {
+    if (!currentWorkspace || currentWorkspace.flavour !== 'local') {
+      return;
+    }
+
+    if (currentWorkspaceName === 'Demo Workspace') {
+      currentWorkspace.setName('Bridge Workspace');
+    }
+
+    const docsService = currentWorkspace.scope.get(DocsService);
+    const organizeService = currentWorkspace.scope.get(OrganizeService);
+
+    const renameStarterDocs = async () => {
+      const bridgeWorkspaceDoc = docsService.list.docs$.value.find(doc =>
+        doc.title$.value.startsWith('Getting Started')
+      );
+      const foldersDoc = docsService.list.docs$.value.find(doc =>
+        doc.title$.value.startsWith('How to use folder and Tags')
+      );
+
+      if (bridgeWorkspaceDoc) {
+        await docsService.changeDocTitle(
+          bridgeWorkspaceDoc.id,
+          'Bridge Workspace'
+        );
+      }
+
+      if (foldersDoc) {
+        await docsService.changeDocTitle(
+          foldersDoc.id,
+          'Using Folders and Tags'
+        );
+      }
+    };
+
+    const renameStarterFolder = () => {
+      const demoFolder =
+        organizeService.folderTree.rootFolder.sortedChildren$.value.find(
+          node => node.name$.value === 'First Folder'
+        );
+
+      if (demoFolder) {
+        demoFolder.rename('Bridge Folder');
+      }
+    };
+
+    void renameStarterDocs();
+    renameStarterFolder();
+
+    const docsSub = docsService.list.docs$.subscribe(() => {
+      void renameStarterDocs();
+    });
+    const foldersSub =
+      organizeService.folderTree.rootFolder.sortedChildren$.subscribe(() => {
+        renameStarterFolder();
+      });
+
+    return () => {
+      docsSub.unsubscribe();
+      foldersSub.unsubscribe();
+    };
+  }, [currentWorkspace, currentWorkspaceName]);
+
   return (
     <SWRConfigProvider>
       <WorkspaceDialogs />

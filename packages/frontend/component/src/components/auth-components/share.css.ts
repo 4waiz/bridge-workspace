@@ -14,6 +14,7 @@ export const authHeaderWrapper = style({
 globalStyle(`${authHeaderWrapper} .logo`, {
   marginRight: '10px',
   verticalAlign: 'middle',
+  flexShrink: 0,
 });
 
 globalStyle(`${authHeaderWrapper} > p:first-of-type`, {
@@ -23,11 +24,14 @@ globalStyle(`${authHeaderWrapper} > p:first-of-type`, {
   lineHeight: '28px',
   display: 'flex',
   alignItems: 'center',
+  gap: '10px',
+  flexWrap: 'wrap',
 });
 globalStyle(`${authHeaderWrapper} > p:last-of-type`, {
   fontSize: cssVar('fontH4'),
   fontWeight: 600,
   lineHeight: '28px',
+  color: cssVar('textSecondaryColor'),
 });
 
 export const authContent = style({

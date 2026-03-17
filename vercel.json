@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "installCommand": "HUSKY=0 corepack yarn install --mode=skip-build",
+  "buildCommand": "HUSKY=0 corepack yarn affine web build",
+  "outputDirectory": "packages/frontend/apps/web/dist",
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/.*",
+      "dest": "/index.html"
+    }
+  ]
+}
