@@ -108,22 +108,6 @@ export class RunCommand extends PackageCommand {
     args: string[],
     opts: RunScriptOptions = {}
   ) {
-    const rawScript = pkg.scripts[scriptName];
-
-    if (!rawScript) {
-      if (opts.ignoreIfNotFound) {
-        return;
-      }
-
-      throw new Error(`Script ${scriptName} not found in ${pkg.name}`);
-    }
-
-    const rawArgs = [...rawScript.split(' '), ...args];
-
-    const { args: extractedArgs, envs } = this.extractEnvs(rawArgs);
-
-    args = extractedArgs;
-
     if (opts.includeDependencies) {
       const depsRun = Promise.all(
         pkg.deps.map(dep => {
@@ -147,6 +131,22 @@ export class RunCommand extends PackageCommand {
         });
       }
     }
+
+    const rawScript = pkg.scripts[scriptName];
+
+    if (!rawScript) {
+      if (opts.ignoreIfNotFound) {
+        return;
+      }
+
+      throw new Error(`Script ${scriptName} not found in ${pkg.name}`);
+    }
+
+    const rawArgs = [...rawScript.split(' '), ...args];
+
+    const { args: extractedArgs, envs } = this.extractEnvs(rawArgs);
+
+    args = extractedArgs;
 
     const isAFFiNECommand = args[0] === 'affine';
     if (isAFFiNECommand) {
