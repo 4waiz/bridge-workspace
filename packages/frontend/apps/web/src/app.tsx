@@ -18,7 +18,7 @@ import { setTelemetryTransport } from '@affine/track';
 import { CacheProvider } from '@emotion/react';
 import { Framework, FrameworkRoot, getCurrentStore } from '@toeverything/infra';
 import { OpClient } from '@toeverything/infra/op';
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
 
 const cache = createEmotionCache();
@@ -88,6 +88,10 @@ framework.impl(PopupWindowProvider, {
 });
 const frameworkProvider = framework.provider();
 
+type BridgeWelcomeWindow = Window & {
+  __bridgeWelcomeMarkReady?: () => void;
+};
+
 // setup application lifecycle events, and emit application start event
 window.addEventListener('focus', () => {
   frameworkProvider.get(LifecycleService).applicationFocus();
@@ -95,6 +99,10 @@ window.addEventListener('focus', () => {
 frameworkProvider.get(LifecycleService).applicationStart();
 
 export function App() {
+  useEffect(() => {
+    (window as BridgeWelcomeWindow).__bridgeWelcomeMarkReady?.();
+  }, []);
+
   return (
     <Suspense>
       <FrameworkRoot framework={frameworkProvider}>

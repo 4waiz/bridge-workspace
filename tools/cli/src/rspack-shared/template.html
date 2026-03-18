@@ -27,15 +27,288 @@
     <meta name="twitter:url" content="https://awaizahmed.com/" />
     <meta name="twitter:title" content="BridgeWS" />
     <meta name="twitter:description" content="<%= DESCRIPTION %>" />
-    <meta name="twitter:image" content="/imgs/bridge-logo.png" />
+    <meta name="twitter:image" content="/imgs/bridge-logo.webp" />
     <meta property="og:title" content="BridgeWS" />
     <meta property="og:type" content="website" />
     <meta property="og:description" content="<%= DESCRIPTION %>" />
     <meta property="og:url" content="https://awaizahmed.com/" />
-    <meta property="og:image" content="/imgs/bridge-logo.png" />
+    <meta property="og:image" content="/imgs/bridge-logo.webp" />
+    <% if (SHOW_WELCOME_SCREEN) { %>
+    <style>
+      @font-face {
+        font-family: 'BridgeWelcomeSans';
+        src: url('/fonts/Satoshi-Bold.woff2') format('woff2');
+        font-display: swap;
+        font-weight: 700;
+      }
+
+      @font-face {
+        font-family: 'BridgeWelcomeBody';
+        src: url('/fonts/Satoshi-Regular.woff2') format('woff2');
+        font-display: swap;
+        font-weight: 400;
+      }
+
+      @font-face {
+        font-family: 'BridgeWelcomeScript';
+        src: url('/fonts/Kalam-Bold.woff2') format('woff2');
+        font-display: swap;
+        font-weight: 700;
+      }
+
+      #bridge-welcome-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 2147483647;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at top left, rgba(255, 122, 45, 0.12), transparent 30%),
+          radial-gradient(circle at bottom right, rgba(66, 72, 82, 0.1), transparent 28%),
+          linear-gradient(180deg, #faf7f3 0%, #f4efe8 100%);
+        color: #22262d;
+        transition:
+          opacity 420ms ease,
+          visibility 420ms ease,
+          transform 420ms ease;
+      }
+
+      #bridge-welcome-screen.is-hiding {
+        opacity: 0;
+        visibility: hidden;
+        transform: scale(1.015);
+      }
+
+      .bridge-welcome__panel {
+        position: relative;
+        width: min(1520px, calc(100vw - 48px));
+        padding: clamp(28px, 4vw, 56px);
+        text-align: center;
+      }
+
+      .bridge-welcome__line {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        justify-content: center;
+        gap: clamp(12px, 1.4vw, 24px);
+      }
+
+      .bridge-welcome__line + .bridge-welcome__line {
+        margin-top: clamp(4px, 0.8vw, 12px);
+      }
+
+      .bridge-welcome__accent {
+        display: inline-block;
+        width: clamp(8px, 0.85vw, 14px);
+        height: clamp(102px, 12vw, 148px);
+        border-radius: 999px;
+        background: linear-gradient(180deg, #ff8f3f 0%, #ff5622 100%);
+        box-shadow: 0 14px 30px rgba(255, 86, 34, 0.22);
+      }
+
+      .bridge-welcome__headline {
+        display: inline-block;
+        font-family: 'BridgeWelcomeSans', 'Segoe UI Variable Display', sans-serif;
+        font-size: clamp(3.6rem, 8vw, 9rem);
+        line-height: 0.9;
+        letter-spacing: -0.08em;
+        font-weight: 700;
+        color: #232730;
+        white-space: nowrap;
+      }
+
+      .bridge-welcome__headline--script {
+        font-family: 'BridgeWelcomeScript', 'Segoe Print', cursive;
+        color: #434a54;
+        letter-spacing: -0.05em;
+      }
+
+      .bridge-welcome__headline--accent {
+        color: #ff5622;
+      }
+
+      .bridge-welcome__check {
+        position: relative;
+        flex: 0 0 auto;
+        width: clamp(76px, 8vw, 132px);
+        height: clamp(76px, 8vw, 132px);
+        border-radius: clamp(22px, 2.1vw, 34px);
+        background: linear-gradient(180deg, #ff8b3c 0%, #ff5622 100%);
+        box-shadow:
+          0 18px 40px rgba(255, 86, 34, 0.24),
+          inset 0 1px 0 rgba(255, 255, 255, 0.22);
+        transform: translateY(-0.06em);
+      }
+
+      .bridge-welcome__check::before {
+        content: '';
+        position: absolute;
+        left: 34%;
+        top: 22%;
+        width: 18%;
+        height: 38%;
+        border-right: clamp(5px, 0.48vw, 8px) solid #fffdf8;
+        border-bottom: clamp(5px, 0.48vw, 8px) solid #fffdf8;
+        transform: rotate(45deg);
+      }
+
+      .bridge-welcome__copy {
+        margin: clamp(22px, 3vw, 34px) auto 0;
+        max-width: 1380px;
+        font-family: 'BridgeWelcomeBody', 'Segoe UI Variable Text', sans-serif;
+        font-size: clamp(1.35rem, 2.4vw, 3rem);
+        line-height: 1.16;
+        letter-spacing: -0.04em;
+        color: #4c5059;
+      }
+
+      .bridge-welcome__copy + .bridge-welcome__copy {
+        margin-top: clamp(6px, 0.8vw, 14px);
+      }
+
+      .bridge-welcome__cta {
+        margin: clamp(34px, 4vw, 54px) auto 0;
+        width: fit-content;
+        min-width: clamp(210px, 21vw, 360px);
+        padding: 16px 34px;
+        border-radius: 999px;
+        background: linear-gradient(180deg, #ff8f3f 0%, #ff5622 100%);
+        box-shadow: 0 18px 34px rgba(255, 86, 34, 0.2);
+        font-family: 'BridgeWelcomeBody', 'Segoe UI Variable Text', sans-serif;
+        font-size: clamp(1rem, 1.9vw, 1.55rem);
+        font-weight: 700;
+        color: #fff8f2;
+        letter-spacing: -0.03em;
+      }
+
+      @media (max-width: 960px) {
+        .bridge-welcome__panel {
+          width: min(860px, calc(100vw - 28px));
+          padding: 26px 14px 36px;
+        }
+
+        .bridge-welcome__line {
+          gap: 12px 14px;
+        }
+
+        .bridge-welcome__headline {
+          white-space: normal;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .bridge-welcome__accent {
+          display: none;
+        }
+
+        .bridge-welcome__line {
+          align-items: center;
+        }
+
+        .bridge-welcome__check {
+          width: 72px;
+          height: 72px;
+          border-radius: 22px;
+        }
+
+        .bridge-welcome__copy {
+          max-width: 92vw;
+          line-height: 1.24;
+        }
+
+        .bridge-welcome__cta {
+          width: min(84vw, 320px);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #bridge-welcome-screen {
+          transition: none;
+        }
+      }
+    </style>
+    <% } %>
   </head>
 
   <body>
+    <% if (SHOW_WELCOME_SCREEN) { %>
+    <div id="bridge-welcome-screen" aria-live="polite" role="status">
+      <div class="bridge-welcome__panel">
+        <div class="bridge-welcome__line">
+          <span class="bridge-welcome__accent" aria-hidden="true"></span>
+          <span class="bridge-welcome__headline">Write,</span>
+          <span class="bridge-welcome__headline bridge-welcome__headline--script">Draw,</span>
+          <span class="bridge-welcome__check" aria-hidden="true"></span>
+          <span class="bridge-welcome__headline">Plan,</span>
+        </div>
+        <div class="bridge-welcome__line">
+          <span class="bridge-welcome__headline">All at Once.</span>
+          <span class="bridge-welcome__headline"
+            >With <span class="bridge-welcome__headline--accent">AI.</span></span
+          >
+        </div>
+        <p class="bridge-welcome__copy">
+          BRIDGE WS is a workspace with fully merged docs, whiteboards and
+          databases.
+        </p>
+        <p class="bridge-welcome__copy">
+          Get more things done, your creativity isn't monotone.
+        </p>
+        <div class="bridge-welcome__cta" aria-hidden="true">Get Started</div>
+      </div>
+    </div>
+    <script>
+      (() => {
+        const splash = document.getElementById('bridge-welcome-screen');
+
+        if (!splash) {
+          return;
+        }
+
+        const state = {
+          appReady: false,
+          pageReady: document.readyState === 'complete',
+          hidden: false,
+        };
+
+        const hide = () => {
+          if (state.hidden || !state.appReady || !state.pageReady) {
+            return;
+          }
+
+          state.hidden = true;
+          splash.classList.add('is-hiding');
+          window.setTimeout(() => splash.remove(), 460);
+        };
+
+        window.__bridgeWelcomeMarkReady = () => {
+          state.appReady = true;
+          hide();
+        };
+
+        if (!state.pageReady) {
+          window.addEventListener(
+            'load',
+            () => {
+              state.pageReady = true;
+              hide();
+            },
+            { once: true }
+          );
+        }
+
+        window.setTimeout(hide, 3000);
+
+        window.setTimeout(() => {
+          state.appReady = true;
+          state.pageReady = true;
+          hide();
+        }, 12000);
+      })();
+    </script>
+    <% } %>
     <div id="app" data-version="<%= GIT_SHORT_SHA %>"></div>
   </body>
 </html>

@@ -85,9 +85,13 @@ export interface CreateHTMLPluginConfig {
   selfhostPublicPath?: string;
   injectGlobalErrorHandler?: boolean;
   emitAssetsManifest?: boolean;
+  showWelcomeScreen?: boolean;
 }
 
-function getHTMLPluginOptions(BUILD_CONFIG: BUILD_CONFIG_TYPE) {
+function getHTMLPluginOptions(
+  BUILD_CONFIG: BUILD_CONFIG_TYPE,
+  config: CreateHTMLPluginConfig
+) {
   const publicPath = getPublicPath(BUILD_CONFIG);
   const cdnOrigin = publicPath.startsWith('/')
     ? undefined
@@ -100,6 +104,7 @@ function getHTMLPluginOptions(BUILD_CONFIG: BUILD_CONFIG_TYPE) {
       ? `<link rel="preconnect" href="${cdnOrigin}" />`
       : '',
     VIEWPORT_FIT: BUILD_CONFIG.isMobileEdition ? 'cover' : 'auto',
+    SHOW_WELCOME_SCREEN: !!config.showWelcomeScreen,
   };
 
   return {
@@ -209,7 +214,7 @@ export function createHTMLPlugins(
   config: CreateHTMLPluginConfig
 ): (HTMLPlugin | PluginLike)[] {
   const publicPath = getPublicPath(BUILD_CONFIG);
-  const htmlPluginOptions = getHTMLPluginOptions(BUILD_CONFIG);
+  const htmlPluginOptions = getHTMLPluginOptions(BUILD_CONFIG, config);
   const selfhostPublicPath = config.selfhostPublicPath ?? '/';
 
   const plugins: (HTMLPlugin | PluginLike)[] = [];

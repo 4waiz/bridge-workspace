@@ -27,10 +27,10 @@ export const channelToScheme = {
 } as Record<Channel, Scheme>;
 
 export const appIconMap = {
-  stable: '/imgs/bridge-logo.png',
-  canary: '/imgs/bridge-logo.png',
-  beta: '/imgs/bridge-logo.png',
-  internal: '/imgs/bridge-logo.png',
+  stable: '/imgs/bridge-logo.webp',
+  canary: '/imgs/bridge-logo.webp',
+  beta: '/imgs/bridge-logo.webp',
+  internal: '/imgs/bridge-logo.webp',
 } satisfies Record<Channel, string>;
 
 export const appNames = {

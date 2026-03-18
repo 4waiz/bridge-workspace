@@ -222,7 +222,7 @@ export class DocRendererController {
       ? htmlSanitize(`${opts.title} | AFFiNE`)
       : 'AFFiNE';
     const summary = opts ? htmlSanitize(opts.summary) : assets.description;
-    const image = opts?.avatar ?? 'https://affine.pro/og.jpeg';
+    const image = opts?.avatar ?? 'https://awaizahmed.com/imgs/bridge-logo.webp';
 
     // TODO(@forehalo): parse assets/index.html
     return `<!DOCTYPE html>

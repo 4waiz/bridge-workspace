@@ -7,7 +7,7 @@ export const TEST_USER: UserProps = {
 
 export const TEST_WORKSPACE: WorkspaceProps = {
   name: 'Test Workspace',
-  avatar: 'https://app.affine.pro/favicon-192.png',
+  avatar: 'https://awaizahmed.com/imgs/bridge-logo.webp',
 };
 
 export const TEST_DOC: DocProps = {

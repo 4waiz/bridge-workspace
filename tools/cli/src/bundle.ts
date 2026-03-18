@@ -103,7 +103,9 @@ function getRspackBundleConfigs(pkg: Package): MultiRspackOptions {
         createRspackHTMLTargetConfig(
           pkg,
           pkg.srcPath.join('index.tsx').value,
-          {},
+          {
+            showWelcomeScreen: pkg.name === '@affine/web',
+          },
           workerConfigs.map(config => config.name)
         ),
         ...workerConfigs,

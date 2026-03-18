@@ -15,6 +15,8 @@ import type { PropsWithChildren } from 'react';
 import { BasicTextStyle } from './common';
 import { Footer } from './footer';
 
+const BRIDGE_LOGO_URL = 'https://awaizahmed.com/imgs/bridge-logo.webp';
+
 export function Title(props: PropsWithChildren) {
   return (
     <EmailText
@@ -214,10 +216,10 @@ export function Template(props: PropsWithChildren) {
           }}
         >
           <Section>
-            <Link href="https://affine.pro">
+            <Link href="https://awaizahmed.com">
               <Img
-                src="https://cdn.affine.pro/mail/2023-8-9/affine-logo.png"
-                alt="AFFiNE logo"
+                src={BRIDGE_LOGO_URL}
+                alt="Bridge Workspace logo"
                 height="32px"
               />
             </Link>
