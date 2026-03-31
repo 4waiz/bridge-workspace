@@ -1,6 +1,4 @@
-// Import is already correct, no changes needed
 import {
-  AddPageButton,
   AppSidebar,
   MenuItem,
   MenuLinkItem,
@@ -8,19 +6,24 @@ import {
   SidebarContainer,
   SidebarScrollableContainer,
 } from '@affine/core/modules/app-sidebar/views';
-import { AuthService, ServerService } from '@affine/core/modules/cloud';
+import { AuthService } from '@affine/core/modules/cloud';
 import { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import { FeatureFlagService } from '@affine/core/modules/feature-flag';
 import { CMDKQuickSearchService } from '@affine/core/modules/quicksearch/services/cmdk';
 import type { Workspace } from '@affine/core/modules/workspace';
 import { useI18n } from '@affine/i18n';
 import { track } from '@affine/track';
 import type { Store } from '@blocksuite/affine/store';
-import { AllDocsIcon, ImportIcon, SettingsIcon } from '@blocksuite/icons/rc';
+import {
+  AllDocsIcon,
+  HomeIcon,
+  ImportIcon,
+  SettingsIcon,
+} from '@blocksuite/icons/rc';
 import { useLiveData, useService, useServices } from '@toeverything/infra';
 import type { ReactElement } from 'react';
 import { memo, useCallback } from 'react';
 
+import { CreateNewButton } from '../../desktop/components/create-new-menu';
 import {
   CollapsibleSection,
   NavigationPanelCollections,
@@ -33,8 +36,12 @@ import { WorkbenchService } from '../../modules/workbench';
 import { WorkspaceNavigator } from '../workspace-selector';
 import {
   bottomContainer,
+  createNewWrapper,
+  primaryNav,
   quickSearch,
-  quickSearchAndNewPage,
+  searchWrapper,
+  settingsRow,
+  sidebarSectionDivider,
   workspaceAndUserWrapper,
   workspaceWrapper,
 } from './index.css';
@@ -61,6 +68,22 @@ export type RootAppSidebarProps = {
   };
 };
 
+const HomeButton = () => {
+  const { workbenchService } = useServices({
+    WorkbenchService,
+  });
+  const workbench = workbenchService.workbench;
+  const homeActive = useLiveData(
+    workbench.location$.selector(location => location.pathname === '/home')
+  );
+
+  return (
+    <MenuLinkItem icon={<HomeIcon />} active={homeActive} to={'/home'}>
+      <span data-testid="home-page">Home</span>
+    </MenuLinkItem>
+  );
+};
+
 const AllDocsButton = () => {
   const t = useI18n();
   const { workbenchService } = useServices({
@@ -80,11 +103,6 @@ const AllDocsButton = () => {
   );
 };
 
-/**
- * This is for the whole affine app sidebar.
- * This component wraps the app sidebar in `@affine/component` with logic and data.
- *
- */
 export const RootAppSidebar = memo((): ReactElement => {
   const { workbenchService, cMDKQuickSearchService, authService } = useServices(
     {
@@ -124,17 +142,14 @@ export const RootAppSidebar = memo((): ReactElement => {
       isWorkspaceFile?: boolean;
     }) => {
       const { docIds, entryId, isWorkspaceFile } = result;
-      // If the imported file is a workspace file, open the entry page.
       if (isWorkspaceFile && entryId) {
         workbench.openDoc(entryId);
       } else if (!docIds.length) {
         return;
       }
-      // Open all the docs when there are multiple docs imported.
       if (docIds.length > 1) {
         workbench.openAll();
       } else {
-        // Otherwise, open the only doc.
         workbench.openDoc(docIds[0]);
       }
     },
@@ -153,6 +168,7 @@ export const RootAppSidebar = memo((): ReactElement => {
 
   return (
     <AppSidebar>
+      {/* Workspace identity */}
       <SidebarContainer>
         <div className={workspaceAndUserWrapper}>
           <div className={workspaceWrapper}>
@@ -166,34 +182,42 @@ export const RootAppSidebar = memo((): ReactElement => {
           </div>
           <UserInfo />
         </div>
-        <div className={quickSearchAndNewPage}>
+
+        {/* Create new button */}
+        <div className={createNewWrapper}>
+          <CreateNewButton />
+        </div>
+
+        {/* Search */}
+        <div className={searchWrapper}>
           <QuickSearchInput
             className={quickSearch}
             data-testid="slider-bar-quick-search-button"
             data-event-props="$.navigationPanel.$.quickSearch"
             onClick={onOpenQuickSearchModal}
           />
-          <AddPageButton />
         </div>
-        <AllDocsButton />
-        <AppSidebarJournalButton />
-        {sessionStatus === 'authenticated' && <NotificationButton />}
-        <MenuItem
-          data-testid="slider-bar-workspace-setting-button"
-          icon={<SettingsIcon />}
-          onClick={onOpenSettingModal}
-        >
-          <span data-testid="settings-modal-trigger">
-            {t['com.affine.settingSidebar.title']()}
-          </span>
-        </MenuItem>
+
+        {/* Primary navigation */}
+        <div className={primaryNav}>
+          <HomeButton />
+          <AllDocsButton />
+          <AppSidebarJournalButton />
+          {sessionStatus === 'authenticated' && <NotificationButton />}
+        </div>
       </SidebarContainer>
+
+      <div className={sidebarSectionDivider} style={{ margin: '0 14px' }} />
+
+      {/* Organizational sections */}
       <SidebarScrollableContainer>
         <NavigationPanelFavorites />
         <NavigationPanelOrganize />
         <NavigationPanelMigrationFavorites />
         <NavigationPanelTags />
         <NavigationPanelCollections />
+
+        {/* Utility items */}
         <CollapsibleSection
           path={['others']}
           title={t['com.affine.rootAppSidebar.others']()}
@@ -210,7 +234,24 @@ export const RootAppSidebar = memo((): ReactElement => {
           <InviteMembersButton />
           <TemplateDocEntrance />
         </CollapsibleSection>
+
+        <div className={sidebarSectionDivider} style={{ margin: '0 8px' }} />
+
+        {/* Settings */}
+        <div className={settingsRow}>
+          <MenuItem
+            data-testid="slider-bar-workspace-setting-button"
+            icon={<SettingsIcon />}
+            onClick={onOpenSettingModal}
+          >
+            <span data-testid="settings-modal-trigger">
+              {t['com.affine.settingSidebar.title']()}
+            </span>
+          </MenuItem>
+        </div>
       </SidebarScrollableContainer>
+
+      {/* Bottom bar */}
       <SidebarContainer className={bottomContainer}>
         <SidebarAudioPlayer />
         {BUILD_CONFIG.isElectron ? <UpdaterButton /> : null}

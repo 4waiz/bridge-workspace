@@ -7,35 +7,31 @@ export const linkItemRoot = style({
 export const root = style({
   display: 'inline-flex',
   alignItems: 'center',
-  borderRadius: '4px',
+  borderRadius: '8px',
   textAlign: 'left',
   color: 'inherit',
   width: '100%',
-  minHeight: '30px',
+  minHeight: '32px',
   userSelect: 'none',
   cursor: 'pointer',
-  padding: '0 2px 0 0',
+  padding: '0 4px 0 0',
   fontSize: cssVar('fontSm'),
-  marginTop: '4px',
+  marginTop: '2px',
   position: 'relative',
+  transition: 'background 0.1s ease',
   selectors: {
     '&:hover': {
       background: cssVarV2.layer.background.hoverOverlay,
     },
     '&[data-active="true"]': {
-      background: cssVarV2.layer.background.hoverOverlay,
+      background: 'rgba(255, 106, 49, 0.08)',
+      fontWeight: 500,
     },
     '&[data-disabled="true"]': {
       cursor: 'default',
       color: cssVarV2.text.disable,
       pointerEvents: 'none',
     },
-    // this is not visible in dark mode
-    // '&[data-active="true"]:hover': {
-    //   background:
-    //     // make this a variable?
-    //     'linear-gradient(0deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.04)), rgba(0, 0, 0, 0.04)',
-    // },
     '&[data-collapsible="true"]': {
       paddingLeft: '4px',
       paddingRight: '4px',
@@ -74,6 +70,11 @@ export const postfix = style({
 export const icon = style({
   color: cssVarV2('icon/primary'),
   fontSize: '20px',
+  selectors: {
+    [`${root}[data-active="true"] &`]: {
+      color: '#FF6A31',
+    },
+  },
 });
 export const collapsedIconContainer = style({
   width: '16px',

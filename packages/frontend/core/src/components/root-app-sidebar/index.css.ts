@@ -1,3 +1,4 @@
+import { cssVarV2 } from '@toeverything/theme/v2';
 import { style } from '@vanilla-extract/css';
 
 export const workspaceAndUserWrapper = style({
@@ -10,17 +11,9 @@ export const workspaceAndUserWrapper = style({
   paddingRight: 6,
   alignSelf: 'center',
 });
-export const quickSearchAndNewPage = style({
-  display: 'flex',
-  alignItems: 'center',
-  gap: 8,
-  padding: '4px 0',
-  marginLeft: -8,
-  marginRight: -6,
-});
+
 export const quickSearch = style({
-  width: 0,
-  flex: 1,
+  width: '100%',
 });
 
 export const workspaceWrapper = style({
@@ -30,4 +23,33 @@ export const workspaceWrapper = style({
 
 export const bottomContainer = style({
   gap: 8,
+});
+
+// -- Sidebar structure --
+
+export const createNewWrapper = style({
+  padding: '6px 0 2px',
+});
+
+export const searchWrapper = style({
+  padding: '2px 0',
+});
+
+export const sidebarSectionDivider = style({
+  height: 1,
+  background: cssVarV2('layer/insideBorder/border'),
+  margin: '6px 0',
+  opacity: 0.5,
+});
+
+export const primaryNav = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 2,
+  padding: '4px 0 2px',
+});
+
+export const settingsRow = style({
+  paddingTop: 4,
+  paddingBottom: 4,
 });

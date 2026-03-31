@@ -51,8 +51,8 @@ const OSWarningMessage = () => {
 };
 
 export const TopTip = ({
-  pageId,
-  workspace,
+  pageId: _pageId,
+  workspace: _workspace,
 }: {
   pageId?: string;
   workspace: Workspace;

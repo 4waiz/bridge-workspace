@@ -5,6 +5,7 @@ import { SWRConfigProvider } from '@affine/core/components/providers/swr-config-
 import { WorkspaceSideEffects } from '@affine/core/components/providers/workspace-side-effects';
 import { AIIsland } from '@affine/core/desktop/components/ai-island';
 import { AppContainer } from '@affine/core/desktop/components/app-container';
+import { BridgeWorkspaceAssistant } from '@affine/core/desktop/components/bridge-workspace-assistant';
 import { DocumentTitle } from '@affine/core/desktop/components/document-title';
 import { WorkspaceDialogs } from '@affine/core/desktop/dialogs';
 import { DocsService } from '@affine/core/modules/doc';
@@ -69,11 +70,11 @@ export const WorkspaceLayout = function WorkspaceLayout({
       }
     };
 
-    void renameStarterDocs();
+    renameStarterDocs().catch(console.error);
     renameStarterFolder();
 
     const docsSub = docsService.list.docs$.subscribe(() => {
-      void renameStarterDocs();
+      renameStarterDocs().catch(console.error);
     });
     const foldersSub =
       organizeService.folderTree.rootFolder.sortedChildren$.subscribe(() => {
@@ -103,6 +104,7 @@ export const WorkspaceLayout = function WorkspaceLayout({
       {/* should show after workspace loaded */}
       {/* FIXME: wait for better ai, <WorkspaceAIOnboarding /> */}
       <AIIsland />
+      <BridgeWorkspaceAssistant />
       <uniReactRoot.Root />
     </SWRConfigProvider>
   );

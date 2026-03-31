@@ -140,6 +140,7 @@ export const useEnableCloud = () => {
     [
       closeConfirmModal,
       globalDialogService,
+      localOnlyMode,
       loginStatus,
       openConfirmModal,
       serverList.length,

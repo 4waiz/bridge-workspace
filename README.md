@@ -13,6 +13,28 @@ Bridge Workspace is the monorepo for the BridgeWS product, including the fronten
 - `yarn test`
 - `yarn lint`
 
+## Bridge Workspace AI Assistant
+
+The workspace now includes a floating `Bridge Workspace AI` assistant with:
+
+- Gemini-powered chat for in-app guidance
+- Browser microphone input for voice questions
+- Optional spoken replies
+
+Set the Gemini key before starting the web app:
+
+```powershell
+$env:GEMINI_API_KEY="your_gemini_api_key"
+corepack yarn dev
+```
+
+For Command Prompt:
+
+```cmd
+set GEMINI_API_KEY=your_gemini_api_key
+corepack yarn dev
+```
+
 ## Workspace Layout
 
 - `packages/frontend`: web, admin, desktop, mobile, and shared UI code

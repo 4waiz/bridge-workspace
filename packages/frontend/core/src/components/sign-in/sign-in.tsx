@@ -1,4 +1,3 @@
-import { BRAND_NAME, BRAND_SITE_URL } from '@affine/component/brand';
 import { Button, notify } from '@affine/component';
 import {
   AuthContainer,
@@ -7,6 +6,7 @@ import {
   AuthHeader,
   AuthInput,
 } from '@affine/component/auth-components';
+import { BRAND_NAME, BRAND_SITE_URL } from '@affine/component/brand';
 import { OAuth } from '@affine/core/components/affine/auth/oauth';
 import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
 import { AuthService, ServerService } from '@affine/core/modules/cloud';
@@ -175,7 +175,7 @@ export const SignInStep = ({
               {/*prettier-ignore*/}
               <Trans i18nKey="com.affine.auth.sign.message">
                 By clicking &quot;Continue with Google/Email&quot; above, you acknowledge that
-                you agree to {BRAND_NAME}'s <a href={BRAND_SITE_URL} target="_blank" rel="noreferrer">Terms of Conditions</a> and <a href={BRAND_SITE_URL} target="_blank" rel="noreferrer">Privacy Policy</a>.
+                you agree to {BRAND_NAME}&apos;s <a href={BRAND_SITE_URL} target="_blank" rel="noreferrer">Terms of Conditions</a> and <a href={BRAND_SITE_URL} target="_blank" rel="noreferrer">Privacy Policy</a>.
             </Trans>
             </div>
             <div className={style.skipDivider}>

@@ -4,24 +4,30 @@ import { style } from '@vanilla-extract/css';
 export const root = style({
   display: 'inline-flex',
   alignItems: 'center',
-  borderRadius: '4px',
+  borderRadius: '8px',
   fontSize: cssVar('fontSm'),
   width: '100%',
-  height: '30px',
+  height: '34px',
   userSelect: 'none',
   cursor: 'pointer',
-  padding: '0 12px 0 8px',
+  padding: '0 10px',
   position: 'relative',
   whiteSpace: 'nowrap',
   overflow: 'hidden',
+  background: cssVarV2('layer/background/hoverOverlay'),
+  transition: 'all 0.15s ease',
+  color: cssVarV2('text/tertiary'),
   ':hover': {
-    background: cssVarV2('layer/background/hoverOverlay'),
+    background: cssVarV2('layer/background/secondary'),
   },
 });
 export const icon = style({
-  marginRight: '12px',
-  color: cssVarV2('icon/primary'),
+  marginRight: '8px',
+  color: cssVarV2('icon/tertiary'),
   fontSize: '20px',
+  flexShrink: 0,
+  display: 'flex',
+  alignItems: 'center',
 });
 export const spacer = style({
   flex: 1,
@@ -34,4 +40,5 @@ export const quickSearchBarEllipsisStyle = style({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
+  fontSize: 13,
 });

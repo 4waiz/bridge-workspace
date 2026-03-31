@@ -1,7 +1,8 @@
 import { cssVar } from '@toeverything/theme';
+import { cssVarV2 } from '@toeverything/theme/v2';
 import { globalStyle, style } from '@vanilla-extract/css';
 export const baseContainer = style({
-  padding: '4px 14px',
+  padding: '4px 12px',
   display: 'flex',
   flexFlow: 'column nowrap',
   ':empty': {
@@ -23,7 +24,7 @@ export const scrollTopBorder = style({
   height: '1px',
   transition: 'opacity .3s .2s',
   opacity: 0,
-  background: cssVar('black10'),
+  background: cssVarV2('layer/insideBorder/border'),
   selectors: {
     '&[data-has-scroll-top="true"]': {
       opacity: 1,
@@ -33,7 +34,6 @@ export const scrollTopBorder = style({
 export const scrollableViewport = style({
   height: '100%',
   marginTop: '4px',
-  // safe area to avoid bottom clipping
   paddingBottom: 8,
 });
 globalStyle(`${scrollableViewport} > div`, {
@@ -44,10 +44,10 @@ export const scrollableContainer = style([
   baseContainer,
   {
     height: '100%',
-    padding: '0px 8px',
+    padding: '0px 6px',
     display: 'flex',
     flexDirection: 'column',
-    gap: 8,
+    gap: 4,
   },
 ]);
 export const scrollbar = style({

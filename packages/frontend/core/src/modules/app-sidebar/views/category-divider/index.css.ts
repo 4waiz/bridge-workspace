@@ -1,4 +1,3 @@
-import { cssVar } from '@toeverything/theme';
 import { cssVarV2 } from '@toeverything/theme/v2';
 import { style } from '@vanilla-extract/css';
 
@@ -9,8 +8,8 @@ const baseAction = style({
 });
 
 export const root = style({
-  fontSize: cssVar('fontXs'),
-  height: 20,
+  fontSize: '11px',
+  height: 24,
   width: 'calc(100%)',
   userSelect: 'none',
   display: 'flex',
@@ -18,6 +17,7 @@ export const root = style({
   justifyContent: 'space-between',
   padding: '0 8px',
   borderRadius: 4,
+  marginTop: 4,
   selectors: {
     [`&[data-collapsible="true"]`]: {
       cursor: 'pointer',
@@ -42,9 +42,12 @@ export const actions = style([
   },
 ]);
 export const label = style({
-  color: cssVarV2('text/tertiary'),
-  fontWeight: 500,
-  lineHeight: '20px',
+  color: cssVarV2('text/secondary'),
+  fontWeight: 600,
+  fontSize: '11px',
+  lineHeight: '24px',
+  letterSpacing: '0.3px',
+  textTransform: 'uppercase',
   flexGrow: '0',
   display: 'flex',
   gap: 2,

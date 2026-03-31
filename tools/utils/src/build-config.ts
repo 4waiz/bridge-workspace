@@ -55,6 +55,7 @@ export function getBuildConfig(
         linkPreviewUrl: '/api/worker/link-preview',
         CAPTCHA_SITE_KEY: process.env.CAPTCHA_SITE_KEY ?? '',
         SENTRY_DSN: process.env.SENTRY_DSN ?? '',
+        GEMINI_API_KEY: process.env.GEMINI_API_KEY ?? '',
       };
     },
     get beta() {
