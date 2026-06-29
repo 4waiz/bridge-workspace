@@ -192,10 +192,12 @@
       }
 
       .bridge-welcome__cta {
+        display: block;
         margin: clamp(20px, 2.4vw, 30px) auto 0;
         width: fit-content;
         min-width: clamp(180px, 17vw, 252px);
         padding: 13px 31px;
+        border: 0;
         border-radius: 999px;
         background: linear-gradient(180deg, #ff8f3f 0%, #ff5622 100%);
         box-shadow: 0 14px 28px rgba(255, 86, 34, 0.2);
@@ -204,6 +206,27 @@
         font-weight: 700;
         color: #fff8f2;
         letter-spacing: -0.03em;
+        cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        transition:
+          transform 120ms ease,
+          box-shadow 120ms ease,
+          filter 120ms ease;
+      }
+
+      .bridge-welcome__cta:hover {
+        filter: brightness(1.04);
+        box-shadow: 0 18px 34px rgba(255, 86, 34, 0.28);
+      }
+
+      .bridge-welcome__cta:active {
+        transform: translateY(1px) scale(0.99);
+      }
+
+      .bridge-welcome__cta:focus-visible {
+        outline: 3px solid rgba(255, 86, 34, 0.4);
+        outline-offset: 3px;
       }
 
       @media (max-width: 960px) {
@@ -283,7 +306,9 @@
         <p class="bridge-welcome__copy">
           Build, plan and execute visually, with AI alongside you.
         </p>
-        <div class="bridge-welcome__cta" aria-hidden="true">Get Started</div>
+        <button type="button" id="bridge-welcome-cta" class="bridge-welcome__cta">
+          Get Started
+        </button>
       </div>
     </div>
     <script>
@@ -294,45 +319,30 @@
           return;
         }
 
-        const state = {
-          appReady: false,
-          pageReady: document.readyState === 'complete',
-          hidden: false,
-        };
+        let hidden = false;
 
+        // Dismiss the welcome screen: fade it out and remove it, which stops
+        // its animation and reveals the app mounted in #app behind it.
         const hide = () => {
-          if (state.hidden || !state.appReady || !state.pageReady) {
+          if (hidden) {
             return;
           }
-
-          state.hidden = true;
+          hidden = true;
           splash.classList.add('is-hiding');
           window.setTimeout(() => splash.remove(), 460);
         };
 
-        window.__bridgeWelcomeMarkReady = () => {
-          state.appReady = true;
-          hide();
-        };
+        // The app boots in the background while the welcome screen is shown.
+        // We intentionally keep the screen up until the user presses
+        // "Get Started" instead of auto-dismissing on a timer.
+        window.__bridgeWelcomeMarkReady = () => {};
 
-        if (!state.pageReady) {
-          window.addEventListener(
-            'load',
-            () => {
-              state.pageReady = true;
-              hide();
-            },
-            { once: true }
-          );
+        const cta = document.getElementById('bridge-welcome-cta');
+        if (cta) {
+          // <button> handles Enter/Space natively, so a click listener covers
+          // both pointer and keyboard activation.
+          cta.addEventListener('click', hide);
         }
-
-        window.setTimeout(hide, 3000);
-
-        window.setTimeout(() => {
-          state.appReady = true;
-          state.pageReady = true;
-          hide();
-        }, 12000);
       })();
     </script>
     <% } %>
