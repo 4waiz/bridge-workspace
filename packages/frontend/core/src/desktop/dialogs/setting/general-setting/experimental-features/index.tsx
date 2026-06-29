@@ -1,4 +1,5 @@
 import { Button, Checkbox, Loading, Switch, Tooltip } from '@bridgeflow/component';
+import { BRAND_SITE_URL } from '@bridgeflow/component/brand';
 import { SettingHeader } from '@bridgeflow/component/setting-components';
 import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
 import {
@@ -101,8 +102,8 @@ const FeedbackIcon = ({ type }: { type: Flag['feedbackType'] }) => {
 
 const feedbackLink: Record<NonNullable<Flag['feedbackType']>, string> = {
   discord: BUILD_CONFIG.discordUrl,
-  email: 'https://kanbanstudios.ae',
-  github: 'https://kanbanstudios.ae',
+  email: BRAND_SITE_URL,
+  github: BRAND_SITE_URL,
 };
 
 const ExperimentalFeaturesItem = ({

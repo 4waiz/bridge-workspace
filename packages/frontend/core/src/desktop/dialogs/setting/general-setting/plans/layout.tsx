@@ -1,4 +1,5 @@
 import { Divider } from '@bridgeflow/component';
+import { BRAND_SITE_URL } from '@bridgeflow/component/brand';
 import { SettingHeader } from '@bridgeflow/component/setting-components';
 import { useI18n } from '@bridgeflow/i18n';
 import { ArrowRightBigIcon } from '@blocksuite/icons/rc';
@@ -14,7 +15,7 @@ export const SeeAllLink = () => {
   return (
     <a
       className={styles.allPlansLink}
-      href="https://kanbanstudios.ae"
+      href={BRAND_SITE_URL}
       target="_blank"
       rel="noopener noreferrer"
     >

@@ -3,6 +3,7 @@ import { type ReactNode, useEffect, useState } from 'react';
 
 import { BridgeAuthPage } from './bridge-auth';
 import { BridgeProfile } from './bridge-profile';
+import { BridgeWelcome } from './bridge-welcome';
 import { BRIDGE_ICON } from './logos';
 import { supabase } from './supabase-client';
 
@@ -61,6 +62,7 @@ export function AuthGate({ children }: { children: ReactNode }) {
   return (
     <>
       {children}
+      <BridgeWelcome />
       <BridgeProfile />
     </>
   );

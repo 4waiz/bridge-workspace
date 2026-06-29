@@ -1,4 +1,5 @@
 import { type Notification, notify } from '@bridgeflow/component';
+import { BRAND_SITE_URL } from '@bridgeflow/component/brand';
 import {
   RouteLogic,
   useNavigateHelper,
@@ -45,7 +46,7 @@ export const AIOnboardingLocal = () => {
         key: 'learn-more',
         label: t['com.bridgeflow.ai-onboarding.local.action-learn-more'](),
         onClick: () => {
-          window.open('https://kanbanstudios.ae', '_blank', 'noreferrer');
+          window.open(BRAND_SITE_URL, '_blank', 'noreferrer');
         },
       },
     ];

@@ -1,3 +1,4 @@
+import { BRAND_NAME, BRAND_SITE_URL } from '@bridgeflow/component/brand';
 import type { Server } from '@bridgeflow/core/modules/cloud';
 import { useLiveData } from '@kanban-studios/infra';
 import { cssVarV2 } from '@toeverything/theme/v2';
@@ -25,7 +26,7 @@ const rules = [
           <span style={{ fontWeight: 500 }}>Instructions:</span>
           <br />
           <a
-            href="https://kanbanstudios.ae"
+            href={BRAND_SITE_URL}
             target="_blank"
             rel="noreferrer"
             style={{
@@ -35,7 +36,7 @@ const rules = [
               lineHeight: '16px',
             }}
           >
-            https://kanbanstudios.ae
+            {BRAND_NAME}
           </a>
         </div>
       </div>

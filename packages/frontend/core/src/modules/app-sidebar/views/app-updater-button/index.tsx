@@ -1,4 +1,5 @@
 import { Tooltip } from '@bridgeflow/component';
+import { BRAND_SITE_URL } from '@bridgeflow/component/brand';
 import { useCatchEventCallback } from '@bridgeflow/core/components/hooks/use-catch-event-hook';
 import { UrlService } from '@bridgeflow/core/modules/url';
 import { Unreachable } from '@bridgeflow/env/constant';
@@ -199,7 +200,7 @@ export function AppUpdaterButton({
           onDownloadUpdate();
         }
       } else {
-        urlService.openPopupWindow(`https://kanbanstudios.ae`);
+        urlService.openPopupWindow(BRAND_SITE_URL);
       }
     } else if (changelogUnread) {
       onOpenChangelog();

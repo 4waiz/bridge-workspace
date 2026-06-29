@@ -5,6 +5,7 @@ import {
   type MenuProps,
   Scrollable,
 } from '@bridgeflow/component';
+import { BRAND_SITE_URL } from '@bridgeflow/component/brand';
 import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
 import { inferOpenMode } from '@bridgeflow/core/utils';
 import { useI18n } from '@bridgeflow/i18n';
@@ -65,7 +66,7 @@ const Empty = () => {
       </span>
       <div className={styles.space} />
       <a
-        href="https://kanbanstudios.ae"
+        href={BRAND_SITE_URL}
         target="_blank"
         rel="noopener noreferrer"
         className={styles.link}

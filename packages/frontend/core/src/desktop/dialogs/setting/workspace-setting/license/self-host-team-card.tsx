@@ -1,4 +1,5 @@
 import { Button, ConfirmModal, Input, Modal, notify } from '@bridgeflow/component';
+import { BRAND_SITE_URL } from '@bridgeflow/component/brand';
 import { SettingRow } from '@bridgeflow/component/setting-components';
 import { useEnableCloud } from '@bridgeflow/core/components/hooks/bridgeflow/use-enable-cloud';
 import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
@@ -415,7 +416,7 @@ const ActionModal = ({
           components={{
             1: (
               <a
-                href="https://kanbanstudios.ae"
+                href={BRAND_SITE_URL}
                 target="_blank"
                 rel="noreferrer"
                 style={{ color: cssVarV2('text/link') }}

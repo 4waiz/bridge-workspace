@@ -1,4 +1,5 @@
 import { notify } from '@bridgeflow/component';
+import { BRAND_SITE_URL } from '@bridgeflow/component/brand';
 import { isMindmapChild, isMindMapRoot } from '@bridgeflow/core/blocksuite/ai';
 import { EditorService } from '@bridgeflow/core/modules/editor';
 import { apis } from '@bridgeflow/electron-api';
@@ -114,7 +115,7 @@ export function copyAsImage(std: BlockStdScope) {
           key: 'download',
           label: I18n.t('com.bridgeflow.copy.asImage.notAvailable.action'),
           onClick: () => {
-            window.open('https://kanbanstudios.ae', '_blank', 'noreferrer');
+            window.open(BRAND_SITE_URL, '_blank', 'noreferrer');
           },
         },
       ],

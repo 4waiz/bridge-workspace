@@ -1,4 +1,5 @@
 import { Scrollable, ThemedImg } from '@bridgeflow/component';
+import { BRAND_SITE_URL } from '@bridgeflow/component/brand';
 import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
 import { Trans, useI18n } from '@bridgeflow/i18n';
 import { ArrowDownSmallIcon } from '@blocksuite/icons/rc';
@@ -142,7 +143,7 @@ export function ContactUS() {
         1: (
           <a
             style={{ color: 'var(--affine-primary-color)' }}
-            href="https://kanbanstudios.ae"
+            href={BRAND_SITE_URL}
             target="__blank"
           />
         ),

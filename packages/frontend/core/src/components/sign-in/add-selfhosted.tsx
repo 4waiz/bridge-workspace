@@ -1,4 +1,5 @@
 import { Button, notify } from '@bridgeflow/component';
+import { BRAND_SITE_URL } from '@bridgeflow/component/brand';
 import {
   AuthContainer,
   AuthContent,
@@ -152,7 +153,7 @@ export const AddSelfhostedStep = ({
             components={{
               1: (
                 <a
-                  href="https://kanbanstudios.ae"
+                  href={BRAND_SITE_URL}
                   target="_blank"
                   rel="noreferrer"
                 />

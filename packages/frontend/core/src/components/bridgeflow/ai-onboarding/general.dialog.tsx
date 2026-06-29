@@ -1,4 +1,5 @@
 import { Button, IconButton, Modal } from '@bridgeflow/component';
+import { BRAND_SITE_URL } from '@bridgeflow/component/brand';
 import { useBlurRoot } from '@bridgeflow/core/components/hooks/use-blur-root';
 import { AuthService, SubscriptionService } from '@bridgeflow/core/modules/cloud';
 import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
@@ -223,7 +224,7 @@ export const AIOnboardingGeneral = () => {
               a: (
                 <a
                   className={styles.privacyLink}
-                  href="https://kanbanstudios.ae"
+                  href={BRAND_SITE_URL}
                 />
               ),
             }}
