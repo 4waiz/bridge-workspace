@@ -13,6 +13,10 @@ const LOCAL_SERVER: ServerMetadata & { config: ServerConfig } = {
   baseUrl: location.origin,
   config: {
     serverName: 'BRIDGE Flow',
+    // The "local" web build has no backend; advertise the app version so the
+    // self-host version guard doesn't fall back to '0.0.0' and block creating
+    // a purely local workspace.
+    version: BUILD_CONFIG.appVersion,
     features: [ServerFeature.LocalWorkspace],
     oauthProviders: [],
     type: ServerDeploymentType.Selfhosted,

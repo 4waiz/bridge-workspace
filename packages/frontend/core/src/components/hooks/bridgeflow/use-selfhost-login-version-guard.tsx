@@ -51,6 +51,13 @@ export const useSelfhostLoginVersionGuard = (server: Server) => {
   const serverVersion =
     useLiveData(server.config$.selector(c => c.version)) ?? '0.0.0';
 
+  // When the server version is unknown (no backend reachable, e.g. the
+  // local-only web build), don't hard-block the user — there's nothing to
+  // upgrade and local workspaces work without a server.
+  if (serverVersion === '0.0.0') {
+    return null;
+  }
+
   for (const rule of rules) {
     if (semver.lt(serverVersion, rule.min)) {
       return rule.tip(serverVersion, rule.min);
