@@ -7,6 +7,7 @@ import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { inferOpenMode } from '@bridgeflow/core/utils';
 import track from '@bridgeflow/track';
+import { buildOkrBoard } from '@bridgeflow/core/blocksuite/templates/okr-board';
 import {
   DatabaseTableViewIcon,
   EdgelessIcon,
@@ -353,6 +354,23 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
       track.$.navigationPanel.$.createDoc();
     },
     [createEdgeless]
+  );
+
+  const handleCreateOkr = useCallback(
+    (e?: MouseEvent) => {
+      const record = docsService.createDoc({
+        primaryMode: 'edgeless',
+        title: 'OKR Quarterly Plan',
+        docProps: {
+          onStoreLoad: (storeDoc, { surfaceId }) => {
+            buildOkrBoard(storeDoc as never, surfaceId);
+          },
+        },
+      });
+      workbench.openDoc(record.id, { at: inferOpenMode(e) });
+      track.$.navigationPanel.$.createDoc();
+    },
+    [docsService, workbench]
   );
 
   const handleImport = useCallback(() => {
