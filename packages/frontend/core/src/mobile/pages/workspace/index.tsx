@@ -1,11 +1,11 @@
-import { AffineErrorBoundary } from '@affine/core/components/affine/affine-error-boundary';
-import { AffineErrorComponent } from '@affine/core/components/affine/affine-error-boundary/affine-error-fallback';
-import { PageNotFound } from '@affine/core/desktop/pages/404';
-import { SharePage } from '@affine/core/desktop/pages/workspace/share/share-page';
-import { workbenchRoutes } from '@affine/core/mobile/workbench-router';
-import { ServersService } from '@affine/core/modules/cloud';
-import { WorkspacesService } from '@affine/core/modules/workspace';
-import { FrameworkScope, useLiveData, useServices } from '@toeverything/infra';
+import { BridgeFlowErrorBoundary } from '@bridgeflow/core/components/bridgeflow/bridgeflow-error-boundary';
+import { BridgeFlowErrorComponent } from '@bridgeflow/core/components/bridgeflow/bridgeflow-error-boundary/bridgeflow-error-fallback';
+import { PageNotFound } from '@bridgeflow/core/desktop/pages/404';
+import { SharePage } from '@bridgeflow/core/desktop/pages/workspace/share/share-page';
+import { workbenchRoutes } from '@bridgeflow/core/mobile/workbench-router';
+import { ServersService } from '@bridgeflow/core/modules/cloud';
+import { WorkspacesService } from '@bridgeflow/core/modules/workspace';
+import { FrameworkScope, useLiveData, useServices } from '@kanban-studios/infra';
 import {
   lazy as reactLazy,
   Suspense,
@@ -31,11 +31,11 @@ type Route = { Component: React.ComponentType };
  **/
 const MobileRouteContainer = ({ route }: { route: Route }) => {
   return (
-    <AffineErrorBoundary>
+    <BridgeFlowErrorBoundary>
       <Suspense>
         <route.Component />
       </Suspense>
-    </AffineErrorBoundary>
+    </BridgeFlowErrorBoundary>
   );
 };
 
@@ -60,7 +60,7 @@ const warpedRoutes = workbenchRoutes.map((originalRoute: RouteObject) => {
     Component: () => {
       return <MobileRouteContainer route={route} />;
     },
-    errorElement: <AffineErrorComponent />,
+    errorElement: <BridgeFlowErrorComponent />,
   };
 });
 

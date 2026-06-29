@@ -1,4 +1,4 @@
-import { ServerFeature } from '@affine/graphql';
+import { ServerFeature } from '@bridgeflow/graphql';
 import { SearchIcon } from '@blocksuite/icons/rc';
 import {
   effect,
@@ -6,7 +6,7 @@ import {
   LiveData,
   onComplete,
   onStart,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { truncate } from 'lodash-es';
 import { catchError, EMPTY, map, of, switchMap, tap, throttleTime } from 'rxjs';
 
@@ -64,7 +64,7 @@ export class DocsQuickSearchSession
     source: 'docs',
     label: {
       title: {
-        i18nKey: 'com.affine.quicksearch.search-locally',
+        i18nKey: 'com.bridgeflow.quicksearch.search-locally',
       },
     },
     score: 1000,
@@ -162,8 +162,8 @@ export class DocsQuickSearchSession
                     id: 'docs',
                     label: {
                       i18nKey: useLocalLabel
-                        ? 'com.affine.quicksearch.group.searchfor-locally'
-                        : 'com.affine.quicksearch.group.searchfor',
+                        ? 'com.bridgeflow.quicksearch.group.searchfor-locally'
+                        : 'com.bridgeflow.quicksearch.group.searchfor',
                       options: { query: truncate(query) },
                     },
                     score: 5,

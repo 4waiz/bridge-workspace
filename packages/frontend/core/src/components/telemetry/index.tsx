@@ -1,5 +1,5 @@
-import { enableAutoTrack, sentry, tracker } from '@affine/track';
-import { appSettingAtom } from '@toeverything/infra';
+import { enableAutoTrack, sentry, tracker } from '@bridgeflow/track';
+import { appSettingAtom } from '@kanban-studios/infra';
 import { useAtomValue } from 'jotai/react';
 import { useEffect } from 'react';
 

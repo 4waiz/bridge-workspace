@@ -1,15 +1,15 @@
-import { DesktopApiService } from '@affine/core/modules/desktop-api';
+import { DesktopApiService } from '@bridgeflow/core/modules/desktop-api';
 import {
   CacheStorage,
   GlobalCache,
   GlobalState,
-} from '@affine/core/modules/storage';
+} from '@bridgeflow/core/modules/storage';
 import {
   ElectronGlobalCache,
   ElectronGlobalState,
-} from '@affine/core/modules/storage/impls/electron';
-import { IDBGlobalState } from '@affine/core/modules/storage/impls/storage';
-import type { Framework } from '@toeverything/infra';
+} from '@bridgeflow/core/modules/storage/impls/electron';
+import { IDBGlobalState } from '@bridgeflow/core/modules/storage/impls/storage';
+import type { Framework } from '@kanban-studios/infra';
 
 export function configureElectronStateStorageImpls(framework: Framework) {
   framework.impl(GlobalCache, ElectronGlobalCache, [DesktopApiService]);

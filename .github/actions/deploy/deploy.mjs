@@ -16,9 +16,9 @@ const {
   REDIS_SERVER_HOST,
   REDIS_SERVER_PASSWORD,
   STATIC_IP_NAME,
-  AFFINE_INDEXER_SEARCH_PROVIDER,
-  AFFINE_INDEXER_SEARCH_ENDPOINT,
-  AFFINE_INDEXER_SEARCH_API_KEY,
+  BRIDGEFLOW_INDEXER_SEARCH_PROVIDER,
+  BRIDGEFLOW_INDEXER_SEARCH_ENDPOINT,
+  BRIDGEFLOW_INDEXER_SEARCH_API_KEY,
 } = process.env;
 
 const buildType = BUILD_TYPE || 'canary';
@@ -68,9 +68,9 @@ const createHelmCommand = ({ isDryRun }) => {
         ]
       : [];
   const indexerOptions = [
-    `--set-string global.indexer.provider="${AFFINE_INDEXER_SEARCH_PROVIDER}"`,
-    `--set-string global.indexer.endpoint="${AFFINE_INDEXER_SEARCH_ENDPOINT}"`,
-    `--set-string global.indexer.apiKey="${AFFINE_INDEXER_SEARCH_API_KEY}"`,
+    `--set-string global.indexer.provider="${BRIDGEFLOW_INDEXER_SEARCH_PROVIDER}"`,
+    `--set-string global.indexer.endpoint="${BRIDGEFLOW_INDEXER_SEARCH_ENDPOINT}"`,
+    `--set-string global.indexer.apiKey="${BRIDGEFLOW_INDEXER_SEARCH_API_KEY}"`,
   ];
   const cloudSqlNodeSelector = isBeta
     ? `{ \\"iam.gke.io/gke-metadata-server-enabled\\": \\"true\\", \\"cloud.google.com/gke-spot\\": \\"true\\" }`
@@ -130,9 +130,9 @@ const createHelmCommand = ({ isDryRun }) => {
     .filter(host => host);
   const primaryHost = hosts[0] || '0.0.0.0';
   const deployCommand = [
-    `helm upgrade --install affine .github/helm/affine`,
+    `helm upgrade --install bridgeflow .github/helm/bridgeflow`,
     `--namespace  ${namespace}`,
-    `--set-string global.deployment.type="affine"`,
+    `--set-string global.deployment.type="bridgeflow"`,
     `--set-string global.deployment.platform="gcp"`,
     `--set-string global.app.buildType="${buildType}"`,
     `--set        global.ingress.enabled=true`,

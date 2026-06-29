@@ -1,11 +1,11 @@
-import { notify } from '@affine/component';
-import { useDowngradeNotify } from '@affine/core/components/affine/subscription-landing/notify';
-import { getDowngradeQuestionnaireLink } from '@affine/core/components/hooks/affine/use-subscription-notify';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { SubscriptionPlan } from '@affine/graphql';
-import { useI18n } from '@affine/i18n';
-import { track } from '@affine/track';
-import { useLiveData, useService } from '@toeverything/infra';
+import { notify } from '@bridgeflow/component';
+import { useDowngradeNotify } from '@bridgeflow/core/components/bridgeflow/subscription-landing/notify';
+import { getDowngradeQuestionnaireLink } from '@bridgeflow/core/components/hooks/bridgeflow/use-subscription-notify';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { SubscriptionPlan } from '@bridgeflow/graphql';
+import { useI18n } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { nanoid } from 'nanoid';
 import type { PropsWithChildren } from 'react';
 import { useEffect, useState } from 'react';
@@ -247,8 +247,8 @@ export const TeamResumeAction = ({
       setIdempotencyKey(nanoid());
       onOpenChange(false);
       notify.success({
-        title: t['com.affine.payment.resume.success.title'](),
-        message: t['com.affine.payment.resume.success.team.message'](),
+        title: t['com.bridgeflow.payment.resume.success.title'](),
+        message: t['com.bridgeflow.payment.resume.success.team.message'](),
       });
     } finally {
       setIsMutating(false);

@@ -1,11 +1,11 @@
-import { Entity, LiveData } from '@toeverything/infra';
+import { Entity, LiveData } from '@kanban-studios/infra';
 import { NEVER } from 'rxjs';
 
 import type { GlobalStateService } from '../../storage';
-import { AFFINE_FLAGS } from '../constant';
+import { BRIDGEFLOW_FLAGS } from '../constant';
 import type { FlagInfo } from '../types';
 
-const FLAG_PREFIX = 'affine-flag:';
+const FLAG_PREFIX = 'bridgeflow-flag:';
 
 export type Flag<F extends FlagInfo = FlagInfo> = {
   readonly value: F['defaultState'] extends boolean
@@ -24,7 +24,7 @@ export class Flags extends Entity {
   constructor(private readonly globalStateService: GlobalStateService) {
     super();
 
-    Object.entries(AFFINE_FLAGS).forEach(([flagKey, flag]) => {
+    Object.entries(BRIDGEFLOW_FLAGS).forEach(([flagKey, flag]) => {
       const configurable = flag.configurable ?? true;
       const defaultState =
         'defaultState' in flag ? flag.defaultState : undefined;
@@ -62,5 +62,5 @@ export class Flags extends Entity {
 }
 
 export type FlagsExt = Flags & {
-  [K in keyof AFFINE_FLAGS]: Flag<AFFINE_FLAGS[K]>;
+  [K in keyof BRIDGEFLOW_FLAGS]: Flag<BRIDGEFLOW_FLAGS[K]>;
 };

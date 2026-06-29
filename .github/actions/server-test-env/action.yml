@@ -7,20 +7,20 @@ runs:
     - name: Initialize database
       shell: bash
       run: |
-        psql -h localhost -U postgres -c "CREATE DATABASE affine;"
-        psql -h localhost -U postgres -c "CREATE USER affine WITH PASSWORD 'affine';"
-        psql -h localhost -U postgres -c "ALTER USER affine WITH SUPERUSER;"
+        psql -h localhost -U postgres -c "CREATE DATABASE bridgeflow;"
+        psql -h localhost -U postgres -c "CREATE USER bridgeflow WITH PASSWORD 'bridgeflow';"
+        psql -h localhost -U postgres -c "ALTER USER bridgeflow WITH SUPERUSER;"
       env:
-        PGPASSWORD: affine
+        PGPASSWORD: bridgeflow
 
     - name: Run init-db script
       shell: bash
       env:
         NODE_ENV: test
       run: |
-        yarn affine @affine/server prisma generate
-        yarn affine @affine/server prisma migrate deploy
-        yarn affine @affine/server data-migration run
+        yarn bridgeflow @bridgeflow/server prisma generate
+        yarn bridgeflow @bridgeflow/server prisma migrate deploy
+        yarn bridgeflow @bridgeflow/server data-migration run
 
     - name: Import config
       shell: bash

@@ -8,13 +8,13 @@ const buttonOptions: AskAIButtonOptions = {
   panelWidth: 240,
 };
 
-import type { AffineCodeToolbarWidget } from '@blocksuite/affine/blocks/code';
-import { BlockSelection } from '@blocksuite/affine/std';
+import type { BridgeFlowCodeToolbarWidget } from '@blocksuite/bridgeflow/blocks/code';
+import { BlockSelection } from '@blocksuite/bridgeflow/std';
 
 import { buildAICodeItemGroups } from '../../_common/config';
 import type { AskAIButtonOptions } from '../../components/ask-ai-button';
 
-export function setupCodeToolbarAIEntry(codeToolbar: AffineCodeToolbarWidget) {
+export function setupCodeToolbarAIEntry(codeToolbar: BridgeFlowCodeToolbarWidget) {
   codeToolbar.addPrimaryItems(
     [
       {

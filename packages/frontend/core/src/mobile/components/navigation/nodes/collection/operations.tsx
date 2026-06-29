@@ -4,16 +4,16 @@ import {
   MenuSeparator,
   notify,
   useConfirmModal,
-} from '@affine/component';
-import { usePageHelper } from '@affine/core/blocksuite/block-suite-page-list/utils';
-import { IsFavoriteIcon } from '@affine/core/components/pure/icons';
-import type { NodeOperation } from '@affine/core/desktop/components/navigation-panel';
-import { CollectionService } from '@affine/core/modules/collection';
-import { CompatibleFavoriteItemsAdapter } from '@affine/core/modules/favorite';
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { useI18n } from '@affine/i18n';
-import { track } from '@affine/track';
+} from '@bridgeflow/component';
+import { usePageHelper } from '@bridgeflow/core/blocksuite/block-suite-page-list/utils';
+import { IsFavoriteIcon } from '@bridgeflow/core/components/pure/icons';
+import type { NodeOperation } from '@bridgeflow/core/desktop/components/navigation-panel';
+import { CollectionService } from '@bridgeflow/core/modules/collection';
+import { CompatibleFavoriteItemsAdapter } from '@bridgeflow/core/modules/favorite';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { useI18n } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
 import {
   DeleteIcon,
   FilterIcon,
@@ -21,7 +21,7 @@ import {
   PlusIcon,
   SplitViewIcon,
 } from '@blocksuite/icons/rc';
-import { useLiveData, useServices } from '@toeverything/infra';
+import { useLiveData, useServices } from '@kanban-studios/infra';
 import { useCallback, useMemo } from 'react';
 
 import { CollectionRenameSubMenu } from './dialog';
@@ -76,8 +76,8 @@ export const useNavigationPanelCollectionNodeOperations = (
 
   const handleAddDocToCollection = useCallback(() => {
     openConfirmModal({
-      title: t['com.affine.collection.add-doc.confirm.title'](),
-      description: t['com.affine.collection.add-doc.confirm.description'](),
+      title: t['com.bridgeflow.collection.add-doc.confirm.title'](),
+      description: t['com.bridgeflow.collection.add-doc.confirm.description'](),
       cancelText: t['Cancel'](),
       confirmText: t['Confirm'](),
       confirmButtonOptions: {
@@ -121,7 +121,7 @@ export const useNavigationPanelCollectionNodeOperations = (
         track.$.navigationPanel.organize.renameOrganizeItem({
           type: 'collection',
         });
-        notify.success({ message: t['com.affine.toastMessage.rename']() });
+        notify.success({ message: t['com.bridgeflow.toastMessage.rename']() });
       }
     },
     [collectionId, collectionService, t]
@@ -183,7 +183,7 @@ export const useNavigationPanelCollectionNodeOperationsMenu = (
             size="16"
             onClick={handleAddDocToCollection}
             tooltip={t[
-              'com.affine.rootAppSidebar.explorer.collection-add-tooltip'
+              'com.bridgeflow.rootAppSidebar.explorer.collection-add-tooltip'
             ]()}
           >
             <PlusIcon />
@@ -202,7 +202,7 @@ export const useNavigationPanelCollectionNodeOperationsMenu = (
         index: 99,
         view: (
           <MenuItem prefixIcon={<FilterIcon />} onClick={handleShowEdit}>
-            {t['com.affine.collection.menu.edit']()}
+            {t['com.bridgeflow.collection.menu.edit']()}
           </MenuItem>
         ),
       },
@@ -225,8 +225,8 @@ export const useNavigationPanelCollectionNodeOperationsMenu = (
             onClick={handleToggleFavoriteCollection}
           >
             {favorite
-              ? t['com.affine.favoritePageOperation.remove']()
-              : t['com.affine.favoritePageOperation.add']()}
+              ? t['com.bridgeflow.favoritePageOperation.remove']()
+              : t['com.bridgeflow.favoritePageOperation.add']()}
           </MenuItem>
         ),
       },
@@ -234,7 +234,7 @@ export const useNavigationPanelCollectionNodeOperationsMenu = (
         index: 99,
         view: (
           <MenuItem prefixIcon={<OpenInNewIcon />} onClick={handleOpenInNewTab}>
-            {t['com.affine.workbench.tab.page-menu-open']()}
+            {t['com.bridgeflow.workbench.tab.page-menu-open']()}
           </MenuItem>
         ),
       },
@@ -247,7 +247,7 @@ export const useNavigationPanelCollectionNodeOperationsMenu = (
                   prefixIcon={<SplitViewIcon />}
                   onClick={handleOpenInSplitView}
                 >
-                  {t['com.affine.workbench.split-view.page-menu-open']()}
+                  {t['com.bridgeflow.workbench.split-view.page-menu-open']()}
                 </MenuItem>
               ),
             },

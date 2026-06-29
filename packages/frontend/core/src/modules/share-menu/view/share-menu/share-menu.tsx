@@ -1,17 +1,17 @@
-import { Tabs, Tooltip, useConfirmModal } from '@affine/component';
-import { Button } from '@affine/component/ui/button';
-import { Menu } from '@affine/component/ui/menu';
-import { ServerService } from '@affine/core/modules/cloud';
-import { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import { WorkspacePermissionService } from '@affine/core/modules/permissions';
-import { WorkspaceQuotaService } from '@affine/core/modules/quota';
-import { ShareInfoService } from '@affine/core/modules/share-doc';
-import type { WorkspaceMetadata } from '@affine/core/modules/workspace';
-import { ServerDeploymentType, SubscriptionPlan } from '@affine/graphql';
-import { useI18n } from '@affine/i18n';
-import type { Store } from '@blocksuite/affine/store';
+import { Tabs, Tooltip, useConfirmModal } from '@bridgeflow/component';
+import { Button } from '@bridgeflow/component/ui/button';
+import { Menu } from '@bridgeflow/component/ui/menu';
+import { ServerService } from '@bridgeflow/core/modules/cloud';
+import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
+import { WorkspacePermissionService } from '@bridgeflow/core/modules/permissions';
+import { WorkspaceQuotaService } from '@bridgeflow/core/modules/quota';
+import { ShareInfoService } from '@bridgeflow/core/modules/share-doc';
+import type { WorkspaceMetadata } from '@bridgeflow/core/modules/workspace';
+import { ServerDeploymentType, SubscriptionPlan } from '@bridgeflow/graphql';
+import { useI18n } from '@bridgeflow/i18n';
+import type { Store } from '@blocksuite/bridgeflow/store';
 import { LockIcon, PublishIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import {
   forwardRef,
   type PropsWithChildren,
@@ -31,7 +31,7 @@ import { SharePage } from './share-page';
 export interface ShareMenuProps extends PropsWithChildren {
   workspaceMetadata: WorkspaceMetadata;
   currentPage: Store;
-  onEnableAffineCloud: () => void;
+  onEnableBridgeFlowCloud: () => void;
   onOpenShareModal?: (open: boolean) => void;
   openPaywallModal?: () => void;
   hittingPaywall?: boolean;
@@ -99,15 +99,15 @@ export const ShareMenuContent = (props: ShareMenuProps) => {
     openConfirmModal({
       title:
         t[
-          `com.affine.share-menu.paywall.${isOwner ? 'owner' : 'member'}.title`
+          `com.bridgeflow.share-menu.paywall.${isOwner ? 'owner' : 'member'}.title`
         ](),
       description:
         t[
-          `com.affine.share-menu.paywall.${isOwner ? 'owner' : 'member'}.description`
+          `com.bridgeflow.share-menu.paywall.${isOwner ? 'owner' : 'member'}.description`
         ](),
       confirmText:
         t[
-          `com.affine.share-menu.paywall.${isOwner ? 'owner' : 'member'}.confirm`
+          `com.bridgeflow.share-menu.paywall.${isOwner ? 'owner' : 'member'}.confirm`
         ](),
       onConfirm: onConfirm,
       cancelText: t['Cancel'](),
@@ -156,7 +156,7 @@ export const ShareMenuContent = (props: ShareMenuProps) => {
       >
         <Tabs.List className={styles.tabList}>
           <Tabs.Trigger value={ShareMenuTab.Share} className={styles.tab}>
-            {t['com.affine.share-menu.shareButton']()}
+            {t['com.bridgeflow.share-menu.shareButton']()}
           </Tabs.Trigger>
           <Tabs.Trigger
             value={ShareMenuTab.Export}
@@ -222,8 +222,8 @@ const DefaultShareButton = forwardRef(function DefaultShareButton(
   const tooltip =
     props.tooltip ??
     (shared
-      ? t['com.affine.share-menu.option.link.readonly.description']()
-      : t['com.affine.share-menu.option.link.no-access.description']());
+      ? t['com.bridgeflow.share-menu.option.link.readonly.description']()
+      : t['com.bridgeflow.share-menu.option.link.no-access.description']());
 
   return (
     <Tooltip content={tooltip}>
@@ -235,7 +235,7 @@ const DefaultShareButton = forwardRef(function DefaultShareButton(
       >
         <div className={styles.buttonContainer}>
           {shared ? <PublishIcon fontSize={16} /> : <LockIcon fontSize={16} />}
-          {t['com.affine.share-menu.shareButton']()}
+          {t['com.bridgeflow.share-menu.shareButton']()}
         </div>
       </Button>
     </Tooltip>

@@ -1,9 +1,9 @@
 import './setup';
-import '@affine/component/theme';
-import '@affine/core/mobile/styles/mobile.css';
+import '@bridgeflow/component/theme';
+import '@bridgeflow/core/mobile/styles/mobile.css';
 
-import { Telemetry } from '@affine/core/components/telemetry';
-import { bindNativeDBApis } from '@affine/nbstore/sqlite';
+import { Telemetry } from '@bridgeflow/core/components/telemetry';
+import { bindNativeDBApis } from '@bridgeflow/nbstore/sqlite';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 

@@ -1,24 +1,24 @@
-import { Button, notify } from '@affine/component';
+import { Button, notify } from '@bridgeflow/component';
 import {
   AuthContainer,
   AuthContent,
   AuthFooter,
   AuthHeader,
   AuthInput,
-} from '@affine/component/auth-components';
-import { BRAND_NAME, BRAND_SITE_URL } from '@affine/component/brand';
-import { OAuth } from '@affine/core/components/affine/auth/oauth';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { AuthService, ServerService } from '@affine/core/modules/cloud';
-import type { AuthSessionStatus } from '@affine/core/modules/cloud/entities/session';
-import { ServerDeploymentType } from '@affine/graphql';
-import { Trans, useI18n } from '@affine/i18n';
+} from '@bridgeflow/component/auth-components';
+import { BRAND_NAME, BRAND_SITE_URL } from '@bridgeflow/component/brand';
+import { OAuth } from '@bridgeflow/core/components/bridgeflow/auth/oauth';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { AuthService, ServerService } from '@bridgeflow/core/modules/cloud';
+import type { AuthSessionStatus } from '@bridgeflow/core/modules/cloud/entities/session';
+import { ServerDeploymentType } from '@bridgeflow/graphql';
+import { Trans, useI18n } from '@bridgeflow/i18n';
 import {
   ArrowRightBigIcon,
   LocalWorkspaceIcon,
   PublishIcon,
 } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { cssVar } from '@toeverything/theme';
 import {
   type Dispatch,
@@ -28,7 +28,7 @@ import {
   useState,
 } from 'react';
 
-import { useSelfhostLoginVersionGuard } from '../hooks/affine/use-selfhost-login-version-guard';
+import { useSelfhostLoginVersionGuard } from '../hooks/bridgeflow/use-selfhost-login-version-guard';
 import type { SignInState } from '.';
 import { Back } from './back';
 import * as style from './style.css';
@@ -71,8 +71,8 @@ export const SignInStep = ({
   useEffect(() => {
     if (loginStatus === 'authenticated') {
       notify.success({
-        title: t['com.affine.auth.toast.title.signed-in'](),
-        message: t['com.affine.auth.toast.message.signed-in'](),
+        title: t['com.bridgeflow.auth.toast.title.signed-in'](),
+        message: t['com.bridgeflow.auth.toast.message.signed-in'](),
       });
     }
     onAuthenticated?.(loginStatus);
@@ -128,7 +128,7 @@ export const SignInStep = ({
   if (versionError && isSelfhosted) {
     return (
       <AuthContainer>
-        <AuthHeader title={t['com.affine.auth.sign.in']()} />
+        <AuthHeader title={t['com.bridgeflow.auth.sign.in']()} />
         <AuthContent>
           <div>{versionError}</div>
         </AuthContent>
@@ -138,19 +138,19 @@ export const SignInStep = ({
 
   return (
     <AuthContainer>
-      <AuthHeader title={t['com.affine.auth.sign.in']()} />
+      <AuthHeader title={t['com.bridgeflow.auth.sign.in']()} />
 
       <AuthContent>
         <OAuth redirectUrl={state.redirectUrl} />
 
         <AuthInput
           className={style.authInput}
-          label={t['com.affine.settings.email']()}
-          placeholder={t['com.affine.auth.sign.email.placeholder']()}
+          label={t['com.bridgeflow.settings.email']()}
+          placeholder={t['com.bridgeflow.auth.sign.email.placeholder']()}
           onChange={setEmail}
           error={!isValidEmail}
           errorHint={
-            isValidEmail ? '' : t['com.affine.auth.sign.email.error']()
+            isValidEmail ? '' : t['com.bridgeflow.auth.sign.email.error']()
           }
           onEnter={onContinue}
         />
@@ -166,14 +166,14 @@ export const SignInStep = ({
           suffixStyle={{ width: 20, height: 20, color: cssVar('blue') }}
           onClick={onContinue}
         >
-          {t['com.affine.auth.sign.email.continue']()}
+          {t['com.bridgeflow.auth.sign.email.continue']()}
         </Button>
 
         {!isSelfhosted && (
           <>
             <div className={style.authMessage}>
               {/*prettier-ignore*/}
-              <Trans i18nKey="com.affine.auth.sign.message">
+              <Trans i18nKey="com.bridgeflow.auth.sign.message">
                 By clicking &quot;Continue with Google/Email&quot; above, you acknowledge that
                 you agree to {BRAND_NAME}&apos;s <a href={BRAND_SITE_URL} target="_blank" rel="noreferrer">Terms of Conditions</a> and <a href={BRAND_SITE_URL} target="_blank" rel="noreferrer">Privacy Policy</a>.
             </Trans>
@@ -193,11 +193,11 @@ export const SignInStep = ({
                   }
                   onClick={onAddSelfhosted}
                 >
-                  {t['com.affine.auth.sign.add-selfhosted']()}
+                  {t['com.bridgeflow.auth.sign.add-selfhosted']()}
                 </Button>
               ) : (
                 <div className={style.skipText}>
-                  {t['com.affine.mobile.sign-in.skip.hint']()}
+                  {t['com.bridgeflow.mobile.sign-in.skip.hint']()}
                 </div>
               )}
               <Button
@@ -206,7 +206,7 @@ export const SignInStep = ({
                 className={style.skipLink}
                 prefix={<LocalWorkspaceIcon className={style.skipLinkIcon} />}
               >
-                {t['com.affine.mobile.sign-in.skip.link']()}
+                {t['com.bridgeflow.mobile.sign-in.skip.link']()}
               </Button>
             </div>
           </>

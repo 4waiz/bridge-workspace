@@ -8,8 +8,8 @@ import {
   readAllNotificationsMutation,
   readNotificationMutation,
   type UnionNotificationBodyType,
-} from '@affine/graphql';
-import { Store } from '@toeverything/infra';
+} from '@bridgeflow/graphql';
+import { Store } from '@kanban-studios/infra';
 import { map } from 'rxjs';
 
 import type { GraphQLService, ServerService } from '../../cloud';
@@ -21,7 +21,7 @@ export type Notification = NonNullable<
 
 export type NotificationBody = UnionNotificationBodyType;
 
-export { NotificationType } from '@affine/graphql';
+export { NotificationType } from '@bridgeflow/graphql';
 
 export class NotificationStore extends Store {
   constructor(

@@ -129,7 +129,7 @@ function expectNoEvent(
 }
 
 async function login(app: TestingApp) {
-  const user = await app.createUser('u1@affine.pro');
+  const user = await app.createUser('u1@bridgeflow.pro');
   const res = await app
     .POST('/api/auth/sign-in')
     .send({ email: user.email, password: user.password })

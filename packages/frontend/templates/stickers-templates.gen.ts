@@ -2,6 +2,10 @@
 /* eslint-disable */
 // @ts-nocheck
 
+import stickerCoverLogo0 from './stickers/Logo/Cover/BRIDGE Dark.png';
+import stickerContentLogo0 from './stickers/Logo/Content/BRIDGE Dark.png';
+import stickerCoverLogo1 from './stickers/Logo/Cover/BRIDGE Light.png';
+import stickerContentLogo1 from './stickers/Logo/Content/BRIDGE Light.png';
 import stickerCover000 from './stickers/Arrows/Cover/arrow-1.svg';
 import stickerContent000 from './stickers/Arrows/Content/arrow-1.svg';
 import stickerCover001 from './stickers/Arrows/Cover/arrow-2.svg';
@@ -374,40 +378,40 @@ import stickerCover184 from './stickers/Arrows/Cover/arrow-185.svg';
 import stickerContent184 from './stickers/Arrows/Content/arrow-185.svg';
 import stickerCover185 from './stickers/Arrows/Cover/source.svg';
 import stickerContent185 from './stickers/Arrows/Content/source.svg';
-import stickerCover186 from './stickers/Cheeky Piggies/Cover/Crybaby.svg';
-import stickerContent186 from './stickers/Cheeky Piggies/Content/Crybaby.svg';
-import stickerCover187 from './stickers/Cheeky Piggies/Cover/Drool.svg';
-import stickerContent187 from './stickers/Cheeky Piggies/Content/Drool.svg';
-import stickerCover188 from './stickers/Cheeky Piggies/Cover/Fuming.svg';
-import stickerContent188 from './stickers/Cheeky Piggies/Content/Fuming.svg';
-import stickerCover189 from './stickers/Cheeky Piggies/Cover/Hi~.svg';
-import stickerContent189 from './stickers/Cheeky Piggies/Content/Hi~.svg';
-import stickerCover190 from './stickers/Cheeky Piggies/Cover/Holding Tears.svg';
-import stickerContent190 from './stickers/Cheeky Piggies/Content/Holding Tears.svg';
-import stickerCover191 from './stickers/Cheeky Piggies/Cover/Love Blows.svg';
-import stickerContent191 from './stickers/Cheeky Piggies/Content/Love Blows.svg';
-import stickerCover192 from './stickers/Cheeky Piggies/Cover/Me_ Really_.svg';
-import stickerContent192 from './stickers/Cheeky Piggies/Content/Me_ Really_.svg';
-import stickerCover193 from './stickers/Cheeky Piggies/Cover/OK.svg';
-import stickerContent193 from './stickers/Cheeky Piggies/Content/OK.svg';
-import stickerCover194 from './stickers/Cheeky Piggies/Cover/Sassy Flick.svg';
-import stickerContent194 from './stickers/Cheeky Piggies/Content/Sassy Flick.svg';
-import stickerCover195 from './stickers/Cheeky Piggies/Cover/Shockwave.svg';
-import stickerContent195 from './stickers/Cheeky Piggies/Content/Shockwave.svg';
-import stickerCover196 from './stickers/Cheeky Piggies/Cover/Snooze Drool.svg';
-import stickerContent196 from './stickers/Cheeky Piggies/Content/Snooze Drool.svg';
-import stickerCover197 from './stickers/Cheeky Piggies/Cover/Swag.svg';
-import stickerContent197 from './stickers/Cheeky Piggies/Content/Swag.svg';
-import stickerCover198 from './stickers/Cheeky Piggies/Cover/Sweatdrop.svg';
-import stickerContent198 from './stickers/Cheeky Piggies/Content/Sweatdrop.svg';
-import stickerCover199 from './stickers/Cheeky Piggies/Cover/Thumbs Up.svg';
-import stickerContent199 from './stickers/Cheeky Piggies/Content/Thumbs Up.svg';
-import stickerCover200 from './stickers/Cheeky Piggies/Cover/What_.svg';
-import stickerContent200 from './stickers/Cheeky Piggies/Content/What_.svg';
-import stickerCover201 from './stickers/Contorted Stickers/Cover/AFFiNE.svg';
-import stickerContent201 from './stickers/Contorted Stickers/Content/AFFiNE.svg';
-import stickerCover202 from './stickers/Contorted Stickers/Cover/AI.svg';
-import stickerContent202 from './stickers/Contorted Stickers/Content/AI.svg';
+import stickerCover186 from './stickers/Cheeky Cats/Cover/Crybaby.svg';
+import stickerContent186 from './stickers/Cheeky Cats/Content/Crybaby.svg';
+import stickerCover187 from './stickers/Cheeky Cats/Cover/Drool.svg';
+import stickerContent187 from './stickers/Cheeky Cats/Content/Drool.svg';
+import stickerCover188 from './stickers/Cheeky Cats/Cover/Fuming.svg';
+import stickerContent188 from './stickers/Cheeky Cats/Content/Fuming.svg';
+import stickerCover189 from './stickers/Cheeky Cats/Cover/Hi~.svg';
+import stickerContent189 from './stickers/Cheeky Cats/Content/Hi~.svg';
+import stickerCover190 from './stickers/Cheeky Cats/Cover/Holding Tears.svg';
+import stickerContent190 from './stickers/Cheeky Cats/Content/Holding Tears.svg';
+import stickerCover191 from './stickers/Cheeky Cats/Cover/Love Blows.svg';
+import stickerContent191 from './stickers/Cheeky Cats/Content/Love Blows.svg';
+import stickerCover192 from './stickers/Cheeky Cats/Cover/Me_ Really_.svg';
+import stickerContent192 from './stickers/Cheeky Cats/Content/Me_ Really_.svg';
+import stickerCover193 from './stickers/Cheeky Cats/Cover/OK.svg';
+import stickerContent193 from './stickers/Cheeky Cats/Content/OK.svg';
+import stickerCover194 from './stickers/Cheeky Cats/Cover/Sassy Flick.svg';
+import stickerContent194 from './stickers/Cheeky Cats/Content/Sassy Flick.svg';
+import stickerCover195 from './stickers/Cheeky Cats/Cover/Shockwave.svg';
+import stickerContent195 from './stickers/Cheeky Cats/Content/Shockwave.svg';
+import stickerCover196 from './stickers/Cheeky Cats/Cover/Snooze Drool.svg';
+import stickerContent196 from './stickers/Cheeky Cats/Content/Snooze Drool.svg';
+import stickerCover197 from './stickers/Cheeky Cats/Cover/Swag.svg';
+import stickerContent197 from './stickers/Cheeky Cats/Content/Swag.svg';
+import stickerCover198 from './stickers/Cheeky Cats/Cover/Sweatdrop.svg';
+import stickerContent198 from './stickers/Cheeky Cats/Content/Sweatdrop.svg';
+import stickerCover199 from './stickers/Cheeky Cats/Cover/Thumbs Up.svg';
+import stickerContent199 from './stickers/Cheeky Cats/Content/Thumbs Up.svg';
+import stickerCover200 from './stickers/Cheeky Cats/Cover/What_.svg';
+import stickerContent200 from './stickers/Cheeky Cats/Content/What_.svg';
+import stickerCover201 from './stickers/Contorted Stickers/Cover/AI.svg';
+import stickerContent201 from './stickers/Contorted Stickers/Content/AI.svg';
+import stickerCover202 from './stickers/Contorted Stickers/Cover/BridgeFlow.svg';
+import stickerContent202 from './stickers/Contorted Stickers/Content/BridgeFlow.svg';
 import stickerCover203 from './stickers/Contorted Stickers/Cover/Cat.svg';
 import stickerContent203 from './stickers/Contorted Stickers/Content/Cat.svg';
 import stickerCover204 from './stickers/Contorted Stickers/Cover/Closed.svg';
@@ -438,16 +442,16 @@ import stickerCover216 from './stickers/Paper/Cover/+1.svg';
 import stickerContent216 from './stickers/Paper/Content/+1.svg';
 import stickerCover217 from './stickers/Paper/Cover/A lot of question.svg';
 import stickerContent217 from './stickers/Paper/Content/A lot of question.svg';
-import stickerCover218 from './stickers/Paper/Cover/AFFiNE AI.svg';
-import stickerContent218 from './stickers/Paper/Content/AFFiNE AI.svg';
-import stickerCover219 from './stickers/Paper/Cover/Arrow.svg';
-import stickerContent219 from './stickers/Paper/Content/Arrow.svg';
-import stickerCover220 from './stickers/Paper/Cover/Atention.svg';
-import stickerContent220 from './stickers/Paper/Content/Atention.svg';
-import stickerCover221 from './stickers/Paper/Cover/Blue Screen.svg';
-import stickerContent221 from './stickers/Paper/Content/Blue Screen.svg';
-import stickerCover222 from './stickers/Paper/Cover/Boom.svg';
-import stickerContent222 from './stickers/Paper/Content/Boom.svg';
+import stickerCover218 from './stickers/Paper/Cover/Arrow.svg';
+import stickerContent218 from './stickers/Paper/Content/Arrow.svg';
+import stickerCover219 from './stickers/Paper/Cover/Atention.svg';
+import stickerContent219 from './stickers/Paper/Content/Atention.svg';
+import stickerCover220 from './stickers/Paper/Cover/Blue Screen.svg';
+import stickerContent220 from './stickers/Paper/Content/Blue Screen.svg';
+import stickerCover221 from './stickers/Paper/Cover/Boom.svg';
+import stickerContent221 from './stickers/Paper/Content/Boom.svg';
+import stickerCover222 from './stickers/Paper/Cover/BridgeFlow AI.svg';
+import stickerContent222 from './stickers/Paper/Content/BridgeFlow AI.svg';
 import stickerCover223 from './stickers/Paper/Cover/Cool.svg';
 import stickerContent223 from './stickers/Paper/Content/Cool.svg';
 import stickerCover224 from './stickers/Paper/Cover/Dino.svg';
@@ -484,7 +488,7 @@ function buildStickerTemplate(data) {
       blocks: {
         type: 'block',
         id: 'block:1VxnfD_8xb',
-        flavour: 'affine:page',
+        flavour: 'bridgeflow:page',
         props: {
           title: {
             '$blocksuite:internal:text$': true,
@@ -499,7 +503,7 @@ function buildStickerTemplate(data) {
           {
             type: 'block',
             id: 'block:pcmYJQ63hX',
-            flavour: 'affine:surface',
+            flavour: 'bridgeflow:surface',
             props: {
               elements: {},
             },
@@ -507,7 +511,7 @@ function buildStickerTemplate(data) {
               {
                 type: 'block',
                 id: 'block:N24al1Qgl7',
-                flavour: 'affine:image',
+                flavour: 'bridgeflow:image',
                 props: {
                   caption: '',
                   sourceId: data.hash,
@@ -546,6 +550,19 @@ function lcs(text1: string, text2: string) {
 }
 
 const templates = {
+  "Logo": [     buildStickerTemplate({
+        name: "BRIDGE Dark",
+        cover: stickerCoverLogo0,
+        content: stickerContentLogo0,
+        hash: "BRIDGEFLOWLOGODARKaaaaaaaaaaaaaaaaaaaaaaaaaa=",
+      }),
+     buildStickerTemplate({
+        name: "BRIDGE Light",
+        cover: stickerCoverLogo1,
+        content: stickerContentLogo1,
+        hash: "BRIDGEFLOWLOGOLIGHTbbbbbbbbbbbbbbbbbbbbbbbbb=",
+      }),
+    ],
   "Arrows": [     buildStickerTemplate({
         name: "arrow-1",
         cover: stickerCover000,
@@ -1662,7 +1679,7 @@ const templates = {
         content: stickerContent185,
         hash: "jrNiKwN_bph3bSCDPhK5EkzUATynRUUxhrDvcMkDNEQ=",
       }),],
-"Cheeky Piggies": [     buildStickerTemplate({
+"Cheeky Cats": [     buildStickerTemplate({
         name: "Crybaby",
         cover: stickerCover186,
         content: stickerContent186,
@@ -1753,16 +1770,16 @@ const templates = {
         hash: "JqWfcP9Q0kGE4wDuVZCi4lW2U7O15trpL--fdNrRJvQ=",
       }),],
 "Contorted Stickers": [     buildStickerTemplate({
-        name: "AFFiNE",
+        name: "AI",
         cover: stickerCover201,
         content: stickerContent201,
-        hash: "i3piAMnoD4STQnEjTrAe_ZRdwHcD34n-sJZY8IN1blg=",
+        hash: "VZJPB8ZBVtiZ-m04KNtlguY_t9VLx4itHILIQ3l1MRw=",
       }),
      buildStickerTemplate({
-        name: "AI",
+        name: "BridgeFlow",
         cover: stickerCover202,
         content: stickerContent202,
-        hash: "VZJPB8ZBVtiZ-m04KNtlguY_t9VLx4itHILIQ3l1MRw=",
+        hash: "i3piAMnoD4STQnEjTrAe_ZRdwHcD34n-sJZY8IN1blg=",
       }),
      buildStickerTemplate({
         name: "Cat",
@@ -1855,34 +1872,34 @@ const templates = {
         hash: "yKPa7vqOxC6rh-e0SVdlp0RwMWQ9mzDKTtE5g2UnHGk=",
       }),
      buildStickerTemplate({
-        name: "AFFiNE AI",
+        name: "Arrow",
         cover: stickerCover218,
         content: stickerContent218,
-        hash: "FwBs2WApEGkiFmu1XR4fHZ_7fOlSsSBdYEyGs2lDeLk=",
-      }),
-     buildStickerTemplate({
-        name: "Arrow",
-        cover: stickerCover219,
-        content: stickerContent219,
         hash: "evuSkommPr7PBAWCioYDRQpKPZGoY6izIGev2C8Xdt0=",
       }),
      buildStickerTemplate({
         name: "Atention",
-        cover: stickerCover220,
-        content: stickerContent220,
+        cover: stickerCover219,
+        content: stickerContent219,
         hash: "Lmvftjmkw5oQEyZ2VP6eTohbXgQyEtNWKkrg9AbDknI=",
       }),
      buildStickerTemplate({
         name: "Blue Screen",
-        cover: stickerCover221,
-        content: stickerContent221,
+        cover: stickerCover220,
+        content: stickerContent220,
         hash: "30OHymd5x-3zr_5KxQm3DzVfxyWWAf0QnmfHpIOoLzQ=",
       }),
      buildStickerTemplate({
         name: "Boom",
+        cover: stickerCover221,
+        content: stickerContent221,
+        hash: "mpTlbN8fJWJUMlHcCCrQuzKTK844-F9YuebgR0kgJa8=",
+      }),
+     buildStickerTemplate({
+        name: "BridgeFlow AI",
         cover: stickerCover222,
         content: stickerContent222,
-        hash: "mpTlbN8fJWJUMlHcCCrQuzKTK844-F9YuebgR0kgJa8=",
+        hash: "FwBs2WApEGkiFmu1XR4fHZ_7fOlSsSBdYEyGs2lDeLk=",
       }),
      buildStickerTemplate({
         name: "Cool",

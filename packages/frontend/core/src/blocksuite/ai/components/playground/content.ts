@@ -1,18 +1,18 @@
-import type { AIToolsConfigService } from '@affine/core/modules/ai-button';
-import type { AIModelService } from '@affine/core/modules/ai-button/services/models';
+import type { AIToolsConfigService } from '@bridgeflow/core/modules/ai-button';
+import type { AIModelService } from '@bridgeflow/core/modules/ai-button/services/models';
 import type {
   ServerService,
   SubscriptionService,
-} from '@affine/core/modules/cloud';
-import type { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import type { FeatureFlagService } from '@affine/core/modules/feature-flag';
-import type { AppThemeService } from '@affine/core/modules/theme';
-import type { CopilotChatHistoryFragment } from '@affine/graphql';
-import { SignalWatcher, WithDisposable } from '@blocksuite/affine/global/lit';
-import type { EditorHost } from '@blocksuite/affine/std';
-import { ShadowlessElement } from '@blocksuite/affine/std';
-import type { ExtensionType, Store } from '@blocksuite/affine/store';
-import type { NotificationService } from '@blocksuite/affine-shared/services';
+} from '@bridgeflow/core/modules/cloud';
+import type { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
+import type { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
+import type { AppThemeService } from '@bridgeflow/core/modules/theme';
+import type { CopilotChatHistoryFragment } from '@bridgeflow/graphql';
+import { SignalWatcher, WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import type { EditorHost } from '@blocksuite/bridgeflow/std';
+import { ShadowlessElement } from '@blocksuite/bridgeflow/std';
+import type { ExtensionType, Store } from '@blocksuite/bridgeflow/store';
+import type { NotificationService } from '@blocksuite/bridgeflow-shared/services';
 import { css, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
@@ -87,10 +87,10 @@ export class PlaygroundContent extends SignalWatcher(
   accessor serverService!: ServerService;
 
   @property({ attribute: false })
-  accessor affineFeatureFlagService!: FeatureFlagService;
+  accessor bridgeflowFeatureFlagService!: FeatureFlagService;
 
   @property({ attribute: false })
-  accessor affineThemeService!: AppThemeService;
+  accessor bridgeflowThemeService!: AppThemeService;
 
   @property({ attribute: false })
   accessor notificationService!: NotificationService;
@@ -99,7 +99,7 @@ export class PlaygroundContent extends SignalWatcher(
   accessor aiToolsConfigService!: AIToolsConfigService;
 
   @property({ attribute: false })
-  accessor affineWorkspaceDialogService!: WorkspaceDialogService;
+  accessor bridgeflowWorkspaceDialogService!: WorkspaceDialogService;
 
   @property({ attribute: false })
   accessor subscriptionService!: SubscriptionService;
@@ -132,7 +132,7 @@ export class PlaygroundContent extends SignalWatcher(
       const rootSessionId = await AIProvider.session?.createSession({
         docId: this.doc.id,
         workspaceId: this.doc.workspace.id,
-        promptName: 'Chat With AFFiNE AI',
+        promptName: 'Chat With BridgeFlow AI',
       });
       if (rootSessionId) {
         this.rootSessionId = rootSessionId;
@@ -361,12 +361,12 @@ export class PlaygroundContent extends SignalWatcher(
                 .docDisplayConfig=${this.docDisplayConfig}
                 .extensions=${this.extensions}
                 .serverService=${this.serverService}
-                .affineFeatureFlagService=${this.affineFeatureFlagService}
-                .affineThemeService=${this.affineThemeService}
+                .bridgeflowFeatureFlagService=${this.bridgeflowFeatureFlagService}
+                .bridgeflowThemeService=${this.bridgeflowThemeService}
                 .notificationService=${this.notificationService}
                 .aiToolsConfigService=${this.aiToolsConfigService}
-                .affineWorkspaceDialogService=${this
-                  .affineWorkspaceDialogService}
+                .bridgeflowWorkspaceDialogService=${this
+                  .bridgeflowWorkspaceDialogService}
                 .subscriptionService=${this.subscriptionService}
                 .aiModelService=${this.aiModelService}
                 .addChat=${this.addChat}

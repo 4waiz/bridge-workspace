@@ -1,10 +1,10 @@
-import { MenuItem } from '@affine/component';
-import type { OrderByParams } from '@affine/core/modules/collection-rules/types';
-import { WorkspacePropertyService } from '@affine/core/modules/workspace-property';
-import { useI18n } from '@affine/i18n';
-import track from '@affine/track';
+import { MenuItem } from '@bridgeflow/component';
+import type { OrderByParams } from '@bridgeflow/core/modules/collection-rules/types';
+import { WorkspacePropertyService } from '@bridgeflow/core/modules/workspace-property';
+import { useI18n } from '@bridgeflow/i18n';
+import track from '@bridgeflow/track';
 import { SortDownIcon, SortUpIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { cssVarV2 } from '@toeverything/theme/v2';
 import { useMemo } from 'react';
 

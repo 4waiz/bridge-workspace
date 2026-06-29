@@ -1,7 +1,7 @@
-import { BRAND_NAME } from '@affine/component/brand';
-import { NotificationCountService } from '@affine/core/modules/notification';
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { useLiveData, useService } from '@toeverything/infra';
+import { BRAND_NAME } from '@bridgeflow/component/brand';
+import { NotificationCountService } from '@bridgeflow/core/modules/notification';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useEffect } from 'react';
 
 export const DocumentTitle = () => {

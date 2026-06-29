@@ -1,6 +1,6 @@
-import type { ReferenceParams } from '@blocksuite/affine/model';
+import type { ReferenceParams } from '@blocksuite/bridgeflow/model';
 import { BlockLinkIcon, EdgelessIcon, PageIcon } from '@blocksuite/icons/rc';
-import { Entity, LiveData } from '@toeverything/infra';
+import { Entity, LiveData } from '@kanban-studios/infra';
 import { omit, truncate } from 'lodash-es';
 
 import type { DocsService } from '../../doc';
@@ -64,7 +64,7 @@ export class LinksQuickSearchSession
         group: {
           id: 'docs',
           label: {
-            i18nKey: 'com.affine.quicksearch.group.searchfor',
+            i18nKey: 'com.bridgeflow.quicksearch.group.searchfor',
             options: { query: truncate(query) },
           },
           score: 5,

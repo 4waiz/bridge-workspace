@@ -1,5 +1,5 @@
-import { AttachmentBlockModel } from '@blocksuite/affine/model';
-import type { BlockModel } from '@blocksuite/affine/store';
+import { AttachmentBlockModel } from '@blocksuite/bridgeflow/model';
+import type { BlockModel } from '@blocksuite/bridgeflow/store';
 import type { GfxModel } from '@blocksuite/std/gfx';
 
 export function isAttachment(

@@ -1,10 +1,10 @@
-import { getPromptModelsQuery, SubscriptionStatus } from '@affine/graphql';
+import { getPromptModelsQuery, SubscriptionStatus } from '@bridgeflow/graphql';
 import {
   createSignalFromObservable,
   type Signal,
-} from '@blocksuite/affine/shared/utils';
+} from '@blocksuite/bridgeflow/shared/utils';
 import { signal } from '@preact/signals-core';
-import { LiveData, Service } from '@toeverything/infra';
+import { LiveData, Service } from '@kanban-studios/infra';
 
 import type { GraphQLService, SubscriptionService } from '../../cloud';
 import type { GlobalStateService } from '../../storage';
@@ -82,7 +82,7 @@ export class AIModelService extends Service {
   };
 
   private readonly initModels = async (prompt?: string) => {
-    const promptName = prompt || 'Chat With AFFiNE AI';
+    const promptName = prompt || 'Chat With BridgeFlow AI';
     const models = await this.getModelsByPrompt(promptName);
     if (models) {
       const { defaultModel, optionalModels, proModels } = models;

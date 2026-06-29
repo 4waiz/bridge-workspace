@@ -1,36 +1,36 @@
-import { observeResize, useConfirmModal } from '@affine/component';
-import { CopilotClient } from '@affine/core/blocksuite/ai';
+import { observeResize, useConfirmModal } from '@bridgeflow/component';
+import { CopilotClient } from '@bridgeflow/core/blocksuite/ai';
 import {
   AIChatContent,
   type ChatContextValue,
-} from '@affine/core/blocksuite/ai/components/ai-chat-content';
-import type { ChatStatus } from '@affine/core/blocksuite/ai/components/ai-chat-messages';
-import type { AIChatToolbar } from '@affine/core/blocksuite/ai/components/ai-chat-toolbar';
+} from '@bridgeflow/core/blocksuite/ai/components/ai-chat-content';
+import type { ChatStatus } from '@bridgeflow/core/blocksuite/ai/components/ai-chat-messages';
+import type { AIChatToolbar } from '@bridgeflow/core/blocksuite/ai/components/ai-chat-toolbar';
 import {
   configureAIChatToolbar,
   getOrCreateAIChatToolbar,
-} from '@affine/core/blocksuite/ai/components/ai-chat-toolbar';
-import type { PromptKey } from '@affine/core/blocksuite/ai/provider/prompt';
-import { getViewManager } from '@affine/core/blocksuite/manager/view';
-import { NotificationServiceImpl } from '@affine/core/blocksuite/view-extensions/editor-view/notification-service';
-import { useAIChatConfig } from '@affine/core/components/hooks/affine/use-ai-chat-config';
-import { useAISpecs } from '@affine/core/components/hooks/affine/use-ai-specs';
-import { useAISubscribe } from '@affine/core/components/hooks/affine/use-ai-subscribe';
+} from '@bridgeflow/core/blocksuite/ai/components/ai-chat-toolbar';
+import type { PromptKey } from '@bridgeflow/core/blocksuite/ai/provider/prompt';
+import { getViewManager } from '@bridgeflow/core/blocksuite/manager/view';
+import { NotificationServiceImpl } from '@bridgeflow/core/blocksuite/view-extensions/editor-view/notification-service';
+import { useAIChatConfig } from '@bridgeflow/core/components/hooks/bridgeflow/use-ai-chat-config';
+import { useAISpecs } from '@bridgeflow/core/components/hooks/bridgeflow/use-ai-specs';
+import { useAISubscribe } from '@bridgeflow/core/components/hooks/bridgeflow/use-ai-subscribe';
 import {
   AIDraftService,
   AIToolsConfigService,
-} from '@affine/core/modules/ai-button';
-import { AIModelService } from '@affine/core/modules/ai-button/services/models';
+} from '@bridgeflow/core/modules/ai-button';
+import { AIModelService } from '@bridgeflow/core/modules/ai-button/services/models';
 import {
   EventSourceService,
   GraphQLService,
   ServerService,
   SubscriptionService,
-} from '@affine/core/modules/cloud';
-import { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import { FeatureFlagService } from '@affine/core/modules/feature-flag';
-import { PeekViewService } from '@affine/core/modules/peek-view';
-import { AppThemeService } from '@affine/core/modules/theme';
+} from '@bridgeflow/core/modules/cloud';
+import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
+import { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
+import { PeekViewService } from '@bridgeflow/core/modules/peek-view';
+import { AppThemeService } from '@bridgeflow/core/modules/theme';
 import {
   ViewBody,
   ViewHeader,
@@ -38,14 +38,14 @@ import {
   ViewService,
   ViewTitle,
   WorkbenchService,
-} from '@affine/core/modules/workbench';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { useI18n } from '@affine/i18n';
-import { RefNodeSlotsProvider } from '@blocksuite/affine/inlines/reference';
-import { BlockStdScope } from '@blocksuite/affine/std';
-import type { Workspace } from '@blocksuite/affine/store';
+} from '@bridgeflow/core/modules/workbench';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { useI18n } from '@bridgeflow/i18n';
+import { RefNodeSlotsProvider } from '@blocksuite/bridgeflow/inlines/reference';
+import { BlockStdScope } from '@blocksuite/bridgeflow/std';
+import type { Workspace } from '@blocksuite/bridgeflow/store';
 import { type Signal, signal } from '@preact/signals-core';
-import { useFramework, useService } from '@toeverything/infra';
+import { useFramework, useService } from '@kanban-studios/infra';
 import { nanoid } from 'nanoid';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
@@ -122,7 +122,7 @@ export const Component = () => {
       }
       const session = await client.createSessionWithHistory({
         workspaceId,
-        promptName: 'Chat With AFFiNE AI' satisfies PromptKey,
+        promptName: 'Chat With BridgeFlow AI' satisfies PromptKey,
         reuseLatestChat: false,
         ...options,
       });
@@ -175,7 +175,7 @@ export const Component = () => {
       reMountChatContent();
       const session = await client.createSessionWithHistory({
         workspaceId,
-        promptName: 'Chat With AFFiNE AI' satisfies PromptKey,
+        promptName: 'Chat With BridgeFlow AI' satisfies PromptKey,
         reuseLatestChat: false,
       });
       setCurrentSession(session);
@@ -293,12 +293,12 @@ export const Component = () => {
     content.searchMenuConfig = searchMenuConfig;
     content.reasoningConfig = reasoningConfig;
     content.onContextChange = onContextChange;
-    content.affineFeatureFlagService = framework.get(FeatureFlagService);
-    content.affineWorkspaceDialogService = framework.get(
+    content.bridgeflowFeatureFlagService = framework.get(FeatureFlagService);
+    content.bridgeflowWorkspaceDialogService = framework.get(
       WorkspaceDialogService
     );
     content.peekViewService = framework.get(PeekViewService);
-    content.affineThemeService = framework.get(AppThemeService);
+    content.bridgeflowThemeService = framework.get(AppThemeService);
     content.notificationService = notificationService;
     content.aiDraftService = framework.get(AIDraftService);
     content.aiToolsConfigService = framework.get(AIToolsConfigService);
@@ -472,7 +472,7 @@ export const Component = () => {
 
   return (
     <>
-      <ViewTitle title={t['com.affine.workspaceSubPath.chat']()} />
+      <ViewTitle title={t['com.bridgeflow.workspaceSubPath.chat']()} />
       <ViewIcon icon="ai" />
       <ViewHeader>
         <div className={styles.chatHeader}>

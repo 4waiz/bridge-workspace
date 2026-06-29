@@ -1,12 +1,12 @@
-import { MenuItem, MenuSeparator } from '@affine/component';
-import type { DocCustomPropertyInfo } from '@affine/core/modules/db';
+import { MenuItem, MenuSeparator } from '@bridgeflow/component';
+import type { DocCustomPropertyInfo } from '@bridgeflow/core/modules/db';
 import {
   WorkspacePropertyService,
   type WorkspacePropertyType,
-} from '@affine/core/modules/workspace-property';
-import { generateUniqueNameInSequence } from '@affine/core/utils/unique-name';
-import { useI18n } from '@affine/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+} from '@bridgeflow/core/modules/workspace-property';
+import { generateUniqueNameInSequence } from '@bridgeflow/core/utils/unique-name';
+import { useI18n } from '@bridgeflow/i18n';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import {
@@ -55,7 +55,7 @@ export const CreatePropertyMenuItems = ({
   return (
     <>
       <div role="heading" className={styles.menuHeader}>
-        {t['com.affine.page-properties.create-property.menu.header']()}
+        {t['com.bridgeflow.page-properties.create-property.menu.header']()}
       </div>
       <MenuSeparator />
       {Object.entries(WorkspacePropertyTypes).map(([type, info]) => {
@@ -81,7 +81,7 @@ export const CreatePropertyMenuItems = ({
               {name}
               {isUniqueExist && (
                 <span>
-                  {t['com.affine.page-properties.create-property.added']()}
+                  {t['com.bridgeflow.page-properties.create-property.added']()}
                 </span>
               )}
             </div>

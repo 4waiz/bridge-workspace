@@ -1,4 +1,4 @@
-import type { Package } from '@affine-tools/utils/workspace';
+import type { Package } from '@bridgeflow-tools/utils/workspace';
 
 import { PackageToDistribution } from './distribution';
 
@@ -7,7 +7,7 @@ export interface BuildFlags {
   mode: 'development' | 'production';
 }
 
-const BRAND_SITE_URL = 'https://awaizahmed.com';
+const BRAND_SITE_URL = '';
 
 export function getBuildConfig(
   pkg: Package,
@@ -43,7 +43,7 @@ export function getBuildConfig(
 
         appBuildType: 'stable' as const,
         appVersion: pkg.version,
-        // editorVersion: pkg.dependencies['@blocksuite/affine'],
+        // editorVersion: pkg.dependencies['@blocksuite/bridgeflow'],
         editorVersion: pkg.version,
         githubUrl: BRAND_SITE_URL,
         changelogUrl: BRAND_SITE_URL,

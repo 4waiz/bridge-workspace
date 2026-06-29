@@ -1,6 +1,6 @@
-import { DatabaseBlockDataSource } from '@blocksuite/affine/blocks/database';
-import type { DatabaseBlockModel } from '@blocksuite/affine/model';
-import { LiveData, Service } from '@toeverything/infra';
+import { DatabaseBlockDataSource } from '@blocksuite/bridgeflow/blocks/database';
+import type { DatabaseBlockModel } from '@blocksuite/bridgeflow/model';
+import { LiveData, Service } from '@kanban-studios/infra';
 import { isEqual } from 'lodash-es';
 import { combineLatest, distinctUntilChanged, map, Observable } from 'rxjs';
 
@@ -84,7 +84,7 @@ export class DocDatabaseBacklinksService extends Service {
         const maybeDatabaseBlock = docRef.doc.blockSuiteDoc.getBlock(
           backlink.databaseBlockId
         );
-        if (maybeDatabaseBlock?.flavour === 'affine:database') {
+        if (maybeDatabaseBlock?.flavour === 'bridgeflow:database') {
           const dbModel = maybeDatabaseBlock.model as DatabaseBlockModel;
           const [cells$, dataSource] = this.adaptRowCells(
             dbModel,

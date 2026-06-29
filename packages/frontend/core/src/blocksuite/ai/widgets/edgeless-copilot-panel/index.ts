@@ -1,9 +1,9 @@
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import { ThemeProvider } from '@blocksuite/affine/shared/services';
-import { scrollbarStyle } from '@blocksuite/affine/shared/styles';
-import { unsafeCSSVar } from '@blocksuite/affine/shared/theme';
-import { on, stopPropagation } from '@blocksuite/affine/shared/utils';
-import type { EditorHost } from '@blocksuite/affine/std';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { ThemeProvider } from '@blocksuite/bridgeflow/shared/services';
+import { scrollbarStyle } from '@blocksuite/bridgeflow/shared/styles';
+import { unsafeCSSVar } from '@blocksuite/bridgeflow/shared/theme';
+import { on, stopPropagation } from '@blocksuite/bridgeflow/shared/utils';
+import type { EditorHost } from '@blocksuite/bridgeflow/std';
 import { darkCssVariables, lightCssVariables } from '@toeverything/theme';
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit';
 import { property } from 'lit/decorators.js';

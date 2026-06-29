@@ -1,4 +1,4 @@
-import { oauthProvidersQuery } from '@affine/graphql';
+import { oauthProvidersQuery } from '@bridgeflow/graphql';
 
 import { ConfigModule } from '../../../base/config';
 import { createApp, e2e, TestingApp } from '../test';
@@ -41,7 +41,7 @@ e2e('should return apple oauth provider in version >= 0.22.0', async t => {
     query: oauthProvidersQuery,
     context: {
       headers: {
-        'x-affine-version': '0.22.0',
+        'x-bridgeflow-version': '0.22.0',
       },
     },
   });
@@ -51,7 +51,7 @@ e2e('should return apple oauth provider in version >= 0.22.0', async t => {
     query: oauthProvidersQuery,
     context: {
       headers: {
-        'x-affine-version': '0.23.0-beta.1',
+        'x-bridgeflow-version': '0.23.0-beta.1',
       },
     },
   });
@@ -62,7 +62,7 @@ e2e('should return apple oauth provider in version >= 0.22.0', async t => {
     query: oauthProvidersQuery,
     context: {
       headers: {
-        'x-affine-version': '2025.6.29-canary.93',
+        'x-bridgeflow-version': '2025.6.29-canary.93',
       },
     },
   });

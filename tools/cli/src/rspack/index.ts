@@ -1,9 +1,9 @@
 import { createRequire } from 'node:module';
 import path from 'node:path';
 
-import { getBuildConfig } from '@affine-tools/utils/build-config';
-import { Path, ProjectRoot } from '@affine-tools/utils/path';
-import { Package } from '@affine-tools/utils/workspace';
+import { getBuildConfig } from '@bridgeflow-tools/utils/build-config';
+import { Path, ProjectRoot } from '@bridgeflow-tools/utils/path';
+import { Package } from '@bridgeflow-tools/utils/workspace';
 import rspack, {
   type Configuration as RspackConfiguration,
 } from '@rspack/core';
@@ -306,7 +306,7 @@ export function createHTMLTargetConfig(
           patterns: [
             {
               // copy the shared public assets into dist
-              from: new Package('@affine/core').join('public').value,
+              from: new Package('@bridgeflow/core').join('public').value,
             },
           ],
         }),

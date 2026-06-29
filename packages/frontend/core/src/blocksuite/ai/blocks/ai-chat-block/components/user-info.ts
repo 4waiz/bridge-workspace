@@ -1,4 +1,4 @@
-import { BRAND_AI_NAME } from '@affine/component/brand';
+import { BRAND_AI_NAME } from '@bridgeflow/component/brand';
 import { baseTheme } from '@toeverything/theme';
 import { css, html, LitElement, type TemplateResult, unsafeCSS } from 'lit';
 import { property } from 'lit/decorators.js';
@@ -7,7 +7,7 @@ import type {
   MessageRole,
   MessageUserInfo,
 } from '../../../components/ai-chat-messages';
-import { AffineAIIcon } from './icon';
+import { BridgeFlowAIIcon } from './icon';
 
 export class UserInfo extends LitElement {
   static override styles = css`
@@ -111,7 +111,7 @@ export function UserInfoTemplate(
       ></user-info>`
     : html`<user-info
         .userName=${BRAND_AI_NAME}
-        .avatarIcon=${AffineAIIcon}
+        .avatarIcon=${BridgeFlowAIIcon}
       ></user-info>`;
 
   return userInfoTemplate;

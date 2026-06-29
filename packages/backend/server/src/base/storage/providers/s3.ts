@@ -5,8 +5,8 @@ import type {
   S3CompatClient,
   S3CompatConfig,
   S3CompatCredentials,
-} from '@affine/s3-compat';
-import { createS3CompatClient } from '@affine/s3-compat';
+} from '@bridgeflow/s3-compat';
+import { createS3CompatClient } from '@bridgeflow/s3-compat';
 import { Logger } from '@nestjs/common';
 
 import {

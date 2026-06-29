@@ -1,16 +1,16 @@
-import { MenuItem, MenuSeparator, MobileMenuSub } from '@affine/component';
-import { sortPagesByDate } from '@affine/core/desktop/pages/workspace/detail-page/tabs/journal';
+import { MenuItem, MenuSeparator, MobileMenuSub } from '@bridgeflow/component';
+import { sortPagesByDate } from '@bridgeflow/core/desktop/pages/workspace/detail-page/tabs/journal';
 import {
   type DocRecord,
   DocService,
   DocsService,
-} from '@affine/core/modules/doc';
-import { DocDisplayMetaService } from '@affine/core/modules/doc-display-meta';
-import { JournalService } from '@affine/core/modules/journal';
-import { WorkbenchLink } from '@affine/core/modules/workbench';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/core/modules/doc';
+import { DocDisplayMetaService } from '@bridgeflow/core/modules/doc-display-meta';
+import { JournalService } from '@bridgeflow/core/modules/journal';
+import { WorkbenchLink } from '@bridgeflow/core/modules/workbench';
+import { useI18n } from '@bridgeflow/i18n';
 import { HistoryIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import dayjs from 'dayjs';
 import { type ReactNode, useCallback, useMemo } from 'react';
 
@@ -44,8 +44,8 @@ const ActivityBlock = ({
 
   const title =
     name === 'created'
-      ? t['com.affine.journal.created-today']()
-      : t['com.affine.journal.updated-today']();
+      ? t['com.bridgeflow.journal.created-today']()
+      : t['com.bridgeflow.journal.updated-today']();
   return (
     <>
       <div className={styles.title}>{title}</div>
@@ -56,8 +56,8 @@ const ActivityBlock = ({
       ) : (
         <div className={styles.empty}>
           {name === 'created'
-            ? t['com.affine.journal.daily-count-created-empty-tips']()
-            : t['com.affine.journal.daily-count-updated-empty-tips']()}
+            ? t['com.bridgeflow.journal.daily-count-created-empty-tips']()
+            : t['com.bridgeflow.journal.daily-count-updated-empty-tips']()}
         </div>
       )}
     </>
@@ -120,9 +120,9 @@ export const JournalTodayActivityMenuItem = ({
           prefixIcon: <HistoryIcon />,
         }}
         items={<TodaysActivity date={journalDate} />}
-        title={t['com.affine.m.selector.journal-menu.today-activity']()}
+        title={t['com.bridgeflow.m.selector.journal-menu.today-activity']()}
       >
-        {t['com.affine.m.selector.journal-menu.today-activity']()}
+        {t['com.bridgeflow.m.selector.journal-menu.today-activity']()}
       </MobileMenuSub>
       {suffix}
     </>

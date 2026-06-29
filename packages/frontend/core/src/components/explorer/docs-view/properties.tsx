@@ -1,7 +1,7 @@
-import type { DocCustomPropertyInfo } from '@affine/core/modules/db';
-import { type DocRecord, DocsService } from '@affine/core/modules/doc';
-import { WorkspacePropertyService } from '@affine/core/modules/workspace-property';
-import { useLiveData, useService } from '@toeverything/infra';
+import type { DocCustomPropertyInfo } from '@bridgeflow/core/modules/db';
+import { type DocRecord, DocsService } from '@bridgeflow/core/modules/doc';
+import { WorkspacePropertyService } from '@bridgeflow/core/modules/workspace-property';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { useContext, useMemo } from 'react';
 

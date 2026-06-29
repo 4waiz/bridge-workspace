@@ -1,6 +1,6 @@
-import { useDropTarget } from '@affine/component';
-import type { AffineDNDData } from '@affine/core/types/dnd';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useDropTarget } from '@bridgeflow/component';
+import type { BridgeFlowDNDData } from '@bridgeflow/core/types/dnd';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useAtomValue } from 'jotai';
 import type { HTMLAttributes } from 'react';
 import { useCallback } from 'react';
@@ -40,7 +40,7 @@ export const ResizeHandle = ({
   const isLast = index === views.length - 1;
   const isFirst = index === 0;
 
-  const { dropTargetRef } = useDropTarget<AffineDNDData>(() => {
+  const { dropTargetRef } = useDropTarget<BridgeFlowDNDData>(() => {
     return {
       data: {
         at: 'workbench:resize-handle',

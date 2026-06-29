@@ -6,34 +6,34 @@ import {
   MenuItem,
   notify,
   useConfirmModal,
-} from '@affine/component';
-import { useGuard } from '@affine/core/components/guard';
-import { ServerService } from '@affine/core/modules/cloud';
-import { AuthService } from '@affine/core/modules/cloud/services/auth';
-import { type DocCommentEntity } from '@affine/core/modules/comment/entities/doc-comment';
-import { CommentPanelService } from '@affine/core/modules/comment/services/comment-panel-service';
-import { DocCommentManagerService } from '@affine/core/modules/comment/services/doc-comment-manager';
+} from '@bridgeflow/component';
+import { useGuard } from '@bridgeflow/core/components/guard';
+import { ServerService } from '@bridgeflow/core/modules/cloud';
+import { AuthService } from '@bridgeflow/core/modules/cloud/services/auth';
+import { type DocCommentEntity } from '@bridgeflow/core/modules/comment/entities/doc-comment';
+import { CommentPanelService } from '@bridgeflow/core/modules/comment/services/comment-panel-service';
+import { DocCommentManagerService } from '@bridgeflow/core/modules/comment/services/doc-comment-manager';
 import type {
   CommentAttachment,
   DocComment,
   DocCommentReply,
-} from '@affine/core/modules/comment/types';
-import { DocService } from '@affine/core/modules/doc';
-import { toDocSearchParams } from '@affine/core/modules/navigation';
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { copyTextToClipboard } from '@affine/core/utils/clipboard';
-import { i18nTime, useI18n } from '@affine/i18n';
-import type { DocSnapshot, Store } from '@blocksuite/affine/store';
+} from '@bridgeflow/core/modules/comment/types';
+import { DocService } from '@bridgeflow/core/modules/doc';
+import { toDocSearchParams } from '@bridgeflow/core/modules/navigation';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { copyTextToClipboard } from '@bridgeflow/core/utils/clipboard';
+import { i18nTime, useI18n } from '@bridgeflow/i18n';
+import type { DocSnapshot, Store } from '@blocksuite/bridgeflow/store';
 import { DoneIcon, FilterIcon, MoreHorizontalIcon } from '@blocksuite/icons/rc';
 import {
   useLiveData,
   useService,
   useServiceOptional,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
-import { useAsyncCallback } from '../../hooks/affine-async-hooks';
+import { useAsyncCallback } from '../../hooks/bridgeflow-async-hooks';
 import { CommentEditor, type CommentEditorRef } from '../comment-editor';
 import * as styles from './style.css';
 
@@ -66,7 +66,7 @@ const SortFilterButton = ({
               )
             }
           >
-            {t['com.affine.comment.filter.show-resolved']()}
+            {t['com.bridgeflow.comment.filter.show-resolved']()}
           </MenuItem>
           <MenuItem
             checked={filterState.onlyMyReplies}
@@ -74,7 +74,7 @@ const SortFilterButton = ({
               onFilterChange('onlyMyReplies', !filterState.onlyMyReplies)
             }
           >
-            {t['com.affine.comment.filter.only-my-replies']()}
+            {t['com.bridgeflow.comment.filter.only-my-replies']()}
           </MenuItem>
           <MenuItem
             checked={filterState.onlyCurrentMode}
@@ -82,7 +82,7 @@ const SortFilterButton = ({
               onFilterChange('onlyCurrentMode', !filterState.onlyCurrentMode)
             }
           >
-            {t['com.affine.comment.filter.only-current-mode']()}
+            {t['com.bridgeflow.comment.filter.only-current-mode']()}
           </MenuItem>
         </>
       }
@@ -135,12 +135,12 @@ const ActionMenu = ({
         <>
           {canReply ? (
             <MenuItem onClick={onReply} disabled={!!disabled || !!resolved}>
-              {t['com.affine.comment.reply']()}
+              {t['com.bridgeflow.comment.reply']()}
             </MenuItem>
           ) : null}
           {canCopyLink ? (
             <MenuItem onClick={onCopyLink} disabled={disabled}>
-              {t['com.affine.comment.copy-link']()}
+              {t['com.bridgeflow.comment.copy-link']()}
             </MenuItem>
           ) : null}
           {canEdit ? (
@@ -284,8 +284,8 @@ const CommentItem = ({
     async (e: React.MouseEvent) => {
       e.stopPropagation();
       openConfirmModal({
-        title: t['com.affine.comment.delete.confirm.title'](),
-        description: t['com.affine.comment.delete.confirm.description'](),
+        title: t['com.bridgeflow.comment.delete.confirm.title'](),
+        description: t['com.bridgeflow.comment.delete.confirm.description'](),
         confirmText: t['Delete'](),
         cancelText: t['Cancel'](),
         confirmButtonOptions: {
@@ -670,7 +670,7 @@ const CommentList = ({ entity }: { entity: DocCommentEntity }) => {
     <>
       <div className={styles.header}>
         <div className={styles.headerTitle}>
-          {t['com.affine.comment.comments']()}
+          {t['com.bridgeflow.comment.comments']()}
         </div>
         {comments.length > 0 && (
           <SortFilterButton
@@ -684,7 +684,7 @@ const CommentList = ({ entity }: { entity: DocCommentEntity }) => {
         !newPendingComment &&
         !loading && (
           <div className={styles.empty}>
-            {t['com.affine.comment.no-comments']()}
+            {t['com.bridgeflow.comment.no-comments']()}
           </div>
         )}
       {loading &&
@@ -814,8 +814,8 @@ const ReplyItem = ({
 
   const handleDelete = useAsyncCallback(async () => {
     openConfirmModal({
-      title: t['com.affine.comment.reply.delete.confirm.title'](),
-      description: t['com.affine.comment.reply.delete.confirm.description'](),
+      title: t['com.bridgeflow.comment.reply.delete.confirm.title'](),
+      description: t['com.bridgeflow.comment.reply.delete.confirm.description'](),
       confirmText: t['Delete'](),
       cancelText: t['Cancel'](),
       confirmButtonOptions: {
@@ -974,7 +974,7 @@ const ReplyList = ({
           }}
         >
           <div className={styles.collapsedRepliesTitle}>
-            {t['com.affine.comment.reply.show-more']({
+            {t['com.bridgeflow.comment.reply.show-more']({
               count: (sortedReplies.length - 4).toString(),
             })}
           </div>

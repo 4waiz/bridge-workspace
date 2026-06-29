@@ -1,10 +1,10 @@
-import { getStoreManager } from '@affine/core/blocksuite/manager/store';
-import { MarkdownTransformer } from '@blocksuite/affine/widgets/linked-doc';
-import { Service } from '@toeverything/infra';
+import { getStoreManager } from '@bridgeflow/core/blocksuite/manager/store';
+import { MarkdownTransformer } from '@blocksuite/bridgeflow/widgets/linked-doc';
+import { Service } from '@kanban-studios/infra';
 
 import { DocsService } from '../../doc';
 import {
-  getAFFiNEWorkspaceSchema,
+  getBridgeFlowWorkspaceSchema,
   type WorkspaceMetadata,
   type WorkspacesService,
 } from '../../workspace';
@@ -33,7 +33,7 @@ export class ImportClipperService extends Service {
     await workspace.engine.doc.waitForDocReady(workspace.id); // wait for root doc ready
     const docId = await MarkdownTransformer.importMarkdownToDoc({
       collection: workspace.docCollection,
-      schema: getAFFiNEWorkspaceSchema(),
+      schema: getBridgeFlowWorkspaceSchema(),
       markdown: clipperInput.contentMarkdown,
       extensions: getStoreManager().config.init().value.get('store'),
     });
@@ -67,7 +67,7 @@ export class ImportClipperService extends Service {
         docCollection.doc.getMap('meta').set('name', workspaceName);
         docId = await MarkdownTransformer.importMarkdownToDoc({
           collection: docCollection,
-          schema: getAFFiNEWorkspaceSchema(),
+          schema: getBridgeFlowWorkspaceSchema(),
           markdown: clipperInput.contentMarkdown,
           extensions: getStoreManager().config.init().value.get('store'),
         });

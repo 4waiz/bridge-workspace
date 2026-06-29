@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser';
 import graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.mjs';
 
 import {
-  AFFiNELogger,
+  BridgeFlowLogger,
   buildCorsAllowedOrigins,
   CacheInterceptor,
   CloudThrottlerGuard,
@@ -35,7 +35,7 @@ export async function run() {
 
   app.useBodyParser('raw', { limit: 100 * OneMB });
 
-  const logger = app.get(AFFiNELogger);
+  const logger = app.get(BridgeFlowLogger);
   app.useLogger(logger);
   const config = app.get(Config);
   const url = app.get(URLHelper);
@@ -110,8 +110,8 @@ export async function run() {
     const { SwaggerModule, DocumentBuilder } = await import('@nestjs/swagger');
     // Swagger API Docs
     const docConfig = new DocumentBuilder()
-      .setTitle('AFFiNE API')
-      .setDescription(`AFFiNE Server ${env.version} API documentation`)
+      .setTitle('BridgeFlow API')
+      .setDescription(`BridgeFlow Server ${env.version} API documentation`)
       .setVersion(`${env.version}`)
       .build();
     const documentFactory = () => SwaggerModule.createDocument(app, docConfig);
@@ -127,7 +127,7 @@ export async function run() {
     ? `[${config.server.listenAddr}]`
     : config.server.listenAddr;
 
-  logger.log(`AFFiNE Server is running in [${env.DEPLOYMENT_TYPE}] mode`);
+  logger.log(`BridgeFlow Server is running in [${env.DEPLOYMENT_TYPE}] mode`);
   logger.log(`Listening on http://${formattedAddr}:${config.server.port}`);
   logger.log(`And the public server should be recognized as ${url.baseUrl}`);
 }

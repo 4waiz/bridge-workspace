@@ -1,4 +1,4 @@
-import { OpConsumer } from '@toeverything/infra/op';
+import { OpConsumer } from '@kanban-studios/infra/op';
 import { Observable } from 'rxjs';
 
 import { type StorageConstructor } from '../impls';

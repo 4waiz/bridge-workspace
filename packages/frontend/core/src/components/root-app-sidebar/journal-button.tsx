@@ -1,10 +1,10 @@
-import { MenuLinkItem } from '@affine/core/modules/app-sidebar/views';
-import { DocDisplayMetaService } from '@affine/core/modules/doc-display-meta';
-import { JournalService } from '@affine/core/modules/journal';
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { useI18n } from '@affine/i18n';
+import { MenuLinkItem } from '@bridgeflow/core/modules/app-sidebar/views';
+import { DocDisplayMetaService } from '@bridgeflow/core/modules/doc-display-meta';
+import { JournalService } from '@bridgeflow/core/modules/journal';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { useI18n } from '@bridgeflow/i18n';
 import { TodayIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 
 export const AppSidebarJournalButton = () => {
   const t = useI18n();
@@ -25,7 +25,7 @@ export const AppSidebarJournalButton = () => {
       to={'/journals'}
       icon={<Icon />}
     >
-      {t['com.affine.journal.app-sidebar-title']()}
+      {t['com.bridgeflow.journal.app-sidebar-title']()}
     </MenuLinkItem>
   );
 };

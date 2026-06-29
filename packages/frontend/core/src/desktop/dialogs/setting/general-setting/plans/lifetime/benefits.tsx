@@ -1,4 +1,4 @@
-import { useI18n } from '@affine/i18n';
+import { useI18n } from '@bridgeflow/i18n';
 import { AfFiNeIcon, DoneIcon } from '@blocksuite/icons/rc';
 import clsx from 'clsx';
 import type { HTMLAttributes } from 'react';
@@ -15,18 +15,18 @@ export const BelieverBenefits = ({
     <ul className={clsx(benefits, className)} {...attrs}>
       <li className={li}>
         <AfFiNeIcon />
-        <span>{t['com.affine.payment.lifetime.benefit-1']()}</span>
+        <span>{t['com.bridgeflow.payment.lifetime.benefit-1']()}</span>
       </li>
 
       <li className={li}>
         <DoneIcon />
-        <span>{t['com.affine.payment.lifetime.benefit-2']()}</span>
+        <span>{t['com.bridgeflow.payment.lifetime.benefit-2']()}</span>
       </li>
 
       <li className={li}>
         <DoneIcon />
         <span>
-          {t['com.affine.payment.lifetime.benefit-3']({
+          {t['com.bridgeflow.payment.lifetime.benefit-3']({
             capacity: '1T',
           })}
         </span>

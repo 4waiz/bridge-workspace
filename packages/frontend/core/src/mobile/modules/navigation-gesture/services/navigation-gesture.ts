@@ -1,16 +1,16 @@
-import { DebugLogger } from '@affine/debug';
+import { DebugLogger } from '@bridgeflow/debug';
 import {
   effect,
   exhaustMapWithTrailing,
   fromPromise,
   LiveData,
   Service,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { catchError, distinctUntilChanged, EMPTY } from 'rxjs';
 
 import type { NavigationGestureProvider } from '../providers/navigation-gesture';
 
-const logger = new DebugLogger('affine:navigation-gesture');
+const logger = new DebugLogger('bridgeflow:navigation-gesture');
 
 export class NavigationGestureService extends Service {
   public enabled$ = new LiveData(false);

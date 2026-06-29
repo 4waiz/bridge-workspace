@@ -1,5 +1,5 @@
-import { Separator } from '@affine/admin/components/ui/separator';
-import { adminWorkspaceQuery } from '@affine/graphql';
+import { Separator } from '@bridgeflow/admin/components/ui/separator';
+import { adminWorkspaceQuery } from '@bridgeflow/graphql';
 import { useMemo } from 'react';
 
 import { useQuery } from '../../../use-query';

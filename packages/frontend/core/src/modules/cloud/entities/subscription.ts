@@ -3,7 +3,7 @@ import {
   type SubscriptionQuery,
   SubscriptionRecurring,
   SubscriptionVariant,
-} from '@affine/graphql';
+} from '@bridgeflow/graphql';
 import {
   catchErrorInto,
   effect,
@@ -14,7 +14,7 @@ import {
   onComplete,
   onStart,
   smartRetry,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { map, tap } from 'rxjs';
 
 import type { AuthService } from '../services/auth';

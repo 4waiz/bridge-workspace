@@ -1,8 +1,8 @@
-import { useThemeColorV2 } from '@affine/component';
-import { PageNotFound } from '@affine/core/desktop/pages/404';
-import { GlobalContextService } from '@affine/core/modules/global-context';
-import { TagService } from '@affine/core/modules/tag';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useThemeColorV2 } from '@bridgeflow/component';
+import { PageNotFound } from '@bridgeflow/core/desktop/pages/404';
+import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
+import { TagService } from '@bridgeflow/core/modules/tag';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 

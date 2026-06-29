@@ -1,8 +1,8 @@
-import type { TagMeta } from '@affine/core/components/page-list';
-import { createLitPortal } from '@blocksuite/affine/components/portal';
-import { SignalWatcher, WithDisposable } from '@blocksuite/affine/global/lit';
-import { unsafeCSSVarV2 } from '@blocksuite/affine/shared/theme';
-import { ShadowlessElement } from '@blocksuite/affine/std';
+import type { TagMeta } from '@bridgeflow/core/components/page-list';
+import { createLitPortal } from '@blocksuite/bridgeflow/components/portal';
+import { SignalWatcher, WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { unsafeCSSVarV2 } from '@blocksuite/bridgeflow/shared/theme';
+import { ShadowlessElement } from '@blocksuite/bridgeflow/std';
 import { MoreVerticalIcon } from '@blocksuite/icons/lit';
 import { flip, offset } from '@floating-ui/dom';
 import { computed, type Signal, signal } from '@preact/signals-core';

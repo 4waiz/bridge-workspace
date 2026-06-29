@@ -1,16 +1,16 @@
 import './declare-test-window.js';
 
-import type { EdgelessNoteBackground } from '@blocksuite/affine/blocks/note';
-import type { NoteBlockModel, RootBlockModel } from '@blocksuite/affine/model';
-import type { RichText } from '@blocksuite/affine/rich-text';
-import type { AffineInlineEditor } from '@blocksuite/affine/shared/types';
+import type { EdgelessNoteBackground } from '@blocksuite/bridgeflow/blocks/note';
+import type { NoteBlockModel, RootBlockModel } from '@blocksuite/bridgeflow/model';
+import type { RichText } from '@blocksuite/bridgeflow/rich-text';
+import type { BridgeFlowInlineEditor } from '@blocksuite/bridgeflow/shared/types';
 import type {
   BlockComponent,
   EditorHost,
   TextSelection,
-} from '@blocksuite/affine/std';
-import type { InlineRootElement } from '@blocksuite/affine/std/inline';
-import type { BlockModel } from '@blocksuite/affine/store';
+} from '@blocksuite/bridgeflow/std';
+import type { InlineRootElement } from '@blocksuite/bridgeflow/std/inline';
+import type { BlockModel } from '@blocksuite/bridgeflow/store';
 import { expect, type Locator, type Page } from '@playwright/test';
 
 import {
@@ -67,12 +67,12 @@ export const defaultStore = {
         '0': {
           'prop:title': '',
           'sys:id': '0',
-          'sys:flavour': 'affine:page',
+          'sys:flavour': 'bridgeflow:page',
           'sys:children': ['1'],
           'sys:version': 2,
         },
         '1': {
-          'sys:flavour': 'affine:note',
+          'sys:flavour': 'bridgeflow:note',
           'sys:id': '1',
           'sys:children': ['2'],
           'sys:version': 1,
@@ -91,7 +91,7 @@ export const defaultStore = {
           },
         },
         '2': {
-          'sys:flavour': 'affine:paragraph',
+          'sys:flavour': 'bridgeflow:paragraph',
           'sys:id': '2',
           'sys:children': [],
           'sys:version': 1,
@@ -167,7 +167,7 @@ export async function assertRichTexts(page: Page, texts: string[]) {
           editorHost?.querySelectorAll<RichText>('rich-text') ?? []
         );
         return richTexts.map(richText => {
-          const editor = richText.inlineEditor as AffineInlineEditor;
+          const editor = richText.inlineEditor as BridgeFlowInlineEditor;
           return editor.yText.toString();
         });
       });
@@ -202,7 +202,7 @@ export async function assertRichImage(page: Page, count: number) {
 }
 
 export async function assertDivider(page: Page, count: number) {
-  await expect(page.locator('affine-divider')).toHaveCount(count);
+  await expect(page.locator('bridgeflow-divider')).toHaveCount(count);
 }
 
 export async function assertRichDragButton(page: Page) {
@@ -230,7 +230,7 @@ export async function assertListPrefix(
   predict: (string | RegExp)[],
   range?: [number, number]
 ) {
-  const prefixs = page.locator('.affine-list-block__prefix');
+  const prefixs = page.locator('.bridgeflow-list-block__prefix');
 
   let start = 0;
   let end = await prefixs.count();
@@ -249,10 +249,10 @@ export async function assertBlockCount(
   flavour: string,
   count: number
 ) {
-  await expect(page.locator(`affine-${flavour}`)).toHaveCount(count);
+  await expect(page.locator(`bridgeflow-${flavour}`)).toHaveCount(count);
 }
 export async function assertRowCount(page: Page, count: number) {
-  await expect(page.locator('.affine-database-block-row')).toHaveCount(count);
+  await expect(page.locator('.bridgeflow-database-block-row')).toHaveCount(count);
 }
 
 export async function assertVisibleBlockCount(
@@ -261,7 +261,7 @@ export async function assertVisibleBlockCount(
   count: number
 ) {
   // not only count, but also check if all the blocks are visible
-  const locator = page.locator(`affine-${flavour}`);
+  const locator = page.locator(`bridgeflow-${flavour}`);
   let visibleCount = 0;
   for (let i = 0; i < (await locator.count()); i++) {
     if (await locator.nth(i).isVisible()) {
@@ -311,7 +311,7 @@ export async function assertNoteXYWH(
   const actual = await page.evaluate(() => {
     const rootModel = window.doc.root as RootBlockModel;
     const note = rootModel.children.find(
-      x => x.flavour === 'affine:note'
+      x => x.flavour === 'bridgeflow:note'
     ) as NoteBlockModel;
     return JSON.parse(note.xywh) as number[];
   });
@@ -582,7 +582,7 @@ export async function assertBlockProps(
 
 export async function assertBlockTypes(page: Page, blockTypes: string[]) {
   const actual = await page.evaluate(() => {
-    const editor = document.querySelector('affine-editor-container');
+    const editor = document.querySelector('bridgeflow-editor-container');
     const elements = editor?.querySelectorAll('[data-block-id]') ?? [];
     return (
       Array.from(elements)
@@ -600,7 +600,7 @@ export function assertClipItems(_page: Page, _key: MimeType, _value: unknown) {
   // FIXME: use original clipboard API
   // const clipItems = await page.evaluate(() => {
   //   return document
-  //     .getElementsByTagName('affine-editor-container')[0]
+  //     .getElementsByTagName('bridgeflow-editor-container')[0]
   //     .clipboard['_copy']['_getClipItems']();
   // });
   // const actual = clipItems.find(item => item.mimeType === key)?.data;
@@ -752,7 +752,7 @@ export async function assertEdgelessDraggingArea(page: Page, xywh: number[]) {
   const editor = getEditorLocator(page);
   const draggingArea = editor
     .locator('edgeless-dragging-area-rect')
-    .locator('.affine-edgeless-dragging-area');
+    .locator('.bridgeflow-edgeless-dragging-area');
 
   const box = await draggingArea.boundingBox();
   if (!box) throw new Error('Missing edgeless dragging area');
@@ -767,7 +767,7 @@ export async function getSelectedRect(page: Page) {
   const editor = getEditorLocator(page);
   const selectedRect = editor
     .locator('edgeless-selected-rect')
-    .locator('.affine-edgeless-selected-rect');
+    .locator('.bridgeflow-edgeless-selected-rect');
   // FIXME: remove this timeout
   await page.waitForTimeout(50);
   const box = await selectedRect.boundingBox();
@@ -818,7 +818,7 @@ export async function assertEdgelessRemoteSelectedRect(
   const [x, y, w, h] = xywh;
   const editor = getEditorLocator(page);
   const remoteSelectedRect = editor
-    .locator('affine-edgeless-remote-selection-widget')
+    .locator('bridgeflow-edgeless-remote-selection-widget')
     .locator('.remote-rect')
     .nth(index);
 
@@ -839,7 +839,7 @@ export async function assertEdgelessRemoteSelectedModelRect(
   const [x, y, w, h] = xywh;
   const editor = getEditorLocator(page);
   const remoteSelectedRect = editor
-    .locator('affine-edgeless-remote-selection-widget')
+    .locator('bridgeflow-edgeless-remote-selection-widget')
     .locator('.remote-rect')
     .nth(index);
 
@@ -857,7 +857,7 @@ export async function assertEdgelessSelectedRectRotation(page: Page, deg = 0) {
   const editor = getEditorLocator(page);
   const selectedRect = editor
     .locator('edgeless-selected-rect')
-    .locator('.affine-edgeless-selected-rect');
+    .locator('.bridgeflow-edgeless-selected-rect');
 
   const transform = await selectedRect.evaluate(el => el.style.transform);
   const r = new RegExp(`rotate\\(${deg}deg\\)`);
@@ -890,7 +890,7 @@ export async function assertEdgelessSelectedReactCursor(
   const editor = getEditorLocator(page);
   const selectedRect = editor
     .locator('edgeless-selected-rect')
-    .locator('.affine-edgeless-selected-rect');
+    .locator('.bridgeflow-edgeless-selected-rect');
 
   const handle = selectedRect
     .getByLabel(expected.handle, { exact: true })
@@ -908,7 +908,7 @@ export async function assertEdgelessNonSelectedRect(page: Page) {
 export async function assertSelectionInNote(
   page: Page,
   noteId: string,
-  blockNote: string = 'affine-note'
+  blockNote: string = 'bridgeflow-note'
 ) {
   const closestNoteId = await page.evaluate(blockNote => {
     const selection = window.getSelection();
@@ -925,7 +925,7 @@ export async function assertEdgelessNoteBackground(
 ) {
   const editor = getEditorLocator(page);
   const backgroundColor = await editor
-    .locator(`affine-edgeless-note[data-block-id="${noteId}"]`)
+    .locator(`bridgeflow-edgeless-note[data-block-id="${noteId}"]`)
     .evaluate(ele => {
       const noteWrapper = ele?.querySelector<EdgelessNoteBackground>(
         'edgeless-note-background'
@@ -1198,7 +1198,7 @@ export async function assertConnectorStrokeColor(
   color: string
 ) {
   const colorButton = page
-    .locator('affine-toolbar-widget editor-toolbar')
+    .locator('bridgeflow-toolbar-widget editor-toolbar')
     .locator('edgeless-color-panel')
     .locator(`.color-unit[aria-label="${label}"]`)
     .locator('svg');

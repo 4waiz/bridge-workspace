@@ -1,5 +1,5 @@
 // Copyright: https://github.com/toeverything/blocksuite/commit/8032ef3ab97aefce01664b36502fc392c5db8b78#diff-bf5b41be21936f9165a8400c7f20e24d3dbc49644ba57b9258e0943f0dc1c464
-import { DebugLogger } from '@affine/debug';
+import { DebugLogger } from '@bridgeflow/debug';
 import type { TemplateResult } from 'lit';
 import { css, html } from 'lit';
 
@@ -43,7 +43,7 @@ const createToastContainer = (portal?: HTMLElement) => {
   `;
   const template = html`<div
     style="${styles}"
-    data-testid="affine-toast-container"
+    data-testid="bridgeflow-toast-container"
   ></div>`;
   const element = htmlToElement<HTMLDivElement>(template);
   portal.append(element);
@@ -91,7 +91,7 @@ const createAndShowNewToast = (
 
   const toastTemplate = html`<div
     style="${toastStyles}"
-    data-testid="affine-toast"
+    data-testid="bridgeflow-toast"
   >
     ${message}
   </div>`;
@@ -101,7 +101,7 @@ const createAndShowNewToast = (
   ToastContainer.append(toastElement);
   logger.debug(`toast with message: "${message}"`);
   window.dispatchEvent(
-    new CustomEvent('affine-toast:emit', { detail: message })
+    new CustomEvent('bridgeflow-toast:emit', { detail: message })
   );
 
   setTimeout(() => {

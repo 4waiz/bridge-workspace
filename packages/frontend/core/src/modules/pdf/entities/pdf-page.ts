@@ -1,17 +1,17 @@
-import { DebugLogger } from '@affine/debug';
+import { DebugLogger } from '@bridgeflow/debug';
 import {
   catchErrorInto,
   effect,
   Entity,
   LiveData,
   mapInto,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { filter, map, switchMap } from 'rxjs';
 
 import type { RenderPageOpts } from '../renderer';
 import type { PDF } from './pdf';
 
-const logger = new DebugLogger('affine:pdf:page:render');
+const logger = new DebugLogger('bridgeflow:pdf:page:render');
 
 export class PDFPage extends Entity<{ pdf: PDF; pageNum: number }> {
   readonly pageNum: number = this.props.pageNum;

@@ -20,7 +20,7 @@ function defineTest(
 }
 
 beforeEach(() => {
-  vi.stubGlobal('location', { origin: 'http://affine.pro' });
+  vi.stubGlobal('location', { origin: 'http://bridgeflow.pro' });
 });
 
 afterEach(() => {
@@ -38,17 +38,17 @@ const testCases: [string, ReturnType<typeof resolveLinkToDoc>][] = [
     },
   ],
   [
-    'http://affine.pro/workspace/48__RTCSwASvWZxyAk3Jw/-Uge-K6SYcAbcNYfQ5U-j?blockIds=xxxx',
+    'http://bridgeflow.pro/workspace/48__RTCSwASvWZxyAk3Jw/-Uge-K6SYcAbcNYfQ5U-j?blockIds=xxxx',
     {
       workspaceId: '48__RTCSwASvWZxyAk3Jw',
       docId: '-Uge-K6SYcAbcNYfQ5U-j',
       blockIds: ['xxxx'],
     },
   ],
-  ['http://affine.pro/workspace/48__RTCSwASvWZxyAk3Jw/all', null],
-  ['http://affine.pro/workspace/48__RTCSwASvWZxyAk3Jw/collection', null],
-  ['http://affine.pro/workspace/48__RTCSwASvWZxyAk3Jw/tag', null],
-  ['http://affine.pro/workspace/48__RTCSwASvWZxyAk3Jw/trash', null],
+  ['http://bridgeflow.pro/workspace/48__RTCSwASvWZxyAk3Jw/all', null],
+  ['http://bridgeflow.pro/workspace/48__RTCSwASvWZxyAk3Jw/collection', null],
+  ['http://bridgeflow.pro/workspace/48__RTCSwASvWZxyAk3Jw/tag', null],
+  ['http://bridgeflow.pro/workspace/48__RTCSwASvWZxyAk3Jw/trash', null],
   [
     'file//./workspace/48__RTCSwASvWZxyAk3Jw/-Uge-K6SYcAbcNYfQ5U-j?blockIds=xxxx',
     {
@@ -122,7 +122,7 @@ describe('resolveLinkToDoc in self-hosted', () => {
       },
     ],
     [
-      'http://affine.pro/workspace/48__RTCSwASvWZxyAk3Jw/-Uge-K6SYcAbcNYfQ5U-j?blockIds=xxxx',
+      'http://bridgeflow.pro/workspace/48__RTCSwASvWZxyAk3Jw/-Uge-K6SYcAbcNYfQ5U-j?blockIds=xxxx',
       {
         workspaceId: '48__RTCSwASvWZxyAk3Jw',
         docId: '-Uge-K6SYcAbcNYfQ5U-j',

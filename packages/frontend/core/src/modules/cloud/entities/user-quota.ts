@@ -1,4 +1,4 @@
-import type { QuotaQuery } from '@affine/graphql';
+import type { QuotaQuery } from '@bridgeflow/graphql';
 import {
   catchErrorInto,
   effect,
@@ -9,7 +9,7 @@ import {
   onComplete,
   onStart,
   smartRetry,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { cssVarV2 } from '@toeverything/theme/v2';
 import bytes from 'bytes';
 import { map, tap } from 'rxjs';

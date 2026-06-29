@@ -1,5 +1,5 @@
-import type { DocMode } from '@blocksuite/affine/model';
-import { Entity, LiveData, MemoryMemento } from '@toeverything/infra';
+import type { DocMode } from '@blocksuite/bridgeflow/model';
+import { Entity, LiveData, MemoryMemento } from '@kanban-studios/infra';
 
 export class GlobalContext extends Entity {
   memento = new MemoryMemento();
@@ -7,7 +7,7 @@ export class GlobalContext extends Entity {
   workspaceId = this.define<string>('workspaceId');
   workspaceFlavour = this.define<string>('workspaceFlavour');
 
-  serverId = this.define<string>('serverId', 'affine-cloud');
+  serverId = this.define<string>('serverId', 'bridgeflow-cloud');
 
   /**
    * is in doc page

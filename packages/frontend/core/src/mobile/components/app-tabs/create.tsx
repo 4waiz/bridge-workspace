@@ -1,12 +1,12 @@
-import { usePageHelper } from '@affine/core/blocksuite/block-suite-page-list/utils';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { DocsService } from '@affine/core/modules/doc';
-import { TemplateDocService } from '@affine/core/modules/template-doc';
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import track from '@affine/track';
+import { usePageHelper } from '@bridgeflow/core/blocksuite/block-suite-page-list/utils';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { DocsService } from '@bridgeflow/core/modules/doc';
+import { TemplateDocService } from '@bridgeflow/core/modules/template-doc';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import track from '@bridgeflow/track';
 import { EditIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 
 import { TabItem } from './tab-item';
 import type { AppTabCustomFCProps } from './type';

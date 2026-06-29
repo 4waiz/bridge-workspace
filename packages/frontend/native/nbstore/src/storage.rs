@@ -1,6 +1,6 @@
 use std::sync::Arc;
 
-use affine_schema::get_migrator;
+use bridgeflow_schema::get_migrator;
 use memory_indexer::InMemoryIndex;
 use sqlx::{
   Pool, Row,
@@ -165,7 +165,7 @@ impl SqliteDocStorage {
 mod tests {
   use std::borrow::Cow;
 
-  use affine_schema::get_migrator;
+  use bridgeflow_schema::get_migrator;
   use sqlx::migrate::{Migration, Migrator};
 
   use super::*;

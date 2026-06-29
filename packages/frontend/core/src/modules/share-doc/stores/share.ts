@@ -1,10 +1,10 @@
-import type { PublicDocMode } from '@affine/graphql';
+import type { PublicDocMode } from '@bridgeflow/graphql';
 import {
   getWorkspacePageByIdQuery,
   publishPageMutation,
   revokePublicPageMutation,
-} from '@affine/graphql';
-import { Store } from '@toeverything/infra';
+} from '@bridgeflow/graphql';
+import { Store } from '@kanban-studios/infra';
 
 import type { WorkspaceServerService } from '../../cloud';
 

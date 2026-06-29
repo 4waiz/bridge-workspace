@@ -1,10 +1,10 @@
-import { DebugLogger } from '@affine/debug';
+import { DebugLogger } from '@bridgeflow/debug';
 import {
   effect,
   exhaustMapWithTrailing,
   fromPromise,
   Service,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { catchError, distinctUntilChanged, EMPTY, throttleTime } from 'rxjs';
 
 import type { AIButtonProvider } from '../provider/ai-button';

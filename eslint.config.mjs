@@ -190,7 +190,7 @@ export default tseslint.config(
     rules: {
       'import-x/no-extraneous-dependencies': [
         'error',
-        { includeInternal: true, whitelist: ['@affine/admin'] },
+        { includeInternal: true, whitelist: ['@bridgeflow/admin'] },
       ],
     },
   },
@@ -199,7 +199,7 @@ export default tseslint.config(
     rules: {
       'import-x/no-extraneous-dependencies': [
         'error',
-        { includeInternal: true, whitelist: ['@affine/core'] },
+        { includeInternal: true, whitelist: ['@bridgeflow/core'] },
       ],
     },
   },
@@ -208,7 +208,7 @@ export default tseslint.config(
     rules: {
       'import-x/no-extraneous-dependencies': [
         'error',
-        { includeInternal: true, whitelist: ['@affine/component'] },
+        { includeInternal: true, whitelist: ['@bridgeflow/component'] },
       ],
     },
   },

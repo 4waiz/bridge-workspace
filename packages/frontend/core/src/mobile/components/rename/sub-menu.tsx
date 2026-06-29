@@ -1,5 +1,5 @@
-import { MobileMenuSub, useMobileMenuController } from '@affine/component';
-import { useI18n } from '@affine/i18n';
+import { MobileMenuSub, useMobileMenuController } from '@bridgeflow/component';
+import { useI18n } from '@bridgeflow/i18n';
 import { EditIcon } from '@blocksuite/icons/rc';
 import { useCallback } from 'react';
 
@@ -49,7 +49,7 @@ export const RenameSubMenu = ({
       title={title}
       {...otherMenuProps}
     >
-      {text ?? t['com.affine.m.explorer.folder.rename']()}
+      {text ?? t['com.bridgeflow.m.explorer.folder.rename']()}
     </MobileMenuSub>
   );
 };

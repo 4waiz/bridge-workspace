@@ -1,13 +1,13 @@
-import { toast } from '@affine/component';
-import type { TagMeta } from '@affine/core/components/page-list';
-import type { CollectionMeta } from '@affine/core/modules/collection';
-import track, { type EventArgs } from '@affine/track';
-import { SignalWatcher, WithDisposable } from '@blocksuite/affine/global/lit';
-import { scrollbarStyle } from '@blocksuite/affine/shared/styles';
-import { unsafeCSSVar, unsafeCSSVarV2 } from '@blocksuite/affine/shared/theme';
-import { openFilesWith } from '@blocksuite/affine/shared/utils';
-import { ShadowlessElement } from '@blocksuite/affine/std';
-import type { DocMeta } from '@blocksuite/affine/store';
+import { toast } from '@bridgeflow/component';
+import type { TagMeta } from '@bridgeflow/core/components/page-list';
+import type { CollectionMeta } from '@bridgeflow/core/modules/collection';
+import track, { type EventArgs } from '@bridgeflow/track';
+import { SignalWatcher, WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { scrollbarStyle } from '@blocksuite/bridgeflow/shared/styles';
+import { unsafeCSSVar, unsafeCSSVarV2 } from '@blocksuite/bridgeflow/shared/theme';
+import { openFilesWith } from '@blocksuite/bridgeflow/shared/utils';
+import { ShadowlessElement } from '@blocksuite/bridgeflow/std';
+import type { DocMeta } from '@blocksuite/bridgeflow/store';
 import {
   CollectionsIcon,
   ImageIcon,

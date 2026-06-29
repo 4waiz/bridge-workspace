@@ -2,7 +2,7 @@
 // TODO(@Peng): automate this
 export const promptKeys = [
   // text actions
-  'Chat With AFFiNE AI',
+  'Chat With BridgeFlow AI',
   'Summary',
   'Summary as title',
   'Generate a caption',

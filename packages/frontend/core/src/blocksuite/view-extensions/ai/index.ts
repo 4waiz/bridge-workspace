@@ -1,22 +1,22 @@
-import { toolbarAIEntryConfig } from '@affine/core/blocksuite/ai';
-import { AIChatBlockSpec } from '@affine/core/blocksuite/ai/blocks';
-import { AITranscriptionBlockSpec } from '@affine/core/blocksuite/ai/blocks/ai-chat-block/ai-transcription-block';
-import { edgelessToolbarAIEntryConfig } from '@affine/core/blocksuite/ai/entries/edgeless';
-import { imageToolbarAIEntryConfig } from '@affine/core/blocksuite/ai/entries/image-toolbar/setup-image-toolbar';
-import { AICodeBlockWatcher } from '@affine/core/blocksuite/ai/extensions/ai-code';
-import { getAIEdgelessRootWatcher } from '@affine/core/blocksuite/ai/extensions/ai-edgeless-root';
-import { getAIPageRootWatcher } from '@affine/core/blocksuite/ai/extensions/ai-page-root';
-import { AiSlashMenuConfigExtension } from '@affine/core/blocksuite/ai/extensions/ai-slash-menu';
-import { CopilotTool } from '@affine/core/blocksuite/ai/tool/copilot-tool';
-import { aiPanelWidget } from '@affine/core/blocksuite/ai/widgets/ai-panel/ai-panel';
-import { edgelessCopilotWidget } from '@affine/core/blocksuite/ai/widgets/edgeless-copilot';
+import { toolbarAIEntryConfig } from '@bridgeflow/core/blocksuite/ai';
+import { AIChatBlockSpec } from '@bridgeflow/core/blocksuite/ai/blocks';
+import { AITranscriptionBlockSpec } from '@bridgeflow/core/blocksuite/ai/blocks/ai-chat-block/ai-transcription-block';
+import { edgelessToolbarAIEntryConfig } from '@bridgeflow/core/blocksuite/ai/entries/edgeless';
+import { imageToolbarAIEntryConfig } from '@bridgeflow/core/blocksuite/ai/entries/image-toolbar/setup-image-toolbar';
+import { AICodeBlockWatcher } from '@bridgeflow/core/blocksuite/ai/extensions/ai-code';
+import { getAIEdgelessRootWatcher } from '@bridgeflow/core/blocksuite/ai/extensions/ai-edgeless-root';
+import { getAIPageRootWatcher } from '@bridgeflow/core/blocksuite/ai/extensions/ai-page-root';
+import { AiSlashMenuConfigExtension } from '@bridgeflow/core/blocksuite/ai/extensions/ai-slash-menu';
+import { CopilotTool } from '@bridgeflow/core/blocksuite/ai/tool/copilot-tool';
+import { aiPanelWidget } from '@bridgeflow/core/blocksuite/ai/widgets/ai-panel/ai-panel';
+import { edgelessCopilotWidget } from '@bridgeflow/core/blocksuite/ai/widgets/edgeless-copilot';
 import {
   type ViewExtensionContext,
   ViewExtensionProvider,
-} from '@blocksuite/affine/ext-loader';
-import { ToolbarModuleExtension } from '@blocksuite/affine/shared/services';
-import { BlockFlavourIdentifier } from '@blocksuite/affine/std';
-import { FrameworkProvider } from '@toeverything/infra';
+} from '@blocksuite/bridgeflow/ext-loader';
+import { ToolbarModuleExtension } from '@blocksuite/bridgeflow/shared/services';
+import { BlockFlavourIdentifier } from '@blocksuite/bridgeflow/std';
+import { FrameworkProvider } from '@kanban-studios/infra';
 import { z } from 'zod';
 
 import {
@@ -35,7 +35,7 @@ const optionsSchema = z.object({
 type AIViewOptions = z.infer<typeof optionsSchema>;
 
 export class AIViewExtension extends ViewExtensionProvider<AIViewOptions> {
-  override name = 'affine-ai-view-extension';
+  override name = 'bridgeflow-ai-view-extension';
 
   override schema = optionsSchema;
 
@@ -52,7 +52,7 @@ export class AIViewExtension extends ViewExtensionProvider<AIViewOptions> {
       .register(AICodeBlockWatcher)
       .register(
         ToolbarModuleExtension({
-          id: BlockFlavourIdentifier('custom:affine:image'),
+          id: BlockFlavourIdentifier('custom:bridgeflow:image'),
           config: imageToolbarAIEntryConfig(),
         })
       );
@@ -62,7 +62,7 @@ export class AIViewExtension extends ViewExtensionProvider<AIViewOptions> {
         aiPanelWidget,
         AiSlashMenuConfigExtension(),
         ToolbarModuleExtension({
-          id: BlockFlavourIdentifier('custom:affine:note'),
+          id: BlockFlavourIdentifier('custom:bridgeflow:note'),
           config: toolbarAIEntryConfig(),
         }),
       ]);
@@ -74,7 +74,7 @@ export class AIViewExtension extends ViewExtensionProvider<AIViewOptions> {
         getAIEdgelessRootWatcher(),
         // In note
         ToolbarModuleExtension({
-          id: BlockFlavourIdentifier('custom:affine:surface:*'),
+          id: BlockFlavourIdentifier('custom:bridgeflow:surface:*'),
           config: edgelessToolbarAIEntryConfig(),
         }),
       ]);

@@ -1,18 +1,18 @@
-import { DocDisplayMetaService } from '@affine/core/modules/doc-display-meta';
-import type { Container } from '@blocksuite/affine/global/di';
+import { DocDisplayMetaService } from '@bridgeflow/core/modules/doc-display-meta';
+import type { Container } from '@blocksuite/bridgeflow/global/di';
 import type {
   DocDisplayMetaExtension,
   DocDisplayMetaParams,
-} from '@blocksuite/affine/shared/services';
-import { DocDisplayMetaProvider } from '@blocksuite/affine/shared/services';
+} from '@blocksuite/bridgeflow/shared/services';
+import { DocDisplayMetaProvider } from '@blocksuite/bridgeflow/shared/services';
 import {
   createSignalFromObservable,
   referenceToNode,
-} from '@blocksuite/affine/shared/utils';
-import { LifeCycleWatcher, StdIdentifier } from '@blocksuite/affine/std';
+} from '@blocksuite/bridgeflow/shared/utils';
+import { LifeCycleWatcher, StdIdentifier } from '@blocksuite/bridgeflow/std';
 import { LinkedPageIcon, PageIcon } from '@blocksuite/icons/lit';
 import { computed, type ReadonlySignal } from '@preact/signals-core';
-import { type FrameworkProvider } from '@toeverything/infra';
+import { type FrameworkProvider } from '@kanban-studios/infra';
 import type { TemplateResult } from 'lit';
 
 export function buildDocDisplayMetaExtension(framework: FrameworkProvider) {
@@ -30,7 +30,7 @@ export function buildDocDisplayMetaExtension(framework: FrameworkProvider) {
     });
   }
 
-  class AffineDocDisplayMetaService
+  class BridgeFlowDocDisplayMetaService
     extends LifeCycleWatcher
     implements DocDisplayMetaExtension
   {
@@ -94,5 +94,5 @@ export function buildDocDisplayMetaExtension(framework: FrameworkProvider) {
     }
   }
 
-  return AffineDocDisplayMetaService;
+  return BridgeFlowDocDisplayMetaService;
 }

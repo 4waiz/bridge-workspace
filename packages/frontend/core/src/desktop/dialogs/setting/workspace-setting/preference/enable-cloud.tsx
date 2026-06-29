@@ -1,13 +1,13 @@
-import { SettingRow } from '@affine/component/setting-components';
-import { Button } from '@affine/component/ui/button';
-import { useEnableCloud } from '@affine/core/components/hooks/affine/use-enable-cloud';
+import { SettingRow } from '@bridgeflow/component/setting-components';
+import { Button } from '@bridgeflow/component/ui/button';
+import { useEnableCloud } from '@bridgeflow/core/components/hooks/bridgeflow/use-enable-cloud';
 import {
   type Workspace,
   WorkspaceService,
-} from '@affine/core/modules/workspace';
-import { UNTITLED_WORKSPACE_NAME } from '@affine/env/constant';
-import { useI18n } from '@affine/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+} from '@bridgeflow/core/modules/workspace';
+import { UNTITLED_WORKSPACE_NAME } from '@bridgeflow/env/constant';
+import { useI18n } from '@bridgeflow/i18n';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 export interface PublishPanelProps {
@@ -53,12 +53,12 @@ export const EnableCloudPanel = ({
       }}
     >
       <Button
-        data-testid="publish-enable-affine-cloud-button"
+        data-testid="publish-enable-bridgeflow-cloud-button"
         variant="primary"
         onClick={confirmEnableCloudAndClose}
         style={{ marginTop: '12px' }}
       >
-        {t['Enable AFFiNE Cloud']()}
+        {t['Enable BridgeFlow Cloud']()}
       </Button>
     </SettingRow>
   );

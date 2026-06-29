@@ -1,9 +1,9 @@
-import track from '@affine/track';
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import { unsafeCSSVar, unsafeCSSVarV2 } from '@blocksuite/affine/shared/theme';
-import { type EditorHost, ShadowlessElement } from '@blocksuite/affine/std';
-import { LoadingIcon } from '@blocksuite/affine-components/icons';
-import type { NotificationService } from '@blocksuite/affine-shared/services';
+import track from '@bridgeflow/track';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { unsafeCSSVar, unsafeCSSVarV2 } from '@blocksuite/bridgeflow/shared/theme';
+import { type EditorHost, ShadowlessElement } from '@blocksuite/bridgeflow/std';
+import { LoadingIcon } from '@blocksuite/bridgeflow-components/icons';
+import type { NotificationService } from '@blocksuite/bridgeflow-shared/services';
 import {
   CloseIcon,
   CopyIcon,
@@ -434,13 +434,13 @@ export class DocEditTool extends WithDisposable(ShadowlessElement) {
                   <div class="doc-edit-tool-result-card-header-operations">
                     <button @click=${() => this._toggleCollapse()}>
                       ${this.isCollapsed ? ExpandFullIcon() : ExpandCloseIcon()}
-                      <affine-tooltip>
+                      <bridgeflow-tooltip>
                         ${this.isCollapsed ? 'Expand' : 'Collapse'}
-                      </affine-tooltip>
+                      </bridgeflow-tooltip>
                     </button>
                     <button @click=${() => this._handleCopy(changedContent)}>
                       ${CopyIcon()}
-                      <affine-tooltip>Copy</affine-tooltip>
+                      <bridgeflow-tooltip>Copy</bridgeflow-tooltip>
                     </button>
                     <button
                       @click=${() => this._handleApply(op, updates)}

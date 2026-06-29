@@ -1,6 +1,6 @@
-import type { DocsService } from '@affine/core/modules/doc';
-import type { TagService } from '@affine/core/modules/tag';
-import { Service } from '@toeverything/infra';
+import type { DocsService } from '@bridgeflow/core/modules/doc';
+import type { TagService } from '@bridgeflow/core/modules/tag';
+import { Service } from '@kanban-studios/infra';
 import { combineLatest, map, type Observable } from 'rxjs';
 
 import type { OrderByProvider } from '../../provider';

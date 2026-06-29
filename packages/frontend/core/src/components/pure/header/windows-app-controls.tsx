@@ -1,5 +1,5 @@
-import { DesktopApiService } from '@affine/core/modules/desktop-api';
-import { useService } from '@toeverything/infra';
+import { DesktopApiService } from '@bridgeflow/core/modules/desktop-api';
+import { useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useState } from 'react';
 
 import * as style from './style.css';

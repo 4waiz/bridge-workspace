@@ -5,7 +5,7 @@ import {
   fromPromise,
   LiveData,
   Service,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import {
   combineLatest,
   exhaustMap,

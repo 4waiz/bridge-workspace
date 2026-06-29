@@ -1,9 +1,9 @@
-import { Button, notify } from '@affine/component';
-import { WorkspaceServerService } from '@affine/core/modules/cloud';
-import { IntegrationService } from '@affine/core/modules/integration';
-import { useI18n } from '@affine/i18n';
+import { Button, notify } from '@bridgeflow/component';
+import { WorkspaceServerService } from '@bridgeflow/core/modules/cloud';
+import { IntegrationService } from '@bridgeflow/core/modules/integration';
+import { useI18n } from '@bridgeflow/i18n';
 import { TodayIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { IntegrationSettingHeader } from '../setting';
@@ -77,7 +77,7 @@ export const CalendarSettingPanel = () => {
     } catch (error) {
       console.error('Failed to save calendar settings', error);
       notify.error({
-        title: t['com.affine.integration.calendar.save-error'](),
+        title: t['com.bridgeflow.integration.calendar.save-error'](),
       });
     } finally {
       setSaving(false);
@@ -90,8 +90,8 @@ export const CalendarSettingPanel = () => {
     <>
       <IntegrationSettingHeader
         icon={<TodayIcon />}
-        name={t['com.affine.integration.calendar.name']()}
-        desc={t['com.affine.integration.calendar.desc']()}
+        name={t['com.bridgeflow.integration.calendar.name']()}
+        desc={t['com.bridgeflow.integration.calendar.desc']()}
         divider={false}
       />
       <div className={styles.list}>
@@ -112,7 +112,7 @@ export const CalendarSettingPanel = () => {
                 </div>
                 <div className={styles.groupMeta}>
                   {calendars.length}{' '}
-                  {t['com.affine.integration.calendar.name']()}
+                  {t['com.bridgeflow.integration.calendar.name']()}
                 </div>
               </div>
               <div className={styles.groupList}>
@@ -130,7 +130,7 @@ export const CalendarSettingPanel = () => {
         })}
         {!hasCalendars ? (
           <div className={styles.empty}>
-            {t['com.affine.integration.calendar.no-calendar']()}
+            {t['com.bridgeflow.integration.calendar.no-calendar']()}
           </div>
         ) : null}
       </div>
@@ -141,7 +141,7 @@ export const CalendarSettingPanel = () => {
           disabled={!hasChanges || saving}
           loading={saving}
         >
-          {t['com.affine.editCollection.save']()}
+          {t['com.bridgeflow.editCollection.save']()}
         </Button>
       </div>
     </>

@@ -1,8 +1,8 @@
 import {
   type ViewExtensionContext,
   ViewExtensionProvider,
-} from '@blocksuite/affine/ext-loader';
-import { FrameworkProvider } from '@toeverything/infra';
+} from '@blocksuite/bridgeflow/ext-loader';
+import { FrameworkProvider } from '@kanban-studios/infra';
 import { z } from 'zod';
 
 import { patchForClipboardInElectron } from './electron-clipboard';

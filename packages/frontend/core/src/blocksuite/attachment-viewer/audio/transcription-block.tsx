@@ -1,7 +1,7 @@
-import { createReactComponentFromLit } from '@affine/component';
-import { LitTranscriptionBlock } from '@affine/core/blocksuite/ai/blocks/ai-chat-block/ai-transcription-block';
-import type { TranscriptionBlockModel } from '@affine/core/blocksuite/ai/blocks/transcription-block/model';
-import { LiveData, useLiveData } from '@toeverything/infra';
+import { createReactComponentFromLit } from '@bridgeflow/component';
+import { LitTranscriptionBlock } from '@bridgeflow/core/blocksuite/ai/blocks/ai-chat-block/ai-transcription-block';
+import type { TranscriptionBlockModel } from '@bridgeflow/core/blocksuite/ai/blocks/transcription-block/model';
+import { LiveData, useLiveData } from '@kanban-studios/infra';
 import React, { useCallback, useMemo } from 'react';
 
 import * as styles from './transcription-block.css';

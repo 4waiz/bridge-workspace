@@ -1,4 +1,4 @@
-import { LiveData, Store } from '@toeverything/infra';
+import { LiveData, Store } from '@kanban-studios/infra';
 import { map } from 'rxjs';
 
 import type { WorkspaceDBService } from '../../db';

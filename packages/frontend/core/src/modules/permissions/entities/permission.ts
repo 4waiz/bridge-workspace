@@ -1,4 +1,4 @@
-import { Permission } from '@affine/graphql';
+import { Permission } from '@bridgeflow/graphql';
 import {
   backoffRetry,
   effect,
@@ -8,7 +8,7 @@ import {
   LiveData,
   onComplete,
   onStart,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { tap } from 'rxjs';
 
 import type { WorkspaceService } from '../../workspace';

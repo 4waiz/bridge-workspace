@@ -1,4 +1,4 @@
-import { Entity, LiveData } from '@toeverything/infra';
+import { Entity, LiveData } from '@kanban-studios/infra';
 import { mean } from 'lodash-es';
 
 import type {

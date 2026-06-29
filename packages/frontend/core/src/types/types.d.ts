@@ -25,6 +25,11 @@ declare module '*.jpg' {
   export default url;
 }
 
+declare module '*.webp' {
+  const url: string;
+  export default url;
+}
+
 declare module '*.inline.svg' {
   const src: string;
   export default src;

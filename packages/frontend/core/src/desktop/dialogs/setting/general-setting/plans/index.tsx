@@ -1,5 +1,5 @@
-import { useI18n } from '@affine/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useI18n } from '@bridgeflow/i18n';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useEffect } from 'react';
 import type { FallbackProps } from 'react-error-boundary';
 
@@ -27,7 +27,7 @@ const Settings = () => {
   return <PlanLayout cloud={<CloudPlans />} ai={<AIPlan />} />;
 };
 
-export const AFFiNEPricingPlans = () => {
+export const BridgeFlowPricingPlans = () => {
   return (
     <SWRErrorBoundary FallbackComponent={PlansErrorBoundary}>
       <Settings />
@@ -40,9 +40,9 @@ const PlansErrorBoundary = ({ resetErrorBoundary }: FallbackProps) => {
 
   const scroll = (
     <div className={styles.errorTip}>
-      <span>{t['com.affine.payment.plans-error-tip']()}</span>
+      <span>{t['com.bridgeflow.payment.plans-error-tip']()}</span>
       <a onClick={resetErrorBoundary} className={styles.errorTipRetry}>
-        {t['com.affine.payment.plans-error-retry']()}
+        {t['com.bridgeflow.payment.plans-error-retry']()}
       </a>
     </div>
   );

@@ -1,4 +1,4 @@
-import { BRAND_NAME, BRAND_SITE_URL } from '@affine/component/brand';
+import { BRAND_NAME, BRAND_SITE_URL } from '@bridgeflow/component/brand';
 import {
   CloseIcon,
   ExportToHtmlIcon,

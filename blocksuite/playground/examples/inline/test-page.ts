@@ -1,16 +1,16 @@
 import '@shoelace-style/shoelace';
 
-import { ShadowlessElement } from '@blocksuite/affine/std';
-import { effects } from '@blocksuite/affine/std/effects';
+import { ShadowlessElement } from '@blocksuite/bridgeflow/std';
+import { effects } from '@blocksuite/bridgeflow/std/effects';
 import {
   type AttributeRenderer,
   InlineEditor,
   ZERO_WIDTH_FOR_EMBED_NODE,
-} from '@blocksuite/affine/std/inline';
+} from '@blocksuite/bridgeflow/std/inline';
 import {
   type BaseTextAttributes,
   baseTextAttributes,
-} from '@blocksuite/affine/store';
+} from '@blocksuite/bridgeflow/store';
 import { effect } from '@preact/signals-core';
 import { css, html, nothing } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';

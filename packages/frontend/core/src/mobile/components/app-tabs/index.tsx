@@ -1,10 +1,10 @@
-import { SafeArea } from '@affine/component';
-import { GlobalCacheService } from '@affine/core/modules/storage';
+import { SafeArea } from '@bridgeflow/component';
+import { GlobalCacheService } from '@bridgeflow/core/modules/storage';
 import {
   WorkbenchLink,
   WorkbenchService,
-} from '@affine/core/modules/workbench';
-import { useLiveData, useService } from '@toeverything/infra';
+} from '@bridgeflow/core/modules/workbench';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';

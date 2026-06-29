@@ -1,6 +1,6 @@
 // eslint-disable-next-line import-x/no-extraneous-dependencies
-import { PanTool } from '@blocksuite/affine-gfx-pointer';
-import { on } from '@blocksuite/affine-shared/utils';
+import { PanTool } from '@blocksuite/bridgeflow-gfx-pointer';
+import { on } from '@blocksuite/bridgeflow-shared/utils';
 import type { PointerEventState } from '@blocksuite/std';
 import {
   type BaseTool,
@@ -20,8 +20,8 @@ type SelectionEntry = {
 const pointerUpHandlers: unknown[] = [];
 const pointerUpDisposers: Array<ReturnType<typeof vi.fn>> = [];
 
-vi.mock('@blocksuite/affine-shared/utils', async () => {
-  const actual = await vi.importActual('@blocksuite/affine-shared/utils');
+vi.mock('@blocksuite/bridgeflow-shared/utils', async () => {
+  const actual = await vi.importActual('@blocksuite/bridgeflow-shared/utils');
 
   return {
     ...actual,

@@ -1,5 +1,5 @@
 {
-  "name": "@affine/media-capture-playground",
+  "name": "@bridgeflow/media-capture-playground",
   "private": true,
   "type": "module",
   "version": "0.26.3",
@@ -8,7 +8,7 @@
     "dev:server": "node --env-file-if-exists=.env --watch server/main.ts"
   },
   "dependencies": {
-    "@affine/native": "workspace:*",
+    "@bridgeflow/native": "workspace:*",
     "@google/generative-ai": "^0.24.0",
     "@tailwindcss/vite": "^4.0.6",
     "@types/express": "^5.0.0",

@@ -2,21 +2,21 @@ import {
   type DropTargetDropEvent,
   IconButton,
   useDropTarget,
-} from '@affine/component';
-import { usePageHelper } from '@affine/core/blocksuite/block-suite-page-list/utils';
-import type { FavoriteSupportTypeUnion } from '@affine/core/modules/favorite';
+} from '@bridgeflow/component';
+import { usePageHelper } from '@bridgeflow/core/blocksuite/block-suite-page-list/utils';
+import type { FavoriteSupportTypeUnion } from '@bridgeflow/core/modules/favorite';
 import {
   FavoriteService,
   isFavoriteSupportType,
-} from '@affine/core/modules/favorite';
-import { NavigationPanelService } from '@affine/core/modules/navigation-panel';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import type { AffineDNDData } from '@affine/core/types/dnd';
-import { inferOpenMode } from '@affine/core/utils';
-import { useI18n } from '@affine/i18n';
-import { track } from '@affine/track';
+} from '@bridgeflow/core/modules/favorite';
+import { NavigationPanelService } from '@bridgeflow/core/modules/navigation-panel';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import type { BridgeFlowDNDData } from '@bridgeflow/core/types/dnd';
+import { inferOpenMode } from '@bridgeflow/core/utils';
+import { useI18n } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
 import { PlusIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useServices } from '@toeverything/infra';
+import { useLiveData, useServices } from '@kanban-studios/infra';
 import { type MouseEventHandler, useCallback, useMemo } from 'react';
 
 import { CollapsibleSection } from '../../layouts/collapsible-section';
@@ -54,7 +54,7 @@ export const NavigationPanelFavorites = () => {
   );
 
   const handleDrop = useCallback(
-    (data: DropTargetDropEvent<AffineDNDData>) => {
+    (data: DropTargetDropEvent<BridgeFlowDNDData>) => {
       if (
         data.source.data.entity?.type &&
         isFavoriteSupportType(data.source.data.entity.type)
@@ -93,7 +93,7 @@ export const NavigationPanelFavorites = () => {
   const handleOnChildrenDrop = useCallback(
     (
       favorite: { id: string; type: FavoriteSupportTypeUnion },
-      data: DropTargetDropEvent<AffineDNDData>
+      data: DropTargetDropEvent<BridgeFlowDNDData>
     ) => {
       if (
         data.treeInstruction?.type === 'reorder-above' ||
@@ -148,7 +148,7 @@ export const NavigationPanelFavorites = () => {
   );
 
   const { dropTargetRef, draggedOverDraggable, draggedOverPosition } =
-    useDropTarget<AffineDNDData>(
+    useDropTarget<BridgeFlowDNDData>(
       () => ({
         data: {
           at: 'navigation-panel:favorite:root',
@@ -163,7 +163,7 @@ export const NavigationPanelFavorites = () => {
   return (
     <CollapsibleSection
       path={path}
-      title={t['com.affine.rootAppSidebar.favorites']()}
+      title={t['com.bridgeflow.rootAppSidebar.favorites']()}
       headerRef={dropTargetRef}
       testId="navigation-panel-favorites"
       headerTestId="navigation-panel-favorite-category-divider"
@@ -177,7 +177,7 @@ export const NavigationPanelFavorites = () => {
             onAuxClick={handleCreateNewFavoriteDoc}
             size="16"
             tooltip={t[
-              'com.affine.rootAppSidebar.explorer.fav-section-add-tooltip'
+              'com.bridgeflow.rootAppSidebar.explorer.fav-section-add-tooltip'
             ]()}
           >
             <PlusIcon />
@@ -228,11 +228,11 @@ const NavigationPanelFavoriteNode = ({
       id: string;
       type: FavoriteSupportTypeUnion;
     },
-    data: DropTargetDropEvent<AffineDNDData>
+    data: DropTargetDropEvent<BridgeFlowDNDData>
   ) => void;
 }) => {
   const handleOnChildrenDrop = useCallback(
-    (data: DropTargetDropEvent<AffineDNDData>) => {
+    (data: DropTargetDropEvent<BridgeFlowDNDData>) => {
       onDrop(favorite, data);
     },
     [favorite, onDrop]

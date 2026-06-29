@@ -1,9 +1,9 @@
 import './action-wrapper';
 
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import { unsafeCSSVar } from '@blocksuite/affine/shared/theme';
-import type { EditorHost } from '@blocksuite/affine/std';
-import { ThemeProvider } from '@blocksuite/affine-shared/services';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { unsafeCSSVar } from '@blocksuite/bridgeflow/shared/theme';
+import type { EditorHost } from '@blocksuite/bridgeflow/std';
+import { ThemeProvider } from '@blocksuite/bridgeflow-shared/services';
 import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';

@@ -1,5 +1,5 @@
-import { AffineSchemas } from '@blocksuite/affine/schemas';
-import { replaceIdMiddleware } from '@blocksuite/affine/shared/adapters';
+import { BridgeFlowSchemas } from '@blocksuite/bridgeflow/schemas';
+import { replaceIdMiddleware } from '@blocksuite/bridgeflow/shared/adapters';
 import {
   type DocSnapshot,
   Schema,
@@ -12,7 +12,7 @@ export async function importFromSnapshot(
   snapshot: DocSnapshot
 ) {
   const job = new Transformer({
-    schema: new Schema().register(AffineSchemas),
+    schema: new Schema().register(BridgeFlowSchemas),
     blobCRUD: collection.blobSync,
     docCRUD: {
       create: (id: string) => collection.createDoc(id).getStore({ id }),

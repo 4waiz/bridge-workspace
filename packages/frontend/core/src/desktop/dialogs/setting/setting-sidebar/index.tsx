@@ -1,15 +1,15 @@
-import { BrandLogo } from '@affine/component/brand';
-import { Scrollable } from '@affine/component';
-import { Avatar } from '@affine/component/ui/avatar';
-import { UserPlanButton } from '@affine/core/components/affine/auth/user-plan-button';
-import { useCatchEventCallback } from '@affine/core/components/hooks/use-catch-event-hook';
-import { AuthService } from '@affine/core/modules/cloud';
-import { GlobalDialogService } from '@affine/core/modules/dialogs';
-import type { SettingTab } from '@affine/core/modules/dialogs/constant';
-import { type WorkspaceMetadata } from '@affine/core/modules/workspace';
-import { useI18n } from '@affine/i18n';
-import { track } from '@affine/track';
-import { useLiveData, useService } from '@toeverything/infra';
+import { BrandLogo } from '@bridgeflow/component/brand';
+import { Scrollable } from '@bridgeflow/component';
+import { Avatar } from '@bridgeflow/component/ui/avatar';
+import { UserPlanButton } from '@bridgeflow/core/components/bridgeflow/auth/user-plan-button';
+import { useCatchEventCallback } from '@bridgeflow/core/components/hooks/use-catch-event-hook';
+import { AuthService } from '@bridgeflow/core/modules/cloud';
+import { GlobalDialogService } from '@bridgeflow/core/modules/dialogs';
+import type { SettingTab } from '@bridgeflow/core/modules/dialogs/constant';
+import { type WorkspaceMetadata } from '@bridgeflow/core/modules/workspace';
+import { useI18n } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import {
   type HTMLAttributes,
@@ -95,11 +95,11 @@ export const SignInButton = () => {
       </div>
 
       <div className="content">
-        <div className="name" title={t['com.affine.settings.sign']()}>
-          {t['com.affine.settings.sign']()}
+        <div className="name" title={t['com.bridgeflow.settings.sign']()}>
+          {t['com.bridgeflow.settings.sign']()}
         </div>
-        <div className="email" title={t['com.affine.setting.sign.message']()}>
-          {t['com.affine.setting.sign.message']()}
+        <div className="email" title={t['com.bridgeflow.setting.sign.message']()}>
+          {t['com.bridgeflow.setting.sign.message']()}
         </div>
       </div>
     </div>
@@ -185,12 +185,12 @@ export const SettingSidebar = ({
     const res = [
       {
         key: 'setting:general',
-        title: t['com.affine.settingSidebar.settings.general'](),
+        title: t['com.bridgeflow.settingSidebar.settings.general'](),
         items: generalList,
       },
       {
         key: 'setting:workspace',
-        title: t['com.affine.settingSidebar.settings.workspace'](),
+        title: t['com.bridgeflow.settingSidebar.settings.workspace'](),
         items: workspaceSettingList,
       },
     ].map(group => {
@@ -212,7 +212,7 @@ export const SettingSidebar = ({
   return (
     <div className={style.settingSlideBar} data-testid="settings-sidebar">
       <div className={style.sidebarTitle}>
-        {t['com.affine.settingSidebar.title']()}
+        {t['com.bridgeflow.settingSidebar.title']()}
       </div>
 
       {loginStatus === 'unauthenticated' ? <SignInButton /> : null}

@@ -1,8 +1,8 @@
 import type {
   StoreClient,
   WorkerInitOptions,
-} from '@affine/nbstore/worker/client';
-import { createIdentifier } from '@toeverything/infra';
+} from '@bridgeflow/nbstore/worker/client';
+import { createIdentifier } from '@kanban-studios/infra';
 
 export interface NbstoreProvider {
   /**

@@ -1,4 +1,4 @@
-import { DebugLogger } from '@affine/debug';
+import { DebugLogger } from '@bridgeflow/debug';
 import {
   effect,
   Entity,
@@ -6,7 +6,7 @@ import {
   LiveData,
   onComplete,
   onStart,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { isEqual } from 'lodash-es';
 import { catchError, EMPTY, exhaustMap, tap } from 'rxjs';
 
@@ -16,7 +16,7 @@ import type { WorkspaceFlavoursService } from '../services/flavours';
 import type { WorkspaceProfileCacheStore } from '../stores/profile-cache';
 import type { Workspace } from './workspace';
 
-const logger = new DebugLogger('affine:workspace-profile');
+const logger = new DebugLogger('bridgeflow:workspace-profile');
 
 export interface WorkspaceProfileInfo {
   avatar?: string;

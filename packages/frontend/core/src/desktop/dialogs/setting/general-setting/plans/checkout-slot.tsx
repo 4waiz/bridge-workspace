@@ -1,11 +1,11 @@
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
 import {
   SubscriptionService,
   UserQuotaService,
-} from '@affine/core/modules/cloud';
-import { UrlService } from '@affine/core/modules/url';
-import type { CreateCheckoutSessionInput } from '@affine/graphql';
-import { useService } from '@toeverything/infra';
+} from '@bridgeflow/core/modules/cloud';
+import { UrlService } from '@bridgeflow/core/modules/url';
+import type { CreateCheckoutSessionInput } from '@bridgeflow/graphql';
+import { useService } from '@kanban-studios/infra';
 import { nanoid } from 'nanoid';
 import {
   type PropsWithChildren,

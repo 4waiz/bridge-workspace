@@ -1,20 +1,20 @@
-import { WorkspaceImpl } from '@affine/core/modules/workspace/impls/workspace.js';
-import type { SurfaceBlockModel } from '@blocksuite/affine/blocks/surface';
+import { WorkspaceImpl } from '@bridgeflow/core/modules/workspace/impls/workspace.js';
+import type { SurfaceBlockModel } from '@blocksuite/bridgeflow/blocks/surface';
 import {
   MindmapStyleFour,
   MindmapStyleOne,
   MindmapStyleThree,
   MindmapStyleTwo,
-} from '@blocksuite/affine/gfx/mindmap';
-import type { ServiceProvider } from '@blocksuite/affine/global/di';
-import { WithDisposable } from '@blocksuite/affine/global/lit';
+} from '@blocksuite/bridgeflow/gfx/mindmap';
+import type { ServiceProvider } from '@blocksuite/bridgeflow/global/di';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
 import {
   type MindmapElementModel,
   MindmapStyle,
-} from '@blocksuite/affine/model';
-import { MarkdownAdapter } from '@blocksuite/affine/shared/adapters';
-import { BlockStdScope, type EditorHost } from '@blocksuite/affine/std';
-import { Schema, type Store } from '@blocksuite/affine/store';
+} from '@blocksuite/bridgeflow/model';
+import { MarkdownAdapter } from '@blocksuite/bridgeflow/shared/adapters';
+import { BlockStdScope, type EditorHost } from '@blocksuite/bridgeflow/std';
+import { Schema, type Store } from '@blocksuite/bridgeflow/store';
 import { css, html, LitElement, nothing } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
@@ -107,8 +107,8 @@ export class MiniMindmapPreview extends WithDisposable(LitElement) {
     collection.meta.initialize();
     const doc = collection.createDoc('doc:home').getStore();
     doc.load();
-    const rootId = doc.addBlock('affine:page', {});
-    const surfaceId = doc.addBlock('affine:surface', {}, rootId);
+    const rootId = doc.addBlock('bridgeflow:page', {});
+    const surfaceId = doc.addBlock('bridgeflow:surface', {}, rootId);
     const surface = doc.getModelById(surfaceId) as SurfaceBlockModel;
     doc.resetHistory();
 

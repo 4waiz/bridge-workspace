@@ -1,5 +1,5 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { eases, waapi, type WAAPIAnimation } from 'animejs';
 import clsx from 'clsx';
 import {
@@ -27,7 +27,7 @@ const contentOptions: Dialog.DialogContentProps = {
     if (
       el.closest('[data-peek-view-wrapper]') ||
       // workaround for slash menu click outside issue
-      el.closest('affine-slash-menu')
+      el.closest('bridgeflow-slash-menu')
     ) {
       e.preventDefault();
     }

@@ -1,6 +1,6 @@
-import { Scrollable } from '@affine/component';
-import { ThemeEditorService } from '@affine/core/modules/theme-editor';
-import { useLiveData, useService } from '@toeverything/infra';
+import { Scrollable } from '@bridgeflow/component';
+import { ThemeEditorService } from '@bridgeflow/core/modules/theme-editor';
+import { useLiveData, useService } from '@kanban-studios/infra';
 
 import type { TreeNode } from '../resource';
 import * as styles from '../theme-editor.css';

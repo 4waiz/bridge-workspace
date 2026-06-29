@@ -1,29 +1,29 @@
 import { z } from 'zod';
 
 export const appSchemes = z.enum([
-  'affine',
-  'affine-canary',
-  'affine-beta',
-  'affine-internal',
-  'affine-dev',
+  'bridgeflow',
+  'bridgeflow-canary',
+  'bridgeflow-beta',
+  'bridgeflow-internal',
+  'bridgeflow-dev',
 ]);
 
 export type Scheme = z.infer<typeof appSchemes>;
 export type Channel = 'stable' | 'canary' | 'beta' | 'internal';
 
 export const schemeToChannel = {
-  affine: 'stable',
-  'affine-canary': 'canary',
-  'affine-beta': 'beta',
-  'affine-internal': 'internal',
-  'affine-dev': 'canary', // dev does not have a dedicated app. use canary as the placeholder.
+  bridgeflow: 'stable',
+  'bridgeflow-canary': 'canary',
+  'bridgeflow-beta': 'beta',
+  'bridgeflow-internal': 'internal',
+  'bridgeflow-dev': 'canary', // dev does not have a dedicated app. use canary as the placeholder.
 } as Record<Scheme, Channel>;
 
 export const channelToScheme = {
-  stable: 'affine',
-  canary: BUILD_CONFIG.debug ? 'affine-dev' : 'affine-canary',
-  beta: 'affine-beta',
-  internal: 'affine-internal',
+  stable: 'bridgeflow',
+  canary: BUILD_CONFIG.debug ? 'bridgeflow-dev' : 'bridgeflow-canary',
+  beta: 'bridgeflow-beta',
+  internal: 'bridgeflow-internal',
 } as Record<Channel, Scheme>;
 
 export const appIconMap = {
@@ -34,10 +34,10 @@ export const appIconMap = {
 } satisfies Record<Channel, string>;
 
 export const appNames = {
-  stable: 'BridgeWS',
-  canary: 'BridgeWS Canary',
-  beta: 'BridgeWS Beta',
-  internal: 'BridgeWS Internal',
+  stable: 'BRIDGE Flow',
+  canary: 'BRIDGE Flow Canary',
+  beta: 'BRIDGE Flow Beta',
+  internal: 'BRIDGE Flow Internal',
 } satisfies Record<Channel, string>;
 
 export const appSchemaUrl = z.custom<string>(

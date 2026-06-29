@@ -1,9 +1,9 @@
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { useLiveData, useService } from '@toeverything/infra';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { useCallback, useEffect, useState } from 'react';
 
-import { useEnableAI } from '../../../components/hooks/affine/use-enable-ai';
+import { useEnableAI } from '../../../components/hooks/bridgeflow/use-enable-ai';
 import { IslandContainer } from './container';
 import { AIIcon } from './icons';
 import { aiIslandBtn, aiIslandWrapper, toolStyle } from './styles.css';

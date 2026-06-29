@@ -1,6 +1,6 @@
-import { toReactNode } from '@affine/component';
-import { BlockComponent } from '@blocksuite/affine/std';
-import { useLiveData, useService } from '@toeverything/infra';
+import { toReactNode } from '@bridgeflow/component';
+import { BlockComponent } from '@blocksuite/bridgeflow/std';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import type { ActivePeekView } from '../entities/peek-view';

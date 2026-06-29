@@ -1,4 +1,4 @@
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 
 import type { WorkspaceService, WorkspacesService } from '../../workspace';
 import { WorkspacePermission } from '../entities/permission';

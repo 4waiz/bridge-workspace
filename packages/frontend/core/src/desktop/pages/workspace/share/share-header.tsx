@@ -1,7 +1,7 @@
-import { BlocksuiteHeaderTitle } from '@affine/core/blocksuite/block-suite-header/title';
-import { EditorModeSwitch } from '@affine/core/blocksuite/block-suite-mode-switch';
-import ShareHeaderRightItem from '@affine/core/components/cloud/share-header-right-item';
-import type { DocMode } from '@blocksuite/affine/model';
+import { BlocksuiteHeaderTitle } from '@bridgeflow/core/blocksuite/block-suite-header/title';
+import { EditorModeSwitch } from '@bridgeflow/core/blocksuite/block-suite-mode-switch';
+import ShareHeaderRightItem from '@bridgeflow/core/components/cloud/share-header-right-item';
+import type { DocMode } from '@blocksuite/bridgeflow/model';
 
 import * as styles from './share-header.css';
 

@@ -1,6 +1,6 @@
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import type { RichText } from '@blocksuite/affine/rich-text';
-import { ShadowlessElement, TextSelection } from '@blocksuite/affine/std';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import type { RichText } from '@blocksuite/bridgeflow/rich-text';
+import { ShadowlessElement, TextSelection } from '@blocksuite/bridgeflow/std';
 import { css, html, nothing } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import * as Y from 'yjs';

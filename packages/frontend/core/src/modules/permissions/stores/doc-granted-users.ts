@@ -1,4 +1,4 @@
-import type { WorkspaceServerService } from '@affine/core/modules/cloud';
+import type { WorkspaceServerService } from '@bridgeflow/core/modules/cloud';
 import {
   type DocRole,
   getPageGrantedUsersListQuery,
@@ -9,8 +9,8 @@ import {
   type UpdateDocDefaultRoleInput,
   updateDocDefaultRoleMutation,
   updateDocUserRoleMutation,
-} from '@affine/graphql';
-import { Store } from '@toeverything/infra';
+} from '@bridgeflow/graphql';
+import { Store } from '@kanban-studios/infra';
 
 export class DocGrantedUsersStore extends Store {
   constructor(private readonly workspaceServerService: WorkspaceServerService) {

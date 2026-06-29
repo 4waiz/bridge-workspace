@@ -1,46 +1,85 @@
-import { usePageHelper } from '@affine/core/blocksuite/block-suite-page-list/utils';
-import { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import type { DocRecord } from '@affine/core/modules/doc';
-import { DocsService } from '@affine/core/modules/doc';
-import { DocDisplayMetaService } from '@affine/core/modules/doc-display-meta';
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { inferOpenMode } from '@affine/core/utils';
-import track from '@affine/track';
+import { usePageHelper } from '@bridgeflow/core/blocksuite/block-suite-page-list/utils';
+import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
+import type { DocRecord } from '@bridgeflow/core/modules/doc';
+import { DocsService } from '@bridgeflow/core/modules/doc';
+import { DocDisplayMetaService } from '@bridgeflow/core/modules/doc-display-meta';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { inferOpenMode } from '@bridgeflow/core/utils';
+import track from '@bridgeflow/track';
 import {
   DatabaseTableViewIcon,
   EdgelessIcon,
   ImportIcon,
   PageIcon,
-  SearchIcon,
-  SettingsIcon,
-  TagsIcon,
-  TodayIcon,
+  PlusIcon,
   ViewLayersIcon,
 } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import type { CSSProperties, MouseEvent, ReactNode } from 'react';
 import { memo, useCallback, useMemo, useState } from 'react';
 
 import * as styles from './styles.css';
 
-// -- Color palette for Miro-style colorful icons --
+// -- EDGE-flavoured colour palette for object icons --
 const ICON_COLORS = {
-  blue: { bg: 'rgba(56, 132, 255, 0.10)', fg: '#3884FF' },
-  orange: { bg: 'rgba(255, 106, 49, 0.10)', fg: '#FF6A31' },
-  purple: { bg: 'rgba(134, 94, 255, 0.10)', fg: '#865EFF' },
-  green: { bg: 'rgba(46, 184, 92, 0.10)', fg: '#2EB85C' },
-  pink: { bg: 'rgba(237, 74, 138, 0.10)', fg: '#ED4A8A' },
-  teal: { bg: 'rgba(0, 184, 212, 0.10)', fg: '#00B8D4' },
-  amber: { bg: 'rgba(245, 166, 35, 0.10)', fg: '#F5A623' },
-  red: { bg: 'rgba(234, 67, 53, 0.10)', fg: '#EA4335' },
+  orange: { bg: 'rgba(241, 90, 41, 0.12)', fg: '#f15a29' },
+  blue: { bg: 'rgba(56, 132, 255, 0.12)', fg: '#3884FF' },
+  purple: { bg: 'rgba(134, 94, 255, 0.12)', fg: '#865EFF' },
+  green: { bg: 'rgba(46, 184, 92, 0.12)', fg: '#2EB85C' },
+  pink: { bg: 'rgba(237, 74, 138, 0.12)', fg: '#ED4A8A' },
+  teal: { bg: 'rgba(0, 184, 212, 0.12)', fg: '#00B8D4' },
+  amber: { bg: 'rgba(245, 166, 35, 0.12)', fg: '#F5A623' },
+  indigo: { bg: 'rgba(88, 101, 242, 0.12)', fg: '#5865F2' },
 } as const;
+
+type IconColor = (typeof ICON_COLORS)[keyof typeof ICON_COLORS];
+
+// -- Inline SVGs for canvas-native object types (no extra icon deps) --
+const svgProps = {
+  width: '1em',
+  height: '1em',
+  viewBox: '0 0 24 24',
+  fill: 'none',
+  stroke: 'currentColor',
+  strokeWidth: 1.8,
+  strokeLinecap: 'round' as const,
+  strokeLinejoin: 'round' as const,
+};
+
+const AiSparkIcon = () => (
+  <svg {...svgProps} aria-hidden="true">
+    <path d="M12 3l1.9 4.6L18.5 9.5 13.9 11.4 12 16l-1.9-4.6L5.5 9.5 10.1 7.6z" />
+    <path d="M18.5 14.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z" />
+  </svg>
+);
+
+const FlowIcon = () => (
+  <svg {...svgProps} aria-hidden="true">
+    <rect x="3" y="4" width="7" height="5" rx="1.2" />
+    <rect x="14" y="15" width="7" height="5" rx="1.2" />
+    <path d="M6.5 9v4a2 2 0 0 0 2 2h5" />
+  </svg>
+);
+
+const TimelineIcon = () => (
+  <svg {...svgProps} aria-hidden="true">
+    <path d="M4 6h10M4 12h16M4 18h7" />
+    <circle cx="17" cy="6" r="1.6" />
+    <circle cx="13" cy="18" r="1.6" />
+  </svg>
+);
+
+// ----------------------------------------------------------------------------
+// Create-new tiles
+// ----------------------------------------------------------------------------
 
 interface QuickStartItem {
   id: string;
   icon: ReactNode;
   label: string;
-  color: (typeof ICON_COLORS)[keyof typeof ICON_COLORS];
+  hint: string;
+  color: IconColor;
   onClick: (e?: MouseEvent) => void;
 }
 
@@ -60,9 +99,28 @@ const QuickStartCard = ({ item }: { item: QuickStartItem }) => {
         {item.icon}
       </span>
       <span className={styles.quickStartLabel}>{item.label}</span>
+      <span className={styles.quickStartHint}>{item.hint}</span>
     </button>
   );
 };
+
+// ----------------------------------------------------------------------------
+// Recent boards
+// ----------------------------------------------------------------------------
+
+// Deterministic mock collaborator + tag data keyed off the doc id so cards feel
+// alive without persisting anything. Replaced by real presence data later.
+const COLLAB_PALETTE = ['#f15a29', '#3884FF', '#865EFF', '#2EB85C', '#ED4A8A'];
+const TAG_POOL = ['Product', 'Strategy', 'Research', 'Design', 'Planning'];
+
+function hashString(value: string) {
+  let h = 0;
+  for (let i = 0; i < value.length; i++) {
+    h = (h << 5) - h + value.charCodeAt(i);
+    h |= 0;
+  }
+  return Math.abs(h);
+}
 
 interface RecentDocCardProps {
   docId: string;
@@ -99,31 +157,67 @@ const RecentDocCard = memo(function RecentDocCard({
     return new Date(updatedDate).toLocaleDateString();
   }, [updatedDate, now]);
 
+  const meta = useMemo(() => {
+    const h = hashString(docId);
+    const collabCount = (h % 3) + 1;
+    const isPrivate = h % 2 === 0;
+    const tag = TAG_POOL[h % TAG_POOL.length];
+    const collaborators = Array.from({ length: collabCount }, (_, i) => ({
+      color: COLLAB_PALETTE[(h + i) % COLLAB_PALETTE.length],
+      letter: String.fromCharCode(65 + ((h + i * 7) % 26)),
+    }));
+    return { collaborators, isPrivate, tag };
+  }, [docId]);
+
   if (!docRecord) return null;
 
   return (
     <button className={styles.recentCard} onClick={onClick} tabIndex={0}>
-      <div className={styles.recentCardHeader}>
-        <span className={styles.recentCardIcon}>
+      <div className={styles.recentThumb} aria-hidden="true">
+        <span className={styles.recentThumbIcon}>
           <Icon />
         </span>
-        <span className={styles.recentCardTitle}>{title || 'Untitled'}</span>
       </div>
-      {timeAgo && (
+      <div className={styles.recentBody}>
+        <span className={styles.recentCardTitle}>{title || 'Untitled'}</span>
         <div className={styles.recentCardMeta}>
-          <span>{timeAgo}</span>
+          <span className={styles.recentTag}>{meta.tag}</span>
+          <span className={styles.recentDot} />
+          <span>{meta.isPrivate ? 'Private' : 'Team'}</span>
+          {timeAgo && (
+            <>
+              <span className={styles.recentDot} />
+              <span>{timeAgo}</span>
+            </>
+          )}
         </div>
-      )}
+      </div>
+      <div className={styles.avatarCluster}>
+        {meta.collaborators.map((c, i) => (
+          <span
+            key={i}
+            className={styles.avatar}
+            style={{ background: c.color }}
+          >
+            {c.letter}
+          </span>
+        ))}
+      </div>
     </button>
   );
 });
+
+// ----------------------------------------------------------------------------
+// Template cards
+// ----------------------------------------------------------------------------
 
 interface TemplateItem {
   id: string;
   icon: ReactNode;
   title: string;
   description: string;
-  color: (typeof ICON_COLORS)[keyof typeof ICON_COLORS];
+  uses: string;
+  color: IconColor;
   onClick: (e?: MouseEvent) => void;
 }
 
@@ -134,41 +228,87 @@ const TemplateCard = ({ item }: { item: TemplateItem }) => {
   };
   return (
     <button className={styles.templateCard} onClick={item.onClick} tabIndex={0}>
-      <span className={styles.templateCardIcon} style={iconStyle}>
-        {item.icon}
+      <span
+        className={styles.templatePreview}
+        style={{ background: item.color.bg }}
+        aria-hidden="true"
+      >
+        <span className={styles.templatePreviewIcon} style={{ color: item.color.fg }}>
+          {item.icon}
+        </span>
       </span>
       <span className={styles.templateCardTitle}>{item.title}</span>
       <span className={styles.templateCardDescription}>{item.description}</span>
+      <span className={styles.templateUses}>
+        <span className={styles.templateIconSmall} style={iconStyle}>
+          {item.icon}
+        </span>
+        {item.uses} uses
+      </span>
     </button>
   );
 };
 
-interface TipItem {
+// ----------------------------------------------------------------------------
+// Spaces
+// ----------------------------------------------------------------------------
+
+interface SpaceItem {
   id: string;
-  icon: ReactNode;
-  title: string;
-  description: string;
-  color: (typeof ICON_COLORS)[keyof typeof ICON_COLORS];
+  name: string;
+  count: string;
+  color: string;
   onClick: () => void;
 }
 
-const TipCard = ({ item }: { item: TipItem }) => {
-  const iconStyle: CSSProperties = {
-    background: item.color.bg,
-    color: item.color.fg,
-  };
+const SpaceCard = ({ item }: { item: SpaceItem }) => (
+  <button className={styles.spaceCard} onClick={item.onClick} tabIndex={0}>
+    <span className={styles.spaceDot} style={{ background: item.color }} />
+    <span className={styles.spaceBody}>
+      <span className={styles.spaceName}>{item.name}</span>
+      <span className={styles.spaceCount}>{item.count}</span>
+    </span>
+  </button>
+);
+
+// ----------------------------------------------------------------------------
+// AI recommendations
+// ----------------------------------------------------------------------------
+
+interface AiRecItem {
+  id: string;
+  title: string;
+  hint: string;
+  prompt: string;
+}
+
+const AiRecCard = ({ item }: { item: AiRecItem }) => {
+  const handleClick = useCallback(() => {
+    window.dispatchEvent(
+      new CustomEvent('bridge:open-assistant', {
+        detail: { prompt: item.prompt },
+      })
+    );
+  }, [item.prompt]);
   return (
-    <button className={styles.tipCard} onClick={item.onClick} tabIndex={0}>
-      <span className={styles.tipCardIcon} style={iconStyle}>
-        {item.icon}
+    <button className={styles.aiRecCard} onClick={handleClick} tabIndex={0}>
+      <span className={styles.aiRecIcon} aria-hidden="true">
+        <AiSparkIcon />
       </span>
-      <div className={styles.tipCardContent}>
-        <span className={styles.tipCardTitle}>{item.title}</span>
-        <span className={styles.tipCardDescription}>{item.description}</span>
-      </div>
+      <span className={styles.aiRecBody}>
+        <span className={styles.aiRecTitle}>{item.title}</span>
+        <span className={styles.aiRecHint}>{item.hint}</span>
+      </span>
+      <span className={styles.aiRecArrow} aria-hidden="true">
+        →
+      </span>
     </button>
   );
 };
+
+// ----------------------------------------------------------------------------
+// Dashboard
+// ----------------------------------------------------------------------------
 
 export const WorkspaceHome = memo(function WorkspaceHome() {
   const workspaceService = useService(WorkspaceService);
@@ -183,7 +323,6 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
     currentWorkspace.docCollection
   );
 
-  // Get recent docs (last 8 updated)
   const allDocs = useLiveData(docsService.list.docs$);
   const recentDocIds = useMemo(() => {
     return allDocs
@@ -196,7 +335,7 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
         const bDate = b.meta$.value?.updatedDate || 0;
         return (bDate as number) - (aDate as number);
       })
-      .slice(0, 8)
+      .slice(0, 6)
       .map((doc: DocRecord) => doc.id);
   }, [allDocs]);
 
@@ -214,22 +353,6 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
       track.$.navigationPanel.$.createDoc();
     },
     [createEdgeless]
-  );
-
-  const handleCreateKanban = useCallback(
-    (e?: MouseEvent) => {
-      createPage('page', { at: inferOpenMode(e) });
-      track.$.navigationPanel.$.createDoc();
-    },
-    [createPage]
-  );
-
-  const handleCreateTable = useCallback(
-    (e?: MouseEvent) => {
-      createPage('page', { at: inferOpenMode(e) });
-      track.$.navigationPanel.$.createDoc();
-    },
-    [createPage]
   );
 
   const handleImport = useCallback(() => {
@@ -270,155 +393,230 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
     [workbench]
   );
 
-  const handleOpenJournals = useCallback(() => {
-    workbench.open('/journals');
-  }, [workbench]);
-
-  const handleOpenSearch = useCallback(() => {
-    workbench.openAll();
-  }, [workbench]);
-
-  const handleOpenSettings = useCallback(() => {
-    workspaceDialogService.open('setting', { activeTab: 'appearance' });
+  const handleInvite = useCallback(() => {
+    workspaceDialogService.open('setting', { activeTab: 'workspace:members' });
   }, [workspaceDialogService]);
 
   const quickStartItems: QuickStartItem[] = useMemo(
     () => [
       {
-        id: 'document',
-        icon: <PageIcon />,
-        label: 'Document',
-        color: ICON_COLORS.blue,
-        onClick: handleCreatePage,
+        id: 'ai-canvas',
+        icon: <AiSparkIcon />,
+        label: 'AI Canvas',
+        hint: 'Generate with AI',
+        color: ICON_COLORS.orange,
+        onClick: handleCreateEdgeless,
       },
       {
-        id: 'whiteboard',
+        id: 'board',
         icon: <EdgelessIcon />,
         label: 'Board',
-        color: ICON_COLORS.orange,
+        hint: 'Infinite canvas',
+        color: ICON_COLORS.indigo,
+        onClick: handleCreateEdgeless,
+      },
+      {
+        id: 'flowchart',
+        icon: <FlowIcon />,
+        label: 'Flowchart',
+        hint: 'Connect ideas',
+        color: ICON_COLORS.purple,
         onClick: handleCreateEdgeless,
       },
       {
         id: 'kanban',
         icon: <ViewLayersIcon />,
         label: 'Kanban',
-        color: ICON_COLORS.purple,
-        onClick: handleCreateKanban,
+        hint: 'Track tasks',
+        color: ICON_COLORS.pink,
+        onClick: handleCreatePage,
+      },
+      {
+        id: 'timeline',
+        icon: <TimelineIcon />,
+        label: 'Timeline',
+        hint: 'Plan over time',
+        color: ICON_COLORS.amber,
+        onClick: handleCreateEdgeless,
+      },
+      {
+        id: 'document',
+        icon: <PageIcon />,
+        label: 'Document',
+        hint: 'Rich text doc',
+        color: ICON_COLORS.blue,
+        onClick: handleCreatePage,
       },
       {
         id: 'table',
         icon: <DatabaseTableViewIcon />,
         label: 'Table',
+        hint: 'Structured data',
         color: ICON_COLORS.green,
-        onClick: handleCreateTable,
+        onClick: handleCreatePage,
       },
       {
         id: 'import',
         icon: <ImportIcon />,
         label: 'Import',
+        hint: 'Bring your files',
         color: ICON_COLORS.teal,
         onClick: handleImport,
       },
     ],
-    [
-      handleCreatePage,
-      handleCreateEdgeless,
-      handleCreateKanban,
-      handleCreateTable,
-      handleImport,
-    ]
+    [handleCreatePage, handleCreateEdgeless, handleImport]
   );
 
   const templateItems: TemplateItem[] = useMemo(
     () => [
       {
-        id: 'meeting-notes',
-        icon: <PageIcon />,
-        title: 'Meeting Notes',
-        description: 'Structured agenda, action items, and follow-ups',
-        color: ICON_COLORS.blue,
-        onClick: handleCreatePage,
-      },
-      {
-        id: 'project-board',
+        id: 'product-strategy',
         icon: <EdgelessIcon />,
-        title: 'Project Board',
-        description: 'Visual overview with tasks and milestones',
+        title: 'Product Strategy',
+        description: 'Vision, pillars and bets on one board',
+        uses: '4.2k',
         color: ICON_COLORS.orange,
         onClick: handleCreateEdgeless,
       },
       {
-        id: 'weekly-planner',
-        icon: <TodayIcon />,
-        title: 'Weekly Planner',
-        description: 'Plan your week with daily goals and priorities',
-        color: ICON_COLORS.green,
+        id: 'sprint-planning',
+        icon: <ViewLayersIcon />,
+        title: 'Sprint Planning',
+        description: 'Backlog, capacity and sprint goals',
+        uses: '6.1k',
+        color: ICON_COLORS.purple,
         onClick: handleCreatePage,
       },
       {
-        id: 'brainstorm',
+        id: 'research-synthesis',
+        icon: <PageIcon />,
+        title: 'Research Synthesis',
+        description: 'Cluster findings into clear insights',
+        uses: '2.8k',
+        color: ICON_COLORS.blue,
+        onClick: handleCreateEdgeless,
+      },
+      {
+        id: 'workshop-canvas',
         icon: <EdgelessIcon />,
-        title: 'Brainstorm Canvas',
-        description: 'Freeform space for ideas and mind mapping',
+        title: 'Workshop Canvas',
+        description: 'Facilitate sessions with structure',
+        uses: '3.5k',
         color: ICON_COLORS.pink,
+        onClick: handleCreateEdgeless,
+      },
+      {
+        id: 'customer-journey',
+        icon: <TimelineIcon />,
+        title: 'Customer Journey Map',
+        description: 'Map touchpoints, pains and moments',
+        uses: '5.0k',
+        color: ICON_COLORS.teal,
+        onClick: handleCreateEdgeless,
+      },
+      {
+        id: 'ai-flow-builder',
+        icon: <AiSparkIcon />,
+        title: 'AI Flow Builder',
+        description: 'Chain AI steps into a pipeline',
+        uses: '1.9k',
+        color: ICON_COLORS.amber,
+        onClick: handleCreateEdgeless,
+      },
+      {
+        id: 'roadmap',
+        icon: <TimelineIcon />,
+        title: 'Roadmap',
+        description: 'Quarters, themes and milestones',
+        uses: '7.3k',
+        color: ICON_COLORS.green,
+        onClick: handleCreateEdgeless,
+      },
+      {
+        id: 'business-model',
+        icon: <DatabaseTableViewIcon />,
+        title: 'Business Model Canvas',
+        description: 'Nine building blocks in one view',
+        uses: '2.4k',
+        color: ICON_COLORS.indigo,
         onClick: handleCreateEdgeless,
       },
     ],
     [handleCreatePage, handleCreateEdgeless]
   );
 
-  const tipItems: TipItem[] = useMemo(
+  const spaceItems: SpaceItem[] = useMemo(
+    () => [
+      { id: 'product', name: 'Product', count: '24 boards', color: '#f15a29', onClick: handleViewAll },
+      { id: 'engineering', name: 'Engineering', count: '18 boards', color: '#3884FF', onClick: handleViewAll },
+      { id: 'strategy', name: 'Strategy', count: '9 boards', color: '#865EFF', onClick: handleViewAll },
+      { id: 'research', name: 'Research', count: '12 boards', color: '#2EB85C', onClick: handleViewAll },
+      { id: 'operations', name: 'Operations', count: '7 boards', color: '#00B8D4', onClick: handleViewAll },
+    ],
+    [handleViewAll]
+  );
+
+  const aiRecItems: AiRecItem[] = useMemo(
     () => [
       {
-        id: 'search',
-        icon: <SearchIcon />,
-        title: 'Quick Search',
-        description: 'Press Ctrl+K to find anything instantly',
-        color: ICON_COLORS.blue,
-        onClick: handleOpenSearch,
+        id: 'cluster',
+        title: 'Cluster last workshop notes',
+        hint: 'Group sticky notes into themes',
+        prompt: 'Cluster my last workshop notes into clear themes.',
       },
       {
-        id: 'journal',
-        icon: <TodayIcon />,
-        title: 'Daily Journal',
-        description: 'Write daily notes organized by date',
-        color: ICON_COLORS.amber,
-        onClick: handleOpenJournals,
+        id: 'roadmap',
+        title: 'Generate roadmap from product board',
+        hint: 'Turn your board into a timeline',
+        prompt: 'Generate a roadmap from my product board.',
       },
       {
-        id: 'organize',
-        icon: <TagsIcon />,
-        title: 'Tags & Folders',
-        description: 'Organize docs with tags and nested folders',
-        color: ICON_COLORS.purple,
-        onClick: handleViewAll,
+        id: 'insights',
+        title: 'Convert research into insights',
+        hint: 'Surface what matters most',
+        prompt: 'Convert my research notes into prioritised insights.',
       },
       {
-        id: 'settings',
-        icon: <SettingsIcon />,
-        title: 'Customize',
-        description: 'Theme, language, and workspace preferences',
-        color: ICON_COLORS.teal,
-        onClick: handleOpenSettings,
+        id: 'summary',
+        title: 'Prepare executive summary',
+        hint: 'A crisp brief for leadership',
+        prompt: 'Prepare an executive summary of this workspace.',
       },
     ],
-    [handleOpenSearch, handleOpenJournals, handleViewAll, handleOpenSettings]
+    []
   );
 
   return (
     <div className={styles.homeContainer}>
       <div className={styles.homeInner}>
-        {/* Welcome section */}
+        {/* Command-center header */}
         <div className={styles.welcomeSection}>
-          <h1 className={styles.welcomeTitle}>
-            {workspaceName || 'Bridge Workspace'}
-          </h1>
-          <p className={styles.welcomeSubtitle}>
-            Write, draw, plan, and organize — all in one place.
-          </p>
+          <div className={styles.welcomeText}>
+            <span className={styles.eyebrow}>AI Innovation Canvas</span>
+            <h1 className={styles.welcomeTitle}>
+              {workspaceName || 'BRIDGE Flow'}
+            </h1>
+            <p className={styles.welcomeSubtitle}>
+              Write, draw, plan and build — together on one infinite canvas.
+            </p>
+          </div>
+          <div className={styles.welcomeActions}>
+            <button
+              className={styles.primaryAction}
+              onClick={handleCreateEdgeless}
+            >
+              <span className={styles.primaryActionIcon}>
+                <PlusIcon />
+              </span>
+              New canvas
+            </button>
+            <button className={styles.secondaryAction} onClick={handleInvite}>
+              Invite team
+            </button>
+          </div>
         </div>
 
-        {/* Quick start section */}
+        {/* Create new */}
         <div className={styles.sectionWrapper}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>Create new</h2>
@@ -430,10 +628,13 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
           </div>
         </div>
 
-        {/* Templates section */}
+        {/* Templates */}
         <div className={styles.sectionWrapper}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>Start from a template</h2>
+            <button className={styles.sectionAction} onClick={handleViewAll}>
+              Browse all
+            </button>
           </div>
           <div className={styles.templatesRow}>
             {templateItems.map(item => (
@@ -442,10 +643,10 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
           </div>
         </div>
 
-        {/* Recent documents section */}
+        {/* Recent boards */}
         <div className={styles.sectionWrapper}>
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Recent</h2>
+            <h2 className={styles.sectionTitle}>Recent boards</h2>
             {recentDocIds.length > 0 && (
               <button className={styles.sectionAction} onClick={handleViewAll}>
                 View all
@@ -465,27 +666,51 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
           ) : (
             <div className={styles.emptyState}>
               <div className={styles.emptyIcon}>
-                <PageIcon />
+                <EdgelessIcon />
               </div>
               <p className={styles.emptyText}>
-                No documents yet. Create your first document to get started.
+                No boards yet. Spin up your first canvas and invite your team.
               </p>
-              <button className={styles.emptyAction} onClick={handleCreatePage}>
-                Create a document
+              <button
+                className={styles.emptyAction}
+                onClick={handleCreateEdgeless}
+              >
+                Create a board
               </button>
             </div>
           )}
         </div>
 
-        {/* Tips & shortcuts section */}
-        <div className={styles.sectionWrapper}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Explore your workspace</h2>
+        {/* Spaces + AI recommendations */}
+        <div className={styles.splitRow}>
+          <div className={styles.sectionWrapper}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Spaces</h2>
+            </div>
+            <div className={styles.spacesGrid}>
+              {spaceItems.map(item => (
+                <SpaceCard key={item.id} item={item} />
+              ))}
+            </div>
           </div>
-          <div className={styles.tipCardsRow}>
-            {tipItems.map(item => (
-              <TipCard key={item.id} item={item} />
-            ))}
+
+          <div className={styles.aiPanel}>
+            <div className={styles.aiPanelHeader}>
+              <span className={styles.aiPanelBadge} aria-hidden="true">
+                <AiSparkIcon />
+              </span>
+              <div>
+                <div className={styles.aiPanelTitle}>Workspace AI</div>
+                <div className={styles.aiPanelSubtitle}>
+                  Recommended for your workspace
+                </div>
+              </div>
+            </div>
+            <div className={styles.aiRecList}>
+              {aiRecItems.map(item => (
+                <AiRecCard key={item.id} item={item} />
+              ))}
+            </div>
           </div>
         </div>
       </div>

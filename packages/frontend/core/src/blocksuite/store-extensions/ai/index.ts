@@ -1,12 +1,12 @@
-import { AIChatBlockSchemaExtension } from '@affine/core/blocksuite/ai/blocks';
-import { TranscriptionBlockSchemaExtension } from '@affine/core/blocksuite/ai/blocks/transcription-block/model';
+import { AIChatBlockSchemaExtension } from '@bridgeflow/core/blocksuite/ai/blocks';
+import { TranscriptionBlockSchemaExtension } from '@bridgeflow/core/blocksuite/ai/blocks/transcription-block/model';
 import {
   type StoreExtensionContext,
   StoreExtensionProvider,
-} from '@blocksuite/affine/ext-loader';
+} from '@blocksuite/bridgeflow/ext-loader';
 
 export class AIStoreExtension extends StoreExtensionProvider {
-  override name = 'affine-store-extensions';
+  override name = 'bridgeflow-store-extensions';
 
   override setup(context: StoreExtensionContext) {
     super.setup(context);

@@ -1,8 +1,8 @@
 import {
   WorkbenchLink,
   WorkbenchService,
-} from '@affine/core/modules/workbench';
-import { useLiveData, useService } from '@toeverything/infra';
+} from '@bridgeflow/core/modules/workbench';
+import { useLiveData, useService } from '@kanban-studios/infra';
 
 import * as styles from './style.css';
 

@@ -1,12 +1,12 @@
-import { Button, type ButtonProps, useConfirmModal } from '@affine/component';
-import { useDowngradeNotify } from '@affine/core/components/affine/subscription-landing/notify';
-import { getDowngradeQuestionnaireLink } from '@affine/core/components/hooks/affine/use-subscription-notify';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { AuthService, SubscriptionService } from '@affine/core/modules/cloud';
-import { SubscriptionPlan } from '@affine/graphql';
-import { useI18n } from '@affine/i18n';
-import { track } from '@affine/track';
-import { useService } from '@toeverything/infra';
+import { Button, type ButtonProps, useConfirmModal } from '@bridgeflow/component';
+import { useDowngradeNotify } from '@bridgeflow/core/components/bridgeflow/subscription-landing/notify';
+import { getDowngradeQuestionnaireLink } from '@bridgeflow/core/components/hooks/bridgeflow/use-subscription-notify';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { AuthService, SubscriptionService } from '@bridgeflow/core/modules/cloud';
+import { SubscriptionPlan } from '@bridgeflow/graphql';
+import { useI18n } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
+import { useService } from '@kanban-studios/infra';
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
 
@@ -29,17 +29,17 @@ export const AICancel = (btnProps: ButtonProps) => {
       });
     }
     openConfirmModal({
-      title: t['com.affine.payment.ai.action.cancel.confirm.title'](),
+      title: t['com.bridgeflow.payment.ai.action.cancel.confirm.title'](),
       description:
-        t['com.affine.payment.ai.action.cancel.confirm.description'](),
+        t['com.bridgeflow.payment.ai.action.cancel.confirm.description'](),
       reverseFooter: true,
       confirmText:
-        t['com.affine.payment.ai.action.cancel.confirm.confirm-text'](),
+        t['com.bridgeflow.payment.ai.action.cancel.confirm.confirm-text'](),
       confirmButtonOptions: {
         variant: 'secondary',
       },
       cancelText:
-        t['com.affine.payment.ai.action.cancel.confirm.cancel-text'](),
+        t['com.bridgeflow.payment.ai.action.cancel.confirm.cancel-text'](),
       cancelButtonOptions: {
         variant: 'primary',
       },
@@ -89,7 +89,7 @@ export const AICancel = (btnProps: ButtonProps) => {
       variant="secondary"
       {...btnProps}
     >
-      {t['com.affine.payment.ai.action.cancel.button-label']()}
+      {t['com.bridgeflow.payment.ai.action.cancel.button-label']()}
     </Button>
   );
 };

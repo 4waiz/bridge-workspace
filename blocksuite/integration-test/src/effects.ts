@@ -1,7 +1,7 @@
-import '@blocksuite/affine/effects';
+import '@blocksuite/bridgeflow/effects';
 
-import { TestAffineEditorContainer } from './editors/index.js';
+import { TestBridgeFlowEditorContainer } from './editors/index.js';
 
 export function effects() {
-  customElements.define('affine-editor-container', TestAffineEditorContainer);
+  customElements.define('bridgeflow-editor-container', TestBridgeFlowEditorContainer);
 }

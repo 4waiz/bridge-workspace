@@ -1,5 +1,5 @@
-import { track } from '@affine/track';
-import { Service } from '@toeverything/infra';
+import { track } from '@bridgeflow/track';
+import { Service } from '@kanban-studios/infra';
 
 import type { DocsService } from '../../doc';
 import type { WorkbenchService } from '../../workbench';
@@ -116,7 +116,7 @@ export class CMDKQuickSearchService extends Service {
         },
         {
           placeholder: {
-            i18nKey: 'com.affine.cmdk.docs.placeholder',
+            i18nKey: 'com.bridgeflow.cmdk.docs.placeholder',
           },
         }
       );

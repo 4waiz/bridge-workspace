@@ -2,8 +2,8 @@ import {
   type DocPermissionActions,
   GuardService,
   type WorkspacePermissionActions,
-} from '@affine/core/modules/permissions';
-import { useLiveData, useService } from '@toeverything/infra';
+} from '@bridgeflow/core/modules/permissions';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useEffect, useMemo } from 'react';
 
 export const useGuard = <

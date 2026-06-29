@@ -1,9 +1,9 @@
 import {
   BRAND_AI_NAME,
   BRAND_CLOUD_NAME,
-} from '@affine/component/brand';
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import type { EditorHost } from '@blocksuite/affine/std';
+} from '@bridgeflow/component/brand';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import type { EditorHost } from '@blocksuite/bridgeflow/std';
 import { baseTheme } from '@toeverything/theme';
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit';
 import { property } from 'lit/decorators.js';
@@ -189,9 +189,9 @@ export class AIPanelError extends WithDisposable(LitElement) {
         const error = tip
           ? html`<span class="error-tip">
               An error occurred
-              <affine-tooltip tip-position="bottom-start">
+              <bridgeflow-tooltip tip-position="bottom-start">
                 ${tip}
-              </affine-tooltip>
+              </bridgeflow-tooltip>
             </span>`
           : 'An error occurred';
         return html`

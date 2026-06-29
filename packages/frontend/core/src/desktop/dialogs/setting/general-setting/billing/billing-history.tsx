@@ -1,15 +1,15 @@
-import { Button, Loading } from '@affine/component';
+import { Button, Loading } from '@bridgeflow/component';
 import {
   Pagination,
   SettingRow,
   SettingWrapper,
-} from '@affine/component/setting-components';
-import { InvoicesService } from '@affine/core/modules/cloud';
-import { UrlService } from '@affine/core/modules/url';
-import { UserFriendlyError } from '@affine/error';
-import { type InvoicesQuery, InvoiceStatus } from '@affine/graphql';
-import { useI18n } from '@affine/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+} from '@bridgeflow/component/setting-components';
+import { InvoicesService } from '@bridgeflow/core/modules/cloud';
+import { UrlService } from '@bridgeflow/core/modules/url';
+import { UserFriendlyError } from '@bridgeflow/error';
+import { type InvoicesQuery, InvoiceStatus } from '@bridgeflow/graphql';
+import { useI18n } from '@bridgeflow/i18n';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { cssVar } from '@toeverything/theme';
 import { useCallback, useEffect } from 'react';
 
@@ -56,7 +56,7 @@ export const BillingHistory = () => {
       <div className={styles.historyContent}>
         {invoiceCount === 0 ? (
           <p className={styles.noInvoice}>
-            {t['com.affine.payment.billing-setting.no-invoice']()}
+            {t['com.bridgeflow.payment.billing-setting.no-invoice']()}
           </p>
         ) : (
           pageInvoices?.map(invoice => (
@@ -97,12 +97,12 @@ const InvoiceLine = ({
       name={new Date(invoice.createdAt).toLocaleDateString()}
       desc={`${
         invoice.status === InvoiceStatus.Paid
-          ? t['com.affine.payment.billing-setting.paid']()
+          ? t['com.bridgeflow.payment.billing-setting.paid']()
           : ''
       } $${invoice.amount / 100}`}
     >
       <Button onClick={open}>
-        {t['com.affine.payment.billing-setting.view-invoice']()}
+        {t['com.bridgeflow.payment.billing-setting.view-invoice']()}
       </Button>
     </SettingRow>
   );
@@ -111,7 +111,7 @@ const InvoiceLine = ({
 const BillingHistorySkeleton = () => {
   const t = useI18n();
   return (
-    <SettingWrapper title={t['com.affine.payment.billing-setting.history']()}>
+    <SettingWrapper title={t['com.bridgeflow.payment.billing-setting.history']()}>
       <div className={styles.billingHistorySkeleton}>
         <Loading />
       </div>

@@ -1,6 +1,6 @@
-import { Button } from '@affine/component';
-import { useI18n } from '@affine/i18n';
-import type { AttachmentBlockModel } from '@blocksuite/affine/model';
+import { Button } from '@bridgeflow/component';
+import { useI18n } from '@bridgeflow/i18n';
+import type { AttachmentBlockModel } from '@blocksuite/bridgeflow/model';
 import { ArrowDownBigIcon } from '@blocksuite/icons/rc';
 import clsx from 'clsx';
 import type { PropsWithChildren, ReactElement } from 'react';
@@ -10,7 +10,7 @@ import { ErrorBoundary, type FallbackProps } from 'react-error-boundary';
 import * as styles from './error.css';
 import { download } from './utils';
 
-// https://github.com/toeverything/blocksuite/blob/master/packages/affine/components/src/icons/file-icons.ts
+// https://github.com/toeverything/blocksuite/blob/master/packages/bridgeflow/components/src/icons/file-icons.ts
 // TODO: should move file icons to icons repo
 const FileIcon = () => (
   <svg
@@ -91,8 +91,8 @@ interface ErrorProps {
 export const AttachmentFallback = ({ model, ext }: ErrorProps) => {
   const t = useI18n();
   const Icon = FILE_ICONS[model.props.type] ?? FileIcon;
-  const title = t['com.affine.attachment.preview.error.title']();
-  const subtitle = `.${ext} ${t['com.affine.attachment.preview.error.subtitle']()}`;
+  const title = t['com.bridgeflow.attachment.preview.error.title']();
+  const subtitle = `.${ext} ${t['com.bridgeflow.attachment.preview.error.subtitle']()}`;
 
   return (
     <ErrorBase
@@ -117,7 +117,7 @@ export const AttachmentFallback = ({ model, ext }: ErrorProps) => {
 
 const ErrorBoundaryInner = (props: FallbackProps): ReactElement => {
   const t = useI18n();
-  const title = t['com.affine.attachment.preview.error.title']();
+  const title = t['com.bridgeflow.attachment.preview.error.title']();
   const subtitle = `${props.error}`;
   return <ErrorBase title={title} subtitle={subtitle} />;
 };

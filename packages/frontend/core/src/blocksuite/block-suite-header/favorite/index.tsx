@@ -1,9 +1,9 @@
-import { FavoriteTag } from '@affine/core/components/page-list';
-import { CompatibleFavoriteItemsAdapter } from '@affine/core/modules/favorite';
-import { toast } from '@affine/core/utils';
-import { useI18n } from '@affine/i18n';
-import { track } from '@affine/track';
-import { useLiveData, useService } from '@toeverything/infra';
+import { FavoriteTag } from '@bridgeflow/core/components/page-list';
+import { CompatibleFavoriteItemsAdapter } from '@bridgeflow/core/modules/favorite';
+import { toast } from '@bridgeflow/core/utils';
+import { useI18n } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 export interface FavoriteButtonProps {
@@ -20,8 +20,8 @@ export const useFavorite = (pageId: string) => {
     favAdapter.toggle(pageId, 'doc');
     toast(
       favorite
-        ? t['com.affine.toastMessage.removedFavorites']()
-        : t['com.affine.toastMessage.addedFavorites']()
+        ? t['com.bridgeflow.toastMessage.removedFavorites']()
+        : t['com.bridgeflow.toastMessage.addedFavorites']()
     );
   }, [favorite, pageId, t, favAdapter]);
 

@@ -1,48 +1,48 @@
-import { BrandLogo } from '@affine/component/brand';
-import { useConfirmModal } from '@affine/component';
-import { AIProvider } from '@affine/core/blocksuite/ai';
-import type { AppSidebarConfig } from '@affine/core/blocksuite/ai/chat-panel/chat-config';
+import { BrandLogo } from '@bridgeflow/component/brand';
+import { useConfirmModal } from '@bridgeflow/component';
+import { AIProvider } from '@bridgeflow/core/blocksuite/ai';
+import type { AppSidebarConfig } from '@bridgeflow/core/blocksuite/ai/chat-panel/chat-config';
 import {
   AIChatContent,
   type ChatContextValue,
-} from '@affine/core/blocksuite/ai/components/ai-chat-content';
-import type { ChatStatus } from '@affine/core/blocksuite/ai/components/ai-chat-messages';
-import type { AIChatToolbar } from '@affine/core/blocksuite/ai/components/ai-chat-toolbar';
+} from '@bridgeflow/core/blocksuite/ai/components/ai-chat-content';
+import type { ChatStatus } from '@bridgeflow/core/blocksuite/ai/components/ai-chat-messages';
+import type { AIChatToolbar } from '@bridgeflow/core/blocksuite/ai/components/ai-chat-toolbar';
 import {
   configureAIChatToolbar,
   getOrCreateAIChatToolbar,
-} from '@affine/core/blocksuite/ai/components/ai-chat-toolbar';
-import { createPlaygroundModal } from '@affine/core/blocksuite/ai/components/playground/modal';
-import { registerAIAppEffects } from '@affine/core/blocksuite/ai/effects/app';
-import type { AffineEditorContainer } from '@affine/core/blocksuite/block-suite-editor';
-import { NotificationServiceImpl } from '@affine/core/blocksuite/view-extensions/editor-view/notification-service';
-import { useAIChatConfig } from '@affine/core/components/hooks/affine/use-ai-chat-config';
-import { useAISpecs } from '@affine/core/components/hooks/affine/use-ai-specs';
-import { useAISubscribe } from '@affine/core/components/hooks/affine/use-ai-subscribe';
+} from '@bridgeflow/core/blocksuite/ai/components/ai-chat-toolbar';
+import { createPlaygroundModal } from '@bridgeflow/core/blocksuite/ai/components/playground/modal';
+import { registerAIAppEffects } from '@bridgeflow/core/blocksuite/ai/effects/app';
+import type { BridgeFlowEditorContainer } from '@bridgeflow/core/blocksuite/block-suite-editor';
+import { NotificationServiceImpl } from '@bridgeflow/core/blocksuite/view-extensions/editor-view/notification-service';
+import { useAIChatConfig } from '@bridgeflow/core/components/hooks/bridgeflow/use-ai-chat-config';
+import { useAISpecs } from '@bridgeflow/core/components/hooks/bridgeflow/use-ai-specs';
+import { useAISubscribe } from '@bridgeflow/core/components/hooks/bridgeflow/use-ai-subscribe';
 import {
   AIDraftService,
   AIToolsConfigService,
-} from '@affine/core/modules/ai-button';
-import { AIModelService } from '@affine/core/modules/ai-button/services/models';
-import { ServerService, SubscriptionService } from '@affine/core/modules/cloud';
-import { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import { useSignalValue } from '@affine/core/modules/doc-info/utils';
-import { FeatureFlagService } from '@affine/core/modules/feature-flag';
-import { PeekViewService } from '@affine/core/modules/peek-view';
-import { AppThemeService } from '@affine/core/modules/theme';
-import { WorkbenchService } from '@affine/core/modules/workbench';
+} from '@bridgeflow/core/modules/ai-button';
+import { AIModelService } from '@bridgeflow/core/modules/ai-button/services/models';
+import { ServerService, SubscriptionService } from '@bridgeflow/core/modules/cloud';
+import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
+import { useSignalValue } from '@bridgeflow/core/modules/doc-info/utils';
+import { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
+import { PeekViewService } from '@bridgeflow/core/modules/peek-view';
+import { AppThemeService } from '@bridgeflow/core/modules/theme';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
 import type {
   ContextEmbedStatus,
   CopilotChatHistoryFragment,
   UpdateChatSessionInput,
-} from '@affine/graphql';
-import { useI18n } from '@affine/i18n';
-import { RefNodeSlotsProvider } from '@blocksuite/affine/inlines/reference';
-import { DocModeProvider } from '@blocksuite/affine/shared/services';
-import { createSignalFromObservable } from '@blocksuite/affine/shared/utils';
+} from '@bridgeflow/graphql';
+import { useI18n } from '@bridgeflow/i18n';
+import { RefNodeSlotsProvider } from '@blocksuite/bridgeflow/inlines/reference';
+import { DocModeProvider } from '@blocksuite/bridgeflow/shared/services';
+import { createSignalFromObservable } from '@blocksuite/bridgeflow/shared/utils';
 import { CenterPeekIcon } from '@blocksuite/icons/rc';
 import type { Signal } from '@preact/signals-core';
-import { useFramework, useService } from '@toeverything/infra';
+import { useFramework, useService } from '@kanban-studios/infra';
 import { html } from 'lit';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
@@ -56,7 +56,7 @@ import {
 registerAIAppEffects();
 
 export interface SidebarTabProps {
-  editor: AffineEditorContainer | null;
+  editor: BridgeFlowEditorContainer | null;
   onLoad?: ((component: HTMLElement) => void) | null;
 }
 
@@ -166,7 +166,7 @@ export const EditorChatPanel = ({ editor, onLoad }: SidebarTabProps) => {
       const nextSession = await AIProvider.session.createSessionWithHistory({
         docId: doc.id,
         workspaceId: doc.workspace.id,
-        promptName: 'Chat With AFFiNE AI',
+        promptName: 'Chat With BridgeFlow AI',
         reuseLatestChat: false,
         ...options,
       });
@@ -210,7 +210,7 @@ export const EditorChatPanel = ({ editor, onLoad }: SidebarTabProps) => {
       const nextSession = await AIProvider.session.createSessionWithHistory({
         docId: doc.id,
         workspaceId: doc.workspace.id,
-        promptName: 'Chat With AFFiNE AI',
+        promptName: 'Chat With BridgeFlow AI',
         reuseLatestChat: false,
       });
       if (requestSeq === sessionLoadSeqRef.current) {
@@ -437,11 +437,11 @@ export const EditorChatPanel = ({ editor, onLoad }: SidebarTabProps) => {
     content.docDisplayConfig = docDisplayConfig;
     content.extensions = specs;
     content.serverService = framework.get(ServerService);
-    content.affineFeatureFlagService = framework.get(FeatureFlagService);
-    content.affineWorkspaceDialogService = framework.get(
+    content.bridgeflowFeatureFlagService = framework.get(FeatureFlagService);
+    content.bridgeflowWorkspaceDialogService = framework.get(
       WorkspaceDialogService
     );
-    content.affineThemeService = framework.get(AppThemeService);
+    content.bridgeflowThemeService = framework.get(AppThemeService);
     content.notificationService = notificationService;
     content.aiDraftService = framework.get(AIDraftService);
     content.aiToolsConfigService = framework.get(AIToolsConfigService);
@@ -593,10 +593,10 @@ export const EditorChatPanel = ({ editor, onLoad }: SidebarTabProps) => {
         .docDisplayConfig=${docDisplayConfig}
         .extensions=${specs}
         .serverService=${framework.get(ServerService)}
-        .affineFeatureFlagService=${framework.get(FeatureFlagService)}
-        .affineThemeService=${framework.get(AppThemeService)}
+        .bridgeflowFeatureFlagService=${framework.get(FeatureFlagService)}
+        .bridgeflowThemeService=${framework.get(AppThemeService)}
         .notificationService=${notificationService}
-        .affineWorkspaceDialogService=${framework.get(WorkspaceDialogService)}
+        .bridgeflowWorkspaceDialogService=${framework.get(WorkspaceDialogService)}
         .aiToolsConfigService=${framework.get(AIToolsConfigService)}
         .subscriptionService=${framework.get(SubscriptionService)}
         .aiModelService=${framework.get(AIModelService)}
@@ -645,7 +645,7 @@ export const EditorChatPanel = ({ editor, onLoad }: SidebarTabProps) => {
           <div className={styles.loading}>
             <BrandLogo className={styles.loadingIcon} />
             <div className={styles.loadingTitle}>
-              {t['com.affine.ai.chat-panel.loading-history']()}
+              {t['com.bridgeflow.ai.chat-panel.loading-history']()}
             </div>
           </div>
         </div>
@@ -655,13 +655,13 @@ export const EditorChatPanel = ({ editor, onLoad }: SidebarTabProps) => {
             <div className={styles.title}>
               {isEmbedding ? (
                 <span data-testid="chat-panel-embedding-progress">
-                  {t.t('com.affine.ai.chat-panel.embedding-progress', {
+                  {t.t('com.bridgeflow.ai.chat-panel.embedding-progress', {
                     done,
                     total,
                   })}
                 </span>
               ) : (
-                t['com.affine.ai.chat-panel.title']()
+                t['com.bridgeflow.ai.chat-panel.title']()
               )}
             </div>
             {playgroundVisible ? (

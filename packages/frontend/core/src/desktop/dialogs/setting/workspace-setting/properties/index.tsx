@@ -1,13 +1,13 @@
-import { Button, Menu } from '@affine/component';
-import { SettingHeader } from '@affine/component/setting-components';
-import { useWorkspaceInfo } from '@affine/core/components/hooks/use-workspace-info';
-import { WorkspacePropertyManager } from '@affine/core/components/properties/manager';
-import { CreatePropertyMenuItems } from '@affine/core/components/properties/menu/create-doc-property';
-import type { DocCustomPropertyInfo } from '@affine/core/modules/db';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { Trans, useI18n } from '@affine/i18n';
-import track from '@affine/track';
-import { FrameworkScope, useService } from '@toeverything/infra';
+import { Button, Menu } from '@bridgeflow/component';
+import { SettingHeader } from '@bridgeflow/component/setting-components';
+import { useWorkspaceInfo } from '@bridgeflow/core/components/hooks/use-workspace-info';
+import { WorkspacePropertyManager } from '@bridgeflow/core/components/properties/manager';
+import { CreatePropertyMenuItems } from '@bridgeflow/core/components/properties/menu/create-doc-property';
+import type { DocCustomPropertyInfo } from '@bridgeflow/core/modules/db';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { Trans, useI18n } from '@bridgeflow/i18n';
+import track from '@bridgeflow/track';
+import { FrameworkScope, useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import * as styles from './styles.css';
@@ -37,7 +37,7 @@ const WorkspaceSettingPropertiesMain = () => {
       <div className={styles.listHeader}>
         <Menu items={<CreatePropertyMenuItems onCreated={onCreated} />}>
           <Button variant="primary">
-            {t['com.affine.settings.workspace.properties.add_property']()}
+            {t['com.bridgeflow.settings.workspace.properties.add_property']()}
           </Button>
         </Menu>
       </div>
@@ -59,13 +59,13 @@ export const WorkspaceSettingProperties = () => {
   return (
     <FrameworkScope scope={workspace.scope}>
       <SettingHeader
-        title={t['com.affine.settings.workspace.properties.header.title']()}
+        title={t['com.bridgeflow.settings.workspace.properties.header.title']()}
         subtitle={
           <Trans
             values={{
               name: title,
             }}
-            i18nKey="com.affine.settings.workspace.properties.header.subtitle"
+            i18nKey="com.bridgeflow.settings.workspace.properties.header.subtitle"
           >
             Manage workspace <strong>name</strong> properties
           </Trans>

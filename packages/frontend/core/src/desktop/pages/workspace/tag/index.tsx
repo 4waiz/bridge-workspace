@@ -1,21 +1,21 @@
 import {
   createDocExplorerContext,
   DocExplorerContext,
-} from '@affine/core/components/explorer/context';
-import { DocsExplorer } from '@affine/core/components/explorer/docs-view/docs-list';
-import type { ExplorerDisplayPreference } from '@affine/core/components/explorer/types';
-import { CollectionRulesService } from '@affine/core/modules/collection-rules';
-import { GlobalContextService } from '@affine/core/modules/global-context';
-import { WorkspacePermissionService } from '@affine/core/modules/permissions';
-import { TagService } from '@affine/core/modules/tag';
+} from '@bridgeflow/core/components/explorer/context';
+import { DocsExplorer } from '@bridgeflow/core/components/explorer/docs-view/docs-list';
+import type { ExplorerDisplayPreference } from '@bridgeflow/core/components/explorer/types';
+import { CollectionRulesService } from '@bridgeflow/core/modules/collection-rules';
+import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
+import { WorkspacePermissionService } from '@bridgeflow/core/modules/permissions';
+import { TagService } from '@bridgeflow/core/modules/tag';
 import {
   useIsActiveView,
   ViewBody,
   ViewHeader,
   ViewIcon,
   ViewTitle,
-} from '@affine/core/modules/workbench';
-import { useLiveData, useService } from '@toeverything/infra';
+} from '@bridgeflow/core/modules/workbench';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 

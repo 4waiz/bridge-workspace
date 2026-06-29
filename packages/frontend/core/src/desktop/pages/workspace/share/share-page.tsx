@@ -1,34 +1,34 @@
-import { BrandLogo, BRAND_SITE_URL } from '@affine/component/brand';
-import { Scrollable, uniReactRoot } from '@affine/component';
-import type { AffineEditorContainer } from '@affine/core/blocksuite/block-suite-editor';
-import { EditorOutlineViewer } from '@affine/core/blocksuite/outline-viewer';
-import { useActiveBlocksuiteEditor } from '@affine/core/components/hooks/use-block-suite-editor';
-import { useNavigateHelper } from '@affine/core/components/hooks/use-navigate-helper';
-import { PageDetailEditor } from '@affine/core/components/page-detail-editor';
-import { AppContainer } from '@affine/core/desktop/components/app-container';
-import { AuthService, ServerService } from '@affine/core/modules/cloud';
-import { type Doc, DocsService } from '@affine/core/modules/doc';
+import { BrandLogo, BRAND_SITE_URL } from '@bridgeflow/component/brand';
+import { Scrollable, uniReactRoot } from '@bridgeflow/component';
+import type { BridgeFlowEditorContainer } from '@bridgeflow/core/blocksuite/block-suite-editor';
+import { EditorOutlineViewer } from '@bridgeflow/core/blocksuite/outline-viewer';
+import { useActiveBlocksuiteEditor } from '@bridgeflow/core/components/hooks/use-block-suite-editor';
+import { useNavigateHelper } from '@bridgeflow/core/components/hooks/use-navigate-helper';
+import { PageDetailEditor } from '@bridgeflow/core/components/page-detail-editor';
+import { AppContainer } from '@bridgeflow/core/desktop/components/app-container';
+import { AuthService, ServerService } from '@bridgeflow/core/modules/cloud';
+import { type Doc, DocsService } from '@bridgeflow/core/modules/doc';
 import {
   type Editor,
   type EditorSelector,
   EditorService,
   EditorsService,
-} from '@affine/core/modules/editor';
-import { PeekViewManagerModal } from '@affine/core/modules/peek-view';
+} from '@bridgeflow/core/modules/editor';
+import { PeekViewManagerModal } from '@bridgeflow/core/modules/peek-view';
 import {
   ViewIcon,
   ViewTitle,
   WorkbenchService,
-} from '@affine/core/modules/workbench';
+} from '@bridgeflow/core/modules/workbench';
 import {
   type Workspace,
   WorkspacesService,
-} from '@affine/core/modules/workspace';
-import { useI18n } from '@affine/i18n';
-import { DisposableGroup } from '@blocksuite/affine/global/disposable';
-import { RefNodeSlotsProvider } from '@blocksuite/affine/inlines/reference';
-import { type DocMode, DocModes } from '@blocksuite/affine/model';
-import { FrameworkScope, useLiveData, useService } from '@toeverything/infra';
+} from '@bridgeflow/core/modules/workspace';
+import { useI18n } from '@bridgeflow/i18n';
+import { DisposableGroup } from '@blocksuite/bridgeflow/global/disposable';
+import { RefNodeSlotsProvider } from '@blocksuite/bridgeflow/inlines/reference';
+import { type DocMode, DocModes } from '@blocksuite/bridgeflow/model';
+import { FrameworkScope, useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -135,7 +135,7 @@ const SharePageInner = ({
       {
         metadata: {
           id: workspaceId,
-          flavour: 'affine-cloud',
+          flavour: 'bridgeflow-cloud',
         },
         isSharedMode: true,
       },
@@ -205,7 +205,7 @@ const SharePageInner = ({
   useUpdateBasename(workspace);
 
   const onEditorLoad = useCallback(
-    (editorContainer: AffineEditorContainer) => {
+    (editorContainer: BridgeFlowEditorContainer) => {
       setActiveBlocksuiteEditor(editorContainer);
       if (!editor) {
         return;
@@ -266,7 +266,7 @@ const SharePageInner = ({
               <Scrollable.Root>
                 <Scrollable.Viewport
                   className={clsx(
-                    'affine-page-viewport',
+                    'bridgeflow-page-viewport',
                     styles.editorContainer
                   )}
                 >
@@ -310,7 +310,7 @@ const SharePageFooter = () => {
       rel="noreferrer"
     >
       <span className={styles.linkText}>
-        {t['com.affine.share-page.footer.built-with']()}
+        {t['com.bridgeflow.share-page.footer.built-with']()}
       </span>
       <BrandLogo height={20} />
     </a>

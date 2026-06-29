@@ -1,7 +1,7 @@
-import { getAttachmentFileIcon } from '@blocksuite/affine/components/icons';
-import { SignalWatcher, WithDisposable } from '@blocksuite/affine/global/lit';
-import type { AttachmentBlockModel } from '@blocksuite/affine-model';
-import { formatSize } from '@blocksuite/affine-shared/utils';
+import { getAttachmentFileIcon } from '@blocksuite/bridgeflow/components/icons';
+import { SignalWatcher, WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import type { AttachmentBlockModel } from '@blocksuite/bridgeflow-model';
+import { formatSize } from '@blocksuite/bridgeflow-shared/utils';
 import {
   ArrowDownBigIcon,
   ArrowUpBigIcon,

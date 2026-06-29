@@ -1,5 +1,5 @@
-import { createReactComponentFromLit } from '@affine/component';
-import { DocTitle } from '@blocksuite/affine/fragments/doc-title';
+import { createReactComponentFromLit } from '@bridgeflow/component';
+import { DocTitle } from '@blocksuite/bridgeflow/fragments/doc-title';
 import React from 'react';
 
 import { EdgelessEditor } from './edgeless-editor';

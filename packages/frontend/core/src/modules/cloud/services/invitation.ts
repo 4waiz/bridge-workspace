@@ -1,4 +1,4 @@
-import type { GetInviteInfoQuery } from '@affine/graphql';
+import type { GetInviteInfoQuery } from '@bridgeflow/graphql';
 import {
   catchErrorInto,
   effect,
@@ -8,7 +8,7 @@ import {
   onStart,
   Service,
   smartRetry,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { EMPTY, switchMap, tap } from 'rxjs';
 
 import type { AcceptInviteStore } from '../stores/accept-invite';

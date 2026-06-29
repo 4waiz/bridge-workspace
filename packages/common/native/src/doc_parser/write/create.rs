@@ -1,6 +1,6 @@
 //! Markdown to YDoc conversion module
 //!
-//! Converts markdown content into AFFiNE-compatible y-octo document binary
+//! Converts markdown content into BridgeFlow-compatible y-octo document binary
 //! format.
 
 use y_octo::DocOptions;
@@ -17,7 +17,7 @@ use super::{
   *,
 };
 
-/// Converts markdown into an AFFiNE-compatible y-octo document binary.
+/// Converts markdown into an BridgeFlow-compatible y-octo document binary.
 ///
 /// # Arguments
 /// * `title` - The document title
@@ -232,7 +232,7 @@ mod tests {
     let mut found = false;
     for (_, value) in blocks_map.iter() {
       if let Some(block_map) = value.to_map()
-        && get_string(&block_map, "sys:flavour").as_deref() == Some("affine:image")
+        && get_string(&block_map, "sys:flavour").as_deref() == Some("bridgeflow:image")
       {
         let source_id = get_string(&block_map, "prop:sourceId");
         assert_eq!(source_id.as_deref(), Some("image-id"));
@@ -257,7 +257,7 @@ mod tests {
     let mut found_cell = false;
     for (_, value) in blocks_map.iter() {
       if let Some(block_map) = value.to_map()
-        && get_string(&block_map, "sys:flavour").as_deref() == Some("affine:table")
+        && get_string(&block_map, "sys:flavour").as_deref() == Some("bridgeflow:table")
       {
         for key in block_map.keys() {
           if key.starts_with("prop:cells.") && key.ends_with(".text") {

@@ -1,6 +1,6 @@
 //
 //  Tools.swift
-//  AFFiNE
+//  BridgeFlow
 //
 //  Created by qaq on 9/18/25.
 //

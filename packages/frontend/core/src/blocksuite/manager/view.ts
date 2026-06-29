@@ -1,50 +1,50 @@
-import type { ReactToLit } from '@affine/component';
-import { AIViewExtension } from '@affine/core/blocksuite/view-extensions/ai';
-import { CloudViewExtension } from '@affine/core/blocksuite/view-extensions/cloud';
-import { CodeBlockPreviewViewExtension } from '@affine/core/blocksuite/view-extensions/code-block-preview';
-import { CommentViewExtension } from '@affine/core/blocksuite/view-extensions/comment';
-import { AffineDatabaseViewExtension } from '@affine/core/blocksuite/view-extensions/database';
+import type { ReactToLit } from '@bridgeflow/component';
+import { AIViewExtension } from '@bridgeflow/core/blocksuite/view-extensions/ai';
+import { CloudViewExtension } from '@bridgeflow/core/blocksuite/view-extensions/cloud';
+import { CodeBlockPreviewViewExtension } from '@bridgeflow/core/blocksuite/view-extensions/code-block-preview';
+import { CommentViewExtension } from '@bridgeflow/core/blocksuite/view-extensions/comment';
+import { BridgeFlowDatabaseViewExtension } from '@bridgeflow/core/blocksuite/view-extensions/database';
 import {
   EdgelessBlockHeaderConfigViewExtension,
   type EdgelessBlockHeaderViewOptions,
-} from '@affine/core/blocksuite/view-extensions/edgeless-block-header';
-import { AffineEditorConfigViewExtension } from '@affine/core/blocksuite/view-extensions/editor-config';
-import { createDatabaseOptionsConfig } from '@affine/core/blocksuite/view-extensions/editor-config/database';
-import { createLinkedWidgetConfig } from '@affine/core/blocksuite/view-extensions/editor-config/linked';
+} from '@bridgeflow/core/blocksuite/view-extensions/edgeless-block-header';
+import { BridgeFlowEditorConfigViewExtension } from '@bridgeflow/core/blocksuite/view-extensions/editor-config';
+import { createDatabaseOptionsConfig } from '@bridgeflow/core/blocksuite/view-extensions/editor-config/database';
+import { createLinkedWidgetConfig } from '@bridgeflow/core/blocksuite/view-extensions/editor-config/linked';
 import {
-  AffineEditorViewExtension,
-  type AffineEditorViewOptions,
-} from '@affine/core/blocksuite/view-extensions/editor-view/editor-view';
-import { ElectronViewExtension } from '@affine/core/blocksuite/view-extensions/electron';
-import { AffineIconPickerExtension } from '@affine/core/blocksuite/view-extensions/icon-picker';
-import { AffineLinkPreviewExtension } from '@affine/core/blocksuite/view-extensions/link-preview-service';
-import { MobileViewExtension } from '@affine/core/blocksuite/view-extensions/mobile';
-import { PdfViewExtension } from '@affine/core/blocksuite/view-extensions/pdf';
-import { AffineThemeViewExtension } from '@affine/core/blocksuite/view-extensions/theme';
-import { TurboRendererViewExtension } from '@affine/core/blocksuite/view-extensions/turbo-renderer';
-import { PeekViewService } from '@affine/core/modules/peek-view';
-import { DebugLogger } from '@affine/debug';
-import { tracker } from '@affine/track';
-import { DatabaseViewExtension } from '@blocksuite/affine/blocks/database/view';
-import { ParagraphViewExtension } from '@blocksuite/affine/blocks/paragraph/view';
+  BridgeFlowEditorViewExtension,
+  type BridgeFlowEditorViewOptions,
+} from '@bridgeflow/core/blocksuite/view-extensions/editor-view/editor-view';
+import { ElectronViewExtension } from '@bridgeflow/core/blocksuite/view-extensions/electron';
+import { BridgeFlowIconPickerExtension } from '@bridgeflow/core/blocksuite/view-extensions/icon-picker';
+import { BridgeFlowLinkPreviewExtension } from '@bridgeflow/core/blocksuite/view-extensions/link-preview-service';
+import { MobileViewExtension } from '@bridgeflow/core/blocksuite/view-extensions/mobile';
+import { PdfViewExtension } from '@bridgeflow/core/blocksuite/view-extensions/pdf';
+import { BridgeFlowThemeViewExtension } from '@bridgeflow/core/blocksuite/view-extensions/theme';
+import { TurboRendererViewExtension } from '@bridgeflow/core/blocksuite/view-extensions/turbo-renderer';
+import { PeekViewService } from '@bridgeflow/core/modules/peek-view';
+import { DebugLogger } from '@bridgeflow/debug';
+import { tracker } from '@bridgeflow/track';
+import { DatabaseViewExtension } from '@blocksuite/bridgeflow/blocks/database/view';
+import { ParagraphViewExtension } from '@blocksuite/bridgeflow/blocks/paragraph/view';
 import type {
   PeekOptions,
   PeekViewService as BSPeekViewService,
-} from '@blocksuite/affine/components/peek';
-import { ViewExtensionManager } from '@blocksuite/affine/ext-loader';
-import { getInternalViewExtensions } from '@blocksuite/affine/extensions/view';
-import { FoundationViewExtension } from '@blocksuite/affine/foundation/view';
-import { InlineCommentViewExtension } from '@blocksuite/affine/inlines/comment';
-import { AffineCanvasTextFonts } from '@blocksuite/affine/shared/services';
-import { LinkedDocViewExtension } from '@blocksuite/affine/widgets/linked-doc/view';
-import type { FrameworkProvider } from '@toeverything/infra';
+} from '@blocksuite/bridgeflow/components/peek';
+import { ViewExtensionManager } from '@blocksuite/bridgeflow/ext-loader';
+import { getInternalViewExtensions } from '@blocksuite/bridgeflow/extensions/view';
+import { FoundationViewExtension } from '@blocksuite/bridgeflow/foundation/view';
+import { InlineCommentViewExtension } from '@blocksuite/bridgeflow/inlines/comment';
+import { BridgeFlowCanvasTextFonts } from '@blocksuite/bridgeflow/shared/services';
+import { LinkedDocViewExtension } from '@blocksuite/bridgeflow/widgets/linked-doc/view';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 import type { TemplateResult } from 'lit';
 
 type Configure = {
   init: () => Configure;
 
   foundation: (framework?: FrameworkProvider) => Configure;
-  editorView: (options?: AffineEditorViewOptions) => Configure;
+  editorView: (options?: BridgeFlowEditorViewOptions) => Configure;
   theme: (framework?: FrameworkProvider) => Configure;
   editorConfig: (framework?: FrameworkProvider) => Configure;
   edgelessBlockHeader: (options?: EdgelessBlockHeaderViewOptions) => Configure;
@@ -68,7 +68,7 @@ type Configure = {
   value: ViewExtensionManager;
 };
 
-const peekViewLogger = new DebugLogger('affine::patch-peek-view-service');
+const peekViewLogger = new DebugLogger('bridgeflow::patch-peek-view-service');
 
 class ViewProvider {
   static instance: ViewProvider | null = null;
@@ -85,10 +85,10 @@ class ViewProvider {
     this._manager = new ViewExtensionManager([
       ...getInternalViewExtensions(),
 
-      AffineThemeViewExtension,
-      AffineEditorViewExtension,
-      AffineEditorConfigViewExtension,
-      AffineIconPickerExtension,
+      BridgeFlowThemeViewExtension,
+      BridgeFlowEditorViewExtension,
+      BridgeFlowEditorConfigViewExtension,
+      BridgeFlowIconPickerExtension,
       CodeBlockPreviewViewExtension,
       EdgelessBlockHeaderConfigViewExtension,
       TurboRendererViewExtension,
@@ -97,8 +97,8 @@ class ViewProvider {
       MobileViewExtension,
       AIViewExtension,
       ElectronViewExtension,
-      AffineLinkPreviewExtension,
-      AffineDatabaseViewExtension,
+      BridgeFlowLinkPreviewExtension,
+      BridgeFlowDatabaseViewExtension,
       CommentViewExtension,
     ]);
   }
@@ -165,7 +165,7 @@ class ViewProvider {
           tracker.track(eventName, props);
         },
       },
-      fontConfig: AffineCanvasTextFonts.map(font => ({
+      fontConfig: BridgeFlowCanvasTextFonts.map(font => ({
         ...font,
         url: environment.publicPath + 'fonts/' + font.url.split('/').pop(),
       })),
@@ -200,19 +200,19 @@ class ViewProvider {
   };
 
   private readonly _configureEditorView = (
-    options?: AffineEditorViewOptions
+    options?: BridgeFlowEditorViewOptions
   ) => {
-    this._manager.configure(AffineEditorViewExtension, options);
+    this._manager.configure(BridgeFlowEditorViewExtension, options);
     return this.config;
   };
 
   private readonly _configureTheme = (framework?: FrameworkProvider) => {
-    this._manager.configure(AffineThemeViewExtension, { framework });
+    this._manager.configure(BridgeFlowThemeViewExtension, { framework });
     return this.config;
   };
 
   private readonly _configureEditorConfig = (framework?: FrameworkProvider) => {
-    this._manager.configure(AffineEditorConfigViewExtension, { framework });
+    this._manager.configure(BridgeFlowEditorConfigViewExtension, { framework });
     return this.config;
   };
 
@@ -327,7 +327,7 @@ class ViewProvider {
   };
 
   private readonly _configureLinkPreview = (framework?: FrameworkProvider) => {
-    this._manager.configure(AffineLinkPreviewExtension, { framework });
+    this._manager.configure(BridgeFlowLinkPreviewExtension, { framework });
     return this.config;
   };
 
@@ -339,7 +339,7 @@ class ViewProvider {
   };
 
   private readonly _configureIconPicker = (framework?: FrameworkProvider) => {
-    this._manager.configure(AffineIconPickerExtension, { framework });
+    this._manager.configure(BridgeFlowIconPickerExtension, { framework });
     return this.config;
   };
 

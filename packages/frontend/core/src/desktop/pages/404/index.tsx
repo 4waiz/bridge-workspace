@@ -1,15 +1,15 @@
 import {
   NoPermissionOrNotFound,
   NotFoundPage,
-} from '@affine/component/not-found-page';
-import { useSignOut } from '@affine/core/components/hooks/affine/use-sign-out';
-import { DesktopApiService } from '@affine/core/modules/desktop-api';
+} from '@bridgeflow/component/not-found-page';
+import { useSignOut } from '@bridgeflow/core/components/hooks/bridgeflow/use-sign-out';
+import { DesktopApiService } from '@bridgeflow/core/modules/desktop-api';
 import {
   FrameworkScope,
   useLiveData,
   useService,
   useServiceOptional,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import type { ReactElement } from 'react';
 import { useCallback, useEffect } from 'react';
 

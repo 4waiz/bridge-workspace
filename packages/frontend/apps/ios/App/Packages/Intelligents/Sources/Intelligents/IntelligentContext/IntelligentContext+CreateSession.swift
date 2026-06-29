@@ -5,7 +5,7 @@
 //  Created by 秋星桥 on 6/27/25.
 //
 
-import AffineGraphQL
+import BridgeFlowGraphQL
 import Apollo
 import ApolloAPI
 import Foundation
@@ -13,7 +13,7 @@ import Foundation
 public extension IntelligentContext {
   func createSession(
     workspaceId: String,
-    promptName: PromptName = .chatWithAffineAI,
+    promptName: PromptName = .chatWithBridgeFlowAI,
     docId: String? = nil,
     pinned: Bool = false,
     completion: @escaping (Result<ChatSessionObject, Error>) -> Void

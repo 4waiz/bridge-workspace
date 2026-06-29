@@ -887,20 +887,20 @@ fn parse_youtube_video_id(src: &str) -> Option<String> {
   if id.is_empty() { None } else { Some(id.to_string()) }
 }
 
-const AFFINE_DOMAINS: [&str; 6] = [
-  "affine.pro",
-  "app.affine.pro",
-  "insider.affine.pro",
-  "affine.fail",
+const BRIDGEFLOW_DOMAINS: [&str; 6] = [
+  "bridgeflow.pro",
+  "app.bridgeflow.pro",
+  "insider.bridgeflow.pro",
+  "bridgeflow.fail",
   "toeverything.app",
-  "apple.getaffineapp.com",
+  "apple.getbridgeflowapp.com",
 ];
 
 fn is_valid_generic_embed_url(url: &str) -> bool {
   let Some(host) = parse_https_host(url) else {
     return false;
   };
-  !AFFINE_DOMAINS
+  !BRIDGEFLOW_DOMAINS
     .iter()
     .any(|domain| host == *domain || host.ends_with(&format!(".{domain}")))
 }
@@ -1690,10 +1690,10 @@ mod tests {
   }
 
   #[test]
-  fn test_validate_markdown_rejects_iframe_affine_domain() {
+  fn test_validate_markdown_rejects_iframe_bridgeflow_domain() {
     let markdown = r#"# Title
 
-<iframe src="https://affine.pro/embed"></iframe>
+<iframe src="https://bridgeflow.pro/embed"></iframe>
 "#;
     let result = validate_markdown(markdown);
     assert!(result.is_err());

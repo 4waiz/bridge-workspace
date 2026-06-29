@@ -1,5 +1,5 @@
-import { getMembersByWorkspaceIdQuery } from '@affine/graphql';
-import { Store } from '@toeverything/infra';
+import { getMembersByWorkspaceIdQuery } from '@bridgeflow/graphql';
+import { Store } from '@kanban-studios/infra';
 
 import type { WorkspaceServerService } from '../../cloud';
 

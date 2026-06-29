@@ -1,11 +1,11 @@
-import { BRAND_NAME } from '@affine/component/brand';
+import { BRAND_NAME } from '@bridgeflow/component/brand';
 import {
   ResizablePanel,
   ResizablePanelGroup,
-} from '@affine/admin/components/ui/resizable';
-import { Separator } from '@affine/admin/components/ui/separator';
-import { TooltipProvider } from '@affine/admin/components/ui/tooltip';
-import { cn } from '@affine/admin/utils';
+} from '@bridgeflow/admin/components/ui/resizable';
+import { Separator } from '@bridgeflow/admin/components/ui/separator';
+import { TooltipProvider } from '@bridgeflow/admin/components/ui/tooltip';
+import { cn } from '@bridgeflow/admin/utils';
 import { AlignJustifyIcon } from 'lucide-react';
 import type { PropsWithChildren, ReactNode, RefObject } from 'react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';

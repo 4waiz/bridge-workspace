@@ -1,6 +1,6 @@
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import { ShadowlessElement } from '@blocksuite/affine/std';
-import type { TestAffineEditorContainer } from '@blocksuite/integration-test';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { ShadowlessElement } from '@blocksuite/bridgeflow/std';
+import type { TestBridgeFlowEditorContainer } from '@blocksuite/integration-test';
 import { css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
@@ -21,10 +21,10 @@ export class CustomOutlinePanel extends WithDisposable(ShadowlessElement) {
   `;
 
   private _renderPanel() {
-    return html`<affine-outline-panel
+    return html`<bridgeflow-outline-panel
       .editor=${this.editor.host}
       .fitPadding=${[50, 360, 50, 50]}
-    ></affine-outline-panel>`;
+    ></bridgeflow-outline-panel>`;
   }
 
   override render() {
@@ -45,7 +45,7 @@ export class CustomOutlinePanel extends WithDisposable(ShadowlessElement) {
   private accessor _show = false;
 
   @property({ attribute: false })
-  accessor editor!: TestAffineEditorContainer;
+  accessor editor!: TestBridgeFlowEditorContainer;
 }
 
 declare global {

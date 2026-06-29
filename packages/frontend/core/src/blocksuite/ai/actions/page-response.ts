@@ -1,32 +1,32 @@
-import { CodeBlockPreviewIdentifier } from '@blocksuite/affine/blocks/code';
-import { addSiblingImageBlocks } from '@blocksuite/affine/blocks/image';
+import { CodeBlockPreviewIdentifier } from '@blocksuite/bridgeflow/blocks/code';
+import { addSiblingImageBlocks } from '@blocksuite/bridgeflow/blocks/image';
 import {
   getSurfaceBlock,
   SurfaceBlockModel,
-} from '@blocksuite/affine/blocks/surface';
-import { fitContent } from '@blocksuite/affine/gfx/shape';
-import { createTemplateJob } from '@blocksuite/affine/gfx/template';
+} from '@blocksuite/bridgeflow/blocks/surface';
+import { fitContent } from '@blocksuite/bridgeflow/gfx/shape';
+import { createTemplateJob } from '@blocksuite/bridgeflow/gfx/template';
 import {
   Bound,
   getCommonBound,
   type XYWH,
-} from '@blocksuite/affine/global/gfx';
+} from '@blocksuite/bridgeflow/global/gfx';
 import type {
   MindmapElementModel,
   ShapeElementModel,
-} from '@blocksuite/affine/model';
-import { TelemetryProvider } from '@blocksuite/affine/shared/services';
-import { type EditorHost, TextSelection } from '@blocksuite/affine/std';
+} from '@blocksuite/bridgeflow/model';
+import { TelemetryProvider } from '@blocksuite/bridgeflow/shared/services';
+import { type EditorHost, TextSelection } from '@blocksuite/bridgeflow/std';
 import {
   GfxBlockElementModel,
   type GfxModel,
   LayerManager,
-} from '@blocksuite/affine/std/gfx';
-import { type BlockProps, Text } from '@blocksuite/affine/store';
+} from '@blocksuite/bridgeflow/std/gfx';
+import { type BlockProps, Text } from '@blocksuite/bridgeflow/store';
 import * as Y from 'yjs';
 
 import { getAIPanelWidget } from '../utils/ai-widgets';
-import type { AffineNode, AIContext } from '../utils/context';
+import type { BridgeFlowNode, AIContext } from '../utils/context';
 import { insertAbove, insertBelow, replace } from '../utils/editor-actions';
 import { preprocessHtml } from '../utils/html';
 import { fetchImageToFile } from '../utils/image';
@@ -123,14 +123,14 @@ function responseToMakeItReal(host: EditorHost, ctx: AIContext, place: Place) {
     );
     if (ifUseCodeBlock) {
       const note = host.store.addBlock(
-        'affine:note',
+        'bridgeflow:note',
         {
           xywh: htmlBound.serialize(),
         },
         host.store.root
       );
       host.store.addBlock(
-        'affine:code',
+        'bridgeflow:code',
         { text: new Text(html), language: 'html', preview: true },
         note
       );
@@ -138,7 +138,7 @@ function responseToMakeItReal(host: EditorHost, ctx: AIContext, place: Place) {
       addSurfaceRefBlock(host, frameBound, place);
     } else {
       host.store.addBlock(
-        'affine:embed-html',
+        'bridgeflow:embed-html',
         {
           html,
           design: 'ai:makeItReal', // as tag
@@ -179,8 +179,8 @@ async function responseToCreateSlides(
       frame && frameIds.push(frame.id);
     }
     const props = frameIds.map(id => ({
-      flavour: 'affine:surface-ref',
-      refFlavour: 'affine:frame',
+      flavour: 'bridgeflow:surface-ref',
+      refFlavour: 'bridgeflow:frame',
       reference: id,
     }));
     addSiblingBlocks(host, props, place);
@@ -286,7 +286,7 @@ function addSurfaceRefBlock(host: EditorHost, bound: Bound, place: Place) {
   const surface = getSurfaceBlock(host.store);
   if (!surface) return;
   const frame = host.store.addBlock(
-    'affine:frame',
+    'bridgeflow:frame',
     {
       title: new Text(new Y.Text('Frame')),
       xywh: bound.serialize(),
@@ -295,8 +295,8 @@ function addSurfaceRefBlock(host: EditorHost, bound: Bound, place: Place) {
     surface
   );
   const props = {
-    flavour: 'affine:surface-ref',
-    refFlavour: 'affine:frame',
+    flavour: 'bridgeflow:surface-ref',
+    refFlavour: 'bridgeflow:frame',
     reference: frame,
   };
   return addSiblingBlocks(host, [props], place);
@@ -320,8 +320,8 @@ function addSiblingBlocks(
   return host.store.addSiblingBlocks(targetModel, props, place);
 }
 
-function findFrameObject(obj: AffineNode): AffineNode | null {
-  if (obj.flavour === 'affine:frame') {
+function findFrameObject(obj: BridgeFlowNode): BridgeFlowNode | null {
+  if (obj.flavour === 'bridgeflow:frame') {
     return obj;
   }
 

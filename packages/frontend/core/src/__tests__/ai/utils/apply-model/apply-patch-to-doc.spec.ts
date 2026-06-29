@@ -2,9 +2,9 @@
  * @vitest-environment happy-dom
  */
 
-import { getInternalStoreExtensions } from '@blocksuite/affine/extensions/store';
-import { StoreExtensionManager } from '@blocksuite/affine-ext-loader';
-import { createAffineTemplate } from '@blocksuite/affine-shared/test-utils';
+import { getInternalStoreExtensions } from '@blocksuite/bridgeflow/extensions/store';
+import { StoreExtensionManager } from '@blocksuite/bridgeflow-ext-loader';
+import { createBridgeFlowTemplate } from '@blocksuite/bridgeflow-shared/test-utils';
 import type { Store } from '@blocksuite/store';
 import { describe, expect, it } from 'vitest';
 
@@ -18,28 +18,28 @@ declare module 'vitest' {
 }
 
 const manager = new StoreExtensionManager(getInternalStoreExtensions());
-const { affine } = createAffineTemplate(manager.get('store'));
+const { bridgeflow } = createBridgeFlowTemplate(manager.get('store'));
 
 describe('applyPatchToDoc', () => {
   it('should delete a block', async () => {
-    const host = affine`
-    <affine-page id="page">
-      <affine-note id="note">
-        <affine-paragraph id="paragraph-1">Hello</affine-paragraph>
-        <affine-paragraph id="paragraph-2">World</affine-paragraph>
-      </affine-note>
-    </affine-page>
+    const host = bridgeflow`
+    <bridgeflow-page id="page">
+      <bridgeflow-note id="note">
+        <bridgeflow-paragraph id="paragraph-1">Hello</bridgeflow-paragraph>
+        <bridgeflow-paragraph id="paragraph-2">World</bridgeflow-paragraph>
+      </bridgeflow-note>
+    </bridgeflow-page>
   `;
 
     const patch: PatchOp[] = [{ op: 'delete', id: 'paragraph-1' }];
     await applyPatchToDoc(host.store, patch);
 
-    const expected = affine`
-      <affine-page id="page">
-        <affine-note id="note">
-          <affine-paragraph id="paragraph-2">World</affine-paragraph>
-        </affine-note>
-      </affine-page>
+    const expected = bridgeflow`
+      <bridgeflow-page id="page">
+        <bridgeflow-note id="note">
+          <bridgeflow-paragraph id="paragraph-2">World</bridgeflow-paragraph>
+        </bridgeflow-note>
+      </bridgeflow-page>
     `;
 
     expect(host.store).toEqualDoc(expected.store, {
@@ -49,13 +49,13 @@ describe('applyPatchToDoc', () => {
 
   // FIXME: markdown parse error in test mode
   it.skip('should replace a block', async () => {
-    const host = affine`
-    <affine-page id="page">
-      <affine-note id="note">
-        <affine-paragraph id="paragraph-1">Hello</affine-paragraph>
-        <affine-paragraph id="paragraph-2">World</affine-paragraph>
-      </affine-note>
-    </affine-page>
+    const host = bridgeflow`
+    <bridgeflow-page id="page">
+      <bridgeflow-note id="note">
+        <bridgeflow-paragraph id="paragraph-1">Hello</bridgeflow-paragraph>
+        <bridgeflow-paragraph id="paragraph-2">World</bridgeflow-paragraph>
+      </bridgeflow-note>
+    </bridgeflow-page>
   `;
 
     const patch: PatchOp[] = [
@@ -68,13 +68,13 @@ describe('applyPatchToDoc', () => {
 
     await applyPatchToDoc(host.store, patch);
 
-    const expected = affine`
-      <affine-page id="page">
-        <affine-note id="note">
-          <affine-paragraph id="paragraph-1">New content</affine-paragraph>
-          <affine-paragraph id="paragraph-2">World</affine-paragraph>
-        </affine-note>
-      </affine-page>
+    const expected = bridgeflow`
+      <bridgeflow-page id="page">
+        <bridgeflow-note id="note">
+          <bridgeflow-paragraph id="paragraph-1">New content</bridgeflow-paragraph>
+          <bridgeflow-paragraph id="paragraph-2">World</bridgeflow-paragraph>
+        </bridgeflow-note>
+      </bridgeflow-page>
     `;
 
     expect(host.store).toEqualDoc(expected.store, {
@@ -84,13 +84,13 @@ describe('applyPatchToDoc', () => {
 
   // FIXME: markdown parse error in test mode
   it.skip('should insert a block at index', async () => {
-    const host = affine`
-    <affine-page id="page">
-      <affine-note id="note">
-        <affine-paragraph id="paragraph-1">Hello</affine-paragraph>
-        <affine-paragraph id="paragraph-2">World</affine-paragraph>
-      </affine-note>
-    </affine-page>
+    const host = bridgeflow`
+    <bridgeflow-page id="page">
+      <bridgeflow-note id="note">
+        <bridgeflow-paragraph id="paragraph-1">Hello</bridgeflow-paragraph>
+        <bridgeflow-paragraph id="paragraph-2">World</bridgeflow-paragraph>
+      </bridgeflow-note>
+    </bridgeflow-page>
   `;
 
     const patch: PatchOp[] = [
@@ -100,7 +100,7 @@ describe('applyPatchToDoc', () => {
         after: 'paragraph-1',
         block: {
           id: 'paragraph-3',
-          type: 'affine:paragraph',
+          type: 'bridgeflow:paragraph',
           content: 'Inserted',
         },
       },
@@ -108,14 +108,14 @@ describe('applyPatchToDoc', () => {
 
     await applyPatchToDoc(host.store, patch);
 
-    const expected = affine`
-      <affine-page id="page">
-        <affine-note id="note">
-          <affine-paragraph id="paragraph-1">Hello</affine-paragraph>
-          <affine-paragraph id="paragraph-2">World</affine-paragraph>
-          <affine-paragraph id="paragraph-3">Inserted</affine-paragraph>
-        </affine-note>
-      </affine-page>
+    const expected = bridgeflow`
+      <bridgeflow-page id="page">
+        <bridgeflow-note id="note">
+          <bridgeflow-paragraph id="paragraph-1">Hello</bridgeflow-paragraph>
+          <bridgeflow-paragraph id="paragraph-2">World</bridgeflow-paragraph>
+          <bridgeflow-paragraph id="paragraph-3">Inserted</bridgeflow-paragraph>
+        </bridgeflow-note>
+      </bridgeflow-page>
     `;
 
     expect(host.store).toEqualDoc(expected.store, {

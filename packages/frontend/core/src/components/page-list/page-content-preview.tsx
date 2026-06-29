@@ -1,5 +1,5 @@
-import { DocSummaryService } from '@affine/core/modules/doc-summary';
-import { LiveData, useLiveData, useService } from '@toeverything/infra';
+import { DocSummaryService } from '@bridgeflow/core/modules/doc-summary';
+import { LiveData, useLiveData, useService } from '@kanban-studios/infra';
 import { type ReactNode, useMemo } from 'react';
 
 interface PagePreviewProps {

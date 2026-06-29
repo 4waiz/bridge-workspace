@@ -1,14 +1,14 @@
-import { DebugLogger } from '@affine/debug';
-import { Unreachable } from '@affine/env/constant';
-import { replaceIdMiddleware } from '@blocksuite/affine/shared/adapters';
-import type { AffineTextAttributes } from '@blocksuite/affine/shared/types';
-import type { DeltaInsert } from '@blocksuite/affine/store';
-import { Slice, Text, Transformer } from '@blocksuite/affine/store';
-import { ObjectPool, Service } from '@toeverything/infra';
+import { DebugLogger } from '@bridgeflow/debug';
+import { Unreachable } from '@bridgeflow/env/constant';
+import { replaceIdMiddleware } from '@blocksuite/bridgeflow/shared/adapters';
+import type { BridgeFlowTextAttributes } from '@blocksuite/bridgeflow/shared/types';
+import type { DeltaInsert } from '@blocksuite/bridgeflow/store';
+import { Slice, Text, Transformer } from '@blocksuite/bridgeflow/store';
+import { ObjectPool, Service } from '@kanban-studios/infra';
 import { combineLatest, map } from 'rxjs';
 
 import { initDocFromProps } from '../../../blocksuite/initialization';
-import { getAFFiNEWorkspaceSchema } from '../../workspace/global-schema';
+import { getBridgeFlowWorkspaceSchema } from '../../workspace/global-schema';
 import type { Doc } from '../entities/doc';
 import { DocRecordList } from '../entities/record-list';
 import { DocCreated, DocInitialized } from '../events';
@@ -192,11 +192,11 @@ export class DocsService extends Service {
           },
         },
       },
-    ] as DeltaInsert<AffineTextAttributes>[]);
-    const [frame] = doc.blockSuiteDoc.getBlocksByFlavour('affine:note');
+    ] as DeltaInsert<BridgeFlowTextAttributes>[]);
+    const [frame] = doc.blockSuiteDoc.getBlocksByFlavour('bridgeflow:note');
     frame &&
       doc.blockSuiteDoc.addBlock(
-        'affine:paragraph' as never, // TODO(eyhn): fix type
+        'bridgeflow:paragraph' as never, // TODO(eyhn): fix type
         { text },
         frame.id
       );
@@ -241,7 +241,7 @@ export class DocsService extends Service {
 
       const collection = this.store.getBlocksuiteCollection();
       const transformer = new Transformer({
-        schema: getAFFiNEWorkspaceSchema(),
+        schema: getBridgeFlowWorkspaceSchema(),
         blobCRUD: collection.blobSync,
         docCRUD: {
           create: (id: string) => {
@@ -335,7 +335,7 @@ export class DocsService extends Service {
 
       const collection = this.store.getBlocksuiteCollection();
       const transformer = new Transformer({
-        schema: getAFFiNEWorkspaceSchema(),
+        schema: getBridgeFlowWorkspaceSchema(),
         blobCRUD: collection.blobSync,
         docCRUD: {
           create: (id: string) => {

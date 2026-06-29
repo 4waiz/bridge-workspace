@@ -1,10 +1,10 @@
-import type { AttachmentBlockModel } from '@blocksuite/affine/model';
+import type { AttachmentBlockModel } from '@blocksuite/bridgeflow/model';
 import {
   attachmentBlockAudioMediaKey,
   type AudioMediaKey,
   ObjectPool,
   Service,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 
 import { AudioAttachmentBlock } from '../entities/audio-attachment-block';
 

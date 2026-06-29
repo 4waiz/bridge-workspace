@@ -1,9 +1,9 @@
-import { WorkspaceServerService } from '@affine/core/modules/cloud';
+import { WorkspaceServerService } from '@bridgeflow/core/modules/cloud';
 import {
   WorkspaceScope,
   WorkspaceService,
-} from '@affine/core/modules/workspace';
-import { type Framework } from '@toeverything/infra';
+} from '@bridgeflow/core/modules/workspace';
+import { type Framework } from '@kanban-studios/infra';
 
 import { AdditionalAttachments } from './entities/additional-attachments';
 import { EmbeddingEnabled } from './entities/embedding-enabled';

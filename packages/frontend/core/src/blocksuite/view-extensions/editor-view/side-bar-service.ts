@@ -1,6 +1,6 @@
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { SidebarExtension } from '@blocksuite/affine/shared/services';
-import type { FrameworkProvider } from '@toeverything/infra';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { SidebarExtension } from '@blocksuite/bridgeflow/shared/services';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 
 export function patchSideBarService(framework: FrameworkProvider) {
   const { workbench } = framework.get(WorkbenchService);

@@ -1,24 +1,24 @@
 {
-  "name": "@affine/electron-renderer",
+  "name": "@bridgeflow/electron-renderer",
   "private": true,
   "version": "0.26.3",
   "type": "module",
   "scripts": {
-    "build": "affine bundle",
-    "dev": "affine bundle --dev"
+    "build": "bridgeflow bundle",
+    "dev": "bridgeflow bundle --dev"
   },
   "dependencies": {
-    "@affine/component": "workspace:*",
-    "@affine/core": "workspace:*",
-    "@affine/debug": "workspace:*",
-    "@affine/electron-api": "workspace:*",
-    "@affine/i18n": "workspace:*",
-    "@affine/nbstore": "workspace:*",
-    "@affine/track": "workspace:*",
-    "@blocksuite/affine": "workspace:*",
+    "@blocksuite/bridgeflow": "workspace:*",
+    "@bridgeflow/component": "workspace:*",
+    "@bridgeflow/core": "workspace:*",
+    "@bridgeflow/debug": "workspace:*",
+    "@bridgeflow/electron-api": "workspace:*",
+    "@bridgeflow/i18n": "workspace:*",
+    "@bridgeflow/nbstore": "workspace:*",
+    "@bridgeflow/track": "workspace:*",
     "@emotion/react": "^11.14.0",
+    "@kanban-studios/infra": "workspace:*",
     "@sentry/react": "^10.40.0",
-    "@toeverything/infra": "workspace:*",
     "@toeverything/theme": "^1.1.23",
     "@vanilla-extract/css": "^1.17.0",
     "async-call-rpc": "^6.4.2",
@@ -30,7 +30,7 @@
     "webm-muxer": "^5.0.3"
   },
   "devDependencies": {
-    "@affine-tools/utils": "workspace:*",
+    "@bridgeflow-tools/utils": "workspace:*",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",
     "cross-env": "^10.1.0",

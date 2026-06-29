@@ -1,8 +1,8 @@
 import type {
   StoreClient,
   WorkerInitOptions,
-} from '@affine/nbstore/worker/client';
-import { Entity } from '@toeverything/infra';
+} from '@bridgeflow/nbstore/worker/client';
+import { Entity } from '@kanban-studios/infra';
 
 import type { FeatureFlagService } from '../../feature-flag';
 import type { NbstoreService } from '../../storage';

@@ -17,19 +17,19 @@ const TABLE_ORDER_WIDTH: usize = 6;
 
 pub(super) fn block_version(flavour: &str) -> i32 {
   match flavour {
-    "affine:page" => 2,
-    "affine:surface" => 5,
-    "affine:note" => 1,
-    "affine:paragraph" => 1,
-    "affine:list" => 1,
-    "affine:code" => 1,
-    "affine:divider" => 1,
-    "affine:image" => 1,
-    "affine:table" => 1,
-    "affine:bookmark" => 1,
-    "affine:embed-youtube" => 1,
-    "affine:embed-iframe" => 1,
-    "affine:callout" => 1,
+    "bridgeflow:page" => 2,
+    "bridgeflow:surface" => 5,
+    "bridgeflow:note" => 1,
+    "bridgeflow:paragraph" => 1,
+    "bridgeflow:list" => 1,
+    "bridgeflow:code" => 1,
+    "bridgeflow:divider" => 1,
+    "bridgeflow:image" => 1,
+    "bridgeflow:table" => 1,
+    "bridgeflow:bookmark" => 1,
+    "bridgeflow:embed-youtube" => 1,
+    "bridgeflow:embed-iframe" => 1,
+    "bridgeflow:callout" => 1,
     _ => 1,
   }
 }

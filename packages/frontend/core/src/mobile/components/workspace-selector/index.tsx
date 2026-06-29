@@ -1,7 +1,7 @@
-import { MobileMenu } from '@affine/component';
-import { WorkspacesService } from '@affine/core/modules/workspace';
-import { track } from '@affine/track';
-import { useServiceOptional } from '@toeverything/infra';
+import { MobileMenu } from '@bridgeflow/component';
+import { WorkspacesService } from '@bridgeflow/core/modules/workspace';
+import { track } from '@bridgeflow/track';
+import { useServiceOptional } from '@kanban-studios/infra';
 import {
   forwardRef,
   type HTMLAttributes,

@@ -1,8 +1,8 @@
-import { WorkspaceImpl } from '@affine/core/modules/workspace/impls/workspace';
-import { ViewExtensionManagerIdentifier } from '@blocksuite/affine/ext-loader';
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import { BlockStdScope, type EditorHost } from '@blocksuite/affine/std';
-import type { Store } from '@blocksuite/affine/store';
+import { WorkspaceImpl } from '@bridgeflow/core/modules/workspace/impls/workspace';
+import { ViewExtensionManagerIdentifier } from '@blocksuite/bridgeflow/ext-loader';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { BlockStdScope, type EditorHost } from '@blocksuite/bridgeflow/std';
+import type { Store } from '@blocksuite/bridgeflow/store';
 import { css, html, LitElement, nothing } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { createRef, type Ref, ref } from 'lit/directives/ref.js';
@@ -11,12 +11,12 @@ import { Doc as YDoc } from 'yjs';
 import { PPTBuilder } from '../slides/index';
 import { getAIPanelWidget } from '../utils/ai-widgets';
 import type { AIContext } from '../utils/context';
-import type { AffineAIPanelWidgetConfig } from '../widgets/ai-panel/type';
+import type { BridgeFlowAIPanelWidgetConfig } from '../widgets/ai-panel/type';
 
 export const createSlidesRenderer: (
   host: EditorHost,
   ctx: AIContext
-) => AffineAIPanelWidgetConfig['answerRenderer'] = (host, ctx) => {
+) => BridgeFlowAIPanelWidgetConfig['answerRenderer'] = (host, ctx) => {
   return (answer, state) => {
     if (state === 'generating') {
       const panel = getAIPanelWidget(host);
@@ -123,7 +123,7 @@ export class AISlidesRenderer extends WithDisposable(LitElement) {
           height: 100%;
         }
 
-        .edgeless-container affine-edgeless-zoom-toolbar-widget,
+        .edgeless-container bridgeflow-edgeless-zoom-toolbar-widget,
         edgeless-toolbar {
           display: none;
         }
@@ -132,7 +132,7 @@ export class AISlidesRenderer extends WithDisposable(LitElement) {
           box-sizing: border-box;
         }
 
-        .affine-edgeless-viewport {
+        .bridgeflow-edgeless-viewport {
           display: block;
           height: 100%;
           position: relative;
@@ -141,13 +141,13 @@ export class AISlidesRenderer extends WithDisposable(LitElement) {
           container-type: inline-size;
         }
 
-        .affine-edgeless-surface-block-container {
+        .bridgeflow-edgeless-surface-block-container {
           position: absolute;
           width: 100%;
           height: 100%;
         }
 
-        .affine-edgeless-surface-block-container canvas {
+        .bridgeflow-edgeless-surface-block-container canvas {
           width: 100%;
           height: 100%;
           position: relative;
@@ -168,7 +168,7 @@ export class AISlidesRenderer extends WithDisposable(LitElement) {
           font-weight: 400;
         }
 
-        .affine-block-children-container.edgeless {
+        .bridgeflow-block-children-container.edgeless {
           padding-left: 0;
           position: relative;
           overflow: hidden;
@@ -182,7 +182,7 @@ export class AISlidesRenderer extends WithDisposable(LitElement) {
           z-index: 0;
         }
 
-        .affine-edgeless-block-child {
+        .bridgeflow-edgeless-block-child {
           position: absolute;
           transform-origin: center;
           box-sizing: border-box;
@@ -192,13 +192,13 @@ export class AISlidesRenderer extends WithDisposable(LitElement) {
           pointer-events: all;
         }
 
-        affine-edgeless-image .resizable-img,
-        affine-edgeless-image .resizable-img img {
+        bridgeflow-edgeless-image .resizable-img,
+        bridgeflow-edgeless-image .resizable-img img {
           width: 100%;
           height: 100%;
         }
 
-        .affine-edgeless-layer {
+        .bridgeflow-edgeless-layer {
           position: absolute;
           top: 0;
           left: 0;
@@ -207,7 +207,7 @@ export class AISlidesRenderer extends WithDisposable(LitElement) {
       </style>
       <div class="slides-container">
         <div
-          class="edgeless-container affine-edgeless-viewport"
+          class="edgeless-container bridgeflow-edgeless-viewport"
           ${ref(this._editorContainer)}
         >
           ${new BlockStdScope({
@@ -230,8 +230,8 @@ export class AISlidesRenderer extends WithDisposable(LitElement) {
     const doc = collection.createDoc().getStore();
 
     doc.load(() => {
-      const pageBlockId = doc.addBlock('affine:page', {});
-      doc.addBlock('affine:surface', {}, pageBlockId);
+      const pageBlockId = doc.addBlock('bridgeflow:page', {});
+      doc.addBlock('bridgeflow:surface', {}, pageBlockId);
     });
 
     doc.resetHistory();

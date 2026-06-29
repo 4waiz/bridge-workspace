@@ -1,9 +1,9 @@
-import type { CopilotChatHistoryFragment } from '@affine/graphql';
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import { type NotificationService } from '@blocksuite/affine/shared/services';
-import { unsafeCSSVarV2 } from '@blocksuite/affine/shared/theme';
-import { ShadowlessElement } from '@blocksuite/affine/std';
-import type { Store } from '@blocksuite/affine/store';
+import type { CopilotChatHistoryFragment } from '@bridgeflow/graphql';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { type NotificationService } from '@blocksuite/bridgeflow/shared/services';
+import { unsafeCSSVarV2 } from '@blocksuite/bridgeflow/shared/theme';
+import { ShadowlessElement } from '@blocksuite/bridgeflow/std';
+import type { Store } from '@blocksuite/bridgeflow/store';
 import { css, html } from 'lit';
 import { property } from 'lit/decorators.js';
 

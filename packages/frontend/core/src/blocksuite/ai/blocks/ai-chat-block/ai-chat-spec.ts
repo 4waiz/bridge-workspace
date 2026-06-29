@@ -1,15 +1,15 @@
-import { BlockViewExtension } from '@blocksuite/affine/std';
-import type { ExtensionType } from '@blocksuite/affine/store';
+import { BlockViewExtension } from '@blocksuite/bridgeflow/std';
+import type { ExtensionType } from '@blocksuite/bridgeflow/store';
 import { literal } from 'lit/static-html.js';
 
 export const AIChatBlockSpec: ExtensionType[] = [
-  BlockViewExtension('affine:embed-ai-chat', model => {
+  BlockViewExtension('bridgeflow:embed-ai-chat', model => {
     const parent = model.store.getParent(model.id);
 
-    if (parent?.flavour === 'affine:surface') {
-      return literal`affine-edgeless-ai-chat`;
+    if (parent?.flavour === 'bridgeflow:surface') {
+      return literal`bridgeflow-edgeless-ai-chat`;
     }
 
-    return literal`affine-ai-chat`;
+    return literal`bridgeflow-ai-chat`;
   }),
 ];

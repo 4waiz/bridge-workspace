@@ -1,28 +1,28 @@
-import { DNDContext } from '@affine/component';
-import { AffineOtherPageLayout } from '@affine/component/affine-other-page-layout';
-import { workbenchRoutes } from '@affine/core/desktop/workbench-router';
+import { DNDContext } from '@bridgeflow/component';
+import { BridgeFlowOtherPageLayout } from '@bridgeflow/component/bridgeflow-other-page-layout';
+import { workbenchRoutes } from '@bridgeflow/core/desktop/workbench-router';
 import {
   DefaultServerService,
   ServersService,
-} from '@affine/core/modules/cloud';
-import { GlobalDialogService } from '@affine/core/modules/dialogs';
-import { DndService } from '@affine/core/modules/dnd/services';
-import { GlobalContextService } from '@affine/core/modules/global-context';
-import { OpenInAppGuard } from '@affine/core/modules/open-in-app';
+} from '@bridgeflow/core/modules/cloud';
+import { GlobalDialogService } from '@bridgeflow/core/modules/dialogs';
+import { DndService } from '@bridgeflow/core/modules/dnd/services';
+import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
+import { OpenInAppGuard } from '@bridgeflow/core/modules/open-in-app';
 import {
-  getAFFiNEWorkspaceSchema,
+  getBridgeFlowWorkspaceSchema,
   type Workspace,
   type WorkspaceMetadata,
   WorkspacesService,
-} from '@affine/core/modules/workspace';
-import { ZipTransformer } from '@blocksuite/affine/widgets/linked-doc';
+} from '@bridgeflow/core/modules/workspace';
+import { ZipTransformer } from '@blocksuite/bridgeflow/widgets/linked-doc';
 import {
   FrameworkScope,
   LiveData,
   useLiveData,
   useService,
   useServices,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import type { PropsWithChildren, ReactElement } from 'react';
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import {
@@ -34,7 +34,7 @@ import {
 import { map } from 'rxjs';
 import * as _Y from 'yjs';
 
-import { AffineErrorBoundary } from '../../../components/affine/affine-error-boundary';
+import { BridgeFlowErrorBoundary } from '../../../components/bridgeflow/bridgeflow-error-boundary';
 import { WorkbenchRoot } from '../../../modules/workbench';
 import { AppContainer } from '../../components/app-container';
 import { PageNotFound } from '../404';
@@ -54,7 +54,7 @@ declare global {
   // oxlint-disable-next-line no-var
   var Y: typeof _Y;
   interface WindowEventMap {
-    'affine:workspace:change': CustomEvent<{ id: string }>;
+    'bridgeflow:workspace:change': CustomEvent<{ id: string }>;
   }
 }
 
@@ -207,9 +207,9 @@ export const Component = (): ReactElement => {
     }
     return (
       <FrameworkScope scope={server?.scope}>
-        <AffineOtherPageLayout>
+        <BridgeFlowOtherPageLayout>
           <PageNotFound noPermission />
-        </AffineOtherPageLayout>
+        </BridgeFlowOtherPageLayout>
       </FrameworkScope>
     );
   }
@@ -272,7 +272,7 @@ const WorkspacePage = ({ meta }: { meta: WorkspaceMetadata }) => {
       // for debug purpose
       window.currentWorkspace = workspace ?? undefined;
       window.dispatchEvent(
-        new CustomEvent('affine:workspace:change', {
+        new CustomEvent('bridgeflow:workspace:change', {
           detail: {
             id: workspace.id,
           },
@@ -281,7 +281,7 @@ const WorkspacePage = ({ meta }: { meta: WorkspaceMetadata }) => {
       window.exportWorkspaceSnapshot = async (docs?: string[]) => {
         await ZipTransformer.exportDocs(
           workspace.docCollection,
-          getAFFiNEWorkspaceSchema(),
+          getBridgeFlowWorkspaceSchema(),
           Array.from(workspace.docCollection.docs.values())
             .filter(doc => (docs ? docs.includes(doc.id) : true))
             .map(doc => doc.getStore())
@@ -297,7 +297,7 @@ const WorkspacePage = ({ meta }: { meta: WorkspaceMetadata }) => {
             const blob = new Blob([file], { type: 'application/zip' });
             const newDocs = await ZipTransformer.importDocs(
               workspace.docCollection,
-              getAFFiNEWorkspaceSchema(),
+              getBridgeFlowWorkspaceSchema(),
               blob
             );
             console.log(
@@ -347,11 +347,11 @@ const WorkspacePage = ({ meta }: { meta: WorkspaceMetadata }) => {
     <FrameworkScope scope={workspace.scope}>
       <DNDContextProvider>
         <OpenInAppGuard>
-          <AffineErrorBoundary height="100vh">
+          <BridgeFlowErrorBoundary height="100vh">
             <WorkspaceLayout>
               <WorkbenchRoot />
             </WorkspaceLayout>
-          </AffineErrorBoundary>
+          </BridgeFlowErrorBoundary>
         </OpenInAppGuard>
       </DNDContextProvider>
     </FrameworkScope>

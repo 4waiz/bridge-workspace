@@ -1,9 +1,9 @@
-import { DebugLogger } from '@affine/debug';
+import { DebugLogger } from '@bridgeflow/debug';
 import type { BackendModule, i18n } from 'i18next';
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-import type { useAFFiNEI18N } from './i18n.gen';
+import type { useBridgeFlowI18N } from './i18n.gen';
 import type { Language } from './resources';
 import { SUPPORTED_LANGUAGES } from './resources';
 
@@ -16,14 +16,14 @@ let _instance: i18n | null = null;
 function applyBranding<T>(value: T): T {
   if (typeof value === 'string') {
     const replacements: Array<[string, string]> = [
-      ['AFFiNE Cloud', 'BridgeWS'],
-      ['AFFiNE AI', 'BridgeWS AI'],
-      ['AFFiNE.Pro', 'awaizahmed.com'],
-      ['ai.affine.pro', 'awaizahmed.com'],
-      ['app.affine.pro', 'awaizahmed.com'],
-      ['docs.affine.pro', 'awaizahmed.com'],
-      ['affine.pro', 'awaizahmed.com'],
-      ['AFFiNE', 'BridgeWS'],
+      ['BridgeFlow Cloud', 'BRIDGE Flow'],
+      ['BridgeFlow AI', 'Workspace AI'],
+      ['BridgeFlow.Pro', 'BRIDGE Flow'],
+      ['ai.bridgeflow.pro', 'BRIDGE Flow'],
+      ['app.bridgeflow.pro', 'BRIDGE Flow'],
+      ['docs.bridgeflow.pro', 'BRIDGE Flow'],
+      ['bridgeflow.pro', 'BRIDGE Flow'],
+      ['BridgeFlow', 'BRIDGE Flow'],
     ];
 
     let brandedValue: string = value;
@@ -128,7 +128,7 @@ declare module 'i18next' {
   }
 }
 
-export type I18nFuncs = ReturnType<typeof useAFFiNEI18N>;
+export type I18nFuncs = ReturnType<typeof useBridgeFlowI18N>;
 type KnownI18nKey = keyof I18nFuncs;
 
 export type I18nString =
@@ -198,11 +198,11 @@ export function createI18nWrapper(getI18nFn: () => i18n) {
       return false;
     },
   }) as typeof I18nMethod &
-    ReturnType<typeof useAFFiNEI18N> & { [unknownKey: string]: () => string };
+    ReturnType<typeof useBridgeFlowI18N> & { [unknownKey: string]: () => string };
 }
 
 /**
- * I18n['com.affine.xxx']({ arg1: 'hello' }) -> '中文 hello'
+ * I18n['com.bridgeflow.xxx']({ arg1: 'hello' }) -> '中文 hello'
  */
 export const I18n = createI18nWrapper(getOrCreateI18n);
 export type I18nInstance = typeof I18n;

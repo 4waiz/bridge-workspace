@@ -1,28 +1,28 @@
-import { Button, notify } from '@affine/component';
+import { Button, notify } from '@bridgeflow/component';
 import {
   SettingHeader,
   SettingRow,
-} from '@affine/component/setting-components';
-import { getUpgradeQuestionnaireLink } from '@affine/core/components/hooks/affine/use-subscription-notify';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { useMutation } from '@affine/core/components/hooks/use-mutation';
+} from '@bridgeflow/component/setting-components';
+import { getUpgradeQuestionnaireLink } from '@bridgeflow/core/components/hooks/bridgeflow/use-subscription-notify';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { useMutation } from '@bridgeflow/core/components/hooks/use-mutation';
 import {
   AuthService,
   SelfhostLicenseService,
   WorkspaceSubscriptionService,
-} from '@affine/core/modules/cloud';
-import { WorkspacePermissionService } from '@affine/core/modules/permissions';
-import { UrlService } from '@affine/core/modules/url';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { UserFriendlyError } from '@affine/error';
+} from '@bridgeflow/core/modules/cloud';
+import { WorkspacePermissionService } from '@bridgeflow/core/modules/permissions';
+import { UrlService } from '@bridgeflow/core/modules/url';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { UserFriendlyError } from '@bridgeflow/error';
 import {
   createSelfhostCustomerPortalMutation,
   SubscriptionPlan,
   SubscriptionRecurring,
   SubscriptionVariant,
-} from '@affine/graphql';
-import { useI18n } from '@affine/i18n';
-import { FrameworkScope, useLiveData, useService } from '@toeverything/infra';
+} from '@bridgeflow/graphql';
+import { useI18n } from '@bridgeflow/i18n';
+import { FrameworkScope, useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useState } from 'react';
 
 import { EnableCloudPanel } from '../preference/enable-cloud';
@@ -47,8 +47,8 @@ export const WorkspaceSettingLicense = ({
   return (
     <FrameworkScope scope={workspace.scope}>
       <SettingHeader
-        title={t['com.affine.settings.workspace.license']()}
-        subtitle={t['com.affine.settings.workspace.license.description']()}
+        title={t['com.bridgeflow.settings.workspace.license']()}
+        subtitle={t['com.bridgeflow.settings.workspace.license.description']()}
       />
       <SelfHostTeamPlan />
       {workspace.flavour === 'local' ? (
@@ -91,15 +91,15 @@ const ReplaceLicenseModal = () => {
       <SettingRow
         className={styles.paymentMethod}
         name={t[
-          'com.affine.settings.workspace.license.self-host-team.replace-license.title'
+          'com.bridgeflow.settings.workspace.license.self-host-team.replace-license.title'
         ]()}
         desc={t[
-          'com.affine.settings.workspace.license.self-host-team.replace-license.description'
+          'com.bridgeflow.settings.workspace.license.self-host-team.replace-license.description'
         ]()}
       >
         <Button onClick={handleClick}>
           {t[
-            'com.affine.settings.workspace.license.self-host-team.replace-license.upload'
+            'com.bridgeflow.settings.workspace.license.self-host-team.replace-license.upload'
           ]()}
         </Button>
       </SettingRow>
@@ -134,11 +134,11 @@ const TypeFormLink = () => {
   return (
     <SettingRow
       className={styles.paymentMethod}
-      name={t['com.affine.payment.billing-type-form.title']()}
-      desc={t['com.affine.payment.billing-type-form.description']()}
+      name={t['com.bridgeflow.payment.billing-type-form.title']()}
+      desc={t['com.bridgeflow.payment.billing-type-form.description']()}
     >
       <a target="_blank" href={link} rel="noreferrer">
-        <Button>{t['com.affine.payment.billing-type-form.go']()}</Button>
+        <Button>{t['com.bridgeflow.payment.billing-type-form.go']()}</Button>
       </a>
     </SettingRow>
   );
@@ -179,13 +179,13 @@ const PaymentMethodUpdater = () => {
   return (
     <SettingRow
       className={styles.paymentMethod}
-      name={t['com.affine.payment.billing-setting.payment-method']()}
+      name={t['com.bridgeflow.payment.billing-setting.payment-method']()}
       desc={t[
-        'com.affine.payment.billing-setting.payment-method.description'
+        'com.bridgeflow.payment.billing-setting.payment-method.description'
       ]()}
     >
       <Button onClick={update} loading={isMutating} disabled={isMutating}>
-        {t['com.affine.payment.billing-setting.payment-method.go']()}
+        {t['com.bridgeflow.payment.billing-setting.payment-method.go']()}
       </Button>
     </SettingRow>
   );

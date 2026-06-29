@@ -1,5 +1,5 @@
-import { Scrollable } from '@affine/component';
-import { ViewSidebarTab } from '@affine/core/modules/workbench';
+import { Scrollable } from '@bridgeflow/component';
+import { ViewSidebarTab } from '@bridgeflow/core/modules/workbench';
 import { TodayIcon } from '@blocksuite/icons/rc';
 
 import { sidebarScrollArea } from '../detail-page/detail-page.css';

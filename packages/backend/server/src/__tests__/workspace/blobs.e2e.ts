@@ -46,7 +46,7 @@ test.after.always(async () => {
 });
 
 test('should set blobs', async t => {
-  await app.signupV1('u1@affine.pro');
+  await app.signupV1('u1@bridgeflow.pro');
 
   const workspace = await createWorkspace(app);
 
@@ -69,7 +69,7 @@ test('should set blobs', async t => {
 });
 
 test('should list blobs', async t => {
-  await app.signupV1('u1@affine.pro');
+  await app.signupV1('u1@bridgeflow.pro');
 
   const workspace = await createWorkspace(app);
   const blobs = await listBlobs(app, workspace.id);
@@ -87,7 +87,7 @@ test('should list blobs', async t => {
 });
 
 test('should create pending blob upload with graphql fallback', async t => {
-  await app.signupV1('u1@affine.pro');
+  await app.signupV1('u1@bridgeflow.pro');
 
   const workspace = await createWorkspace(app);
   const key = `upload-${Math.random().toString(16).slice(2, 8)}`;
@@ -108,7 +108,7 @@ test('should create pending blob upload with graphql fallback', async t => {
 });
 
 test('should complete pending blob upload', async t => {
-  await app.signupV1('u1@affine.pro');
+  await app.signupV1('u1@bridgeflow.pro');
 
   const workspace = await createWorkspace(app);
   const buffer = Buffer.from('done');
@@ -139,7 +139,7 @@ test('should complete pending blob upload', async t => {
 });
 
 test('should reject complete when blob key mismatched', async t => {
-  await app.signupV1('u1@affine.pro');
+  await app.signupV1('u1@bridgeflow.pro');
 
   const workspace = await createWorkspace(app);
   const buffer = Buffer.from('mismatch');
@@ -163,7 +163,7 @@ test('should reject complete when blob key mismatched', async t => {
 });
 
 test('should reject multipart upload part url on fs provider', async t => {
-  await app.signupV1('u1@affine.pro');
+  await app.signupV1('u1@bridgeflow.pro');
 
   const workspace = await createWorkspace(app);
 
@@ -176,7 +176,7 @@ test('should reject multipart upload part url on fs provider', async t => {
 });
 
 test('should auto delete blobs when workspace is deleted', async t => {
-  await app.signupV1('u1@affine.pro');
+  await app.signupV1('u1@bridgeflow.pro');
 
   const workspace = await createWorkspace(app);
   const buffer1 = Buffer.from([0, 0]);
@@ -195,7 +195,7 @@ test('should auto delete blobs when workspace is deleted', async t => {
 });
 
 test('should calc blobs size', async t => {
-  await app.signupV1('u1@affine.pro');
+  await app.signupV1('u1@bridgeflow.pro');
 
   const workspace = await createWorkspace(app);
 
@@ -209,7 +209,7 @@ test('should calc blobs size', async t => {
 });
 
 test('should calc all blobs size', async t => {
-  await app.signupV1('u1@affine.pro');
+  await app.signupV1('u1@bridgeflow.pro');
 
   const workspace1 = await createWorkspace(app);
 
@@ -230,7 +230,7 @@ test('should calc all blobs size', async t => {
 });
 
 test('should reject blob exceeded limit', async t => {
-  await app.signupV1('u1@affine.pro');
+  await app.signupV1('u1@bridgeflow.pro');
 
   const workspace1 = await createWorkspace(app);
   await model.add(workspace1.id, 'team_plan_v1', 'test', RESTRICTED_QUOTA);
@@ -244,7 +244,7 @@ test('should reject blob exceeded limit', async t => {
 });
 
 test('should reject blob exceeded storage quota', async t => {
-  await app.signupV1('u1@affine.pro');
+  await app.signupV1('u1@bridgeflow.pro');
 
   const workspace = await createWorkspace(app);
   await model.add(workspace.id, 'team_plan_v1', 'test', RESTRICTED_QUOTA);
@@ -258,7 +258,7 @@ test('should reject blob exceeded storage quota', async t => {
 });
 
 test('should accept blob even storage out of quota if workspace has unlimited feature', async t => {
-  await app.signupV1('u1@affine.pro');
+  await app.signupV1('u1@bridgeflow.pro');
 
   const workspace = await createWorkspace(app);
   await model.add(workspace.id, 'team_plan_v1', 'test', RESTRICTED_QUOTA);

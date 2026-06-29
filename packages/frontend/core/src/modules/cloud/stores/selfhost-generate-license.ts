@@ -1,5 +1,5 @@
-import { generateLicenseKeyMutation } from '@affine/graphql';
-import { Store } from '@toeverything/infra';
+import { generateLicenseKeyMutation } from '@bridgeflow/graphql';
+import { Store } from '@kanban-studios/infra';
 
 import type { GraphQLService } from '../services/graphql';
 

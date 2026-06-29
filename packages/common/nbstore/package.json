@@ -1,5 +1,5 @@
 {
-  "name": "@affine/nbstore",
+  "name": "@bridgeflow/nbstore",
   "type": "module",
   "version": "0.26.3",
   "private": true,
@@ -18,8 +18,8 @@
     "./frontend": "./src/frontend/index.ts"
   },
   "dependencies": {
-    "@affine/reader": "workspace:*",
-    "@toeverything/infra": "workspace:*",
+    "@bridgeflow/reader": "workspace:*",
+    "@kanban-studios/infra": "workspace:*",
     "eventemitter2": "^6.4.9",
     "graphemer": "^1.4.0",
     "lib0": "^0.2.114",
@@ -31,18 +31,18 @@
     "yjs": "^13.6.27"
   },
   "devDependencies": {
-    "@affine/error": "workspace:*",
-    "@affine/graphql": "workspace:*",
-    "@blocksuite/affine": "workspace:*",
+    "@blocksuite/bridgeflow": "workspace:*",
+    "@bridgeflow/error": "workspace:*",
+    "@bridgeflow/graphql": "workspace:*",
     "fake-indexeddb": "^6.0.0",
     "idb": "^8.0.0",
     "socket.io-client": "^4.8.3",
     "vitest": "^4.0.18"
   },
   "peerDependencies": {
-    "@affine/error": "workspace:*",
-    "@affine/graphql": "workspace:*",
-    "@blocksuite/affine": "workspace:*",
+    "@blocksuite/bridgeflow": "workspace:*",
+    "@bridgeflow/error": "workspace:*",
+    "@bridgeflow/graphql": "workspace:*",
     "idb": "^8.0.0",
     "socket.io-client": "^4.8.3"
   }

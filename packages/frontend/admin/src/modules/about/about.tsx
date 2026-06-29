@@ -2,10 +2,10 @@ import {
   BRAND_CREATOR_NAME,
   BRAND_NAME,
   BRAND_SITE_URL,
-} from '@affine/component/brand';
-import { buttonVariants } from '@affine/admin/components/ui/button';
-import { Separator } from '@affine/admin/components/ui/separator';
-import { cn } from '@affine/admin/utils';
+} from '@bridgeflow/component/brand';
+import { buttonVariants } from '@bridgeflow/admin/components/ui/button';
+import { Separator } from '@bridgeflow/admin/components/ui/separator';
+import { cn } from '@bridgeflow/admin/utils';
 import { AlbumIcon, ChevronRightIcon, MailWarningIcon } from 'lucide-react';
 
 type Channel = 'stable' | 'canary' | 'beta' | 'internal';
@@ -22,7 +22,7 @@ const links = [
   {
     href: BRAND_SITE_URL,
     icon: <AlbumIcon size={20} />,
-    label: 'Visit awaizahmed.com',
+    label: `Visit ${BRAND_NAME}`,
   },
   {
     href: BRAND_SITE_URL,
@@ -31,7 +31,7 @@ const links = [
   },
 ];
 
-export function AboutAFFiNE() {
+export function AboutBridgeFlow() {
   return (
     <div className="flex flex-col h-full gap-3 py-5 px-6 w-full">
       <div className="flex items-center">

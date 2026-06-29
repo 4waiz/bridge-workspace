@@ -1,14 +1,14 @@
-import { DocsService } from '@affine/core/modules/doc';
-import { EditorSettingService } from '@affine/core/modules/editor-setting';
+import { DocsService } from '@bridgeflow/core/modules/doc';
+import { EditorSettingService } from '@bridgeflow/core/modules/editor-setting';
 import {
   JOURNAL_DATE_FORMAT,
   JournalService,
   type MaybeDate,
-} from '@affine/core/modules/journal';
-import type { WorkbenchOpenOptions } from '@affine/core/modules/workbench/entities/workbench';
-import { i18nTime } from '@affine/i18n';
-import { track } from '@affine/track';
-import { useService, useServices } from '@toeverything/infra';
+} from '@bridgeflow/core/modules/journal';
+import type { WorkbenchOpenOptions } from '@bridgeflow/core/modules/workbench/entities/workbench';
+import { i18nTime } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
+import { useService, useServices } from '@kanban-studios/infra';
 import dayjs from 'dayjs';
 import { useCallback, useMemo } from 'react';
 

@@ -1,6 +1,6 @@
-import { showAILoginRequiredAtom } from '@affine/core/components/affine/auth/ai-login-required';
-import type { AIToolsConfig } from '@affine/core/modules/ai-button';
-import { UserFriendlyError } from '@affine/error';
+import { showAILoginRequiredAtom } from '@bridgeflow/core/components/bridgeflow/auth/ai-login-required';
+import type { AIToolsConfig } from '@bridgeflow/core/modules/ai-button';
+import { UserFriendlyError } from '@bridgeflow/error';
 import {
   addContextBlobMutation,
   addContextCategoryMutation,
@@ -32,8 +32,8 @@ import {
   removeContextFileMutation,
   type RequestOptions,
   updateCopilotSessionMutation,
-} from '@affine/graphql';
-import { getCurrentStore } from '@toeverything/infra';
+} from '@bridgeflow/graphql';
+import { getCurrentStore } from '@kanban-studios/infra';
 
 import {
   GeneralNetworkError,

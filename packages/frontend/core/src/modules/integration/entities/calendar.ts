@@ -3,8 +3,8 @@ import type {
   CalendarEventsQuery,
   WorkspaceCalendarItemInput,
   WorkspaceCalendarsQuery,
-} from '@affine/graphql';
-import { Entity, LiveData } from '@toeverything/infra';
+} from '@bridgeflow/graphql';
+import { Entity, LiveData } from '@kanban-studios/infra';
 import dayjs, { type Dayjs } from 'dayjs';
 
 import type { CalendarStore } from '../store/calendar';

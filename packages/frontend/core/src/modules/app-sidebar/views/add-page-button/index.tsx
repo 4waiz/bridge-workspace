@@ -1,16 +1,16 @@
-import { Button, IconButton, Menu, MenuItem, MenuSub } from '@affine/component';
-import { usePageHelper } from '@affine/core/blocksuite/block-suite-page-list/utils';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { DocsService } from '@affine/core/modules/doc';
-import { EditorSettingService } from '@affine/core/modules/editor-setting';
-import { TemplateDocService } from '@affine/core/modules/template-doc';
-import { TemplateListMenuContentScrollable } from '@affine/core/modules/template-doc/view/template-list-menu';
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { inferOpenMode } from '@affine/core/utils';
-import { useI18n } from '@affine/i18n';
-import track from '@affine/track';
-import type { DocMode } from '@blocksuite/affine/model';
+import { Button, IconButton, Menu, MenuItem, MenuSub } from '@bridgeflow/component';
+import { usePageHelper } from '@bridgeflow/core/blocksuite/block-suite-page-list/utils';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { DocsService } from '@bridgeflow/core/modules/doc';
+import { EditorSettingService } from '@bridgeflow/core/modules/editor-setting';
+import { TemplateDocService } from '@bridgeflow/core/modules/template-doc';
+import { TemplateListMenuContentScrollable } from '@bridgeflow/core/modules/template-doc/view/template-list-menu';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { inferOpenMode } from '@bridgeflow/core/utils';
+import { useI18n } from '@bridgeflow/i18n';
+import track from '@bridgeflow/track';
+import type { DocMode } from '@blocksuite/bridgeflow/model';
 import {
   ArrowDownSmallIcon,
   EdgelessIcon,
@@ -18,7 +18,7 @@ import {
   PlusIcon,
   TemplateIcon,
 } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import type React from 'react';
 import { type MouseEvent, useCallback } from 'react';

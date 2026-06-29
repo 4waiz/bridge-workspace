@@ -1,28 +1,28 @@
-import { DocService, DocsService } from '@affine/core/modules/doc';
-import { AppThemeService } from '@affine/core/modules/theme';
-import type { Container } from '@blocksuite/affine/global/di';
-import { ColorScheme } from '@blocksuite/affine/model';
+import { DocService, DocsService } from '@bridgeflow/core/modules/doc';
+import { AppThemeService } from '@bridgeflow/core/modules/theme';
+import type { Container } from '@blocksuite/bridgeflow/global/di';
+import { ColorScheme } from '@blocksuite/bridgeflow/model';
 import {
   type ThemeExtension,
   ThemeExtensionIdentifier,
-} from '@blocksuite/affine/shared/services';
+} from '@blocksuite/bridgeflow/shared/services';
 import {
   createSignalFromObservable,
   type Signal,
-} from '@blocksuite/affine/shared/utils';
-import { LifeCycleWatcher, StdIdentifier } from '@blocksuite/affine/std';
-import { type FrameworkProvider } from '@toeverything/infra';
+} from '@blocksuite/bridgeflow/shared/utils';
+import { LifeCycleWatcher, StdIdentifier } from '@blocksuite/bridgeflow/std';
+import { type FrameworkProvider } from '@kanban-studios/infra';
 import type { Observable } from 'rxjs';
 import { combineLatest, map } from 'rxjs';
 
 export function getThemeExtension(
   framework: FrameworkProvider
 ): typeof LifeCycleWatcher {
-  class AffineThemeExtension
+  class BridgeFlowThemeExtension
     extends LifeCycleWatcher
     implements ThemeExtension
   {
-    static override readonly key = 'affine-theme';
+    static override readonly key = 'bridgeflow-theme';
 
     private readonly themes: Map<string, Signal<ColorScheme>> = new Map();
 
@@ -30,7 +30,7 @@ export function getThemeExtension(
 
     static override setup(di: Container) {
       super.setup(di);
-      di.override(ThemeExtensionIdentifier, AffineThemeExtension, [
+      di.override(ThemeExtensionIdentifier, BridgeFlowThemeExtension, [
         StdIdentifier,
       ]);
     }
@@ -93,5 +93,5 @@ export function getThemeExtension(
     }
   }
 
-  return AffineThemeExtension;
+  return BridgeFlowThemeExtension;
 }

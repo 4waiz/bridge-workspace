@@ -30,7 +30,7 @@ export class TelemetryController {
       .header({
         ...this.telemetry.getCorsHeaders(origin),
         'Access-Control-Allow-Methods': 'POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, x-affine-version',
+        'Access-Control-Allow-Headers': 'Content-Type, x-bridgeflow-version',
       })
       .send();
   }

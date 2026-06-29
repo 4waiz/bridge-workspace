@@ -1,13 +1,13 @@
-import { Input } from '@affine/admin/components/ui/input';
+import { Input } from '@bridgeflow/admin/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@affine/admin/components/ui/select';
-import { Switch } from '@affine/admin/components/ui/switch';
-import { cn } from '@affine/admin/utils';
+} from '@bridgeflow/admin/components/ui/select';
+import { Switch } from '@bridgeflow/admin/components/ui/switch';
+import { cn } from '@bridgeflow/admin/utils';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Textarea } from '../../components/ui/textarea';

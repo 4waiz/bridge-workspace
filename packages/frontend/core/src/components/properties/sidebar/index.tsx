@@ -1,18 +1,18 @@
-import { Divider, IconButton, Tooltip } from '@affine/component';
-import type { DocCustomPropertyInfo } from '@affine/core/modules/db';
+import { Divider, IconButton, Tooltip } from '@bridgeflow/component';
+import type { DocCustomPropertyInfo } from '@bridgeflow/core/modules/db';
 import {
   WorkspacePropertyService,
   type WorkspacePropertyType,
-} from '@affine/core/modules/workspace-property';
-import { generateUniqueNameInSequence } from '@affine/core/utils/unique-name';
-import { useI18n } from '@affine/i18n';
-import track from '@affine/track';
+} from '@bridgeflow/core/modules/workspace-property';
+import { generateUniqueNameInSequence } from '@bridgeflow/core/utils/unique-name';
+import { useI18n } from '@bridgeflow/i18n';
+import track from '@bridgeflow/track';
 import { PlusIcon } from '@blocksuite/icons/rc';
 import {
   Content as CollapsibleContent,
   Root as CollapsibleRoot,
 } from '@radix-ui/react-collapsible';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useState } from 'react';
 
 import { useGuard } from '../../guard';

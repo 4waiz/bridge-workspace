@@ -9,7 +9,7 @@ import graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.mjs';
 import supertest from 'supertest';
 
 import {
-  AFFiNELogger,
+  BridgeFlowLogger,
   ApplyType,
   GlobalExceptionFilter,
   JobQueue,
@@ -42,7 +42,7 @@ export async function createTestingApp(
   moduleDef: TestingAppMetadata = {}
 ): Promise<TestingApp> {
   const module = await createTestingModule(moduleDef, false);
-  const logger = new AFFiNELogger();
+  const logger = new BridgeFlowLogger();
   logger.setLogLevels([TEST_LOG_LEVEL]);
 
   const app = module.createNestApplication<NestExpressApplication>({
@@ -135,7 +135,7 @@ export class TestingApp extends ApplyType<INestApplication>() {
       .set('Cookie', cookies);
 
     if (this.csrfCookie) {
-      req.set('x-affine-csrf-token', this.csrfCookie);
+      req.set('x-bridgeflow-csrf-token', this.csrfCookie);
     }
 
     return req;
@@ -186,7 +186,7 @@ export class TestingApp extends ApplyType<INestApplication>() {
     return this.request('patch', path);
   }
 
-  // TODO(@forehalo): directly make proxy for graphql queries defined in `@affine/graphql`
+  // TODO(@forehalo): directly make proxy for graphql queries defined in `@bridgeflow/graphql`
   // by calling with `app.apis.createWorkspace({ ...variables })`
   async gql<Data = any>(query: string, variables?: any): Promise<Data> {
     const res = await this.POST('/graphql')
@@ -218,7 +218,7 @@ export class TestingApp extends ApplyType<INestApplication>() {
   }
 
   private randomEmail() {
-    return `test-${randomUUID()}@affine.pro`;
+    return `test-${randomUUID()}@bridgeflow.pro`;
   }
 
   /**

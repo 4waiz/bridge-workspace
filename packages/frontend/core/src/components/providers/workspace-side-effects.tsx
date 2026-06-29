@@ -1,38 +1,38 @@
-import { toast } from '@affine/component';
+import { toast } from '@bridgeflow/component';
 import {
   pushGlobalLoadingEventAtom,
   resolveGlobalLoadingEventAtom,
-} from '@affine/component/global-loading';
+} from '@bridgeflow/component/global-loading';
 import {
   AIProvider,
   CopilotClient,
   setupAIProvider,
-} from '@affine/core/blocksuite/ai';
-import { useRegisterFindInPageCommands } from '@affine/core/components/hooks/affine/use-register-find-in-page-commands';
-import { useRegisterWorkspaceCommands } from '@affine/core/components/hooks/use-register-workspace-commands';
-import { OverCapacityNotification } from '@affine/core/components/over-capacity';
+} from '@bridgeflow/core/blocksuite/ai';
+import { useRegisterFindInPageCommands } from '@bridgeflow/core/components/hooks/bridgeflow/use-register-find-in-page-commands';
+import { useRegisterWorkspaceCommands } from '@bridgeflow/core/components/hooks/use-register-workspace-commands';
+import { OverCapacityNotification } from '@bridgeflow/core/components/over-capacity';
 import {
   AuthService,
   EventSourceService,
   GraphQLService,
-} from '@affine/core/modules/cloud';
+} from '@bridgeflow/core/modules/cloud';
 import {
   GlobalDialogService,
   WorkspaceDialogService,
-} from '@affine/core/modules/dialogs';
-import { DocsService } from '@affine/core/modules/doc';
-import { EditorSettingService } from '@affine/core/modules/editor-setting';
-import { useRegisterNavigationCommands } from '@affine/core/modules/navigation/view/use-register-navigation-commands';
-import { QuickSearchContainer } from '@affine/core/modules/quicksearch';
-import { WorkbenchService } from '@affine/core/modules/workbench';
+} from '@bridgeflow/core/modules/dialogs';
+import { DocsService } from '@bridgeflow/core/modules/doc';
+import { EditorSettingService } from '@bridgeflow/core/modules/editor-setting';
+import { useRegisterNavigationCommands } from '@bridgeflow/core/modules/navigation/view/use-register-navigation-commands';
+import { QuickSearchContainer } from '@bridgeflow/core/modules/quicksearch';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
 import {
-  getAFFiNEWorkspaceSchema,
+  getBridgeFlowWorkspaceSchema,
   WorkspaceService,
-} from '@affine/core/modules/workspace';
-import { useI18n } from '@affine/i18n';
-import track from '@affine/track';
-import type { DocMode } from '@blocksuite/affine/model';
-import { ZipTransformer } from '@blocksuite/affine/widgets/linked-doc';
+} from '@bridgeflow/core/modules/workspace';
+import { useI18n } from '@bridgeflow/i18n';
+import track from '@bridgeflow/track';
+import type { DocMode } from '@blocksuite/bridgeflow/model';
+import { ZipTransformer } from '@blocksuite/bridgeflow/widgets/linked-doc';
 import {
   effect,
   fromPromise,
@@ -40,7 +40,7 @@ import {
   throwIfAborted,
   useService,
   useServices,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 import { catchError, EMPTY, finalize, switchMap, tap, timeout } from 'rxjs';
@@ -70,7 +70,7 @@ export const WorkspaceSideEffects = () => {
           throwIfAborted(abort);
           const [doc] = await ZipTransformer.importDocs(
             currentWorkspace.docCollection,
-            getAFFiNEWorkspaceSchema(),
+            getBridgeFlowWorkspaceSchema(),
             templateBlob
           );
           if (doc) {
@@ -93,7 +93,7 @@ export const WorkspaceSideEffects = () => {
           }),
           catchError(err => {
             console.error(err);
-            toast(t['com.affine.ai.template-insert.failed']());
+            toast(t['com.bridgeflow.ai.template-insert.failed']());
             return EMPTY;
           }),
           finalize(() => {

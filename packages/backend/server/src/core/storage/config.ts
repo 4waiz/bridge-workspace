@@ -31,7 +31,7 @@ defineModuleConfig('storages', {
       provider: 'fs',
       bucket: 'avatars',
       config: {
-        path: '~/.affine/storage',
+        path: '~/.bridgeflow/storage',
       },
     },
     schema: StorageJSONSchema,
@@ -42,7 +42,7 @@ defineModuleConfig('storages', {
       provider: 'fs',
       bucket: 'blobs',
       config: {
-        path: '~/.affine/storage',
+        path: '~/.bridgeflow/storage',
       },
     },
     schema: StorageJSONSchema,

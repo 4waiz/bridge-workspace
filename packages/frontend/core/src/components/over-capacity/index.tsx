@@ -1,10 +1,10 @@
-import { notify } from '@affine/component';
-import { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import { WorkspacePermissionService } from '@affine/core/modules/permissions';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { useI18n } from '@affine/i18n';
-import type { BlobSyncState } from '@affine/nbstore';
-import { useLiveData, useService } from '@toeverything/infra';
+import { notify } from '@bridgeflow/component';
+import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
+import { WorkspacePermissionService } from '@bridgeflow/core/modules/permissions';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { useI18n } from '@bridgeflow/i18n';
+import type { BlobSyncState } from '@bridgeflow/nbstore';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { debounce } from 'lodash-es';
 import { useCallback, useEffect } from 'react';
 
@@ -40,22 +40,22 @@ export const OverCapacityNotification = () => {
           }
           if (isOwner) {
             notify.warning({
-              title: t['com.affine.payment.storage-limit.new-title'](),
+              title: t['com.bridgeflow.payment.storage-limit.new-title'](),
               message:
-                t['com.affine.payment.storage-limit.new-description.owner'](),
+                t['com.bridgeflow.payment.storage-limit.new-description.owner'](),
               actions: [
                 {
                   key: 'upgrade',
-                  label: t['com.affine.payment.upgrade'](),
+                  label: t['com.bridgeflow.payment.upgrade'](),
                   onClick: jumpToPricePlan,
                 },
               ],
             });
           } else {
             notify.warning({
-              title: t['com.affine.payment.storage-limit.new-title'](),
+              title: t['com.bridgeflow.payment.storage-limit.new-title'](),
               message:
-                t['com.affine.payment.storage-limit.description.member'](),
+                t['com.bridgeflow.payment.storage-limit.description.member'](),
             });
           }
         })

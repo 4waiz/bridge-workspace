@@ -1,16 +1,17 @@
-import { Button, notify } from '@affine/component';
+import { Button, notify } from '@bridgeflow/component';
+import { BRAND_SITE_URL } from '@bridgeflow/component/brand';
 import {
   AuthContainer,
   AuthContent,
   AuthFooter,
   AuthHeader,
   AuthInput,
-} from '@affine/component/auth-components';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { ServersService } from '@affine/core/modules/cloud';
-import { UserFriendlyError } from '@affine/error';
-import { Trans, useI18n } from '@affine/i18n';
-import { useService } from '@toeverything/infra';
+} from '@bridgeflow/component/auth-components';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { ServersService } from '@bridgeflow/core/modules/cloud';
+import { UserFriendlyError } from '@bridgeflow/error';
+import { Trans, useI18n } from '@bridgeflow/i18n';
+import { useService } from '@kanban-studios/infra';
 import {
   type Dispatch,
   type SetStateAction,
@@ -42,7 +43,7 @@ export const AddSelfhostedStep = ({
   const [isConnecting, setIsConnecting] = useState(false);
   const [error, setError] = useState<boolean>(false);
   const [errorHint, setErrorHint] = useState(
-    t['com.affine.auth.sign.add-selfhosted.error']()
+    t['com.bridgeflow.auth.sign.add-selfhosted.error']()
   );
 
   const urlValid = useMemo(() => {
@@ -58,7 +59,7 @@ export const AddSelfhostedStep = ({
     (value: string) => {
       setBaseURL(value);
       setError(false);
-      setErrorHint(t['com.affine.auth.sign.add-selfhosted.error']());
+      setErrorHint(t['com.bridgeflow.auth.sign.add-selfhosted.error']());
     },
     [t]
   );
@@ -86,11 +87,11 @@ export const AddSelfhostedStep = ({
       ) {
         setErrorHint(t['error.NETWORK_ERROR']());
       } else {
-        setErrorHint(t['com.affine.auth.sign.add-selfhosted.error']());
+        setErrorHint(t['com.bridgeflow.auth.sign.add-selfhosted.error']());
       }
 
       notify.error({
-        title: t['com.affine.auth.toast.title.failed'](),
+        title: t['com.bridgeflow.auth.toast.title.failed'](),
         message:
           userFriendlyError.is('REQUEST_ABORTED') ||
           userFriendlyError.is('NETWORK_ERROR')
@@ -119,12 +120,12 @@ export const AddSelfhostedStep = ({
   return (
     <AuthContainer>
       <AuthHeader
-        title={t['com.affine.auth.sign.add-selfhosted.title']()}
-        subTitle={t['com.affine.auth.sign.add-selfhosted']()}
+        title={t['com.bridgeflow.auth.sign.add-selfhosted.title']()}
+        subTitle={t['com.bridgeflow.auth.sign.add-selfhosted']()}
       />
       <AuthContent>
         <AuthInput
-          label={t['com.affine.auth.sign.add-selfhosted.baseurl']()}
+          label={t['com.bridgeflow.auth.sign.add-selfhosted.baseurl']()}
           value={baseURL}
           onChange={onBaseURLChange}
           placeholder="https://your-server.com"
@@ -142,17 +143,17 @@ export const AddSelfhostedStep = ({
           loading={isConnecting}
           onClick={onConnect}
         >
-          {t['com.affine.auth.sign.add-selfhosted.connect-button']()}
+          {t['com.bridgeflow.auth.sign.add-selfhosted.connect-button']()}
         </Button>
       </AuthContent>
       <AuthFooter>
         <div className={styles.authMessage}>
           <Trans
-            i18nKey="com.affine.auth.sign.add-selfhosted.description"
+            i18nKey="com.bridgeflow.auth.sign.add-selfhosted.description"
             components={{
               1: (
                 <a
-                  href="https://awaizahmed.com"
+                  href={BRAND_SITE_URL}
                   target="_blank"
                   rel="noreferrer"
                 />

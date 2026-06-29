@@ -1,9 +1,9 @@
 import {
   PreconditionStrategy,
-  registerAffineCommand,
-} from '@affine/core/commands';
-import { track } from '@affine/track';
-import { useService } from '@toeverything/infra';
+  registerBridgeFlowCommand,
+} from '@bridgeflow/core/commands';
+import { track } from '@bridgeflow/track';
+import { useService } from '@kanban-studios/infra';
 import { useEffect } from 'react';
 
 import { NavigatorService } from '../services/navigator';
@@ -14,9 +14,9 @@ export function useRegisterNavigationCommands() {
     const unsubs: Array<() => void> = [];
 
     unsubs.push(
-      registerAffineCommand({
-        id: 'affine:shortcut-history-go-back',
-        category: 'affine:general',
+      registerBridgeFlowCommand({
+        id: 'bridgeflow:shortcut-history-go-back',
+        category: 'bridgeflow:general',
         preconditionStrategy: PreconditionStrategy.Never,
         icon: 'none',
         label: 'go back',
@@ -31,9 +31,9 @@ export function useRegisterNavigationCommands() {
       })
     );
     unsubs.push(
-      registerAffineCommand({
-        id: 'affine:shortcut-history-go-forward',
-        category: 'affine:general',
+      registerBridgeFlowCommand({
+        id: 'bridgeflow:shortcut-history-go-forward',
+        category: 'bridgeflow:general',
         preconditionStrategy: PreconditionStrategy.Never,
         icon: 'none',
         label: 'go forward',

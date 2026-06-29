@@ -1,6 +1,6 @@
-import { EmptyCollections } from '@affine/core/components/affine/empty';
-import { CollectionService } from '@affine/core/modules/collection';
-import { useLiveData, useService } from '@toeverything/infra';
+import { EmptyCollections } from '@bridgeflow/core/components/bridgeflow/empty';
+import { CollectionService } from '@bridgeflow/core/modules/collection';
+import { useLiveData, useService } from '@kanban-studios/infra';
 
 import { CollectionListItem } from './item';
 import { list } from './styles.css';

@@ -1,11 +1,11 @@
-import { UserFriendlyError } from '@affine/error';
+import { UserFriendlyError } from '@bridgeflow/error';
 import {
   gqlFetcherFactory,
   type GraphQLQuery,
   type QueryOptions,
   type QueryResponse,
-} from '@affine/graphql';
-import { fromPromise, Service } from '@toeverything/infra';
+} from '@bridgeflow/graphql';
+import { fromPromise, Service } from '@kanban-studios/infra';
 import type { Observable } from 'rxjs';
 
 import { AuthService } from './auth';

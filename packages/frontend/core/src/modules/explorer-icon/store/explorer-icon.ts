@@ -1,5 +1,5 @@
-import type { IconData } from '@affine/component';
-import { Store } from '@toeverything/infra';
+import type { IconData } from '@bridgeflow/component';
+import { Store } from '@kanban-studios/infra';
 
 import type { WorkspaceDBService } from '../../db';
 

@@ -1,12 +1,12 @@
-import { Button, notify } from '@affine/component';
-import { SettingRow } from '@affine/component/setting-components';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { useMutation } from '@affine/core/components/hooks/use-mutation';
-import { UrlService } from '@affine/core/modules/url';
-import { UserFriendlyError } from '@affine/error';
-import { createCustomerPortalMutation } from '@affine/graphql';
-import { useI18n } from '@affine/i18n';
-import { useService } from '@toeverything/infra';
+import { Button, notify } from '@bridgeflow/component';
+import { SettingRow } from '@bridgeflow/component/setting-components';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { useMutation } from '@bridgeflow/core/components/hooks/use-mutation';
+import { UrlService } from '@bridgeflow/core/modules/url';
+import { UserFriendlyError } from '@bridgeflow/error';
+import { createCustomerPortalMutation } from '@bridgeflow/graphql';
+import { useI18n } from '@bridgeflow/i18n';
+import { useService } from '@kanban-studios/infra';
 
 import * as styles from './styles.css';
 
@@ -31,13 +31,13 @@ export const PaymentMethodUpdater = () => {
   return (
     <SettingRow
       className={styles.paymentMethod}
-      name={t['com.affine.payment.billing-setting.payment-method']()}
+      name={t['com.bridgeflow.payment.billing-setting.payment-method']()}
       desc={t[
-        'com.affine.payment.billing-setting.payment-method.description'
+        'com.bridgeflow.payment.billing-setting.payment-method.description'
       ]()}
     >
       <Button onClick={update} loading={isMutating} disabled={isMutating}>
-        {t['com.affine.payment.billing-setting.payment-method.go']()}
+        {t['com.bridgeflow.payment.billing-setting.payment-method.go']()}
       </Button>
     </SettingRow>
   );

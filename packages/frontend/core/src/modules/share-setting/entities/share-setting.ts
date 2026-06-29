@@ -1,5 +1,5 @@
-import { DebugLogger } from '@affine/debug';
-import type { GetWorkspaceConfigQuery, InviteLink } from '@affine/graphql';
+import { DebugLogger } from '@bridgeflow/debug';
+import type { GetWorkspaceConfigQuery, InviteLink } from '@bridgeflow/graphql';
 import {
   catchErrorInto,
   effect,
@@ -9,7 +9,7 @@ import {
   onComplete,
   onStart,
   smartRetry,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { exhaustMap, tap } from 'rxjs';
 
 import type { WorkspaceService } from '../../workspace';
@@ -20,7 +20,7 @@ type EnableSharing = GetWorkspaceConfigQuery['workspace']['enableSharing'];
 type EnableUrlPreview =
   GetWorkspaceConfigQuery['workspace']['enableUrlPreview'];
 
-const logger = new DebugLogger('affine:workspace-permission');
+const logger = new DebugLogger('bridgeflow:workspace-permission');
 
 export class WorkspaceShareSetting extends Entity {
   enableAi$ = new LiveData<EnableAi | null>(null);

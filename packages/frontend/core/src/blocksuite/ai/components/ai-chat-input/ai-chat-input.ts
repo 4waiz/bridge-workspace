@@ -1,19 +1,19 @@
 import type {
   AIDraftService,
   AIToolsConfigService,
-} from '@affine/core/modules/ai-button';
-import type { AIModelService } from '@affine/core/modules/ai-button/services/models';
+} from '@bridgeflow/core/modules/ai-button';
+import type { AIModelService } from '@bridgeflow/core/modules/ai-button/services/models';
 import type {
   ServerService,
   SubscriptionService,
-} from '@affine/core/modules/cloud';
-import type { FeatureFlagService } from '@affine/core/modules/feature-flag';
-import type { CopilotChatHistoryFragment } from '@affine/graphql';
-import { SignalWatcher, WithDisposable } from '@blocksuite/affine/global/lit';
-import { unsafeCSSVar, unsafeCSSVarV2 } from '@blocksuite/affine/shared/theme';
-import type { EditorHost } from '@blocksuite/affine/std';
-import { ShadowlessElement } from '@blocksuite/affine/std';
-import type { NotificationService } from '@blocksuite/affine-shared/services';
+} from '@bridgeflow/core/modules/cloud';
+import type { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
+import type { CopilotChatHistoryFragment } from '@bridgeflow/graphql';
+import { SignalWatcher, WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { unsafeCSSVar, unsafeCSSVarV2 } from '@blocksuite/bridgeflow/shared/theme';
+import type { EditorHost } from '@blocksuite/bridgeflow/std';
+import { ShadowlessElement } from '@blocksuite/bridgeflow/std';
+import type { NotificationService } from '@blocksuite/bridgeflow-shared/services';
 import { ArrowUpBigIcon, CloseIcon } from '@blocksuite/icons/lit';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
@@ -365,7 +365,7 @@ export class AIChatInput extends SignalWatcher(
   accessor aiToolsConfigService!: AIToolsConfigService;
 
   @property({ attribute: false })
-  accessor affineFeatureFlagService!: FeatureFlagService;
+  accessor bridgeflowFeatureFlagService!: FeatureFlagService;
 
   @property({ attribute: false })
   accessor notificationService!: NotificationService;
@@ -686,7 +686,7 @@ export class AIChatInput extends SignalWatcher(
       }
 
       const enableSendDetailedObject =
-        this.affineFeatureFlagService.flags.enable_send_detailed_object_to_ai
+        this.bridgeflowFeatureFlagService.flags.enable_send_detailed_object_to_ai
           .value;
 
       const modelId = this.aiModelService.modelId.value;

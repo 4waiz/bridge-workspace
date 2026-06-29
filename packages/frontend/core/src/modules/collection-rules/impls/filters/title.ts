@@ -1,5 +1,5 @@
-import type { DocsSearchService } from '@affine/core/modules/docs-search';
-import { Service } from '@toeverything/infra';
+import type { DocsSearchService } from '@bridgeflow/core/modules/docs-search';
+import { Service } from '@kanban-studios/infra';
 import { map, type Observable } from 'rxjs';
 
 import type { FilterProvider } from '../../provider';

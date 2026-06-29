@@ -38,9 +38,9 @@ function extractTokenFromHeader(authorization: string) {
 @Injectable()
 export class AuthService implements OnApplicationBootstrap {
   readonly cookieOptions: CookieOptions;
-  static readonly sessionCookieName = 'affine_session';
-  static readonly userCookieName = 'affine_user_id';
-  static readonly csrfCookieName = 'affine_csrf_token';
+  static readonly sessionCookieName = 'bridgeflow_session';
+  static readonly userCookieName = 'bridgeflow_user_id';
+  static readonly csrfCookieName = 'bridgeflow_csrf_token';
 
   constructor(
     private readonly config: Config,

@@ -1,10 +1,10 @@
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import { GenerateDocUrlProvider } from '@blocksuite/affine/shared/services';
-import { createDefaultDoc } from '@blocksuite/affine/shared/utils';
-import { ShadowlessElement } from '@blocksuite/affine/std';
-import type { Doc, Workspace } from '@blocksuite/affine/store';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { GenerateDocUrlProvider } from '@blocksuite/bridgeflow/shared/services';
+import { createDefaultDoc } from '@blocksuite/bridgeflow/shared/utils';
+import { ShadowlessElement } from '@blocksuite/bridgeflow/std';
+import type { Doc, Workspace } from '@blocksuite/bridgeflow/store';
 import { CloseIcon } from '@blocksuite/icons/lit';
-import type { TestAffineEditorContainer } from '@blocksuite/integration-test';
+import type { TestBridgeFlowEditorContainer } from '@blocksuite/integration-test';
 import { css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
@@ -161,7 +161,7 @@ export class DocsPanel extends WithDisposable(ShadowlessElement) {
   }
 
   @property({ attribute: false })
-  accessor editor!: TestAffineEditorContainer;
+  accessor editor!: TestBridgeFlowEditorContainer;
 
   @property({ attribute: false })
   accessor onClose!: () => void;

@@ -1,6 +1,6 @@
-import { TagItem as TagItemComponent } from '@affine/core/components/tags';
-import type { Tag } from '@affine/core/modules/tag';
-import { useLiveData } from '@toeverything/infra';
+import { TagItem as TagItemComponent } from '@bridgeflow/core/components/tags';
+import type { Tag } from '@bridgeflow/core/modules/tag';
+import { useLiveData } from '@kanban-studios/infra';
 
 export interface PageTagsProps {
   tags: Tag[];

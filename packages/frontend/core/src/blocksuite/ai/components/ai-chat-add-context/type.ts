@@ -2,8 +2,8 @@ import type {
   SearchCollectionMenuAction,
   SearchDocMenuAction,
   SearchTagMenuAction,
-} from '@affine/core/modules/search-menu/services';
-import type { LinkedMenuGroup } from '@blocksuite/affine/widgets/linked-doc';
+} from '@bridgeflow/core/modules/search-menu/services';
+import type { LinkedMenuGroup } from '@blocksuite/bridgeflow/widgets/linked-doc';
 
 export interface SearchMenuConfig {
   getDocMenuGroup: (

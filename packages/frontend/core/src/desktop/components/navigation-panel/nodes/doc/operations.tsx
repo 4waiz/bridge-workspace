@@ -4,20 +4,20 @@ import {
   MenuSeparator,
   toast,
   useConfirmModal,
-} from '@affine/component';
-import { usePageHelper } from '@affine/core/blocksuite/block-suite-page-list/utils';
-import { Guard } from '@affine/core/components/guard';
-import { useAppSettingHelper } from '@affine/core/components/hooks/affine/use-app-setting-helper';
-import { useBlockSuiteMetaHelper } from '@affine/core/components/hooks/affine/use-block-suite-meta-helper';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { IsFavoriteIcon } from '@affine/core/components/pure/icons';
-import { DocsService } from '@affine/core/modules/doc';
-import { CompatibleFavoriteItemsAdapter } from '@affine/core/modules/favorite';
-import { GuardService } from '@affine/core/modules/permissions';
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { useI18n } from '@affine/i18n';
-import { track } from '@affine/track';
+} from '@bridgeflow/component';
+import { usePageHelper } from '@bridgeflow/core/blocksuite/block-suite-page-list/utils';
+import { Guard } from '@bridgeflow/core/components/guard';
+import { useAppSettingHelper } from '@bridgeflow/core/components/hooks/bridgeflow/use-app-setting-helper';
+import { useBlockSuiteMetaHelper } from '@bridgeflow/core/components/hooks/bridgeflow/use-block-suite-meta-helper';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { IsFavoriteIcon } from '@bridgeflow/core/components/pure/icons';
+import { DocsService } from '@bridgeflow/core/modules/doc';
+import { CompatibleFavoriteItemsAdapter } from '@bridgeflow/core/modules/favorite';
+import { GuardService } from '@bridgeflow/core/modules/permissions';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { useI18n } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
 import {
   DeleteIcon,
   DuplicateIcon,
@@ -27,7 +27,7 @@ import {
   PlusIcon,
   SplitViewIcon,
 } from '@blocksuite/icons/rc';
-import { useLiveData, useServices } from '@toeverything/infra';
+import { useLiveData, useServices } from '@kanban-studios/infra';
 import { useCallback, useMemo, useState } from 'react';
 
 import type { NodeOperation } from '../../tree/types';
@@ -84,12 +84,12 @@ export const useNavigationPanelDocNodeOperations = (
       return;
     }
     openConfirmModal({
-      title: t['com.affine.moveToTrash.title'](),
-      description: t['com.affine.moveToTrash.confirmModal.description']({
+      title: t['com.bridgeflow.moveToTrash.title'](),
+      description: t['com.bridgeflow.moveToTrash.confirmModal.description']({
         title: docRecord.title$.value,
       }),
-      confirmText: t['com.affine.moveToTrash.confirmModal.confirm'](),
-      cancelText: t['com.affine.moveToTrash.confirmModal.cancel'](),
+      confirmText: t['com.bridgeflow.moveToTrash.confirmModal.confirm'](),
+      cancelText: t['com.bridgeflow.moveToTrash.confirmModal.cancel'](),
       confirmButtonOptions: {
         variant: 'error',
       },
@@ -98,7 +98,7 @@ export const useNavigationPanelDocNodeOperations = (
         track.$.navigationPanel.docs.deleteDoc({
           control: 'button',
         });
-        toast(t['com.affine.toastMessage.movedTrash']());
+        toast(t['com.bridgeflow.toastMessage.movedTrash']());
       },
     });
   }, [docRecord, openConfirmModal, t]);
@@ -128,7 +128,7 @@ export const useNavigationPanelDocNodeOperations = (
     try {
       const canEdit = await guardService.can('Doc_Update', docId);
       if (!canEdit) {
-        toast(t['com.affine.no-permission']());
+        toast(t['com.bridgeflow.no-permission']());
         return;
       }
       const newDoc = createPage();
@@ -161,7 +161,7 @@ export const useNavigationPanelDocNodeOperations = (
                   size="16"
                   icon={<PlusIcon />}
                   tooltip={t[
-                    'com.affine.rootAppSidebar.explorer.doc-add-tooltip'
+                    'com.bridgeflow.rootAppSidebar.explorer.doc-add-tooltip'
                   ]()}
                   onClick={handleAddLinkedPage}
                   loading={addLinkedPageLoading}
@@ -178,7 +178,7 @@ export const useNavigationPanelDocNodeOperations = (
             prefixIcon={<InformationIcon />}
             onClick={handleOpenInfoModal}
           >
-            {t['com.affine.page-properties.page-info.view']()}
+            {t['com.bridgeflow.page-properties.page-info.view']()}
           </MenuItem>
         ),
       },
@@ -192,7 +192,7 @@ export const useNavigationPanelDocNodeOperations = (
                 onClick={handleAddLinkedPage}
                 disabled={!canEdit}
               >
-                {t['com.affine.page-operation.add-linked-page']()}
+                {t['com.bridgeflow.page-operation.add-linked-page']()}
               </MenuItem>
             )}
           </Guard>
@@ -202,7 +202,7 @@ export const useNavigationPanelDocNodeOperations = (
         index: 99,
         view: (
           <MenuItem prefixIcon={<DuplicateIcon />} onClick={handleDuplicate}>
-            {t['com.affine.header.option.duplicate']()}
+            {t['com.bridgeflow.header.option.duplicate']()}
           </MenuItem>
         ),
       },
@@ -210,7 +210,7 @@ export const useNavigationPanelDocNodeOperations = (
         index: 99,
         view: (
           <MenuItem prefixIcon={<OpenInNewIcon />} onClick={handleOpenInNewTab}>
-            {t['com.affine.workbench.tab.page-menu-open']()}
+            {t['com.bridgeflow.workbench.tab.page-menu-open']()}
           </MenuItem>
         ),
       },
@@ -223,7 +223,7 @@ export const useNavigationPanelDocNodeOperations = (
                   prefixIcon={<SplitViewIcon />}
                   onClick={handleOpenInSplitView}
                 >
-                  {t['com.affine.workbench.split-view.page-menu-open']()}
+                  {t['com.bridgeflow.workbench.split-view.page-menu-open']()}
                 </MenuItem>
               ),
             },
@@ -237,8 +237,8 @@ export const useNavigationPanelDocNodeOperations = (
             onClick={handleToggleFavoriteDoc}
           >
             {favorite
-              ? t['com.affine.favoritePageOperation.remove']()
-              : t['com.affine.favoritePageOperation.add']()}
+              ? t['com.bridgeflow.favoritePageOperation.remove']()
+              : t['com.bridgeflow.favoritePageOperation.add']()}
           </MenuItem>
         ),
       },
@@ -257,7 +257,7 @@ export const useNavigationPanelDocNodeOperations = (
                 onClick={handleMoveToTrash}
                 disabled={!canMoveToTrash}
               >
-                {t['com.affine.moveToTrash.title']()}
+                {t['com.bridgeflow.moveToTrash.title']()}
               </MenuItem>
             )}
           </Guard>

@@ -1,6 +1,6 @@
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import { ShadowlessElement } from '@blocksuite/affine/std';
-import type { TestAffineEditorContainer } from '@blocksuite/integration-test';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { ShadowlessElement } from '@blocksuite/bridgeflow/std';
+import type { TestBridgeFlowEditorContainer } from '@blocksuite/integration-test';
 import { effect } from '@preact/signals-core';
 import { css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
@@ -23,9 +23,9 @@ export class CustomFramePanel extends WithDisposable(ShadowlessElement) {
   `;
 
   private _renderPanel() {
-    return html`<affine-frame-panel
+    return html`<bridgeflow-frame-panel
       .host=${this.editor.std.host}
-    ></affine-frame-panel>`;
+    ></bridgeflow-frame-panel>`;
   }
 
   override connectedCallback(): void {
@@ -59,7 +59,7 @@ export class CustomFramePanel extends WithDisposable(ShadowlessElement) {
   private accessor _show = false;
 
   @property({ attribute: false })
-  accessor editor!: TestAffineEditorContainer;
+  accessor editor!: TestBridgeFlowEditorContainer;
 }
 
 declare global {

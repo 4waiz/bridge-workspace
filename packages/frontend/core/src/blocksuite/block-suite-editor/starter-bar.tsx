@@ -1,26 +1,26 @@
-import { MenuSeparator } from '@affine/component';
+import { MenuSeparator } from '@bridgeflow/component';
 import {
   handleInlineAskAIAction,
   pageAIGroups,
-} from '@affine/core/blocksuite/ai';
-import { useEnableAI } from '@affine/core/components/hooks/affine/use-enable-ai';
-import { DocsService } from '@affine/core/modules/doc';
-import { EditorService } from '@affine/core/modules/editor';
-import { TemplateDocService } from '@affine/core/modules/template-doc';
+} from '@bridgeflow/core/blocksuite/ai';
+import { useEnableAI } from '@bridgeflow/core/components/hooks/bridgeflow/use-enable-ai';
+import { DocsService } from '@bridgeflow/core/modules/doc';
+import { EditorService } from '@bridgeflow/core/modules/editor';
+import { TemplateDocService } from '@bridgeflow/core/modules/template-doc';
 import {
   TemplateListMenu,
   TemplateListMenuAdd,
-} from '@affine/core/modules/template-doc/view/template-list-menu';
-import { useI18n } from '@affine/i18n';
-import track from '@affine/track';
-import { PageRootBlockComponent } from '@blocksuite/affine/blocks/root';
-import type { Store } from '@blocksuite/affine/store';
+} from '@bridgeflow/core/modules/template-doc/view/template-list-menu';
+import { useI18n } from '@bridgeflow/i18n';
+import track from '@bridgeflow/track';
+import { PageRootBlockComponent } from '@blocksuite/bridgeflow/blocks/root';
+import type { Store } from '@blocksuite/bridgeflow/store';
 import {
   AiIcon,
   EdgelessIcon,
   TemplateColoredIcon,
 } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import {
   forwardRef,
@@ -31,7 +31,7 @@ import {
   useState,
 } from 'react';
 
-import { useAsyncCallback } from '../../components/hooks/affine-async-hooks';
+import { useAsyncCallback } from '../../components/hooks/bridgeflow-async-hooks';
 import * as styles from './starter-bar.css';
 
 const Badge = forwardRef<
@@ -122,13 +122,13 @@ const StarterBarNotEmpty = ({ doc }: { doc: Store }) => {
 
   return (
     <div className={styles.root} data-testid="starter-bar">
-      {t['com.affine.page-starter-bar.start']()}
+      {t['com.bridgeflow.page-starter-bar.start']()}
       <ul className={styles.badges}>
         {enableAI ? (
           <Badge
             data-testid="start-with-ai-badge"
             icon={<AiIcon className={styles.aiIcon} />}
-            text={t['com.affine.page-starter-bar.ai']()}
+            text={t['com.bridgeflow.page-starter-bar.ai']()}
             onClick={startWithAI}
           />
         ) : null}
@@ -150,7 +150,7 @@ const StarterBarNotEmpty = ({ doc }: { doc: Store }) => {
             <Badge
               data-testid="template-docs-badge"
               icon={<TemplateColoredIcon />}
-              text={t['com.affine.page-starter-bar.template']()}
+              text={t['com.bridgeflow.page-starter-bar.template']()}
               active={templateMenuOpen}
             />
           </TemplateListMenu>
@@ -158,7 +158,7 @@ const StarterBarNotEmpty = ({ doc }: { doc: Store }) => {
 
         <Badge
           icon={<EdgelessIcon />}
-          text={t['com.affine.page-starter-bar.edgeless']()}
+          text={t['com.bridgeflow.page-starter-bar.edgeless']()}
           onClick={startWithEdgeless}
         />
       </ul>

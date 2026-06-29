@@ -1,12 +1,12 @@
-import { isAllowedRedirectTarget } from '@toeverything/infra/utils';
+import { isAllowedRedirectTarget } from '@kanban-studios/infra/utils';
 
 import { buildType, isDev } from '../config';
 
 const API_BASE_BY_BUILD_TYPE: Record<typeof buildType, string> = {
-  stable: 'https://app.affine.pro',
-  beta: 'https://insider.affine.pro',
-  internal: 'https://insider.affine.pro',
-  canary: 'https://affine.fail',
+  stable: 'https://app.bridgeflow.pro',
+  beta: 'https://insider.bridgeflow.pro',
+  internal: 'https://insider.bridgeflow.pro',
+  canary: 'https://bridgeflow.fail',
 };
 
 function resolveCurrentHostnameForRedirectAllowlist() {
@@ -19,7 +19,7 @@ function resolveCurrentHostnameForRedirectAllowlist() {
   try {
     return new URL(base).hostname;
   } catch {
-    return 'app.affine.pro';
+    return 'app.bridgeflow.pro';
   }
 }
 

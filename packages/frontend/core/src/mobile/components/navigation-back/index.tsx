@@ -2,9 +2,9 @@ import {
   IconButton,
   type IconButtonProps,
   useIsInsideModal,
-} from '@affine/component';
+} from '@bridgeflow/component';
 import { ArrowLeftSmallIcon, CloseIcon } from '@blocksuite/icons/rc';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useMemo } from 'react';
 
 import { NavigationGestureService } from '../../modules/navigation-gesture';

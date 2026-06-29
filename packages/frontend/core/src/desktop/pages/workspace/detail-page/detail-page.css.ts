@@ -27,8 +27,8 @@ export const editorContainer = style({
   flex: 1,
   zIndex: 0,
 });
-// brings styles of .affine-page-viewport from blocksuite
-export const affineDocViewport = style({
+// brings styles of .bridgeflow-page-viewport from blocksuite
+export const bridgeflowDocViewport = style({
   display: 'flex',
   flexDirection: 'column',
   containerName: 'viewport',
@@ -49,7 +49,7 @@ export const affineDocViewport = style({
 
 export const pageModeViewportContentBox = style({});
 globalStyle(
-  `${pageModeViewportContentBox} >:first-child:has(>[data-affine-editor-container])`,
+  `${pageModeViewportContentBox} >:first-child:has(>[data-bridgeflow-editor-container])`,
   { display: 'table !important', minWidth: '100%' }
 );
 globalStyle(

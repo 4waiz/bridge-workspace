@@ -5,7 +5,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@affine/admin/components/ui/table';
+} from '@bridgeflow/admin/components/ui/table';
 import {
   type ColumnDef,
   type ColumnFiltersState,

@@ -1,5 +1,5 @@
-import { BRAND_SITE_URL } from '@affine/component/brand';
-import { Trans, useI18n } from '@affine/i18n';
+import { BRAND_SITE_URL } from '@bridgeflow/component/brand';
+import { Trans, useI18n } from '@bridgeflow/i18n';
 import clsx from 'clsx';
 import { useCallback } from 'react';
 
@@ -32,11 +32,11 @@ export const EditorLoading = ({
         <div className={styles.content} data-longer-loading={true}>
           <div>
             <div className={styles.text} data-longer-loading={true}>
-              {t['com.affine.error.loading-timeout-error']()}
+              {t['com.bridgeflow.error.loading-timeout-error']()}
             </div>
             <div className={styles.text} data-longer-loading={true}>
               <Trans
-                i18nKey="com.affine.error.contact-us"
+                i18nKey="com.bridgeflow.error.contact-us"
                 components={{
                   1: (
                     <a
@@ -64,17 +64,17 @@ export const EditorLoading = ({
             onClick={reloadPage}
             variant="primary"
           >
-            {t['com.affine.error.reload']()}
+            {t['com.bridgeflow.error.reload']()}
           </Button>
         </div>
       ) : (
         <div className={styles.content}>
           <div className={styles.title}>
             <Loading size={20} className={styles.loadingIcon} />
-            {t['com.affine.loading']()}
+            {t['com.bridgeflow.loading']()}
           </div>
           <div className={styles.text}>
-            {t['com.affine.loading.description']()}
+            {t['com.bridgeflow.loading.description']()}
           </div>
         </div>
       )}

@@ -1,10 +1,10 @@
-import { WorkspaceHome } from '@affine/core/desktop/components/workspace-home';
+import { WorkspaceHome } from '@bridgeflow/core/desktop/components/workspace-home';
 import {
   ViewBody,
   ViewHeader,
   ViewIcon,
   ViewTitle,
-} from '@affine/core/modules/workbench';
+} from '@bridgeflow/core/modules/workbench';
 
 export const Component = function HomePage() {
   return (

@@ -1,11 +1,11 @@
-import { createLitPortal } from '@blocksuite/affine/components/portal';
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import { ThemeProvider } from '@blocksuite/affine/shared/services';
+import { createLitPortal } from '@blocksuite/bridgeflow/components/portal';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { ThemeProvider } from '@blocksuite/bridgeflow/shared/services';
 import {
   EditorHost,
   PropTypes,
   requiredProperties,
-} from '@blocksuite/affine/std';
+} from '@blocksuite/bridgeflow/std';
 import { flip, offset } from '@floating-ui/dom';
 import { baseTheme } from '@toeverything/theme';
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit';

@@ -7,8 +7,8 @@
   },
   "include": ["./src"],
   "references": [
+    { "path": "../../blocksuite/bridgeflow/all" },
     { "path": "../../tools/utils" },
-    { "path": "../../blocksuite/affine/all" },
     { "path": "../../packages/common/infra" }
   ]
 }

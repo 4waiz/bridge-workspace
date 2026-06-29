@@ -1,4 +1,4 @@
-import type { ListedBlobRecord } from '@affine/nbstore';
+import type { ListedBlobRecord } from '@bridgeflow/nbstore';
 import {
   effect,
   Entity,
@@ -6,7 +6,7 @@ import {
   LiveData,
   onComplete,
   onStart,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { fileTypeFromBuffer } from 'file-type';
 import { switchMap, tap } from 'rxjs';
 

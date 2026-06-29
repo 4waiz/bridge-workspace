@@ -1,5 +1,5 @@
 import { LinkIcon } from '@blocksuite/icons/rc';
-import { Entity, LiveData } from '@toeverything/infra';
+import { Entity, LiveData } from '@kanban-studios/infra';
 
 import { resolveLinkToDoc } from '../../navigation';
 import { isLink } from '../../navigation/utils';
@@ -42,7 +42,7 @@ export class ExternalLinksQuickSearchSession
         source: 'external-link',
         icon: LinkIcon,
         label: {
-          i18nKey: 'com.affine.cmdk.affine.insert-link',
+          i18nKey: 'com.bridgeflow.cmdk.bridgeflow.insert-link',
         },
         payload: { url: query },
       } as QuickSearchItem<'external-link', ExternalLinkPayload>,

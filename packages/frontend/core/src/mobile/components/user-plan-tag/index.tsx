@@ -1,6 +1,6 @@
-import { ServerService, SubscriptionService } from '@affine/core/modules/cloud';
-import { SubscriptionPlan } from '@affine/graphql';
-import { useLiveData, useServices } from '@toeverything/infra';
+import { ServerService, SubscriptionService } from '@bridgeflow/core/modules/cloud';
+import { SubscriptionPlan } from '@bridgeflow/graphql';
+import { useLiveData, useServices } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { forwardRef, type HTMLProps, useEffect } from 'react';
 

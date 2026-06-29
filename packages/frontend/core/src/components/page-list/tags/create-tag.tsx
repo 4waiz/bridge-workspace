@@ -1,7 +1,7 @@
-import { Button, Input, Menu, toast } from '@affine/component';
-import { TagService } from '@affine/core/modules/tag';
-import { useI18n } from '@affine/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { Button, Input, Menu, toast } from '@bridgeflow/component';
+import { TagService } from '@bridgeflow/core/modules/tag';
+import { useI18n } from '@bridgeflow/i18n';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import type { MouseEvent } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -92,18 +92,18 @@ export const CreateOrEditTag = ({
         tag => tag.name === tagName.trim() && tag.id !== tagMeta?.id
       )
     ) {
-      return toast(t['com.affine.tags.create-tag.toast.exist']());
+      return toast(t['com.bridgeflow.tags.create-tag.toast.exist']());
     }
     if (!tagMeta) {
       tagList.createTag(tagName.trim(), tagIcon);
-      toast(t['com.affine.tags.create-tag.toast.success']());
+      toast(t['com.bridgeflow.tags.create-tag.toast.success']());
       onClose();
       return;
     }
     tag?.rename(tagName.trim());
     tag?.changeColor(tagIcon);
 
-    toast(t['com.affine.tags.edit-tag.toast.success']());
+    toast(t['com.bridgeflow.tags.edit-tag.toast.success']());
     onClose();
     return;
   }, [onClose, t, tag, tagIcon, tagMeta, tagName, tagOptions, tagList]);
@@ -159,7 +159,7 @@ export const CreateOrEditTag = ({
       </Menu>
 
       <Input
-        placeholder={t['com.affine.tags.create-tag.placeholder']()}
+        placeholder={t['com.bridgeflow.tags.create-tag.placeholder']()}
         inputStyle={{ fontSize: 'var(--affine-font-xs)' }}
         onEnter={onConfirm}
         value={tagName}

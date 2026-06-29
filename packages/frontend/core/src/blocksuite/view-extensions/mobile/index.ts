@@ -1,10 +1,10 @@
-import { KeyboardToolbarExtension } from '@affine/core/blocksuite/view-extensions/mobile/keyboard-toolbar-extension';
-import { MobileFeatureFlagControl } from '@affine/core/blocksuite/view-extensions/mobile/mobile-feature-flag-control';
+import { KeyboardToolbarExtension } from '@bridgeflow/core/blocksuite/view-extensions/mobile/keyboard-toolbar-extension';
+import { MobileFeatureFlagControl } from '@bridgeflow/core/blocksuite/view-extensions/mobile/mobile-feature-flag-control';
 import {
   type ViewExtensionContext,
   ViewExtensionProvider,
-} from '@blocksuite/affine/ext-loader';
-import { FrameworkProvider } from '@toeverything/infra';
+} from '@blocksuite/bridgeflow/ext-loader';
+import { FrameworkProvider } from '@kanban-studios/infra';
 import { z } from 'zod';
 
 const optionsSchema = z.object({

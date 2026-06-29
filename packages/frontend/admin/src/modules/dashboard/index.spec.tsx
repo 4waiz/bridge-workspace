@@ -8,7 +8,7 @@ import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 const useQueryMock = vi.fn();
 const mutateQueryResourceMock = vi.fn();
 
-vi.mock('@affine/admin/use-query', () => ({
+vi.mock('@bridgeflow/admin/use-query', () => ({
   useQuery: (...args: unknown[]) => useQueryMock(...args),
 }));
 
@@ -112,7 +112,7 @@ describe('DashboardPage', () => {
     expect(classes).not.toContain('min-[1024px]');
   });
 
-  test('uses affine token color variables for trend chart lines', () => {
+  test('uses bridgeflow token color variables for trend chart lines', () => {
     render(<DashboardPage />);
     const styles = Array.from(document.querySelectorAll('style'))
       .map(node => node.textContent ?? '')

@@ -1,10 +1,10 @@
-import { Menu } from '@affine/component';
-import { usePageHelper } from '@affine/core/blocksuite/block-suite-page-list/utils';
-import { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { inferOpenMode } from '@affine/core/utils';
-import track from '@affine/track';
+import { Menu } from '@bridgeflow/component';
+import { usePageHelper } from '@bridgeflow/core/blocksuite/block-suite-page-list/utils';
+import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { inferOpenMode } from '@bridgeflow/core/utils';
+import track from '@bridgeflow/track';
 import {
   ArrowDownSmallIcon,
   DatabaseTableViewIcon,
@@ -14,7 +14,7 @@ import {
   PlusIcon,
   ViewLayersIcon,
 } from '@blocksuite/icons/rc';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import type { CSSProperties, MouseEvent, ReactNode } from 'react';
 import { memo, useCallback, useState } from 'react';
 

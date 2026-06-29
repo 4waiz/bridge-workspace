@@ -1,11 +1,11 @@
 import {
   BRAND_AI_NAME,
   BRAND_CLOUD_NAME,
-} from '@affine/component/brand';
-import { SignalWatcher, WithDisposable } from '@blocksuite/affine/global/lit';
-import { scrollbarStyle } from '@blocksuite/affine/shared/styles';
-import { unsafeCSSVarV2 } from '@blocksuite/affine/shared/theme';
-import { type EditorHost } from '@blocksuite/affine/std';
+} from '@bridgeflow/component/brand';
+import { SignalWatcher, WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { scrollbarStyle } from '@blocksuite/bridgeflow/shared/styles';
+import { unsafeCSSVarV2 } from '@blocksuite/bridgeflow/shared/theme';
+import { type EditorHost } from '@blocksuite/bridgeflow/std';
 import { InformationIcon, ToggleDownIcon } from '@blocksuite/icons/lit';
 import { signal } from '@preact/signals-core';
 import { baseTheme } from '@toeverything/theme';
@@ -159,9 +159,9 @@ export class AIErrorWrapper extends SignalWatcher(WithDisposable(LitElement)) {
         >
           ${this.actionText}
           ${this.actionTooltip
-            ? html`<affine-tooltip tip-position="top">
+            ? html`<bridgeflow-tooltip tip-position="top">
                 ${this.actionTooltip}
-              </affine-tooltip>`
+              </bridgeflow-tooltip>`
             : nothing}
         </span>
       </div>

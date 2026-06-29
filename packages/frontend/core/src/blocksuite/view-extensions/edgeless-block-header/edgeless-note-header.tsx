@@ -1,19 +1,19 @@
-import { IconButton } from '@affine/component';
-import { DocService } from '@affine/core/modules/doc';
-import { EditorService } from '@affine/core/modules/editor';
-import { useInsidePeekView } from '@affine/core/modules/peek-view/view/modal-container';
-import { extractEmojiIcon } from '@affine/core/utils';
-import { useI18n } from '@affine/i18n';
-import { track } from '@affine/track';
-import { Bound } from '@blocksuite/affine/global/gfx';
-import { type NoteBlockModel } from '@blocksuite/affine/model';
-import { GfxControllerIdentifier } from '@blocksuite/affine/std/gfx';
+import { IconButton } from '@bridgeflow/component';
+import { DocService } from '@bridgeflow/core/modules/doc';
+import { EditorService } from '@bridgeflow/core/modules/editor';
+import { useInsidePeekView } from '@bridgeflow/core/modules/peek-view/view/modal-container';
+import { extractEmojiIcon } from '@bridgeflow/core/utils';
+import { useI18n } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
+import { Bound } from '@blocksuite/bridgeflow/global/gfx';
+import { type NoteBlockModel } from '@blocksuite/bridgeflow/model';
+import { GfxControllerIdentifier } from '@blocksuite/bridgeflow/std/gfx';
 import {
   ExpandFullIcon,
   ToggleDownIcon,
   ToggleRightIcon,
 } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { CopyLinkButton, DocInfoButton } from './common';
@@ -87,7 +87,7 @@ const EdgelessNoteToggleButton = ({ note }: { note: NoteBlockModel }) => {
       <IconButton
         className={styles.button}
         size={styles.iconSize}
-        tooltip={t['com.affine.editor.edgeless-note-header.fold-page-block']()}
+        tooltip={t['com.bridgeflow.editor.edgeless-note-header.fold-page-block']()}
         data-testid="edgeless-note-toggle-button"
         onClick={toggle}
       >
@@ -118,7 +118,7 @@ const OpenInPageButton = () => {
     <IconButton
       className={styles.button}
       size={styles.iconSize}
-      tooltip={t['com.affine.editor.edgeless-note-header.open-in-page']()}
+      tooltip={t['com.bridgeflow.editor.edgeless-note-header.open-in-page']()}
       data-testid="edgeless-note-view-in-page-button"
       onClick={openInPage}
     >

@@ -1,9 +1,9 @@
-import { Avatar } from '@affine/component/ui/avatar';
-import { Menu, MenuItem, MenuSeparator } from '@affine/component/ui/menu';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { useI18n } from '@affine/i18n';
+import { Avatar } from '@bridgeflow/component/ui/avatar';
+import { Menu, MenuItem, MenuSeparator } from '@bridgeflow/component/ui/menu';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { useI18n } from '@bridgeflow/i18n';
 import { SignOutIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useEffect, useMemo } from 'react';
 
 import { AuthService, SubscriptionService } from '../../../modules/cloud';
@@ -68,7 +68,7 @@ export const PublishPageUserAvatar = () => {
           data-testid="share-page-sign-out-option"
           onClick={handleSignOut}
         >
-          {t['com.affine.workspace.cloud.account.logout']()}
+          {t['com.bridgeflow.workspace.cloud.account.logout']()}
         </MenuItem>
       </>
     );

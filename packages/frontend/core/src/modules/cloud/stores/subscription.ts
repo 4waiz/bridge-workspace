@@ -1,7 +1,7 @@
 import type {
   CreateCheckoutSessionInput,
   SubscriptionRecurring,
-} from '@affine/graphql';
+} from '@bridgeflow/graphql';
 import {
   cancelSubscriptionMutation,
   createCheckoutSessionMutation,
@@ -11,8 +11,8 @@ import {
   SubscriptionPlan,
   subscriptionQuery,
   updateSubscriptionMutation,
-} from '@affine/graphql';
-import { Store } from '@toeverything/infra';
+} from '@bridgeflow/graphql';
+import { Store } from '@kanban-studios/infra';
 
 import type { GlobalCache } from '../../storage';
 import type { UrlService } from '../../url';

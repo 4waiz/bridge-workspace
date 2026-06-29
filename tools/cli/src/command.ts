@@ -1,7 +1,7 @@
-import { AliasToPackage } from '@affine-tools/utils/distribution';
-import { Logger } from '@affine-tools/utils/logger';
-import { exec, execAsync, spawn } from '@affine-tools/utils/process';
-import { type PackageName, Workspace } from '@affine-tools/utils/workspace';
+import { AliasToPackage } from '@bridgeflow-tools/utils/distribution';
+import { Logger } from '@bridgeflow-tools/utils/logger';
+import { exec, execAsync, spawn } from '@bridgeflow-tools/utils/process';
+import { type PackageName, Workspace } from '@bridgeflow-tools/utils/workspace';
 import { Command as BaseCommand, Option } from 'clipanion';
 import inquirer from 'inquirer';
 import * as t from 'typanion';
@@ -125,7 +125,7 @@ export abstract class PackageSelectorCommand extends Command {
             value: name,
           })),
           pageSize: 10,
-          default: '@affine/web',
+          default: '@bridgeflow/web',
         },
       ]);
 

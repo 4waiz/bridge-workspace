@@ -1,12 +1,12 @@
-import { usePromptModal } from '@affine/component';
-import { NavigationPanelTreeRoot } from '@affine/core/desktop/components/navigation-panel';
-import { CollectionService } from '@affine/core/modules/collection';
-import { NavigationPanelService } from '@affine/core/modules/navigation-panel';
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { useI18n } from '@affine/i18n';
-import { track } from '@affine/track';
+import { usePromptModal } from '@bridgeflow/component';
+import { NavigationPanelTreeRoot } from '@bridgeflow/core/desktop/components/navigation-panel';
+import { CollectionService } from '@bridgeflow/core/modules/collection';
+import { NavigationPanelService } from '@bridgeflow/core/modules/navigation-panel';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { useI18n } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
 import { AddCollectionIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useServices } from '@toeverything/infra';
+import { useLiveData, useServices } from '@kanban-studios/infra';
 import { useCallback, useMemo } from 'react';
 
 import { AddItemPlaceholder } from '../../layouts/add-item-placeholder';
@@ -28,18 +28,18 @@ export const NavigationPanelCollections = () => {
 
   const handleCreateCollection = useCallback(() => {
     openPromptModal({
-      title: t['com.affine.editCollection.saveCollection'](),
-      label: t['com.affine.editCollectionName.name'](),
+      title: t['com.bridgeflow.editCollection.saveCollection'](),
+      label: t['com.bridgeflow.editCollectionName.name'](),
       inputOptions: {
-        placeholder: t['com.affine.editCollectionName.name.placeholder'](),
+        placeholder: t['com.bridgeflow.editCollectionName.name.placeholder'](),
       },
       children: (
         <div className={styles.createTips}>
-          {t['com.affine.editCollectionName.createTips']()}
+          {t['com.bridgeflow.editCollectionName.createTips']()}
         </div>
       ),
-      confirmText: t['com.affine.editCollection.save'](),
-      cancelText: t['com.affine.editCollection.button.cancel'](),
+      confirmText: t['com.bridgeflow.editCollection.save'](),
+      cancelText: t['com.bridgeflow.editCollection.button.cancel'](),
       confirmButtonOptions: {
         variant: 'primary',
       },
@@ -65,7 +65,7 @@ export const NavigationPanelCollections = () => {
     <CollapsibleSection
       path={path}
       testId="navigation-panel-collections"
-      title={t['com.affine.rootAppSidebar.collections']()}
+      title={t['com.bridgeflow.rootAppSidebar.collections']()}
     >
       <NavigationPanelTreeRoot>
         {collectionMetas.map(collection => (
@@ -78,7 +78,7 @@ export const NavigationPanelCollections = () => {
         <AddItemPlaceholder
           icon={<AddCollectionIcon />}
           data-testid="navigation-panel-bar-add-collection-button"
-          label={t['com.affine.rootAppSidebar.collection.new']()}
+          label={t['com.bridgeflow.rootAppSidebar.collection.new']()}
           onClick={() => handleCreateCollection()}
         />
       </NavigationPanelTreeRoot>

@@ -1,14 +1,15 @@
 {
-  "name": "@affine/admin",
+  "name": "@bridgeflow/admin",
   "version": "0.26.3",
   "private": true,
   "dependencies": {
-    "@affine/component": "workspace:*",
-    "@affine/core": "workspace:*",
-    "@affine/error": "workspace:*",
-    "@affine/graphql": "workspace:*",
-    "@affine/routes": "workspace:*",
     "@blocksuite/icons": "^2.2.17",
+    "@bridgeflow/component": "workspace:*",
+    "@bridgeflow/core": "workspace:*",
+    "@bridgeflow/error": "workspace:*",
+    "@bridgeflow/graphql": "workspace:*",
+    "@bridgeflow/routes": "workspace:*",
+    "@kanban-studios/infra": "workspace:*",
     "@queuedash/ui": "^3.16.0",
     "@radix-ui/react-accordion": "^1.2.2",
     "@radix-ui/react-alert-dialog": "^1.1.3",
@@ -39,7 +40,6 @@
     "@radix-ui/react-tooltip": "^1.1.5",
     "@sentry/react": "^10.40.0",
     "@tanstack/react-table": "^8.20.5",
-    "@toeverything/infra": "workspace:*",
     "@toeverything/theme": "^1.1.23",
     "cmdk": "^1.0.4",
     "embla-carousel-react": "^8.5.1",
@@ -72,8 +72,8 @@
     "vitest": "^4.0.18"
   },
   "scripts": {
-    "build": "affine bundle",
-    "dev": "affine bundle --dev",
+    "build": "bridgeflow bundle",
+    "dev": "bridgeflow bundle --dev",
     "update-shadcn": "yarn dlx shadcn@latest add -p src/components/ui"
   },
   "exports": {

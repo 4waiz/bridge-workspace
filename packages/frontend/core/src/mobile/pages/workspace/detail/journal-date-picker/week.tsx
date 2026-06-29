@@ -1,5 +1,5 @@
-import { SwipeHelper } from '@affine/core/mobile/utils';
-import { useI18n } from '@affine/i18n';
+import { SwipeHelper } from '@bridgeflow/core/mobile/utils';
+import { useI18n } from '@bridgeflow/i18n';
 import { animate, eases } from 'animejs';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
@@ -30,7 +30,7 @@ export const WeekHeader = memo(function WeekHeader({
   const t = useI18n();
 
   const days = useMemo(
-    () => t['com.affine.calendar-date-picker.week-days']().split(','),
+    () => t['com.bridgeflow.calendar-date-picker.week-days']().split(','),
     [t]
   );
   return (

@@ -1,7 +1,7 @@
-import { NavigationPanelService } from '@affine/core/modules/navigation-panel';
+import { NavigationPanelService } from '@bridgeflow/core/modules/navigation-panel';
 import { ToggleRightIcon } from '@blocksuite/icons/rc';
 import * as Collapsible from '@radix-ui/react-collapsible';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import {
   forwardRef,

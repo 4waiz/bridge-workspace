@@ -1,10 +1,10 @@
-import type { EditorHost } from '@blocksuite/affine/std';
+import type { EditorHost } from '@blocksuite/bridgeflow/std';
 import { css, html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { getAIPanelWidget } from '../utils/ai-widgets';
 import { preprocessHtml } from '../utils/html';
-import type { AffineAIPanelWidgetConfig } from '../widgets/ai-panel/type';
+import type { BridgeFlowAIPanelWidgetConfig } from '../widgets/ai-panel/type';
 
 type AIAnswerWrapperOptions = {
   height: number;
@@ -59,7 +59,7 @@ declare global {
 export const createIframeRenderer: (
   host: EditorHost,
   options?: AIAnswerWrapperOptions
-) => AffineAIPanelWidgetConfig['answerRenderer'] = (host, options) => {
+) => BridgeFlowAIPanelWidgetConfig['answerRenderer'] = (host, options) => {
   return (answer, state) => {
     if (state === 'generating') {
       const panel = getAIPanelWidget(host);
@@ -87,7 +87,7 @@ export const createIframeRenderer: (
 export const createImageRenderer: (
   host: EditorHost,
   options?: AIAnswerWrapperOptions
-) => AffineAIPanelWidgetConfig['answerRenderer'] = (host, options) => {
+) => BridgeFlowAIPanelWidgetConfig['answerRenderer'] = (host, options) => {
   return (answer, state) => {
     if (state === 'generating') {
       const panel = getAIPanelWidget(host);

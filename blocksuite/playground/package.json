@@ -9,10 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@blocksuite/affine": "workspace:*",
-    "@blocksuite/affine-components": "workspace:*",
-    "@blocksuite/affine-model": "workspace:*",
-    "@blocksuite/affine-shared": "workspace:*",
+    "@blocksuite/bridgeflow": "workspace:*",
+    "@blocksuite/bridgeflow-components": "workspace:*",
+    "@blocksuite/bridgeflow-model": "workspace:*",
+    "@blocksuite/bridgeflow-shared": "workspace:*",
     "@blocksuite/data-view": "workspace:*",
     "@blocksuite/icons": "^2.2.17",
     "@blocksuite/integration-test": "workspace:*",

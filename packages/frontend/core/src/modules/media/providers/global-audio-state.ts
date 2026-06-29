@@ -3,7 +3,7 @@ import {
   LiveData,
   type MediaStats,
   type PlaybackState,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 
 import type { GlobalState } from '../../storage';
 

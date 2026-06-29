@@ -3,8 +3,8 @@ import {
   type ListUserAccessTokensQuery,
   listUserAccessTokensQuery,
   revokeUserAccessTokenMutation,
-} from '@affine/graphql';
-import { Store } from '@toeverything/infra';
+} from '@bridgeflow/graphql';
+import { Store } from '@kanban-studios/infra';
 
 import type { GraphQLService } from '../services/graphql';
 

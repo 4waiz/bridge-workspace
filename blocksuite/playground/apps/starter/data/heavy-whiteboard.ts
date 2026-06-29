@@ -1,12 +1,12 @@
-import type { SerializedXYWH } from '@blocksuite/affine/global/gfx';
+import type { SerializedXYWH } from '@blocksuite/bridgeflow/global/gfx';
 import {
   Boxed,
   nanoid,
   native2Y,
   Text,
   type Workspace,
-} from '@blocksuite/affine/store';
-import { DEFAULT_ROUGHNESS } from '@blocksuite/affine-model';
+} from '@blocksuite/bridgeflow/store';
+import { DEFAULT_ROUGHNESS } from '@blocksuite/bridgeflow-model';
 import type * as Y from 'yjs';
 
 import type { InitFn } from './utils.js';
@@ -54,14 +54,14 @@ export const heavyWhiteboard: InitFn = (collection: Workspace, id: string) => {
   const store = doc.getStore();
   doc.load(() => {
     // Add root block and surface block at root level
-    const rootId = store.addBlock('affine:page', {
+    const rootId = store.addBlock('bridgeflow:page', {
       title: new Text(),
     });
 
     const surfaceBlocks = enableShapes ? createShapes(count) : {};
 
     store.addBlock(
-      'affine:surface',
+      'bridgeflow:surface',
       {
         elements: new Boxed(native2Y(surfaceBlocks, { deep: false })) as Boxed<
           Y.Map<Y.Map<unknown>>
@@ -76,7 +76,7 @@ export const heavyWhiteboard: InitFn = (collection: Workspace, id: string) => {
       const x = Math.random() * RANGE - RANGE / 2;
       const y = Math.random() * RANGE - RANGE / 2;
       const noteId = store.addBlock(
-        'affine:note',
+        'bridgeflow:note',
         {
           xywh: `[${x}, ${y}, 100, 50]` as SerializedXYWH,
         },
@@ -84,7 +84,7 @@ export const heavyWhiteboard: InitFn = (collection: Workspace, id: string) => {
       );
       // Add paragraph block inside note block
       store.addBlock(
-        'affine:paragraph',
+        'bridgeflow:paragraph',
         {
           text: new Text('Note #' + i),
         },

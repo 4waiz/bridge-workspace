@@ -1,5 +1,5 @@
-import { AppSidebarService } from '@affine/core/modules/app-sidebar';
-import { useLiveData, useService } from '@toeverything/infra';
+import { AppSidebarService } from '@bridgeflow/core/modules/app-sidebar';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import type { ReactNode } from 'react';
 

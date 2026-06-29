@@ -1,14 +1,14 @@
-import { BRAND_NAME, BrandLogo } from '@affine/component/brand';
-import { Button } from '@affine/admin/components/ui/button';
-import { Input } from '@affine/admin/components/ui/input';
-import { Label } from '@affine/admin/components/ui/label';
-import { FeatureType, getUserFeaturesQuery } from '@affine/graphql';
+import { BRAND_NAME, BrandLogo } from '@bridgeflow/component/brand';
+import { Button } from '@bridgeflow/admin/components/ui/button';
+import { Input } from '@bridgeflow/admin/components/ui/input';
+import { Label } from '@bridgeflow/admin/components/ui/label';
+import { FeatureType, getUserFeaturesQuery } from '@bridgeflow/graphql';
 import type { FormEvent } from 'react';
 import { useCallback, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
-import { affineFetch } from '../../fetch-utils';
+import { bridgeflowFetch } from '../../fetch-utils';
 import { isAdmin, useCurrentUser, useRevalidateCurrentUser } from '../common';
 
 export function Auth() {
@@ -21,7 +21,7 @@ export function Auth() {
       e.preventDefault();
       e.stopPropagation();
       if (!emailRef.current || !passwordRef.current) return;
-      affineFetch('/api/auth/sign-in', {
+      bridgeflowFetch('/api/auth/sign-in', {
         method: 'POST',
         body: JSON.stringify({
           email: emailRef.current?.value,
@@ -39,7 +39,7 @@ export function Auth() {
           return response.json();
         })
         .then(() =>
-          affineFetch('/graphql', {
+          bridgeflowFetch('/graphql', {
             method: 'POST',
             body: JSON.stringify({
               operationName: getUserFeaturesQuery.op,

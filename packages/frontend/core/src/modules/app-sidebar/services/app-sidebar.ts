@@ -1,4 +1,4 @@
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 
 import { GlobalState } from '../../storage';
 import { AppSidebar } from '../entities/app-sidebar';

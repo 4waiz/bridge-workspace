@@ -1,7 +1,7 @@
-import { type MenuSubProps, useMobileMenuController } from '@affine/component';
-import { TagService } from '@affine/core/modules/tag';
-import { useI18n } from '@affine/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { type MenuSubProps, useMobileMenuController } from '@bridgeflow/component';
+import { TagService } from '@bridgeflow/core/modules/tag';
+import { useI18n } from '@bridgeflow/i18n';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import {
   createContext,
   type Dispatch,
@@ -135,9 +135,9 @@ export const TagRenameDialog = ({
   ...props
 }: TagRenameDialogProps) => {
   const t = useI18n();
-  const title = propsTitle || t['com.affine.m.explorer.tag.new-dialog-title']();
+  const title = propsTitle || t['com.bridgeflow.m.explorer.tag.new-dialog-title']();
   const confirmText =
-    propsConfirmText || t['com.affine.m.explorer.tag.rename-confirm']();
+    propsConfirmText || t['com.bridgeflow.m.explorer.tag.rename-confirm']();
 
   return (
     <RenameDialog
@@ -185,7 +185,7 @@ export const TagRenameSubMenu = ({
 
   return (
     <RenameSubMenu
-      title={title ?? t['com.affine.m.explorer.tag.rename-menu-title']()}
+      title={title ?? t['com.bridgeflow.m.explorer.tag.rename-menu-title']()}
       icon={icon}
       text={text}
       menuProps={menuProps}

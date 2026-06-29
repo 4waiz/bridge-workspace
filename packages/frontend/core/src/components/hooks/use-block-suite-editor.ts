@@ -1,13 +1,13 @@
 import type { SetStateAction } from 'jotai';
 import { atom, useAtom } from 'jotai';
 
-import type { AffineEditorContainer } from '../../blocksuite/block-suite-editor';
+import type { BridgeFlowEditorContainer } from '../../blocksuite/block-suite-editor';
 
-const activeEditorContainerAtom = atom<AffineEditorContainer | null>(null);
+const activeEditorContainerAtom = atom<BridgeFlowEditorContainer | null>(null);
 
 export function useActiveBlocksuiteEditor(): [
-  AffineEditorContainer | null,
-  React.Dispatch<SetStateAction<AffineEditorContainer | null>>,
+  BridgeFlowEditorContainer | null,
+  React.Dispatch<SetStateAction<BridgeFlowEditorContainer | null>>,
 ] {
   const [editorContainer, setEditorContainer] = useAtom(
     activeEditorContainerAtom

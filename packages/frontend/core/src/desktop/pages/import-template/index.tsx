@@ -1,6 +1,6 @@
-import { GlobalDialogService } from '@affine/core/modules/dialogs';
-import type { DocMode } from '@blocksuite/affine/model';
-import { useService } from '@toeverything/infra';
+import { GlobalDialogService } from '@bridgeflow/core/modules/dialogs';
+import type { DocMode } from '@blocksuite/bridgeflow/model';
+import { useService } from '@kanban-studios/infra';
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 

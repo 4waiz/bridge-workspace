@@ -1,4 +1,4 @@
-import serverNativeModule from '@affine/server-native';
+import serverNativeModule from '@bridgeflow/server-native';
 import test from 'ava';
 
 import type { NativeLlmRerankRequest } from '../../native';
@@ -79,7 +79,7 @@ class NativeRerankProtocolProvider extends OpenAIProvider {
 
 function createProvider(profileMiddleware?: ProviderMiddlewareConfig) {
   const provider = new TestOpenAIProvider();
-  (provider as any).AFFiNEConfig = {
+  (provider as any).BridgeFlowConfig = {
     copilot: {
       providers: {
         profiles: [

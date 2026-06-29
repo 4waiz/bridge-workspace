@@ -1,23 +1,23 @@
-import { BRAND_AI_NAME } from '@affine/component/brand';
-import type { AIToolsConfigService } from '@affine/core/modules/ai-button';
-import type { AIModelService } from '@affine/core/modules/ai-button/services/models';
+import { BRAND_AI_NAME } from '@bridgeflow/component/brand';
+import type { AIToolsConfigService } from '@bridgeflow/core/modules/ai-button';
+import type { AIModelService } from '@bridgeflow/core/modules/ai-button/services/models';
 import type {
   ServerService,
   SubscriptionService,
-} from '@affine/core/modules/cloud';
+} from '@bridgeflow/core/modules/cloud';
 import {
   type CopilotChatHistoryFragment,
   ServerDeploymentType,
   SubscriptionStatus,
-} from '@affine/graphql';
+} from '@bridgeflow/graphql';
 import {
   menu,
   popMenu,
   popupTargetFromElement,
-} from '@blocksuite/affine/components/context-menu';
-import { SignalWatcher, WithDisposable } from '@blocksuite/affine/global/lit';
-import { unsafeCSSVarV2 } from '@blocksuite/affine/shared/theme';
-import type { NotificationService } from '@blocksuite/affine-shared/services';
+} from '@blocksuite/bridgeflow/components/context-menu';
+import { SignalWatcher, WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { unsafeCSSVarV2 } from '@blocksuite/bridgeflow/shared/theme';
+import type { NotificationService } from '@blocksuite/bridgeflow-shared/services';
 import {
   AiOutlineIcon,
   ArrowDownSmallIcon,

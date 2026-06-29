@@ -1,9 +1,9 @@
 import './ask-ai-panel';
 
-import { HoverController } from '@blocksuite/affine/components/hover';
-import { createLitPortal } from '@blocksuite/affine/components/portal';
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import { type EditorHost } from '@blocksuite/affine/std';
+import { HoverController } from '@blocksuite/bridgeflow/components/hover';
+import { createLitPortal } from '@blocksuite/bridgeflow/components/portal';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { type EditorHost } from '@blocksuite/bridgeflow/std';
 import { flip, offset } from '@floating-ui/dom';
 import { css, html, LitElement, nothing } from 'lit';
 import { property, query } from 'lit/decorators.js';

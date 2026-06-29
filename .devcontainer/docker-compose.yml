@@ -10,9 +10,9 @@ services:
     command: sleep infinity
     network_mode: service:db
     environment:
-      DATABASE_URL: postgresql://affine:affine@db:5432/affine
+      DATABASE_URL: postgresql://bridgeflow:bridgeflow@db:5432/bridgeflow
       REDIS_SERVER_HOST: redis
-      AFFINE_INDEXER_SEARCH_ENDPOINT: http://indexer:9308
+      BRIDGEFLOW_INDEXER_SEARCH_ENDPOINT: http://indexer:9308
 
   db:
     image: pgvector/pgvector:pg16
@@ -20,9 +20,9 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: affine
-      POSTGRES_USER: affine
-      POSTGRES_DB: affine
+      POSTGRES_PASSWORD: bridgeflow
+      POSTGRES_USER: bridgeflow
+      POSTGRES_DB: bridgeflow
   redis:
     image: redis
 

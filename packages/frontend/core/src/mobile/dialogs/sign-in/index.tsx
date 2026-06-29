@@ -1,9 +1,9 @@
-import { IconButton, Modal, SafeArea } from '@affine/component';
-import type { SignInStep } from '@affine/core/components/sign-in';
+import { IconButton, Modal, SafeArea } from '@bridgeflow/component';
+import type { SignInStep } from '@bridgeflow/core/components/sign-in';
 import type {
   DialogComponentProps,
   GLOBAL_DIALOG_SCHEMA,
-} from '@affine/core/modules/dialogs';
+} from '@bridgeflow/core/modules/dialogs';
 import { CloseIcon } from '@blocksuite/icons/rc';
 import { cssVarV2 } from '@toeverything/theme/v2';
 

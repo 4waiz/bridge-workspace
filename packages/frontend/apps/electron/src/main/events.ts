@@ -1,8 +1,8 @@
 import { ipcMain, powerMonitor, webContents } from 'electron';
 
 import {
-  AFFINE_EVENT_CHANNEL_NAME,
-  AFFINE_EVENT_SUBSCRIBE_CHANNEL_NAME,
+  BRIDGEFLOW_EVENT_CHANNEL_NAME,
+  BRIDGEFLOW_EVENT_SUBSCRIBE_CHANNEL_NAME,
 } from '../shared/type';
 import { applicationMenuEvents } from './application-menu';
 import { beforeAppQuit } from './cleanup';
@@ -75,7 +75,7 @@ export function registerEvents() {
       addSubscription(event.sender, channel);
       if (channel === 'power:power-source') {
         event.sender.send(
-          AFFINE_EVENT_CHANNEL_NAME,
+          BRIDGEFLOW_EVENT_CHANNEL_NAME,
           channel,
           powerMonitor.isOnBatteryPower()
         );
@@ -85,9 +85,9 @@ export function registerEvents() {
     }
   };
 
-  ipcMain.on(AFFINE_EVENT_SUBSCRIBE_CHANNEL_NAME, onSubscribe);
+  ipcMain.on(BRIDGEFLOW_EVENT_SUBSCRIBE_CHANNEL_NAME, onSubscribe);
   unsubs.push(() =>
-    ipcMain.removeListener(AFFINE_EVENT_SUBSCRIBE_CHANNEL_NAME, onSubscribe)
+    ipcMain.removeListener(BRIDGEFLOW_EVENT_SUBSCRIBE_CHANNEL_NAME, onSubscribe)
   );
   // register events
   for (const [namespace, namespaceEvents] of Object.entries(allEvents)) {
@@ -106,7 +106,7 @@ export function registerEvents() {
         );
         getTargetContents(chan).forEach(wc => {
           if (!wc.isDestroyed()) {
-            wc.send(AFFINE_EVENT_CHANNEL_NAME, chan, ...args);
+            wc.send(BRIDGEFLOW_EVENT_CHANNEL_NAME, chan, ...args);
           }
         });
       });

@@ -1,4 +1,4 @@
-import type { GetMembersByWorkspaceIdQuery } from '@affine/graphql';
+import type { GetMembersByWorkspaceIdQuery } from '@bridgeflow/graphql';
 import {
   catchErrorInto,
   effect,
@@ -8,7 +8,7 @@ import {
   onComplete,
   onStart,
   smartRetry,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { map, switchMap, tap } from 'rxjs';
 
 import type { WorkspaceService } from '../../workspace';

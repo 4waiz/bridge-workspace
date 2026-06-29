@@ -4,26 +4,26 @@ export const PackageToDistribution = new Map<
   PackageName,
   BUILD_CONFIG_TYPE['distribution']
 >([
-  ['@affine/admin', 'admin'],
-  ['@affine/web', 'web'],
-  ['@affine/electron-renderer', 'desktop'],
-  ['@affine/electron', 'desktop'],
-  ['@affine/mobile', 'mobile'],
-  ['@affine/ios', 'ios'],
-  ['@affine/android', 'android'],
+  ['@bridgeflow/admin', 'admin'],
+  ['@bridgeflow/web', 'web'],
+  ['@bridgeflow/electron-renderer', 'desktop'],
+  ['@bridgeflow/electron', 'desktop'],
+  ['@bridgeflow/mobile', 'mobile'],
+  ['@bridgeflow/ios', 'ios'],
+  ['@bridgeflow/android', 'android'],
 ]);
 
 export const AliasToPackage = new Map<string, PackageName>([
-  ['admin', '@affine/admin'],
-  ['web', '@affine/web'],
-  ['electron', '@affine/electron'],
-  ['desktop', '@affine/electron-renderer'],
-  ['renderer', '@affine/electron-renderer'],
-  ['mobile', '@affine/mobile'],
-  ['ios', '@affine/ios'],
-  ['android', '@affine/android'],
-  ['server', '@affine/server'],
-  ['gql', '@affine/graphql'],
+  ['admin', '@bridgeflow/admin'],
+  ['web', '@bridgeflow/web'],
+  ['electron', '@bridgeflow/electron'],
+  ['desktop', '@bridgeflow/electron-renderer'],
+  ['renderer', '@bridgeflow/electron-renderer'],
+  ['mobile', '@bridgeflow/mobile'],
+  ['ios', '@bridgeflow/ios'],
+  ['android', '@bridgeflow/android'],
+  ['server', '@bridgeflow/server'],
+  ['gql', '@bridgeflow/graphql'],
   ...PackageList.map(
     pkg => [pkg.name.split('/').pop()!, pkg.name] as [string, PackageName]
   ),

@@ -1,7 +1,7 @@
 import { execSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 
-import { Path, ProjectRoot } from '@affine-tools/utils/path';
+import { Path, ProjectRoot } from '@bridgeflow-tools/utils/path';
 import { Repository } from '@napi-rs/simple-git';
 import HTMLPlugin from 'html-webpack-plugin';
 import { once } from 'lodash-es';
@@ -51,15 +51,15 @@ export const getPublicPath = (BUILD_CONFIG: BUILD_CONFIG_TYPE) => {
 
   switch (BUILD_TYPE) {
     case 'stable':
-      return 'https://prod.affineassets.com/';
+      return 'https://prod.bridgeflowassets.com/';
     case 'beta':
-      return 'https://beta.affineassets.com/';
+      return 'https://beta.bridgeflowassets.com/';
     default:
-      return 'https://dev.affineassets.com/';
+      return 'https://dev.bridgeflowassets.com/';
   }
 };
 
-const DESCRIPTION = `BridgeWS unifies docs, whiteboards, and databases in one enterprise workspace.`;
+const DESCRIPTION = `BRIDGE Flow — AI Innovation Canvas. An infinite canvas to write, draw, plan and build with AI, all in one enterprise workspace.`;
 
 const gitShortHash = once(() => {
   const { GITHUB_SHA } = process.env;

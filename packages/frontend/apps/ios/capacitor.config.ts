@@ -9,16 +9,16 @@ const packageJson = JSON.parse(
 );
 
 interface AppConfig {
-  affineVersion: string;
+  bridgeflowVersion: string;
 }
 
 const config: CapacitorConfig & AppConfig = {
-  appId: 'app.affine.pro',
-  appName: 'AFFiNE',
+  appId: 'app.bridgeflow.pro',
+  appName: 'BridgeFlow',
   webDir: 'dist',
-  affineVersion: packageJson.version,
+  bridgeflowVersion: packageJson.version,
   ios: {
-    scheme: 'AFFiNE',
+    scheme: 'BridgeFlow',
     path: '.',
     webContentsDebuggingEnabled: true,
   },

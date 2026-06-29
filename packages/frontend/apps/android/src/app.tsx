@@ -1,11 +1,11 @@
-import { getStoreManager } from '@affine/core/blocksuite/manager/store';
-import { AffineContext } from '@affine/core/components/context';
-import { AppFallback } from '@affine/core/mobile/components/app-fallback';
-import { configureMobileModules } from '@affine/core/mobile/modules';
-import { VirtualKeyboardProvider } from '@affine/core/mobile/modules/virtual-keyboard';
-import { router } from '@affine/core/mobile/router';
-import { configureCommonModules } from '@affine/core/modules';
-import { AIButtonProvider } from '@affine/core/modules/ai-button';
+import { getStoreManager } from '@bridgeflow/core/blocksuite/manager/store';
+import { BridgeFlowContext } from '@bridgeflow/core/components/context';
+import { AppFallback } from '@bridgeflow/core/mobile/components/app-fallback';
+import { configureMobileModules } from '@bridgeflow/core/mobile/modules';
+import { VirtualKeyboardProvider } from '@bridgeflow/core/mobile/modules/virtual-keyboard';
+import { router } from '@bridgeflow/core/mobile/router';
+import { configureCommonModules } from '@bridgeflow/core/modules';
+import { AIButtonProvider } from '@bridgeflow/core/modules/ai-button';
 import {
   AuthProvider,
   AuthService,
@@ -14,42 +14,42 @@ import {
   ServerService,
   ServersService,
   ValidatorProvider,
-} from '@affine/core/modules/cloud';
-import { DocsService } from '@affine/core/modules/doc';
-import { GlobalContextService } from '@affine/core/modules/global-context';
-import { I18nProvider } from '@affine/core/modules/i18n';
-import { LifecycleService } from '@affine/core/modules/lifecycle';
+} from '@bridgeflow/core/modules/cloud';
+import { DocsService } from '@bridgeflow/core/modules/doc';
+import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
+import { I18nProvider } from '@bridgeflow/core/modules/i18n';
+import { LifecycleService } from '@bridgeflow/core/modules/lifecycle';
 import {
   configureLocalStorageStateStorageImpls,
   NbstoreProvider,
-} from '@affine/core/modules/storage';
-import { PopupWindowProvider } from '@affine/core/modules/url';
-import { ClientSchemeProvider } from '@affine/core/modules/url/providers/client-schema';
-import { configureBrowserWorkbenchModule } from '@affine/core/modules/workbench';
-import { WorkspacesService } from '@affine/core/modules/workspace';
-import { configureBrowserWorkspaceFlavours } from '@affine/core/modules/workspace-engine';
-import { getWorkerUrl } from '@affine/env/worker';
-import { I18n } from '@affine/i18n';
-import { StoreManagerClient } from '@affine/nbstore/worker/client';
-import { setTelemetryTransport } from '@affine/track';
-import { Container } from '@blocksuite/affine/global/di';
+} from '@bridgeflow/core/modules/storage';
+import { PopupWindowProvider } from '@bridgeflow/core/modules/url';
+import { ClientSchemeProvider } from '@bridgeflow/core/modules/url/providers/client-schema';
+import { configureBrowserWorkbenchModule } from '@bridgeflow/core/modules/workbench';
+import { WorkspacesService } from '@bridgeflow/core/modules/workspace';
+import { configureBrowserWorkspaceFlavours } from '@bridgeflow/core/modules/workspace-engine';
+import { getWorkerUrl } from '@bridgeflow/env/worker';
+import { I18n } from '@bridgeflow/i18n';
+import { StoreManagerClient } from '@bridgeflow/nbstore/worker/client';
+import { setTelemetryTransport } from '@bridgeflow/track';
+import { Container } from '@blocksuite/bridgeflow/global/di';
 import {
   docLinkBaseURLMiddleware,
   MarkdownAdapter,
   titleMiddleware,
-} from '@blocksuite/affine/shared/adapters';
+} from '@blocksuite/bridgeflow/shared/adapters';
 import { App as CapacitorApp } from '@capacitor/app';
 import { Keyboard } from '@capacitor/keyboard';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { InAppBrowser } from '@capgo/inappbrowser';
-import { Framework, FrameworkRoot, getCurrentStore } from '@toeverything/infra';
-import { OpClient } from '@toeverything/infra/op';
+import { Framework, FrameworkRoot, getCurrentStore } from '@kanban-studios/infra';
+import { OpClient } from '@kanban-studios/infra/op';
 import { AsyncCall } from 'async-call-rpc';
 import { useTheme } from 'next-themes';
 import { Suspense, useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
 
-import { AffineTheme } from './plugins/affine-theme';
+import { BridgeFlowTheme } from './plugins/bridgeflow-theme';
 import { AIButton } from './plugins/ai-button';
 import { Auth } from './plugins/auth';
 import { HashCash } from './plugins/hashcash';
@@ -95,7 +95,7 @@ framework.impl(PopupWindowProvider, {
 
 framework.impl(ClientSchemeProvider, {
   getClientScheme() {
-    return 'affine';
+    return 'bridgeflow';
   },
 });
 
@@ -119,7 +119,7 @@ framework.impl(VirtualKeyboardProvider, {
     Promise.all([
       Keyboard.addListener('keyboardWillShow', info => {
         (async () => {
-          const navBarHeight = (await AffineTheme.getSystemNavBarHeight())
+          const navBarHeight = (await BridgeFlowTheme.getSystemNavBarHeight())
             .height;
           callback({
             // When an physical keyboard is connected, the virtual keyboard height is 0,
@@ -336,7 +336,7 @@ const ThemeProvider = () => {
             ? Style.Light
             : Style.Default,
     }).catch(console.error);
-    AffineTheme.onThemeChanged({
+    BridgeFlowTheme.onThemeChanged({
       darkMode: resolvedTheme === 'dark',
     }).catch(console.error);
   }, [resolvedTheme]);
@@ -348,14 +348,14 @@ export function App() {
     <Suspense>
       <FrameworkRoot framework={frameworkProvider}>
         <I18nProvider>
-          <AffineContext store={getCurrentStore()}>
+          <BridgeFlowContext store={getCurrentStore()}>
             <ThemeProvider />
             <RouterProvider
               fallbackElement={<AppFallback />}
               router={router}
               future={future}
             />
-          </AffineContext>
+          </BridgeFlowContext>
         </I18nProvider>
       </FrameworkRoot>
     </Suspense>

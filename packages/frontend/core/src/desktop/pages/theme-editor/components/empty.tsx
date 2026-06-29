@@ -1,4 +1,4 @@
-import { Empty } from '@affine/component';
+import { Empty } from '@bridgeflow/component';
 
 export const ThemeEmpty = () => {
   return (

@@ -1,16 +1,16 @@
-import { Avatar, IconButton, Loading, Menu, notify } from '@affine/component';
-import { Pagination } from '@affine/component/setting-components';
-import { type AuthAccountInfo, AuthService } from '@affine/core/modules/cloud';
+import { Avatar, IconButton, Loading, Menu, notify } from '@bridgeflow/component';
+import { Pagination } from '@bridgeflow/component/setting-components';
+import { type AuthAccountInfo, AuthService } from '@bridgeflow/core/modules/cloud';
 import {
   type Member,
   WorkspaceMembersService,
-} from '@affine/core/modules/permissions';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { UserFriendlyError } from '@affine/error';
-import { Permission, WorkspaceMemberStatus } from '@affine/graphql';
-import { type I18nString, useI18n } from '@affine/i18n';
+} from '@bridgeflow/core/modules/permissions';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { UserFriendlyError } from '@bridgeflow/error';
+import { Permission, WorkspaceMemberStatus } from '@bridgeflow/graphql';
+import { type I18nString, useI18n } from '@bridgeflow/i18n';
 import { MoreVerticalIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { clamp } from 'lodash-es';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -169,8 +169,8 @@ const MemberItem = ({
         if (result) {
           setOpen(false);
           notify.success({
-            title: t['com.affine.payment.member.team.assign.notify.title'](),
-            message: t['com.affine.payment.member.team.assign.notify.message']({
+            title: t['com.bridgeflow.payment.member.team.assign.notify.title'](),
+            message: t['com.bridgeflow.payment.member.team.assign.notify.message']({
               name: member.name || member.email || member.id,
             }),
           });
@@ -301,7 +301,7 @@ export const MemberListFallback = ({
       className={styles.membersFallback}
     >
       <Loading size={20} />
-      <span>{t['com.affine.settings.member.loading']()}</span>
+      <span>{t['com.bridgeflow.settings.member.loading']()}</span>
     </div>
   );
 };

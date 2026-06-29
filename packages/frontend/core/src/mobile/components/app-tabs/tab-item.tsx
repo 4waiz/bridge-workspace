@@ -1,5 +1,5 @@
-import { GlobalCacheService } from '@affine/core/modules/storage';
-import { LiveData, useLiveData, useService } from '@toeverything/infra';
+import { GlobalCacheService } from '@bridgeflow/core/modules/storage';
+import { LiveData, useLiveData, useService } from '@kanban-studios/infra';
 import { type PropsWithChildren, useCallback, useMemo } from 'react';
 
 import { cacheKey } from './constants';

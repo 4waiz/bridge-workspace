@@ -1,13 +1,13 @@
-import { generateUrl } from '@affine/core/components/hooks/affine/use-share-url';
-import { WorkspaceServerService } from '@affine/core/modules/cloud';
-import { resolveLinkToDoc } from '@affine/core/modules/navigation/utils';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { type ReferenceParams } from '@blocksuite/affine/model';
+import { generateUrl } from '@bridgeflow/core/components/hooks/bridgeflow/use-share-url';
+import { WorkspaceServerService } from '@bridgeflow/core/modules/cloud';
+import { resolveLinkToDoc } from '@bridgeflow/core/modules/navigation/utils';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { type ReferenceParams } from '@blocksuite/bridgeflow/model';
 import {
   GenerateDocUrlExtension,
   ParseDocUrlExtension,
-} from '@blocksuite/affine/shared/services';
-import type { FrameworkProvider } from '@toeverything/infra';
+} from '@blocksuite/bridgeflow/shared/services';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 
 function patchParseDocUrlExtension(framework: FrameworkProvider) {
   const workspaceService = framework.get(WorkspaceService);

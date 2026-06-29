@@ -1,7 +1,7 @@
-import { Button, IconButton } from '@affine/component';
-import { useI18n } from '@affine/i18n';
+import { Button, IconButton } from '@bridgeflow/component';
+import { useI18n } from '@bridgeflow/i18n';
 import { ToggleRightIcon } from '@blocksuite/icons/rc';
-import { useLiveData } from '@toeverything/infra';
+import { useLiveData } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import {
   type HTMLAttributes,
@@ -91,8 +91,8 @@ export const DocGroupHeader = ({
       >
         {t[
           isGroupAllSelected
-            ? 'com.affine.page.group-header.clear'
-            : 'com.affine.page.group-header.select-all'
+            ? 'com.bridgeflow.page.group-header.clear'
+            : 'com.bridgeflow.page.group-header.select-all'
         ]()}
       </Button>
     </div>

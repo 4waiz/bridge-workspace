@@ -1,10 +1,10 @@
-import type { NodeOperation } from '@affine/core/desktop/components/navigation-panel';
-import { GlobalContextService } from '@affine/core/modules/global-context';
-import { NavigationPanelService } from '@affine/core/modules/navigation-panel';
-import type { Tag } from '@affine/core/modules/tag';
-import { TagService } from '@affine/core/modules/tag';
-import { useI18n } from '@affine/i18n';
-import { useLiveData, useService, useServices } from '@toeverything/infra';
+import type { NodeOperation } from '@bridgeflow/core/desktop/components/navigation-panel';
+import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
+import { NavigationPanelService } from '@bridgeflow/core/modules/navigation-panel';
+import type { Tag } from '@bridgeflow/core/modules/tag';
+import { TagService } from '@bridgeflow/core/modules/tag';
+import { useI18n } from '@bridgeflow/i18n';
+import { useLiveData, useService, useServices } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { useCallback, useMemo } from 'react';
 

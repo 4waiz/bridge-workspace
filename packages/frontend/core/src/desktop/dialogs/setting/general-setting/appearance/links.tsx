@@ -1,10 +1,10 @@
-import { Menu, MenuItem, MenuTrigger } from '@affine/component';
+import { Menu, MenuItem, MenuTrigger } from '@bridgeflow/component';
 import {
   OpenInAppService,
   OpenLinkMode,
-} from '@affine/core/modules/open-in-app';
-import { useI18n } from '@affine/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+} from '@bridgeflow/core/modules/open-in-app';
+import { useI18n } from '@bridgeflow/i18n';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useMemo } from 'react';
 
 import * as styles from './links.css';
@@ -18,8 +18,8 @@ export const OpenInAppLinksMenu = () => {
     () =>
       Object.values(OpenLinkMode).map(mode => ({
         label:
-          t.t(`com.affine.setting.appearance.open-in-app.${mode}`) ||
-          `com.affine.setting.appearance.open-in-app.${mode}`,
+          t.t(`com.bridgeflow.setting.appearance.open-in-app.${mode}`) ||
+          `com.bridgeflow.setting.appearance.open-in-app.${mode}`,
         value: mode,
       })),
     [t]

@@ -1,8 +1,8 @@
-import { Divider, Loading, toast } from '@affine/component';
-import { Button, IconButton } from '@affine/component/ui/button';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import type { ImageBlockModel } from '@blocksuite/affine/model';
-import type { BlockModel, Workspace } from '@blocksuite/affine/store';
+import { Divider, Loading, toast } from '@bridgeflow/component';
+import { Button, IconButton } from '@bridgeflow/component/ui/button';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import type { ImageBlockModel } from '@blocksuite/bridgeflow/model';
+import type { BlockModel, Workspace } from '@blocksuite/bridgeflow/store';
 import {
   ArrowLeftSmallIcon,
   ArrowRightSmallIcon,
@@ -14,7 +14,7 @@ import {
   PlusIcon,
   ViewBarIcon,
 } from '@blocksuite/icons/rc';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import type { ImgHTMLAttributes, ReactElement } from 'react';
 import {
@@ -424,7 +424,7 @@ const ImagePreviewModalImpl = ({
 };
 
 const filterImageBlock = (block: BlockModel): block is ImageBlockModel => {
-  return block.flavour === 'affine:image';
+  return block.flavour === 'bridgeflow:image';
 };
 
 export const ImagePreviewPeekView = (

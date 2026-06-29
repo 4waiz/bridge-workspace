@@ -1,18 +1,18 @@
-import { BRAND_NAME } from '@affine/component/brand';
-import { Button } from '@affine/admin/components/ui/button';
-import type { CarouselApi } from '@affine/admin/components/ui/carousel';
+import { BRAND_NAME } from '@bridgeflow/component/brand';
+import { Button } from '@bridgeflow/admin/components/ui/button';
+import type { CarouselApi } from '@bridgeflow/admin/components/ui/carousel';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from '@affine/admin/components/ui/carousel';
-import { validateEmailAndPassword } from '@affine/admin/utils';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
+} from '@bridgeflow/admin/components/ui/carousel';
+import { validateEmailAndPassword } from '@bridgeflow/admin/utils';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
-import { affineFetch } from '../../fetch-utils';
+import { bridgeflowFetch } from '../../fetch-utils';
 import { useRevalidateServerConfig, useServerConfig } from '../common';
 import { CreateAdmin } from './create-admin';
 
@@ -98,7 +98,7 @@ export const Form = () => {
 
   const createAdmin = useCallback(async () => {
     try {
-      const createResponse = await affineFetch('/api/setup/create-admin-user', {
+      const createResponse = await bridgeflowFetch('/api/setup/create-admin-user', {
         method: 'POST',
         body: JSON.stringify({
           name: nameValue,

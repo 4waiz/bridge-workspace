@@ -240,7 +240,7 @@ fn format_option_tag(option: &DatabaseOption) -> String {
   let value = option.value.as_deref().unwrap_or_default();
   let color = option.color.as_deref().unwrap_or_default();
 
-  format!("<span data-affine-option data-value=\"{id}\" data-option-color=\"{color}\">{value}</span>")
+  format!("<span data-bridgeflow-option data-value=\"{id}\" data-option-color=\"{color}\">{value}</span>")
 }
 
 fn format_cell_value(value: &Value, column: &DatabaseColumn) -> String {

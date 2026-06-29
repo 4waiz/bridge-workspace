@@ -1,6 +1,6 @@
-import type { DocMode } from '@blocksuite/affine/model';
+import type { DocMode } from '@blocksuite/bridgeflow/model';
 import { NewXxxEdgelessIcon, NewXxxPageIcon } from '@blocksuite/icons/rc';
-import { Entity, LiveData } from '@toeverything/infra';
+import { Entity, LiveData } from '@kanban-studios/infra';
 
 import type { QuickSearchSession } from '../providers/quick-search-provider';
 import type { QuickSearchGroup } from '../types/group';
@@ -8,7 +8,7 @@ import type { QuickSearchItem } from '../types/item';
 
 const group = {
   id: 'creation',
-  label: { i18nKey: 'com.affine.quicksearch.group.creation' },
+  label: { i18nKey: 'com.bridgeflow.quicksearch.group.creation' },
   score: 0,
 } as QuickSearchGroup;
 
@@ -30,7 +30,7 @@ export class CreationQuickSearchSession
         id: 'creation:create-page',
         source: 'creation',
         label: {
-          i18nKey: 'com.affine.cmdk.affine.create-new-page-as',
+          i18nKey: 'com.bridgeflow.cmdk.bridgeflow.create-new-page-as',
           options: { keyWord: query },
         },
         group,
@@ -41,7 +41,7 @@ export class CreationQuickSearchSession
         id: 'creation:create-edgeless',
         source: 'creation',
         label: {
-          i18nKey: 'com.affine.cmdk.affine.create-new-edgeless-as',
+          i18nKey: 'com.bridgeflow.cmdk.bridgeflow.create-new-edgeless-as',
           options: { keyWord: query },
         },
         group,

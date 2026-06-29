@@ -1,5 +1,5 @@
-import { IconButton, observeResize, RowInput } from '@affine/component';
-import { FindInPageService } from '@affine/core/modules/find-in-page';
+import { IconButton, observeResize, RowInput } from '@bridgeflow/component';
+import { FindInPageService } from '@bridgeflow/core/modules/find-in-page';
 import {
   ArrowDownSmallIcon,
   ArrowUpSmallIcon,
@@ -7,7 +7,7 @@ import {
   SearchIcon,
 } from '@blocksuite/icons/rc';
 import * as Popover from '@radix-ui/react-popover';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import clsx from 'clsx';
 import {

@@ -1,8 +1,8 @@
-import { Button } from '@affine/component';
-import { AuthService, ServerService } from '@affine/core/modules/cloud';
-import { NativePaywallService } from '@affine/core/modules/paywall';
-import { useI18n } from '@affine/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { Button } from '@bridgeflow/component';
+import { AuthService, ServerService } from '@bridgeflow/core/modules/cloud';
+import { NativePaywallService } from '@bridgeflow/core/modules/paywall';
+import { useI18n } from '@bridgeflow/i18n';
+import { useLiveData, useService } from '@kanban-studios/infra';
 
 import * as styles from './styles.css';
 
@@ -36,10 +36,10 @@ export const UserSubscription = () => {
     <div className={styles.root}>
       <div className={styles.content}>
         <div className={styles.title}>
-          {t['com.affine.payment.subscription.title']()}
+          {t['com.bridgeflow.payment.subscription.title']()}
         </div>
         <div className={styles.description}>
-          {t['com.affine.payment.subscription.description']()}
+          {t['com.bridgeflow.payment.subscription.description']()}
         </div>
       </div>
       <Button
@@ -49,7 +49,7 @@ export const UserSubscription = () => {
           void nativePaywallProvider.showPaywall('Pro').catch(console.error)
         }
       >
-        {t['com.affine.payment.subscription.button']()}
+        {t['com.bridgeflow.payment.subscription.button']()}
       </Button>
     </div>
   );

@@ -1,22 +1,22 @@
-import { FlexWrapper } from '@affine/component';
-import { EmptyCollectionDetail } from '@affine/core/components/affine/empty/collection-detail';
+import { FlexWrapper } from '@bridgeflow/component';
+import { EmptyCollectionDetail } from '@bridgeflow/core/components/bridgeflow/empty/collection-detail';
 import {
   createDocExplorerContext,
   DocExplorerContext,
-} from '@affine/core/components/explorer/context';
-import { DocsExplorer } from '@affine/core/components/explorer/docs-view/docs-list';
-import type { ExplorerDisplayPreference } from '@affine/core/components/explorer/types';
+} from '@bridgeflow/core/components/explorer/context';
+import { DocsExplorer } from '@bridgeflow/core/components/explorer/docs-view/docs-list';
+import type { ExplorerDisplayPreference } from '@bridgeflow/core/components/explorer/types';
 import {
   type Collection,
   CollectionService,
-} from '@affine/core/modules/collection';
-import { CollectionRulesService } from '@affine/core/modules/collection-rules';
-import { GlobalContextService } from '@affine/core/modules/global-context';
-import { WorkspacePermissionService } from '@affine/core/modules/permissions';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/core/modules/collection';
+import { CollectionRulesService } from '@bridgeflow/core/modules/collection-rules';
+import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
+import { WorkspacePermissionService } from '@bridgeflow/core/modules/permissions';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { useI18n } from '@bridgeflow/i18n';
 import { ViewLayersIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService, useServices } from '@toeverything/infra';
+import { useLiveData, useService, useServices } from '@kanban-studios/infra';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -210,7 +210,7 @@ const Placeholder = ({ collection }: { collection: Collection }) => {
               style={{ color: 'var(--affine-icon-color)' }}
               fontSize={14}
             />
-            {t['com.affine.collection.allCollections']()}
+            {t['com.bridgeflow.collection.allCollections']()}
             <div>/</div>
           </div>
           <div

@@ -1,10 +1,10 @@
-import { getStoreManager } from '@affine/core/blocksuite/manager/store';
-import { MarkdownTransformer } from '@blocksuite/affine/widgets/linked-doc';
-import { Entity } from '@toeverything/infra';
+import { getStoreManager } from '@bridgeflow/core/blocksuite/manager/store';
+import { MarkdownTransformer } from '@blocksuite/bridgeflow/widgets/linked-doc';
+import { Entity } from '@kanban-studios/infra';
 
 import type { TagService } from '../../tag';
 import {
-  getAFFiNEWorkspaceSchema,
+  getBridgeFlowWorkspaceSchema,
   type WorkspaceService,
 } from '../../workspace';
 
@@ -58,7 +58,7 @@ export class IntegrationWriter extends Entity {
     if (!docId) {
       const newDocId = await MarkdownTransformer.importMarkdownToDoc({
         collection: workspace.docCollection,
-        schema: getAFFiNEWorkspaceSchema(),
+        schema: getBridgeFlowWorkspaceSchema(),
         markdown,
         fileName: title,
         extensions: getStoreManager().config.init().value.get('store'),
@@ -73,13 +73,13 @@ export class IntegrationWriter extends Entity {
       if (!doc) throw new Error('Doc not found');
 
       if (updateStrategy === 'override') {
-        const pageBlock = doc.getBlocksByFlavour('affine:page')[0];
+        const pageBlock = doc.getBlocksByFlavour('bridgeflow:page')[0];
         // remove all children of the page block
         pageBlock.model.children.forEach(child => {
           doc.deleteBlock(child);
         });
         // add a new note block
-        const noteBlockId = doc.addBlock('affine:note', {}, pageBlock.id);
+        const noteBlockId = doc.addBlock('bridgeflow:note', {}, pageBlock.id);
         // import the markdown to the note block
         await MarkdownTransformer.importMarkdownToBlock({
           doc,
@@ -88,8 +88,8 @@ export class IntegrationWriter extends Entity {
           extensions: getStoreManager().config.init().value.get('store'),
         });
       } else if (updateStrategy === 'append') {
-        const pageBlockId = doc.getBlocksByFlavour('affine:page')[0]?.id;
-        const blockId = doc.addBlock('affine:note', {}, pageBlockId);
+        const pageBlockId = doc.getBlocksByFlavour('bridgeflow:page')[0]?.id;
+        const blockId = doc.addBlock('bridgeflow:note', {}, pageBlockId);
         await MarkdownTransformer.importMarkdownToBlock({
           doc,
           blockId,

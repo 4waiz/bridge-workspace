@@ -1,17 +1,17 @@
-import { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import track from '@affine/track';
-import type { Container } from '@blocksuite/affine/global/di';
+import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
+import track from '@bridgeflow/track';
+import type { Container } from '@blocksuite/bridgeflow/global/di';
 import {
   FileSizeLimitProvider,
   type IFileSizeLimitService,
-} from '@blocksuite/affine/shared/services';
-import { Extension } from '@blocksuite/affine/store';
-import type { FrameworkProvider } from '@toeverything/infra';
+} from '@blocksuite/bridgeflow/shared/services';
+import { Extension } from '@blocksuite/bridgeflow/store';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 
 export function patchFileSizeLimitExtension(framework: FrameworkProvider) {
   const workspaceDialogService = framework.get(WorkspaceDialogService);
 
-  class AffineFileSizeLimitService
+  class BridgeFlowFileSizeLimitService
     extends Extension
     implements IFileSizeLimitService
   {
@@ -27,9 +27,9 @@ export function patchFileSizeLimitExtension(framework: FrameworkProvider) {
     }
 
     static override setup(di: Container) {
-      di.override(FileSizeLimitProvider, AffineFileSizeLimitService);
+      di.override(FileSizeLimitProvider, BridgeFlowFileSizeLimitService);
     }
   }
 
-  return AffineFileSizeLimitService;
+  return BridgeFlowFileSizeLimitService;
 }

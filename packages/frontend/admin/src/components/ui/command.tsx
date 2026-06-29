@@ -1,5 +1,5 @@
-import { Dialog, DialogContent } from '@affine/admin/components/ui/dialog';
-import { cn } from '@affine/admin/utils';
+import { Dialog, DialogContent } from '@bridgeflow/admin/components/ui/dialog';
+import { cn } from '@bridgeflow/admin/utils';
 import { type DialogProps } from '@radix-ui/react-dialog';
 import { Command as CommandPrimitive } from 'cmdk';
 import { Search } from 'lucide-react';

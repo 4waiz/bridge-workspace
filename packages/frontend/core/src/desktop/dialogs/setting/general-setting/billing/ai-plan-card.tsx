@@ -1,9 +1,9 @@
-import { Skeleton } from '@affine/component';
-import { SettingRow } from '@affine/component/setting-components';
-import { SubscriptionService } from '@affine/core/modules/cloud';
-import { SubscriptionStatus } from '@affine/graphql';
-import { i18nTime, Trans, useI18n } from '@affine/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { Skeleton } from '@bridgeflow/component';
+import { SettingRow } from '@bridgeflow/component/setting-components';
+import { SubscriptionService } from '@bridgeflow/core/modules/cloud';
+import { SubscriptionStatus } from '@bridgeflow/graphql';
+import { i18nTime, Trans, useI18n } from '@bridgeflow/i18n';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useEffect, useMemo } from 'react';
 
 import { AICancel, AIResume, AISubscribe } from '../plans/ai/actions';
@@ -26,13 +26,13 @@ export const AIPlanCard = ({ onClick }: { onClick: () => void }) => {
   const priceReadable = price?.yearlyAmount
     ? `$${(price.yearlyAmount / 100).toFixed(2)}`
     : '?';
-  const priceFrequency = t['com.affine.payment.billing-setting.year']();
+  const priceFrequency = t['com.bridgeflow.payment.billing-setting.year']();
 
   const billingTip = useMemo(() => {
     if (subscription === undefined) {
       return (
         <Trans
-          i18nKey={'com.affine.payment.billing-setting.ai.free-desc'}
+          i18nKey={'com.bridgeflow.payment.billing-setting.ai.free-desc'}
           components={{
             a: <span onClick={onClick} className={styles.currentPlanName} />,
           }}
@@ -40,21 +40,21 @@ export const AIPlanCard = ({ onClick }: { onClick: () => void }) => {
       );
     }
     if (subscription?.status === SubscriptionStatus.PastDue) {
-      return t['com.affine.payment.billing-tip.past-due']({
+      return t['com.bridgeflow.payment.billing-tip.past-due']({
         due: i18nTime(subscription.nextBillAt, {
           absolute: { accuracy: 'day' },
         }),
       });
     }
     if (subscription?.nextBillAt) {
-      return t['com.affine.payment.ai.billing-tip.next-bill-at']({
+      return t['com.bridgeflow.payment.ai.billing-tip.next-bill-at']({
         due: i18nTime(subscription.nextBillAt, {
           absolute: { accuracy: 'day' },
         }),
       });
     }
     if ((isOnetime || subscription?.canceledAt) && subscription?.end) {
-      return t['com.affine.payment.ai.billing-tip.end-at']({
+      return t['com.bridgeflow.payment.ai.billing-tip.end-at']({
         end: i18nTime(subscription.end, { absolute: { accuracy: 'day' } }),
       });
     }
@@ -72,7 +72,7 @@ export const AIPlanCard = ({ onClick }: { onClick: () => void }) => {
           spreadCol={false}
           name={
             <CardNameLabelRow
-              cardName={t['com.affine.payment.billing-setting.ai-plan']()}
+              cardName={t['com.bridgeflow.payment.billing-setting.ai-plan']()}
               status={subscription?.status}
             />
           }
@@ -92,7 +92,7 @@ export const AIPlanCard = ({ onClick }: { onClick: () => void }) => {
                   ) : (
                     <AISubscribe className={styles.planAction}>
                       {t[
-                        'com.affine.payment.billing-setting.ai.start-free-trial'
+                        'com.bridgeflow.payment.billing-setting.ai.start-free-trial'
                       ]()}
                     </AISubscribe>
                   )

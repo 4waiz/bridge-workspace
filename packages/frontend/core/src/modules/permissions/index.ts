@@ -12,7 +12,7 @@ export {
   type WorkspacePermissionActions,
 } from './stores/guard';
 
-import { type Framework } from '@toeverything/infra';
+import { type Framework } from '@kanban-studios/infra';
 
 import { WorkspaceServerService } from '../cloud/services/workspace-server';
 import { DocScope, DocService } from '../doc';

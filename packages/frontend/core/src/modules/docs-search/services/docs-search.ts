@@ -1,7 +1,7 @@
-import { toDocSearchParams } from '@affine/core/modules/navigation';
-import type { IndexerPreferOptions, IndexerSyncState } from '@affine/nbstore';
-import type { ReferenceParams } from '@blocksuite/affine/model';
-import { fromPromise, LiveData, Service } from '@toeverything/infra';
+import { toDocSearchParams } from '@bridgeflow/core/modules/navigation';
+import type { IndexerPreferOptions, IndexerSyncState } from '@bridgeflow/nbstore';
+import type { ReferenceParams } from '@blocksuite/bridgeflow/model';
+import { fromPromise, LiveData, Service } from '@kanban-studios/infra';
 import { isEmpty, omit } from 'lodash-es';
 import { map, type Observable, of, switchMap } from 'rxjs';
 import { z } from 'zod';
@@ -89,7 +89,7 @@ export class DocsSearchService extends Service {
                   query: {
                     type: 'match',
                     field: 'flavour',
-                    match: 'affine:page',
+                    match: 'bridgeflow:page',
                   },
                 },
               ],
@@ -125,7 +125,7 @@ export class DocsSearchService extends Service {
 
           for (const bucket of buckets) {
             const firstMatchFlavour = bucket.hits.nodes[0]?.fields.flavour;
-            if (firstMatchFlavour === 'affine:page') {
+            if (firstMatchFlavour === 'bridgeflow:page') {
               // is title match
               const blockContent = normalizeSearchText(
                 bucket.hits.nodes[1]?.highlights.content[0]
@@ -257,7 +257,7 @@ export class DocsSearchService extends Service {
             {
               type: 'match',
               field: 'parentFlavour',
-              match: 'affine:database',
+              match: 'bridgeflow:database',
             },
           ],
         },

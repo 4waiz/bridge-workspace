@@ -1,4 +1,4 @@
-import { i18nTime } from '@affine/i18n';
+import { i18nTime } from '@bridgeflow/i18n';
 import {
   AliasIcon as LitAliasIcon,
   BlockLinkIcon as LitBlockLinkIcon,
@@ -21,7 +21,7 @@ import {
   TomorrowIcon,
   YesterdayIcon,
 } from '@blocksuite/icons/rc';
-import { LiveData, Service } from '@toeverything/infra';
+import { LiveData, Service } from '@kanban-studios/infra';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 
@@ -210,7 +210,7 @@ export class DocDisplayMetaService extends Service {
       // doc not found
       if (!doc) {
         return this.i18nService.i18n.i18next.t(
-          'com.affine.notFoundPage.title',
+          'com.bridgeflow.notFoundPage.title',
           { lng }
         );
       }

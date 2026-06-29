@@ -1,4 +1,4 @@
-import type { PricesQuery } from '@affine/graphql';
+import type { PricesQuery } from '@bridgeflow/graphql';
 import {
   catchErrorInto,
   effect,
@@ -9,7 +9,7 @@ import {
   onComplete,
   onStart,
   smartRetry,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { exhaustMap } from 'rxjs';
 
 import type { ServerService } from '../services/server';

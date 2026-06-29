@@ -2,8 +2,8 @@ import {
   type Workspace,
   type WorkspaceMetadata,
   WorkspacesService,
-} from '@affine/core/modules/workspace';
-import { useService } from '@toeverything/infra';
+} from '@bridgeflow/core/modules/workspace';
+import { useService } from '@kanban-studios/infra';
 import { useEffect, useState } from 'react';
 
 /**

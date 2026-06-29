@@ -71,7 +71,7 @@ export const link = style({
   },
 });
 
-globalStyle(`${link} .affine-reference-title`, {
+globalStyle(`${link} .bridgeflow-reference-title`, {
   borderBottom: 'none',
 });
 

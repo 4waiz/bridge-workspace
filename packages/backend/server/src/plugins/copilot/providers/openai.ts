@@ -101,7 +101,7 @@ const ImageResponseSchema = z.union([
     }),
   }),
 ]);
-const TRUSTED_ATTACHMENT_HOST_SUFFIXES = ['cdn.affine.pro'];
+const TRUSTED_ATTACHMENT_HOST_SUFFIXES = ['cdn.bridgeflow.pro'];
 
 function normalizeImageFormatToMime(format?: string) {
   switch (format?.toLowerCase()) {
@@ -720,8 +720,8 @@ export class OpenAIProvider extends CopilotProvider<OpenAIConfig> {
   private buildImageFetchOptions(url: URL) {
     const baseOptions = { timeoutMs: 15_000, maxRedirects: 3 } as const;
     const trustedOrigins = new Set<string>();
-    const protocol = this.AFFiNEConfig.server.https ? 'https:' : 'http:';
-    const port = this.AFFiNEConfig.server.port;
+    const protocol = this.BridgeFlowConfig.server.https ? 'https:' : 'http:';
+    const port = this.BridgeFlowConfig.server.port;
     const isDefaultPort =
       (protocol === 'https:' && port === 443) ||
       (protocol === 'http:' && port === 80);
@@ -739,18 +739,18 @@ export class OpenAIProvider extends CopilotProvider<OpenAIConfig> {
       }
     };
 
-    if (this.AFFiNEConfig.server.externalUrl) {
+    if (this.BridgeFlowConfig.server.externalUrl) {
       try {
         trustedOrigins.add(
-          new URL(this.AFFiNEConfig.server.externalUrl).origin
+          new URL(this.BridgeFlowConfig.server.externalUrl).origin
         );
       } catch {
         // ignore invalid external URL
       }
     }
 
-    addHostOrigin(this.AFFiNEConfig.server.host);
-    for (const host of this.AFFiNEConfig.server.hosts) {
+    addHostOrigin(this.BridgeFlowConfig.server.host);
+    for (const host of this.BridgeFlowConfig.server.hosts) {
       addHostOrigin(host);
     }
 

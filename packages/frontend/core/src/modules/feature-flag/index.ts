@@ -1,10 +1,10 @@
-import type { Framework } from '@toeverything/infra';
+import type { Framework } from '@kanban-studios/infra';
 
 import { GlobalStateService } from '../storage';
 import { Flags } from './entities/flags';
 import { FeatureFlagService } from './services/feature-flag';
 
-export { AFFINE_FLAGS } from './constant';
+export { BRIDGEFLOW_FLAGS } from './constant';
 export type { Flag } from './entities/flags';
 export { FeatureFlagService } from './services/feature-flag';
 export type { FlagInfo } from './types';

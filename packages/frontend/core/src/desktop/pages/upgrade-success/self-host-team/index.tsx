@@ -1,11 +1,11 @@
-import { Button, IconButton, Loading, notify } from '@affine/component';
-import { AuthPageContainer } from '@affine/component/auth-components';
-import { SelfhostGenerateLicenseService } from '@affine/core/modules/cloud';
-import { OpenInAppService } from '@affine/core/modules/open-in-app';
-import { copyTextToClipboard } from '@affine/core/utils/clipboard';
-import { Trans, useI18n } from '@affine/i18n';
+import { Button, IconButton, Loading, notify } from '@bridgeflow/component';
+import { AuthPageContainer } from '@bridgeflow/component/auth-components';
+import { SelfhostGenerateLicenseService } from '@bridgeflow/core/modules/cloud';
+import { OpenInAppService } from '@bridgeflow/core/modules/open-in-app';
+import { copyTextToClipboard } from '@bridgeflow/core/utils/clipboard';
+import { Trans, useI18n } from '@bridgeflow/i18n';
 import { CopyIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
@@ -55,7 +55,7 @@ const Success = ({ licenseKey }: { licenseKey: string | null }) => {
   const t = useI18n();
   const openInAppService = useService(OpenInAppService);
 
-  const openAFFiNE = useCallback(() => {
+  const openBridgeFlow = useCallback(() => {
     openInAppService.showOpenInAppPage();
   }, [openInAppService]);
 
@@ -68,7 +68,7 @@ const Success = ({ licenseKey }: { licenseKey: string | null }) => {
       .then(success => {
         if (success) {
           notify.success({
-            title: t['com.affine.payment.license-success.copy'](),
+            title: t['com.bridgeflow.payment.license-success.copy'](),
           });
         }
       })
@@ -80,10 +80,10 @@ const Success = ({ licenseKey }: { licenseKey: string | null }) => {
 
   const subtitle = (
     <span className={styles.leftContentText}>
-      <span>{t['com.affine.payment.license-success.text-1']()}</span>
+      <span>{t['com.bridgeflow.payment.license-success.text-1']()}</span>
       <span>
         <Trans
-          i18nKey={'com.affine.payment.license-success.text-2'}
+          i18nKey={'com.bridgeflow.payment.license-success.text-2'}
           components={{
             1: (
               <a
@@ -98,7 +98,7 @@ const Success = ({ licenseKey }: { licenseKey: string | null }) => {
   );
   return (
     <AuthPageContainer
-      title={t['com.affine.payment.license-success.title']()}
+      title={t['com.bridgeflow.payment.license-success.title']()}
       subtitle={subtitle}
     >
       <div className={styles.content}>
@@ -112,10 +112,10 @@ const Success = ({ licenseKey }: { licenseKey: string | null }) => {
             onClick={onCopy}
           />
         </div>
-        <div>{t['com.affine.payment.license-success.hint']()}</div>
+        <div>{t['com.bridgeflow.payment.license-success.hint']()}</div>
         <div>
-          <Button variant="primary" size="extraLarge" onClick={openAFFiNE}>
-            {t['com.affine.payment.license-success.open-affine']()}
+          <Button variant="primary" size="extraLarge" onClick={openBridgeFlow}>
+            {t['com.bridgeflow.payment.license-success.open-bridgeflow']()}
           </Button>
         </div>
       </div>

@@ -1,6 +1,6 @@
 export enum IconType {
   Emoji = 'emoji',
-  AffineIcon = 'affine-icon',
+  BridgeFlowIcon = 'bridgeflow-icon',
   Blob = 'blob',
 }
 
@@ -10,7 +10,7 @@ export type IconData =
       unicode: string;
     }
   | {
-      type: IconType.AffineIcon;
+      type: IconType.BridgeFlowIcon;
       name: string;
       color: string;
     }

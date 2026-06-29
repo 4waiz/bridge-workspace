@@ -1,19 +1,19 @@
-import { Button, Loading } from '@affine/component';
-import { UrlService } from '@affine/core/modules/url';
-import { UserFriendlyError } from '@affine/error';
+import { Button, Loading } from '@bridgeflow/component';
+import { UrlService } from '@bridgeflow/core/modules/url';
+import { UserFriendlyError } from '@bridgeflow/error';
 import {
   SubscriptionPlan,
   SubscriptionRecurring,
   SubscriptionVariant,
-} from '@affine/graphql';
-import { track } from '@affine/track';
-import { effect, fromPromise, useServices } from '@toeverything/infra';
+} from '@bridgeflow/graphql';
+import { track } from '@bridgeflow/track';
+import { effect, fromPromise, useServices } from '@kanban-studios/infra';
 import { nanoid } from 'nanoid';
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { switchMap } from 'rxjs';
 
-import { generateSubscriptionCallbackLink } from '../../../components/hooks/affine/use-subscription-notify';
+import { generateSubscriptionCallbackLink } from '../../../components/hooks/bridgeflow/use-subscription-notify';
 import {
   RouteLogic,
   useNavigateHelper,

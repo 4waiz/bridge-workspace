@@ -46,11 +46,11 @@ export class WorkspaceBlobStorage {
   private provider!: StorageProvider;
 
   get config() {
-    return this.AFFiNEConfig.storages.blob;
+    return this.BridgeFlowConfig.storages.blob;
   }
 
   constructor(
-    private readonly AFFiNEConfig: Config,
+    private readonly BridgeFlowConfig: Config,
     private readonly event: EventBus,
     private readonly storageFactory: StorageProviderFactory,
     private readonly models: Models,

@@ -23,25 +23,25 @@ use super::{
 const SUMMARY_LIMIT: usize = 1000;
 const DEFAULT_PAGE_TITLE: &str = "Untitled";
 const KNOWN_UNSUPPORTED_MARKDOWN_FLAVOURS: [&str; 10] = [
-  "affine:attachment",
-  "affine:callout",
-  "affine:note",
-  "affine:edgeless-text",
-  "affine:embed-linked-doc",
-  "affine:embed-synced-doc",
-  "affine:frame",
-  "affine:latex",
-  "affine:surface",
-  "affine:surface-ref",
+  "bridgeflow:attachment",
+  "bridgeflow:callout",
+  "bridgeflow:note",
+  "bridgeflow:edgeless-text",
+  "bridgeflow:embed-linked-doc",
+  "bridgeflow:embed-synced-doc",
+  "bridgeflow:frame",
+  "bridgeflow:latex",
+  "bridgeflow:surface",
+  "bridgeflow:surface-ref",
 ];
 
 const BOOKMARK_FLAVOURS: [&str; 6] = [
-  "affine:bookmark",
-  "affine:embed-youtube",
-  "affine:embed-iframe",
-  "affine:embed-figma",
-  "affine:embed-github",
-  "affine:embed-loom",
+  "bridgeflow:bookmark",
+  "bridgeflow:embed-youtube",
+  "bridgeflow:embed-iframe",
+  "bridgeflow:embed-figma",
+  "bridgeflow:embed-github",
+  "bridgeflow:embed-loom",
 ];
 
 struct SummaryBuilder {
@@ -146,11 +146,11 @@ pub struct MarkdownResult {
 }
 
 fn is_known_unsupported_markdown_flavour(flavour: &str) -> bool {
-  KNOWN_UNSUPPORTED_MARKDOWN_FLAVOURS.contains(&flavour) || flavour.starts_with("affine:edgeless-")
+  KNOWN_UNSUPPORTED_MARKDOWN_FLAVOURS.contains(&flavour) || flavour.starts_with("bridgeflow:edgeless-")
 }
 
 fn is_edgeless_markdown_flavour(flavour: &str) -> bool {
-  matches!(flavour, "affine:surface" | "affine:frame" | "affine:surface-ref") || flavour.starts_with("affine:edgeless-")
+  matches!(flavour, "bridgeflow:surface" | "bridgeflow:frame" | "bridgeflow:surface-ref") || flavour.starts_with("bridgeflow:edgeless-")
 }
 
 fn has_skipped_markdown_ancestor(
@@ -222,22 +222,22 @@ pub fn parse_page_doc(
     };
 
     match flavour.as_str() {
-      "affine:page" | "affine:note" => {
+      "bridgeflow:page" | "bridgeflow:note" => {
         walker.enqueue_children(&block_id, block);
       }
-      "affine:attachment" | "affine:transcription" | "affine:callout" => {
+      "bridgeflow:attachment" | "bridgeflow:transcription" | "bridgeflow:callout" => {
         if summary.is_unlimited() {
           walker.enqueue_children(&block_id, block);
         }
       }
-      "affine:database" => {
+      "bridgeflow:database" => {
         if summary.is_unlimited()
           && let Some(text) = database_summary_text(block, &context)
         {
           summary.push_raw(&text);
         }
       }
-      "affine:table" => {
+      "bridgeflow:table" => {
         if summary.is_unlimited() {
           let contents = table_cell_texts(block);
           if !contents.is_empty() {
@@ -245,7 +245,7 @@ pub fn parse_page_doc(
           }
         }
       }
-      "affine:paragraph" | "affine:list" | "affine:code" => {
+      "bridgeflow:paragraph" | "bridgeflow:list" | "bridgeflow:code" => {
         walker.enqueue_children(&block_id, block);
         if let Some((text, len)) = text_content_for_summary(block, "prop:text") {
           summary.push_text(&text, len);
@@ -313,7 +313,7 @@ pub fn parse_doc_to_markdown(
       .and_then(|id| context.block_pool.get(id))
       .and_then(get_flavour);
 
-    if parent_flavour.as_deref() == Some("affine:database") {
+    if parent_flavour.as_deref() == Some("bridgeflow:database") {
       continue;
     }
 
@@ -328,7 +328,7 @@ pub fn parse_doc_to_markdown(
       continue;
     }
 
-    if BlockFlavour::from_str(flavour.as_str()).is_none() && flavour.as_str() != "affine:database" {
+    if BlockFlavour::from_str(flavour.as_str()).is_none() && flavour.as_str() != "bridgeflow:database" {
       unknown_blocks.push(format!("{block_id}:{flavour}"));
       skipped_subtrees.insert(block_id.clone());
       continue;
@@ -348,7 +348,7 @@ pub fn parse_doc_to_markdown(
     let mut block_markdown = String::new();
 
     match flavour.as_str() {
-      "affine:database" => {
+      "bridgeflow:database" => {
         let title = get_string(block, "prop:title").unwrap_or_default();
         block_markdown.push_str(&format!("\n### {title}\n"));
 
@@ -442,9 +442,9 @@ pub fn parse_doc_from_binary(doc_bin: Vec<u8>, doc_id: String) -> Result<CrawlRe
       continue;
     }
 
-    if matches!(flavour.as_str(), "affine:paragraph" | "affine:list" | "affine:code") {
+    if matches!(flavour.as_str(), "bridgeflow:paragraph" | "bridgeflow:list" | "bridgeflow:code") {
       if let Some(text) = block.get("prop:text").and_then(|value| value.to_text()) {
-        let database_name = if flavour == "affine:paragraph" && parent_flavour.as_deref() == Some("affine:database") {
+        let database_name = if flavour == "bridgeflow:paragraph" && parent_flavour.as_deref() == Some("bridgeflow:database") {
           parent_block.and_then(|map| get_string(map, "prop:title"))
         } else {
           None
@@ -466,7 +466,7 @@ pub fn parse_doc_from_binary(doc_bin: Vec<u8>, doc_id: String) -> Result<CrawlRe
       continue;
     }
 
-    if matches!(flavour.as_str(), "affine:embed-linked-doc" | "affine:embed-synced-doc") {
+    if matches!(flavour.as_str(), "bridgeflow:embed-linked-doc" | "bridgeflow:embed-synced-doc") {
       if let Some(page_id) = get_string(block, "prop:pageId") {
         let mut info = build_block(None);
         let payload = embed_ref_payload(block, &page_id);
@@ -476,7 +476,7 @@ pub fn parse_doc_from_binary(doc_bin: Vec<u8>, doc_id: String) -> Result<CrawlRe
       continue;
     }
 
-    if flavour == "affine:attachment" {
+    if flavour == "bridgeflow:attachment" {
       if let Some(blob_id) = get_string(block, "prop:sourceId") {
         let mut info = build_block(None);
         let name = get_string(block, "prop:name").unwrap_or_default();
@@ -486,7 +486,7 @@ pub fn parse_doc_from_binary(doc_bin: Vec<u8>, doc_id: String) -> Result<CrawlRe
       continue;
     }
 
-    if flavour == "affine:image" {
+    if flavour == "bridgeflow:image" {
       let image = ImageSpec::from_block_map(block);
       if !image.source_id.is_empty() {
         let mut info = build_block(None);
@@ -497,7 +497,7 @@ pub fn parse_doc_from_binary(doc_bin: Vec<u8>, doc_id: String) -> Result<CrawlRe
       continue;
     }
 
-    if flavour == "affine:surface" {
+    if flavour == "bridgeflow:surface" {
       let texts = gather_surface_texts(block);
       let mut info = build_block(None);
       info.content = Some(texts);
@@ -505,7 +505,7 @@ pub fn parse_doc_from_binary(doc_bin: Vec<u8>, doc_id: String) -> Result<CrawlRe
       continue;
     }
 
-    if flavour == "affine:database" {
+    if flavour == "bridgeflow:database" {
       let (texts, database_name) = gather_database_texts(block);
       let mut info = BlockInfo::base(
         &block_id,
@@ -524,7 +524,7 @@ pub fn parse_doc_from_binary(doc_bin: Vec<u8>, doc_id: String) -> Result<CrawlRe
       continue;
     }
 
-    if flavour == "affine:latex" {
+    if flavour == "bridgeflow:latex" {
       if let Some(content) = get_string(block, "prop:latex") {
         let mut info = build_block(None);
         info.content = Some(vec![content]);
@@ -533,7 +533,7 @@ pub fn parse_doc_from_binary(doc_bin: Vec<u8>, doc_id: String) -> Result<CrawlRe
       continue;
     }
 
-    if flavour == "affine:table" {
+    if flavour == "bridgeflow:table" {
       let contents = table_cell_texts(block);
       let mut info = build_block(None);
       info.content = Some(contents);
@@ -757,7 +757,7 @@ mod tests {
 
     let mut page = doc.create_map().unwrap();
     page.insert("sys:id".into(), "page").unwrap();
-    page.insert("sys:flavour".into(), "affine:page").unwrap();
+    page.insert("sys:flavour".into(), "bridgeflow:page").unwrap();
     let mut page_children = doc.create_array().unwrap();
     page_children.push("note").unwrap();
     page.insert("sys:children".into(), Value::Array(page_children)).unwrap();
@@ -768,7 +768,7 @@ mod tests {
 
     let mut note = doc.create_map().unwrap();
     note.insert("sys:id".into(), "note").unwrap();
-    note.insert("sys:flavour".into(), "affine:note").unwrap();
+    note.insert("sys:flavour".into(), "bridgeflow:note").unwrap();
     let mut note_children = doc.create_array().unwrap();
     note_children.push("db").unwrap();
     note.insert("sys:children".into(), Value::Array(note_children)).unwrap();
@@ -777,7 +777,7 @@ mod tests {
 
     let mut db = doc.create_map().unwrap();
     db.insert("sys:id".into(), "db").unwrap();
-    db.insert("sys:flavour".into(), "affine:database").unwrap();
+    db.insert("sys:flavour".into(), "bridgeflow:database").unwrap();
     db.insert("sys:children".into(), Value::Array(doc.create_array().unwrap()))
       .unwrap();
     let mut db_title = doc.create_text().unwrap();
@@ -849,7 +849,7 @@ mod tests {
     let result = parse_doc_to_markdown(doc_bin, doc_id.to_string(), true, None).expect("parse doc");
     let md = result.markdown;
 
-    assert!(md.contains("flavour=affine:image"));
+    assert!(md.contains("flavour=bridgeflow:image"));
     assert!(md.contains("blob://image-id"));
     assert!(md.contains("|A|B|"));
     assert!(md.contains("|---|---|"));
@@ -857,7 +857,7 @@ mod tests {
       result
         .known_unsupported_blocks
         .iter()
-        .any(|block| block.ends_with(":affine:note"))
+        .any(|block| block.ends_with(":bridgeflow:note"))
     );
     assert!(result.unknown_blocks.is_empty());
   }
@@ -870,7 +870,7 @@ mod tests {
 
     let mut page = doc.create_map().unwrap();
     page.insert("sys:id".into(), "page").unwrap();
-    page.insert("sys:flavour".into(), "affine:page").unwrap();
+    page.insert("sys:flavour".into(), "bridgeflow:page").unwrap();
     let mut page_children = doc.create_array().unwrap();
     page_children.push("surface").unwrap();
     page.insert("sys:children".into(), Value::Array(page_children)).unwrap();
@@ -881,7 +881,7 @@ mod tests {
 
     let mut surface = doc.create_map().unwrap();
     surface.insert("sys:id".into(), "surface").unwrap();
-    surface.insert("sys:flavour".into(), "affine:surface").unwrap();
+    surface.insert("sys:flavour".into(), "bridgeflow:surface").unwrap();
     let mut surface_children = doc.create_array().unwrap();
     surface_children.push("edgeless-text").unwrap();
     surface
@@ -892,7 +892,7 @@ mod tests {
     let mut edgeless_text = doc.create_map().unwrap();
     edgeless_text.insert("sys:id".into(), "edgeless-text").unwrap();
     edgeless_text
-      .insert("sys:flavour".into(), "affine:edgeless-text")
+      .insert("sys:flavour".into(), "bridgeflow:edgeless-text")
       .unwrap();
     let mut edgeless_text_children = doc.create_array().unwrap();
     edgeless_text_children.push("paragraph").unwrap();
@@ -905,7 +905,7 @@ mod tests {
 
     let mut paragraph = doc.create_map().unwrap();
     paragraph.insert("sys:id".into(), "paragraph").unwrap();
-    paragraph.insert("sys:flavour".into(), "affine:paragraph").unwrap();
+    paragraph.insert("sys:flavour".into(), "bridgeflow:paragraph").unwrap();
     paragraph
       .insert("sys:children".into(), Value::Array(doc.create_array().unwrap()))
       .unwrap();
@@ -924,12 +924,12 @@ mod tests {
     assert!(
       result
         .known_unsupported_blocks
-        .contains(&"surface:affine:surface".to_string())
+        .contains(&"surface:bridgeflow:surface".to_string())
     );
     assert!(
       result
         .known_unsupported_blocks
-        .contains(&"edgeless-text:affine:edgeless-text".to_string())
+        .contains(&"edgeless-text:bridgeflow:edgeless-text".to_string())
     );
     assert!(result.unknown_blocks.is_empty());
   }
@@ -942,7 +942,7 @@ mod tests {
 
     let mut page = doc.create_map().unwrap();
     page.insert("sys:id".into(), "page").unwrap();
-    page.insert("sys:flavour".into(), "affine:page").unwrap();
+    page.insert("sys:flavour".into(), "bridgeflow:page").unwrap();
     let mut page_children = doc.create_array().unwrap();
     page_children.push("mystery").unwrap();
     page.insert("sys:children".into(), Value::Array(page_children)).unwrap();
@@ -953,7 +953,7 @@ mod tests {
 
     let mut mystery = doc.create_map().unwrap();
     mystery.insert("sys:id".into(), "mystery").unwrap();
-    mystery.insert("sys:flavour".into(), "affine:custom-unknown").unwrap();
+    mystery.insert("sys:flavour".into(), "bridgeflow:custom-unknown").unwrap();
     let mut mystery_children = doc.create_array().unwrap();
     mystery_children.push("paragraph").unwrap();
     mystery
@@ -963,7 +963,7 @@ mod tests {
 
     let mut paragraph = doc.create_map().unwrap();
     paragraph.insert("sys:id".into(), "paragraph").unwrap();
-    paragraph.insert("sys:flavour".into(), "affine:paragraph").unwrap();
+    paragraph.insert("sys:flavour".into(), "bridgeflow:paragraph").unwrap();
     paragraph
       .insert("sys:children".into(), Value::Array(doc.create_array().unwrap()))
       .unwrap();
@@ -980,6 +980,6 @@ mod tests {
 
     assert!(result.markdown.is_empty());
     assert!(result.known_unsupported_blocks.is_empty());
-    assert_eq!(result.unknown_blocks, vec!["mystery:affine:custom-unknown".to_string()]);
+    assert_eq!(result.unknown_blocks, vec!["mystery:bridgeflow:custom-unknown".to_string()]);
   }
 }

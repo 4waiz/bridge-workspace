@@ -1,6 +1,6 @@
-import type { DocMode } from '@blocksuite/affine/model';
-import type { DocMeta } from '@blocksuite/affine/store';
-import { Entity, LiveData } from '@toeverything/infra';
+import type { DocMode } from '@blocksuite/bridgeflow/model';
+import type { DocMeta } from '@blocksuite/bridgeflow/store';
+import { Entity, LiveData } from '@kanban-studios/infra';
 
 import type { DocProperties } from '../../db';
 import type { DocPropertiesStore } from '../stores/doc-properties';

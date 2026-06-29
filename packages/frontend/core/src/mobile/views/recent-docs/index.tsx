@@ -1,6 +1,6 @@
-import { useBlockSuiteDocMeta } from '@affine/core/components/hooks/use-block-suite-page-meta';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { useService } from '@toeverything/infra';
+import { useBlockSuiteDocMeta } from '@bridgeflow/core/components/hooks/use-block-suite-page-meta';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { useService } from '@kanban-studios/infra';
 import { useMemo } from 'react';
 
 import { DocCard } from '../../components/doc-card';

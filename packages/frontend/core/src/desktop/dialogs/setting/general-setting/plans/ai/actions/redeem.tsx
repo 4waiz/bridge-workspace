@@ -1,14 +1,14 @@
-import { Button, type ButtonProps } from '@affine/component';
-import { generateSubscriptionCallbackLink } from '@affine/core/components/hooks/affine/use-subscription-notify';
-import { AuthService } from '@affine/core/modules/cloud';
+import { Button, type ButtonProps } from '@bridgeflow/component';
+import { generateSubscriptionCallbackLink } from '@bridgeflow/core/components/hooks/bridgeflow/use-subscription-notify';
+import { AuthService } from '@bridgeflow/core/modules/cloud';
 import {
   SubscriptionPlan,
   SubscriptionRecurring,
   SubscriptionVariant,
-} from '@affine/graphql';
-import { useI18n } from '@affine/i18n';
-import track from '@affine/track';
-import { useService } from '@toeverything/infra';
+} from '@bridgeflow/graphql';
+import { useI18n } from '@bridgeflow/i18n';
+import track from '@bridgeflow/track';
+import { useService } from '@kanban-studios/infra';
 import { useCallback, useMemo } from 'react';
 
 import { CheckoutSlot } from '../../checkout-slot';
@@ -44,7 +44,7 @@ export const AIRedeemCodeButton = (btnProps: ButtonProps) => {
       checkoutOptions={checkoutOptions}
       renderer={props => (
         <Button variant="primary" {...btnProps} {...props}>
-          {t['com.affine.payment.redeem-code']()}
+          {t['com.bridgeflow.payment.redeem-code']()}
         </Button>
       )}
     />

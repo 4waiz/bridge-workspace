@@ -1,5 +1,5 @@
-import type { TagMeta } from '@affine/core/components/page-list';
-import type { DocMeta, Store } from '@blocksuite/affine/store';
+import type { TagMeta } from '@bridgeflow/core/components/page-list';
+import type { DocMeta, Store } from '@blocksuite/bridgeflow/store';
 import type { Signal } from '@preact/signals-core';
 
 export type ChipState = 'candidate' | 'processing' | 'finished' | 'failed';

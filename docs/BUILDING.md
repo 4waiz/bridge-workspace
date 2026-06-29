@@ -1,4 +1,4 @@
-# Building AFFiNE Web
+# Building BridgeFlow Web
 
 > **Warning**:
 >
@@ -17,7 +17,7 @@
 
 ## Prerequisites
 
-AFFiNE client has both **Node.js** & **Rust** toolchains.
+BridgeFlow client has both **Node.js** & **Rust** toolchains.
 
 ### Install Node.js
 
@@ -62,7 +62,7 @@ yarn install
 #### Linux & MacOS
 
 ```sh
-git clone https://github.com/toeverything/AFFiNE
+git clone https://github.com/Kanban-Studios/BridgeFlow
 ```
 
 #### Windows
@@ -77,23 +77,23 @@ Once Developer Mode is enabled, execute the following command with administrator
 # Enable symbolic links
 git config --global core.symlinks true
 # Clone the repository
-git clone https://github.com/toeverything/AFFiNE
+git clone https://github.com/Kanban-Studios/BridgeFlow
 ```
 
 ### Build Native Dependencies
 
 Run the following script. It will build the native module at [`/packages/frontend/native`](/packages/frontend/native) and build Node.js binding using [NAPI.rs](https://napi.rs/).
 This could take a while if you build it for the first time.
-Note: use `strip` from system instead of `binutils` if you are running MacOS. [see problem here](https://github.com/toeverything/AFFiNE/discussions/2840)
+Note: use `strip` from system instead of `binutils` if you are running MacOS. [see problem here](https://github.com/Kanban-Studios/BridgeFlow/discussions/2840)
 
 ```sh
-yarn affine @affine/native build
+yarn bridgeflow @bridgeflow/native build
 ```
 
 ### Build Server Dependencies
 
 ```sh
-yarn affine @affine/server-native build
+yarn bridgeflow @bridgeflow/server-native build
 ```
 
 ## Testing
@@ -114,7 +114,7 @@ yarn test
 ### E2E Test
 
 ```shell
-# there are `affine-local`, `affine-migration`, `affine-local`, `affine-prototype` e2e tests,
+# there are `bridgeflow-local`, `bridgeflow-migration`, `bridgeflow-local`, `bridgeflow-prototype` e2e tests,
 #   which are run under different situations.
-yarn workspace @affine-test/affine-local e2e
+yarn workspace @bridgeflow-test/bridgeflow-local e2e
 ```

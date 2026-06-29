@@ -1,8 +1,8 @@
-import { AIStarIcon } from '@blocksuite/affine/components/icons';
-import { SignalWatcher, WithDisposable } from '@blocksuite/affine/global/lit';
-import { ColorScheme } from '@blocksuite/affine/model';
-import { unsafeCSSVarV2 } from '@blocksuite/affine/shared/theme';
-import { stopPropagation } from '@blocksuite/affine/shared/utils';
+import { AIStarIcon } from '@blocksuite/bridgeflow/components/icons';
+import { SignalWatcher, WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { ColorScheme } from '@blocksuite/bridgeflow/model';
+import { unsafeCSSVarV2 } from '@blocksuite/bridgeflow/shared/theme';
+import { stopPropagation } from '@blocksuite/bridgeflow/shared/utils';
 import { SendIcon } from '@blocksuite/icons/lit';
 import {
   darkCssVariablesV2,
@@ -240,7 +240,7 @@ export class AIPanelInput extends SignalWatcher(WithDisposable(LitElement)) {
         >
           ${SendIcon()}
           ${this._hasContent
-            ? html`<affine-tooltip .offsetY=${12}>Send to AI</affine-tooltip>`
+            ? html`<bridgeflow-tooltip .offsetY=${12}>Send to AI</bridgeflow-tooltip>`
             : nothing}
         </div>
       </div>

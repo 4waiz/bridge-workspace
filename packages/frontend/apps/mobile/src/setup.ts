@@ -1,4 +1,4 @@
-import '@affine/core/bootstrap/browser';
-import '@affine/core/bootstrap/cleanup';
-import '@affine/component/theme';
-import '@affine/core/mobile/styles/mobile.css';
+import '@bridgeflow/core/bootstrap/browser';
+import '@bridgeflow/core/bootstrap/cleanup';
+import '@bridgeflow/component/theme';
+import '@bridgeflow/core/mobile/styles/mobile.css';

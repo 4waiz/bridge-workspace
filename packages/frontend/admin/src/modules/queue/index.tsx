@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 
 import { Header } from '../header';
 
-const QUEUEDASH_SCOPE_CLASS = 'affine-queuedash';
+const QUEUEDASH_SCOPE_CLASS = 'bridgeflow-queuedash';
 const PORTAL_CONTENT_SELECTOR =
   '.react-aria-ModalOverlay, .react-aria-Menu, [data-rac][data-placement][data-trigger]';
 

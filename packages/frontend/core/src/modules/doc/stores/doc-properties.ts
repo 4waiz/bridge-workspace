@@ -3,7 +3,7 @@ import {
   Store,
   yjsGetPath,
   yjsObserveDeep,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { isNil, omitBy } from 'lodash-es';
 import { combineLatest, map, switchMap } from 'rxjs';
 import { AbstractType as YAbstractType } from 'yjs';
@@ -91,7 +91,7 @@ export class DocPropertiesStore extends Store {
 
   private getLegacyDocProperties(id: string) {
     return this.workspaceService.workspace.rootYDoc
-      .getMap<any>('affine:workspace-properties')
+      .getMap<any>('bridgeflow:workspace-properties')
       .get('pageProperties')
       ?.get(id)
       ?.toJSON() as LegacyDocProperties | undefined;
@@ -100,7 +100,7 @@ export class DocPropertiesStore extends Store {
   private watchLegacyDocProperties(id: string) {
     return yjsGetPath(
       this.workspaceService.workspace.rootYDoc.getMap<any>(
-        'affine:workspace-properties'
+        'bridgeflow:workspace-properties'
       ),
       `pageProperties.${id}`
     ).pipe(

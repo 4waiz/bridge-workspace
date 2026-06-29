@@ -1,4 +1,4 @@
-# If you would like to crawl BridgeWS public workspace visit https://awaizahmed.com
+# If you would like to crawl BRIDGE Flow public workspace visit https://kanbanstudios.ae
 
 User-agent: *
 Allow: /

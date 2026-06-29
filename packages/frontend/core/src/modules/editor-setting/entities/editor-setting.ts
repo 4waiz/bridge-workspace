@@ -1,9 +1,9 @@
-import type { DeepPartial } from '@blocksuite/affine/global/utils';
+import type { DeepPartial } from '@blocksuite/bridgeflow/global/utils';
 import {
   createSignalFromObservable,
   type Signal,
-} from '@blocksuite/affine/shared/utils';
-import { Entity, LiveData } from '@toeverything/infra';
+} from '@blocksuite/bridgeflow/shared/utils';
+import { Entity, LiveData } from '@kanban-studios/infra';
 import { isObject, merge } from 'lodash-es';
 import type { Observable } from 'rxjs';
 import { map } from 'rxjs';

@@ -22,12 +22,12 @@ const mobileUAString =
 
 function initTestStaticFiles(staticPath: string) {
   const files = {
-    'selfhost.html': `<!DOCTYPE html><html><body>AFFiNE</body><script src="main.a.js"/></html>`,
-    'main.a.js': `const name = 'affine'`,
-    'admin/selfhost.html': `<!DOCTYPE html><html><body>AFFiNE Admin</body><script src="/admin/main.b.js"/></html>`,
-    'admin/main.b.js': `const name = 'affine-admin'`,
-    'mobile/selfhost.html': `<!DOCTYPE html><html><body>AFFiNE mobile</body><script src="/mobile/main.c.js"/></html>`,
-    'mobile/main.c.js': `const name = 'affine-mobile'`,
+    'selfhost.html': `<!DOCTYPE html><html><body>BridgeFlow</body><script src="main.a.js"/></html>`,
+    'main.a.js': `const name = 'bridgeflow'`,
+    'admin/selfhost.html': `<!DOCTYPE html><html><body>BridgeFlow Admin</body><script src="/admin/main.b.js"/></html>`,
+    'admin/main.b.js': `const name = 'bridgeflow-admin'`,
+    'mobile/selfhost.html': `<!DOCTYPE html><html><body>BridgeFlow mobile</body><script src="/mobile/main.c.js"/></html>`,
+    'mobile/main.c.js': `const name = 'bridgeflow-mobile'`,
   };
 
   for (const [filename, content] of Object.entries(files)) {
@@ -94,39 +94,39 @@ test('should always return static asset files', async t => {
   let res = await request(t.context.app.getHttpServer())
     .get('/main.a.js')
     .expect(200);
-  t.is(res.text, "const name = 'affine'");
+  t.is(res.text, "const name = 'bridgeflow'");
 
   res = await request(t.context.app.getHttpServer())
     .get('/admin/main.b.js')
     .expect(200);
-  t.is(res.text, "const name = 'affine-admin'");
+  t.is(res.text, "const name = 'bridgeflow-admin'");
 
   res = await request(t.context.app.getHttpServer())
     .get('/main.c.js')
     .expect(200);
-  t.is(res.text, "const name = 'affine-mobile'");
+  t.is(res.text, "const name = 'bridgeflow-mobile'");
 
   await t.context.db.user.create({
     data: {
       name: 'test',
-      email: 'test@affine.pro',
+      email: 'test@bridgeflow.pro',
     },
   });
 
   res = await request(t.context.app.getHttpServer())
     .get('/main.a.js')
     .expect(200);
-  t.is(res.text, "const name = 'affine'");
+  t.is(res.text, "const name = 'bridgeflow'");
 
   res = await request(t.context.app.getHttpServer())
     .get('/admin/main.b.js')
     .expect(200);
-  t.is(res.text, "const name = 'affine-admin'");
+  t.is(res.text, "const name = 'bridgeflow-admin'");
 
   res = await request(t.context.app.getHttpServer())
     .get('/main.c.js')
     .expect(200);
-  t.is(res.text, "const name = 'affine-mobile'");
+  t.is(res.text, "const name = 'bridgeflow-mobile'");
 });
 
 test('should be able to call apis', async t => {
@@ -160,7 +160,7 @@ test('should allow visiting all pages if initialized', async t => {
   await t.context.db.user.create({
     data: {
       name: 'test',
-      email: 'test@affine.pro',
+      email: 'test@bridgeflow.pro',
     },
   });
 
@@ -178,14 +178,14 @@ test('should allow visiting setup page if not initialized', async t => {
     .get('/admin/setup')
     .expect(200);
 
-  t.true(res.text.includes('AFFiNE Admin'));
+  t.true(res.text.includes('BridgeFlow Admin'));
 });
 
 test('should redirect to admin if initialized', async t => {
   await t.context.db.user.create({
     data: {
       name: 'test',
-      email: 'test@affine.pro',
+      email: 'test@bridgeflow.pro',
     },
   });
 
@@ -201,7 +201,7 @@ test.skip('should return web assets if visited by mobile', async t => {
   await t.context.db.user.create({
     data: {
       name: 'test',
-      email: 'test@affine.pro',
+      email: 'test@bridgeflow.pro',
     },
   });
 
@@ -210,7 +210,7 @@ test.skip('should return web assets if visited by mobile', async t => {
     .set('user-agent', mobileUAString)
     .expect(200);
 
-  t.true(res.text.includes('AFFiNE mobile'));
+  t.true(res.text.includes('BridgeFlow mobile'));
 });
 
 test('should can send maximum size of body', async t => {

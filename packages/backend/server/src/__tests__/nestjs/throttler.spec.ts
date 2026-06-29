@@ -148,7 +148,7 @@ test('should be able to prevent requests if limit is reached', async t => {
 test('should use session id as tracker when available', async t => {
   const { app } = t.context;
 
-  const user = await app.signupV1('u1@affine.pro');
+  const user = await app.signupV1('u1@bridgeflow.pro');
   const userSession = await app.get(PrismaClient).userSession.findFirst({
     where: { userId: user.id },
   });
@@ -258,7 +258,7 @@ test('should use specified throttler for unauthenticated user', async t => {
 test('should not protect unspecified routes', async t => {
   const { app } = t.context;
 
-  await app.signupV1('u1@affine.pro');
+  await app.signupV1('u1@bridgeflow.pro');
   const res = await app.GET('/nonthrottled/default').expect(200);
 
   const headers = rateLimitHeaders(res);
@@ -271,7 +271,7 @@ test('should not protect unspecified routes', async t => {
 test('should use default throttler for authenticated user when not specified', async t => {
   const { app } = t.context;
 
-  await app.signupV1('u1@affine.pro');
+  await app.signupV1('u1@bridgeflow.pro');
   const res = await app.GET('/throttled/default').expect(200);
 
   const headers = rateLimitHeaders(res);
@@ -283,7 +283,7 @@ test('should use default throttler for authenticated user when not specified', a
 test('should use same throttler for multiple routes', async t => {
   const { app } = t.context;
 
-  await app.signupV1('u1@affine.pro');
+  await app.signupV1('u1@bridgeflow.pro');
   let res = await app.GET('/throttled/default').expect(200);
 
   let headers = rateLimitHeaders(res);
@@ -302,7 +302,7 @@ test('should use same throttler for multiple routes', async t => {
 test('should use different throttler if specified', async t => {
   const { app } = t.context;
 
-  await app.signupV1('u1@affine.pro');
+  await app.signupV1('u1@bridgeflow.pro');
   let res = await app.GET('/throttled/default').expect(200);
 
   let headers = rateLimitHeaders(res);
@@ -321,7 +321,7 @@ test('should use different throttler if specified', async t => {
 test('should skip throttler for authenticated if `authenticated` throttler used', async t => {
   const { app } = t.context;
 
-  await app.signupV1('u1@affine.pro');
+  await app.signupV1('u1@bridgeflow.pro');
   const res = await app.GET('/throttled/authenticated').expect(200);
 
   const headers = rateLimitHeaders(res);
@@ -345,7 +345,7 @@ test('should apply `default` throttler for unauthenticated user if `authenticate
 test('should skip throttler for authenticated user when specified', async t => {
   const { app } = t.context;
 
-  await app.signupV1('u1@affine.pro');
+  await app.signupV1('u1@bridgeflow.pro');
   const res = await app.GET('/throttled/skip').expect(200);
 
   const headers = rateLimitHeaders(res);
@@ -358,7 +358,7 @@ test('should skip throttler for authenticated user when specified', async t => {
 test('should use specified throttler for authenticated user', async t => {
   const { app } = t.context;
 
-  await app.signupV1('u1@affine.pro');
+  await app.signupV1('u1@bridgeflow.pro');
   const res = await app.GET('/throttled/strict').expect(200);
 
   const headers = rateLimitHeaders(res);
@@ -373,7 +373,7 @@ test('should separate anonymous and authenticated user throttlers', async t => {
   const unauthenticatedUserRes = await app
     .GET('/nonthrottled/default')
     .expect(200);
-  await app.signupV1('u1@affine.pro');
+  await app.signupV1('u1@bridgeflow.pro');
   const authenticatedUserRes = await app.GET('/throttled/default').expect(200);
 
   const authenticatedResHeaders = rateLimitHeaders(authenticatedUserRes);

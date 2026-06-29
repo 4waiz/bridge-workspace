@@ -1,7 +1,7 @@
-import { IconButton } from '@affine/component';
-import { AffineErrorBoundary } from '@affine/core/components/affine/affine-error-boundary';
+import { IconButton } from '@bridgeflow/component';
+import { BridgeFlowErrorBoundary } from '@bridgeflow/core/components/bridgeflow/bridgeflow-error-boundary';
 import { RightSidebarIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { Suspense, useCallback } from 'react';
 import { Outlet } from 'react-router-dom';
 
@@ -79,11 +79,11 @@ export const RouteContainer = () => {
         )}
       </div>
 
-      <AffineErrorBoundary>
+      <BridgeFlowErrorBoundary>
         <Suspense>
           <Outlet />
         </Suspense>
-      </AffineErrorBoundary>
+      </BridgeFlowErrorBoundary>
       <ViewBodyTarget viewId={view.id} className={styles.viewBodyContainer} />
     </div>
   );

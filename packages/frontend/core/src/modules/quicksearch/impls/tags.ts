@@ -1,4 +1,4 @@
-import { Entity, LiveData } from '@toeverything/infra';
+import { Entity, LiveData } from '@kanban-studios/infra';
 import Fuse from 'fuse.js';
 
 import type { TagService } from '../../tag';
@@ -11,7 +11,7 @@ import { QuickSearchTagIcon } from '../views/tag-icon';
 const group: QuickSearchGroup = {
   id: 'tags',
   label: {
-    i18nKey: 'com.affine.cmdk.affine.category.affine.tags',
+    i18nKey: 'com.bridgeflow.cmdk.bridgeflow.category.bridgeflow.tags',
   },
   score: 10,
 };

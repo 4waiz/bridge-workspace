@@ -1,8 +1,8 @@
 import {
   createSignalFromObservable,
   type Signal,
-} from '@blocksuite/affine/shared/utils';
-import { Service } from '@toeverything/infra';
+} from '@blocksuite/bridgeflow/shared/utils';
+import { Service } from '@kanban-studios/infra';
 
 import type { FeatureFlagService } from '../../feature-flag';
 

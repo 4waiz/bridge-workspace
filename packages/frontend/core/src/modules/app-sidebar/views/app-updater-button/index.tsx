@@ -1,15 +1,16 @@
-import { Tooltip } from '@affine/component';
-import { useCatchEventCallback } from '@affine/core/components/hooks/use-catch-event-hook';
-import { UrlService } from '@affine/core/modules/url';
-import { Unreachable } from '@affine/env/constant';
-import { useI18n } from '@affine/i18n';
+import { Tooltip } from '@bridgeflow/component';
+import { BRAND_SITE_URL } from '@bridgeflow/component/brand';
+import { useCatchEventCallback } from '@bridgeflow/core/components/hooks/use-catch-event-hook';
+import { UrlService } from '@bridgeflow/core/modules/url';
+import { Unreachable } from '@bridgeflow/env/constant';
+import { useI18n } from '@bridgeflow/i18n';
 import {
   CloseIcon,
   DownloadIcon,
   NewIcon,
   ResetIcon,
 } from '@blocksuite/icons/rc';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { useCallback, useMemo } from 'react';
 
@@ -53,7 +54,7 @@ function DownloadUpdate({ updateAvailable }: ButtonContentProps) {
       <div className={styles.installLabelNormal}>
         <DownloadIcon className={styles.icon} />
         <span className={styles.ellipsisTextOverflow}>
-          {t['com.affine.appUpdater.downloadUpdate']()}
+          {t['com.bridgeflow.appUpdater.downloadUpdate']()}
         </span>
         <span className={styles.versionLabel}>{updateAvailable?.version}</span>
       </div>
@@ -61,7 +62,7 @@ function DownloadUpdate({ updateAvailable }: ButtonContentProps) {
       <div className={styles.installLabelHover}>
         <DownloadIcon className={styles.icon} />
         <span className={styles.ellipsisTextOverflow}>
-          {t['com.affine.appUpdater.downloadUpdate']()}
+          {t['com.bridgeflow.appUpdater.downloadUpdate']()}
         </span>
       </div>
     </div>
@@ -75,7 +76,7 @@ function UpdateReady({ updateAvailable, appQuitting }: ButtonContentProps) {
       <div className={styles.installLabelNormal}>
         <ResetIcon className={styles.icon} />
         <span className={styles.ellipsisTextOverflow}>
-          {t['com.affine.appUpdater.updateAvailable']()}
+          {t['com.bridgeflow.appUpdater.updateAvailable']()}
         </span>
         <span className={styles.versionLabel}>{updateAvailable?.version}</span>
       </div>
@@ -83,7 +84,7 @@ function UpdateReady({ updateAvailable, appQuitting }: ButtonContentProps) {
       <div className={styles.installLabelHover}>
         <ResetIcon className={styles.icon} />
         <span className={styles.ellipsisTextOverflow}>
-          {t[appQuitting ? 'Loading' : 'com.affine.appUpdater.installUpdate']()}
+          {t[appQuitting ? 'Loading' : 'com.bridgeflow.appUpdater.installUpdate']()}
         </span>
       </div>
     </div>
@@ -99,7 +100,7 @@ function DownloadingUpdate({
     <div className={clsx([styles.updateAvailableWrapper])}>
       <div className={clsx([styles.installLabelNormal])}>
         <span className={styles.ellipsisTextOverflow}>
-          {t['com.affine.appUpdater.downloading']()}
+          {t['com.bridgeflow.appUpdater.downloading']()}
         </span>
         <span className={styles.versionLabel}>{updateAvailable?.version}</span>
       </div>
@@ -121,7 +122,7 @@ function OpenDownloadPage({ updateAvailable }: ButtonContentProps) {
       <div className={styles.installLabelNormal}>
         <DownloadIcon className={styles.icon} />
         <span className={styles.ellipsisTextOverflow}>
-          {t['com.affine.appUpdater.updateAvailable']()}
+          {t['com.bridgeflow.appUpdater.updateAvailable']()}
         </span>
         <span className={styles.versionLabel}>{updateAvailable?.version}</span>
       </div>
@@ -129,7 +130,7 @@ function OpenDownloadPage({ updateAvailable }: ButtonContentProps) {
       <div className={styles.installLabelHover}>
         <DownloadIcon className={styles.icon} />
         <span className={styles.ellipsisTextOverflow}>
-          {t['com.affine.appUpdater.openDownloadPage']()}
+          {t['com.bridgeflow.appUpdater.openDownloadPage']()}
         </span>
       </div>
     </>
@@ -146,7 +147,7 @@ function WhatsNew({ onDismissChangelog }: ButtonContentProps) {
       <div className={clsx([styles.whatsNewLabel])}>
         <NewIcon className={styles.icon} />
         <span className={styles.ellipsisTextOverflow}>
-          {t['com.affine.appUpdater.whatsNew']()}
+          {t['com.bridgeflow.appUpdater.whatsNew']()}
         </span>
       </div>
       <div className={styles.closeIcon} onClick={onClickClose}>
@@ -199,7 +200,7 @@ export function AppUpdaterButton({
           onDownloadUpdate();
         }
       } else {
-        urlService.openPopupWindow(`https://awaizahmed.com`);
+        urlService.openPopupWindow(BRAND_SITE_URL);
       }
     } else if (changelogUnread) {
       onOpenChangelog();

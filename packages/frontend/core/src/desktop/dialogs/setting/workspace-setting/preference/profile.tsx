@@ -1,15 +1,15 @@
-import { FlexWrapper, Input, notify, Wrapper } from '@affine/component';
-import { Button } from '@affine/component/ui/button';
-import { useCatchEventCallback } from '@affine/core/components/hooks/use-catch-event-hook';
-import { Upload } from '@affine/core/components/pure/file-upload';
-import { WorkspaceAvatar } from '@affine/core/components/workspace-avatar';
-import { WorkspacePermissionService } from '@affine/core/modules/permissions';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { validateAndReduceImage } from '@affine/core/utils/reduce-image';
-import { UNTITLED_WORKSPACE_NAME } from '@affine/env/constant';
-import { useI18n } from '@affine/i18n';
+import { FlexWrapper, Input, notify, Wrapper } from '@bridgeflow/component';
+import { Button } from '@bridgeflow/component/ui/button';
+import { useCatchEventCallback } from '@bridgeflow/core/components/hooks/use-catch-event-hook';
+import { Upload } from '@bridgeflow/core/components/pure/file-upload';
+import { WorkspaceAvatar } from '@bridgeflow/core/components/workspace-avatar';
+import { WorkspacePermissionService } from '@bridgeflow/core/modules/permissions';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { validateAndReduceImage } from '@bridgeflow/core/utils/reduce-image';
+import { UNTITLED_WORKSPACE_NAME } from '@bridgeflow/env/constant';
+import { useI18n } from '@bridgeflow/i18n';
 import { CameraIcon } from '@blocksuite/icons/rc';
-import { LiveData, useLiveData, useService } from '@toeverything/infra';
+import { LiveData, useLiveData, useService } from '@kanban-studios/infra';
 import type { KeyboardEvent } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { map } from 'rxjs';
@@ -181,7 +181,7 @@ export const ProfilePanel = () => {
                 marginLeft: '12px',
               }}
             >
-              {t['com.affine.editCollection.save']()}
+              {t['com.bridgeflow.editCollection.save']()}
             </Button>
           )}
         </FlexWrapper>

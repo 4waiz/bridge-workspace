@@ -1,13 +1,13 @@
 import {
   createCustomToolbarExtension,
   createToolbarMoreMenuConfig,
-} from '@affine/core/blocksuite/view-extensions/editor-config/toolbar';
-import { WorkspaceServerService } from '@affine/core/modules/cloud';
-import { EditorSettingService } from '@affine/core/modules/editor-setting';
-import { ToolbarMoreMenuConfigExtension } from '@blocksuite/affine/components/toolbar';
-import { EditorSettingExtension } from '@blocksuite/affine/shared/services';
+} from '@bridgeflow/core/blocksuite/view-extensions/editor-config/toolbar';
+import { WorkspaceServerService } from '@bridgeflow/core/modules/cloud';
+import { EditorSettingService } from '@bridgeflow/core/modules/editor-setting';
+import { ToolbarMoreMenuConfigExtension } from '@blocksuite/bridgeflow/components/toolbar';
+import { EditorSettingExtension } from '@blocksuite/bridgeflow/shared/services';
 import type { ExtensionType } from '@blocksuite/store';
-import type { FrameworkProvider } from '@toeverything/infra';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 
 export function getEditorConfigExtension(
   framework: FrameworkProvider

@@ -8,21 +8,21 @@ const packageJson = JSON.parse(
 );
 
 interface AppConfig {
-  affineVersion: string;
+  bridgeflowVersion: string;
 }
 
 const config: CapacitorConfig & AppConfig = {
-  appId: 'app.affine.pro',
-  appName: 'AFFiNE',
+  appId: 'app.bridgeflow.pro',
+  appName: 'BridgeFlow',
   webDir: 'dist',
-  affineVersion: packageJson.version,
+  bridgeflowVersion: packageJson.version,
   android: {
     path: 'App',
     buildOptions: {
-      keystorePath: join(__dirname, 'affine.keystore'),
-      keystorePassword: process.env.AFFINE_ANDROID_KEYSTORE_PASSWORD,
+      keystorePath: join(__dirname, 'bridgeflow.keystore'),
+      keystorePassword: process.env.BRIDGEFLOW_ANDROID_KEYSTORE_PASSWORD,
       keystoreAlias: 'key0',
-      keystoreAliasPassword: process.env.AFFINE_ANDROID_KEYSTORE_ALIAS_PASSWORD,
+      keystoreAliasPassword: process.env.BRIDGEFLOW_ANDROID_KEYSTORE_ALIAS_PASSWORD,
       releaseType: 'AAB',
     },
     adjustMarginsForEdgeToEdge: 'force',

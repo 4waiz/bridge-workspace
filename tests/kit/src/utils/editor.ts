@@ -1,8 +1,8 @@
-import '@blocksuite/affine/effects';
+import '@blocksuite/bridgeflow/effects';
 
-import type { IVec, XYWH } from '@blocksuite/affine/global/gfx';
-import type { CodeBlockComponent } from '@blocksuite/affine-block-code';
-import type { ParagraphBlockComponent } from '@blocksuite/affine-block-paragraph';
+import type { IVec, XYWH } from '@blocksuite/bridgeflow/global/gfx';
+import type { CodeBlockComponent } from '@blocksuite/bridgeflow-block-code';
+import type { ParagraphBlockComponent } from '@blocksuite/bridgeflow-block-paragraph';
 import type { BlockComponent } from '@blocksuite/std';
 import { expect, type Locator, type Page } from '@playwright/test';
 
@@ -16,8 +16,8 @@ export function inlineEditorInnerTextToString(innerText: string): string {
   return innerText.replace(ZERO_WIDTH_FOR_EMPTY_LINE, '').trim();
 }
 
-const PARAGRAPH_BLOCK_LOCATOR = 'affine-paragraph';
-const CODE_BLOCK_LOCATOR = 'affine-code';
+const PARAGRAPH_BLOCK_LOCATOR = 'bridgeflow-paragraph';
+const CODE_BLOCK_LOCATOR = 'bridgeflow-code';
 
 export function locateModeSwitchButton(
   page: Page,
@@ -64,11 +64,11 @@ export async function getPageMode(page: Page): Promise<'page' | 'edgeless'> {
 }
 
 export function locateEditorContainer(page: Page, editorIndex = 0) {
-  return page.locator('[data-affine-editor-container]').nth(editorIndex);
+  return page.locator('[data-bridgeflow-editor-container]').nth(editorIndex);
 }
 
 export async function dblclickNoteBody(page: Page) {
-  const note = page.locator('affine-edgeless-note');
+  const note = page.locator('bridgeflow-edgeless-note');
   await dblclickLocatorByRatio(page, note, { yRatio: 0.7 });
 }
 
@@ -97,7 +97,7 @@ export async function assertTitle(page: Page, text: string) {
 
 export function locateToolbar(page: Page, editorIndex = 0) {
   return locateEditorContainer(page, editorIndex).locator(
-    'affine-toolbar-widget editor-toolbar'
+    'bridgeflow-toolbar-widget editor-toolbar'
   );
 }
 
@@ -106,7 +106,7 @@ export function locateToolbar(page: Page, editorIndex = 0) {
 export async function getEdgelessSelectedIds(page: Page, editorIndex = 0) {
   const container = locateEditorContainer(page, editorIndex);
   return container.evaluate(container => {
-    const root = container.querySelector('affine-edgeless-root');
+    const root = container.querySelector('bridgeflow-edgeless-root');
     if (!root) {
       throw new Error('Edgeless root not found');
     }
@@ -121,7 +121,7 @@ export async function getSelectedXYWH(
 ): Promise<[number, number, number, number]> {
   const container = locateEditorContainer(page, editorIndex);
   return container.evaluate((container, index) => {
-    const root = container.querySelector('affine-edgeless-root');
+    const root = container.querySelector('bridgeflow-edgeless-root');
     if (!root) {
       throw new Error('Edgeless root not found');
     }
@@ -133,7 +133,7 @@ export async function getSelectedXYWH(
 export async function getViewportCenter(page: Page, editorIndex = 0) {
   const container = locateEditorContainer(page, editorIndex);
   return container.evaluate(container => {
-    const root = container.querySelector('affine-edgeless-root');
+    const root = container.querySelector('bridgeflow-edgeless-root');
     if (!root) {
       throw new Error('Edgeless root not found');
     }
@@ -144,7 +144,7 @@ export async function getViewportCenter(page: Page, editorIndex = 0) {
 export async function getViewportBound(page: Page, editorIndex = 0) {
   const container = locateEditorContainer(page, editorIndex);
   return container.evaluate(container => {
-    const root = container.querySelector('affine-edgeless-root');
+    const root = container.querySelector('bridgeflow-edgeless-root');
     if (!root) {
       throw new Error('Edgeless root not found');
     }
@@ -159,7 +159,7 @@ export async function setViewportCenter(
 ) {
   const container = locateEditorContainer(page, editorIndex);
   return container.evaluate((container, center) => {
-    const root = container.querySelector('affine-edgeless-root');
+    const root = container.querySelector('bridgeflow-edgeless-root');
     if (!root) {
       throw new Error('Edgeless root not found');
     }
@@ -170,7 +170,7 @@ export async function setViewportCenter(
 export async function setViewportZoom(page: Page, zoom = 1, editorIndex = 0) {
   const container = locateEditorContainer(page, editorIndex);
   return container.evaluate((container, zoom) => {
-    const root = container.querySelector('affine-edgeless-root');
+    const root = container.querySelector('bridgeflow-edgeless-root');
     if (!root) {
       throw new Error('Edgeless root not found');
     }
@@ -181,7 +181,7 @@ export async function setViewportZoom(page: Page, zoom = 1, editorIndex = 0) {
 export async function fitViewportToContent(page: Page, editorIndex = 0) {
   const container = locateEditorContainer(page, editorIndex);
   return container.evaluate(container => {
-    const root = container.querySelector('affine-edgeless-root');
+    const root = container.querySelector('bridgeflow-edgeless-root');
     if (!root) {
       throw new Error('Edgeless root not found');
     }
@@ -196,7 +196,7 @@ export async function fitViewportToContent(page: Page, editorIndex = 0) {
 export async function toViewCoord(page: Page, point: IVec, editorIndex = 0) {
   const container = locateEditorContainer(page, editorIndex);
   return container.evaluate((container, point) => {
-    const root = container.querySelector('affine-edgeless-root');
+    const root = container.querySelector('bridgeflow-edgeless-root');
     if (!root) {
       throw new Error('Edgeless root not found');
     }
@@ -214,7 +214,7 @@ export async function toViewCoord(page: Page, point: IVec, editorIndex = 0) {
 export async function toModelCoord(page: Page, point: IVec, editorIndex = 0) {
   const container = locateEditorContainer(page, editorIndex);
   return container.evaluate((container, point) => {
-    const root = container.querySelector('affine-edgeless-root');
+    const root = container.querySelector('bridgeflow-edgeless-root');
     if (!root) {
       throw new Error('Edgeless root not found');
     }

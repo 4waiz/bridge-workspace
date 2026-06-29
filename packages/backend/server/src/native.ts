@@ -1,4 +1,4 @@
-import serverNativeModule, { type Tokenizer } from '@affine/server-native';
+import serverNativeModule, { type Tokenizer } from '@bridgeflow/server-native';
 
 export const mergeUpdatesInApplyWay = serverNativeModule.mergeUpdatesInApplyWay;
 
@@ -47,9 +47,9 @@ export const parsePageDocFromBinary = serverNativeModule.parsePageDoc;
 export const parseWorkspaceDocFromBinary = serverNativeModule.parseWorkspaceDoc;
 export const readAllDocIdsFromRootDoc =
   serverNativeModule.readAllDocIdsFromRootDoc;
-export const AFFINE_PRO_PUBLIC_KEY = serverNativeModule.AFFINE_PRO_PUBLIC_KEY;
-export const AFFINE_PRO_LICENSE_AES_KEY =
-  serverNativeModule.AFFINE_PRO_LICENSE_AES_KEY;
+export const BRIDGEFLOW_PRO_PUBLIC_KEY = serverNativeModule.BRIDGEFLOW_PRO_PUBLIC_KEY;
+export const BRIDGEFLOW_PRO_LICENSE_AES_KEY =
+  serverNativeModule.BRIDGEFLOW_PRO_LICENSE_AES_KEY;
 
 // MCP write tools exports
 export const createDocWithMarkdown = serverNativeModule.createDocWithMarkdown;
@@ -303,7 +303,7 @@ export type NativeLlmStreamEvent =
       };
     }
   | { type: 'error'; message: string; code?: string; raw?: string };
-const LLM_STREAM_END_MARKER = '__AFFINE_LLM_STREAM_END__';
+const LLM_STREAM_END_MARKER = '__BRIDGEFLOW_LLM_STREAM_END__';
 
 export async function llmDispatch(
   protocol: NativeLlmProtocol,

@@ -3,14 +3,14 @@ import {
   PropertyCollapsibleContent,
   PropertyCollapsibleSection,
   PropertyName,
-} from '@affine/component';
-import { AffinePageReference } from '@affine/core/components/affine/reference-link';
-import { DocService } from '@affine/core/modules/doc';
-import { TemplateDocService } from '@affine/core/modules/template-doc';
-import { useI18n } from '@affine/i18n';
-import type { DatabaseBlockDataSource } from '@blocksuite/affine/blocks/database';
+} from '@bridgeflow/component';
+import { BridgeFlowPageReference } from '@bridgeflow/core/components/bridgeflow/reference-link';
+import { DocService } from '@bridgeflow/core/modules/doc';
+import { TemplateDocService } from '@bridgeflow/core/modules/template-doc';
+import { useI18n } from '@bridgeflow/i18n';
+import type { DatabaseBlockDataSource } from '@blocksuite/bridgeflow/blocks/database';
 import { DatabaseTableViewIcon, PageIcon } from '@blocksuite/icons/rc';
-import { LiveData, useLiveData, useService } from '@toeverything/infra';
+import { LiveData, useLiveData, useService } from '@kanban-studios/infra';
 import { useMemo } from 'react';
 import type { Observable } from 'rxjs';
 
@@ -142,7 +142,7 @@ const DatabaseBacklinkRow = ({
         defaultCollapsed={!defaultOpen}
         icon={<DatabaseTableViewIcon />}
         suffix={
-          <AffinePageReference
+          <BridgeFlowPageReference
             className={
               BUILD_CONFIG.isMobileEdition
                 ? styles.mobileDocRefLink

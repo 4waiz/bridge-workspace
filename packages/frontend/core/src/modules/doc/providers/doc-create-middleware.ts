@@ -1,4 +1,4 @@
-import { createIdentifier } from '@toeverything/infra';
+import { createIdentifier } from '@kanban-studios/infra';
 
 import type { DocRecord } from '../entities/record';
 import type { DocCreateOptions } from '../types';

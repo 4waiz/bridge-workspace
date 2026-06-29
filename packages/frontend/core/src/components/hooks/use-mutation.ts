@@ -1,12 +1,12 @@
-import { GraphQLService } from '@affine/core/modules/cloud';
+import { GraphQLService } from '@bridgeflow/core/modules/cloud';
 import type {
   GraphQLQuery,
   MutationOptions,
   QueryResponse,
   QueryVariables,
   RecursiveMaybeFields,
-} from '@affine/graphql';
-import { useService } from '@toeverything/infra';
+} from '@bridgeflow/graphql';
+import { useService } from '@kanban-studios/infra';
 import type { GraphQLError } from 'graphql';
 import { useMemo } from 'react';
 import type { Key } from 'swr';
@@ -23,7 +23,7 @@ import useSWRMutation from 'swr/mutation';
  * @example
  *
  * ```ts
- * import { someMutation } from '@affine/graphql'
+ * import { someMutation } from '@bridgeflow/graphql'
  *
  * const { trigger } = useMutation({
  *  mutation: someMutation,

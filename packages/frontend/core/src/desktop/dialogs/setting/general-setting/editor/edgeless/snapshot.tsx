@@ -1,18 +1,18 @@
-import { Skeleton } from '@affine/component';
-import { getViewManager } from '@affine/core/blocksuite/manager/view';
-import type { EditorSettingSchema } from '@affine/core/modules/editor-setting';
-import { EditorSettingService } from '@affine/core/modules/editor-setting';
-import { EdgelessCRUDIdentifier } from '@blocksuite/affine/blocks/surface';
-import { Bound } from '@blocksuite/affine/global/gfx';
-import { ViewportElementExtension } from '@blocksuite/affine/shared/services';
-import type { EditorHost } from '@blocksuite/affine/std';
-import { BlockStdScope } from '@blocksuite/affine/std';
+import { Skeleton } from '@bridgeflow/component';
+import { getViewManager } from '@bridgeflow/core/blocksuite/manager/view';
+import type { EditorSettingSchema } from '@bridgeflow/core/modules/editor-setting';
+import { EditorSettingService } from '@bridgeflow/core/modules/editor-setting';
+import { EdgelessCRUDIdentifier } from '@blocksuite/bridgeflow/blocks/surface';
+import { Bound } from '@blocksuite/bridgeflow/global/gfx';
+import { ViewportElementExtension } from '@blocksuite/bridgeflow/shared/services';
+import type { EditorHost } from '@blocksuite/bridgeflow/std';
+import { BlockStdScope } from '@blocksuite/bridgeflow/std';
 import {
   GfxControllerIdentifier,
   type GfxPrimitiveElementModel,
-} from '@blocksuite/affine/std/gfx';
-import type { Block, Store } from '@blocksuite/affine/store';
-import { useFramework } from '@toeverything/infra';
+} from '@blocksuite/bridgeflow/std/gfx';
+import type { Block, Store } from '@blocksuite/bridgeflow/store';
+import { useFramework } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { isEqual } from 'lodash-es';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
@@ -108,7 +108,7 @@ export const EdgelessSnapshot = (props: Props) => {
       if (
         payload.type !== 'block' ||
         payload.method !== 'add' ||
-        payload.view.model.flavour !== 'affine:page'
+        payload.view.model.flavour !== 'bridgeflow:page'
       ) {
         return;
       }

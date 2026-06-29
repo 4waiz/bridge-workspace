@@ -1,5 +1,5 @@
-import type { SurfaceRefBlockComponent } from '@blocksuite/affine/blocks/surface-ref';
-import { AffineReference } from '@blocksuite/affine/inlines/reference';
+import type { SurfaceRefBlockComponent } from '@blocksuite/bridgeflow/blocks/surface-ref';
+import { BridgeFlowReference } from '@blocksuite/bridgeflow/inlines/reference';
 import type {
   AttachmentBlockModel,
   DocMode,
@@ -7,10 +7,10 @@ import type {
   EmbedSyncedDocModel,
   ImageBlockModel,
   SurfaceRefBlockModel,
-} from '@blocksuite/affine/model';
-import type { BlockComponent, EditorHost } from '@blocksuite/affine/std';
-import type { Block, BlockModel } from '@blocksuite/affine/store';
-import { Entity, LiveData } from '@toeverything/infra';
+} from '@blocksuite/bridgeflow/model';
+import type { BlockComponent, EditorHost } from '@blocksuite/bridgeflow/std';
+import type { Block, BlockModel } from '@blocksuite/bridgeflow/store';
+import { Entity, LiveData } from '@kanban-studios/infra';
 import type { TemplateResult } from 'lit';
 import { firstValueFrom, map, race } from 'rxjs';
 
@@ -36,7 +36,7 @@ export type DocReferenceInfo = {
 export type PeekViewElement =
   | HTMLElement
   | BlockComponent
-  | AffineReference
+  | BridgeFlowReference
   | HTMLAnchorElement
   | Block;
 
@@ -91,37 +91,37 @@ export type ActivePeekView = {
 const isEmbedLinkedDocModel = (
   blockModel: BlockModel
 ): blockModel is EmbedLinkedDocModel => {
-  return blockModel.flavour === 'affine:embed-linked-doc';
+  return blockModel.flavour === 'bridgeflow:embed-linked-doc';
 };
 
 const isEmbedSyncedDocModel = (
   blockModel: BlockModel
 ): blockModel is EmbedSyncedDocModel => {
-  return blockModel.flavour === 'affine:embed-synced-doc';
+  return blockModel.flavour === 'bridgeflow:embed-synced-doc';
 };
 
 const isImageBlockModel = (
   blockModel: BlockModel
 ): blockModel is ImageBlockModel => {
-  return blockModel.flavour === 'affine:image';
+  return blockModel.flavour === 'bridgeflow:image';
 };
 
 const isAttachmentBlockModel = (
   blockModel: BlockModel
 ): blockModel is AttachmentBlockModel => {
-  return blockModel.flavour === 'affine:attachment';
+  return blockModel.flavour === 'bridgeflow:attachment';
 };
 
 const isSurfaceRefModel = (
   blockModel: BlockModel
 ): blockModel is SurfaceRefBlockModel => {
-  return blockModel.flavour === 'affine:surface-ref';
+  return blockModel.flavour === 'bridgeflow:surface-ref';
 };
 
 const isAIChatBlockModel = (
   blockModel: BlockModel
 ): blockModel is AIChatBlockModel => {
-  return blockModel.flavour === 'affine:embed-ai-chat';
+  return blockModel.flavour === 'bridgeflow:embed-ai-chat';
 };
 
 function resolvePeekInfoFromPeekTarget(
@@ -138,7 +138,7 @@ function resolvePeekInfoFromPeekTarget(
   const element = peekTarget.element;
 
   if (element) {
-    if (element instanceof AffineReference) {
+    if (element instanceof BridgeFlowReference) {
       const referenceInfo = element.referenceInfo;
       if (referenceInfo) {
         const { pageId: docId, params } = referenceInfo;

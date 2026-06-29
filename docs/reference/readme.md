@@ -1,7 +1,7 @@
-Welcome to AFFiNE development reference.
+Welcome to BridgeFlow development reference.
 
-This document is intended for developers who want to contribute to AFFiNE. It contains information about the architecture of AFFiNE, how to build it, and how to contribute to it.
+This document is intended for developers who want to contribute to BridgeFlow. It contains information about the architecture of BridgeFlow, how to build it, and how to contribute to it.
 
-### The Infrastructure of AFFiNE
+### The Infrastructure of BridgeFlow
 
-see {@link @toeverything/infra!}
+see {@link @kanban-studios/infra!}

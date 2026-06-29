@@ -1,4 +1,4 @@
-import { serverConfigQuery, ServerFeature } from '@affine/graphql';
+import { serverConfigQuery, ServerFeature } from '@bridgeflow/graphql';
 
 import { app, e2e } from '../test';
 

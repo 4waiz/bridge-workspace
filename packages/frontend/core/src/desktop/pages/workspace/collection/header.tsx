@@ -1,9 +1,9 @@
-import { FlexWrapper } from '@affine/component';
-import { ExplorerDisplayMenuButton } from '@affine/core/components/explorer/display-menu';
-import { ViewToggle } from '@affine/core/components/explorer/display-menu/view-toggle';
-import { ExplorerNavigation } from '@affine/core/components/explorer/header/navigation';
-import type { ExplorerDisplayPreference } from '@affine/core/components/explorer/types';
-import { Header } from '@affine/core/components/pure/header';
+import { FlexWrapper } from '@bridgeflow/component';
+import { ExplorerDisplayMenuButton } from '@bridgeflow/core/components/explorer/display-menu';
+import { ViewToggle } from '@bridgeflow/core/components/explorer/display-menu/view-toggle';
+import { ExplorerNavigation } from '@bridgeflow/core/components/explorer/header/navigation';
+import type { ExplorerDisplayPreference } from '@bridgeflow/core/components/explorer/types';
+import { Header } from '@bridgeflow/core/components/pure/header';
 
 export const CollectionDetailHeader = ({
   displayPreference,

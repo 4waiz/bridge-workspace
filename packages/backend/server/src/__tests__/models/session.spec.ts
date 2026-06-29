@@ -66,7 +66,7 @@ test('should not delete a not exists session', async t => {
 
 test('should create a new userSession', async t => {
   const user = await t.context.user.create({
-    email: 'test@affine.pro',
+    email: 'test@bridgeflow.pro',
   });
   const session = await t.context.db.session.create({
     data: {},
@@ -82,7 +82,7 @@ test('should create a new userSession', async t => {
 
 test('should auto create a new session when sessionId not exists in database', async t => {
   const user = await t.context.user.create({
-    email: 'test@affine.pro',
+    email: 'test@bridgeflow.pro',
   });
   const userSession = await t.context.session.createOrRefreshUserSession(
     user.id,
@@ -96,7 +96,7 @@ test('should auto create a new session when sessionId not exists in database', a
 
 test('should refresh exists userSession', async t => {
   const user = await t.context.user.create({
-    email: 'test@affine.pro',
+    email: 'test@bridgeflow.pro',
   });
   const session = await t.context.db.session.create({
     data: {},
@@ -124,7 +124,7 @@ test('should refresh exists userSession', async t => {
 
 test('should record sign-in client version on create and update', async t => {
   const user = await t.context.user.create({
-    email: 'test@affine.pro',
+    email: 'test@bridgeflow.pro',
   });
   const session = await t.context.session.createSession();
 
@@ -153,7 +153,7 @@ test('should record sign-in client version on create and update', async t => {
 
 test('should record refresh client version only when refreshed', async t => {
   const user = await t.context.user.create({
-    email: 'test@affine.pro',
+    email: 'test@bridgeflow.pro',
   });
   const session = await t.context.session.createSession();
   const userSession = await t.context.session.createOrRefreshUserSession(
@@ -182,7 +182,7 @@ test('should record refresh client version only when refreshed', async t => {
 
 test('should not refresh userSession when expires time not hit ttr', async t => {
   const user = await t.context.user.create({
-    email: 'test@affine.pro',
+    email: 'test@bridgeflow.pro',
   });
   const session = await t.context.db.session.create({
     data: {},
@@ -204,7 +204,7 @@ test('should not refresh userSession when expires time not hit ttr', async t => 
 
 test('should not refresh userSession when expires time hit ttr', async t => {
   const user = await t.context.user.create({
-    email: 'test@affine.pro',
+    email: 'test@bridgeflow.pro',
   });
   const session = await t.context.session.createSession();
   const userSession = await t.context.session.createOrRefreshUserSession(
@@ -227,7 +227,7 @@ test('should find userSessions without user property by default', async t => {
   const count = 10;
   for (let i = 0; i < count; i++) {
     const user = await t.context.user.create({
-      email: `test${i}@affine.pro`,
+      email: `test${i}@bridgeflow.pro`,
     });
     await t.context.session.createOrRefreshUserSession(user.id, session.id);
   }
@@ -248,7 +248,7 @@ test('should find userSessions include user property', async t => {
   const count = 10;
   for (let i = 0; i < count; i++) {
     const user = await t.context.user.create({
-      email: `test${i}@affine.pro`,
+      email: `test${i}@bridgeflow.pro`,
     });
     await t.context.session.createOrRefreshUserSession(user.id, session.id);
   }
@@ -265,7 +265,7 @@ test('should find userSessions include user property', async t => {
 
 test('should delete userSession success by userId', async t => {
   const user = await t.context.user.create({
-    email: 'test@affine.pro',
+    email: 'test@bridgeflow.pro',
   });
   const session = await t.context.db.session.create({
     data: {},
@@ -279,7 +279,7 @@ test('should delete userSession success by userId', async t => {
 
 test('should delete userSession success by userId and sessionId', async t => {
   const user = await t.context.user.create({
-    email: 'test@affine.pro',
+    email: 'test@bridgeflow.pro',
   });
   const session = await t.context.db.session.create({
     data: {},
@@ -291,7 +291,7 @@ test('should delete userSession success by userId and sessionId', async t => {
 
 test('should delete userSession fail when sessionId not match', async t => {
   const user = await t.context.user.create({
-    email: 'test@affine.pro',
+    email: 'test@bridgeflow.pro',
   });
   const session = await t.context.db.session.create({
     data: {},
@@ -306,7 +306,7 @@ test('should delete userSession fail when sessionId not match', async t => {
 
 test('should cleanup expired userSessions', async t => {
   const user = await t.context.user.create({
-    email: 'test@affine.pro',
+    email: 'test@bridgeflow.pro',
   });
   const session = await t.context.db.session.create({
     data: {},

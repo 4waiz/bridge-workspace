@@ -1,20 +1,20 @@
-import { Button, ConfirmModal, notify, RowInput } from '@affine/component';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
+import { Button, ConfirmModal, notify, RowInput } from '@bridgeflow/component';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
 import {
   AuthService,
   type Server,
   ServersService,
-} from '@affine/core/modules/cloud';
+} from '@bridgeflow/core/modules/cloud';
 import {
   type DialogComponentProps,
   type GLOBAL_DIALOG_SCHEMA,
   GlobalDialogService,
-} from '@affine/core/modules/dialogs';
-import { WorkspacesService } from '@affine/core/modules/workspace';
-import { buildShowcaseWorkspace } from '@affine/core/utils/first-app-data';
-import { useI18n } from '@affine/i18n';
-import track from '@affine/track';
-import { FrameworkScope, useLiveData, useService } from '@toeverything/infra';
+} from '@bridgeflow/core/modules/dialogs';
+import { WorkspacesService } from '@bridgeflow/core/modules/workspace';
+import { buildShowcaseWorkspace } from '@bridgeflow/core/utils/first-app-data';
+import { useI18n } from '@bridgeflow/i18n';
+import track from '@bridgeflow/track';
+import { FrameworkScope, useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useState } from 'react';
 
 import * as styles from './index.css';
@@ -44,7 +44,7 @@ export const CreateWorkspaceDialog = ({
 
   const [workspaceName, setWorkspaceName] = useState('');
   const [inputServerId, setInputServerId] = useState(
-    serverId ?? 'affine-cloud'
+    serverId ?? 'bridgeflow-cloud'
   );
 
   const serversService = useService(ServersService);
@@ -63,9 +63,9 @@ export const CreateWorkspaceDialog = ({
     <ConfirmModal
       open
       onOpenChange={onOpenChange}
-      title={t['com.affine.nameWorkspace.title']()}
-      description={t['com.affine.nameWorkspace.description']()}
-      cancelText={t['com.affine.nameWorkspace.button.cancel']()}
+      title={t['com.bridgeflow.nameWorkspace.title']()}
+      description={t['com.bridgeflow.nameWorkspace.description']()}
+      cancelText={t['com.bridgeflow.nameWorkspace.button.cancel']()}
       closeButtonOptions={{
         ['data-testid' as string]: 'create-workspace-close-button',
       }}
@@ -87,13 +87,13 @@ export const CreateWorkspaceDialog = ({
       {...props}
     >
       <FormSection
-        label={t['com.affine.nameWorkspace.subtitle.workspace-name']()}
+        label={t['com.bridgeflow.nameWorkspace.subtitle.workspace-name']()}
         input={
           <RowInput
             autoFocus
             className={styles.input}
             data-testid="create-workspace-input"
-            placeholder={t['com.affine.nameWorkspace.placeholder']()}
+            placeholder={t['com.bridgeflow.nameWorkspace.placeholder']()}
             maxLength={64}
             minLength={0}
             onChange={setWorkspaceName}
@@ -102,7 +102,7 @@ export const CreateWorkspaceDialog = ({
       />
 
       <FormSection
-        label={t['com.affine.nameWorkspace.subtitle.workspace-type']()}
+        label={t['com.bridgeflow.nameWorkspace.subtitle.workspace-type']()}
         input={
           <ServerSelector
             className={styles.select}
@@ -140,7 +140,7 @@ const CustomConfirmButton = ({
     if (loading) return;
     setLoading(true);
     track.$.$.$.createWorkspace({
-      flavour: !server ? 'local' : 'affine-cloud',
+      flavour: !server ? 'local' : 'bridgeflow-cloud',
     });
 
     // this will be the last step for web for now
@@ -178,7 +178,7 @@ const CustomConfirmButton = ({
       onClick={handleCheckSessionAndConfirm}
       loading={loading}
     >
-      {t['com.affine.nameWorkspace.button.create']()}
+      {t['com.bridgeflow.nameWorkspace.button.create']()}
     </Button>
   );
 };

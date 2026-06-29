@@ -1,12 +1,12 @@
 import fs from 'node:fs';
 
-import type { Memento } from '@toeverything/infra';
+import type { Memento } from '@kanban-studios/infra';
 import {
   backoffRetry,
   effect,
   exhaustMapWithTrailing,
   fromPromise,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { debounceTime, Observable, timeout } from 'rxjs';
 
 import { logger } from '../logger';

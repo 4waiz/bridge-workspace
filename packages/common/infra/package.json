@@ -1,5 +1,5 @@
 {
-  "name": "@toeverything/infra",
+  "name": "@kanban-studios/infra",
   "type": "module",
   "private": true,
   "sideEffects": false,
@@ -12,10 +12,10 @@
     ".": "./src/index.ts"
   },
   "dependencies": {
-    "@affine/debug": "workspace:*",
-    "@affine/env": "workspace:*",
-    "@affine/error": "workspace:*",
-    "@affine/templates": "workspace:*",
+    "@bridgeflow/debug": "workspace:*",
+    "@bridgeflow/env": "workspace:*",
+    "@bridgeflow/error": "workspace:*",
+    "@bridgeflow/templates": "workspace:*",
     "@preact/signals-core": "^1.8.0",
     "eventemitter2": "^6.4.9",
     "foxact": "^0.2.49",
@@ -32,7 +32,7 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
-    "@affine/templates": "workspace:*",
+    "@bridgeflow/templates": "workspace:*",
     "@emotion/react": "^11.14.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.1.0",

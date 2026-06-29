@@ -6,7 +6,7 @@ import {
   mapInto,
   onComplete,
   onStart,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { exhaustMap } from 'rxjs';
 
 export type FontData = {

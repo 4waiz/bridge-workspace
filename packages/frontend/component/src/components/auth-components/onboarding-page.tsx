@@ -1,4 +1,4 @@
-import { BRAND_SITE_URL } from '@affine/component/brand';
+import { BRAND_SITE_URL } from '@bridgeflow/component/brand';
 import { ArrowRightSmallIcon } from '@blocksuite/icons/rc';
 import clsx from 'clsx';
 import { useMemo, useState } from 'react';
@@ -98,10 +98,10 @@ export const ScrollableLayout = ({
 
 export const OnboardingPage = ({
   user,
-  onOpenAffine,
+  onOpenBridgeFlow,
 }: {
   user: User;
-  onOpenAffine: () => void;
+  onOpenBridgeFlow: () => void;
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -251,14 +251,14 @@ export const OnboardingPage = ({
           you once again for your supports.
         </p>
         <Button
-          className={clsx(styles.button, styles.openAFFiNEButton)}
+          className={clsx(styles.button, styles.openBridgeFlowButton)}
           variant="primary"
           size="extraLarge"
           onClick={() => {
             if (callbackUrl) {
               navigate(callbackUrl);
             } else {
-              onOpenAffine();
+              onOpenBridgeFlow();
             }
           }}
           suffix={<ArrowRightSmallIcon />}

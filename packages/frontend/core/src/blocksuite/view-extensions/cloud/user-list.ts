@@ -1,5 +1,5 @@
-import type { MemberSearchService } from '@affine/core/modules/permissions';
-import { UserListServiceExtension } from '@blocksuite/affine/shared/services';
+import type { MemberSearchService } from '@bridgeflow/core/modules/permissions';
+import { UserListServiceExtension } from '@blocksuite/bridgeflow/shared/services';
 
 export function patchUserListExtensions(memberSearch: MemberSearchService) {
   return UserListServiceExtension({

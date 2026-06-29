@@ -1,9 +1,9 @@
-import { Avatar, type AvatarProps } from '@affine/component';
+import { Avatar, type AvatarProps } from '@bridgeflow/component';
 import {
   type WorkspaceMetadata,
   WorkspacesService,
-} from '@affine/core/modules/workspace';
-import { useLiveData, useService } from '@toeverything/infra';
+} from '@bridgeflow/core/modules/workspace';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useEffect, useLayoutEffect, useState } from 'react';
 
 const cache = new Map<string, { imageBitmap: ImageBitmap; key: string }>();

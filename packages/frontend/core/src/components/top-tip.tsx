@@ -1,5 +1,5 @@
-import { BrowserWarning } from '@affine/component/affine-banner';
-import { Trans, useI18n } from '@affine/i18n';
+import { BrowserWarning } from '@bridgeflow/component/bridgeflow-banner';
+import { Trans, useI18n } from '@bridgeflow/i18n';
 import { useState } from 'react';
 
 import type { Workspace } from '../modules/workspace';
@@ -31,7 +31,7 @@ const OSWarningMessage = () => {
 
   // TODO(@L-Sun): remove this message when mobile version is able to edit.
   if (environment.isMobile) {
-    return <span>{t['com.affine.top-tip.mobile']()}</span>;
+    return <span>{t['com.bridgeflow.top-tip.mobile']()}</span>;
   }
 
   if (notChrome) {

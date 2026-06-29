@@ -1,4 +1,4 @@
-import { createIdentifier } from '@toeverything/infra';
+import { createIdentifier } from '@kanban-studios/infra';
 
 export interface ClientSchemeProvider {
   /**

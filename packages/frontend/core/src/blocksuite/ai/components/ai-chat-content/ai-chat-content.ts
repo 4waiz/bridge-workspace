@@ -1,25 +1,25 @@
 import type {
   AIDraftService,
   AIToolsConfigService,
-} from '@affine/core/modules/ai-button';
-import type { AIDraftState } from '@affine/core/modules/ai-button/services/ai-draft';
-import type { AIModelService } from '@affine/core/modules/ai-button/services/models';
+} from '@bridgeflow/core/modules/ai-button';
+import type { AIDraftState } from '@bridgeflow/core/modules/ai-button/services/ai-draft';
+import type { AIModelService } from '@bridgeflow/core/modules/ai-button/services/models';
 import type {
   ServerService,
   SubscriptionService,
-} from '@affine/core/modules/cloud';
-import type { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import type { FeatureFlagService } from '@affine/core/modules/feature-flag';
-import type { PeekViewService } from '@affine/core/modules/peek-view';
-import type { AppThemeService } from '@affine/core/modules/theme';
+} from '@bridgeflow/core/modules/cloud';
+import type { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
+import type { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
+import type { PeekViewService } from '@bridgeflow/core/modules/peek-view';
+import type { AppThemeService } from '@bridgeflow/core/modules/theme';
 import type {
   ContextEmbedStatus,
   CopilotChatHistoryFragment,
-} from '@affine/graphql';
-import { SignalWatcher, WithDisposable } from '@blocksuite/affine/global/lit';
-import { type EditorHost, ShadowlessElement } from '@blocksuite/affine/std';
-import type { ExtensionType } from '@blocksuite/affine/store';
-import type { NotificationService } from '@blocksuite/affine-shared/services';
+} from '@bridgeflow/graphql';
+import { SignalWatcher, WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { type EditorHost, ShadowlessElement } from '@blocksuite/bridgeflow/std';
+import type { ExtensionType } from '@blocksuite/bridgeflow/store';
+import type { NotificationService } from '@blocksuite/bridgeflow-shared/services';
 import { type Signal } from '@preact/signals-core';
 import { css, html, type PropertyValues, type TemplateResult } from 'lit';
 import { property, state } from 'lit/decorators.js';
@@ -152,13 +152,13 @@ export class AIChatContent extends SignalWatcher(
   accessor serverService!: ServerService;
 
   @property({ attribute: false })
-  accessor affineFeatureFlagService!: FeatureFlagService;
+  accessor bridgeflowFeatureFlagService!: FeatureFlagService;
 
   @property({ attribute: false })
-  accessor affineWorkspaceDialogService!: WorkspaceDialogService;
+  accessor bridgeflowWorkspaceDialogService!: WorkspaceDialogService;
 
   @property({ attribute: false })
-  accessor affineThemeService!: AppThemeService;
+  accessor bridgeflowThemeService!: AppThemeService;
 
   @property({ attribute: false })
   accessor notificationService!: NotificationService;
@@ -440,8 +440,8 @@ export class AIChatContent extends SignalWatcher(
         .updateContext=${this.updateContext}
         .isHistoryLoading=${this.isHistoryLoading}
         .extensions=${this.extensions}
-        .affineFeatureFlagService=${this.affineFeatureFlagService}
-        .affineThemeService=${this.affineThemeService}
+        .bridgeflowFeatureFlagService=${this.bridgeflowFeatureFlagService}
+        .bridgeflowThemeService=${this.bridgeflowThemeService}
         .notificationService=${this.notificationService}
         .aiToolsConfigService=${this.aiToolsConfigService}
         .reasoningConfig=${this.reasoningConfig}
@@ -457,7 +457,7 @@ export class AIChatContent extends SignalWatcher(
           [this.onboardingOffsetY > 0 ? 'paddingTop' : 'paddingBottom']:
             `${this.messages.length === 0 ? Math.abs(this.onboardingOffsetY) * 2 : 0}px`,
         })}
-        .affineFeatureFlagService=${this.affineFeatureFlagService}
+        .bridgeflowFeatureFlagService=${this.bridgeflowFeatureFlagService}
         .independentMode=${this.independentMode}
         .host=${this.host}
         .workspaceId=${this.workspaceId}
@@ -471,7 +471,7 @@ export class AIChatContent extends SignalWatcher(
         .docDisplayConfig=${this.docDisplayConfig}
         .searchMenuConfig=${this.searchMenuConfig}
         .serverService=${this.serverService}
-        .affineWorkspaceDialogService=${this.affineWorkspaceDialogService}
+        .bridgeflowWorkspaceDialogService=${this.bridgeflowWorkspaceDialogService}
         .notificationService=${this.notificationService}
         .aiDraftService=${this.aiDraftService}
         .aiToolsConfigService=${this.aiToolsConfigService}

@@ -1,5 +1,5 @@
-import { type WorkbenchService } from '@affine/core/modules/workbench';
-import { Service } from '@toeverything/infra';
+import { type WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { Service } from '@kanban-studios/infra';
 
 import type { DocCommentEntity } from '../entities/doc-comment';
 

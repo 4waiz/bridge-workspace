@@ -29,8 +29,8 @@ test.afterEach.always(async t => {
 
 test('change email', async t => {
   const { app } = t.context;
-  const u1Email = 'u1@affine.pro';
-  const u2Email = 'u2@affine.pro';
+  const u1Email = 'u1@bridgeflow.pro';
+  const u2Email = 'u2@bridgeflow.pro';
 
   const user = await app.signupV1(u1Email);
   await sendChangeEmail(app, u1Email, '/email-change');
@@ -91,7 +91,7 @@ test('change email', async t => {
 
 test('set and change password', async t => {
   const { app } = t.context;
-  const u1Email = 'u1@affine.pro';
+  const u1Email = 'u1@bridgeflow.pro';
 
   const u1 = await app.signupV1(u1Email);
   await sendSetPasswordEmail(app, u1Email, '/password-change');
@@ -135,7 +135,7 @@ test('set and change password', async t => {
 test('should forbid graphql callbackUrl to external origin', async t => {
   const { app } = t.context;
 
-  const u1Email = 'u1@affine.pro';
+  const u1Email = 'u1@bridgeflow.pro';
   await app.signupV1(u1Email);
 
   const res = await app

@@ -2,7 +2,7 @@ import {
   generateFractionalIndexingKeyBetween,
   LiveData,
   Service,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 
 import type {
   PinnedCollectionRecord,

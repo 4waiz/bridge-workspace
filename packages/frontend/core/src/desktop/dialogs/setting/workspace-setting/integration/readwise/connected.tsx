@@ -1,8 +1,8 @@
-import { Button, Modal } from '@affine/component';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { IntegrationService } from '@affine/core/modules/integration';
-import { useI18n } from '@affine/i18n';
-import { useService } from '@toeverything/infra';
+import { Button, Modal } from '@bridgeflow/component';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { IntegrationService } from '@bridgeflow/core/modules/integration';
+import { useI18n } from '@bridgeflow/i18n';
+import { useService } from '@kanban-studios/infra';
 import { useCallback, useState } from 'react';
 
 import * as styles from './connected.css';
@@ -43,19 +43,19 @@ export const ReadwiseDisconnectDialog = ({
       contentOptions={{ className: styles.connectDialog }}
     >
       <div className={styles.connectDialogTitle}>
-        {t['com.affine.integration.readwise.disconnect.title']()}
+        {t['com.bridgeflow.integration.readwise.disconnect.title']()}
       </div>
       <div className={styles.connectDialogDesc}>
-        {t['com.affine.integration.readwise.disconnect.desc']()}
+        {t['com.bridgeflow.integration.readwise.disconnect.desc']()}
       </div>
       <footer className={styles.footer}>
         <Button onClick={handleCancel}>{t['Cancel']()}</Button>
         <div className={styles.actions}>
           <Button variant="error" onClick={handleDelete}>
-            {t['com.affine.integration.readwise.disconnect.delete']()}
+            {t['com.bridgeflow.integration.readwise.disconnect.delete']()}
           </Button>
           <Button variant="primary" onClick={handleKeep}>
-            {t['com.affine.integration.readwise.disconnect.keep']()}
+            {t['com.bridgeflow.integration.readwise.disconnect.keep']()}
           </Button>
         </div>
       </footer>
@@ -78,7 +78,7 @@ export const ReadwiseDisconnectButton = () => {
         className={actionButton}
         onClick={() => setShowDisconnectDialog(true)}
       >
-        {t['com.affine.integration.readwise.disconnect']()}
+        {t['com.bridgeflow.integration.readwise.disconnect']()}
       </Button>
     </>
   );

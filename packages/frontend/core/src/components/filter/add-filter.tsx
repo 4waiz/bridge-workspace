@@ -4,17 +4,17 @@ import {
   Menu,
   MenuItem,
   MenuSeparator,
-} from '@affine/component';
-import type { FilterParams } from '@affine/core/modules/collection-rules';
-import { WorkspacePropertyService } from '@affine/core/modules/workspace-property';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/component';
+import type { FilterParams } from '@bridgeflow/core/modules/collection-rules';
+import { WorkspacePropertyService } from '@bridgeflow/core/modules/workspace-property';
+import { useI18n } from '@bridgeflow/i18n';
 import {
   ArrowLeftBigIcon,
   CloudWorkspaceIcon,
   FavoriteIcon,
   PlusIcon,
 } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useMemo } from 'react';
 
 import { generateExplorerPropertyList } from '../explorer/properties';
@@ -48,7 +48,7 @@ export const AddFilterMenu = ({
           </IconButton>
         )}
         <div className={styles.variableSelectTitleStyle}>
-          {t['com.affine.filter']()}
+          {t['com.bridgeflow.filter']()}
         </div>
       </div>
 
@@ -82,7 +82,7 @@ export const AddFilterMenu = ({
         }}
       >
         <span className={styles.filterTypeItemName}>
-          {t['com.affine.filter.is-public']()}
+          {t['com.bridgeflow.filter.is-public']()}
         </span>
       </MenuItem>
       {explorerPropertyList.map(({ systemProperty, workspaceProperty }) => {
@@ -167,7 +167,7 @@ export const AddFilter = ({
         </IconButton>
       ) : (
         <Button prefix={<PlusIcon />} className={styles.addFilterButton}>
-          {t['com.affine.filter.add-filter']()}
+          {t['com.bridgeflow.filter.add-filter']()}
         </Button>
       )}
     </Menu>

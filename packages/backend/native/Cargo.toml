@@ -1,14 +1,14 @@
 [package]
 edition      = "2024"
 license-file = "LICENSE"
-name         = "affine_server_native"
+name         = "bridgeflow_server_native"
 version      = "1.0.0"
 
 [lib]
 crate-type = ["cdylib"]
 
 [dependencies]
-affine_common = { workspace = true, features = [
+bridgeflow_common = { workspace = true, features = [
   "doc-loader",
   "hashcash",
   "napi",

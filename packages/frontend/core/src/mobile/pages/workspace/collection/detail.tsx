@@ -1,7 +1,7 @@
-import { useThemeColorV2 } from '@affine/component';
-import { CollectionService } from '@affine/core/modules/collection';
-import { GlobalContextService } from '@affine/core/modules/global-context';
-import { useLiveData, useServices } from '@toeverything/infra';
+import { useThemeColorV2 } from '@bridgeflow/component';
+import { CollectionService } from '@bridgeflow/core/modules/collection';
+import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
+import { useLiveData, useServices } from '@kanban-studios/infra';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 

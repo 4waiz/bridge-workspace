@@ -1,11 +1,11 @@
-import type { DocsPropertiesMeta } from '@blocksuite/affine/store';
+import type { DocsPropertiesMeta } from '@blocksuite/bridgeflow/store';
 import {
   LiveData,
   Store,
   yjsGetPath,
   yjsObserveDeep,
   yjsObservePath,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { nanoid } from 'nanoid';
 import { map, switchMap } from 'rxjs';
 import { Array as YArray } from 'yjs';

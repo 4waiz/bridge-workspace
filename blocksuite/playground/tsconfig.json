@@ -8,11 +8,11 @@
   },
   "include": ["./apps", "./examples"],
   "references": [
-    { "path": "../affine/all" },
-    { "path": "../affine/components" },
-    { "path": "../affine/model" },
-    { "path": "../affine/shared" },
-    { "path": "../affine/data-view" },
+    { "path": "../bridgeflow/all" },
+    { "path": "../bridgeflow/components" },
+    { "path": "../bridgeflow/model" },
+    { "path": "../bridgeflow/shared" },
+    { "path": "../bridgeflow/data-view" },
     { "path": "../integration-test" }
   ]
 }

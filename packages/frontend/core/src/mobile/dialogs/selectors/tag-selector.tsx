@@ -1,11 +1,11 @@
-import { Modal } from '@affine/component';
+import { Modal } from '@bridgeflow/component';
 import type {
   DialogComponentProps,
   WORKSPACE_DIALOG_SCHEMA,
-} from '@affine/core/modules/dialogs';
-import { TagService } from '@affine/core/modules/tag';
-import { useI18n } from '@affine/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+} from '@bridgeflow/core/modules/dialogs';
+import { TagService } from '@bridgeflow/core/modules/tag';
+import { useI18n } from '@bridgeflow/i18n';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { cssVarV2 } from '@toeverything/theme/v2';
 import { useMemo } from 'react';
 
@@ -73,7 +73,7 @@ export const TagSelectorDialog = ({
         onBeforeConfirm={onBeforeConfirm}
         initial={init}
         data={list}
-        typeName={t[`com.affine.m.selector.type-tag`]()}
+        typeName={t[`com.bridgeflow.m.selector.type-tag`]()}
       />
     </Modal>
   );

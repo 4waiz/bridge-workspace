@@ -1,5 +1,5 @@
-import { acceptInviteByInviteIdMutation } from '@affine/graphql';
-import { Store } from '@toeverything/infra';
+import { acceptInviteByInviteIdMutation } from '@bridgeflow/graphql';
+import { Store } from '@kanban-studios/infra';
 
 import type { GraphQLService } from '../services/graphql';
 

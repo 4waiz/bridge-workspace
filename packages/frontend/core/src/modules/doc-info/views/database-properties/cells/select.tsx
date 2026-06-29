@@ -1,16 +1,16 @@
 /* eslint-disable rxjs/finnish */
 
-import { PropertyValue } from '@affine/component';
-import { type TagLike, TagsInlineEditor } from '@affine/core/components/tags';
-import { TagService } from '@affine/core/modules/tag';
+import { PropertyValue } from '@bridgeflow/component';
+import { type TagLike, TagsInlineEditor } from '@bridgeflow/core/components/tags';
+import { TagService } from '@bridgeflow/core/modules/tag';
 import {
-  affineLabelToDatabaseTagColor,
+  bridgeflowLabelToDatabaseTagColor,
   databaseTagColorToV2,
-} from '@affine/core/modules/tag/entities/utils';
-import type { DatabaseBlockDataSource } from '@blocksuite/affine/blocks/database';
+} from '@bridgeflow/core/modules/tag/entities/utils';
+import type { DatabaseBlockDataSource } from '@blocksuite/bridgeflow/blocks/database';
 import type { SelectTag } from '@blocksuite/data-view';
 import { MultiSelectIcon, SingleSelectIcon } from '@blocksuite/icons/rc';
-import { LiveData, useLiveData, useService } from '@toeverything/infra';
+import { LiveData, useLiveData, useService } from '@kanban-studios/infra';
 import { nanoid } from 'nanoid';
 import { useCallback, useMemo } from 'react';
 
@@ -203,7 +203,7 @@ const BlocksuiteDatabaseSelector = ({
   const tagColors = useMemo(() => {
     return tagService.tagColors.map(([name, color]) => ({
       id: name,
-      value: affineLabelToDatabaseTagColor(color),
+      value: bridgeflowLabelToDatabaseTagColor(color),
       name,
     }));
   }, [tagService.tagColors]);
@@ -212,7 +212,7 @@ const BlocksuiteDatabaseSelector = ({
     (tagId: string, property: string, value: string) => {
       adapter.updateTag(selectCell, dataSource, tagId, old => {
         if (property === 'color') {
-          value = affineLabelToDatabaseTagColor(value);
+          value = bridgeflowLabelToDatabaseTagColor(value);
         }
         return {
           ...old,

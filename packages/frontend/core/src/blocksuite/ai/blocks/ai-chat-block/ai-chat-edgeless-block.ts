@@ -1,5 +1,5 @@
-import { Bound, clamp } from '@blocksuite/affine/global/gfx';
-import { toGfxBlockComponent } from '@blocksuite/affine/std';
+import { Bound, clamp } from '@blocksuite/bridgeflow/global/gfx';
+import { toGfxBlockComponent } from '@blocksuite/bridgeflow/std';
 import { GfxViewInteractionExtension } from '@blocksuite/std/gfx';
 import { html } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
@@ -98,6 +98,6 @@ export const EdgelessAIChatBlockInteraction =
 
 declare global {
   interface HTMLElementTagNameMap {
-    'affine-edgeless-ai-chat': EdgelessAIChatBlockComponent;
+    'bridgeflow-edgeless-ai-chat': EdgelessAIChatBlockComponent;
   }
 }

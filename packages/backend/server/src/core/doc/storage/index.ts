@@ -1,6 +1,6 @@
-// This is a totally copy of definitions in [@affine/space-store]
-// because currently importing cross workspace package from [@affine/server] is not yet supported
-// should be kept updated with the original definitions in [@affine/space-store]
+// This is a totally copy of definitions in [@bridgeflow/space-store]
+// because currently importing cross workspace package from [@bridgeflow/server] is not yet supported
+// should be kept updated with the original definitions in [@bridgeflow/space-store]
 import type { BlobStorageAdapter } from './blob';
 import { Connection } from './connection';
 import type { DocStorageAdapter } from './doc';

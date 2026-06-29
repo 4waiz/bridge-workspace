@@ -1,3 +1,3 @@
-import { createEvent } from '@toeverything/infra';
+import { createEvent } from '@kanban-studios/infra';
 
 export const ServerStarted = createEvent('ServerStarted');

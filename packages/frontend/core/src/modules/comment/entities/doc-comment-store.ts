@@ -11,8 +11,8 @@ import {
   updateCommentMutation,
   updateReplyMutation,
   uploadCommentAttachmentMutation,
-} from '@affine/graphql';
-import { Entity } from '@toeverything/infra';
+} from '@bridgeflow/graphql';
+import { Entity } from '@kanban-studios/infra';
 
 import type { DefaultServerService, WorkspaceServerService } from '../../cloud';
 import { GraphQLService } from '../../cloud/services/graphql';

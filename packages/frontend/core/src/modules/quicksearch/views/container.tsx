@@ -1,6 +1,6 @@
-import { UserFriendlyError } from '@affine/error';
-import { useI18n } from '@affine/i18n';
-import { useLiveData, useServices } from '@toeverything/infra';
+import { UserFriendlyError } from '@bridgeflow/error';
+import { useI18n } from '@bridgeflow/i18n';
+import { useLiveData, useServices } from '@kanban-studios/infra';
 import { useCallback, useMemo } from 'react';
 
 import { QuickSearchService } from '../services/quick-search';

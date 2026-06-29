@@ -1,4 +1,4 @@
-import type { Collection } from '@affine/core/modules/collection';
+import type { Collection } from '@bridgeflow/core/modules/collection';
 
 import { DetailHeader } from './detail';
 

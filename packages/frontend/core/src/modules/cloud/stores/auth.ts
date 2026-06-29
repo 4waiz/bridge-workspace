@@ -3,8 +3,8 @@ import {
   removeAvatarMutation,
   updateUserProfileMutation,
   uploadAvatarMutation,
-} from '@affine/graphql';
-import { Store } from '@toeverything/infra';
+} from '@bridgeflow/graphql';
+import { Store } from '@kanban-studios/infra';
 
 import type { GlobalState } from '../../storage';
 import type { AuthSessionInfo } from '../entities/session';

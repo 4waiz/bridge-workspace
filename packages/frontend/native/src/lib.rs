@@ -5,6 +5,6 @@ pub mod hashcash;
 static ALLOC: mimalloc::MiMalloc = mimalloc::MiMalloc;
 
 #[allow(unused_imports)]
-pub use affine_media_capture::*;
-pub use affine_nbstore::*;
-pub use affine_sqlite_v1::*;
+pub use bridgeflow_media_capture::*;
+pub use bridgeflow_nbstore::*;
+pub use bridgeflow_sqlite_v1::*;

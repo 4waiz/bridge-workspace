@@ -1,15 +1,15 @@
-import type { ReactToLit } from '@affine/component';
-import { JournalService } from '@affine/core/modules/journal';
-import { EmbedSyncedDocConfigExtension } from '@blocksuite/affine/blocks/embed-doc';
-import { NoteConfigExtension } from '@blocksuite/affine/blocks/note';
-import { EDGELESS_BLOCK_CHILD_PADDING } from '@blocksuite/affine/blocks/root';
-import { Bound, Vec } from '@blocksuite/affine/global/gfx';
+import type { ReactToLit } from '@bridgeflow/component';
+import { JournalService } from '@bridgeflow/core/modules/journal';
+import { EmbedSyncedDocConfigExtension } from '@blocksuite/bridgeflow/blocks/embed-doc';
+import { NoteConfigExtension } from '@blocksuite/bridgeflow/blocks/note';
+import { EDGELESS_BLOCK_CHILD_PADDING } from '@blocksuite/bridgeflow/blocks/root';
+import { Bound, Vec } from '@blocksuite/bridgeflow/global/gfx';
 import {
   DocModeProvider,
   EditPropsStore,
-} from '@blocksuite/affine/shared/services';
-import { GfxControllerIdentifier } from '@blocksuite/affine/std/gfx';
-import type { FrameworkProvider } from '@toeverything/infra';
+} from '@blocksuite/bridgeflow/shared/services';
+import { GfxControllerIdentifier } from '@blocksuite/bridgeflow/std/gfx';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 import { html } from 'lit';
 
 import { BlocksuiteEditorJournalDocTitle } from '../../block-suite-editor/journal-doc-title';

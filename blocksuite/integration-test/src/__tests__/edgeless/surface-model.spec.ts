@@ -1,9 +1,9 @@
-import type { SurfaceBlockModel } from '@blocksuite/affine/blocks/surface';
+import type { SurfaceBlockModel } from '@blocksuite/bridgeflow/blocks/surface';
 import type {
   BrushElementModel,
   ConnectorElementModel,
   GroupElementModel,
-} from '@blocksuite/affine/model';
+} from '@blocksuite/bridgeflow/model';
 import { beforeEach, describe, expect, test } from 'vitest';
 
 import { wait } from '../utils/common.js';
@@ -14,7 +14,7 @@ let model: SurfaceBlockModel;
 beforeEach(async () => {
   const cleanup = await setupEditor('edgeless');
   const models = doc.getModelsByFlavour(
-    'affine:surface'
+    'bridgeflow:surface'
   ) as SurfaceBlockModel[];
 
   model = models[0];

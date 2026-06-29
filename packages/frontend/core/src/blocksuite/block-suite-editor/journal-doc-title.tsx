@@ -1,7 +1,7 @@
-import { JournalService } from '@affine/core/modules/journal';
-import { i18nTime, useI18n } from '@affine/i18n';
-import type { Store } from '@blocksuite/affine/store';
-import { useLiveData, useService } from '@toeverything/infra';
+import { JournalService } from '@bridgeflow/core/modules/journal';
+import { i18nTime, useI18n } from '@bridgeflow/i18n';
+import type { Store } from '@blocksuite/bridgeflow/store';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import dayjs from 'dayjs';
 
 import * as styles from './styles.css';
@@ -44,7 +44,7 @@ export const BlocksuiteEditorJournalDocTitleUI = ({
       <span data-testid="date">{localizedJournalDate}</span>
       {isToday ? (
         <span className={styles.titleTodayTag} data-testid="date-today-label">
-          {t['com.affine.today']()}
+          {t['com.bridgeflow.today']()}
         </span>
       ) : (
         <span className={styles.titleDayTag}>{day}</span>

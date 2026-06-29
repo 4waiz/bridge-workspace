@@ -1,19 +1,19 @@
-import { useAppSettingHelper } from '@affine/core/components/hooks/affine/use-app-setting-helper';
-import { RootAppSidebar } from '@affine/core/components/root-app-sidebar';
-import { AppSidebarService } from '@affine/core/modules/app-sidebar';
+import { useAppSettingHelper } from '@bridgeflow/core/components/hooks/bridgeflow/use-app-setting-helper';
+import { RootAppSidebar } from '@bridgeflow/core/components/root-app-sidebar';
+import { AppSidebarService } from '@bridgeflow/core/modules/app-sidebar';
 import {
   AppSidebarFallback,
   OpenInAppCard,
   SidebarSwitch,
-} from '@affine/core/modules/app-sidebar/views';
-import { AppTabsHeader } from '@affine/core/modules/app-tabs-header';
-import { NavigationButtons } from '@affine/core/modules/navigation';
-import { WorkspaceService } from '@affine/core/modules/workspace';
+} from '@bridgeflow/core/modules/app-sidebar/views';
+import { AppTabsHeader } from '@bridgeflow/core/modules/app-tabs-header';
+import { NavigationButtons } from '@bridgeflow/core/modules/navigation';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import {
   useLiveData,
   useService,
   useServiceOptional,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import clsx from 'clsx';
 import {
   forwardRef,

@@ -2,33 +2,33 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch AFFiNE Cloud",
+      "name": "Launch BridgeFlow Cloud",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "yarn",
       "cwd": "${workspaceFolder}",
       "runtimeArgs": [
-        "affine",
-        "@affine/server",
+        "bridgeflow",
+        "@bridgeflow/server",
         "dev"
       ]
     },
     {
-      "name": "Lanuch AFFiNE Web",
+      "name": "Lanuch BridgeFlow Web",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "yarn",
       "cwd": "${workspaceFolder}",
       "runtimeArgs": [
-        "affine",
-        "@affine/web",
+        "bridgeflow",
+        "@bridgeflow/web",
         "dev"
       ]
     },
     {
       "type": "chrome",
       "request": "launch",
-      "name": "Debug AFFiNE Web",
+      "name": "Debug BridgeFlow Web",
       "url": "http://localhost:8080"
     }
   ]

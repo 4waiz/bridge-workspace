@@ -1,10 +1,10 @@
 import './page-detail-editor.css';
 
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { useEffect } from 'react';
 
-import type { AffineEditorContainer } from '../blocksuite/block-suite-editor';
+import type { BridgeFlowEditorContainer } from '../blocksuite/block-suite-editor';
 import { BlockSuiteEditor } from '../blocksuite/block-suite-editor';
 import { DocService } from '../modules/doc';
 import { EditorService } from '../modules/editor';
@@ -13,11 +13,11 @@ import * as styles from './page-detail-editor.css';
 
 declare global {
   // oxlint-disable-next-line no-var
-  var currentEditor: AffineEditorContainer | undefined;
+  var currentEditor: BridgeFlowEditorContainer | undefined;
 }
 
 export type OnLoadEditor = (
-  editor: AffineEditorContainer
+  editor: BridgeFlowEditorContainer
 ) => (() => void) | void;
 
 export interface PageDetailEditorProps {

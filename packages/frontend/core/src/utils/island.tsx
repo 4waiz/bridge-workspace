@@ -1,4 +1,4 @@
-import { LiveData, useLiveData } from '@toeverything/infra';
+import { LiveData, useLiveData } from '@kanban-studios/infra';
 import { nanoid } from 'nanoid';
 import {
   forwardRef,

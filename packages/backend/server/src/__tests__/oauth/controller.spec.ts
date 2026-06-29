@@ -38,7 +38,7 @@ test.before(async t => {
           },
         },
         server: {
-          hosts: ['localhost', 'test.affine.dev'],
+          hosts: ['localhost', 'test.bridgeflow.dev'],
           https: true,
         },
       }),
@@ -64,7 +64,7 @@ test.beforeEach(async t => {
       },
     },
   });
-  t.context.u1 = await t.context.auth.signUp('u1@affine.pro', '1');
+  t.context.u1 = await t.context.auth.signUp('u1@bridgeflow.pro', '1');
 });
 
 test.after.always(async t => {
@@ -107,7 +107,7 @@ test('should be able to redirect to oauth provider with multiple hosts', async t
 
   const res = await app
     .POST('/api/oauth/preflight')
-    .set('host', 'test.affine.dev')
+    .set('host', 'test.bridgeflow.dev')
     .send({ provider: 'Google', client_nonce: 'test-nonce' })
     .expect(HttpStatus.OK);
 
@@ -120,7 +120,7 @@ test('should be able to redirect to oauth provider with multiple hosts', async t
   t.is(redirect.searchParams.get('client_id'), 'google-client-id');
   t.is(
     redirect.searchParams.get('redirect_uri'),
-    'https://test.affine.dev/oauth/callback'
+    'https://test.bridgeflow.dev/oauth/callback'
   );
   t.is(redirect.searchParams.get('response_type'), 'code');
   t.is(redirect.searchParams.get('prompt'), 'select_account');
@@ -139,7 +139,7 @@ test('should be able to redirect to oauth provider with client_nonce', async t =
 
   const res = await app
     .POST('/api/oauth/preflight')
-    .send({ provider: 'Google', client: 'affine', client_nonce: '1234567890' })
+    .send({ provider: 'Google', client: 'bridgeflow', client_nonce: '1234567890' })
     .expect(HttpStatus.OK);
 
   const { url } = res.body;
@@ -159,7 +159,7 @@ test('should be able to redirect to oauth provider with client_nonce', async t =
   // state should be a json string
   const state = JSON.parse(redirect.searchParams.get('state')!);
   t.is(state.provider, 'Google');
-  t.is(state.client, 'affine');
+  t.is(state.client, 'bridgeflow');
   t.falsy(state.clientNonce);
   t.truthy(state.state);
 });
@@ -179,7 +179,7 @@ test('should record sign in client version from oauth preflight state', async t 
 
   const preflightRes = await app
     .POST('/api/oauth/preflight')
-    .set('x-affine-version', '0.25.3')
+    .set('x-bridgeflow-version', '0.25.3')
     .send({ provider: 'Google', client_nonce: 'test-nonce' })
     .expect(HttpStatus.OK);
 
@@ -194,7 +194,7 @@ test('should record sign in client version from oauth preflight state', async t 
   Sinon.stub(provider, 'getToken').resolves({ accessToken: '1' });
   Sinon.stub(provider, 'getUser').resolves({
     id: '1',
-    email: 'oauth-version@affine.pro',
+    email: 'oauth-version@bridgeflow.pro',
     avatarUrl: 'avatar',
   });
 
@@ -435,7 +435,7 @@ function mockOAuthProvider(
 test('should be able to sign up with oauth', async t => {
   const { app, db } = t.context;
 
-  const clientNonce = mockOAuthProvider(app, 'u2@affine.pro');
+  const clientNonce = mockOAuthProvider(app, 'u2@bridgeflow.pro');
 
   await app
     .POST('/api/oauth/callback')
@@ -445,7 +445,7 @@ test('should be able to sign up with oauth', async t => {
   const sessionUser = await currentUser(app);
 
   t.truthy(sessionUser);
-  t.is(sessionUser!.email, 'u2@affine.pro');
+  t.is(sessionUser!.email, 'u2@bridgeflow.pro');
 
   const user = await db.user.findFirst({
     select: {
@@ -453,12 +453,12 @@ test('should be able to sign up with oauth', async t => {
       connectedAccounts: true,
     },
     where: {
-      email: 'u2@affine.pro',
+      email: 'u2@bridgeflow.pro',
     },
   });
 
   t.truthy(user);
-  t.is(user!.email, 'u2@affine.pro');
+  t.is(user!.email, 'u2@bridgeflow.pro');
   t.is(user!.connectedAccounts[0].providerAccountId, '1');
 });
 
@@ -466,7 +466,7 @@ test('should be able to sign up with oauth and client_nonce', async t => {
   const { app, db } = t.context;
 
   const clientNonce = randomUUID();
-  const userEmail = `${clientNonce}@affine.pro`;
+  const userEmail = `${clientNonce}@bridgeflow.pro`;
   mockOAuthProvider(app, userEmail, clientNonce);
 
   await app
@@ -498,7 +498,7 @@ test('should throw if client_nonce is invalid', async t => {
   const { app } = t.context;
 
   const clientNonce = randomUUID();
-  const userEmail = `${clientNonce}@affine.pro`;
+  const userEmail = `${clientNonce}@bridgeflow.pro`;
   mockOAuthProvider(app, userEmail, clientNonce);
 
   await app
@@ -533,7 +533,7 @@ test('should not throw if account registered', async t => {
 test('should be able to fullfil user with oauth sign in', async t => {
   const { app, models } = t.context;
 
-  const u3 = await app.createUser('u3@affine.pro');
+  const u3 = await app.createUser('u3@bridgeflow.pro');
 
   const clientNonce = mockOAuthProvider(app, u3.email);
 

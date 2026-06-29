@@ -1,9 +1,9 @@
-import { Checkbox, MenuItem, PropertyValue } from '@affine/component';
-import type { FilterParams } from '@affine/core/modules/collection-rules';
-import { type DocRecord, DocService } from '@affine/core/modules/doc';
-import { useI18n } from '@affine/i18n';
+import { Checkbox, MenuItem, PropertyValue } from '@bridgeflow/component';
+import type { FilterParams } from '@bridgeflow/core/modules/collection-rules';
+import { type DocRecord, DocService } from '@bridgeflow/core/modules/doc';
+import { useI18n } from '@bridgeflow/i18n';
 import { TemplateIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { type ChangeEvent, useCallback } from 'react';
 
 import { PlainTextDocGroupHeader } from '../explorer/docs-view/group-header';
@@ -67,9 +67,9 @@ export const TemplateGroupHeader = ({
   const t = useI18n();
   const text =
     groupId === 'true'
-      ? t['com.affine.all-docs.group.is-template']()
+      ? t['com.bridgeflow.all-docs.group.is-template']()
       : groupId === 'false'
-        ? t['com.affine.all-docs.group.is-not-template']()
+        ? t['com.bridgeflow.all-docs.group.is-not-template']()
         : 'Default';
 
   return (

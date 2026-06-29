@@ -1,10 +1,10 @@
-import { BRAND_CLOUD_NAME } from '@affine/component/brand';
-import { Avatar } from '@affine/component';
-import { useSignOut } from '@affine/core/components/hooks/affine/use-sign-out';
-import { AuthService } from '@affine/core/modules/cloud';
-import { GlobalDialogService } from '@affine/core/modules/dialogs';
+import { BRAND_CLOUD_NAME } from '@bridgeflow/component/brand';
+import { Avatar } from '@bridgeflow/component';
+import { useSignOut } from '@bridgeflow/core/components/hooks/bridgeflow/use-sign-out';
+import { AuthService } from '@bridgeflow/core/modules/cloud';
+import { GlobalDialogService } from '@bridgeflow/core/modules/dialogs';
 import { ArrowRightSmallIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { type ReactNode } from 'react';
 
 import { UserPlanTag } from '../../../components';

@@ -5,7 +5,7 @@ import { describe, expect, test } from 'vitest';
 const css = readFileSync(new URL('./global.css', import.meta.url), 'utf8');
 
 describe('admin global token mapping', () => {
-  test('maps semantic colors to affine tokens', () => {
+  test('maps semantic colors to bridgeflow tokens', () => {
     expect(css).toContain(
       '--background: var(--affine-v2-layer-background-primary);'
     );

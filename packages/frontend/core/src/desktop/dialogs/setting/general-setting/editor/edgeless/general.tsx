@@ -1,9 +1,9 @@
-import { Menu, MenuItem, MenuTrigger, Switch } from '@affine/component';
-import { SettingRow } from '@affine/component/setting-components';
-import { EditorSettingService } from '@affine/core/modules/editor-setting';
-import type { EdgelessDefaultTheme } from '@affine/core/modules/editor-setting/schema';
-import { useI18n } from '@affine/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { Menu, MenuItem, MenuTrigger, Switch } from '@bridgeflow/component';
+import { SettingRow } from '@bridgeflow/component/setting-components';
+import { EditorSettingService } from '@bridgeflow/core/modules/editor-setting';
+import type { EdgelessDefaultTheme } from '@bridgeflow/core/modules/editor-setting/schema';
+import { useI18n } from '@bridgeflow/i18n';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useMemo } from 'react';
 
 import { menuTrigger } from '../style.css';
@@ -15,20 +15,20 @@ const getThemeOptions = (
     value: 'specified' as EdgelessDefaultTheme,
     label:
       t[
-        'com.affine.settings.editorSettings.page.edgeless-default-theme.specified'
+        'com.bridgeflow.settings.editorSettings.page.edgeless-default-theme.specified'
       ](),
   },
   {
     value: 'dark' as EdgelessDefaultTheme,
-    label: t['com.affine.themeSettings.dark'](),
+    label: t['com.bridgeflow.themeSettings.dark'](),
   },
   {
     value: 'light' as EdgelessDefaultTheme,
-    label: t['com.affine.themeSettings.light'](),
+    label: t['com.bridgeflow.themeSettings.light'](),
   },
   {
     value: 'auto' as EdgelessDefaultTheme,
-    label: t['com.affine.themeSettings.auto'](),
+    label: t['com.bridgeflow.themeSettings.auto'](),
   },
 ];
 
@@ -38,14 +38,14 @@ const getThemeValue = (
 ) => {
   switch (theme) {
     case 'dark':
-      return t['com.affine.themeSettings.dark']();
+      return t['com.bridgeflow.themeSettings.dark']();
     case 'light':
-      return t['com.affine.themeSettings.light']();
+      return t['com.bridgeflow.themeSettings.light']();
     case 'auto':
-      return t['com.affine.themeSettings.auto']();
+      return t['com.bridgeflow.themeSettings.auto']();
     case 'specified':
       return t[
-        'com.affine.settings.editorSettings.page.edgeless-default-theme.specified'
+        'com.bridgeflow.settings.editorSettings.page.edgeless-default-theme.specified'
       ]();
     default:
       return '';
@@ -89,10 +89,10 @@ export const GeneralEdgelessSetting = () => {
     <>
       <SettingRow
         name={t[
-          'com.affine.settings.editorSettings.page.edgeless-default-theme.title'
+          'com.bridgeflow.settings.editorSettings.page.edgeless-default-theme.title'
         ]()}
         desc={t[
-          'com.affine.settings.editorSettings.page.edgeless-default-theme.description'
+          'com.bridgeflow.settings.editorSettings.page.edgeless-default-theme.description'
         ]()}
       >
         <Menu
@@ -112,10 +112,10 @@ export const GeneralEdgelessSetting = () => {
       </SettingRow>
       <SettingRow
         name={t[
-          'com.affine.settings.editorSettings.page.edgeless-scroll-wheel-zoom.title'
+          'com.bridgeflow.settings.editorSettings.page.edgeless-scroll-wheel-zoom.title'
         ]()}
         desc={t[
-          'com.affine.settings.editorSettings.page.edgeless-scroll-wheel-zoom.description'
+          'com.bridgeflow.settings.editorSettings.page.edgeless-scroll-wheel-zoom.description'
         ]()}
       >
         <Switch

@@ -1,6 +1,6 @@
-import { EmptyTags } from '@affine/core/components/affine/empty';
-import { TagService } from '@affine/core/modules/tag';
-import { useLiveData, useService } from '@toeverything/infra';
+import { EmptyTags } from '@bridgeflow/core/components/bridgeflow/empty';
+import { TagService } from '@bridgeflow/core/modules/tag';
+import { useLiveData, useService } from '@kanban-studios/infra';
 
 import { TagItem } from './item';
 import { list } from './styles.css';

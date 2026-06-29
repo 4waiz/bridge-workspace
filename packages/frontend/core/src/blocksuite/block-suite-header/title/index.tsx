@@ -1,11 +1,11 @@
-import type { InlineEditProps } from '@affine/component';
-import { InlineEdit } from '@affine/component';
-import { useGuard } from '@affine/core/components/guard';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { DocService, DocsService } from '@affine/core/modules/doc';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { track } from '@affine/track';
-import { useLiveData, useService } from '@toeverything/infra';
+import type { InlineEditProps } from '@bridgeflow/component';
+import { InlineEdit } from '@bridgeflow/component';
+import { useGuard } from '@bridgeflow/core/components/guard';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { DocService, DocsService } from '@bridgeflow/core/modules/doc';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { track } from '@bridgeflow/track';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import type { HTMLAttributes } from 'react';
 

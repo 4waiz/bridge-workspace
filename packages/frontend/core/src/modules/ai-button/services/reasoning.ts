@@ -1,8 +1,8 @@
 import {
   createSignalFromObservable,
   type Signal,
-} from '@blocksuite/affine/shared/utils';
-import { LiveData, Service } from '@toeverything/infra';
+} from '@blocksuite/bridgeflow/shared/utils';
+import { LiveData, Service } from '@kanban-studios/infra';
 
 import type { GlobalStateService } from '../../storage';
 

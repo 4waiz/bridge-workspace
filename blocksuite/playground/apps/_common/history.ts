@@ -1,6 +1,6 @@
-import type { DocModeProvider } from '@blocksuite/affine/shared/services';
-import type { Doc, Store, Workspace } from '@blocksuite/affine/store';
-import type { TestAffineEditorContainer } from '@blocksuite/integration-test';
+import type { DocModeProvider } from '@blocksuite/bridgeflow/shared/services';
+import type { Doc, Store, Workspace } from '@blocksuite/bridgeflow/store';
+import type { TestBridgeFlowEditorContainer } from '@blocksuite/integration-test';
 
 export function getDocFromUrlParams(collection: Workspace, url: URL) {
   let doc: Store | null = null;
@@ -43,7 +43,7 @@ export function setDocModeFromUrlParams(
 
 export function listenHashChange(
   collection: Workspace,
-  editor: TestAffineEditorContainer
+  editor: TestBridgeFlowEditorContainer
 ) {
   const panel = document.querySelector('docs-panel');
   window.addEventListener('hashchange', () => {

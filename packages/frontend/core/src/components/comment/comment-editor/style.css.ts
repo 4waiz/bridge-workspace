@@ -32,12 +32,12 @@ export const footer = style({
   paddingBottom: 8,
 });
 
-globalStyle(`${container} .affine-page-root-block-container`, {
+globalStyle(`${container} .bridgeflow-page-root-block-container`, {
   padding: '8px 0',
   minHeight: '32px',
 });
 
-globalStyle(`${container} .affine-paragraph-rich-text-wrapper`, {
+globalStyle(`${container} .bridgeflow-paragraph-rich-text-wrapper`, {
   margin: 0,
 });
 

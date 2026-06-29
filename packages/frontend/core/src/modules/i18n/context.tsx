@@ -1,5 +1,5 @@
-import { I18nextProvider } from '@affine/i18n';
-import { useService } from '@toeverything/infra';
+import { I18nextProvider } from '@bridgeflow/i18n';
+import { useService } from '@kanban-studios/infra';
 import { type PropsWithChildren, useEffect } from 'react';
 
 import { I18nService } from './services/i18n';

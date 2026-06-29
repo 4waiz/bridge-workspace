@@ -1,7 +1,7 @@
-import { Button } from '@affine/component/ui/button';
-import { GlobalDialogService } from '@affine/core/modules/dialogs';
-import { useI18n } from '@affine/i18n';
-import { useService } from '@toeverything/infra';
+import { Button } from '@bridgeflow/component/ui/button';
+import { GlobalDialogService } from '@bridgeflow/core/modules/dialogs';
+import { useI18n } from '@bridgeflow/i18n';
+import { useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import * as styles from './styles.css';
@@ -21,7 +21,7 @@ export const SignIn = () => {
       onClick={onClickSignIn}
       data-testid="share-page-sign-in-button"
     >
-      {t['com.affine.share-page.header.login']()}
+      {t['com.bridgeflow.share-page.header.login']()}
     </Button>
   );
 };

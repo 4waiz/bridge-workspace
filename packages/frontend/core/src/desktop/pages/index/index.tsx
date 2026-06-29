@@ -1,17 +1,17 @@
-import { BRAND_CLOUD_NAME } from '@affine/component/brand';
-import { DefaultServerService } from '@affine/core/modules/cloud';
-import { DesktopApiService } from '@affine/core/modules/desktop-api';
-import { WorkspacesService } from '@affine/core/modules/workspace';
+import { BRAND_CLOUD_NAME } from '@bridgeflow/component/brand';
+import { DefaultServerService } from '@bridgeflow/core/modules/cloud';
+import { DesktopApiService } from '@bridgeflow/core/modules/desktop-api';
+import { WorkspacesService } from '@bridgeflow/core/modules/workspace';
 import {
   buildShowcaseWorkspace,
   createFirstAppData,
-} from '@affine/core/utils/first-app-data';
-import { ServerFeature } from '@affine/graphql';
+} from '@bridgeflow/core/utils/first-app-data';
+import { ServerFeature } from '@bridgeflow/graphql';
 import {
   useLiveData,
   useService,
   useServiceOptional,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import {
   type ReactNode,
   useCallback,
@@ -76,7 +76,7 @@ export const Component = ({
     if (createOnceRef.current) return;
     createOnceRef.current = true;
     // TODO: support selfhosted
-    buildShowcaseWorkspace(workspacesService, 'affine-cloud', BRAND_CLOUD_NAME)
+    buildShowcaseWorkspace(workspacesService, 'bridgeflow-cloud', BRAND_CLOUD_NAME)
       .then(({ meta, defaultDocId }) => {
         if (defaultDocId) {
           jumpToPage(meta.id, defaultDocId);
@@ -105,14 +105,14 @@ export const Component = ({
     // check is user logged in && has cloud workspace
     if (searchParams.get('initCloud') === 'true') {
       if (loggedIn) {
-        if (list.every(w => w.flavour !== 'affine-cloud')) {
+        if (list.every(w => w.flavour !== 'bridgeflow-cloud')) {
           createCloudWorkspace();
           return;
         }
 
         // open first cloud workspace
         const openWorkspace =
-          list.find(w => w.flavour === 'affine-cloud') ?? list[0];
+          list.find(w => w.flavour === 'bridgeflow-cloud') ?? list[0];
         openPage(openWorkspace.id, defaultIndexRoute);
       } else {
         return;

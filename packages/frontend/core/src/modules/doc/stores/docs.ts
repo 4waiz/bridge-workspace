@@ -1,12 +1,12 @@
-import type { DocMode } from '@blocksuite/affine/model';
-import type { DocMeta } from '@blocksuite/affine/store';
+import type { DocMode } from '@blocksuite/bridgeflow/model';
+import type { DocMeta } from '@blocksuite/bridgeflow/store';
 import {
   Store,
   yjsGetPath,
   yjsObserve,
   yjsObserveDeep,
   yjsObservePath,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { nanoid } from 'nanoid';
 import { distinctUntilChanged, map, switchMap } from 'rxjs';
 import { Array as YArray, Map as YMap, transact } from 'yjs';

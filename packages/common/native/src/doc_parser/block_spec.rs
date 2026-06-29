@@ -12,7 +12,7 @@ use super::{
   value::{value_to_f64, value_to_string},
 };
 
-/// Block flavours used in AFFiNE documents.
+/// Block flavours used in BridgeFlow documents.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum BlockFlavour {
   Paragraph,
@@ -30,31 +30,31 @@ pub enum BlockFlavour {
 impl BlockFlavour {
   pub fn as_str(&self) -> &'static str {
     match self {
-      BlockFlavour::Paragraph => "affine:paragraph",
-      BlockFlavour::List => "affine:list",
-      BlockFlavour::Code => "affine:code",
-      BlockFlavour::Divider => "affine:divider",
-      BlockFlavour::Image => "affine:image",
-      BlockFlavour::Table => "affine:table",
-      BlockFlavour::Bookmark => "affine:bookmark",
-      BlockFlavour::EmbedYoutube => "affine:embed-youtube",
-      BlockFlavour::EmbedIframe => "affine:embed-iframe",
-      BlockFlavour::Callout => "affine:callout",
+      BlockFlavour::Paragraph => "bridgeflow:paragraph",
+      BlockFlavour::List => "bridgeflow:list",
+      BlockFlavour::Code => "bridgeflow:code",
+      BlockFlavour::Divider => "bridgeflow:divider",
+      BlockFlavour::Image => "bridgeflow:image",
+      BlockFlavour::Table => "bridgeflow:table",
+      BlockFlavour::Bookmark => "bridgeflow:bookmark",
+      BlockFlavour::EmbedYoutube => "bridgeflow:embed-youtube",
+      BlockFlavour::EmbedIframe => "bridgeflow:embed-iframe",
+      BlockFlavour::Callout => "bridgeflow:callout",
     }
   }
 
   pub fn from_str(value: &str) -> Option<Self> {
     match value {
-      "affine:paragraph" => Some(BlockFlavour::Paragraph),
-      "affine:list" => Some(BlockFlavour::List),
-      "affine:code" => Some(BlockFlavour::Code),
-      "affine:divider" => Some(BlockFlavour::Divider),
-      "affine:image" => Some(BlockFlavour::Image),
-      "affine:table" => Some(BlockFlavour::Table),
-      "affine:bookmark" => Some(BlockFlavour::Bookmark),
-      "affine:embed-youtube" => Some(BlockFlavour::EmbedYoutube),
-      "affine:embed-iframe" => Some(BlockFlavour::EmbedIframe),
-      "affine:callout" => Some(BlockFlavour::Callout),
+      "bridgeflow:paragraph" => Some(BlockFlavour::Paragraph),
+      "bridgeflow:list" => Some(BlockFlavour::List),
+      "bridgeflow:code" => Some(BlockFlavour::Code),
+      "bridgeflow:divider" => Some(BlockFlavour::Divider),
+      "bridgeflow:image" => Some(BlockFlavour::Image),
+      "bridgeflow:table" => Some(BlockFlavour::Table),
+      "bridgeflow:bookmark" => Some(BlockFlavour::Bookmark),
+      "bridgeflow:embed-youtube" => Some(BlockFlavour::EmbedYoutube),
+      "bridgeflow:embed-iframe" => Some(BlockFlavour::EmbedIframe),
+      "bridgeflow:callout" => Some(BlockFlavour::Callout),
       _ => None,
     }
   }
@@ -544,7 +544,7 @@ mod tests {
 
   #[test]
   fn test_from_block_map_paragraph() {
-    let spec = spec_from_markdown("Plain paragraph.", "block-spec-paragraph", "affine:paragraph");
+    let spec = spec_from_markdown("Plain paragraph.", "block-spec-paragraph", "bridgeflow:paragraph");
     assert_eq!(spec.flavour, BlockFlavour::Paragraph);
     assert_eq!(spec.block_type, Some(BlockType::Text));
     assert_eq!(spec.text, text_ops_from_plain("Plain paragraph."));
@@ -552,7 +552,7 @@ mod tests {
 
   #[test]
   fn test_from_block_map_list_checked() {
-    let spec = spec_from_markdown("- [x] Done", "block-spec-list", "affine:list");
+    let spec = spec_from_markdown("- [x] Done", "block-spec-list", "bridgeflow:list");
     assert_eq!(spec.flavour, BlockFlavour::List);
     assert_eq!(spec.block_type, Some(BlockType::Todo));
     assert_eq!(spec.checked, Some(true));
@@ -561,7 +561,7 @@ mod tests {
 
   #[test]
   fn test_from_block_map_image() {
-    let spec = spec_from_markdown("![Alt](blob://image-id)", "block-spec-image", "affine:image");
+    let spec = spec_from_markdown("![Alt](blob://image-id)", "block-spec-image", "bridgeflow:image");
     assert_eq!(spec.flavour, BlockFlavour::Image);
     let image = spec.image.expect("image spec");
     assert_eq!(image.source_id, "image-id");
@@ -575,7 +575,7 @@ mod tests {
     let spec = spec_from_markdown(
       "| A | B |\n| --- | --- |\n| 1 | 2 |",
       "block-spec-table",
-      "affine:table",
+      "bridgeflow:table",
     );
     assert_eq!(spec.flavour, BlockFlavour::Table);
     let table = spec.table.expect("table spec");
@@ -593,7 +593,7 @@ mod tests {
     let spec = spec_from_markdown(
       r#"<iframe src="https://example.com/embed"></iframe>"#,
       "block-spec-embed-iframe",
-      "affine:embed-iframe",
+      "bridgeflow:embed-iframe",
     );
     assert_eq!(spec.flavour, BlockFlavour::EmbedIframe);
     assert_eq!(spec.embed_iframe.as_ref().unwrap().url, "https://example.com/embed");

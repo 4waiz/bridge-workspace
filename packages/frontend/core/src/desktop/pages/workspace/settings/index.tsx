@@ -1,7 +1,7 @@
-import { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import type { SettingTab } from '@affine/core/modules/dialogs/constant';
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { useService } from '@toeverything/infra';
+import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
+import type { SettingTab } from '@bridgeflow/core/modules/dialogs/constant';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { useService } from '@kanban-studios/infra';
 import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 

@@ -1,12 +1,12 @@
-import type { RootBlockModel } from '@blocksuite/affine/model';
-import { BlockComponent } from '@blocksuite/affine/std';
+import type { RootBlockModel } from '@blocksuite/bridgeflow/model';
+import { BlockComponent } from '@blocksuite/bridgeflow/std';
 import { html } from 'lit';
 
 export class MindmapRootBlock extends BlockComponent<RootBlockModel> {
   override render() {
     return html`
       <style>
-        .affine-mini-mindmap-root {
+        .bridgeflow-mini-mindmap-root {
           display: block;
           width: 100%;
           height: 100%;
@@ -19,7 +19,7 @@ export class MindmapRootBlock extends BlockComponent<RootBlockModel> {
           );
         }
       </style>
-      <div class="affine-mini-mindmap-root">
+      <div class="bridgeflow-mini-mindmap-root">
         ${this.host.renderChildren(this.model)}
       </div>
     `;

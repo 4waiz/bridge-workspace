@@ -1,6 +1,6 @@
-import type { WorkspaceServerService } from '@affine/core/modules/cloud';
-import { getWorkspaceInfoQuery, leaveWorkspaceMutation } from '@affine/graphql';
-import { Store } from '@toeverything/infra';
+import type { WorkspaceServerService } from '@bridgeflow/core/modules/cloud';
+import { getWorkspaceInfoQuery, leaveWorkspaceMutation } from '@bridgeflow/graphql';
+import { Store } from '@kanban-studios/infra';
 
 import type { WorkspaceLocalState } from '../../workspace';
 

@@ -1,5 +1,5 @@
-import { AIStarIcon } from '@blocksuite/affine/components/icons';
-import { WithDisposable } from '@blocksuite/affine/global/lit';
+import { AIStarIcon } from '@blocksuite/bridgeflow/components/icons';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
 import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 

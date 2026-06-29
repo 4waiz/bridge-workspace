@@ -1,7 +1,7 @@
-import type { CheckboxProps } from '@affine/component';
-import { Checkbox } from '@affine/component';
-import { useCatchEventCallback } from '@affine/core/components/hooks/use-catch-event-hook';
-import { useI18n } from '@affine/i18n';
+import type { CheckboxProps } from '@bridgeflow/component';
+import { Checkbox } from '@bridgeflow/component';
+import { useCatchEventCallback } from '@bridgeflow/core/components/hooks/use-catch-event-hook';
+import { useI18n } from '@bridgeflow/i18n';
 import { MultiSelectIcon } from '@blocksuite/icons/rc';
 import clsx from 'clsx';
 import { selectAtom } from 'jotai/utils';

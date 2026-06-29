@@ -1,15 +1,15 @@
-import { notify } from '@affine/component';
+import { notify } from '@bridgeflow/component';
 import {
   generateUrl,
   type UseSharingUrl,
-} from '@affine/core/components/hooks/affine/use-share-url';
-import { WorkspaceServerService } from '@affine/core/modules/cloud';
-import { EditorService } from '@affine/core/modules/editor';
-import type { EditorSettingExt } from '@affine/core/modules/editor-setting/entities/editor-setting';
-import { copyLinkToBlockStdScopeClipboard } from '@affine/core/utils/clipboard';
-import { I18n, i18nTime } from '@affine/i18n';
-import { track } from '@affine/track';
-import { BookmarkBlockComponent } from '@blocksuite/affine/blocks/bookmark';
+} from '@bridgeflow/core/components/hooks/bridgeflow/use-share-url';
+import { WorkspaceServerService } from '@bridgeflow/core/modules/cloud';
+import { EditorService } from '@bridgeflow/core/modules/editor';
+import type { EditorSettingExt } from '@bridgeflow/core/modules/editor-setting/entities/editor-setting';
+import { copyLinkToBlockStdScopeClipboard } from '@bridgeflow/core/utils/clipboard';
+import { I18n, i18nTime } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
+import { BookmarkBlockComponent } from '@blocksuite/bridgeflow/blocks/bookmark';
 import {
   EmbedFigmaBlockComponent,
   EmbedGithubBlockComponent,
@@ -17,35 +17,35 @@ import {
   EmbedLoomBlockComponent,
   EmbedYoutubeBlockComponent,
   getDocContentWithMaxLength,
-} from '@blocksuite/affine/blocks/embed';
+} from '@blocksuite/bridgeflow/blocks/embed';
 import {
   EmbedLinkedDocBlockComponent,
   EmbedSyncedDocBlockComponent,
-} from '@blocksuite/affine/blocks/embed-doc';
-import { SurfaceRefBlockComponent } from '@blocksuite/affine/blocks/surface-ref';
-import { toggleEmbedCardEditModal } from '@blocksuite/affine/components/embed-card-modal';
-import { notifyLinkedDocClearedAliases } from '@blocksuite/affine/components/notification';
-import { isPeekable, peek } from '@blocksuite/affine/components/peek';
-import { toast } from '@blocksuite/affine/components/toast';
+} from '@blocksuite/bridgeflow/blocks/embed-doc';
+import { SurfaceRefBlockComponent } from '@blocksuite/bridgeflow/blocks/surface-ref';
+import { toggleEmbedCardEditModal } from '@blocksuite/bridgeflow/components/embed-card-modal';
+import { notifyLinkedDocClearedAliases } from '@blocksuite/bridgeflow/components/notification';
+import { isPeekable, peek } from '@blocksuite/bridgeflow/components/peek';
+import { toast } from '@blocksuite/bridgeflow/components/toast';
 import {
   EditorChevronDown,
   type MenuContext,
   type MenuItemGroup,
-} from '@blocksuite/affine/components/toolbar';
-import { watch } from '@blocksuite/affine/global/lit';
+} from '@blocksuite/bridgeflow/components/toolbar';
+import { watch } from '@blocksuite/bridgeflow/global/lit';
 import {
-  AffineReference,
+  BridgeFlowReference,
   toggleReferencePopup,
-} from '@blocksuite/affine/inlines/reference';
+} from '@blocksuite/bridgeflow/inlines/reference';
 import {
   BookmarkBlockModel,
   EmbedIframeBlockModel,
   EmbedLinkedDocModel,
   EmbedSyncedDocModel,
   SurfaceRefBlockSchema,
-} from '@blocksuite/affine/model';
-import { getSelectedModelsCommand } from '@blocksuite/affine/shared/commands';
-import { ImageSelection } from '@blocksuite/affine/shared/selection';
+} from '@blocksuite/bridgeflow/model';
+import { getSelectedModelsCommand } from '@blocksuite/bridgeflow/shared/commands';
+import { ImageSelection } from '@blocksuite/bridgeflow/shared/selection';
 import {
   ActionPlacement,
   CitationProvider,
@@ -60,18 +60,18 @@ import {
   type ToolbarModuleConfig,
   ToolbarModuleExtension,
   UserProvider,
-} from '@blocksuite/affine/shared/services';
-import { matchModels } from '@blocksuite/affine/shared/utils';
+} from '@blocksuite/bridgeflow/shared/services';
+import { matchModels } from '@blocksuite/bridgeflow/shared/utils';
 import {
   BlockFlavourIdentifier,
   BlockSelection,
   TextSelection,
-} from '@blocksuite/affine/std';
+} from '@blocksuite/bridgeflow/std';
 import {
   GfxBlockElementModel,
   GfxPrimitiveElementModel,
-} from '@blocksuite/affine/std/gfx';
-import type { ExtensionType } from '@blocksuite/affine/store';
+} from '@blocksuite/bridgeflow/std/gfx';
+import type { ExtensionType } from '@blocksuite/bridgeflow/store';
 import {
   CopyAsImgaeIcon,
   CopyIcon,
@@ -80,7 +80,7 @@ import {
   OpenInNewIcon,
 } from '@blocksuite/icons/lit';
 import { computed } from '@preact/signals-core';
-import type { FrameworkProvider } from '@toeverything/infra';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { keyed } from 'lit/directives/keyed.js';
@@ -374,7 +374,7 @@ function createToolbarMoreMenuConfigV2(baseUrl?: string) {
                 return value.name;
               });
               const user = computed(() => {
-                return I18n.t('com.affine.page.toolbar.created_by', {
+                return I18n.t('com.bridgeflow.page.toolbar.created_by', {
                   name: name.value,
                 });
               });
@@ -488,7 +488,7 @@ function createOpenDocActions(
   target:
     | EmbedLinkedDocBlockComponent
     | EmbedSyncedDocBlockComponent
-    | AffineReference
+    | BridgeFlowReference
     | SurfaceRefBlockComponent,
   isSameDoc: boolean,
   actions = openDocActions.map(
@@ -601,7 +601,7 @@ function createSurfaceRefToolbarConfig(baseUrl?: string): ToolbarModuleConfig {
             .map(action => {
               if (action.id.endsWith('open-in-active-view')) {
                 action.label =
-                  I18n['com.affine.peek-view-controls.open-doc-in-edgeless']();
+                  I18n['com.bridgeflow.peek-view-controls.open-doc-in-edgeless']();
               }
               return action;
             });
@@ -713,7 +713,7 @@ function renderOpenDocMenu(
   target:
     | EmbedLinkedDocBlockComponent
     | EmbedSyncedDocBlockComponent
-    | AffineReference,
+    | BridgeFlowReference,
   isSameDoc: boolean
 ) {
   const actions = createOpenDocActions(ctx, target, isSameDoc).map(action => ({
@@ -731,13 +731,13 @@ function renderOpenDocMenu(
   return html`${keyed(
     target,
     html`
-      <affine-open-doc-dropdown-menu
+      <bridgeflow-open-doc-dropdown-menu
         .actions=${actions}
         .context=${ctx}
         .openDocMode$=${openDocMode}
         .updateOpenDocMode=${updateOpenDocMode}
       >
-      </affine-open-doc-dropdown-menu>
+      </bridgeflow-open-doc-dropdown-menu>
     `
   )}`;
 }
@@ -875,7 +875,7 @@ const inlineReferenceToolbarConfig = {
           icon: CopyIcon(),
           run(ctx) {
             const target = ctx.message$.peek()?.element;
-            if (!(target instanceof AffineReference)) return;
+            if (!(target instanceof BridgeFlowReference)) return;
 
             const { pageId, params } = target.referenceInfo;
 
@@ -904,7 +904,7 @@ const inlineReferenceToolbarConfig = {
           icon: EditIcon(),
           run(ctx) {
             const target = ctx.message$.peek()?.element;
-            if (!(target instanceof AffineReference)) return;
+            if (!(target instanceof BridgeFlowReference)) return;
 
             // Clears
             ctx.reset();
@@ -982,62 +982,62 @@ export const createCustomToolbarExtension = (
 ): ExtensionType[] => {
   return [
     ToolbarModuleExtension({
-      id: BlockFlavourIdentifier('custom:affine:*'),
+      id: BlockFlavourIdentifier('custom:bridgeflow:*'),
       config: createToolbarMoreMenuConfigV2(baseUrl),
     }),
 
     ToolbarModuleExtension({
-      id: BlockFlavourIdentifier('custom:affine:bookmark'),
+      id: BlockFlavourIdentifier('custom:bridgeflow:bookmark'),
       config: createExternalLinkableToolbarConfig(BookmarkBlockComponent),
     }),
 
     ToolbarModuleExtension({
-      id: BlockFlavourIdentifier('custom:affine:surface:bookmark'),
+      id: BlockFlavourIdentifier('custom:bridgeflow:surface:bookmark'),
       config: createExternalLinkableToolbarConfig(BookmarkBlockComponent),
     }),
 
     ToolbarModuleExtension({
-      id: BlockFlavourIdentifier('custom:affine:embed-figma'),
+      id: BlockFlavourIdentifier('custom:bridgeflow:embed-figma'),
       config: createExternalLinkableToolbarConfig(EmbedFigmaBlockComponent),
     }),
 
     ToolbarModuleExtension({
-      id: BlockFlavourIdentifier('custom:affine:surface:embed-figma'),
+      id: BlockFlavourIdentifier('custom:bridgeflow:surface:embed-figma'),
       config: createExternalLinkableToolbarConfig(BookmarkBlockComponent),
     }),
 
     ToolbarModuleExtension({
-      id: BlockFlavourIdentifier('custom:affine:embed-github'),
+      id: BlockFlavourIdentifier('custom:bridgeflow:embed-github'),
       config: createExternalLinkableToolbarConfig(EmbedGithubBlockComponent),
     }),
 
     ToolbarModuleExtension({
-      id: BlockFlavourIdentifier('custom:affine:surface:embed-github'),
+      id: BlockFlavourIdentifier('custom:bridgeflow:surface:embed-github'),
       config: createExternalLinkableToolbarConfig(BookmarkBlockComponent),
     }),
 
     ToolbarModuleExtension({
-      id: BlockFlavourIdentifier('custom:affine:embed-loom'),
+      id: BlockFlavourIdentifier('custom:bridgeflow:embed-loom'),
       config: createExternalLinkableToolbarConfig(EmbedLoomBlockComponent),
     }),
 
     ToolbarModuleExtension({
-      id: BlockFlavourIdentifier('custom:affine:surface:embed-loom'),
+      id: BlockFlavourIdentifier('custom:bridgeflow:surface:embed-loom'),
       config: createExternalLinkableToolbarConfig(BookmarkBlockComponent),
     }),
 
     ToolbarModuleExtension({
-      id: BlockFlavourIdentifier('custom:affine:embed-youtube'),
+      id: BlockFlavourIdentifier('custom:bridgeflow:embed-youtube'),
       config: createExternalLinkableToolbarConfig(EmbedYoutubeBlockComponent),
     }),
 
     ToolbarModuleExtension({
-      id: BlockFlavourIdentifier('custom:affine:surface:embed-youtube'),
+      id: BlockFlavourIdentifier('custom:bridgeflow:surface:embed-youtube'),
       config: createExternalLinkableToolbarConfig(BookmarkBlockComponent),
     }),
 
     ToolbarModuleExtension({
-      id: BlockFlavourIdentifier('custom:affine:embed-linked-doc'),
+      id: BlockFlavourIdentifier('custom:bridgeflow:embed-linked-doc'),
       config: {
         actions: [
           embedLinkedDocToolbarConfig.actions,
@@ -1047,7 +1047,7 @@ export const createCustomToolbarExtension = (
     }),
 
     ToolbarModuleExtension({
-      id: BlockFlavourIdentifier('custom:affine:surface:embed-linked-doc'),
+      id: BlockFlavourIdentifier('custom:bridgeflow:surface:embed-linked-doc'),
       config: {
         actions: [
           embedLinkedDocToolbarConfig.actions,
@@ -1060,7 +1060,7 @@ export const createCustomToolbarExtension = (
     }),
 
     ToolbarModuleExtension({
-      id: BlockFlavourIdentifier('custom:affine:embed-synced-doc'),
+      id: BlockFlavourIdentifier('custom:bridgeflow:embed-synced-doc'),
       config: {
         actions: [
           embedSyncedDocToolbarConfig.actions,
@@ -1070,7 +1070,7 @@ export const createCustomToolbarExtension = (
     }),
 
     ToolbarModuleExtension({
-      id: BlockFlavourIdentifier('custom:affine:surface:embed-synced-doc'),
+      id: BlockFlavourIdentifier('custom:bridgeflow:surface:embed-synced-doc'),
       config: {
         actions: [
           // the open actions are provided by the header of embed-edgeless-synced-doc-block
@@ -1083,7 +1083,7 @@ export const createCustomToolbarExtension = (
     }),
 
     ToolbarModuleExtension({
-      id: BlockFlavourIdentifier('custom:affine:reference'),
+      id: BlockFlavourIdentifier('custom:bridgeflow:reference'),
       config: {
         actions: [
           {
@@ -1091,7 +1091,7 @@ export const createCustomToolbarExtension = (
             id: 'A.open-doc',
             content(ctx) {
               const target = ctx.message$.peek()?.element;
-              if (!(target instanceof AffineReference)) return null;
+              if (!(target instanceof BridgeFlowReference)) return null;
 
               return renderOpenDocMenu(
                 settings,
@@ -1107,12 +1107,12 @@ export const createCustomToolbarExtension = (
     }),
 
     ToolbarModuleExtension({
-      id: BlockFlavourIdentifier('custom:affine:embed-iframe'),
+      id: BlockFlavourIdentifier('custom:bridgeflow:embed-iframe'),
       config: embedIframeToolbarConfig,
     }),
 
     ToolbarModuleExtension({
-      id: BlockFlavourIdentifier('custom:affine:surface:embed-iframe'),
+      id: BlockFlavourIdentifier('custom:bridgeflow:surface:embed-iframe'),
       config: {
         actions: [embedIframeToolbarConfig.actions].flat(),
 

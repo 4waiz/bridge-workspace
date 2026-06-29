@@ -1,4 +1,4 @@
-import { DocRole, type GetPageGrantedUsersListQuery } from '@affine/graphql';
+import { DocRole, type GetPageGrantedUsersListQuery } from '@bridgeflow/graphql';
 import {
   catchErrorInto,
   effect,
@@ -8,7 +8,7 @@ import {
   onStart,
   Service,
   smartRetry,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { EMPTY, exhaustMap, tap } from 'rxjs';
 
 import type { DocService } from '../../doc';

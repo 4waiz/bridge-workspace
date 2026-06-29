@@ -1,0 +1,15 @@
+{
+  "name": "@bridgeflow-test/bridgeflow-local",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "e2e": "yarn playwright test"
+  },
+  "devDependencies": {
+    "@bridgeflow-test/kit": "workspace:*",
+    "@bridgeflow-tools/cli": "workspace:*",
+    "@bridgeflow-tools/utils": "workspace:*",
+    "@playwright/test": "=1.58.2"
+  },
+  "version": "0.26.3"
+}

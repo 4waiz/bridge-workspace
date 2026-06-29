@@ -1,7 +1,7 @@
-import { IconButton } from '@affine/component';
-import { useI18n } from '@affine/i18n';
+import { IconButton } from '@bridgeflow/component';
+import { useI18n } from '@bridgeflow/i18n';
 import { ArrowLeftSmallIcon, ArrowRightSmallIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect } from 'react';
 
 import { NavigatorService } from '../services/navigator';

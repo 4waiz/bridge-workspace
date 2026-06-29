@@ -2,7 +2,7 @@ import { BlockSchemaExtension } from '../extension/schema.js';
 import { BlockModel, defineBlockSchema } from '../model/index.js';
 
 export const RootBlockSchema = defineBlockSchema({
-  flavour: 'affine:page',
+  flavour: 'bridgeflow:page',
   props: internal => ({
     title: internal.Text(),
     count: 0,
@@ -22,25 +22,25 @@ export class RootBlockModel extends BlockModel<
 > {}
 
 export const NoteBlockSchema = defineBlockSchema({
-  flavour: 'affine:note',
+  flavour: 'bridgeflow:note',
   props: () => ({}),
   metadata: {
     version: 1,
     role: 'hub',
-    parent: ['affine:page'],
+    parent: ['bridgeflow:page'],
     children: [
-      'affine:paragraph',
-      'affine:list',
-      'affine:code',
-      'affine:divider',
-      'affine:database',
-      'affine:data-view',
-      'affine:image',
-      'affine:note-block-*',
-      'affine:bookmark',
-      'affine:attachment',
-      'affine:surface-ref',
-      'affine:embed-*',
+      'bridgeflow:paragraph',
+      'bridgeflow:list',
+      'bridgeflow:code',
+      'bridgeflow:divider',
+      'bridgeflow:database',
+      'bridgeflow:data-view',
+      'bridgeflow:image',
+      'bridgeflow:note-block-*',
+      'bridgeflow:bookmark',
+      'bridgeflow:attachment',
+      'bridgeflow:surface-ref',
+      'bridgeflow:embed-*',
     ],
   },
 });
@@ -48,7 +48,7 @@ export const NoteBlockSchema = defineBlockSchema({
 export const NoteBlockSchemaExtension = BlockSchemaExtension(NoteBlockSchema);
 
 export const ParagraphBlockSchema = defineBlockSchema({
-  flavour: 'affine:paragraph',
+  flavour: 'bridgeflow:paragraph',
   props: internal => ({
     type: 'text',
     text: internal.Text(),
@@ -57,10 +57,10 @@ export const ParagraphBlockSchema = defineBlockSchema({
     version: 1,
     role: 'content',
     parent: [
-      'affine:note',
-      'affine:database',
-      'affine:paragraph',
-      'affine:list',
+      'bridgeflow:note',
+      'bridgeflow:database',
+      'bridgeflow:paragraph',
+      'bridgeflow:list',
     ],
   },
 });
@@ -69,7 +69,7 @@ export const ParagraphBlockSchemaExtension =
   BlockSchemaExtension(ParagraphBlockSchema);
 
 export const ListBlockSchema = defineBlockSchema({
-  flavour: 'affine:list',
+  flavour: 'bridgeflow:list',
   props: internal => ({
     type: 'bulleted',
     text: internal.Text(),
@@ -80,10 +80,10 @@ export const ListBlockSchema = defineBlockSchema({
     version: 1,
     role: 'content',
     parent: [
-      'affine:note',
-      'affine:database',
-      'affine:list',
-      'affine:paragraph',
+      'bridgeflow:note',
+      'bridgeflow:database',
+      'bridgeflow:list',
+      'bridgeflow:paragraph',
     ],
   },
 });
@@ -91,7 +91,7 @@ export const ListBlockSchema = defineBlockSchema({
 export const ListBlockSchemaExtension = BlockSchemaExtension(ListBlockSchema);
 
 export const DividerBlockSchema = defineBlockSchema({
-  flavour: 'affine:divider',
+  flavour: 'bridgeflow:divider',
   metadata: {
     version: 1,
     role: 'content',

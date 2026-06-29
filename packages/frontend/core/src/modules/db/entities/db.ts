@@ -2,7 +2,7 @@ import {
   type DBSchemaBuilder,
   Entity,
   type TableMap,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 
 import { WorkspaceDBTable } from './table';
 

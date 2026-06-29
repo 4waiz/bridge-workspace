@@ -8,20 +8,20 @@ import { Subject } from 'rxjs';
 import { z } from 'zod';
 
 import {
-  AFFINE_API_CHANNEL_NAME,
-  AFFINE_EVENT_CHANNEL_NAME,
-  AFFINE_EVENT_SUBSCRIBE_CHANNEL_NAME,
+  BRIDGEFLOW_API_CHANNEL_NAME,
+  BRIDGEFLOW_EVENT_CHANNEL_NAME,
+  BRIDGEFLOW_EVENT_SUBSCRIBE_CHANNEL_NAME,
   type ExposedMeta,
   type HelperToRenderer,
   type RendererToHelper,
 } from '../shared/type';
 
 type Schema =
-  | 'affine'
-  | 'affine-canary'
-  | 'affine-beta'
-  | 'affine-internal'
-  | 'affine-dev';
+  | 'bridgeflow'
+  | 'bridgeflow-canary'
+  | 'bridgeflow-beta'
+  | 'bridgeflow-internal'
+  | 'bridgeflow-dev';
 
 // todo: remove duplicated codes
 const ReleaseTypeSchema = z.enum(['stable', 'beta', 'canary', 'internal']);
@@ -29,8 +29,8 @@ const envBuildType = (process.env.BUILD_TYPE || 'canary').trim().toLowerCase();
 const buildType = ReleaseTypeSchema.parse(envBuildType);
 const isDev = process.env.NODE_ENV === 'development';
 let scheme =
-  buildType === 'stable' ? 'affine' : (`affine-${envBuildType}` as Schema);
-scheme = isDev ? 'affine-dev' : scheme;
+  buildType === 'stable' ? 'bridgeflow' : (`bridgeflow-${envBuildType}` as Schema);
+scheme = isDev ? 'bridgeflow-dev' : scheme;
 
 export const appInfo = {
   electron: true,
@@ -65,7 +65,7 @@ function getMainAPIs() {
           name,
           (...args: any[]) => {
             return ipcRenderer.invoke(
-              AFFINE_API_CHANNEL_NAME,
+              BRIDGEFLOW_API_CHANNEL_NAME,
               channel,
               ...args
             );
@@ -91,7 +91,7 @@ function getMainAPIs() {
       subscribeCounts.set(channel, count);
       if (count === 1) {
         ipcRenderer.send(
-          AFFINE_EVENT_SUBSCRIBE_CHANNEL_NAME,
+          BRIDGEFLOW_EVENT_SUBSCRIBE_CHANNEL_NAME,
           'subscribe',
           channel
         );
@@ -103,7 +103,7 @@ function getMainAPIs() {
       if (count <= 0) {
         subscribeCounts.delete(channel);
         ipcRenderer.send(
-          AFFINE_EVENT_SUBSCRIBE_CHANNEL_NAME,
+          BRIDGEFLOW_EVENT_SUBSCRIBE_CHANNEL_NAME,
           'unsubscribe',
           channel
         );
@@ -112,7 +112,7 @@ function getMainAPIs() {
       }
     };
 
-    ipcRenderer.on(AFFINE_EVENT_CHANNEL_NAME, (_event, channel, ...args) => {
+    ipcRenderer.on(BRIDGEFLOW_EVENT_CHANNEL_NAME, (_event, channel, ...args) => {
       if (typeof channel !== 'string') {
         console.error('invalid ipc event', channel);
         return;

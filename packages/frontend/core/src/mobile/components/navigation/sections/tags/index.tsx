@@ -1,10 +1,10 @@
-import { NavigationPanelTreeRoot } from '@affine/core/desktop/components/navigation-panel';
-import { NavigationPanelService } from '@affine/core/modules/navigation-panel';
-import { TagService } from '@affine/core/modules/tag';
-import { useI18n } from '@affine/i18n';
-import { track } from '@affine/track';
+import { NavigationPanelTreeRoot } from '@bridgeflow/core/desktop/components/navigation-panel';
+import { NavigationPanelService } from '@bridgeflow/core/modules/navigation-panel';
+import { TagService } from '@bridgeflow/core/modules/tag';
+import { useI18n } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
 import { AddTagIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useServices } from '@toeverything/infra';
+import { useLiveData, useServices } from '@kanban-studios/infra';
 import { useCallback, useMemo, useState } from 'react';
 
 import { AddItemPlaceholder } from '../../layouts/add-item-placeholder';
@@ -16,8 +16,8 @@ export const TagDesc = ({ input }: { input: string }) => {
   const t = useI18n();
 
   return input
-    ? t['com.affine.m.explorer.tag.new-tip-not-empty']({ value: input })
-    : t['com.affine.m.explorer.tag.new-tip-empty']();
+    ? t['com.bridgeflow.m.explorer.tag.new-tip-not-empty']({ value: input })
+    : t['com.bridgeflow.m.explorer.tag.new-tip-empty']();
 };
 
 export const NavigationPanelTags = () => {
@@ -44,7 +44,7 @@ export const NavigationPanelTags = () => {
   return (
     <CollapsibleSection
       path={path}
-      title={t['com.affine.rootAppSidebar.tags']()}
+      title={t['com.bridgeflow.rootAppSidebar.tags']()}
     >
       <NavigationPanelTreeRoot>
         {tags.map(tag => (
@@ -59,7 +59,7 @@ export const NavigationPanelTags = () => {
           data-testid="navigation-panel-add-tag-button"
           onClick={() => setShowNewTagDialog(true)}
           label={t[
-            'com.affine.rootAppSidebar.explorer.tag-section-add-tooltip'
+            'com.bridgeflow.rootAppSidebar.explorer.tag-section-add-tooltip'
           ]()}
         />
         <TagRenameDialog

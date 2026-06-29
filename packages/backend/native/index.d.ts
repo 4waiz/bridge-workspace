@@ -22,9 +22,9 @@ export declare class Tokenizer {
  */
 export declare function addDocToRootDoc(rootDocBin: Buffer, docId: string, title?: string | undefined | null): Buffer
 
-export const AFFINE_PRO_LICENSE_AES_KEY: string | undefined | null
+export const BRIDGEFLOW_PRO_LICENSE_AES_KEY: string | undefined | null
 
-export const AFFINE_PRO_PUBLIC_KEY: string | undefined | null
+export const BRIDGEFLOW_PRO_PUBLIC_KEY: string | undefined | null
 
 export interface Chunk {
   index: number
@@ -32,7 +32,7 @@ export interface Chunk {
 }
 
 /**
- * Converts markdown content to AFFiNE-compatible y-octo document binary.
+ * Converts markdown content to BridgeFlow-compatible y-octo document binary.
  *
  * # Arguments
  * * `title` - The document title

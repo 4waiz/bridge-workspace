@@ -1,5 +1,5 @@
 {
-  "name": "@affine-test/kit",
+  "name": "@bridgeflow-test/kit",
   "private": true,
   "type": "module",
   "version": "0.26.3",
@@ -11,11 +11,11 @@
     "./bs/*": "./src/bs/*.ts"
   },
   "devDependencies": {
-    "@affine-tools/utils": "workspace:*",
-    "@blocksuite/affine": "workspace:*",
+    "@blocksuite/bridgeflow": "workspace:*",
+    "@bridgeflow-tools/utils": "workspace:*",
+    "@kanban-studios/infra": "workspace:*",
     "@node-rs/argon2": "^2.0.2",
     "@playwright/test": "=1.58.2",
-    "@toeverything/infra": "workspace:*",
     "express": "^5.0.0",
     "http-proxy-middleware": "^3.0.3"
   },

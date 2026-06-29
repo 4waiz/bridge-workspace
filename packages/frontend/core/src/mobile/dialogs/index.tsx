@@ -3,9 +3,9 @@ import {
   type GLOBAL_DIALOG_SCHEMA,
   GlobalDialogService,
   WorkspaceDialogService,
-} from '@affine/core/modules/dialogs';
-import type { WORKSPACE_DIALOG_SCHEMA } from '@affine/core/modules/dialogs/constant';
-import { useLiveData, useService } from '@toeverything/infra';
+} from '@bridgeflow/core/modules/dialogs';
+import type { WORKSPACE_DIALOG_SCHEMA } from '@bridgeflow/core/modules/dialogs/constant';
+import { useLiveData, useService } from '@kanban-studios/infra';
 
 import { CollectionSelectorDialog } from './selectors/collection-selector';
 import { DateSelectorDialog } from './selectors/date-selector';

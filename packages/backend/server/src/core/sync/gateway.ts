@@ -78,7 +78,7 @@ const DOC_UPDATES_PROTOCOL_026 = new semver.Range('>=0.26.0-0', {
 });
 
 type SyncProtocolRoomType = Extract<RoomType, 'sync-025' | 'sync-026'>;
-const SOCKET_PRESENCE_USER_ID_KEY = 'affinePresenceUserId';
+const SOCKET_PRESENCE_USER_ID_KEY = 'bridgeflowPresenceUserId';
 
 function normalizeWsClientVersion(clientVersion: string): string | null {
   if (env.namespaces.canary) {
@@ -501,7 +501,7 @@ export class SpaceSyncGateway
 
   selectAdapter(client: Socket, spaceType: SpaceType): SyncSocketAdapter {
     let adapters: Record<SpaceType, SyncSocketAdapter> = (client as any)
-      .affineSyncAdapters;
+      .bridgeflowSyncAdapters;
 
     if (!adapters) {
       const workspace = new WorkspaceSyncAdapter(
@@ -514,7 +514,7 @@ export class SpaceSyncGateway
       const userspace = new UserspaceSyncAdapter(client, this.userspace);
 
       adapters = { workspace, userspace };
-      (client as any).affineSyncAdapters = adapters;
+      (client as any).bridgeflowSyncAdapters = adapters;
     }
 
     return adapters[spaceType];

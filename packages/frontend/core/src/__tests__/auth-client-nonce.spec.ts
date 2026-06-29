@@ -1,10 +1,10 @@
-import { AuthSession } from '@affine/core/modules/cloud/entities/session';
-import { AuthService } from '@affine/core/modules/cloud/services/auth';
-import { FetchService } from '@affine/core/modules/cloud/services/fetch';
-import { AuthStore } from '@affine/core/modules/cloud/stores/auth';
-import { GlobalDialogService } from '@affine/core/modules/dialogs/services/dialog';
-import { UrlService } from '@affine/core/modules/url/services/url';
-import { Framework } from '@toeverything/infra';
+import { AuthSession } from '@bridgeflow/core/modules/cloud/entities/session';
+import { AuthService } from '@bridgeflow/core/modules/cloud/services/auth';
+import { FetchService } from '@bridgeflow/core/modules/cloud/services/fetch';
+import { AuthStore } from '@bridgeflow/core/modules/cloud/stores/auth';
+import { GlobalDialogService } from '@bridgeflow/core/modules/dialogs/services/dialog';
+import { UrlService } from '@bridgeflow/core/modules/url/services/url';
+import { Framework } from '@kanban-studios/infra';
 import { of } from 'rxjs';
 import { describe, expect, test, vi } from 'vitest';
 

@@ -1,4 +1,4 @@
-import type { FeatureType } from '@affine/graphql';
+import type { FeatureType } from '@bridgeflow/graphql';
 import type {
   ColumnDef,
   PaginationState,

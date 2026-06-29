@@ -1,7 +1,7 @@
-import type { FilterParams } from '@affine/core/modules/collection-rules';
-import { WorkspacePropertyService } from '@affine/core/modules/workspace-property';
-import { useI18n } from '@affine/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import type { FilterParams } from '@bridgeflow/core/modules/collection-rules';
+import { WorkspacePropertyService } from '@bridgeflow/core/modules/workspace-property';
+import { useI18n } from '@bridgeflow/i18n';
+import { useLiveData, useService } from '@kanban-studios/infra';
 
 import { WorkspacePropertyIcon, WorkspacePropertyName } from '../../properties';
 import {

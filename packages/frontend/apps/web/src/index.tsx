@@ -1,10 +1,11 @@
 import './setup';
 
-import { Telemetry } from '@affine/core/components/telemetry';
+import { Telemetry } from '@bridgeflow/core/components/telemetry';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import { App } from './app';
+import { AuthGate } from './auth/auth-gate';
 
 function mountApp() {
   // oxlint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -12,7 +13,9 @@ function mountApp() {
   createRoot(root).render(
     <StrictMode>
       <Telemetry />
-      <App />
+      <AuthGate>
+        <App />
+      </AuthGate>
     </StrictMode>
   );
 }

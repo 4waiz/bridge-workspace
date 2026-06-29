@@ -37,7 +37,7 @@ test('trigger props updated', () => {
     extensions,
   });
 
-  store.addBlock('affine:page');
+  store.addBlock('bridgeflow:page');
 
   const rootModel = store.root as RootBlockModel;
 
@@ -100,7 +100,7 @@ test('stash and pop', () => {
     extensions,
   });
 
-  store.addBlock('affine:page');
+  store.addBlock('bridgeflow:page');
 
   const rootModel = store.root as RootBlockModel;
 
@@ -173,7 +173,7 @@ test('always get latest value in onChange', () => {
     extensions,
   });
 
-  store.addBlock('affine:page');
+  store.addBlock('bridgeflow:page');
 
   const rootModel = store.root as RootBlockModel;
 
@@ -230,7 +230,7 @@ test('query', () => {
       mode: 'loose',
       match: [
         {
-          flavour: 'affine:list',
+          flavour: 'bridgeflow:list',
           viewType: 'hidden',
         },
       ],
@@ -239,16 +239,16 @@ test('query', () => {
   expect(store1).toBe(store2);
   expect(store1).not.toBe(store3);
 
-  const page = store1.addBlock('affine:page');
-  const note = store1.addBlock('affine:note', {}, page);
-  const paragraph1 = store1.addBlock('affine:paragraph', {}, note);
-  const list1 = store1.addBlock('affine:list' as never, {}, note);
+  const page = store1.addBlock('bridgeflow:page');
+  const note = store1.addBlock('bridgeflow:note', {}, page);
+  const paragraph1 = store1.addBlock('bridgeflow:paragraph', {}, note);
+  const list1 = store1.addBlock('bridgeflow:list' as never, {}, note);
 
   expect(store2?.getBlock(paragraph1)?.blockViewType).toBe('display');
   expect(store2?.getBlock(list1)?.blockViewType).toBe('display');
   expect(store3?.getBlock(list1)?.blockViewType).toBe('hidden');
 
-  const list2 = store1.addBlock('affine:list' as never, {}, note);
+  const list2 = store1.addBlock('bridgeflow:list' as never, {}, note);
 
   expect(store2?.getBlock(list2)?.blockViewType).toBe('display');
   expect(store3?.getBlock(list2)?.blockViewType).toBe('hidden');
@@ -295,12 +295,12 @@ describe('move blocks', () => {
     const doc = collection.createDoc('home');
     doc.load();
     const store = doc.getStore({ extensions });
-    const pageId = store.addBlock('affine:page');
+    const pageId = store.addBlock('bridgeflow:page');
     const page = store.getBlock(pageId)!.model;
 
     const noteIds = store.addBlocks(
       [1, 2, 3].map(i => ({
-        flavour: 'affine:note',
+        flavour: 'bridgeflow:note',
         blockProps: { id: `${i}` },
       })),
       page

@@ -1,7 +1,7 @@
-import type { DocsService } from '@affine/core/modules/doc';
-import type { TagService } from '@affine/core/modules/tag';
-import type { WorkspacePropertyFilter } from '@affine/core/modules/workspace-property';
-import { Service } from '@toeverything/infra';
+import type { DocsService } from '@bridgeflow/core/modules/doc';
+import type { TagService } from '@bridgeflow/core/modules/tag';
+import type { WorkspacePropertyFilter } from '@bridgeflow/core/modules/workspace-property';
+import { Service } from '@kanban-studios/infra';
 import { combineLatest, map, type Observable, of, switchMap } from 'rxjs';
 
 import type { FilterProvider } from '../../provider';

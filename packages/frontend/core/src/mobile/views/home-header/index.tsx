@@ -3,14 +3,14 @@ import {
   Menu,
   SafeArea,
   startScopedViewTransition,
-} from '@affine/component';
-import { NotificationList } from '@affine/core/components/notification/list';
-import { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import { NotificationCountService } from '@affine/core/modules/notification';
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/component';
+import { NotificationList } from '@bridgeflow/core/components/notification/list';
+import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
+import { NotificationCountService } from '@bridgeflow/core/modules/notification';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { useI18n } from '@bridgeflow/i18n';
 import { NotificationIcon, SettingsIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { cssVarV2 } from '@toeverything/theme/v2';
 import clsx from 'clsx';
 import { useCallback, useRef, useState } from 'react';

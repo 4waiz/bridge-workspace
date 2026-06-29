@@ -219,7 +219,7 @@ declare global {
 
 defineModuleConfig('copilot', {
   enabled: {
-    desc: 'Whether to enable the copilot plugin. <br> Document: <a href="https://docs.affine.pro/self-host-affine/administer/ai" target="_blank">https://docs.affine.pro/self-host-affine/administer/ai</a>',
+    desc: 'Whether to enable the copilot plugin. <br> Document: <a href="https://docs.bridgeflow.pro/self-host-bridgeflow/administer/ai" target="_blank">https://docs.bridgeflow.pro/self-host-bridgeflow/administer/ai</a>',
     default: false,
   },
   scenarios: {
@@ -315,7 +315,7 @@ defineModuleConfig('copilot', {
       provider: 'fs',
       bucket: 'copilot',
       config: {
-        path: '~/.affine/storage',
+        path: '~/.bridgeflow/storage',
       },
     },
     schema: StorageJSONSchema,

@@ -1,27 +1,27 @@
-import { Button } from '@affine/admin/components/ui/button';
+import { Button } from '@bridgeflow/admin/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@affine/admin/components/ui/card';
+} from '@bridgeflow/admin/components/ui/card';
 import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from '@affine/admin/components/ui/chart';
-import { Label } from '@affine/admin/components/ui/label';
+} from '@bridgeflow/admin/components/ui/chart';
+import { Label } from '@bridgeflow/admin/components/ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@affine/admin/components/ui/select';
-import { Separator } from '@affine/admin/components/ui/separator';
-import { Skeleton } from '@affine/admin/components/ui/skeleton';
+} from '@bridgeflow/admin/components/ui/select';
+import { Separator } from '@bridgeflow/admin/components/ui/separator';
+import { Skeleton } from '@bridgeflow/admin/components/ui/skeleton';
 import {
   Table,
   TableBody,
@@ -29,10 +29,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@affine/admin/components/ui/table';
-import { useQuery } from '@affine/admin/use-query';
-import { adminDashboardQuery } from '@affine/graphql';
-import { ROUTES } from '@affine/routes';
+} from '@bridgeflow/admin/components/ui/table';
+import { useQuery } from '@bridgeflow/admin/use-query';
+import { adminDashboardQuery } from '@bridgeflow/graphql';
+import { ROUTES } from '@bridgeflow/routes';
 import {
   DatabaseIcon,
   MessageSquareTextIcon,

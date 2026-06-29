@@ -1,11 +1,11 @@
-import { ThemeProvider } from '@affine/core/components/theme-provider';
-import { configureElectronStateStorageImpls } from '@affine/core/desktop/storage';
-import { configureDesktopApiModule } from '@affine/core/modules/desktop-api';
-import { configureI18nModule, I18nProvider } from '@affine/core/modules/i18n';
-import { configureStorageModule } from '@affine/core/modules/storage';
-import { configureEssentialThemeModule } from '@affine/core/modules/theme';
-import { appInfo } from '@affine/electron-api';
-import { Framework, FrameworkRoot } from '@toeverything/infra';
+import { ThemeProvider } from '@bridgeflow/core/components/theme-provider';
+import { configureElectronStateStorageImpls } from '@bridgeflow/core/desktop/storage';
+import { configureDesktopApiModule } from '@bridgeflow/core/modules/desktop-api';
+import { configureI18nModule, I18nProvider } from '@bridgeflow/core/modules/i18n';
+import { configureStorageModule } from '@bridgeflow/core/modules/storage';
+import { configureEssentialThemeModule } from '@bridgeflow/core/modules/theme';
+import { appInfo } from '@bridgeflow/electron-api';
+import { Framework, FrameworkRoot } from '@kanban-studios/infra';
 
 import * as styles from './app.css';
 import { Recording } from './recording';

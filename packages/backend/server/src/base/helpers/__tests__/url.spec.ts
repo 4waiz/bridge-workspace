@@ -13,7 +13,7 @@ test.beforeEach(async t => {
   t.context.url = new URLHelper({
     server: {
       externalUrl: '',
-      host: 'app.affine.local',
+      host: 'app.bridgeflow.local',
       hosts: [],
       port: 3010,
       https: true,
@@ -23,14 +23,14 @@ test.beforeEach(async t => {
 });
 
 test('can factor base url correctly without specified external url', t => {
-  t.is(t.context.url.baseUrl, 'https://app.affine.local');
+  t.is(t.context.url.baseUrl, 'https://app.bridgeflow.local');
 });
 
 test('can factor base url correctly with specified external url', t => {
   const url = new URLHelper({
     server: {
       externalUrl: 'https://external.domain.com',
-      host: 'app.affine.local',
+      host: 'app.bridgeflow.local',
       hosts: [],
       port: 3010,
       https: true,
@@ -45,7 +45,7 @@ test('can factor base url correctly with specified external url and path', t => 
   const url = new URLHelper({
     server: {
       externalUrl: 'https://external.domain.com/anything',
-      host: 'app.affine.local',
+      host: 'app.bridgeflow.local',
       hosts: [],
       port: 3010,
       https: true,
@@ -60,7 +60,7 @@ test('can factor base url correctly with specified external url with port', t =>
   const url = new URLHelper({
     server: {
       externalUrl: 'https://external.domain.com:123',
-      host: 'app.affine.local',
+      host: 'app.bridgeflow.local',
       hosts: [],
       port: 3010,
       https: true,
@@ -76,44 +76,44 @@ test('can stringify query', t => {
 });
 
 test('can create link', t => {
-  t.is(t.context.url.link('/path'), 'https://app.affine.local/path');
+  t.is(t.context.url.link('/path'), 'https://app.bridgeflow.local/path');
   t.is(
     t.context.url.link('/path', { a: 1, b: 2 }),
-    'https://app.affine.local/path?a=1&b=2'
+    'https://app.bridgeflow.local/path?a=1&b=2'
   );
   t.is(
     t.context.url.link('/path', { a: 1, b: '/path' }),
-    'https://app.affine.local/path?a=1&b=%2Fpath'
+    'https://app.bridgeflow.local/path?a=1&b=%2Fpath'
   );
 });
 
 test('addSimpleQuery should not double encode', t => {
   t.is(
     t.context.url.addSimpleQuery(
-      'https://app.affine.local/path',
+      'https://app.bridgeflow.local/path',
       'redirect_uri',
       '/path'
     ),
-    'https://app.affine.local/path?redirect_uri=%2Fpath'
+    'https://app.bridgeflow.local/path?redirect_uri=%2Fpath'
   );
 });
 
 test('addSimpleQuery should allow unescaped value when escape=false', t => {
   t.is(
     t.context.url.addSimpleQuery(
-      'https://app.affine.local/path',
+      'https://app.bridgeflow.local/path',
       'session_id',
       '{CHECKOUT_SESSION_ID}',
       false
     ),
-    'https://app.affine.local/path?session_id={CHECKOUT_SESSION_ID}'
+    'https://app.bridgeflow.local/path?session_id={CHECKOUT_SESSION_ID}'
   );
 });
 
 test('can validate callbackUrl allowlist', t => {
   t.true(t.context.url.isAllowedCallbackUrl('/magic-link'));
   t.true(
-    t.context.url.isAllowedCallbackUrl('https://app.affine.local/magic-link')
+    t.context.url.isAllowedCallbackUrl('https://app.bridgeflow.local/magic-link')
   );
   t.false(
     t.context.url.isAllowedCallbackUrl('https://evil.example/magic-link')
@@ -128,7 +128,7 @@ test('can validate redirect_uri allowlist', t => {
 });
 
 test('can create safe link', t => {
-  t.is(t.context.url.safeLink('/path'), 'https://app.affine.local/path');
+  t.is(t.context.url.safeLink('/path'), 'https://app.bridgeflow.local/path');
   t.throws(() => t.context.url.safeLink('https://evil.example/magic-link'), {
     instanceOf: ActionForbidden,
   });
@@ -153,19 +153,19 @@ test('can safe redirect', t => {
   }
 
   [
-    'https://app.affine.local',
-    'https://app.affine.local/path',
-    'https://app.affine.local/path?query=1',
+    'https://app.bridgeflow.local',
+    'https://app.bridgeflow.local/path',
+    'https://app.bridgeflow.local/path?query=1',
   ].forEach(allow);
   ['https://other.domain.com', 'a://invalid.uri'].forEach(deny);
 });
 
 test('can get request origin', t => {
-  t.is(t.context.url.requestOrigin, 'https://app.affine.local');
+  t.is(t.context.url.requestOrigin, 'https://app.bridgeflow.local');
 });
 
 test('can get request base url', t => {
-  t.is(t.context.url.requestBaseUrl, 'https://app.affine.local');
+  t.is(t.context.url.requestBaseUrl, 'https://app.bridgeflow.local');
 });
 
 test('can get request base url with multiple hosts', t => {
@@ -175,8 +175,8 @@ test('can get request base url with multiple hosts', t => {
     {
       server: {
         externalUrl: '',
-        host: 'app.affine.local1',
-        hosts: ['app.affine.local1', 'app.affine.local2'],
+        host: 'app.bridgeflow.local1',
+        hosts: ['app.bridgeflow.local1', 'app.bridgeflow.local2'],
         port: 3010,
         https: true,
         path: '',
@@ -186,21 +186,21 @@ test('can get request base url with multiple hosts', t => {
   );
 
   // no cls, use default origin
-  t.is(url.requestOrigin, 'https://app.affine.local1');
-  t.is(url.requestBaseUrl, 'https://app.affine.local1');
+  t.is(url.requestOrigin, 'https://app.bridgeflow.local1');
+  t.is(url.requestBaseUrl, 'https://app.bridgeflow.local1');
 
   // set cls
-  cls.set(CLS_REQUEST_HOST, 'app.affine.local2');
-  t.is(url.requestOrigin, 'https://app.affine.local2');
-  t.is(url.requestBaseUrl, 'https://app.affine.local2');
+  cls.set(CLS_REQUEST_HOST, 'app.bridgeflow.local2');
+  t.is(url.requestOrigin, 'https://app.bridgeflow.local2');
+  t.is(url.requestBaseUrl, 'https://app.bridgeflow.local2');
 });
 
 test('should allow websocket secure origin by normalizing wss to https', t => {
   const allowedOrigins = buildCorsAllowedOrigins({
-    allowedOrigins: ['https://app.affine.pro'],
+    allowedOrigins: ['https://app.bridgeflow.pro'],
   } as any);
 
-  t.true(isCorsOriginAllowed('wss://app.affine.pro', allowedOrigins));
+  t.true(isCorsOriginAllowed('wss://app.bridgeflow.pro', allowedOrigins));
 });
 
 test('should allow desktop file origin', t => {

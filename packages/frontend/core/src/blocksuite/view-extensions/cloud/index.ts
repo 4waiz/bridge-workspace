@@ -1,10 +1,10 @@
-import { AuthService, PublicUserService } from '@affine/core/modules/cloud';
-import { MemberSearchService } from '@affine/core/modules/permissions';
+import { AuthService, PublicUserService } from '@bridgeflow/core/modules/cloud';
+import { MemberSearchService } from '@bridgeflow/core/modules/permissions';
 import {
   type ViewExtensionContext,
   ViewExtensionProvider,
-} from '@blocksuite/affine/ext-loader';
-import { FrameworkProvider } from '@toeverything/infra';
+} from '@blocksuite/bridgeflow/ext-loader';
+import { FrameworkProvider } from '@kanban-studios/infra';
 import { z } from 'zod';
 
 import { patchUserExtensions } from './user';
@@ -18,7 +18,7 @@ const optionsSchema = z.object({
 type CloudViewOptions = z.infer<typeof optionsSchema>;
 
 export class CloudViewExtension extends ViewExtensionProvider<CloudViewOptions> {
-  override name = 'affine-view-cloud';
+  override name = 'bridgeflow-view-cloud';
 
   override schema = optionsSchema;
 

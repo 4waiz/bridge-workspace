@@ -1,5 +1,5 @@
-import type { Store } from '@blocksuite/affine/store';
-import { Scope } from '@toeverything/infra';
+import type { Store } from '@blocksuite/bridgeflow/store';
+import { Scope } from '@kanban-studios/infra';
 
 import type { DocRecord } from '../entities/record';
 

@@ -1,4 +1,4 @@
-import { LiveData } from '@toeverything/infra';
+import { LiveData } from '@kanban-studios/infra';
 
 export const enableNavigationGesture$ = new LiveData(false);
 

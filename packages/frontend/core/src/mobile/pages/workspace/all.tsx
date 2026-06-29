@@ -1,12 +1,12 @@
-import { useThemeColorV2, Wrapper } from '@affine/component';
-import { EmptyDocs } from '@affine/core/components/affine/empty';
+import { useThemeColorV2, Wrapper } from '@bridgeflow/component';
+import { EmptyDocs } from '@bridgeflow/core/components/bridgeflow/empty';
 import {
   createDocExplorerContext,
   DocExplorerContext,
-} from '@affine/core/components/explorer/context';
-import { DocsExplorer } from '@affine/core/components/explorer/docs-view/docs-list';
-import { CollectionRulesService } from '@affine/core/modules/collection-rules';
-import { useLiveData, useService } from '@toeverything/infra';
+} from '@bridgeflow/core/components/explorer/context';
+import { DocsExplorer } from '@bridgeflow/core/components/explorer/docs-view/docs-list';
+import { CollectionRulesService } from '@bridgeflow/core/modules/collection-rules';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useEffect, useState } from 'react';
 
 import { Page } from '../../components/page';

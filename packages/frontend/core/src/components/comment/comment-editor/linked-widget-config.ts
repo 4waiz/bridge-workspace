@@ -1,16 +1,16 @@
-import { MemberSearchService } from '@affine/core/modules/permissions';
-import { highlighter } from '@affine/core/modules/quicksearch/utils/highlighter';
-import { I18n } from '@affine/i18n';
-import track from '@affine/track';
-import type { AffineInlineEditor } from '@blocksuite/affine/shared/types';
+import { MemberSearchService } from '@bridgeflow/core/modules/permissions';
+import { highlighter } from '@bridgeflow/core/modules/quicksearch/utils/highlighter';
+import { I18n } from '@bridgeflow/i18n';
+import track from '@bridgeflow/track';
+import type { BridgeFlowInlineEditor } from '@blocksuite/bridgeflow/shared/types';
 import type {
   LinkedMenuItem,
   LinkedWidgetConfig,
-} from '@blocksuite/affine/widgets/linked-doc';
+} from '@blocksuite/bridgeflow/widgets/linked-doc';
 import { UserIcon } from '@blocksuite/icons/lit';
 import { BLOCK_ID_ATTR, type BlockComponent } from '@blocksuite/std';
 import { computed } from '@preact/signals-core';
-import type { FrameworkProvider } from '@toeverything/infra';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 import { cssVarV2 } from '@toeverything/theme/v2';
 import Fuse, { type FuseResultMatch } from 'fuse.js';
 import { html } from 'lit';
@@ -23,7 +23,7 @@ export const createCommentLinkedWidgetConfig = (
   const memberGroup = (
     query: string,
     close: () => void,
-    inlineEditor: AffineInlineEditor
+    inlineEditor: BridgeFlowInlineEditor
   ) => {
     const memberSearchService = framework.get(MemberSearchService);
 
@@ -136,7 +136,7 @@ export const createCommentLinkedWidgetConfig = (
     });
 
     return {
-      name: I18n.t('com.affine.editor.at-menu.mention-members'),
+      name: I18n.t('com.bridgeflow.editor.at-menu.mention-members'),
       items,
       loading: memberSearchService.isLoading$.signal,
       hidden: computed(() => {
@@ -149,7 +149,7 @@ export const createCommentLinkedWidgetConfig = (
       overflowText: computed(() => {
         const totalCount = memberSearchService.result$.signal.value.length;
         const remainingCount = totalCount - 3;
-        return I18n.t('com.affine.editor.at-menu.more-members-hint', {
+        return I18n.t('com.bridgeflow.editor.at-menu.more-members-hint', {
           count: remainingCount,
         });
       }),

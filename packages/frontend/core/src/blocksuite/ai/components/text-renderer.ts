@@ -1,26 +1,26 @@
-import { createReactComponentFromLit } from '@affine/component';
-import type { FeatureFlagService } from '@affine/core/modules/feature-flag';
-import { PeekViewProvider } from '@blocksuite/affine/components/peek';
-import { SignalWatcher, WithDisposable } from '@blocksuite/affine/global/lit';
-import { RefNodeSlotsProvider } from '@blocksuite/affine/inlines/reference';
-import type { ColorScheme } from '@blocksuite/affine/model';
+import { createReactComponentFromLit } from '@bridgeflow/component';
+import type { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
+import { PeekViewProvider } from '@blocksuite/bridgeflow/components/peek';
+import { SignalWatcher, WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { RefNodeSlotsProvider } from '@blocksuite/bridgeflow/inlines/reference';
+import type { ColorScheme } from '@blocksuite/bridgeflow/model';
 import {
   codeBlockWrapMiddleware,
   defaultImageProxyMiddleware,
   ImageProxyService,
-} from '@blocksuite/affine/shared/adapters';
-import { unsafeCSSVarV2 } from '@blocksuite/affine/shared/theme';
+} from '@blocksuite/bridgeflow/shared/adapters';
+import { unsafeCSSVarV2 } from '@blocksuite/bridgeflow/shared/theme';
 import {
   BlockStdScope,
   type EditorHost,
   ShadowlessElement,
-} from '@blocksuite/affine/std';
+} from '@blocksuite/bridgeflow/std';
 import type {
   ExtensionType,
   Query,
   Store,
   TransformerMiddleware,
-} from '@blocksuite/affine/store';
+} from '@blocksuite/bridgeflow/store';
 import type { Signal } from '@preact/signals-core';
 import {
   darkCssVariablesV2,
@@ -34,7 +34,7 @@ import React from 'react';
 import { filter } from 'rxjs/operators';
 
 import { markDownToDoc } from '../../utils';
-import type { AffineAIPanelState } from '../widgets/ai-panel/type';
+import type { BridgeFlowAIPanelState } from '../widgets/ai-panel/type';
 import { getCustomPageEditorBlockSpecs } from './page-editor-block-specs';
 
 const customHeadingStyles = css`
@@ -83,7 +83,7 @@ export type TextRendererOptions = {
   extensions?: ExtensionType[];
   additionalMiddlewares?: TransformerMiddleware[];
   testId?: string;
-  affineFeatureFlagService?: FeatureFlagService;
+  bridgeflowFeatureFlagService?: FeatureFlagService;
   theme?: Signal<ColorScheme>;
 };
 
@@ -92,14 +92,14 @@ export class TextRenderer extends SignalWatcher(
   WithDisposable(ShadowlessElement)
 ) {
   static override styles = css`
-    .ai-answer-text-editor.affine-page-viewport {
+    .ai-answer-text-editor.bridgeflow-page-viewport {
       background: transparent;
       font-family: var(--affine-font-family);
       margin-top: 0;
       margin-bottom: 0;
     }
 
-    .ai-answer-text-editor .affine-page-root-block-container {
+    .ai-answer-text-editor .bridgeflow-page-root-block-container {
       padding: 0;
       margin: 0;
       line-height: var(--affine-line-height);
@@ -108,10 +108,10 @@ export class TextRenderer extends SignalWatcher(
     }
 
     .ai-answer-text-editor {
-      .affine-note-block-container {
-        > .affine-block-children-container {
-          > :first-child:not(affine-callout),
-          > :first-child:not(affine-callout) * {
+      .bridgeflow-note-block-container {
+        > .bridgeflow-block-children-container {
+          > :first-child:not(bridgeflow-callout),
+          > :first-child:not(bridgeflow-callout) * {
             margin-top: 0 !important;
           }
           > :last-child,
@@ -121,7 +121,7 @@ export class TextRenderer extends SignalWatcher(
         }
       }
 
-      .affine-paragraph-block-container {
+      .bridgeflow-paragraph-block-container {
         line-height: 22px;
 
         .h6 {
@@ -176,13 +176,13 @@ export class TextRenderer extends SignalWatcher(
     }
 
     .text-renderer-container[data-app-theme='dark'] {
-      .ai-answer-text-editor .affine-page-root-block-container {
+      .ai-answer-text-editor .bridgeflow-page-root-block-container {
         color: ${unsafeCSS(darkCssVariablesV2['--affine-v2-text-primary'])};
       }
     }
 
     .text-renderer-container[data-app-theme='light'] {
-      .ai-answer-text-editor .affine-page-root-block-container {
+      .ai-answer-text-editor .bridgeflow-page-root-block-container {
         color: ${unsafeCSS(lightCssVariablesV2['--affine-v2-text-primary'])};
       }
     }
@@ -208,19 +208,19 @@ export class TextRenderer extends SignalWatcher(
   private readonly _query: Query = {
     mode: 'strict',
     match: [
-      'affine:page',
-      'affine:note',
-      'affine:table',
-      'affine:surface',
-      'affine:paragraph',
-      'affine:callout',
-      'affine:code',
-      'affine:list',
-      'affine:divider',
-      'affine:latex',
-      'affine:bookmark',
-      'affine:attachment',
-      'affine:embed-linked-doc',
+      'bridgeflow:page',
+      'bridgeflow:note',
+      'bridgeflow:table',
+      'bridgeflow:surface',
+      'bridgeflow:paragraph',
+      'bridgeflow:callout',
+      'bridgeflow:code',
+      'bridgeflow:list',
+      'bridgeflow:divider',
+      'bridgeflow:latex',
+      'bridgeflow:bookmark',
+      'bridgeflow:attachment',
+      'bridgeflow:embed-linked-doc',
     ].map(flavour => ({ flavour, viewType: 'display' })),
   };
 
@@ -261,7 +261,7 @@ export class TextRenderer extends SignalWatcher(
         markDownToDoc(
           latestAnswer,
           middlewares,
-          this.options.affineFeatureFlagService
+          this.options.bridgeflowFeatureFlagService
         )
           .then(doc => {
             this.disposeDoc();
@@ -335,7 +335,7 @@ export class TextRenderer extends SignalWatcher(
       >
         ${keyed(
           this._doc,
-          html`<div class="ai-answer-text-editor affine-page-viewport">
+          html`<div class="ai-answer-text-editor bridgeflow-page-viewport">
             ${this._host}
           </div>`
         )}
@@ -386,11 +386,11 @@ export class TextRenderer extends SignalWatcher(
   accessor options!: TextRendererOptions;
 
   @property({ attribute: false })
-  accessor state: AffineAIPanelState | undefined = undefined;
+  accessor state: BridgeFlowAIPanelState | undefined = undefined;
 }
 
 export const createTextRenderer = (options: TextRendererOptions) => {
-  return (answer: string, state?: AffineAIPanelState) => {
+  return (answer: string, state?: BridgeFlowAIPanelState) => {
     return html`<text-renderer
       contenteditable="false"
       .answer=${answer}

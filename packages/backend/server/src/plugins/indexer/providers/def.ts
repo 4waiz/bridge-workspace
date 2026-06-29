@@ -136,10 +136,10 @@ export abstract class SearchProvider {
   protected readonly logger = new Logger(this.constructor.name);
 
   @Inject() private readonly factory!: SearchProviderFactory;
-  @Inject() private readonly AFFiNEConfig!: Config;
+  @Inject() private readonly BridgeFlowConfig!: Config;
 
   protected get config() {
-    return this.AFFiNEConfig.indexer;
+    return this.BridgeFlowConfig.indexer;
   }
 
   protected get configured() {

@@ -1,11 +1,11 @@
-import type { CopilotChatHistoryFragment } from '@affine/graphql';
-import type { ImageSelection } from '@blocksuite/affine/shared/selection';
+import type { CopilotChatHistoryFragment } from '@bridgeflow/graphql';
+import type { ImageSelection } from '@blocksuite/bridgeflow/shared/selection';
 import type {
   BlockSelection,
   EditorHost,
   TextSelection,
-} from '@blocksuite/affine/std';
-import type { NotificationService } from '@blocksuite/affine-shared/services';
+} from '@blocksuite/bridgeflow/std';
+import type { NotificationService } from '@blocksuite/bridgeflow-shared/services';
 import { css, html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';

@@ -1,4 +1,4 @@
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 
 import { FolderTree } from '../entities/folder-tree';
 export class OrganizeService extends Service {

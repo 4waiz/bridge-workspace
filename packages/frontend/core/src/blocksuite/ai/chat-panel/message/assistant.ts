@@ -1,16 +1,16 @@
-import type { FeatureFlagService } from '@affine/core/modules/feature-flag';
-import type { PeekViewService } from '@affine/core/modules/peek-view';
-import type { AppThemeService } from '@affine/core/modules/theme';
-import type { CopilotChatHistoryFragment } from '@affine/graphql';
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import { isInsidePageEditor } from '@blocksuite/affine/shared/utils';
+import type { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
+import type { PeekViewService } from '@bridgeflow/core/modules/peek-view';
+import type { AppThemeService } from '@bridgeflow/core/modules/theme';
+import type { CopilotChatHistoryFragment } from '@bridgeflow/graphql';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { isInsidePageEditor } from '@blocksuite/bridgeflow/shared/utils';
 import {
   type BlockStdScope,
   type EditorHost,
   ShadowlessElement,
-} from '@blocksuite/affine/std';
-import type { ExtensionType } from '@blocksuite/affine/store';
-import type { NotificationService } from '@blocksuite/affine-shared/services';
+} from '@blocksuite/bridgeflow/std';
+import type { ExtensionType } from '@blocksuite/bridgeflow/store';
+import type { NotificationService } from '@blocksuite/bridgeflow-shared/services';
 import type { Signal } from '@preact/signals-core';
 import { css, html, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
@@ -61,10 +61,10 @@ export class ChatMessageAssistant extends WithDisposable(ShadowlessElement) {
   accessor extensions!: ExtensionType[];
 
   @property({ attribute: false })
-  accessor affineFeatureFlagService!: FeatureFlagService;
+  accessor bridgeflowFeatureFlagService!: FeatureFlagService;
 
   @property({ attribute: false })
-  accessor affineThemeService!: AppThemeService;
+  accessor bridgeflowThemeService!: AppThemeService;
 
   @property({ attribute: false })
   accessor session!: CopilotChatHistoryFragment | null | undefined;
@@ -149,9 +149,9 @@ export class ChatMessageAssistant extends WithDisposable(ShadowlessElement) {
       .state=${this.state}
       .width=${this.width}
       .extensions=${this.extensions}
-      .affineFeatureFlagService=${this.affineFeatureFlagService}
+      .bridgeflowFeatureFlagService=${this.bridgeflowFeatureFlagService}
       .notificationService=${this.notificationService}
-      .theme=${this.affineThemeService.appTheme.themeSignal}
+      .theme=${this.bridgeflowThemeService.appTheme.themeSignal}
       .independentMode=${this.independentMode}
       .docDisplayService=${this.docDisplayService}
       .peekViewService=${this.peekViewService}
@@ -164,8 +164,8 @@ export class ChatMessageAssistant extends WithDisposable(ShadowlessElement) {
       .text=${text}
       .state=${this.state}
       .extensions=${this.extensions}
-      .affineFeatureFlagService=${this.affineFeatureFlagService}
-      .theme=${this.affineThemeService.appTheme.themeSignal}
+      .bridgeflowFeatureFlagService=${this.bridgeflowFeatureFlagService}
+      .theme=${this.bridgeflowThemeService.appTheme.themeSignal}
     ></chat-content-rich-text>`;
   }
 

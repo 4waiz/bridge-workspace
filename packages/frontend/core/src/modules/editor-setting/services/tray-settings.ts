@@ -1,8 +1,8 @@
 import type {
   MenubarStateKey,
   MenubarStateSchema,
-} from '@affine/electron/main/shared-state-schema';
-import { LiveData, Service } from '@toeverything/infra';
+} from '@bridgeflow/electron/main/shared-state-schema';
+import { LiveData, Service } from '@kanban-studios/infra';
 import { defaults } from 'lodash-es';
 
 import type { GlobalStateService } from '../../storage';

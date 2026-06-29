@@ -3,23 +3,23 @@ import {
   SafeArea,
   startScopedViewTransition,
   useThemeColorV2,
-} from '@affine/component';
-import { CollectionService } from '@affine/core/modules/collection';
+} from '@bridgeflow/component';
+import { CollectionService } from '@bridgeflow/core/modules/collection';
 import {
   type QuickSearchItem,
   QuickSearchTagIcon,
-} from '@affine/core/modules/quicksearch';
-import { TagService } from '@affine/core/modules/tag';
-import { UserFriendlyError } from '@affine/error';
-import { useI18n } from '@affine/i18n';
-import { sleep } from '@blocksuite/affine/global/utils';
+} from '@bridgeflow/core/modules/quicksearch';
+import { TagService } from '@bridgeflow/core/modules/tag';
+import { UserFriendlyError } from '@bridgeflow/error';
+import { useI18n } from '@bridgeflow/i18n';
+import { sleep } from '@blocksuite/bridgeflow/global/utils';
 import { ViewLayersIcon } from '@blocksuite/icons/rc';
 import {
   LiveData,
   useLiveData,
   useService,
   useServices,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { bodyEmphasized } from '@toeverything/theme/typography';
 import { useCallback, useMemo } from 'react';
 

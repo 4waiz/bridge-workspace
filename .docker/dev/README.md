@@ -8,14 +8,14 @@
 
 ```bash
 # the root ca file will be located at `./.docker/dev/certs/ca`
-yarn affine cert --install
+yarn bridgeflow cert --install
 ```
 
 ### 2. Generate domain certs
 
 ```bash
 # certificates will be located at `./.docker/dev/certs/${domain}`
-yarn affine cert --domain affine.localhost
+yarn bridgeflow cert --domain bridgeflow.localhost
 ```
 
 ### 3. Enable nginx service in compose.yml

@@ -1,5 +1,5 @@
-import { Unreachable } from '@affine/env/constant';
-import { LiveData, ObjectPool, Service } from '@toeverything/infra';
+import { Unreachable } from '@bridgeflow/env/constant';
+import { LiveData, ObjectPool, Service } from '@kanban-studios/infra';
 import { nanoid } from 'nanoid';
 import { Observable, switchMap } from 'rxjs';
 

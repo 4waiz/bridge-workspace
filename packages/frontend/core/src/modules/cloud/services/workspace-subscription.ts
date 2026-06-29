@@ -1,5 +1,5 @@
-import { type CreateCheckoutSessionInput } from '@affine/graphql';
-import { Service } from '@toeverything/infra';
+import { type CreateCheckoutSessionInput } from '@bridgeflow/graphql';
+import { Service } from '@kanban-studios/infra';
 
 import { WorkspaceSubscription } from '../entities/workspace-subscription';
 import { SubscriptionStore } from '../stores/subscription';

@@ -82,7 +82,7 @@ export abstract class CopilotProvider<C = any> {
   abstract readonly models: CopilotProviderModel[];
   abstract configured(): boolean;
 
-  @Inject() protected readonly AFFiNEConfig!: Config;
+  @Inject() protected readonly BridgeFlowConfig!: Config;
   @Inject() protected readonly factory!: CopilotProviderFactory;
   @Inject() protected readonly moduleRef!: ModuleRef;
   readonly #registeredProviderIds = new Set<string>();
@@ -97,7 +97,7 @@ export abstract class CopilotProvider<C = any> {
 
   protected getActiveProviderMiddleware(): ProviderMiddlewareConfig {
     const providerId = this.getActiveProviderId();
-    const registry = buildProviderRegistry(this.AFFiNEConfig.copilot.providers);
+    const registry = buildProviderRegistry(this.BridgeFlowConfig.copilot.providers);
     const profile = registry.profiles.get(providerId);
     return profile?.middleware ?? resolveProviderMiddleware(this.type);
   }
@@ -113,12 +113,12 @@ export abstract class CopilotProvider<C = any> {
   get config(): C {
     const profileId = providerProfileContext.getStore();
     if (profileId) {
-      const profile = this.AFFiNEConfig.copilot.providers.profiles?.find(
+      const profile = this.BridgeFlowConfig.copilot.providers.profiles?.find(
         profile => profile.id === profileId && profile.type === this.type
       );
       if (profile) return profile.config as C;
     }
-    return this.AFFiNEConfig.copilot.providers[this.type] as C;
+    return this.BridgeFlowConfig.copilot.providers[this.type] as C;
   }
 
   @OnEvent('config.init')
@@ -134,7 +134,7 @@ export abstract class CopilotProvider<C = any> {
   }
 
   protected setup() {
-    const registry = buildProviderRegistry(this.AFFiNEConfig.copilot.providers);
+    const registry = buildProviderRegistry(this.BridgeFlowConfig.copilot.providers);
     const providerIds = registry.byType.get(this.type) ?? [];
     const nextProviderIds = new Set<string>();
 
@@ -464,7 +464,7 @@ export abstract class CopilotProvider<C = any> {
             break;
           }
           case 'docKeywordSearch': {
-            if (this.AFFiNEConfig.indexer.enabled) {
+            if (this.BridgeFlowConfig.indexer.enabled) {
               const indexerService = this.moduleRef.get(IndexerService, {
                 strict: false,
               });
@@ -506,8 +506,8 @@ export abstract class CopilotProvider<C = any> {
             break;
           }
           case 'webSearch': {
-            tools.web_search_exa = createExaSearchTool(this.AFFiNEConfig);
-            tools.web_crawl_exa = createExaCrawlTool(this.AFFiNEConfig);
+            tools.web_search_exa = createExaSearchTool(this.BridgeFlowConfig);
+            tools.web_crawl_exa = createExaCrawlTool(this.BridgeFlowConfig);
             break;
           }
           case 'docCompose': {

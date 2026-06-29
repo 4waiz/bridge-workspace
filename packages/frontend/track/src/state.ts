@@ -26,7 +26,7 @@ type TrackerState = {
   middlewares: Set<Middleware>;
 };
 
-const CLIENT_ID_KEY = 'affine_telemetry_client_id';
+const CLIENT_ID_KEY = 'bridgeflow_telemetry_client_id';
 
 export let trackerState = createTrackerState();
 

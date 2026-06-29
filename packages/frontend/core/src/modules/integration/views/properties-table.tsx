@@ -3,9 +3,9 @@ import {
   PropertyCollapsibleSection,
   PropertyName,
   PropertyRoot,
-} from '@affine/component';
-import { useI18n } from '@affine/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+} from '@bridgeflow/component';
+import { useI18n } from '@bridgeflow/i18n';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { type ReactNode, useMemo } from 'react';
 
 import { IntegrationPropertyService } from '../services/integration-property';
@@ -42,7 +42,7 @@ export const DocIntegrationPropertiesTable = ({
   return (
     <>
       <PropertyCollapsibleSection
-        title={t['com.affine.integration.properties']()}
+        title={t['com.bridgeflow.integration.properties']()}
       >
         <PropertyCollapsibleContent>
           {properties.map(property => {

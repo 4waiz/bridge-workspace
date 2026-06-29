@@ -1,15 +1,15 @@
-import type { EdgelessRootBlockComponent } from '@blocksuite/affine/blocks/root';
+import type { EdgelessRootBlockComponent } from '@blocksuite/bridgeflow/blocks/root';
 import type {
   CanvasRenderer,
   SurfaceElementModel,
-} from '@blocksuite/affine/blocks/surface';
-import { ungroupCommand } from '@blocksuite/affine/gfx/group';
+} from '@blocksuite/bridgeflow/blocks/surface';
+import { ungroupCommand } from '@blocksuite/bridgeflow/gfx/group';
 import type {
   GroupElementModel,
   MindmapElementModel,
   NoteBlockModel,
-} from '@blocksuite/affine/model';
-import { generateKeyBetween } from '@blocksuite/affine/std/gfx';
+} from '@blocksuite/bridgeflow/model';
+import { generateKeyBetween } from '@blocksuite/bridgeflow/std/gfx';
 import type { BlockComponent } from '@blocksuite/std';
 import type { BlockModel, Store } from '@blocksuite/store';
 import { beforeEach, describe, expect, test } from 'vitest';
@@ -228,7 +228,7 @@ test('blocks should rerender when their z-index changed', async () => {
   const assertBlocksContent = () => {
     const blocks = Array.from(
       document.querySelectorAll(
-        'affine-edgeless-root gfx-viewport > [data-block-id]'
+        'bridgeflow-edgeless-root gfx-viewport > [data-block-id]'
       )
     );
 
@@ -262,7 +262,7 @@ test('block host z-index should update after reordering', async () => {
 
   const getBlockHost = (id: string) =>
     document.querySelector<HTMLElement>(
-      `affine-edgeless-root gfx-viewport > [data-block-id="${id}"]`
+      `bridgeflow-edgeless-root gfx-viewport > [data-block-id="${id}"]`
     );
 
   const backHost = getBlockHost(backId);
@@ -509,7 +509,7 @@ describe('group related functionality', () => {
     ).toBe(0);
 
     const topCanvas = edgeless.querySelector(
-      'affine-surface canvas'
+      'bridgeflow-surface canvas'
     ) as HTMLCanvasElement;
 
     expect(
@@ -915,7 +915,7 @@ test('the actual rendering z-index should satisfy the logic order of their index
   expect(blocks.length).toBe(indexes.length + 1);
 
   blocks
-    .filter(block => block.flavour !== 'affine:surface')
+    .filter(block => block.flavour !== 'bridgeflow:surface')
     .forEach((block, index) => {
       if (index === blocks.length - 1) return;
 

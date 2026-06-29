@@ -1,4 +1,4 @@
-import { createIdentifier, type Memento } from '@toeverything/infra';
+import { createIdentifier, type Memento } from '@kanban-studios/infra';
 
 export interface AppSidebarState extends Memento {}
 

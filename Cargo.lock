@@ -34,7 +34,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "affine_common"
+name = "bridgeflow_common"
 version = "0.1.0"
 dependencies = [
  "assert-json-diff",
@@ -76,7 +76,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "affine_media_capture"
+name = "bridgeflow_media_capture"
 version = "0.0.0"
 dependencies = [
  "block2",
@@ -102,11 +102,11 @@ dependencies = [
 ]
 
 [[package]]
-name = "affine_mobile_native"
+name = "bridgeflow_mobile_native"
 version = "0.0.0"
 dependencies = [
- "affine_common",
- "affine_nbstore",
+ "bridgeflow_common",
+ "bridgeflow_nbstore",
  "anyhow",
  "base64-simd",
  "chrono",
@@ -121,13 +121,13 @@ dependencies = [
 ]
 
 [[package]]
-name = "affine_native"
+name = "bridgeflow_native"
 version = "0.0.0"
 dependencies = [
- "affine_common",
- "affine_media_capture",
- "affine_nbstore",
- "affine_sqlite_v1",
+ "bridgeflow_common",
+ "bridgeflow_media_capture",
+ "bridgeflow_nbstore",
+ "bridgeflow_sqlite_v1",
  "chrono",
  "mimalloc",
  "napi",
@@ -142,11 +142,11 @@ dependencies = [
 ]
 
 [[package]]
-name = "affine_nbstore"
+name = "bridgeflow_nbstore"
 version = "0.0.0"
 dependencies = [
- "affine_common",
- "affine_schema",
+ "bridgeflow_common",
+ "bridgeflow_schema",
  "anyhow",
  "bincode",
  "chrono",
@@ -167,17 +167,17 @@ dependencies = [
 ]
 
 [[package]]
-name = "affine_schema"
+name = "bridgeflow_schema"
 version = "0.0.0"
 dependencies = [
  "sqlx",
 ]
 
 [[package]]
-name = "affine_server_native"
+name = "bridgeflow_server_native"
 version = "1.0.0"
 dependencies = [
- "affine_common",
+ "bridgeflow_common",
  "anyhow",
  "chrono",
  "file-format",
@@ -204,10 +204,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "affine_sqlite_v1"
+name = "bridgeflow_sqlite_v1"
 version = "0.0.0"
 dependencies = [
- "affine_schema",
+ "bridgeflow_schema",
  "anyhow",
  "chrono",
  "dotenvy",

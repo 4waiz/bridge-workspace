@@ -1,14 +1,14 @@
-import { ServerService } from '@affine/core/modules/cloud';
-import { AdapterPanel } from '@blocksuite/affine/fragments/adapter-panel';
+import { ServerService } from '@bridgeflow/core/modules/cloud';
+import { AdapterPanel } from '@blocksuite/bridgeflow/fragments/adapter-panel';
 import {
   customImageProxyMiddleware,
   docLinkBaseURLMiddlewareBuilder,
   embedSyncedDocMiddleware,
   titleMiddleware,
-} from '@blocksuite/affine/shared/adapters';
-import type { EditorHost } from '@blocksuite/affine/std';
-import type { TransformerMiddleware } from '@blocksuite/affine/store';
-import { useService } from '@toeverything/infra';
+} from '@blocksuite/bridgeflow/shared/adapters';
+import type { EditorHost } from '@blocksuite/bridgeflow/std';
+import type { TransformerMiddleware } from '@blocksuite/bridgeflow/store';
+import { useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useRef } from 'react';
 
 import * as styles from './adapter.css';

@@ -1,5 +1,5 @@
-import { toArrayBuffer } from '@affine/core/utils/array-buffer';
-import { DebugLogger } from '@affine/debug';
+import { toArrayBuffer } from '@bridgeflow/core/utils/array-buffer';
+import { DebugLogger } from '@bridgeflow/debug';
 import {
   catchErrorInto,
   effect,
@@ -9,7 +9,7 @@ import {
   type MediaStats,
   onComplete,
   onStart,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { clamp } from 'lodash-es';
 import { mergeMap, switchMap } from 'rxjs';
 

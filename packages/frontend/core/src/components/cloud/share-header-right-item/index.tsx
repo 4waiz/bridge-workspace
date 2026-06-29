@@ -1,6 +1,6 @@
-import { AuthService } from '@affine/core/modules/cloud';
-import type { DocMode } from '@blocksuite/affine/model';
-import { useLiveData, useService } from '@toeverything/infra';
+import { AuthService } from '@bridgeflow/core/modules/cloud';
+import type { DocMode } from '@blocksuite/bridgeflow/model';
+import { useLiveData, useService } from '@kanban-studios/infra';
 
 import { ImportTemplateButton } from './import-template';
 import { PresentButton } from './present';

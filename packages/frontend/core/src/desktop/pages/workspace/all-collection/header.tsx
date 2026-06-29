@@ -1,6 +1,6 @@
-import { IconButton } from '@affine/component';
-import { ExplorerNavigation } from '@affine/core/components/explorer/header/navigation';
-import { Header } from '@affine/core/components/pure/header';
+import { IconButton } from '@bridgeflow/component';
+import { ExplorerNavigation } from '@bridgeflow/core/components/explorer/header/navigation';
+import { Header } from '@bridgeflow/core/components/pure/header';
 import { PlusIcon } from '@blocksuite/icons/rc';
 import clsx from 'clsx';
 

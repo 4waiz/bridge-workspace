@@ -1,4 +1,4 @@
-import type { WorkspaceServerService } from '@affine/core/modules/cloud';
+import type { WorkspaceServerService } from '@bridgeflow/core/modules/cloud';
 import {
   addWorkspaceEmbeddingFilesMutation,
   addWorkspaceEmbeddingIgnoredDocsMutation,
@@ -10,8 +10,8 @@ import {
   removeWorkspaceEmbeddingFilesMutation,
   removeWorkspaceEmbeddingIgnoredDocsMutation,
   setEnableDocEmbeddingMutation,
-} from '@affine/graphql';
-import { Store } from '@toeverything/infra';
+} from '@bridgeflow/graphql';
+import { Store } from '@kanban-studios/infra';
 
 export class EmbeddingStore extends Store {
   constructor(private readonly workspaceServerService: WorkspaceServerService) {

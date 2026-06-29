@@ -1,6 +1,6 @@
-import { type CreateCheckoutSessionInput } from '@affine/graphql';
-import { tracker } from '@affine/track';
-import { OnEvent, Service } from '@toeverything/infra';
+import { type CreateCheckoutSessionInput } from '@bridgeflow/graphql';
+import { tracker } from '@bridgeflow/track';
+import { OnEvent, Service } from '@kanban-studios/infra';
 
 import { Subscription } from '../entities/subscription';
 import { SubscriptionPrices } from '../entities/subscription-prices';

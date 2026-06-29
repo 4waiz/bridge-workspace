@@ -1,4 +1,4 @@
-import { createEvent } from '@toeverything/infra';
+import { createEvent } from '@kanban-studios/infra';
 
 import type { WorkspaceEngine } from '../entities/engine';
 import type { Workspace } from '../entities/workspace';

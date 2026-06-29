@@ -3,8 +3,8 @@ import {
   getCurrentUserProfileQuery,
   type UpdateUserSettingsInput,
   updateUserSettingsMutation,
-} from '@affine/graphql';
-import { Store } from '@toeverything/infra';
+} from '@bridgeflow/graphql';
+import { Store } from '@kanban-studios/infra';
 
 import type { GraphQLService } from '../services/graphql';
 

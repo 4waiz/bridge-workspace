@@ -1,4 +1,4 @@
-import { Scope } from '@toeverything/infra';
+import { Scope } from '@kanban-studios/infra';
 
 import type { Editor } from '../entities/editor';
 

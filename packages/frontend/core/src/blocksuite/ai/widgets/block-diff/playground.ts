@@ -1,16 +1,16 @@
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import { WidgetComponent, WidgetViewExtension } from '@blocksuite/affine/std';
-import type { Store } from '@blocksuite/affine/store';
-import { createLitPortal } from '@blocksuite/affine-components/portal';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { WidgetComponent, WidgetViewExtension } from '@blocksuite/bridgeflow/std';
+import type { Store } from '@blocksuite/bridgeflow/store';
+import { createLitPortal } from '@blocksuite/bridgeflow-components/portal';
 import { css, html, LitElement } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { literal, unsafeStatic } from 'lit/static-html.js';
 
 import { BlockDiffProvider } from '../../services/block-diff';
 
-export const AFFINE_BLOCK_DIFF_PLAYGROUND = 'affine-block-diff-playground';
-export const AFFINE_BLOCK_DIFF_PLAYGROUND_MODAL =
-  'affine-block-diff-playground-modal';
+export const BRIDGEFLOW_BLOCK_DIFF_PLAYGROUND = 'bridgeflow-block-diff-playground';
+export const BRIDGEFLOW_BLOCK_DIFF_PLAYGROUND_MODAL =
+  'bridgeflow-block-diff-playground-modal';
 
 export class BlockDiffPlaygroundModal extends WithDisposable(LitElement) {
   static override styles = css`
@@ -188,11 +188,11 @@ export class BlockDiffPlayground extends WidgetComponent {
 
     createLitPortal({
       template: html`
-        <affine-block-diff-playground-modal
+        <bridgeflow-block-diff-playground-modal
           .diffService=${this.diffService}
           .store=${this.std.store}
           .onClose=${this.handleClose}
-        ></affine-block-diff-playground-modal>
+        ></bridgeflow-block-diff-playground-modal>
       `,
       container: this.host,
       computePosition: {
@@ -224,7 +224,7 @@ export class BlockDiffPlayground extends WidgetComponent {
 }
 
 export const blockDiffPlayground = WidgetViewExtension(
-  'affine:page',
-  AFFINE_BLOCK_DIFF_PLAYGROUND,
-  literal`${unsafeStatic(AFFINE_BLOCK_DIFF_PLAYGROUND)}`
+  'bridgeflow:page',
+  BRIDGEFLOW_BLOCK_DIFF_PLAYGROUND,
+  literal`${unsafeStatic(BRIDGEFLOW_BLOCK_DIFF_PLAYGROUND)}`
 );

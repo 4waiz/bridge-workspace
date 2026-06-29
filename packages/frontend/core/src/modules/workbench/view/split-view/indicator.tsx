@@ -1,6 +1,6 @@
-import type { MenuProps } from '@affine/component';
-import { Menu, Tooltip } from '@affine/component';
-import { useI18n } from '@affine/i18n';
+import type { MenuProps } from '@bridgeflow/component';
+import { Menu, Tooltip } from '@bridgeflow/component';
+import { useI18n } from '@bridgeflow/i18n';
 import clsx from 'clsx';
 import type { HTMLAttributes, MouseEventHandler } from 'react';
 import { forwardRef, memo, useCallback, useMemo, useState } from 'react';
@@ -108,7 +108,7 @@ export const SplitViewIndicator = memo(
             <div className={styles.menuTrigger} />
           </Menu>
           <Tooltip
-            content={t['com.affine.split-view-drag-handle.tooltip']()}
+            content={t['com.bridgeflow.split-view-drag-handle.tooltip']()}
             side="bottom"
           >
             <SplitViewDragHandle

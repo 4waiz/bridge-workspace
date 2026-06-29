@@ -1,4 +1,4 @@
-import type { GetWorkspacePageByIdQuery, PublicDocMode } from '@affine/graphql';
+import type { GetWorkspacePageByIdQuery, PublicDocMode } from '@bridgeflow/graphql';
 import {
   catchErrorInto,
   effect,
@@ -9,7 +9,7 @@ import {
   onComplete,
   onStart,
   smartRetry,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { switchMap } from 'rxjs';
 
 import type { DocService } from '../../doc';

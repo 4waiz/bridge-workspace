@@ -1,20 +1,20 @@
-import { VirtualKeyboardProvider } from '@affine/core/mobile/modules/virtual-keyboard';
-import { globalVars } from '@affine/core/mobile/styles/variables.css';
-import type { Container } from '@blocksuite/affine/global/di';
-import { DisposableGroup } from '@blocksuite/affine/global/disposable';
+import { VirtualKeyboardProvider } from '@bridgeflow/core/mobile/modules/virtual-keyboard';
+import { globalVars } from '@bridgeflow/core/mobile/styles/variables.css';
+import type { Container } from '@blocksuite/bridgeflow/global/di';
+import { DisposableGroup } from '@blocksuite/bridgeflow/global/disposable';
 import {
   VirtualKeyboardProvider as BSVirtualKeyboardProvider,
   type VirtualKeyboardProviderWithAction,
-} from '@blocksuite/affine/shared/services';
-import { LifeCycleWatcher } from '@blocksuite/affine/std';
-import type { ExtensionType } from '@blocksuite/affine/store';
+} from '@blocksuite/bridgeflow/shared/services';
+import { LifeCycleWatcher } from '@blocksuite/bridgeflow/std';
+import type { ExtensionType } from '@blocksuite/bridgeflow/store';
 import { batch, signal } from '@preact/signals-core';
-import type { FrameworkProvider } from '@toeverything/infra';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 
 export function KeyboardToolbarExtension(
   framework: FrameworkProvider
 ): ExtensionType {
-  const affineVirtualKeyboardProvider = framework.get(VirtualKeyboardProvider);
+  const bridgeflowVirtualKeyboardProvider = framework.get(VirtualKeyboardProvider);
 
   class BSVirtualKeyboardService
     extends LifeCycleWatcher
@@ -45,7 +45,7 @@ export function KeyboardToolbarExtension(
 
     override mounted() {
       this._disposables.add(
-        affineVirtualKeyboardProvider.onChange(({ visible, height }) => {
+        bridgeflowVirtualKeyboardProvider.onChange(({ visible, height }) => {
           batch(() => {
             if (visible && this.staticHeight$.peek() !== height) {
               this.staticHeight$.value = height;
@@ -62,8 +62,8 @@ export function KeyboardToolbarExtension(
     }
   }
 
-  if ('show' in affineVirtualKeyboardProvider) {
-    const providerWithAction = affineVirtualKeyboardProvider;
+  if ('show' in bridgeflowVirtualKeyboardProvider) {
+    const providerWithAction = bridgeflowVirtualKeyboardProvider;
 
     class BSVirtualKeyboardServiceWithShowAndHide
       extends BSVirtualKeyboardService

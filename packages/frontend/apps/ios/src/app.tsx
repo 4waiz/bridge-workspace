@@ -1,12 +1,12 @@
-import { getStoreManager } from '@affine/core/blocksuite/manager/store';
-import { AffineContext } from '@affine/core/components/context';
-import { AppFallback } from '@affine/core/mobile/components/app-fallback';
-import { configureMobileModules } from '@affine/core/mobile/modules';
-import { HapticProvider } from '@affine/core/mobile/modules/haptics';
-import { NavigationGestureProvider } from '@affine/core/mobile/modules/navigation-gesture';
-import { VirtualKeyboardProvider } from '@affine/core/mobile/modules/virtual-keyboard';
-import { router } from '@affine/core/mobile/router';
-import { configureCommonModules } from '@affine/core/modules';
+import { getStoreManager } from '@bridgeflow/core/blocksuite/manager/store';
+import { BridgeFlowContext } from '@bridgeflow/core/components/context';
+import { AppFallback } from '@bridgeflow/core/mobile/components/app-fallback';
+import { configureMobileModules } from '@bridgeflow/core/mobile/modules';
+import { HapticProvider } from '@bridgeflow/core/mobile/modules/haptics';
+import { NavigationGestureProvider } from '@bridgeflow/core/mobile/modules/navigation-gesture';
+import { VirtualKeyboardProvider } from '@bridgeflow/core/mobile/modules/virtual-keyboard';
+import { router } from '@bridgeflow/core/mobile/router';
+import { configureCommonModules } from '@bridgeflow/core/modules';
 import {
   AuthProvider,
   AuthService,
@@ -16,49 +16,49 @@ import {
   ServersService,
   SubscriptionService,
   ValidatorProvider,
-} from '@affine/core/modules/cloud';
-import { DocsService } from '@affine/core/modules/doc';
-import { FeatureFlagService } from '@affine/core/modules/feature-flag';
-import { GlobalContextService } from '@affine/core/modules/global-context';
-import { I18nProvider } from '@affine/core/modules/i18n';
-import { LifecycleService } from '@affine/core/modules/lifecycle';
-import { NativePaywallProvider } from '@affine/core/modules/paywall';
+} from '@bridgeflow/core/modules/cloud';
+import { DocsService } from '@bridgeflow/core/modules/doc';
+import { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
+import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
+import { I18nProvider } from '@bridgeflow/core/modules/i18n';
+import { LifecycleService } from '@bridgeflow/core/modules/lifecycle';
+import { NativePaywallProvider } from '@bridgeflow/core/modules/paywall';
 import {
   configureLocalStorageStateStorageImpls,
   NbstoreProvider,
-} from '@affine/core/modules/storage';
-import { PopupWindowProvider } from '@affine/core/modules/url';
-import { ClientSchemeProvider } from '@affine/core/modules/url/providers/client-schema';
+} from '@bridgeflow/core/modules/storage';
+import { PopupWindowProvider } from '@bridgeflow/core/modules/url';
+import { ClientSchemeProvider } from '@bridgeflow/core/modules/url/providers/client-schema';
 import {
   configureBrowserWorkbenchModule,
   WorkbenchService,
-} from '@affine/core/modules/workbench';
+} from '@bridgeflow/core/modules/workbench';
 import {
-  getAFFiNEWorkspaceSchema,
+  getBridgeFlowWorkspaceSchema,
   WorkspacesService,
-} from '@affine/core/modules/workspace';
-import { configureBrowserWorkspaceFlavours } from '@affine/core/modules/workspace-engine';
-import { getWorkerUrl } from '@affine/env/worker';
+} from '@bridgeflow/core/modules/workspace';
+import { configureBrowserWorkspaceFlavours } from '@bridgeflow/core/modules/workspace-engine';
+import { getWorkerUrl } from '@bridgeflow/env/worker';
 import {
   refreshSubscriptionMutation,
   requestApplySubscriptionMutation,
-} from '@affine/graphql';
-import { I18n } from '@affine/i18n';
-import { StoreManagerClient } from '@affine/nbstore/worker/client';
-import { setTelemetryTransport } from '@affine/track';
-import { Container } from '@blocksuite/affine/global/di';
+} from '@bridgeflow/graphql';
+import { I18n } from '@bridgeflow/i18n';
+import { StoreManagerClient } from '@bridgeflow/nbstore/worker/client';
+import { setTelemetryTransport } from '@bridgeflow/track';
+import { Container } from '@blocksuite/bridgeflow/global/di';
 import {
   docLinkBaseURLMiddleware,
   MarkdownAdapter,
   titleMiddleware,
-} from '@blocksuite/affine/shared/adapters';
-import { MarkdownTransformer } from '@blocksuite/affine/widgets/linked-doc';
+} from '@blocksuite/bridgeflow/shared/adapters';
+import { MarkdownTransformer } from '@blocksuite/bridgeflow/widgets/linked-doc';
 import { App as CapacitorApp } from '@capacitor/app';
 import { Browser } from '@capacitor/browser';
 import { Haptics } from '@capacitor/haptics';
 import { Keyboard, KeyboardStyle } from '@capacitor/keyboard';
-import { Framework, FrameworkRoot, getCurrentStore } from '@toeverything/infra';
-import { OpClient } from '@toeverything/infra/op';
+import { Framework, FrameworkRoot, getCurrentStore } from '@kanban-studios/infra';
+import { OpClient } from '@kanban-studios/infra/op';
 import { AsyncCall } from 'async-call-rpc';
 import { AppTrackingTransparency } from 'capacitor-plugin-app-tracking-transparency';
 import { useTheme } from 'next-themes';
@@ -111,7 +111,7 @@ framework.impl(PopupWindowProvider, {
 });
 framework.impl(ClientSchemeProvider, {
   getClientScheme() {
-    return 'affine';
+    return 'bridgeflow';
   },
 });
 framework.impl(ValidatorProvider, {
@@ -328,7 +328,7 @@ const frameworkProvider = framework.provider();
     await workspace.engine.doc.waitForDocReady(workspace.id); // wait for root doc ready
     const docId = await MarkdownTransformer.importMarkdownToDoc({
       collection: workspace.docCollection,
-      schema: getAFFiNEWorkspaceSchema(),
+      schema: getBridgeFlowWorkspaceSchema(),
       markdown,
       extensions: getStoreManager().config.init().value.get('store'),
     });
@@ -475,7 +475,7 @@ export function App() {
     <Suspense>
       <FrameworkRoot framework={frameworkProvider}>
         <I18nProvider>
-          <AffineContext store={getCurrentStore()}>
+          <BridgeFlowContext store={getCurrentStore()}>
             <KeyboardThemeProvider />
             <ModalConfigProvider>
               <BlocksuiteMenuConfigProvider>
@@ -486,7 +486,7 @@ export function App() {
                 />
               </BlocksuiteMenuConfigProvider>
             </ModalConfigProvider>
-          </AffineContext>
+          </BridgeFlowContext>
         </I18nProvider>
       </FrameworkRoot>
     </Suspense>

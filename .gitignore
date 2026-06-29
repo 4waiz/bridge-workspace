@@ -79,7 +79,7 @@ target
 *.node
 tsconfig.node.tsbuildinfo
 lib
-affine.db
+bridgeflow.db
 apps/web/next-routes.conf
 .nx
 

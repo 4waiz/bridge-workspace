@@ -1,5 +1,5 @@
-import { configureQuotaModule } from '@affine/core/modules/quota';
-import { type Framework } from '@toeverything/infra';
+import { configureQuotaModule } from '@bridgeflow/core/modules/quota';
+import { type Framework } from '@kanban-studios/infra';
 
 import {
   configureAIButtonModule,

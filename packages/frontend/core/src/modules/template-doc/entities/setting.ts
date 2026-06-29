@@ -1,4 +1,4 @@
-import { Entity } from '@toeverything/infra';
+import { Entity } from '@kanban-studios/infra';
 
 import type { TemplateDocSettingStore } from '../store/setting';
 

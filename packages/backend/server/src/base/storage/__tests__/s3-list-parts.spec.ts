@@ -1,4 +1,4 @@
-import { parseListPartsXml } from '@affine/s3-compat';
+import { parseListPartsXml } from '@bridgeflow/s3-compat';
 import test from 'ava';
 
 test('parseListPartsXml handles array parts and pagination', t => {

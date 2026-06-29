@@ -18,17 +18,17 @@ const webDir = path.join(
   'apps',
   'electron-renderer'
 );
-const affineWebOutDir = path.join(webDir, 'dist');
-const publicAffineOutDir = path.join(publicDistDir, `web-static`);
+const bridgeflowWebOutDir = path.join(webDir, 'dist');
+const publicBridgeFlowOutDir = path.join(publicDistDir, `web-static`);
 const releaseVersionEnv = process.env.RELEASE_VERSION || '';
 
 console.log('build with following variables', {
   repoRootDir,
   electronRootDir,
   publicDistDir,
-  affineSrcDir: webDir,
-  affineSrcOutDir: affineWebOutDir,
-  publicAffineOutDir,
+  bridgeflowSrcDir: webDir,
+  bridgeflowSrcOutDir: bridgeflowWebOutDir,
+  publicBridgeFlowOutDir,
   releaseVersionEnv,
 });
 
@@ -45,21 +45,21 @@ const cwd = repoRootDir;
 
 // step 1: build web dist
 if (!process.env.SKIP_WEB_BUILD) {
-  spawnSync('yarn', ['affine', '@affine/electron-renderer', 'build'], {
+  spawnSync('yarn', ['bridgeflow', '@bridgeflow/electron-renderer', 'build'], {
     stdio: 'inherit',
     env: process.env,
     cwd,
     shell: true,
   });
 
-  spawnSync('yarn', ['affine', '@affine/electron', 'build'], {
+  spawnSync('yarn', ['bridgeflow', '@bridgeflow/electron', 'build'], {
     stdio: 'inherit',
     env: process.env,
     cwd,
     shell: true,
   });
 
-  await fs.move(affineWebOutDir, publicAffineOutDir, { overwrite: true });
+  await fs.move(bridgeflowWebOutDir, publicBridgeFlowOutDir, { overwrite: true });
 }
 
 // step 2: update app-updater.yml content with build type in resources folder
@@ -67,8 +67,8 @@ if (process.env.BUILD_TYPE === 'internal') {
   const appUpdaterYml = path.join(publicDistDir, 'app-update.yml');
   const appUpdaterYmlContent = await fs.readFile(appUpdaterYml, 'utf-8');
   const newAppUpdaterYmlContent = appUpdaterYmlContent.replace(
-    'AFFiNE',
-    'AFFiNE-Releases'
+    'BridgeFlow',
+    'BridgeFlow-Releases'
   );
   await fs.writeFile(appUpdaterYml, newAppUpdaterYmlContent);
 }

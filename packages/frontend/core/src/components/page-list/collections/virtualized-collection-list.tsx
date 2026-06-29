@@ -1,6 +1,6 @@
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { Trans } from '@affine/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { Trans } from '@bridgeflow/i18n';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useMemo, useRef, useState } from 'react';
 
 import {
@@ -89,7 +89,7 @@ export const VirtualizedCollectionList = ({
         open={showFloatingToolbar}
         content={
           <Trans
-            i18nKey="com.affine.collection.toolbar.selected"
+            i18nKey="com.bridgeflow.collection.toolbar.selected"
             count={selectedCollectionIds.length}
           >
             <div style={{ color: 'var(--affine-text-secondary-color)' }}>

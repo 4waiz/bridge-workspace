@@ -4,16 +4,17 @@ import {
   MenuItem,
   type MenuProps,
   Scrollable,
-} from '@affine/component';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { inferOpenMode } from '@affine/core/utils';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/component';
+import { BRAND_SITE_URL } from '@bridgeflow/component/brand';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { inferOpenMode } from '@bridgeflow/core/utils';
+import { useI18n } from '@bridgeflow/i18n';
 import {
   DualLinkIcon,
   InformationIcon,
   TemplateIcon,
 } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useState } from 'react';
 
 import { type DocRecord, DocsService } from '../../doc';
@@ -61,11 +62,11 @@ const Empty = () => {
     <div className={styles.empty}>
       <InformationIcon className={styles.emptyIcon} />
       <span className={styles.emptyText}>
-        {t['com.affine.template-list.empty']()}
+        {t['com.bridgeflow.template-list.empty']()}
       </span>
       <div className={styles.space} />
       <a
-        href="https://awaizahmed.com"
+        href={BRAND_SITE_URL}
         target="_blank"
         rel="noopener noreferrer"
         className={styles.link}
@@ -168,7 +169,7 @@ export const TemplateListMenuAdd = () => {
       onClick={createNewTemplate}
       onAuxClick={createNewTemplate}
     >
-      {t['com.affine.template-list.create-new']()}
+      {t['com.bridgeflow.template-list.create-new']()}
     </MenuItem>
   );
 };

@@ -1,14 +1,14 @@
-import { notify } from '@affine/component';
-import { SettingRow } from '@affine/component/setting-components';
-import { Button } from '@affine/component/ui/button';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { DesktopApiService } from '@affine/core/modules/desktop-api';
-import type { Workspace } from '@affine/core/modules/workspace';
-import { useI18n } from '@affine/i18n';
-import { universalId } from '@affine/nbstore';
-import track from '@affine/track';
+import { notify } from '@bridgeflow/component';
+import { SettingRow } from '@bridgeflow/component/setting-components';
+import { Button } from '@bridgeflow/component/ui/button';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { DesktopApiService } from '@bridgeflow/core/modules/desktop-api';
+import type { Workspace } from '@bridgeflow/core/modules/workspace';
+import { useI18n } from '@bridgeflow/i18n';
+import { universalId } from '@bridgeflow/nbstore';
+import track from '@bridgeflow/track';
 import { ExportIcon } from '@blocksuite/icons/rc';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useState } from 'react';
 
 interface ExportPanelProps {
@@ -70,7 +70,7 @@ export const DesktopExportPanel = ({ workspace }: ExportPanelProps) => {
       >
         <Button
           variant="primary"
-          data-testid="export-affine-backup"
+          data-testid="export-bridgeflow-backup"
           onClick={onExport}
           disabled={saving}
         >
@@ -90,7 +90,7 @@ export const DesktopExportPanel = ({ workspace }: ExportPanelProps) => {
       >
         <Button
           variant="primary"
-          data-testid="export-affine-full-sync"
+          data-testid="export-bridgeflow-full-sync"
           onClick={fullSync}
           loading={fullSyncing}
           disabled={fullSyncing}
@@ -104,7 +104,7 @@ export const DesktopExportPanel = ({ workspace }: ExportPanelProps) => {
         desc={t['Quick Export Description']()}
       >
         <Button
-          data-testid="export-affine-backup"
+          data-testid="export-bridgeflow-backup"
           onClick={onExport}
           disabled={saving}
         >

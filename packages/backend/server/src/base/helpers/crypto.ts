@@ -22,8 +22,8 @@ import {
 } from '@node-rs/argon2';
 
 import {
-  AFFINE_PRO_LICENSE_AES_KEY,
-  AFFINE_PRO_PUBLIC_KEY,
+  BRIDGEFLOW_PRO_LICENSE_AES_KEY,
+  BRIDGEFLOW_PRO_PUBLIC_KEY,
 } from '../../native';
 import { Config } from '../config';
 import { OnEvent } from '../event';
@@ -78,13 +78,13 @@ export class CryptoHelper implements OnModuleInit {
 
   private previousPublicKeys: KeyObject[] = [];
 
-  AFFiNEProPublicKey: Buffer | null = null;
-  AFFiNEProLicenseAESKey: Buffer | null = null;
+  BridgeFlowProPublicKey: Buffer | null = null;
+  BridgeFlowProLicenseAESKey: Buffer | null = null;
 
   onModuleInit() {
     if (env.selfhosted) {
-      this.AFFiNEProPublicKey = this.loadAFFiNEProPublicKey();
-      this.AFFiNEProLicenseAESKey = this.loadAFFiNEProLicenseAESKey();
+      this.BridgeFlowProPublicKey = this.loadBridgeFlowProPublicKey();
+      this.BridgeFlowProLicenseAESKey = this.loadBridgeFlowProLicenseAESKey();
     }
   }
 
@@ -306,31 +306,31 @@ export class CryptoHelper implements OnModuleInit {
     return createHash('sha256').update(data).digest();
   }
 
-  private loadAFFiNEProPublicKey() {
-    if (AFFINE_PRO_PUBLIC_KEY) {
-      return Buffer.from(AFFINE_PRO_PUBLIC_KEY);
+  private loadBridgeFlowProPublicKey() {
+    if (BRIDGEFLOW_PRO_PUBLIC_KEY) {
+      return Buffer.from(BRIDGEFLOW_PRO_PUBLIC_KEY);
     } else {
-      this.logger.warn('AFFINE_PRO_PUBLIC_KEY is not set at compile time.');
+      this.logger.warn('BRIDGEFLOW_PRO_PUBLIC_KEY is not set at compile time.');
     }
 
-    if (!env.prod && process.env.AFFiNE_PRO_PUBLIC_KEY) {
-      return Buffer.from(process.env.AFFiNE_PRO_PUBLIC_KEY);
+    if (!env.prod && process.env.BridgeFlow_PRO_PUBLIC_KEY) {
+      return Buffer.from(process.env.BridgeFlow_PRO_PUBLIC_KEY);
     }
 
     return null;
   }
 
-  private loadAFFiNEProLicenseAESKey() {
-    if (AFFINE_PRO_LICENSE_AES_KEY) {
-      return this.sha256(AFFINE_PRO_LICENSE_AES_KEY);
+  private loadBridgeFlowProLicenseAESKey() {
+    if (BRIDGEFLOW_PRO_LICENSE_AES_KEY) {
+      return this.sha256(BRIDGEFLOW_PRO_LICENSE_AES_KEY);
     } else {
       this.logger.warn(
-        'AFFINE_PRO_LICENSE_AES_KEY is not set at compile time.'
+        'BRIDGEFLOW_PRO_LICENSE_AES_KEY is not set at compile time.'
       );
     }
 
-    if (!env.prod && process.env.AFFiNE_PRO_LICENSE_AES_KEY) {
-      return this.sha256(process.env.AFFiNE_PRO_LICENSE_AES_KEY);
+    if (!env.prod && process.env.BridgeFlow_PRO_LICENSE_AES_KEY) {
+      return this.sha256(process.env.BridgeFlow_PRO_LICENSE_AES_KEY);
     }
 
     return null;

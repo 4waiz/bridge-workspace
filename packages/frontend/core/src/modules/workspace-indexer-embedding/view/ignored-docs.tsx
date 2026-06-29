@@ -1,8 +1,8 @@
-import { Loading } from '@affine/component';
-import { DocsService } from '@affine/core/modules/doc';
-import { DocDisplayMetaService } from '@affine/core/modules/doc-display-meta';
-import { i18nTime } from '@affine/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { Loading } from '@bridgeflow/component';
+import { DocsService } from '@bridgeflow/core/modules/doc';
+import { DocDisplayMetaService } from '@bridgeflow/core/modules/doc-display-meta';
+import { i18nTime } from '@bridgeflow/i18n';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import type React from 'react';
 
 import type { IgnoredDoc } from '../types';

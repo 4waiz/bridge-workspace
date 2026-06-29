@@ -9,7 +9,7 @@ import {
   revokeMemberPermissionMutation,
   WorkspaceInviteLinkExpireTime,
   WorkspaceMemberStatus,
-} from '@affine/graphql';
+} from '@bridgeflow/graphql';
 import { faker } from '@faker-js/faker';
 
 import { Models } from '../../../models';

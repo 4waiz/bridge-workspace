@@ -2,11 +2,11 @@ import {
   RadioGroup,
   type RadioItem,
   useMobileMenuController,
-} from '@affine/component';
-import { EditorService } from '@affine/core/modules/editor';
-import track from '@affine/track';
-import type { DocMode } from '@blocksuite/affine/model';
-import { useLiveData, useService } from '@toeverything/infra';
+} from '@bridgeflow/component';
+import { EditorService } from '@bridgeflow/core/modules/editor';
+import track from '@bridgeflow/track';
+import type { DocMode } from '@blocksuite/bridgeflow/model';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import * as styles from './mode-switch.css';

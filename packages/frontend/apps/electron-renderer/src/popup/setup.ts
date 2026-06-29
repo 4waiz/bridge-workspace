@@ -1,2 +1,2 @@
-import '@affine/core/bootstrap/electron';
-import '@affine/component/theme';
+import '@bridgeflow/core/bootstrap/electron';
+import '@bridgeflow/component/theme';

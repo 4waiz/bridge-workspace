@@ -1,10 +1,10 @@
-import { Button, Tooltip } from '@affine/component';
-import { SettingRow } from '@affine/component/setting-components';
-import { AffineErrorBoundary } from '@affine/core/components/affine/affine-error-boundary';
-import { useWorkspaceInfo } from '@affine/core/components/hooks/use-workspace-info';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { useI18n } from '@affine/i18n';
-import { useService } from '@toeverything/infra';
+import { Button, Tooltip } from '@bridgeflow/component';
+import { SettingRow } from '@bridgeflow/component/setting-components';
+import { BridgeFlowErrorBoundary } from '@bridgeflow/core/components/bridgeflow/bridgeflow-error-boundary';
+import { useWorkspaceInfo } from '@bridgeflow/core/components/hooks/use-workspace-info';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { useI18n } from '@bridgeflow/i18n';
+import { useService } from '@kanban-studios/infra';
 import type { ReactElement } from 'react';
 
 import type { SettingState } from '../../types';
@@ -25,12 +25,12 @@ export const MembersPanel = ({
     return <MembersPanelLocal onCloseSetting={onCloseSetting} />;
   }
   return (
-    <AffineErrorBoundary>
+    <BridgeFlowErrorBoundary>
       <CloudWorkspaceMembersPanel
         onChangeSettingState={onChangeSettingState}
         isTeam={isTeam}
       />
-    </AffineErrorBoundary>
+    </BridgeFlowErrorBoundary>
   );
 };
 
@@ -42,7 +42,7 @@ const MembersPanelLocal = ({
   const t = useI18n();
   return (
     <div className={styles.localMembersPanel}>
-      <Tooltip content={t['com.affine.settings.member-tooltip']()}>
+      <Tooltip content={t['com.bridgeflow.settings.member-tooltip']()}>
         <div className={styles.fakeWrapper}>
           <SettingRow name={`${t['Members']()} (0)`} desc={t['Members hint']()}>
             <Button>{t['Invite Members']()}</Button>

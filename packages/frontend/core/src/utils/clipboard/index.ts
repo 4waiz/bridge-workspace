@@ -1,4 +1,4 @@
-import { type Clipboard as BlockStdScopeClipboard } from '@blocksuite/affine/std';
+import { type Clipboard as BlockStdScopeClipboard } from '@blocksuite/bridgeflow/std';
 
 import { fakeCopyAction } from './fake';
 

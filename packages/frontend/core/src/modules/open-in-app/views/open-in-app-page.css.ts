@@ -9,7 +9,7 @@ export const root = style({
   fontSize: cssVar('fontBase'),
   position: 'relative',
 });
-export const affineLogo = style({
+export const bridgeflowLogo = style({
   color: 'inherit',
 });
 export const topNav = style({

@@ -1,5 +1,5 @@
-import type { WorkspacePropertyService } from '@affine/core/modules/workspace-property';
-import { Service } from '@toeverything/infra';
+import type { WorkspacePropertyService } from '@bridgeflow/core/modules/workspace-property';
+import { Service } from '@kanban-studios/infra';
 import type { Observable } from 'rxjs';
 import { switchMap } from 'rxjs';
 

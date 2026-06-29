@@ -1,21 +1,21 @@
 import './setup-worker';
 
-import { broadcastChannelStorages } from '@affine/nbstore/broadcast-channel';
+import { broadcastChannelStorages } from '@bridgeflow/nbstore/broadcast-channel';
 import {
   cloudStorages,
   configureSocketAuthMethod,
-} from '@affine/nbstore/cloud';
-import { idbStoragesIndexerOnly } from '@affine/nbstore/idb';
+} from '@bridgeflow/nbstore/cloud';
+import { idbStoragesIndexerOnly } from '@bridgeflow/nbstore/idb';
 import {
   bindNativeDBApis,
   type NativeDBApis,
   sqliteStorages,
-} from '@affine/nbstore/sqlite';
+} from '@bridgeflow/nbstore/sqlite';
 import {
   StoreManagerConsumer,
   type WorkerManagerOps,
-} from '@affine/nbstore/worker/consumer';
-import { type MessageCommunicapable, OpConsumer } from '@toeverything/infra/op';
+} from '@bridgeflow/nbstore/worker/consumer';
+import { type MessageCommunicapable, OpConsumer } from '@kanban-studios/infra/op';
 import { AsyncCall } from 'async-call-rpc';
 
 import { readEndpointToken } from './proxy';

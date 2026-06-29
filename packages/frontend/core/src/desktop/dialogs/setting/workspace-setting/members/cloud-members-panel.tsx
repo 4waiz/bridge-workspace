@@ -1,32 +1,32 @@
-import { Button, Loading, notify, useConfirmModal } from '@affine/component';
+import { Button, Loading, notify, useConfirmModal } from '@bridgeflow/component';
 import {
   InviteTeamMemberModal,
   type InviteTeamMemberModalProps,
   MemberLimitModal,
-} from '@affine/component/member-components';
-import { SettingRow } from '@affine/component/setting-components';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { Upload } from '@affine/core/components/pure/file-upload';
+} from '@bridgeflow/component/member-components';
+import { SettingRow } from '@bridgeflow/component/setting-components';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { Upload } from '@bridgeflow/core/components/pure/file-upload';
 import {
   ServerService,
   SubscriptionService,
   WorkspaceSubscriptionService,
-} from '@affine/core/modules/cloud';
+} from '@bridgeflow/core/modules/cloud';
 import {
   WorkspaceMembersService,
   WorkspacePermissionService,
-} from '@affine/core/modules/permissions';
-import { WorkspaceQuotaService } from '@affine/core/modules/quota';
-import { WorkspaceShareSettingService } from '@affine/core/modules/share-setting';
-import { copyTextToClipboard } from '@affine/core/utils/clipboard';
-import { emailRegex } from '@affine/core/utils/email-regex';
-import { UserFriendlyError } from '@affine/error';
-import type { WorkspaceInviteLinkExpireTime } from '@affine/graphql';
-import { ServerDeploymentType, SubscriptionPlan } from '@affine/graphql';
-import { useI18n } from '@affine/i18n';
-import { track } from '@affine/track';
+} from '@bridgeflow/core/modules/permissions';
+import { WorkspaceQuotaService } from '@bridgeflow/core/modules/quota';
+import { WorkspaceShareSettingService } from '@bridgeflow/core/modules/share-setting';
+import { copyTextToClipboard } from '@bridgeflow/core/utils/clipboard';
+import { emailRegex } from '@bridgeflow/core/utils/email-regex';
+import { UserFriendlyError } from '@bridgeflow/error';
+import type { WorkspaceInviteLinkExpireTime } from '@bridgeflow/graphql';
+import { ServerDeploymentType, SubscriptionPlan } from '@bridgeflow/graphql';
+import { useI18n } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
 import { ExportIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { nanoid } from 'nanoid';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
@@ -122,8 +122,8 @@ export const CloudWorkspaceMembersPanel = ({
       setIdempotencyKey(nanoid());
       closeConfirmModal();
       notify.success({
-        title: t['com.affine.payment.resume.success.title'](),
-        message: t['com.affine.payment.resume.success.team.message'](),
+        title: t['com.bridgeflow.payment.resume.success.title'](),
+        message: t['com.bridgeflow.payment.resume.success.team.message'](),
       });
     } catch (err) {
       const error = UserFriendlyError.fromAny(err);
@@ -138,15 +138,15 @@ export const CloudWorkspaceMembersPanel = ({
   const openInviteModal = useCallback(() => {
     if (isTeam && workspaceSubscription?.canceledAt) {
       openConfirmModal({
-        title: t['com.affine.payment.member.team.retry-payment.title'](),
+        title: t['com.bridgeflow.payment.member.team.retry-payment.title'](),
         description:
           t[
-            `com.affine.payment.member.team.disabled-subscription.${isOwner ? 'owner' : 'admin'}.description`
+            `com.bridgeflow.payment.member.team.disabled-subscription.${isOwner ? 'owner' : 'admin'}.description`
           ](),
         confirmText:
           t[
             isOwner
-              ? 'com.affine.payment.member.team.disabled-subscription.resume-subscription'
+              ? 'com.bridgeflow.payment.member.team.disabled-subscription.resume-subscription'
               : 'Got it'
           ](),
         cancelText: t['Cancel'](),
@@ -215,7 +215,7 @@ export const CloudWorkspaceMembersPanel = ({
       }, []);
       if (results) {
         notify({
-          title: t['com.affine.payment.member.team.invite.notify.title']({
+          title: t['com.bridgeflow.payment.member.team.invite.notify.title']({
             successCount: (
               uniqueEmails.length - unSuccessInvites.length
             ).toString(),
@@ -256,18 +256,18 @@ export const CloudWorkspaceMembersPanel = ({
     if (!workspaceQuota) return null;
 
     if (isTeam) {
-      return <span>{t['com.affine.payment.member.team.description']()}</span>;
+      return <span>{t['com.bridgeflow.payment.member.team.description']()}</span>;
     }
     return (
       <span>
-        {t['com.affine.payment.member.description2']()}
+        {t['com.bridgeflow.payment.member.description2']()}
         {hasPaymentFeature && isOwner ? (
           <div
             className={styles.goUpgradeWrapper}
             onClick={handleUpgradeConfirm}
           >
             <span className={styles.goUpgrade}>
-              {t['com.affine.payment.member.description.choose-plan']()}
+              {t['com.bridgeflow.payment.member.description.choose-plan']()}
             </span>
           </div>
         ) : null}
@@ -358,7 +358,7 @@ const NotifyMessage = ({
 
   return (
     <div>
-      {t['com.affine.payment.member.team.invite.notify.fail-message']()}
+      {t['com.bridgeflow.payment.member.team.invite.notify.fail-message']()}
       {unSuccessInvites.map((email, index) => (
         <div key={`${index}:${email}`}>{email}</div>
       ))}
@@ -373,7 +373,7 @@ export const MembersPanelFallback = () => {
     <>
       <SettingRow
         name={t['Members']()}
-        desc={t['com.affine.payment.member.description2']()}
+        desc={t['com.bridgeflow.payment.member.description2']()}
       />
       <div className={styles.membersPanel}>
         <MemberListFallback memberCount={1} />
@@ -401,7 +401,7 @@ const MemberListFallback = ({ memberCount }: { memberCount?: number }) => {
       className={styles.membersFallback}
     >
       <Loading size={20} />
-      <span>{t['com.affine.settings.member.loading']()}</span>
+      <span>{t['com.bridgeflow.settings.member.loading']()}</span>
     </div>
   );
 };
@@ -416,7 +416,7 @@ const ImportCSV = ({ onImport }: { onImport: (file: File) => void }) => {
         prefix={<ExportIcon />}
         variant="secondary"
       >
-        {t['com.affine.payment.member.team.invite.import-csv']()}
+        {t['com.bridgeflow.payment.member.team.invite.import-csv']()}
       </Button>
     </Upload>
   );

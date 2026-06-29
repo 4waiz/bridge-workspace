@@ -1,11 +1,11 @@
-import { Button, IconButton, Menu, MenuItem } from '@affine/component';
-import { DocDisplayMetaService } from '@affine/core/modules/doc-display-meta';
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { stopPropagation } from '@affine/core/utils';
-import { useI18n } from '@affine/i18n';
-import { EmbedSyncedDocBlockComponent } from '@blocksuite/affine/blocks/embed-doc';
-import { isPeekable, peek } from '@blocksuite/affine/components/peek';
-import type { EmbedSyncedDocModel } from '@blocksuite/affine-model';
+import { Button, IconButton, Menu, MenuItem } from '@bridgeflow/component';
+import { DocDisplayMetaService } from '@bridgeflow/core/modules/doc-display-meta';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { stopPropagation } from '@bridgeflow/core/utils';
+import { useI18n } from '@bridgeflow/i18n';
+import { EmbedSyncedDocBlockComponent } from '@blocksuite/bridgeflow/blocks/embed-doc';
+import { isPeekable, peek } from '@blocksuite/bridgeflow/components/peek';
+import type { EmbedSyncedDocModel } from '@blocksuite/bridgeflow-model';
 import {
   ArrowDownSmallIcon,
   CenterPeekIcon,
@@ -18,7 +18,7 @@ import {
 } from '@blocksuite/icons/rc';
 import type { BlockStdScope } from '@blocksuite/std';
 import { batch } from '@preact/signals-core';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { CopyLinkButton, DocInfoButton } from './common';
@@ -57,8 +57,8 @@ const ToggleButton = ({ model }: { model: EmbedSyncedDocModel }) => {
       onClick={toggle}
       tooltip={
         isFolded
-          ? t['com.affine.editor.edgeless-embed-synced-doc-header.unfold']()
-          : t['com.affine.editor.edgeless-embed-synced-doc-header.fold']()
+          ? t['com.bridgeflow.editor.edgeless-embed-synced-doc-header.unfold']()
+          : t['com.bridgeflow.editor.edgeless-embed-synced-doc-header.fold']()
       }
       icon={isFolded ? <ToggleRightIcon /> : <ToggleDownIcon />}
     />
@@ -144,7 +144,7 @@ const OpenButton = ({
         prefix={<ExpandFullIcon />}
       >
         <span className={styles.buttonText}>
-          {t['com.affine.editor.edgeless-embed-synced-doc-header.open']()}
+          {t['com.bridgeflow.editor.edgeless-embed-synced-doc-header.open']()}
         </span>
       </Button>
       <MoreMenu model={model} std={std} />
@@ -166,7 +166,7 @@ const MoreMenu = ({
     return [
       {
         type: 'open-in-active-view',
-        label: t['com.affine.peek-view-controls.open-doc'](),
+        label: t['com.bridgeflow.peek-view-controls.open-doc'](),
         icon: <ExpandFullIcon />,
         onClick: () => {
           workbench.openDoc(model.props.pageId);
@@ -175,7 +175,7 @@ const MoreMenu = ({
       },
       {
         type: 'open-in-center-peek',
-        label: t['com.affine.peek-view-controls.open-doc-in-center-peek'](),
+        label: t['com.bridgeflow.peek-view-controls.open-doc-in-center-peek'](),
         icon: <CenterPeekIcon />,
         onClick: () => {
           const block = std.view.getBlock(model.id);
@@ -191,7 +191,7 @@ const MoreMenu = ({
       },
       {
         type: 'open-in-split-view',
-        label: t['com.affine.peek-view-controls.open-doc-in-split-view'](),
+        label: t['com.bridgeflow.peek-view-controls.open-doc-in-split-view'](),
         icon: <SplitViewIcon />,
         onClick: () => {
           workbench.openDoc(model.props.pageId, { at: 'beside' });
@@ -200,7 +200,7 @@ const MoreMenu = ({
       },
       {
         type: 'open-in-new-tab',
-        label: t['com.affine.peek-view-controls.open-doc-in-new-tab'](),
+        label: t['com.bridgeflow.peek-view-controls.open-doc-in-new-tab'](),
         icon: <OpenInNewIcon />,
         onClick: () => {
           workbench.openDoc(model.props.pageId, {

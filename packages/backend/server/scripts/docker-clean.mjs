@@ -8,8 +8,8 @@ const DEFAULT_APP_ROOT = path.resolve(SCRIPT_DIR, '..');
 const APP_ROOT = process.env.APP_ROOT ?? DEFAULT_APP_ROOT;
 const TARGETARCH = process.env.TARGETARCH ?? '';
 const TARGETVARIANT = process.env.TARGETVARIANT ?? '';
-const ALLOW_RUN = process.env.AFFINE_DOCKER_CLEAN === '1';
-const VERBOSE = process.env.AFFINE_DOCKER_CLEAN_VERBOSE === '1';
+const ALLOW_RUN = process.env.BRIDGEFLOW_DOCKER_CLEAN === '1';
+const VERBOSE = process.env.BRIDGEFLOW_DOCKER_CLEAN_VERBOSE === '1';
 
 function log(message) {
   console.log(`[docker-clean] ${message}`);
@@ -314,7 +314,7 @@ const targetKey = normalizeTargetKey(TARGETARCH, TARGETVARIANT);
 log(`root=${APP_ROOT} target=${targetKey || '(unknown)'}`);
 
 if (!ALLOW_RUN) {
-  log('skip (set AFFINE_DOCKER_CLEAN=1 to enable)');
+  log('skip (set BRIDGEFLOW_DOCKER_CLEAN=1 to enable)');
   process.exit(0);
 }
 

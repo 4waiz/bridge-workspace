@@ -1,6 +1,6 @@
-import { toggleGeneralAIOnboarding } from '@affine/core/components/affine/ai-onboarding/apis';
-import type { AuthAccountInfo, AuthService } from '@affine/core/modules/cloud';
-import type { GlobalDialogService } from '@affine/core/modules/dialogs';
+import { toggleGeneralAIOnboarding } from '@bridgeflow/core/components/bridgeflow/ai-onboarding/apis';
+import type { AuthAccountInfo, AuthService } from '@bridgeflow/core/modules/cloud';
+import type { GlobalDialogService } from '@bridgeflow/core/modules/dialogs';
 import {
   type AddContextFileInput,
   ContextCategories,
@@ -9,7 +9,7 @@ import {
   type QueryChatSessionsInput,
   type RequestOptions,
   type UpdateChatSessionInput,
-} from '@affine/graphql';
+} from '@bridgeflow/graphql';
 import { z } from 'zod';
 
 import { AIProvider } from './ai-provider';
@@ -86,7 +86,7 @@ export function setupAIProvider(
     const { input, contexts } = options;
 
     const sessionId = await createSession({
-      promptName: 'Chat With AFFiNE AI',
+      promptName: 'Chat With BridgeFlow AI',
       ...options,
     });
     return textToText({

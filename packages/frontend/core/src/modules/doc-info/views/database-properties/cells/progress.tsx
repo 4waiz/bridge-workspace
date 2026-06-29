@@ -1,8 +1,8 @@
-import { Progress, PropertyValue } from '@affine/component';
-import { ConfigModal } from '@affine/core/components/mobile';
+import { Progress, PropertyValue } from '@bridgeflow/component';
+import { ConfigModal } from '@bridgeflow/core/components/mobile';
 import { ProgressIcon } from '@blocksuite/icons/rc';
-import type { LiveData } from '@toeverything/infra';
-import { useLiveData } from '@toeverything/infra';
+import type { LiveData } from '@kanban-studios/infra';
+import { useLiveData } from '@kanban-studios/infra';
 import { useEffect, useState } from 'react';
 
 import type { DatabaseCellRendererProps } from '../../../types';

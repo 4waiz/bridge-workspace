@@ -1,10 +1,10 @@
-import { getBaseFontStyleOptions } from '@affine/core/desktop/dialogs/setting/general-setting/editor/general';
+import { getBaseFontStyleOptions } from '@bridgeflow/core/desktop/dialogs/setting/general-setting/editor/general';
 import {
   EditorSettingService,
   type FontFamily,
-} from '@affine/core/modules/editor-setting';
-import { useI18n } from '@affine/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+} from '@bridgeflow/core/modules/editor-setting';
+import { useI18n } from '@bridgeflow/i18n';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useMemo } from 'react';
 
 import { SettingDropdownSelect } from '../dropdown-select';
@@ -26,7 +26,7 @@ export const FontStyleSetting = () => {
   );
 
   return (
-    <RowLayout label={t['com.affine.mobile.setting.appearance.font']()}>
+    <RowLayout label={t['com.bridgeflow.mobile.setting.appearance.font']()}>
       <SettingDropdownSelect<FontFamily>
         options={options}
         value={fontFamily}
