@@ -13,13 +13,26 @@ const FEATURES = [
 
 export function BridgeAuthPage() {
   const [mode, setMode] = useState<Mode>('signin');
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(() => {
+    try {
+      return localStorage.getItem('bridge-flow-email') ?? '';
+    } catch {
+      return '';
+    }
+  });
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
   const [showPw, setShowPw] = useState(false);
+  const [remember, setRemember] = useState(() => {
+    try {
+      return localStorage.getItem('bridge-flow-remember') !== '0';
+    } catch {
+      return true;
+    }
+  });
 
   const switchMode = (m: Mode) => {
     setMode(m);
@@ -46,6 +59,13 @@ export function BridgeAuthPage() {
     }
 
     setLoading(true);
+    try {
+      localStorage.setItem('bridge-flow-remember', remember ? '1' : '0');
+      if (remember) localStorage.setItem('bridge-flow-email', email);
+      else localStorage.removeItem('bridge-flow-email');
+    } catch {
+      /* ignore storage errors */
+    }
     try {
       if (mode === 'signin') {
         const { error } = await supabase.auth.signInWithPassword({
@@ -109,7 +129,10 @@ export function BridgeAuthPage() {
           <img className="bfauth-wordmark" src={BRIDGE_WORDMARK_LIGHT} alt="BRIDGE" />
         </div>
         <div className="bfauth-brand-mid">
-          <p className="bfauth-eyebrow">BRIDGE Flow — AI Innovation Canvas</p>
+          <p className="bfauth-eyebrow">
+            <span className="bfauth-brand-name">BRIDGE</span>{' '}
+            <span className="bfauth-brand-flow">Flow</span> — AI Innovation Canvas
+          </p>
           <h1 className="bfauth-headline">
             Where ideas
             <br />
@@ -214,6 +237,18 @@ export function BridgeAuthPage() {
               </label>
             )}
 
+            {mode === 'signin' && (
+              <label className="bfauth-remember">
+                <input
+                  type="checkbox"
+                  checked={remember}
+                  onChange={e => setRemember(e.target.checked)}
+                  disabled={loading}
+                />
+                <span>Remember me</span>
+              </label>
+            )}
+
             {error && <div className="bfauth-msg bfauth-err">{error}</div>}
             {info && <div className="bfauth-msg bfauth-info">{info}</div>}
 
@@ -274,6 +309,9 @@ const STYLES = `
 .bfauth-wordmark{height:34px;width:auto;display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.25))}
 .bfauth-brand-mid{position:relative;z-index:2;max-width:460px}
 .bfauth-eyebrow{margin:0 0 18px;font-size:14px;font-weight:700;letter-spacing:1.5px;color:#f4a58c}
+@font-face{font-family:'BridgeAuthScript';src:url('/fonts/Kalam-Bold.woff2') format('woff2');font-display:swap;font-weight:700}
+.bfauth-brand-name{font-weight:900;-webkit-text-stroke:.4px currentColor}
+.bfauth-brand-flow{font-family:'BridgeAuthScript','Segoe Print',cursive;color:#f15a29;letter-spacing:0;font-size:1.15em}
 .bfauth-headline{margin:0;font-size:64px;line-height:1.04;font-weight:700;letter-spacing:-.5px}
 .bfauth-accent{color:#f15a29}
 .bfauth-rule{display:block;width:64px;height:4px;background:#f15a29;border-radius:2px;margin:28px 0 30px}
@@ -311,6 +349,8 @@ const STYLES = `
 .bfauth-input:focus{border-color:#f15a29;box-shadow:0 0 0 3px rgba(241,90,41,.16)}
 .bfauth-input:disabled{background:#f3f4f6;cursor:not-allowed}
 .bfauth-pw{position:relative;display:flex;align-items:center;height:48px}
+.bfauth-remember{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;color:#5a616c;cursor:pointer;user-select:none}
+.bfauth-remember input{width:17px;height:17px;accent-color:#f15a29;cursor:pointer}
 .bfauth-eye{position:absolute;right:10px;border:0;background:transparent;color:#8a9099;font-size:12.5px;font-weight:600;
   cursor:pointer;padding:6px;font-family:inherit}
 .bfauth-eye:hover{color:#f15a29}
