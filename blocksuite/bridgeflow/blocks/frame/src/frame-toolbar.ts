@@ -1,4 +1,7 @@
-import { EdgelessCRUDIdentifier } from '@blocksuite/bridgeflow-block-surface';
+import {
+  EdgelessCRUDIdentifier,
+  ExportManager,
+} from '@blocksuite/bridgeflow-block-surface';
 import {
   packColor,
   type PickColorEvent,
@@ -29,6 +32,7 @@ import { mountFrameTitleEditor } from '@blocksuite/bridgeflow-widget-frame-title
 import { Bound } from '@blocksuite/global/gfx';
 import {
   EditIcon,
+  ExportToPdfIcon,
   InsertIntoPageIcon,
   UngroupIcon,
 } from '@blocksuite/icons/lit';
@@ -112,6 +116,26 @@ const builtinSurfaceToolbarConfig = {
         if (!rootBlock) return;
 
         mountFrameTitleEditor(model, rootBlock);
+      },
+    },
+    {
+      id: 'b.export-pdf',
+      label: 'Export to PDF',
+      tooltip: 'Export to PDF',
+      icon: ExportToPdfIcon(),
+      when: ctx => ctx.getSurfaceModelsByType(FrameBlockModel).length === 1,
+      run(ctx) {
+        const model = ctx.getCurrentModelByType(FrameBlockModel);
+        if (!model) return;
+
+        const exportManager = ctx.std.getOptional(ExportManager);
+        if (!exportManager) return;
+
+        toast(ctx.host, 'Exporting frame to PDF…');
+        exportManager.exportFramePdf(model).catch((error: unknown) => {
+          console.error(error);
+          toast(ctx.host, 'Failed to export frame to PDF');
+        });
       },
     },
     {

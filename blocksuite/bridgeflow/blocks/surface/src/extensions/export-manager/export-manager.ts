@@ -518,6 +518,37 @@ export class ExportManager {
     );
   }
 
+  // Export only the given frame (its bounds + contents) to a PDF.
+  async exportFramePdf(frame: GfxBlockElementModel) {
+    const gfx = this.editorHost.std.get(GfxControllerIdentifier);
+    const surfaceBlock = gfx.surfaceComponent as SurfaceBlockComponent | null;
+    if (!surfaceBlock || !(surfaceBlock.renderer instanceof CanvasRenderer)) {
+      return;
+    }
+
+    const [x, y, w, h] = deserializeXYWH(frame.xywh);
+    const canvasImage = await this.edgelessToCanvas(
+      surfaceBlock.renderer,
+      { x, y, w, h },
+      gfx
+    );
+    if (!canvasImage) return;
+
+    const PDFLib = await import('pdf-lib');
+    const pdfDoc = await PDFLib.PDFDocument.create();
+    const page = pdfDoc.addPage([canvasImage.width, canvasImage.height]);
+    const imageEmbed = await pdfDoc.embedPng(canvasImage.toDataURL('PNG'));
+    const { width, height } = imageEmbed.scale(1);
+    page.drawImage(imageEmbed, { x: 0, y: 0, width, height });
+    const pdfBase64 = await pdfDoc.saveAsBase64({ dataUri: true });
+
+    const title =
+      (frame as { props?: { title?: { toString(): string } } }).props?.title
+        ?.toString()
+        .trim() || 'frame';
+    FileExporter.exportFile(title + '.pdf', pdfBase64);
+  }
+
   async exportPng() {
     const rootModel = this.doc.root;
     if (!rootModel) return;
