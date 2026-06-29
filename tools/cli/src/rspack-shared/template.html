@@ -106,8 +106,15 @@
         border-radius: 8px;
       }
 
+      .bridge-welcome__brand-name {
+        font-weight: 900;
+        -webkit-text-stroke: 0.6px currentColor;
+      }
+
       .bridge-welcome__brand-accent {
         color: #ff5622;
+        font-family: 'BridgeWelcomeScript', 'Segoe Print', cursive;
+        letter-spacing: -0.04em;
       }
 
       .bridge-welcome__line {
@@ -284,7 +291,7 @@
       <div class="bridge-welcome__panel">
         <div class="bridge-welcome__brand">
           <img src="/imgs/bridge-logo.png" alt="" aria-hidden="true" />
-          <span>BRIDGE <span class="bridge-welcome__brand-accent">Flow</span></span>
+          <span><span class="bridge-welcome__brand-name">BRIDGE</span> <span class="bridge-welcome__brand-accent">Flow</span></span>
         </div>
         <div class="bridge-welcome__line">
           <span class="bridge-welcome__accent" aria-hidden="true"></span>
@@ -333,9 +340,10 @@
         };
 
         // The app boots in the background while the welcome screen is shown.
-        // We intentionally keep the screen up until the user presses
-        // "Get Started" instead of auto-dismissing on a timer.
         window.__bridgeWelcomeMarkReady = () => {};
+
+        // Show the intro for 4 seconds, then fade it out automatically.
+        window.setTimeout(hide, 4000);
 
         const cta = document.getElementById('bridge-welcome-cta');
         if (cta) {
