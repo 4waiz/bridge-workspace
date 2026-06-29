@@ -127,9 +127,6 @@ export function BridgeAuthPage() {
         </div>
         <div className="bfauth-brand-foot">
           <span>© {new Date().getFullYear()} Kanban Studios</span>
-          <a href="https://kanbanstudios.ae" target="_blank" rel="noreferrer">
-            kanbanstudios.ae
-          </a>
         </div>
         <div className="bfauth-glow" />
         <div className="bfauth-grid" />
