@@ -2,8 +2,30 @@ import type { Session } from '@supabase/supabase-js';
 import { type ReactNode, useEffect, useState } from 'react';
 
 import { BridgeAuthPage } from './bridge-auth';
+import { BridgeProfile } from './bridge-profile';
 import { BRIDGE_ICON } from './logos';
 import { supabase } from './supabase-client';
+
+// Publish a minimal identity for the (core) sidebar avatar to read, without
+// coupling core to the supabase client.
+function publishUser(session: Session | null) {
+  const u = session?.user;
+  (globalThis as any).__bridgeFlowUser = u
+    ? {
+        id: u.id,
+        email: u.email,
+        name:
+          (u.user_metadata?.name as string) ??
+          (u.user_metadata?.full_name as string) ??
+          u.email,
+        avatar:
+          (u.user_metadata?.avatar_url as string) ??
+          (u.user_metadata?.picture as string) ??
+          '',
+      }
+    : null;
+  window.dispatchEvent(new CustomEvent('bridge-user-changed'));
+}
 
 /**
  * Gates the whole app behind Supabase auth. On load:
@@ -20,10 +42,12 @@ export function AuthGate({ children }: { children: ReactNode }) {
     supabase.auth.getSession().then(({ data }) => {
       if (!active) return;
       setSession(data.session);
+      publishUser(data.session);
       setReady(true);
     });
     const { data: sub } = supabase.auth.onAuthStateChange((_event, s) => {
       setSession(s);
+      publishUser(s);
       setReady(true);
     });
     return () => {
@@ -34,7 +58,12 @@ export function AuthGate({ children }: { children: ReactNode }) {
 
   if (!ready) return <AuthSplash />;
   if (!session) return <BridgeAuthPage />;
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <BridgeProfile />
+    </>
+  );
 }
 
 function AuthSplash() {

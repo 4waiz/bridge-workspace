@@ -1,88 +1,47 @@
-import {
-  Avatar,
-  Divider,
-  IconButton,
-  Menu,
-  type MenuProps,
-} from '@bridgeflow/component';
-import {
-  type AuthAccountInfo,
-  AuthService,
-  ServerService,
-} from '@bridgeflow/core/modules/cloud';
-import { GlobalDialogService } from '@bridgeflow/core/modules/dialogs';
-import { useLiveData, useService } from '@kanban-studios/infra';
-import { useCallback } from 'react';
+import { Avatar, IconButton } from '@bridgeflow/component';
+import { useEffect, useState } from 'react';
 
-import { Account } from './account';
-import { AccountMenu } from './account-menu';
-import { AIUsage } from './ai-usage';
-import { CloudUsage } from './cloud-usage';
-import * as styles from './index.css';
-import { TeamList } from './team-list';
-import { UnknownUserIcon } from './unknow-user';
+type BridgeUser = {
+  id: string;
+  email?: string;
+  name?: string;
+  avatar?: string;
+} | null;
 
-export default function UserInfo() {
-  const session = useService(AuthService).session;
-  const account = useLiveData(session.account$);
-  return account ? (
-    <AuthorizedUserInfo account={account} />
-  ) : (
-    <UnauthorizedUserInfo />
-  );
+function readUser(): BridgeUser {
+  return ((globalThis as any).__bridgeFlowUser as BridgeUser) ?? null;
 }
 
-const menuContentOptions: MenuProps['contentOptions'] = {
-  className: styles.operationMenu,
-};
-const AuthorizedUserInfo = ({ account }: { account: AuthAccountInfo }) => {
-  return (
-    <Menu items={<OperationMenu />} contentOptions={menuContentOptions}>
-      <IconButton
-        data-testid="sidebar-user-avatar"
-        variant="plain"
-        size="20"
-        style={{ padding: 0 }}
-        withoutHover
-      >
-        <Avatar size={20} name={account.label} url={account.avatar} />
-      </IconButton>
-    </Menu>
-  );
-};
+/**
+ * Sidebar account avatar. Clicking it opens the BRIDGE Flow profile panel
+ * (Supabase identity). Authentication is handled by the app-level auth gate,
+ * so this no longer touches any cloud sign-in flow.
+ */
+export default function UserInfo() {
+  const [user, setUser] = useState<BridgeUser>(readUser());
 
-const UnauthorizedUserInfo = () => {
-  const globalDialogService = useService(GlobalDialogService);
+  useEffect(() => {
+    const update = () => setUser(readUser());
+    window.addEventListener('bridge-user-changed', update);
+    return () => window.removeEventListener('bridge-user-changed', update);
+  }, []);
 
-  const openSignInModal = useCallback(() => {
-    globalDialogService.open('sign-in', {});
-  }, [globalDialogService]);
+  const label = user?.name || user?.email || 'Account';
+
+  const openProfile = () => {
+    window.dispatchEvent(new CustomEvent('bridge-open-profile'));
+  };
 
   return (
     <IconButton
-      onClick={openSignInModal}
+      onClick={openProfile}
       data-testid="sidebar-user-avatar"
       variant="plain"
       size="20"
+      style={{ padding: 0 }}
+      withoutHover
     >
-      <UnknownUserIcon />
+      <Avatar size={20} name={label} url={user?.avatar} />
     </IconButton>
   );
-};
-
-const OperationMenu = () => {
-  const serverService = useService(ServerService);
-  const serverFeatures = useLiveData(serverService.server.features$);
-
-  return (
-    <>
-      <Account />
-      <Divider />
-      <CloudUsage />
-      {serverFeatures?.copilot ? <AIUsage /> : null}
-      <Divider />
-      <TeamList />
-      <AccountMenu />
-    </>
-  );
-};
+}
