@@ -1,12 +1,3 @@
-import { usePageHelper } from '@bridgeflow/core/blocksuite/block-suite-page-list/utils';
-import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
-import type { DocRecord } from '@bridgeflow/core/modules/doc';
-import { DocsService } from '@bridgeflow/core/modules/doc';
-import { DocDisplayMetaService } from '@bridgeflow/core/modules/doc-display-meta';
-import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
-import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
-import { inferOpenMode } from '@bridgeflow/core/utils';
-import track from '@bridgeflow/track';
 import {
   DatabaseTableViewIcon,
   EdgelessIcon,
@@ -15,6 +6,16 @@ import {
   PlusIcon,
   ViewLayersIcon,
 } from '@blocksuite/icons/rc';
+import { usePageHelper } from '@bridgeflow/core/blocksuite/block-suite-page-list/utils';
+import { buildOkrBoard } from '@bridgeflow/core/blocksuite/templates/okr-board';
+import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
+import type { DocRecord } from '@bridgeflow/core/modules/doc';
+import { DocsService } from '@bridgeflow/core/modules/doc';
+import { DocDisplayMetaService } from '@bridgeflow/core/modules/doc-display-meta';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { inferOpenMode } from '@bridgeflow/core/utils';
+import track from '@bridgeflow/track';
 import { useLiveData, useService } from '@kanban-studios/infra';
 import type { CSSProperties, MouseEvent, ReactNode } from 'react';
 import { memo, useCallback, useMemo, useState } from 'react';
@@ -67,6 +68,14 @@ const TimelineIcon = () => (
     <path d="M4 6h10M4 12h16M4 18h7" />
     <circle cx="17" cy="6" r="1.6" />
     <circle cx="13" cy="18" r="1.6" />
+  </svg>
+);
+
+const TargetIcon = () => (
+  <svg {...svgProps} aria-hidden="true">
+    <circle cx="12" cy="12" r="8" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="12" cy="12" r="0.6" fill="currentColor" />
   </svg>
 );
 
@@ -233,7 +242,10 @@ const TemplateCard = ({ item }: { item: TemplateItem }) => {
         style={{ background: item.color.bg }}
         aria-hidden="true"
       >
-        <span className={styles.templatePreviewIcon} style={{ color: item.color.fg }}>
+        <span
+          className={styles.templatePreviewIcon}
+          style={{ color: item.color.fg }}
+        >
           {item.icon}
         </span>
       </span>
@@ -353,6 +365,23 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
       track.$.navigationPanel.$.createDoc();
     },
     [createEdgeless]
+  );
+
+  const handleCreateOkr = useCallback(
+    (e?: MouseEvent) => {
+      const record = docsService.createDoc({
+        primaryMode: 'edgeless',
+        title: 'OKR Quarterly Plan',
+        docProps: {
+          onStoreLoad: (storeDoc, { surfaceId }) => {
+            buildOkrBoard(storeDoc as never, surfaceId);
+          },
+        },
+      });
+      workbench.openDoc(record.id, { at: inferOpenMode(e) });
+      track.$.navigationPanel.$.createDoc();
+    },
+    [docsService, workbench]
   );
 
   const handleImport = useCallback(() => {
@@ -545,13 +574,58 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
     [handleCreatePage, handleCreateEdgeless]
   );
 
+  const okrItems: TemplateItem[] = useMemo(
+    () => [
+      {
+        id: 'okr-quarterly-plan',
+        icon: <TargetIcon />,
+        title: 'OKR Quarterly Plan',
+        description: 'Objectives, key results & initiatives on one board',
+        uses: '8.7k',
+        color: ICON_COLORS.orange,
+        onClick: handleCreateOkr,
+      },
+    ],
+    [handleCreateOkr]
+  );
+
   const spaceItems: SpaceItem[] = useMemo(
     () => [
-      { id: 'product', name: 'Product', count: '24 boards', color: '#f15a29', onClick: handleViewAll },
-      { id: 'engineering', name: 'Engineering', count: '18 boards', color: '#3884FF', onClick: handleViewAll },
-      { id: 'strategy', name: 'Strategy', count: '9 boards', color: '#865EFF', onClick: handleViewAll },
-      { id: 'research', name: 'Research', count: '12 boards', color: '#2EB85C', onClick: handleViewAll },
-      { id: 'operations', name: 'Operations', count: '7 boards', color: '#00B8D4', onClick: handleViewAll },
+      {
+        id: 'product',
+        name: 'Product',
+        count: '24 boards',
+        color: '#f15a29',
+        onClick: handleViewAll,
+      },
+      {
+        id: 'engineering',
+        name: 'Engineering',
+        count: '18 boards',
+        color: '#3884FF',
+        onClick: handleViewAll,
+      },
+      {
+        id: 'strategy',
+        name: 'Strategy',
+        count: '9 boards',
+        color: '#865EFF',
+        onClick: handleViewAll,
+      },
+      {
+        id: 'research',
+        name: 'Research',
+        count: '12 boards',
+        color: '#2EB85C',
+        onClick: handleViewAll,
+      },
+      {
+        id: 'operations',
+        name: 'Operations',
+        count: '7 boards',
+        color: '#00B8D4',
+        onClick: handleViewAll,
+      },
     ],
     [handleViewAll]
   );
@@ -638,6 +712,18 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
           </div>
           <div className={styles.templatesRow}>
             {templateItems.map(item => (
+              <TemplateCard key={item.id} item={item} />
+            ))}
+          </div>
+        </div>
+
+        {/* OKR */}
+        <div className={styles.sectionWrapper}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>OKR</h2>
+          </div>
+          <div className={styles.templatesRow}>
+            {okrItems.map(item => (
               <TemplateCard key={item.id} item={item} />
             ))}
           </div>

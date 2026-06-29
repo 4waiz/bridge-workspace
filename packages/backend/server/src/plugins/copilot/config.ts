@@ -225,17 +225,22 @@ defineModuleConfig('copilot', {
   scenarios: {
     desc: 'Use custom models in scenarios and override default settings.',
     default: {
-      override_enabled: false,
+      // Use OpenAI for everything. override_enabled must be true for these
+      // per-scenario models to replace the built-in prompt defaults.
+      // NOTE: audio_transcribing stays on Gemini because OpenAI's registered
+      // models here only support text+image input (no audio/Whisper model);
+      // it needs a Gemini key to work, otherwise meeting transcription is off.
+      override_enabled: true,
       scenarios: {
         audio_transcribing: 'gemini-2.5-flash',
-        chat: 'gemini-2.5-flash',
-        embedding: 'gemini-embedding-001',
+        chat: 'gpt-4o',
+        embedding: 'text-embedding-3-small',
         image: 'gpt-image-1',
-        coding: 'claude-sonnet-4-5@20250929',
+        coding: 'gpt-4.1',
         complex_text_generation: 'gpt-5-mini',
         quick_decision_making: 'gpt-5-mini',
-        quick_text_generation: 'gemini-2.5-flash',
-        polish_and_summarize: 'gemini-2.5-flash',
+        quick_text_generation: 'gpt-4o-mini',
+        polish_and_summarize: 'gpt-4o-mini',
       },
     },
   },

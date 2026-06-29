@@ -1,0 +1,18 @@
+# Cloudflare Pages configuration for BRIDGE Flow.
+# Deployed to: https://bridge-flow.pages.dev
+#
+# This project is deployed via direct upload (no Git connection), so the build
+# runs locally / in CI and the resulting `dist` is uploaded with:
+#   wrangler pages deploy packages/frontend/apps/web/dist
+#
+# Build steps (run before deploying):
+#   HUSKY=0 corepack yarn install --mode=skip-build
+#   HUSKY=0 corepack yarn workspace @bridgeflow/templates build
+#   HUSKY=0 PUBLIC_PATH=/ corepack yarn bridgeflow web build
+#
+# SPA routing is handled by packages/frontend/core/public/_redirects, which the
+# bundler copies into the output directory.
+
+compatibility_date     = "2026-06-29"
+name                   = "bridge-flow"
+pages_build_output_dir = "packages/frontend/apps/web/dist"

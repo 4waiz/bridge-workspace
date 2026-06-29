@@ -1,7 +1,3 @@
-import { MenuItem, MenuSeparator, MenuSub } from '@bridgeflow/component';
-import { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
-import { useI18n } from '@bridgeflow/i18n';
-import { track } from '@bridgeflow/track';
 import {
   ExportIcon,
   ExportToHtmlIcon,
@@ -10,6 +6,10 @@ import {
   PageIcon,
   PrinterIcon,
 } from '@blocksuite/icons/rc';
+import { MenuItem, MenuSeparator, MenuSub } from '@bridgeflow/component';
+import { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
+import { useI18n } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
 import { useLiveData, useService } from '@kanban-studios/infra';
 import type { ReactNode } from 'react';
 import { useCallback } from 'react';
@@ -26,7 +26,14 @@ interface ExportMenuItemProps<T> {
 
 interface ExportProps {
   exportHandler: (
-    type: 'pdf' | 'html' | 'png' | 'markdown' | 'snapshot' | 'pdf-export'
+    type:
+      | 'pdf'
+      | 'html'
+      | 'png'
+      | 'markdown'
+      | 'snapshot'
+      | 'pdf-export'
+      | 'pdf-canvas'
   ) => void;
   pageMode?: 'page' | 'edgeless';
   className?: string;
@@ -88,15 +95,13 @@ export const ExportMenuItems = ({
         icon={<ExportToHtmlIcon />}
         label={t['Export to HTML']()}
       />
-      {pageMode !== 'edgeless' && (
-        <ExportMenuItem
-          onSelect={() => exportHandler('png')}
-          className={className}
-          type="png"
-          icon={<ExportToPngIcon />}
-          label={t['Export to PNG']()}
-        />
-      )}
+      <ExportMenuItem
+        onSelect={() => exportHandler('png')}
+        className={className}
+        type="png"
+        icon={<ExportToPngIcon />}
+        label={t['Export to PNG']()}
+      />
       <ExportMenuItem
         onSelect={() => exportHandler('markdown')}
         className={className}
@@ -104,6 +109,15 @@ export const ExportMenuItems = ({
         icon={<ExportToMarkdownIcon />}
         label={t['Export to Markdown']()}
       />
+      {pageMode === 'edgeless' && (
+        <ExportMenuItem
+          onSelect={() => exportHandler('pdf-canvas')}
+          className={className}
+          type="pdf-canvas"
+          icon={<PrinterIcon />}
+          label={t['Export to PDF']()}
+        />
+      )}
       {pageMode !== 'edgeless' && enable_pdfmake_export && (
         <ExportMenuItem
           onSelect={() => exportHandler('pdf-export')}

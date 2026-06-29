@@ -1,13 +1,3 @@
-import { notify } from '@bridgeflow/component';
-import {
-  pushGlobalLoadingEventAtom,
-  resolveGlobalLoadingEventAtom,
-} from '@bridgeflow/component/global-loading';
-import type { BridgeFlowEditorContainer } from '@bridgeflow/core/blocksuite/block-suite-editor/blocksuite-editor';
-import { EditorService } from '@bridgeflow/core/modules/editor';
-import { getBridgeFlowWorkspaceSchema } from '@bridgeflow/core/modules/workspace/global-schema';
-import { useI18n } from '@bridgeflow/i18n';
-import { track } from '@bridgeflow/track';
 import { ExportManager } from '@blocksuite/bridgeflow/blocks/surface';
 import {
   docLinkBaseURLMiddleware,
@@ -27,6 +17,16 @@ import {
   PdfTransformer,
   ZipTransformer,
 } from '@blocksuite/bridgeflow/widgets/linked-doc';
+import { notify } from '@bridgeflow/component';
+import {
+  pushGlobalLoadingEventAtom,
+  resolveGlobalLoadingEventAtom,
+} from '@bridgeflow/component/global-loading';
+import type { BridgeFlowEditorContainer } from '@bridgeflow/core/blocksuite/block-suite-editor/blocksuite-editor';
+import { EditorService } from '@bridgeflow/core/modules/editor';
+import { getBridgeFlowWorkspaceSchema } from '@bridgeflow/core/modules/workspace/global-schema';
+import { useI18n } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
 import { useLiveData, useService } from '@kanban-studios/infra';
 import { useSetAtom } from 'jotai';
 import { nanoid } from 'nanoid';
@@ -39,7 +39,8 @@ type ExportType =
   | 'png'
   | 'markdown'
   | 'snapshot'
-  | 'pdf-export';
+  | 'pdf-export'
+  | 'pdf-canvas';
 
 interface ExportHandlerOptions {
   page: Store;
@@ -169,6 +170,13 @@ async function exportHandler({
       return;
     case 'png': {
       await editorRoot?.std.get(ExportManager).exportPng();
+      return;
+    }
+    case 'pdf-canvas': {
+      // Canvas-based PDF export — renders the edgeless board (or page) to a
+      // PDF via the surface ExportManager. This is the path used for boards
+      // such as the OKR template where the layout lives on the canvas.
+      await editorRoot?.std.get(ExportManager).exportPdf();
       return;
     }
     case 'pdf-export': {

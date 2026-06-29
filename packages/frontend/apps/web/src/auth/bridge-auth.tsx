@@ -305,12 +305,12 @@ const STYLES = `
 
 .bfauth-fields{display:flex;flex-direction:column;gap:16px}
 .bfauth-label{display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:600;color:#5a616c}
-.bfauth-input{width:100%;height:44px;padding:0 14px;font-size:15px;color:#2f343f;background:#fff;
+.bfauth-input{width:100%;height:48px;min-height:48px;padding:0 14px;font-size:15px;color:#2f343f;background:#fff;
   border:1.5px solid #d8dbe0;border-radius:9px;outline:none;transition:border-color .15s,box-shadow .15s;font-family:inherit}
 .bfauth-input::placeholder{color:#b9bec5}
 .bfauth-input:focus{border-color:#f15a29;box-shadow:0 0 0 3px rgba(241,90,41,.16)}
 .bfauth-input:disabled{background:#f3f4f6;cursor:not-allowed}
-.bfauth-pw{position:relative;display:flex;align-items:center}
+.bfauth-pw{position:relative;display:flex;align-items:center;height:48px}
 .bfauth-eye{position:absolute;right:10px;border:0;background:transparent;color:#8a9099;font-size:12.5px;font-weight:600;
   cursor:pointer;padding:6px;font-family:inherit}
 .bfauth-eye:hover{color:#f15a29}
