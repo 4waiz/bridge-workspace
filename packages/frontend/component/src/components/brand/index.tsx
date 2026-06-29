@@ -6,7 +6,7 @@ export const BRAND_CLOUD_NAME = BRAND_NAME;
 export const BRAND_AI_NAME = 'Workspace AI';
 export const BRAND_CREATOR_NAME = 'Awaiz Ahmed';
 export const BRAND_SITE_URL = '';
-export const BRAND_LOGO_SRC = '/imgs/bridge-logo.webp';
+export const BRAND_LOGO_SRC = '/imgs/bridge-logo.png';
 
 const brandReplacements: [RegExp, string][] = [
   [/BridgeFlow Cloud/g, BRAND_CLOUD_NAME],
