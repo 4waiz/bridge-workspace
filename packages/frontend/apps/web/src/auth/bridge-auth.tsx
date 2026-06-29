@@ -129,10 +129,19 @@ export function BridgeAuthPage() {
           <img className="bfauth-wordmark" src={BRIDGE_WORDMARK_LIGHT} alt="BRIDGE" />
         </div>
         <div className="bfauth-brand-mid">
-          <p className="bfauth-eyebrow">
-            <span className="bfauth-brand-name">BRIDGE</span>{' '}
-            <span className="bfauth-brand-flow">Flow</span> — AI Innovation Canvas
-          </p>
+          <div className="bfauth-eyebrow">
+            <img
+              className="bfauth-eyebrow-icon"
+              src={BRIDGE_ICON}
+              alt=""
+              aria-hidden="true"
+            />
+            <span className="bfauth-brand-lockup">
+              <span className="bfauth-brand-name">BRIDGE</span>{' '}
+              <span className="bfauth-brand-flow">Flow</span>
+            </span>
+            <span className="bfauth-eyebrow-tag">AI Innovation Canvas</span>
+          </div>
           <h1 className="bfauth-headline">
             Where ideas
             <br />
@@ -308,10 +317,14 @@ const STYLES = `
 .bfauth-brand-top{position:relative;z-index:2}
 .bfauth-wordmark{height:34px;width:auto;display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.25))}
 .bfauth-brand-mid{position:relative;z-index:2;max-width:460px}
-.bfauth-eyebrow{margin:0 0 18px;font-size:14px;font-weight:700;letter-spacing:1.5px;color:#f4a58c}
+.bfauth-eyebrow{display:flex;align-items:center;flex-wrap:wrap;gap:6px 14px;margin:0 0 24px}
+.bfauth-eyebrow-icon{height:58px;width:58px;border-radius:13px;object-fit:contain;flex:0 0 auto;
+  box-shadow:0 10px 24px rgba(241,90,41,.28)}
 @font-face{font-family:'BridgeAuthScript';src:url('/fonts/Kalam-Bold.woff2') format('woff2');font-display:swap;font-weight:700}
-.bfauth-brand-name{font-weight:900;-webkit-text-stroke:.4px currentColor}
-.bfauth-brand-flow{font-family:'BridgeAuthScript','Segoe Print',cursive;color:#f15a29;letter-spacing:0;font-size:1.15em}
+.bfauth-brand-lockup{display:inline-flex;align-items:baseline;gap:10px}
+.bfauth-brand-name{font-size:36px;font-weight:900;color:#fff;-webkit-text-stroke:.5px #fff;line-height:1;letter-spacing:-.01em}
+.bfauth-brand-flow{font-family:'BridgeAuthScript','Segoe Print',cursive;color:#f15a29;font-size:40px;line-height:1;letter-spacing:0}
+.bfauth-eyebrow-tag{flex-basis:100%;font-size:13px;font-weight:700;letter-spacing:1.6px;color:#f4a58c;text-transform:uppercase}
 .bfauth-headline{margin:0;font-size:64px;line-height:1.04;font-weight:700;letter-spacing:-.5px}
 .bfauth-accent{color:#f15a29}
 .bfauth-rule{display:block;width:64px;height:4px;background:#f15a29;border-radius:2px;margin:28px 0 30px}

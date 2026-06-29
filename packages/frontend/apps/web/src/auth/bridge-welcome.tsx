@@ -1,18 +1,15 @@
 import { useEffect, useState } from 'react';
 
 /**
- * Personalised greeting shown once after the user signs in.
+ * Permanent personalised greeting shown while signed in.
  *
- * Reads the identity published by AuthGate on `globalThis.__bridgeFlowUser`
- * (see auth-gate.tsx) so it stays decoupled from the supabase client, and
- * renders a "Good {morning/afternoon/evening}, {name}" banner with today's
- * date and an operating-snapshot subtitle.
- *
- * It surfaces once per browser session (tracked in sessionStorage) so it
- * doesn't nag on every reload, and is dismissible.
+ * Reads the identity AuthGate publishes on `globalThis.__bridgeFlowUser` and
+ * renders a compact "Good {morning/afternoon/evening}, {name}" card pinned to
+ * the bottom-right. It styles itself with the app's `--affine-*` theme
+ * variables so it automatically matches dark / light mode, and renders the
+ * name in the BRIDGE script font (same as the intro page).
  */
 
-const SEEN_KEY = 'bridge-flow-welcomed';
 const USER_EVENT = 'bridge-user-changed';
 
 type BridgeUser = { id: string; email?: string; name?: string } | null;
@@ -49,57 +46,15 @@ function firstName(user: BridgeUser) {
 
 export function BridgeWelcome() {
   const [user, setUser] = useState<BridgeUser>(() => currentUser());
-  const [show, setShow] = useState(false);
 
   useEffect(() => {
-    const evaluate = () => {
-      const u = currentUser();
-      setUser(u);
-      if (!u) {
-        // signed out → reset so the next sign-in greets again
-        try {
-          sessionStorage.removeItem(SEEN_KEY);
-        } catch {
-          /* ignore */
-        }
-        setShow(false);
-        return;
-      }
-      let seen = false;
-      try {
-        seen = sessionStorage.getItem(SEEN_KEY) === u.id;
-      } catch {
-        /* ignore */
-      }
-      if (!seen) setShow(true);
-    };
-
+    const evaluate = () => setUser(currentUser());
     evaluate();
     window.addEventListener(USER_EVENT, evaluate);
     return () => window.removeEventListener(USER_EVENT, evaluate);
   }, []);
 
-  // auto-dismiss after a few seconds
-  useEffect(() => {
-    if (!show) return;
-    const t = setTimeout(() => dismiss(), 7000);
-    return () => clearTimeout(t);
-     
-  }, [show]);
-
-  const dismiss = () => {
-    setShow(false);
-    const u = currentUser();
-    if (u) {
-      try {
-        sessionStorage.setItem(SEEN_KEY, u.id);
-      } catch {
-        /* ignore */
-      }
-    }
-  };
-
-  if (!show || !user) return null;
+  if (!user) return null;
 
   const now = new Date();
 
@@ -107,9 +62,6 @@ export function BridgeWelcome() {
     <div className="bfw-wrap" role="status" aria-live="polite">
       <style>{STYLES}</style>
       <div className="bfw-card">
-        <button className="bfw-close" onClick={dismiss} aria-label="Dismiss">
-          ×
-        </button>
         <div className="bfw-date">{longDate(now)}</div>
         <h2 className="bfw-greeting">
           {greeting(now.getHours())},{' '}
@@ -122,22 +74,23 @@ export function BridgeWelcome() {
 }
 
 const STYLES = `
-.bfw-wrap{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:2147483640;
+@font-face{font-family:'BridgeScript';src:url('/fonts/Kalam-Bold.woff2') format('woff2');font-display:swap;font-weight:700}
+.bfw-wrap{position:fixed;right:18px;bottom:18px;z-index:2147483400;
   font-family:"Segoe UI","Helvetica Neue",Arial,sans-serif;pointer-events:none;
-  animation:bfw-in .35s cubic-bezier(.2,.8,.2,1)}
-@keyframes bfw-in{from{opacity:0;transform:translate(-50%,-12px)}to{opacity:1;transform:translate(-50%,0)}}
-.bfw-card{position:relative;pointer-events:auto;min-width:340px;max-width:min(560px,calc(100vw - 32px));
-  padding:20px 26px 22px;background:#f4efe7;border:1px solid #e7dfd2;border-radius:16px;
-  box-shadow:0 24px 60px -28px rgba(45,52,63,.55)}
-.bfw-close{position:absolute;top:10px;right:12px;border:0;background:transparent;font-size:22px;line-height:1;
-  color:#b5ab9a;cursor:pointer;padding:2px 6px}
-.bfw-close:hover{color:#6b6557}
-.bfw-date{font-size:12.5px;font-weight:700;letter-spacing:1.6px;color:#6c5ce7}
-.bfw-greeting{margin:8px 0 0;font-size:34px;line-height:1.1;font-weight:800;letter-spacing:-.5px;color:#1f2430}
-.bfw-name{color:#6c5ce7}
-.bfw-sub{margin:8px 0 0;font-size:15px;color:#7c7567}
+  animation:bfw-in .4s cubic-bezier(.2,.8,.2,1)}
+@keyframes bfw-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.bfw-card{pointer-events:auto;min-width:268px;max-width:330px;padding:15px 19px 17px;border-radius:16px;
+  background:var(--affine-background-overlay-panel-color,#f4efe7);
+  border:1px solid var(--affine-border-color,#e7dfd2);
+  color:var(--affine-text-primary-color,#1f2430);
+  box-shadow:0 18px 44px -22px rgba(0,0,0,.5)}
+.bfw-date{font-size:11px;font-weight:700;letter-spacing:1.4px;color:var(--affine-text-secondary-color,#8a9099)}
+.bfw-greeting{margin:6px 0 0;font-size:21px;line-height:1.2;font-weight:800;letter-spacing:-.3px}
+.bfw-name{font-family:'BridgeScript','Segoe Print',cursive;font-weight:700;font-size:1.32em;
+  color:var(--affine-brand-color,#f15a29)}
+.bfw-sub{margin:7px 0 0;font-size:13px;color:var(--affine-text-secondary-color,#7c7567)}
 @media (max-width:560px){
-  .bfw-greeting{font-size:27px}
-  .bfw-card{min-width:0}
+  .bfw-wrap{right:12px;bottom:12px}
+  .bfw-card{min-width:0;max-width:calc(100vw - 24px)}
 }
 `;
