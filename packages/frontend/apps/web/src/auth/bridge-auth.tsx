@@ -167,7 +167,18 @@ export function BridgeAuthPage() {
       {/* ---- Form panel ---- */}
       <main className="bfauth-form-wrap">
         <div className="bfauth-card">
-          <img className="bfauth-mark" src={BRIDGE_ICON} alt="BRIDGE Flow" />
+          <div className="bfauth-cardbrand">
+            <img
+              className="bfauth-cardbrand-icon"
+              src={BRIDGE_ICON}
+              alt=""
+              aria-hidden="true"
+            />
+            <span>
+              <span className="bfauth-cardbrand-name">BRIDGE</span>{' '}
+              <span className="bfauth-cardbrand-flow">Flow</span>
+            </span>
+          </div>
           <h2 className="bfauth-title">
             {mode === 'signin' ? 'Welcome back' : 'Create your account'}
           </h2>
@@ -346,6 +357,11 @@ const STYLES = `
 .bfauth-card{width:100%;max-width:420px;background:#fff;border:1px solid #e7e9ec;border-radius:14px;
   padding:40px 38px;box-shadow:0 24px 60px -28px rgba(45,52,63,.45)}
 .bfauth-mark{width:52px;height:52px;object-fit:contain;margin-bottom:20px}
+.bfauth-cardbrand{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.bfauth-cardbrand-icon{width:46px;height:46px;object-fit:contain;border-radius:11px;flex:0 0 auto;
+  box-shadow:0 8px 18px rgba(241,90,41,.22)}
+.bfauth-cardbrand-name{font-size:23px;font-weight:900;color:#2f343f;-webkit-text-stroke:.3px #2f343f;line-height:1}
+.bfauth-cardbrand-flow{font-family:'BridgeAuthScript','Segoe Print',cursive;color:#f15a29;font-size:25px;line-height:1}
 .bfauth-title{margin:0;font-size:26px;font-weight:700;letter-spacing:-.3px;color:#2f343f}
 .bfauth-sub{margin:8px 0 24px;font-size:14.5px;color:#8a9099;line-height:1.4}
 

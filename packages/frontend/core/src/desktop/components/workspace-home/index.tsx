@@ -667,8 +667,29 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
         <div className={styles.welcomeSection}>
           <div className={styles.welcomeText}>
             <span className={styles.eyebrow}>AI Innovation Canvas</span>
+            <style>{
+              "@font-face{font-family:'BridgeScript';src:url('/fonts/Kalam-Bold.woff2') format('woff2');font-display:swap;font-weight:700}"
+            }</style>
             <h1 className={styles.welcomeTitle}>
-              {workspaceName || 'BRIDGE Flow'}
+              {(() => {
+                const t = (workspaceName || 'BRIDGE Flow').trim();
+                const i = t.lastIndexOf(' ');
+                if (i === -1) return t;
+                return (
+                  <>
+                    {t.slice(0, i)}{' '}
+                    <span
+                      style={{
+                        color: '#f15a29',
+                        fontFamily: "'BridgeScript','Segoe Print',cursive",
+                        fontWeight: 700,
+                      }}
+                    >
+                      {t.slice(i + 1)}
+                    </span>
+                  </>
+                );
+              })()}
             </h1>
             <p className={styles.welcomeSubtitle}>
               Write, draw, plan and build — together on one infinite canvas.
@@ -702,6 +723,18 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
           </div>
         </div>
 
+        {/* OKR */}
+        <div className={styles.sectionWrapper}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>OKR</h2>
+          </div>
+          <div className={styles.templatesRow}>
+            {okrItems.map(item => (
+              <TemplateCard key={item.id} item={item} />
+            ))}
+          </div>
+        </div>
+
         {/* Templates */}
         <div className={styles.sectionWrapper}>
           <div className={styles.sectionHeader}>
@@ -712,18 +745,6 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
           </div>
           <div className={styles.templatesRow}>
             {templateItems.map(item => (
-              <TemplateCard key={item.id} item={item} />
-            ))}
-          </div>
-        </div>
-
-        {/* OKR */}
-        <div className={styles.sectionWrapper}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>OKR</h2>
-          </div>
-          <div className={styles.templatesRow}>
-            {okrItems.map(item => (
               <TemplateCard key={item.id} item={item} />
             ))}
           </div>
