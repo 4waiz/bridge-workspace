@@ -13,8 +13,6 @@ DIST="$REPO/packages/frontend/apps/web/dist"
 PROJECT="bridge-flow"
 
 echo "==> Building web app (rspack)..."
-# Serve assets from this same domain, not the (nonexistent) CDN asset host.
-export PUBLIC_PATH=/
 node "$REPO/tools/cli/bin/runner.js" bridgeflow.ts bundle -p @bridgeflow/web
 
 echo "==> Stripping source maps (not needed in production)..."

@@ -55,7 +55,9 @@ export const getPublicPath = (BUILD_CONFIG: BUILD_CONFIG_TYPE) => {
     case 'beta':
       return 'https://beta.bridgeflowassets.com/';
     default:
-      return 'https://dev.bridgeflowassets.com/';
+      // Self-hosted / standalone builds (incl. Cloudflare Pages) serve assets
+      // from their own origin, not a CDN asset host.
+      return '/';
   }
 };
 

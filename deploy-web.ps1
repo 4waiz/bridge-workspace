@@ -13,8 +13,6 @@ $Dist    = Join-Path $Repo 'packages\frontend\apps\web\dist'
 $Project = 'bridge-flow'
 
 Write-Host '==> Building web app (rspack)...' -ForegroundColor Cyan
-# Serve assets from this same domain, not the (nonexistent) CDN asset host.
-$env:PUBLIC_PATH = '/'
 node "$Repo\tools\cli\bin\runner.js" bridgeflow.ts bundle -p '@bridgeflow/web'
 if ($LASTEXITCODE -ne 0) { throw "Build failed (exit $LASTEXITCODE)" }
 
