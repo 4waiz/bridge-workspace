@@ -22,7 +22,7 @@ const links = [
   {
     href: BRAND_SITE_URL,
     icon: <AlbumIcon size={20} />,
-    label: 'Visit kanbanstudios.ae',
+    label: `Visit ${BRAND_NAME}`,
   },
   {
     href: BRAND_SITE_URL,

@@ -45,12 +45,12 @@ const getPlayList = (t: Translate): Array<PlayListItem> => [
     desc: (
       <Trans
         i18nKey="com.bridgeflow.ai-onboarding.general.5.description"
-        values={{ link: 'kanbanstudios.ae' }}
+        values={{ link: 'BRIDGE Flow' }}
         components={{
           a: (
             <a
               className={styles.link}
-              href="https://kanbanstudios.ae"
+              href={BRAND_SITE_URL}
               target="_blank"
               rel="noreferrer"
             />

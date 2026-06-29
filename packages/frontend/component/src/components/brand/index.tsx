@@ -5,17 +5,17 @@ export const BRAND_TAGLINE = 'AI Innovation Canvas';
 export const BRAND_CLOUD_NAME = BRAND_NAME;
 export const BRAND_AI_NAME = 'Workspace AI';
 export const BRAND_CREATOR_NAME = 'Awaiz Ahmed';
-export const BRAND_SITE_URL = 'https://kanbanstudios.ae';
+export const BRAND_SITE_URL = '';
 export const BRAND_LOGO_SRC = '/imgs/bridge-logo.webp';
 
 const brandReplacements: [RegExp, string][] = [
   [/BridgeFlow Cloud/g, BRAND_CLOUD_NAME],
   [/BridgeFlow AI/g, BRAND_AI_NAME],
-  [/BridgeFlow\.Pro/g, 'kanbanstudios.ae'],
-  [/ai\.bridgeflow\.pro/g, 'kanbanstudios.ae'],
-  [/app\.bridgeflow\.pro/g, 'kanbanstudios.ae'],
-  [/docs\.bridgeflow\.pro/g, 'kanbanstudios.ae'],
-  [/bridgeflow\.pro/g, 'kanbanstudios.ae'],
+  [/BridgeFlow\.Pro/g, BRAND_NAME],
+  [/ai\.bridgeflow\.pro/g, BRAND_NAME],
+  [/app\.bridgeflow\.pro/g, BRAND_NAME],
+  [/docs\.bridgeflow\.pro/g, BRAND_NAME],
+  [/bridgeflow\.pro/g, BRAND_NAME],
   [/BridgeFlow/g, BRAND_NAME],
 ];
 

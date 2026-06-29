@@ -109,7 +109,7 @@ export function BridgeAuthPage() {
           <img className="bfauth-wordmark" src={BRIDGE_WORDMARK_LIGHT} alt="BRIDGE" />
         </div>
         <div className="bfauth-brand-mid">
-          <p className="bfauth-eyebrow">AI INNOVATION CANVAS</p>
+          <p className="bfauth-eyebrow">BRIDGE Flow — AI Innovation Canvas</p>
           <h1 className="bfauth-headline">
             Where ideas
             <br />
@@ -126,7 +126,7 @@ export function BridgeAuthPage() {
           </ul>
         </div>
         <div className="bfauth-brand-foot">
-          <span>© {new Date().getFullYear()} Kanban Studios</span>
+          <span>© {new Date().getFullYear()} BRIDGE Flow</span>
         </div>
         <div className="bfauth-glow" />
         <div className="bfauth-grid" />
@@ -169,7 +169,7 @@ export function BridgeAuthPage() {
                 className="bfauth-input"
                 type="email"
                 autoComplete="email"
-                placeholder="you@company.com"
+                placeholder=""
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 disabled={loading}
@@ -183,7 +183,7 @@ export function BridgeAuthPage() {
                   className="bfauth-input"
                   type={showPw ? 'text' : 'password'}
                   autoComplete={mode === 'signin' ? 'current-password' : 'new-password'}
-                  placeholder="••••••••"
+                  placeholder=""
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                   disabled={loading}
@@ -206,7 +206,7 @@ export function BridgeAuthPage() {
                   className="bfauth-input"
                   type={showPw ? 'text' : 'password'}
                   autoComplete="new-password"
-                  placeholder="••••••••"
+                  placeholder=""
                   value={confirm}
                   onChange={e => setConfirm(e.target.value)}
                   disabled={loading}
@@ -273,8 +273,8 @@ const STYLES = `
 .bfauth-brand-top{position:relative;z-index:2}
 .bfauth-wordmark{height:34px;width:auto;display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.25))}
 .bfauth-brand-mid{position:relative;z-index:2;max-width:460px}
-.bfauth-eyebrow{margin:0 0 18px;font-size:13px;font-weight:600;letter-spacing:3px;color:#f4a58c}
-.bfauth-headline{margin:0;font-size:52px;line-height:1.05;font-weight:700;letter-spacing:-.5px}
+.bfauth-eyebrow{margin:0 0 18px;font-size:14px;font-weight:700;letter-spacing:1.5px;color:#f4a58c}
+.bfauth-headline{margin:0;font-size:64px;line-height:1.04;font-weight:700;letter-spacing:-.5px}
 .bfauth-accent{color:#f15a29}
 .bfauth-rule{display:block;width:64px;height:4px;background:#f15a29;border-radius:2px;margin:28px 0 30px}
 .bfauth-features{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px}

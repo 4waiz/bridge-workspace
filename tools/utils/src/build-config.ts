@@ -7,7 +7,7 @@ export interface BuildFlags {
   mode: 'development' | 'production';
 }
 
-const BRAND_SITE_URL = 'https://kanbanstudios.ae';
+const BRAND_SITE_URL = '';
 
 export function getBuildConfig(
   pkg: Package,
