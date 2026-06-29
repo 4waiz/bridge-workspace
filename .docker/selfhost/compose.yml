@@ -1,7 +1,7 @@
 name: bridgeflow
 services:
   bridgeflow:
-    image: ghcr.io/Kanban-Studios/bridgeflow:${BRIDGEFLOW_REVISION:-stable}
+    image: ghcr.io/4waiz/bridge-flow:${BRIDGEFLOW_REVISION:-latest}
     container_name: bridgeflow_server
     ports:
       - '${PORT:-3010}:3010'
@@ -25,7 +25,7 @@ services:
     restart: unless-stopped
 
   bridgeflow_migration:
-    image: ghcr.io/Kanban-Studios/bridgeflow:${BRIDGEFLOW_REVISION:-stable}
+    image: ghcr.io/4waiz/bridge-flow:${BRIDGEFLOW_REVISION:-latest}
     container_name: bridgeflow_migration_job
     volumes:
       # custom configurations

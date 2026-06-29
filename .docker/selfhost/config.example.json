@@ -1,6 +1,13 @@
 {
-  "$schema": "https://github.com/Kanban-Studios/bridgeflow/releases/latest/download/config.schema.json",
   "server": {
     "name": "BridgeFlow Self Hosted Server"
+  },
+  "copilot": {
+    "enabled": true,
+    "providers": {
+      "openai": {
+        "apiKey": "sk-REPLACE_WITH_YOUR_OPENAI_KEY"
+      }
+    }
   }
 }
