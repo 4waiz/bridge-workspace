@@ -17,8 +17,8 @@ import { configureBrowserWorkspaceFlavours } from '@bridgeflow/core/modules/work
 import { getWorkerUrl } from '@bridgeflow/env/worker';
 import { StoreManagerClient } from '@bridgeflow/nbstore/worker/client';
 import { setTelemetryTransport } from '@bridgeflow/track';
-import { Framework, FrameworkRoot, getCurrentStore } from '@toeverything/infra';
-import { OpClient } from '@toeverything/infra/op';
+import { Framework, FrameworkRoot, getCurrentStore } from '@kanban-studios/infra';
+import { OpClient } from '@kanban-studios/infra/op';
 import { Suspense } from 'react';
 import { RouterProvider } from 'react-router-dom';
 

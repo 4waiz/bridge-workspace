@@ -1,5 +1,5 @@
 import { tracker } from '@bridgeflow/track';
-import { createEvent, Service } from '@toeverything/infra';
+import { createEvent, Service } from '@kanban-studios/infra';
 import { combineLatest, distinctUntilChanged, map, skip } from 'rxjs';
 
 import { Workbench } from '../entities/workbench';

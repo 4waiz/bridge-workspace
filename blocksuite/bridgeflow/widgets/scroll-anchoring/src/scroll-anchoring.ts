@@ -38,12 +38,12 @@ export class BridgeFlowScrollAnchoringWidget extends WidgetComponent {
           border-color: ${unsafeCSS(
             cssVarV2('layer/insideBorder/primaryBorder')
           )};
-          box-shadow: var(--bridgeflow-active-shadow);
+          box-shadow: var(--affine-active-shadow);
         }
 
         &.page {
           border-radius: 5px;
-          background-color: var(--bridgeflow-hover-color);
+          background-color: var(--affine-hover-color);
         }
       }
     }

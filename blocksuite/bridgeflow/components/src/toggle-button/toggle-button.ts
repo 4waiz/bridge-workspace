@@ -27,7 +27,7 @@ export class ToggleButton extends WithDisposable(ShadowlessElement) {
     }
 
     .toggle-icon:hover {
-      background: var(--bridgeflow-hover-color);
+      background: var(--affine-hover-color);
     }
 
     .toggle-icon[data-collapsed='true'] {

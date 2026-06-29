@@ -3,7 +3,7 @@ import { IsFavoriteIcon } from '@bridgeflow/core/components/pure/icons';
 import { CompatibleFavoriteItemsAdapter } from '@bridgeflow/core/modules/favorite';
 import type { Tag } from '@bridgeflow/core/modules/tag';
 import { WorkbenchLink } from '@bridgeflow/core/modules/workbench';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { type MouseEvent, useCallback } from 'react';
 
 import { content, item, prefixIcon, suffixIcon } from './styles.css';

@@ -11,7 +11,7 @@ import { ServerDeploymentType, SubscriptionPlan } from '@bridgeflow/graphql';
 import { useI18n } from '@bridgeflow/i18n';
 import type { Store } from '@blocksuite/bridgeflow/store';
 import { LockIcon, PublishIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import {
   forwardRef,
   type PropsWithChildren,

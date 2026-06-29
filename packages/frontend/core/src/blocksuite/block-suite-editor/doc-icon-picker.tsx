@@ -2,7 +2,7 @@ import { IconEditor, IconRenderer } from '@bridgeflow/component';
 import { ExplorerIconService } from '@bridgeflow/core/modules/explorer-icon/services/explorer-icon';
 import { useI18n } from '@bridgeflow/i18n';
 import { SmileSolidIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 
 import * as styles from './doc-icon-picker.css';
 

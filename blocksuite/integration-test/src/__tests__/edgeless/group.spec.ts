@@ -113,7 +113,7 @@ describe('group', () => {
           borderRadius: 8,
           borderSize: 4,
           borderStyle: 'solid',
-          shadowType: '--bridgeflow-note-shadow-box',
+          shadowType: '--affine-note-shadow-box',
         },
         collapse: true,
         collapsedHeight: 100,

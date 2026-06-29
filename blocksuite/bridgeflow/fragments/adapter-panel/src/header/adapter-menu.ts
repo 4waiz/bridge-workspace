@@ -18,10 +18,10 @@ export class AdapterMenu extends SignalWatcher(LitElement) {
     .adapter-menu {
       min-width: 120px;
       padding: 4px;
-      background: var(--bridgeflow-background-primary-color);
-      border: 1px solid var(--bridgeflow-border-color);
+      background: var(--affine-background-primary-color);
+      border: 1px solid var(--affine-border-color);
       border-radius: 4px;
-      box-shadow: var(--bridgeflow-shadow-1);
+      box-shadow: var(--affine-shadow-1);
     }
     .adapter-menu-item {
       display: block;
@@ -31,17 +31,17 @@ export class AdapterMenu extends SignalWatcher(LitElement) {
       background: none;
       text-align: left;
       cursor: pointer;
-      color: var(--bridgeflow-text-primary-color);
-      font-family: var(--bridgeflow-font-family);
-      font-size: var(--bridgeflow-font-xs);
+      color: var(--affine-text-primary-color);
+      font-family: var(--affine-font-family);
+      font-size: var(--affine-font-xs);
       border-radius: 4px;
     }
     .adapter-menu-item:hover {
-      background: var(--bridgeflow-hover-color);
+      background: var(--affine-hover-color);
     }
     .adapter-menu-item.active {
-      color: var(--bridgeflow-primary-color);
-      background: var(--bridgeflow-hover-color);
+      color: var(--affine-primary-color);
+      background: var(--affine-hover-color);
     }
   `;
 

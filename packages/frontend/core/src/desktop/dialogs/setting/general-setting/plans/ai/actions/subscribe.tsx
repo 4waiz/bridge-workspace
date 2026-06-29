@@ -4,7 +4,7 @@ import { AuthService, SubscriptionService } from '@bridgeflow/core/modules/cloud
 import { SubscriptionPlan, SubscriptionRecurring } from '@bridgeflow/graphql';
 import { useI18n } from '@bridgeflow/i18n';
 import { track } from '@bridgeflow/track';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useMemo } from 'react';
 
 import { CheckoutSlot } from '../../checkout-slot';

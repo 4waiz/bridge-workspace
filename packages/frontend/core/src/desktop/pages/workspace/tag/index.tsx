@@ -15,7 +15,7 @@ import {
   ViewIcon,
   ViewTitle,
 } from '@bridgeflow/core/modules/workbench';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 

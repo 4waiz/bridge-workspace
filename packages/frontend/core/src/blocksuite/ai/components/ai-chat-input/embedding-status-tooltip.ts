@@ -31,7 +31,7 @@ export class AIChatEmbeddingStatusTooltip extends SignalWatcher(LitElement) {
       border-radius: 4px;
     }
     .check-status:hover {
-      background-color: ${unsafeCSSVar('--bridgeflow-hover-color')};
+      background-color: ${unsafeCSSVar('--affine-hover-color')};
     }
   `;
 

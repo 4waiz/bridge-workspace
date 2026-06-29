@@ -12,7 +12,7 @@ import {
   subscriptionQuery,
   updateSubscriptionMutation,
 } from '@bridgeflow/graphql';
-import { Store } from '@toeverything/infra';
+import { Store } from '@kanban-studios/infra';
 
 import type { GlobalCache } from '../../storage';
 import type { UrlService } from '../../url';

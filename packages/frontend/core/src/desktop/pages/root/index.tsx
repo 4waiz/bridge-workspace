@@ -1,6 +1,6 @@
 import { NotificationCenter } from '@bridgeflow/component';
 import { DefaultServerService } from '@bridgeflow/core/modules/cloud';
-import { FrameworkScope, useService } from '@toeverything/infra';
+import { FrameworkScope, useService } from '@kanban-studios/infra';
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 

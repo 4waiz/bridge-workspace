@@ -2,7 +2,7 @@ import { Divider, MenuItem } from '@bridgeflow/component';
 import { GlobalDialogService } from '@bridgeflow/core/modules/dialogs';
 import { useI18n } from '@bridgeflow/i18n';
 import { PlusIcon } from '@blocksuite/icons/rc';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import {

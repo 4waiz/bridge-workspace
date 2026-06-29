@@ -24,7 +24,7 @@ import {
   useLiveData,
   useService,
   useServiceOptional,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { useSetAtom } from 'jotai';
 import { useCallback, useEffect } from 'react';
 

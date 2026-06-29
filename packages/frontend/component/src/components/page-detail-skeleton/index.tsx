@@ -40,7 +40,7 @@ export const EditorLoading = ({
                 components={{
                   1: (
                     <a
-                      style={{ color: 'var(--bridgeflow-primary-color)' }}
+                      style={{ color: 'var(--affine-primary-color)' }}
                       href={BRAND_SITE_URL}
                       target="__blank"
                     />

@@ -1,6 +1,6 @@
 import { DocsService } from '@bridgeflow/core/modules/doc';
 import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import type { PropsWithChildren, ReactElement } from 'react';
 

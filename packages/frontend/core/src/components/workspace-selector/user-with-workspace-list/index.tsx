@@ -7,7 +7,7 @@ import { type WorkspaceMetadata } from '@bridgeflow/core/modules/workspace';
 import { ServerFeature } from '@bridgeflow/graphql';
 import { useI18n } from '@bridgeflow/i18n';
 import { track } from '@bridgeflow/track';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import { AddWorkspace } from './add-workspace';

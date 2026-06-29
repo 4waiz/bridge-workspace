@@ -1,6 +1,6 @@
 import { DocsService } from '@bridgeflow/core/modules/doc';
 import type { DocMeta, Workspace } from '@blocksuite/bridgeflow/store';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useCallback, useMemo } from 'react';
 
 import { useAsyncCallback } from './bridgeflow-async-hooks';

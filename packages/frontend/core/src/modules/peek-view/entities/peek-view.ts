@@ -10,7 +10,7 @@ import type {
 } from '@blocksuite/bridgeflow/model';
 import type { BlockComponent, EditorHost } from '@blocksuite/bridgeflow/std';
 import type { Block, BlockModel } from '@blocksuite/bridgeflow/store';
-import { Entity, LiveData } from '@toeverything/infra';
+import { Entity, LiveData } from '@kanban-studios/infra';
 import type { TemplateResult } from 'lit';
 import { firstValueFrom, map, race } from 'rxjs';
 

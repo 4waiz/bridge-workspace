@@ -18,7 +18,7 @@ import {
 } from '@bridgeflow/core/modules/url';
 import { configureDesktopWorkbenchModule } from '@bridgeflow/core/modules/workbench';
 import { configureBrowserWorkspaceFlavours } from '@bridgeflow/core/modules/workspace-engine';
-import { Framework } from '@toeverything/infra';
+import { Framework } from '@kanban-studios/infra';
 
 export function setupModules() {
   const framework = new Framework();

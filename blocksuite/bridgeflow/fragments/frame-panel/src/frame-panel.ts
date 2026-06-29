@@ -16,7 +16,7 @@ const styles = css`
   }
 
   .frame-panel-container {
-    background-color: var(--bridgeflow-background-primary-color);
+    background-color: var(--affine-background-primary-color);
     box-sizing: border-box;
 
     display: flex;
@@ -48,7 +48,7 @@ const styles = css`
   }
 
   .frame-panel-body:hover::-webkit-scrollbar-thumb {
-    background-color: var(--bridgeflow-black-30);
+    background-color: var(--affine-black-30);
   }
 
   .frame-panel-body::-webkit-scrollbar-track {

@@ -14,7 +14,7 @@ import {
   isGfxGroupCompatibleModel,
 } from '@blocksuite/bridgeflow/std/gfx';
 import { CopyAsImgaeIcon } from '@blocksuite/icons/lit';
-import type { FrameworkProvider } from '@toeverything/infra';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 
 const snapshotStyle = `
   bridgeflow-edgeless-root .widgets-container,
@@ -114,7 +114,7 @@ export function copyAsImage(std: BlockStdScope) {
           key: 'download',
           label: I18n.t('com.bridgeflow.copy.asImage.notAvailable.action'),
           onClick: () => {
-            window.open('https://awaizahmed.com', '_blank', 'noreferrer');
+            window.open('https://kanbanstudios.ae', '_blank', 'noreferrer');
           },
         },
       ],

@@ -10,7 +10,7 @@ import { UserFriendlyError } from '@bridgeflow/error';
 import { Permission, WorkspaceMemberStatus } from '@bridgeflow/graphql';
 import { type I18nString, useI18n } from '@bridgeflow/i18n';
 import { MoreVerticalIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { clamp } from 'lodash-es';
 import { useCallback, useEffect, useMemo, useState } from 'react';

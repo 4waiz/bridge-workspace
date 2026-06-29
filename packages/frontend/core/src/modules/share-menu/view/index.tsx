@@ -4,7 +4,7 @@ import type { Workspace } from '@bridgeflow/core/modules/workspace';
 import { useI18n } from '@bridgeflow/i18n';
 import { track } from '@bridgeflow/track';
 import type { Store } from '@blocksuite/bridgeflow/store';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect } from 'react';
 
 import { ShareMenu } from './share-menu';

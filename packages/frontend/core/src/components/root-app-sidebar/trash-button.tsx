@@ -11,7 +11,7 @@ import { GuardService } from '@bridgeflow/core/modules/permissions';
 import type { BridgeFlowDNDData } from '@bridgeflow/core/types/dnd';
 import { UserFriendlyError } from '@bridgeflow/error';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 
 export const TrashButton = () => {
   const t = useI18n();

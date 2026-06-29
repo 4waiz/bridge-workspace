@@ -33,7 +33,7 @@ export const useActions = ({
         },
       },
       {
-        icon: <DeleteIcon style={{ color: 'var(--bridgeflow-error-color)' }} />,
+        icon: <DeleteIcon style={{ color: 'var(--affine-error-color)' }} />,
         name: 'delete',
         tooltip: t['com.bridgeflow.collection-bar.action.tooltip.delete'](),
         click: onDelete,

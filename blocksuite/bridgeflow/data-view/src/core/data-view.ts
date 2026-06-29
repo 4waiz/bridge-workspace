@@ -181,7 +181,7 @@ export class DataViewRootUI extends SignalWatcher(
   static override styles = css`
     ${unsafeCSS(dataViewCommonStyle('bridgeflow-data-view-renderer'))}
     bridgeflow-data-view-renderer {
-      background-color: var(--bridgeflow-background-primary-color);
+      background-color: var(--affine-background-primary-color);
       display: contents;
     }
   `;

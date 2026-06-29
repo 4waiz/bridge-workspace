@@ -12,7 +12,7 @@ import {
   type GfxPrimitiveElementModel,
 } from '@blocksuite/bridgeflow/std/gfx';
 import type { Block, Store } from '@blocksuite/bridgeflow/store';
-import { useFramework } from '@toeverything/infra';
+import { useFramework } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { isEqual } from 'lodash-es';
 import { useCallback, useEffect, useMemo, useRef } from 'react';

@@ -85,7 +85,7 @@ export class AIChatAddContext extends SignalWatcher(
         ></chat-panel-add-popover>
       `,
       portalStyles: {
-        zIndex: 'var(--bridgeflow-z-index-popover)',
+        zIndex: 'var(--affine-z-index-popover)',
       },
       container: this.portalContainer ?? document.body,
       computePosition: {

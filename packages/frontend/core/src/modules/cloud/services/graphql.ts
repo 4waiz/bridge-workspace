@@ -5,7 +5,7 @@ import {
   type QueryOptions,
   type QueryResponse,
 } from '@bridgeflow/graphql';
-import { fromPromise, Service } from '@toeverything/infra';
+import { fromPromise, Service } from '@kanban-studios/infra';
 import type { Observable } from 'rxjs';
 
 import { AuthService } from './auth';

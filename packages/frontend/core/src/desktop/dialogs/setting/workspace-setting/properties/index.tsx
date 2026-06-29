@@ -7,7 +7,7 @@ import type { DocCustomPropertyInfo } from '@bridgeflow/core/modules/db';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { Trans, useI18n } from '@bridgeflow/i18n';
 import track from '@bridgeflow/track';
-import { FrameworkScope, useService } from '@toeverything/infra';
+import { FrameworkScope, useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import * as styles from './styles.css';

@@ -12,7 +12,7 @@ import { PageHeader } from '@bridgeflow/core/mobile/components';
 import { Page } from '@bridgeflow/core/mobile/components/page';
 import type { Collection } from '@bridgeflow/core/modules/collection';
 import { ViewLayersIcon } from '@blocksuite/icons/rc';
-import { useLiveData } from '@toeverything/infra';
+import { useLiveData } from '@kanban-studios/infra';
 import { useEffect, useState } from 'react';
 
 import * as styles from './detail.css';

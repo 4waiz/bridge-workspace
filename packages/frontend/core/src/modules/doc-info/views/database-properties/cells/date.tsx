@@ -1,6 +1,6 @@
 import { DateValue } from '@bridgeflow/core/components/workspace-property-types/date';
-import type { LiveData } from '@toeverything/infra';
-import { useLiveData } from '@toeverything/infra';
+import type { LiveData } from '@kanban-studios/infra';
+import { useLiveData } from '@kanban-studios/infra';
 import dayjs from 'dayjs';
 
 import type { DatabaseCellRendererProps } from '../../../types';

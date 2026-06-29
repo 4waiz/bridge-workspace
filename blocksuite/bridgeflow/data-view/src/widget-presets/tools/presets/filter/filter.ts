@@ -30,7 +30,7 @@ const styles = css`
 
   .bridgeflow-database-filter-button:hover,
   .bridgeflow-database-filter-button.active {
-    background-color: var(--bridgeflow-hover-color);
+    background-color: var(--affine-hover-color);
   }
 
   .bridgeflow-database-filter-button {

@@ -1,6 +1,6 @@
 import { DatabaseBlockDataSource } from '@blocksuite/bridgeflow/blocks/database';
 import type { DatabaseBlockModel } from '@blocksuite/bridgeflow/model';
-import { LiveData, Service } from '@toeverything/infra';
+import { LiveData, Service } from '@kanban-studios/infra';
 import { isEqual } from 'lodash-es';
 import { combineLatest, distinctUntilChanged, map, Observable } from 'rxjs';
 

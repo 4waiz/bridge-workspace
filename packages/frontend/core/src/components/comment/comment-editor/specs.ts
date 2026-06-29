@@ -54,7 +54,7 @@ import { InlineManagerExtension } from '@blocksuite/bridgeflow/std/inline';
 import { LinkedDocViewExtension } from '@blocksuite/bridgeflow/widgets/linked-doc/view';
 import { ToolbarViewExtension } from '@blocksuite/bridgeflow/widgets/toolbar/view';
 import { ViewportOverlayViewExtension } from '@blocksuite/bridgeflow/widgets/viewport-overlay/view';
-import type { FrameworkProvider } from '@toeverything/infra';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 import { z } from 'zod';
 
 import { createCommentLinkedWidgetConfig } from './linked-widget-config';

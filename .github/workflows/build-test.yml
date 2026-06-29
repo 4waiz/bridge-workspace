@@ -538,7 +538,7 @@ jobs:
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
         with:
-          extra-flags: workspaces focus @bridgeflow/monorepo @bridgeflow/electron-renderer @bridgeflow/nbstore @toeverything/infra
+          extra-flags: workspaces focus @bridgeflow/monorepo @bridgeflow/electron-renderer @bridgeflow/nbstore @kanban-studios/infra
           electron-install: false
           full-cache: true
       - name: Build Electron renderer
@@ -1144,7 +1144,7 @@ jobs:
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
         with:
-          extra-flags: workspaces focus @bridgeflow/monorepo @bridgeflow-test/bridgeflow-cloud @bridgeflow-test/bridgeflow-desktop-cloud @bridgeflow/web @bridgeflow/server @bridgeflow/electron @bridgeflow/electron-renderer @bridgeflow/nbstore @toeverything/infra
+          extra-flags: workspaces focus @bridgeflow/monorepo @bridgeflow-test/bridgeflow-cloud @bridgeflow-test/bridgeflow-desktop-cloud @bridgeflow/web @bridgeflow/server @bridgeflow/electron @bridgeflow/electron-renderer @bridgeflow/nbstore @kanban-studios/infra
           playwright-install: true
           playwright-platform: 'chromium'
           electron-install: ${{ matrix.tests.shard == 'desktop' && 'true' || 'false' }}
@@ -1225,7 +1225,7 @@ jobs:
         uses: ./.github/actions/setup-node
         timeout-minutes: 10
         with:
-          extra-flags: workspaces focus @bridgeflow/electron @bridgeflow/monorepo @bridgeflow-test/bridgeflow-desktop @bridgeflow/nbstore @toeverything/infra
+          extra-flags: workspaces focus @bridgeflow/electron @bridgeflow/monorepo @bridgeflow-test/bridgeflow-desktop @bridgeflow/nbstore @kanban-studios/infra
           playwright-install: ${{ matrix.spec.test && 'true' || 'false' }}
           playwright-platform: 'chromium'
           hard-link-nm: false

@@ -3,7 +3,7 @@ import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { useI18n } from '@bridgeflow/i18n';
 import { CollaborationIcon } from '@blocksuite/icons/rc';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 export const InviteMembersButton = () => {

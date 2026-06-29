@@ -4,7 +4,7 @@ import { EditorSettingService } from '@bridgeflow/core/modules/editor-setting';
 import { useI18n } from '@bridgeflow/i18n';
 import { DefaultTheme } from '@blocksuite/bridgeflow/model';
 import type { Store } from '@blocksuite/bridgeflow/store';
-import { useFramework, useLiveData } from '@toeverything/infra';
+import { useFramework, useLiveData } from '@kanban-studios/infra';
 import { isEqual } from 'lodash-es';
 import { useCallback, useMemo } from 'react';
 

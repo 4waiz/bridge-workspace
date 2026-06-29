@@ -14,7 +14,7 @@ import { WorkspacesService } from '@bridgeflow/core/modules/workspace';
 import { buildShowcaseWorkspace } from '@bridgeflow/core/utils/first-app-data';
 import { useI18n } from '@bridgeflow/i18n';
 import track from '@bridgeflow/track';
-import { FrameworkScope, useLiveData, useService } from '@toeverything/infra';
+import { FrameworkScope, useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useState } from 'react';
 
 import * as styles from './index.css';

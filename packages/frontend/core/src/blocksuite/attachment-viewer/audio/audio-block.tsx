@@ -17,7 +17,7 @@ import { Trans, useI18n } from '@bridgeflow/i18n';
 import track from '@bridgeflow/track';
 import type { AttachmentBlockModel } from '@blocksuite/bridgeflow/model';
 import { ResetIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import bytes from 'bytes';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 

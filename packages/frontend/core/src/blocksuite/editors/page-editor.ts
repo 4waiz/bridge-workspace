@@ -18,8 +18,8 @@ export class PageEditor extends SignalWatcher(
 ) {
   static override styles = css`
     page-editor {
-      font-family: var(--bridgeflow-font-family);
-      background: var(--bridgeflow-background-primary-color);
+      font-family: var(--affine-font-family);
+      background: var(--affine-background-primary-color);
     }
 
     page-editor * {

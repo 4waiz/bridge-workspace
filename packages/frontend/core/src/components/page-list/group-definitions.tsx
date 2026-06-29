@@ -4,7 +4,7 @@ import { TagService } from '@bridgeflow/core/modules/tag';
 import { useI18n } from '@bridgeflow/i18n';
 import type { DocMeta } from '@blocksuite/bridgeflow/store';
 import { FavoritedIcon, FavoriteIcon } from '@blocksuite/icons/rc';
-import { LiveData, useLiveData, useService } from '@toeverything/infra';
+import { LiveData, useLiveData, useService } from '@kanban-studios/infra';
 import { type ReactNode, useMemo } from 'react';
 
 import * as styles from './group-definitions.css';

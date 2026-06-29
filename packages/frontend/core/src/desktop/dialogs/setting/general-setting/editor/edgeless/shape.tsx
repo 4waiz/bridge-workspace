@@ -27,7 +27,7 @@ import {
 } from '@blocksuite/bridgeflow/model';
 import type { EditorHost } from '@blocksuite/bridgeflow/std';
 import type { Store } from '@blocksuite/bridgeflow/store';
-import { useFramework, useLiveData } from '@toeverything/infra';
+import { useFramework, useLiveData } from '@kanban-studios/infra';
 import { isEqual } from 'lodash-es';
 import { useCallback, useMemo, useState } from 'react';
 

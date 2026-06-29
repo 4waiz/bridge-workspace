@@ -10,7 +10,7 @@ import {
   updateDocDefaultRoleMutation,
   updateDocUserRoleMutation,
 } from '@bridgeflow/graphql';
-import { Store } from '@toeverything/infra';
+import { Store } from '@kanban-studios/infra';
 
 export class DocGrantedUsersStore extends Store {
   constructor(private readonly workspaceServerService: WorkspaceServerService) {

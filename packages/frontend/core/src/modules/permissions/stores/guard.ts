@@ -4,7 +4,7 @@ import {
   type GetWorkspaceInfoQuery,
   getWorkspaceInfoQuery,
 } from '@bridgeflow/graphql';
-import { Store } from '@toeverything/infra';
+import { Store } from '@kanban-studios/infra';
 
 import type { WorkspaceServerService } from '../../cloud';
 import type { WorkspaceService } from '../../workspace';

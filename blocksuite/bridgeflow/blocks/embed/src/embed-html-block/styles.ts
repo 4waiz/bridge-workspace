@@ -41,7 +41,7 @@ export const styles = css`
     width: 100%;
     height: 100%;
     border-radius: 4px 4px 0px 0px;
-    box-shadow: var(--bridgeflow-shadow-1);
+    box-shadow: var(--affine-shadow-1);
     overflow: hidden;
   }
 
@@ -64,8 +64,8 @@ export const styles = css`
   .embed-html-block-iframe-wrapper bridgeflow-menu .settings-header {
     padding: 7px 12px;
     font-weight: 500;
-    font-size: var(--bridgeflow-font-xs);
-    color: var(--bridgeflow-text-secondary-color);
+    font-size: var(--affine-font-xs);
+    color: var(--affine-text-secondary-color);
   }
 
   .embed-html-block-iframe-wrapper > embed-html-fullscreen-toolbar {
@@ -108,7 +108,7 @@ export const styles = css`
   .bridgeflow-embed-html-title-icon svg {
     width: 20px;
     height: 20px;
-    fill: var(--bridgeflow-background-primary-color);
+    fill: var(--affine-background-primary-color);
   }
 
   .bridgeflow-embed-html-title-text {
@@ -119,10 +119,10 @@ export const styles = css`
     word-break: break-word;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--bridgeflow-text-primary-color);
+    color: var(--affine-text-primary-color);
 
-    font-family: var(--bridgeflow-font-family);
-    font-size: var(--bridgeflow-font-sm);
+    font-family: var(--affine-font-family);
+    font-size: var(--affine-font-sm);
     font-style: normal;
     font-weight: 600;
     line-height: 22px;

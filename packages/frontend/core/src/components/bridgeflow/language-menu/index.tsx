@@ -1,7 +1,7 @@
 import { Menu, MenuItem, MenuTrigger } from '@bridgeflow/component/ui/menu';
 import { type I18n, I18nService } from '@bridgeflow/core/modules/i18n';
 import { DoneIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import type { ReactElement } from 'react';
 import { memo } from 'react';
 

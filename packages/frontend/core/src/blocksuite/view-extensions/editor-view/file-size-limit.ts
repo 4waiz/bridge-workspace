@@ -6,7 +6,7 @@ import {
   type IFileSizeLimitService,
 } from '@blocksuite/bridgeflow/shared/services';
 import { Extension } from '@blocksuite/bridgeflow/store';
-import type { FrameworkProvider } from '@toeverything/infra';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 
 export function patchFileSizeLimitExtension(framework: FrameworkProvider) {
   const workspaceDialogService = framework.get(WorkspaceDialogService);

@@ -52,12 +52,12 @@ export async function printToPdf(
                   display: none; 
                 }
                 :root, body {
-                  --bridgeflow-text-primary: #000 !important;
-                  --bridgeflow-text-secondary: #111 !important;
-                  --bridgeflow-text-tertiary: #333 !important;
-                  --bridgeflow-background-primary: #fff !important;
-                  --bridgeflow-background-secondary: #fff !important;
-                  --bridgeflow-background-tertiary: #fff !important;
+                  --affine-text-primary: #000 !important;
+                  --affine-text-secondary: #111 !important;
+                  --affine-text-tertiary: #333 !important;
+                  --affine-background-primary: #fff !important;
+                  --affine-background-secondary: #fff !important;
+                  --affine-background-tertiary: #fff !important;
                 }
                 body, [data-theme='dark'] {
                   color: #000 !important;
@@ -68,8 +68,8 @@ export async function printToPdf(
                   -webkit-text-fill-color: #000 !important;
                 }
                 :root {
-                  --bridgeflow-note-shadow-box: none !important;
-                  --bridgeflow-note-shadow-sticker: none !important;
+                  --affine-note-shadow-box: none !important;
+                  --affine-note-shadow-sticker: none !important;
                 }
               }</style></head><body></body></html>`);
       doc.close();
@@ -88,15 +88,15 @@ export async function printToPdf(
                 display: none; 
               }
               :root, body {
-                --bridgeflow-text-primary: #000 !important;
-                --bridgeflow-text-secondary: #111 !important;
-                --bridgeflow-text-tertiary: #333 !important;
-                --bridgeflow-background-primary: #fff !important;
-                --bridgeflow-background-secondary: #fff !important;
-                --bridgeflow-background-tertiary: #fff !important;
-                --bridgeflow-background-code-block: #f5f5f5 !important;
-                --bridgeflow-quote-color: #e3e3e3 !important;
-                --bridgeflow-border-color: #e3e3e3 !important;
+                --affine-text-primary: #000 !important;
+                --affine-text-secondary: #111 !important;
+                --affine-text-tertiary: #333 !important;
+                --affine-background-primary: #fff !important;
+                --affine-background-secondary: #fff !important;
+                --affine-background-tertiary: #fff !important;
+                --affine-background-code-block: #f5f5f5 !important;
+                --affine-quote-color: #e3e3e3 !important;
+                --affine-border-color: #e3e3e3 !important;
               }
               body, [data-theme='dark'] {
                 color: #000 !important;
@@ -107,8 +107,8 @@ export async function printToPdf(
                 -webkit-text-fill-color: #000 !important;
               }
               :root {
-                --bridgeflow-note-shadow-box: none !important;
-                --bridgeflow-note-shadow-sticker: none !important;
+                --affine-note-shadow-box: none !important;
+                --affine-note-shadow-sticker: none !important;
               }
             }</style></head><body></body></html>`);
 

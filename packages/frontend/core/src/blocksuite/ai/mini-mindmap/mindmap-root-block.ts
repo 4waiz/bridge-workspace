@@ -12,10 +12,10 @@ export class MindmapRootBlock extends BlockComponent<RootBlockModel> {
           height: 100%;
 
           background-size: 20px 20px;
-          background-color: var(--bridgeflow-background-primary-color);
+          background-color: var(--affine-background-primary-color);
           background-image: radial-gradient(
-            var(--bridgeflow-edgeless-grid-color) 1px,
-            var(--bridgeflow-background-primary-color) 1px
+            var(--affine-edgeless-grid-color) 1px,
+            var(--affine-background-primary-color) 1px
           );
         }
       </style>

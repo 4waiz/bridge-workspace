@@ -16,7 +16,7 @@ export class BridgeFlowEdgelessZoomToolbarWidget extends WidgetComponent<RootBlo
       position: absolute;
       bottom: 20px;
       left: 12px;
-      z-index: var(--bridgeflow-z-index-popover);
+      z-index: var(--affine-z-index-popover);
       display: flex;
       justify-content: center;
       -webkit-user-select: none;

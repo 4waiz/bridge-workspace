@@ -17,7 +17,7 @@ import {
   GfxBlockElementModel,
   GfxControllerIdentifier,
 } from '@blocksuite/bridgeflow/std/gfx';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 export type UseSharingUrl = {

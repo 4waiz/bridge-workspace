@@ -16,7 +16,7 @@ import {
 } from '@blocksuite/bridgeflow/ext-loader';
 import { ToolbarModuleExtension } from '@blocksuite/bridgeflow/shared/services';
 import { BlockFlavourIdentifier } from '@blocksuite/bridgeflow/std';
-import { FrameworkProvider } from '@toeverything/infra';
+import { FrameworkProvider } from '@kanban-studios/infra';
 import { z } from 'zod';
 
 import {

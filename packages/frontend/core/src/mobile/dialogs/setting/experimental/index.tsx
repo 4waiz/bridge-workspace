@@ -6,7 +6,7 @@ import {
 } from '@bridgeflow/core/modules/feature-flag';
 import { useI18n } from '@bridgeflow/i18n';
 import { ArrowRightSmallIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useState } from 'react';
 
 import { SettingGroup } from '../group';

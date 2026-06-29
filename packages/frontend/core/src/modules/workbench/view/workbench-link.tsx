@@ -2,7 +2,7 @@ import { useDraggable } from '@bridgeflow/component';
 import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
 import type { BridgeFlowDNDData, BridgeFlowDNDEntity } from '@bridgeflow/core/types/dnd';
 import { inferOpenMode as inferOpenAt } from '@bridgeflow/core/utils';
-import { useLiveData, useServices } from '@toeverything/infra';
+import { useLiveData, useServices } from '@kanban-studios/infra';
 import { type To } from 'history';
 import { forwardRef, type MouseEvent } from 'react';
 

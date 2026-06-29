@@ -4,7 +4,7 @@ import type {
   ClientHandler,
   SharedStorage,
 } from '@bridgeflow/electron-api';
-import { createIdentifier } from '@toeverything/infra';
+import { createIdentifier } from '@kanban-studios/infra';
 
 // for now desktop api's type are all inferred from electron-api
 export interface DesktopApiProvider {

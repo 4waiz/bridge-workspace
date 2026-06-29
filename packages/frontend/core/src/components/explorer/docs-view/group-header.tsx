@@ -1,7 +1,7 @@
 import { Button, IconButton } from '@bridgeflow/component';
 import { useI18n } from '@bridgeflow/i18n';
 import { ToggleRightIcon } from '@blocksuite/icons/rc';
-import { useLiveData } from '@toeverything/infra';
+import { useLiveData } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import {
   type HTMLAttributes,

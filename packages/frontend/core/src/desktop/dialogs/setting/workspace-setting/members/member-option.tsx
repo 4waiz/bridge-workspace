@@ -6,7 +6,7 @@ import {
 } from '@bridgeflow/core/modules/permissions';
 import { Permission, WorkspaceMemberStatus } from '@bridgeflow/graphql';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useMemo } from 'react';
 
 export const MemberOptions = ({

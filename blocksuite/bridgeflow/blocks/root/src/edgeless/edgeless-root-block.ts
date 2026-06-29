@@ -77,18 +77,18 @@ export class EdgelessRootBlockComponent extends BlockComponent<
 
     .edgeless-background {
       height: 100%;
-      background-color: var(--bridgeflow-background-primary-color);
+      background-color: var(--affine-background-primary-color);
       background-image:
-        linear-gradient(var(--bridgeflow-edgeless-grid-color) 1px, transparent 1px),
+        linear-gradient(var(--affine-edgeless-grid-color) 1px, transparent 1px),
         linear-gradient(
           90deg,
-          var(--bridgeflow-edgeless-grid-color) 1px,
+          var(--affine-edgeless-grid-color) 1px,
           transparent 1px
         ),
         linear-gradient(
           var(
-              --bridgeflow-edgeless-grid-strong-color,
-              var(--bridgeflow-edgeless-grid-color)
+              --affine-edgeless-grid-strong-color,
+              var(--affine-edgeless-grid-color)
             )
             1px,
           transparent 1px
@@ -96,31 +96,31 @@ export class EdgelessRootBlockComponent extends BlockComponent<
         linear-gradient(
           90deg,
           var(
-              --bridgeflow-edgeless-grid-strong-color,
-              var(--bridgeflow-edgeless-grid-color)
+              --affine-edgeless-grid-strong-color,
+              var(--affine-edgeless-grid-color)
             )
             1px,
           transparent 1px
         );
       background-position:
-        var(--bridgeflow-edgeless-grid-offset-x, 0px)
-          var(--bridgeflow-edgeless-grid-offset-y, 0px),
-        var(--bridgeflow-edgeless-grid-offset-x, 0px)
-          var(--bridgeflow-edgeless-grid-offset-y, 0px),
-        var(--bridgeflow-edgeless-grid-offset-x, 0px)
-          var(--bridgeflow-edgeless-grid-offset-y, 0px),
-        var(--bridgeflow-edgeless-grid-offset-x, 0px)
-          var(--bridgeflow-edgeless-grid-offset-y, 0px);
+        var(--affine-edgeless-grid-offset-x, 0px)
+          var(--affine-edgeless-grid-offset-y, 0px),
+        var(--affine-edgeless-grid-offset-x, 0px)
+          var(--affine-edgeless-grid-offset-y, 0px),
+        var(--affine-edgeless-grid-offset-x, 0px)
+          var(--affine-edgeless-grid-offset-y, 0px),
+        var(--affine-edgeless-grid-offset-x, 0px)
+          var(--affine-edgeless-grid-offset-y, 0px);
       background-repeat: repeat;
       background-size:
-        var(--bridgeflow-edgeless-grid-gap, 24px)
-          var(--bridgeflow-edgeless-grid-gap, 24px),
-        var(--bridgeflow-edgeless-grid-gap, 24px)
-          var(--bridgeflow-edgeless-grid-gap, 24px),
-        var(--bridgeflow-edgeless-grid-major-gap, 120px)
-          var(--bridgeflow-edgeless-grid-major-gap, 120px),
-        var(--bridgeflow-edgeless-grid-major-gap, 120px)
-          var(--bridgeflow-edgeless-grid-major-gap, 120px);
+        var(--affine-edgeless-grid-gap, 24px)
+          var(--affine-edgeless-grid-gap, 24px),
+        var(--affine-edgeless-grid-gap, 24px)
+          var(--affine-edgeless-grid-gap, 24px),
+        var(--affine-edgeless-grid-major-gap, 120px)
+          var(--affine-edgeless-grid-major-gap, 120px),
+        var(--affine-edgeless-grid-major-gap, 120px)
+          var(--affine-edgeless-grid-major-gap, 120px);
     }
 
     .edgeless-background[data-show-grid='false'] {
@@ -128,7 +128,7 @@ export class EdgelessRootBlockComponent extends BlockComponent<
     }
 
     .edgeless-container {
-      color: var(--bridgeflow-text-primary-color);
+      color: var(--affine-text-primary-color);
       position: relative;
     }
 
@@ -147,19 +147,19 @@ export class EdgelessRootBlockComponent extends BlockComponent<
 
       if (this.backgroundElm) {
         this.backgroundElm.style.setProperty(
-          '--bridgeflow-edgeless-grid-gap',
+          '--affine-edgeless-grid-gap',
           `${gap}px`
         );
         this.backgroundElm.style.setProperty(
-          '--bridgeflow-edgeless-grid-major-gap',
+          '--affine-edgeless-grid-major-gap',
           `${majorGap}px`
         );
         this.backgroundElm.style.setProperty(
-          '--bridgeflow-edgeless-grid-offset-x',
+          '--affine-edgeless-grid-offset-x',
           `${translateX}px`
         );
         this.backgroundElm.style.setProperty(
-          '--bridgeflow-edgeless-grid-offset-y',
+          '--affine-edgeless-grid-offset-y',
           `${translateY}px`
         );
       }

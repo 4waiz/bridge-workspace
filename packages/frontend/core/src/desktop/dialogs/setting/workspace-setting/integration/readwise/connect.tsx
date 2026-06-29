@@ -9,7 +9,7 @@ import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-a
 import { IntegrationService } from '@bridgeflow/core/modules/integration';
 import { Trans, useI18n } from '@bridgeflow/i18n';
 import { ReadwiseLogoDuotoneIcon } from '@blocksuite/icons/rc';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import {
   type FormEvent,

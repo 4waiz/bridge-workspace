@@ -3,7 +3,7 @@ import { DefaultServerService } from '@bridgeflow/core/modules/cloud';
 import { ServerFeature } from '@bridgeflow/graphql';
 import { useI18n } from '@bridgeflow/i18n';
 import { ImportIcon, PlusIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 
 import * as styles from './index.css';
 

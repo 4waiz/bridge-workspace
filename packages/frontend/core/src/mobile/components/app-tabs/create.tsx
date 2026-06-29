@@ -6,7 +6,7 @@ import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import track from '@bridgeflow/track';
 import { EditIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 
 import { TabItem } from './tab-item';
 import type { AppTabCustomFCProps } from './type';

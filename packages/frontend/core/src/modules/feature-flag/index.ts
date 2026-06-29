@@ -1,4 +1,4 @@
-import type { Framework } from '@toeverything/infra';
+import type { Framework } from '@kanban-studios/infra';
 
 import { GlobalStateService } from '../storage';
 import { Flags } from './entities/flags';

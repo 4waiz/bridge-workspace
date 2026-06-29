@@ -8,7 +8,7 @@ import { _addLocalWorkspace } from '@bridgeflow/core/modules/workspace-engine';
 import { DebugLogger } from '@bridgeflow/debug';
 import { apis } from '@bridgeflow/electron-api';
 import { useI18n } from '@bridgeflow/i18n';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useLayoutEffect, useRef } from 'react';
 
 const logger = new DebugLogger('ImportWorkspaceDialog');

@@ -1,4 +1,4 @@
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 import { applyUpdate } from 'yjs';
 
 import { transformWorkspaceDBLocalToCloud } from '../../db/utils';

@@ -15,7 +15,7 @@ import {
   PlusIcon,
   ViewLayersIcon,
 } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import type { CSSProperties, MouseEvent, ReactNode } from 'react';
 import { memo, useCallback, useMemo, useState } from 'react';
 

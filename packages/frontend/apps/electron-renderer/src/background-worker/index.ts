@@ -12,7 +12,7 @@ import {
   StoreManagerConsumer,
   type WorkerManagerOps,
 } from '@bridgeflow/nbstore/worker/consumer';
-import { OpConsumer } from '@toeverything/infra/op';
+import { OpConsumer } from '@kanban-studios/infra/op';
 
 // oxlint-disable-next-line no-non-null-assertion
 bindNativeDBApis(apis!.nbstore);

@@ -4,8 +4,8 @@ export const editor = style({
   selectors: {
     '&.full-screen': {
       vars: {
-        '--bridgeflow-editor-width': '100%',
-        '--bridgeflow-editor-side-padding': '72px',
+        '--affine-editor-width': '100%',
+        '--affine-editor-side-padding': '72px',
       },
     },
   },
@@ -14,8 +14,8 @@ export const editor = style({
       selectors: {
         '&.is-public': {
           vars: {
-            '--bridgeflow-editor-width': '100%',
-            '--bridgeflow-editor-side-padding': '24px',
+            '--affine-editor-width': '100%',
+            '--affine-editor-side-padding': '24px',
           },
         },
       },

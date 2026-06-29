@@ -7,7 +7,7 @@ import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
 import { appIconMap, appNames } from '@bridgeflow/core/utils/channel';
 import { Trans, useI18n } from '@bridgeflow/i18n';
 import { LocalWorkspaceIcon } from '@blocksuite/icons/rc';
-import { useServiceOptional } from '@toeverything/infra';
+import { useServiceOptional } from '@kanban-studios/infra';
 import type { MouseEvent } from 'react';
 import { useCallback } from 'react';
 

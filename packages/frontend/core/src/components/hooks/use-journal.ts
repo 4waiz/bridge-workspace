@@ -8,7 +8,7 @@ import {
 import type { WorkbenchOpenOptions } from '@bridgeflow/core/modules/workbench/entities/workbench';
 import { i18nTime } from '@bridgeflow/i18n';
 import { track } from '@bridgeflow/track';
-import { useService, useServices } from '@toeverything/infra';
+import { useService, useServices } from '@kanban-studios/infra';
 import dayjs from 'dayjs';
 import { useCallback, useMemo } from 'react';
 

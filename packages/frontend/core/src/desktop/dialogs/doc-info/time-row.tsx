@@ -2,7 +2,7 @@ import { PropertyName, PropertyRoot, PropertyValue } from '@bridgeflow/component
 import { DocsService } from '@bridgeflow/core/modules/doc';
 import { i18nTime, useI18n } from '@bridgeflow/i18n';
 import { DateTimeIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import type { ConfigType } from 'dayjs';
 import { useDebouncedValue } from 'foxact/use-debounced-value';

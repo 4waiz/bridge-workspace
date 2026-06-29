@@ -1,7 +1,7 @@
 // the adapter is to bridge the workspace rootdoc & native js bindings
 import type { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { createYProxy } from '@blocksuite/bridgeflow/store';
-import { LiveData, Service } from '@toeverything/infra';
+import { LiveData, Service } from '@kanban-studios/infra';
 import { defaultsDeep } from 'lodash-es';
 import { Observable } from 'rxjs';
 import type * as Y from 'yjs';

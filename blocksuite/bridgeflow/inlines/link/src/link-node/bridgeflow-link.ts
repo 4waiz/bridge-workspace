@@ -31,7 +31,7 @@ export class BridgeFlowLink extends WithDisposable(ShadowlessElement) {
   // The link has been identified.
   private _identified: boolean = false;
 
-  // see https://github.com/toeverything/BridgeFlow/issues/1540
+  // see https://github.com/Kanban-Studios/BridgeFlow/issues/1540
   private readonly _onMouseUp = () => {
     const anchorElement = this.querySelector('a');
     if (!anchorElement || !anchorElement.isContentEditable) return;
@@ -158,8 +158,8 @@ export class BridgeFlowLink extends WithDisposable(ShadowlessElement) {
 
   override render() {
     const linkStyle = {
-      color: 'var(--bridgeflow-link-color)',
-      fill: 'var(--bridgeflow-link-color)',
+      color: 'var(--affine-link-color)',
+      fill: 'var(--affine-link-color)',
       'text-decoration': 'none',
       cursor: 'pointer',
     };

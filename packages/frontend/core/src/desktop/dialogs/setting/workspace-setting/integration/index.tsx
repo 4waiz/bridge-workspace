@@ -1,7 +1,7 @@
 import { SettingHeader } from '@bridgeflow/component/setting-components';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { useI18n } from '@bridgeflow/i18n';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { type ReactNode, useCallback, useMemo, useState } from 'react';
 
 import { SubPageProvider, useSubPageIsland } from '../../sub-page';

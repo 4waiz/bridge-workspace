@@ -305,7 +305,7 @@ export class BridgeFlowPageDraggingAreaWidget extends WidgetComponent<RootBlockM
       <style>
         .bridgeflow-page-dragging-area {
           position: absolute;
-          background: var(--bridgeflow-hover-color);
+          background: var(--affine-hover-color);
           z-index: 1;
           pointer-events: none;
         }

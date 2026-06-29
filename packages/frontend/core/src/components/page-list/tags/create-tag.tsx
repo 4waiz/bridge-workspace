@@ -1,7 +1,7 @@
 import { Button, Input, Menu, toast } from '@bridgeflow/component';
 import { TagService } from '@bridgeflow/core/modules/tag';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import type { MouseEvent } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -160,7 +160,7 @@ export const CreateOrEditTag = ({
 
       <Input
         placeholder={t['com.bridgeflow.tags.create-tag.placeholder']()}
-        inputStyle={{ fontSize: 'var(--bridgeflow-font-xs)' }}
+        inputStyle={{ fontSize: 'var(--affine-font-xs)' }}
         onEnter={onConfirm}
         value={tagName}
         onChange={handleChangeName}

@@ -12,7 +12,7 @@ import { UserFriendlyError } from '@bridgeflow/error';
 import { createCustomerPortalMutation } from '@bridgeflow/graphql';
 import { useI18n } from '@bridgeflow/i18n';
 import { ArrowRightSmallIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useState } from 'react';
 
 import { useMutation } from '../../../../../components/hooks/use-mutation';

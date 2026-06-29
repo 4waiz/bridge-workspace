@@ -7,7 +7,7 @@ export const TEST_USER: UserProps = {
 
 export const TEST_WORKSPACE: WorkspaceProps = {
   name: 'Test Workspace',
-  avatar: 'https://awaizahmed.com/imgs/bridge-logo.webp',
+  avatar: 'https://kanbanstudios.ae/imgs/bridge-logo.webp',
 };
 
 export const TEST_DOC: DocProps = {

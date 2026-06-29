@@ -17,11 +17,11 @@ export function bridgeflowTextStyles(
   let inlineCodeStyle = {};
   if (props.code) {
     inlineCodeStyle = {
-      'font-family': 'var(--bridgeflow-font-code-family)',
-      background: 'var(--bridgeflow-background-code-block)',
-      border: '1px solid var(--bridgeflow-border-color)',
+      'font-family': 'var(--affine-font-code-family)',
+      background: 'var(--affine-background-code-block)',
+      border: '1px solid var(--affine-border-color)',
       'border-radius': '4px',
-      color: 'var(--bridgeflow-text-primary-color)',
+      color: 'var(--affine-text-primary-color)',
       'font-variant-ligatures': 'none',
       'vertical-align': 'bottom',
       'line-height': 'inherit',

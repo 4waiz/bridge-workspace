@@ -7,7 +7,7 @@ import {
 } from '@bridgeflow/core/modules/workspace';
 import { UNTITLED_WORKSPACE_NAME } from '@bridgeflow/env/constant';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 export interface PublishPanelProps {
@@ -48,7 +48,7 @@ export const EnableCloudPanel = ({
       spreadCol={false}
       style={{
         padding: '10px',
-        background: 'var(--bridgeflow-background-secondary-color)',
+        background: 'var(--affine-background-secondary-color)',
         marginTop: '24px',
       }}
     >

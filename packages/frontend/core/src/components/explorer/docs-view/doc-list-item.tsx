@@ -16,7 +16,7 @@ import {
   PropertyIcon,
   ResizeTidyUpIcon,
 } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import {
   type HTMLProps,
   memo,

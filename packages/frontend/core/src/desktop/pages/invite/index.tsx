@@ -10,7 +10,7 @@ import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-a
 import { WorkspacesService } from '@bridgeflow/core/modules/workspace';
 import { UserFriendlyError } from '@bridgeflow/error';
 import { WorkspaceMemberStatus } from '@bridgeflow/graphql';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 

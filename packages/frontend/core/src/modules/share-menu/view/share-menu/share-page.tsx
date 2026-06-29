@@ -5,7 +5,7 @@ import { ServerService } from '@bridgeflow/core/modules/cloud';
 import { DocService } from '@bridgeflow/core/modules/doc';
 import { ShareInfoService } from '@bridgeflow/core/modules/share-doc';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { Suspense, useEffect } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 

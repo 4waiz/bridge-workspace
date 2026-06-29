@@ -4,7 +4,7 @@ import { FetchService } from '@bridgeflow/core/modules/cloud/services/fetch';
 import { AuthStore } from '@bridgeflow/core/modules/cloud/stores/auth';
 import { GlobalDialogService } from '@bridgeflow/core/modules/dialogs/services/dialog';
 import { UrlService } from '@bridgeflow/core/modules/url/services/url';
-import { Framework } from '@toeverything/infra';
+import { Framework } from '@kanban-studios/infra';
 import { of } from 'rxjs';
 import { describe, expect, test, vi } from 'vitest';
 

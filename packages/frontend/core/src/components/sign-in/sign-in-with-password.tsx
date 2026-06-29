@@ -18,7 +18,7 @@ import { Unreachable } from '@bridgeflow/env/constant';
 import { UserFriendlyError } from '@bridgeflow/error';
 import { ServerDeploymentType } from '@bridgeflow/graphql';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import type { Dispatch, SetStateAction } from 'react';
 import { useCallback, useEffect, useState } from 'react';
 

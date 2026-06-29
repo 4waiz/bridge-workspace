@@ -3,7 +3,7 @@ import {
   registerBridgeFlowCommand,
 } from '@bridgeflow/core/commands';
 import { track } from '@bridgeflow/track';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useEffect } from 'react';
 
 import { NavigatorService } from '../services/navigator';

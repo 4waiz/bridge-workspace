@@ -52,7 +52,7 @@ const styles = css`
   }
 
   .bridgeflow-database-toolbar-item.more-action:hover {
-    background: var(--bridgeflow-hover-color);
+    background: var(--affine-hover-color);
   }
 
   .bridgeflow-database-toolbar-item.more-action {
@@ -61,7 +61,7 @@ const styles = css`
   }
 
   .more-action.active {
-    background: var(--bridgeflow-hover-color);
+    background: var(--affine-hover-color);
   }
 `;
 
@@ -363,15 +363,15 @@ export const popViewOptions = (
                 const iconStyle = styleMap({
                   fontSize: '24px',
                   color: isSelected
-                    ? 'var(--bridgeflow-text-emphasis-color)'
-                    : 'var(--bridgeflow-icon-secondary)',
+                    ? 'var(--affine-text-emphasis-color)'
+                    : 'var(--affine-icon-secondary)',
                 });
                 const textStyle = styleMap({
                   fontSize: '14px',
                   lineHeight: '22px',
                   color: isSelected
-                    ? 'var(--bridgeflow-text-emphasis-color)'
-                    : 'var(--bridgeflow-text-secondary-color)',
+                    ? 'var(--affine-text-emphasis-color)'
+                    : 'var(--affine-text-secondary-color)',
                 });
                 const buttonData: MenuButtonData = {
                   content: () => html`
@@ -411,12 +411,12 @@ export const popViewOptions = (
           return html`
             <div style="display:flex;align-items:center;gap:8px;padding:0 2px;">
               <div
-                style="display:flex;align-items:center;color:var(--bridgeflow-icon-color);"
+                style="display:flex;align-items:center;color:var(--affine-icon-color);"
               >
                 ${LayoutIcon()}
               </div>
               <div
-                style="font-size:14px;line-height:22px;color:var(--bridgeflow-text-secondary-color);"
+                style="font-size:14px;line-height:22px;color:var(--affine-text-secondary-color);"
               >
                 Layout
               </div>

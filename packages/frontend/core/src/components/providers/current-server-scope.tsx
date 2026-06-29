@@ -1,6 +1,6 @@
 import { ServersService } from '@bridgeflow/core/modules/cloud';
 import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
-import { FrameworkScope, useLiveData, useService } from '@toeverything/infra';
+import { FrameworkScope, useLiveData, useService } from '@kanban-studios/infra';
 import { useMemo } from 'react';
 
 export const CurrentServerScopeProvider = ({

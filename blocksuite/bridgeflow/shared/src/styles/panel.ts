@@ -5,8 +5,8 @@ import { fontSMStyle } from './font';
 
 export const panelBaseColorsStyle = (container: string) => css`
   ${unsafeCSS(container)} {
-    color: var(--bridgeflow-icon-color);
-    box-shadow: var(--bridgeflow-overlay-shadow);
+    color: var(--affine-icon-color);
+    box-shadow: var(--affine-overlay-shadow);
     background: ${unsafeCSSVarV2('layer/background/overlayPanel')};
   }
 `;

@@ -4,7 +4,7 @@ import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
 import { useI18n } from '@bridgeflow/i18n';
 import { track } from '@bridgeflow/track';
 import { AccountIcon, AdminIcon, SignOutIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect } from 'react';
 
 import { useSignOut } from '../../hooks/bridgeflow/use-sign-out';

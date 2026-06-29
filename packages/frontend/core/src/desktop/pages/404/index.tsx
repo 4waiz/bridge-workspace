@@ -9,7 +9,7 @@ import {
   useLiveData,
   useService,
   useServiceOptional,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import type { ReactElement } from 'react';
 import { useCallback, useEffect } from 'react';
 

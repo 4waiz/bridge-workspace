@@ -84,7 +84,7 @@ export const styles = css`
   .bridgeflow-embed-figma-content-title-icon svg {
     width: 20px;
     height: 20px;
-    fill: var(--bridgeflow-background-primary-color);
+    fill: var(--affine-background-primary-color);
   }
 
   .bridgeflow-embed-figma-content-title-text {
@@ -97,10 +97,10 @@ export const styles = css`
     word-break: break-word;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--bridgeflow-text-primary-color);
+    color: var(--affine-text-primary-color);
 
-    font-family: var(--bridgeflow-font-family);
-    font-size: var(--bridgeflow-font-sm);
+    font-family: var(--affine-font-family);
+    font-size: var(--affine-font-sm);
     font-style: normal;
     font-weight: 600;
     line-height: 22px;
@@ -115,10 +115,10 @@ export const styles = css`
     white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--bridgeflow-text-primary-color);
+    color: var(--affine-text-primary-color);
 
-    font-family: var(--bridgeflow-font-family);
-    font-size: var(--bridgeflow-font-xs);
+    font-family: var(--affine-font-family);
+    font-size: var(--affine-font-xs);
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
@@ -129,7 +129,7 @@ export const styles = css`
     position: absolute;
     right: 0;
     bottom: 0;
-    background-color: var(--bridgeflow-background-primary-color);
+    background-color: var(--affine-background-primary-color);
   }
 
   .bridgeflow-embed-figma-content-url {
@@ -152,17 +152,17 @@ export const styles = css`
     text-overflow: ellipsis;
     color: ${unsafeCSSVarV2('icon/primary')};
 
-    font-family: var(--bridgeflow-font-family);
-    font-size: var(--bridgeflow-font-xs);
+    font-family: var(--affine-font-family);
+    font-size: var(--affine-font-xs);
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
   }
   .bridgeflow-embed-figma-content-url:hover > span {
-    color: var(--bridgeflow-link-color);
+    color: var(--affine-link-color);
   }
   .bridgeflow-embed-figma-content-url:hover .open-icon {
-    fill: var(--bridgeflow-link-color);
+    fill: var(--affine-link-color);
   }
 
   .bridgeflow-embed-figma-content-url-icon {
@@ -180,10 +180,10 @@ export const styles = css`
 
   .bridgeflow-embed-figma-block.selected {
     .bridgeflow-embed-figma-content-url > span {
-      color: var(--bridgeflow-link-color);
+      color: var(--affine-link-color);
     }
     .bridgeflow-embed-figma-content-url .open-icon {
-      fill: var(--bridgeflow-link-color);
+      fill: var(--affine-link-color);
     }
   }
 `;

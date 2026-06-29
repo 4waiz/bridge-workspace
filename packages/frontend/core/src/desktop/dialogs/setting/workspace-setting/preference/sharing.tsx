@@ -8,7 +8,7 @@ import { WorkspacePermissionService } from '@bridgeflow/core/modules/permissions
 import { WorkspaceShareSettingService } from '@bridgeflow/core/modules/share-setting';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 
 export const SharingPanel = () => {
   const workspace = useService(WorkspaceService).workspace;

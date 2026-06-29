@@ -2,7 +2,7 @@ import type {
   StoreClient,
   WorkerInitOptions,
 } from '@bridgeflow/nbstore/worker/client';
-import { createIdentifier } from '@toeverything/infra';
+import { createIdentifier } from '@kanban-studios/infra';
 
 export interface NbstoreProvider {
   /**

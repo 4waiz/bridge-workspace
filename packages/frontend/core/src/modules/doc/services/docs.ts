@@ -4,7 +4,7 @@ import { replaceIdMiddleware } from '@blocksuite/bridgeflow/shared/adapters';
 import type { BridgeFlowTextAttributes } from '@blocksuite/bridgeflow/shared/types';
 import type { DeltaInsert } from '@blocksuite/bridgeflow/store';
 import { Slice, Text, Transformer } from '@blocksuite/bridgeflow/store';
-import { ObjectPool, Service } from '@toeverything/infra';
+import { ObjectPool, Service } from '@kanban-studios/infra';
 import { combineLatest, map } from 'rxjs';
 
 import { initDocFromProps } from '../../../blocksuite/initialization';

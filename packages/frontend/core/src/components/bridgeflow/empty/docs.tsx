@@ -3,7 +3,7 @@ import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { inferOpenMode } from '@bridgeflow/core/utils';
 import { useI18n } from '@bridgeflow/i18n';
 import { AllDocsIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { type MouseEvent, useCallback } from 'react';
 
 import { usePageHelper } from '../../../blocksuite/block-suite-page-list/utils';

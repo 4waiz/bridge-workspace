@@ -9,7 +9,7 @@ import {
   useLiveData,
   useService,
   useServiceOptional,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { memo, useCallback, useMemo } from 'react';
 

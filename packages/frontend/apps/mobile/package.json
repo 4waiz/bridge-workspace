@@ -17,8 +17,8 @@
     "@bridgeflow/i18n": "workspace:*",
     "@bridgeflow/nbstore": "workspace:*",
     "@bridgeflow/track": "workspace:*",
+    "@kanban-studios/infra": "workspace:*",
     "@sentry/react": "^10.40.0",
-    "@toeverything/infra": "workspace:*",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "react-router-dom": "^6.30.3"

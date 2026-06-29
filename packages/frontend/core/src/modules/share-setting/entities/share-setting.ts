@@ -9,7 +9,7 @@ import {
   onComplete,
   onStart,
   smartRetry,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { exhaustMap, tap } from 'rxjs';
 
 import type { WorkspaceService } from '../../workspace';

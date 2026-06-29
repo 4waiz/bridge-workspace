@@ -15,7 +15,7 @@ import type { PropsWithChildren } from 'react';
 import { BasicTextStyle } from './common';
 import { Footer } from './footer';
 
-const BRIDGE_LOGO_URL = 'https://awaizahmed.com/imgs/bridge-logo.webp';
+const BRIDGE_LOGO_URL = 'https://kanbanstudios.ae/imgs/bridge-logo.webp';
 
 export function Title(props: PropsWithChildren) {
   return (
@@ -216,7 +216,7 @@ export function Template(props: PropsWithChildren) {
           }}
         >
           <Section>
-            <Link href="https://awaizahmed.com">
+            <Link href="https://kanbanstudios.ae">
               <Img
                 src={BRIDGE_LOGO_URL}
                 alt="BRIDGE Flow logo"

@@ -2,7 +2,7 @@ import { parsePageDoc } from '@bridgeflow/reader';
 import { LifeCycleWatcher } from '@blocksuite/bridgeflow/std';
 import { Extension, type Store } from '@blocksuite/bridgeflow/store';
 import { type Container, createIdentifier } from '@blocksuite/global/di';
-import { LiveData } from '@toeverything/infra';
+import { LiveData } from '@kanban-studios/infra';
 import type { Subscription } from 'rxjs';
 
 import { applyPatchToDoc } from '../utils/apply-model/apply-patch-to-doc';

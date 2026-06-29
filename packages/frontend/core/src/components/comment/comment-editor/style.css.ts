@@ -20,8 +20,8 @@ export const container = style({
     },
   },
   vars: {
-    '--bridgeflow-paragraph-margin': '0',
-    '--bridgeflow-font-base': '14px',
+    '--affine-paragraph-margin': '0',
+    '--affine-font-base': '14px',
   },
 });
 

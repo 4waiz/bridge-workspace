@@ -6,7 +6,7 @@ import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
 import { useI18n } from '@bridgeflow/i18n';
 import { track } from '@bridgeflow/track';
 import { AddCollectionIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useServices } from '@toeverything/infra';
+import { useLiveData, useServices } from '@kanban-studios/infra';
 import { useCallback, useMemo } from 'react';
 
 import { AddItemPlaceholder } from '../../layouts/add-item-placeholder';

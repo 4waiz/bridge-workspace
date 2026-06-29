@@ -6,7 +6,7 @@ import { UserFriendlyError } from '@bridgeflow/error';
 import { Trans, useI18n } from '@bridgeflow/i18n';
 import track from '@bridgeflow/track';
 import { ArrowRightSmallIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 

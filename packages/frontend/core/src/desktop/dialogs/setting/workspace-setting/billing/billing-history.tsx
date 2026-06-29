@@ -5,7 +5,7 @@ import { UrlService } from '@bridgeflow/core/modules/url';
 import { UserFriendlyError } from '@bridgeflow/error';
 import { type InvoicesQuery, InvoiceStatus } from '@bridgeflow/graphql';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { cssVar } from '@toeverything/theme';
 import { useCallback, useEffect } from 'react';
 

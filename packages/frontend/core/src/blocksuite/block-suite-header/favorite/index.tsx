@@ -3,7 +3,7 @@ import { CompatibleFavoriteItemsAdapter } from '@bridgeflow/core/modules/favorit
 import { toast } from '@bridgeflow/core/utils';
 import { useI18n } from '@bridgeflow/i18n';
 import { track } from '@bridgeflow/track';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 export interface FavoriteButtonProps {

@@ -59,16 +59,16 @@ export class EmbedIframeLinkInputPopup extends EmbedIframeLinkInputBase {
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      color: var(--bridgeflow-icon-color);
+      color: var(--affine-icon-color);
       border-radius: 4px;
     }
     .popup-close-button:hover {
-      background-color: var(--bridgeflow-hover-color);
+      background-color: var(--affine-hover-color);
     }
 
     .title {
       /* Client/h6 */
-      font-size: var(--bridgeflow-font-base);
+      font-size: var(--affine-font-base);
       font-style: normal;
       font-weight: 500;
       line-height: 24px;
@@ -80,7 +80,7 @@ export class EmbedIframeLinkInputPopup extends EmbedIframeLinkInputBase {
       font-feature-settings:
         'liga' off,
         'clig' off;
-      font-size: var(--bridgeflow-font-sm);
+      font-size: var(--affine-font-sm);
       font-style: normal;
       font-weight: 400;
       line-height: 22px;
@@ -102,8 +102,8 @@ export class EmbedIframeLinkInputPopup extends EmbedIframeLinkInputBase {
       }
 
       .link-input:focus {
-        border-color: var(--bridgeflow-blue-700);
-        box-shadow: var(--bridgeflow-active-shadow);
+        border-color: var(--affine-blue-700);
+        box-shadow: var(--affine-active-shadow);
         outline: none;
       }
       .link-input::placeholder {

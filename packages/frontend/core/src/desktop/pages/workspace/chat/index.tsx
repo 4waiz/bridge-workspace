@@ -45,7 +45,7 @@ import { RefNodeSlotsProvider } from '@blocksuite/bridgeflow/inlines/reference';
 import { BlockStdScope } from '@blocksuite/bridgeflow/std';
 import type { Workspace } from '@blocksuite/bridgeflow/store';
 import { type Signal, signal } from '@preact/signals-core';
-import { useFramework, useService } from '@toeverything/infra';
+import { useFramework, useService } from '@kanban-studios/infra';
 import { nanoid } from 'nanoid';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 

@@ -15,8 +15,8 @@ export class DragToFillElement extends ShadowlessElement {
     .drag-to-fill {
       border-radius: 50%;
       box-sizing: border-box;
-      background-color: var(--bridgeflow-background-primary-color);
-      border: 2px solid var(--bridgeflow-primary-color);
+      background-color: var(--affine-background-primary-color);
+      border: 2px solid var(--affine-primary-color);
       display: none;
       position: absolute;
       cursor: ns-resize;

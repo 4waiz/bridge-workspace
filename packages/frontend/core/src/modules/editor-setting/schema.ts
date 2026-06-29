@@ -7,10 +7,10 @@ export type FontFamily = 'Sans' | 'Serif' | 'Mono' | 'Custom';
 export type EdgelessDefaultTheme = 'auto' | 'dark' | 'light' | 'specified';
 
 export const fontStyleOptions = [
-  { key: 'Sans', value: 'var(--bridgeflow-font-sans-family)' },
-  { key: 'Serif', value: 'var(--bridgeflow-font-serif-family)' },
-  { key: 'Mono', value: 'var(--bridgeflow-font-mono-family)' },
-  { key: 'Custom', value: 'var(--bridgeflow-font-sans-family)' },
+  { key: 'Sans', value: 'var(--affine-font-sans-family)' },
+  { key: 'Serif', value: 'var(--affine-font-serif-family)' },
+  { key: 'Mono', value: 'var(--affine-font-mono-family)' },
+  { key: 'Custom', value: 'var(--affine-font-sans-family)' },
 ] satisfies {
   key: FontFamily;
   value: string;

@@ -169,7 +169,7 @@ legend {
   background-color: unset;
   outline: 0;
   border: 0;
-  font-size: var(--bridgeflow-font-base);
+  font-size: var(--affine-font-base);
   font-family: inherit;
   font-feature-settings: 'calt' 0;
 }
@@ -190,7 +190,7 @@ input {
   outline: medium;
   /*Remove the default yellow border on mouse click*/
   background-color: transparent;
-  caret-color: var(--bridgeflow-primary-color);
+  caret-color: var(--affine-primary-color);
 }
 
 input:-webkit-autofill {
@@ -234,7 +234,7 @@ editor-host *::-webkit-scrollbar {
   padding-right: 0;
 }
 
-/* issue: https://github.com/toeverything/BridgeFlow/issues/2004 */
+/* issue: https://github.com/Kanban-Studios/BridgeFlow/issues/2004 */
 .editor-wrapper.edgeless-mode {
   padding: 0;
 }
@@ -267,7 +267,7 @@ bridgeflow-block-hub {
     width: 100%;
   }
 
-  /* issue: https://github.com/toeverything/BridgeFlow/issues/2004 */
+  /* issue: https://github.com/Kanban-Studios/BridgeFlow/issues/2004 */
   .editor-wrapper.edgeless-mode {
     padding: 0;
   }
@@ -311,7 +311,7 @@ math {
 /* AI Block Diff */
 .ai-block-diff-deleted {
   background-color: var(
-    --bridgeflow-v2-aI-applyDeleteHighlight,
+    --affine-v2-aI-applyDeleteHighlight,
     #ffeaea
   ) !important;
   border-radius: 4px !important;

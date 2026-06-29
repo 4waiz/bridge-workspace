@@ -1,6 +1,6 @@
 import { AtMenuConfigService } from '@bridgeflow/core/modules/at-menu-config/services';
 import type { LinkedWidgetConfig } from '@blocksuite/bridgeflow/widgets/linked-doc';
-import { type FrameworkProvider } from '@toeverything/infra';
+import { type FrameworkProvider } from '@kanban-studios/infra';
 
 export function createLinkedWidgetConfig(
   framework: FrameworkProvider

@@ -4,7 +4,7 @@ import { NavigationPanelService } from '@bridgeflow/core/modules/navigation-pane
 import type { Tag } from '@bridgeflow/core/modules/tag';
 import { TagService } from '@bridgeflow/core/modules/tag';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService, useServices } from '@toeverything/infra';
+import { useLiveData, useService, useServices } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { useCallback, useMemo } from 'react';
 

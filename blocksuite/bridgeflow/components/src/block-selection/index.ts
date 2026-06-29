@@ -29,7 +29,7 @@ export class BlockSelection extends SignalWatcher(LitElement) {
       width: 100%;
       height: 100%;
       pointer-events: none;
-      background-color: var(--bridgeflow-hover-color);
+      background-color: var(--affine-hover-color);
       border-color: transparent;
       border-style: solid;
     }

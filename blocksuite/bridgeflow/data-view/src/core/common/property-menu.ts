@@ -26,7 +26,7 @@ export const typeConfig = (property: Property) => {
         hide: () => !property.typeCanSet,
         postfix: html` <div
           class="bridgeflow-database-column-type-icon"
-          style="color: var(--bridgeflow-text-secondary-color);gap:4px;font-size: 14px;"
+          style="color: var(--affine-text-secondary-color);gap:4px;font-size: 14px;"
         >
           ${renderUniLit(property.icon)}
           ${property.view.propertyMetas$.value.find(

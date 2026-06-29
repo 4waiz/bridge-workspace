@@ -545,7 +545,7 @@ test.describe('select column tag action', () => {
     await assertSelectedStyle(
       page,
       'backgroundColor',
-      'var(--bridgeflow-v2-chip-label-red)'
+      'var(--affine-v2-chip-label-red)'
     );
   });
 });

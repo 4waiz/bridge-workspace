@@ -2,7 +2,7 @@ import { useThemeColorV2 } from '@bridgeflow/component';
 import { PageNotFound } from '@bridgeflow/core/desktop/pages/404';
 import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
 import { TagService } from '@bridgeflow/core/modules/tag';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 

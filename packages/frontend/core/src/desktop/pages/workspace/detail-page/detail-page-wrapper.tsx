@@ -3,7 +3,7 @@ import type { Editor } from '@bridgeflow/core/modules/editor';
 import { EditorsService } from '@bridgeflow/core/modules/editor';
 import { ViewService } from '@bridgeflow/core/modules/workbench/services/view';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
-import { FrameworkScope, useLiveData, useService } from '@toeverything/infra';
+import { FrameworkScope, useLiveData, useService } from '@kanban-studios/infra';
 import {
   type PropsWithChildren,
   type ReactNode,

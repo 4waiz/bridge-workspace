@@ -5,7 +5,7 @@ import { GraphQLService } from '@bridgeflow/core/modules/cloud';
 import { UserFriendlyError } from '@bridgeflow/error';
 import { verifyEmailMutation } from '@bridgeflow/graphql';
 import { useI18n } from '@bridgeflow/i18n';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { type FC, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 

@@ -1,4 +1,4 @@
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 import { map, type Observable, switchMap } from 'rxjs';
 
 import type { ServersService } from '../../cloud';

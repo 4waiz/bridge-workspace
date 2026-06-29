@@ -11,7 +11,7 @@ import {
   type Signal,
 } from '@blocksuite/bridgeflow/shared/utils';
 import { LifeCycleWatcher, StdIdentifier } from '@blocksuite/bridgeflow/std';
-import { type FrameworkProvider } from '@toeverything/infra';
+import { type FrameworkProvider } from '@kanban-studios/infra';
 import type { Observable } from 'rxjs';
 import { combineLatest, map } from 'rxjs';
 

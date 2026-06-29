@@ -57,10 +57,10 @@ export class SurfaceBlockComponent extends BlockComponent<SurfaceBlockModel> {
       overflow: hidden;
       display: block;
       height: 100%;
-      font-family: var(--bridgeflow-font-family);
-      font-size: var(--bridgeflow-font-base);
-      line-height: var(--bridgeflow-line-height);
-      color: var(--bridgeflow-text-primary-color);
+      font-family: var(--affine-font-family);
+      font-size: var(--affine-font-base);
+      line-height: var(--affine-line-height);
+      color: var(--affine-text-primary-color);
       font-weight: 400;
     }
 
@@ -85,9 +85,9 @@ export class SurfaceBlockComponent extends BlockComponent<SurfaceBlockModel> {
       position: absolute;
       transform-origin: center;
       box-sizing: border-box;
-      border: 2px solid var(--bridgeflow-white-10);
+      border: 2px solid var(--affine-white-10);
       border-radius: 8px;
-      box-shadow: var(--bridgeflow-shadow-3);
+      box-shadow: var(--affine-shadow-3);
       pointer-events: all;
     }
   `;

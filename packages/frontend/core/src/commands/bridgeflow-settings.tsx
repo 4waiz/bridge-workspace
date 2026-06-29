@@ -1,7 +1,7 @@
 import type { useI18n } from '@bridgeflow/i18n';
 import { track } from '@bridgeflow/track';
 import { SettingsIcon } from '@blocksuite/icons/rc';
-import { appSettingAtom } from '@toeverything/infra';
+import { appSettingAtom } from '@kanban-studios/infra';
 import type { createStore } from 'jotai';
 import type { useTheme } from 'next-themes';
 

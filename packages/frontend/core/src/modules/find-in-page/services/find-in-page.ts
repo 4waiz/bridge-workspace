@@ -1,4 +1,4 @@
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 
 import { FindInPage } from '../entities/find-in-page';
 

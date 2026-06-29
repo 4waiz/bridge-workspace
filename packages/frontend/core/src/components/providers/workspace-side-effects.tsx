@@ -40,7 +40,7 @@ import {
   throwIfAborted,
   useService,
   useServices,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 import { catchError, EMPTY, finalize, switchMap, tap, timeout } from 'rxjs';

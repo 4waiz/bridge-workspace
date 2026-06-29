@@ -5,7 +5,7 @@ import {
 } from '@bridgeflow/core/components/page-list';
 import { EditorService } from '@bridgeflow/core/modules/editor';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 
 import * as styles from './index.css';
 

@@ -45,9 +45,9 @@ export class EmbedHtmlFullscreenToolbar extends LitElement {
     }
 
     .fullscreen-toolbar-container {
-      background: var(--bridgeflow-background-overlay-panel-color);
-      box-shadow: var(--bridgeflow-menu-shadow);
-      border: 1px solid var(--bridgeflow-border-color);
+      background: var(--affine-background-overlay-panel-color);
+      box-shadow: var(--affine-menu-shadow);
+      border: 1px solid var(--affine-border-color);
       border-radius: 40px;
 
       display: flex;
@@ -62,7 +62,7 @@ export class EmbedHtmlFullscreenToolbar extends LitElement {
 
     .short-v-divider {
       display: inline-block;
-      background-color: var(--bridgeflow-border-color);
+      background-color: var(--affine-border-color);
       width: 1px;
       height: 36px;
     }

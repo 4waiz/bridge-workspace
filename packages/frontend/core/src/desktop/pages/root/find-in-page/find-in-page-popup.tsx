@@ -7,7 +7,7 @@ import {
   SearchIcon,
 } from '@blocksuite/icons/rc';
 import * as Popover from '@radix-ui/react-popover';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import clsx from 'clsx';
 import {
@@ -43,7 +43,7 @@ const drawText = (
 
   const rootStyles = getComputedStyle(document.documentElement);
   const textColor = rootStyles
-    .getPropertyValue('--bridgeflow-text-primary-color')
+    .getPropertyValue('--affine-text-primary-color')
     .trim();
 
   ctx.scale(dpr, dpr);

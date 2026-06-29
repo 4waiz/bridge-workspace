@@ -25,7 +25,7 @@ const styles = css`
     cursor: pointer;
     transition: opacity 230ms ease;
     font-size: 12px;
-    color: var(--bridgeflow-text-secondary-color);
+    color: var(--affine-text-secondary-color);
     display: flex;
     opacity: 0;
     justify-content: flex-end;
@@ -41,7 +41,7 @@ const styles = css`
   .stats-cell:hover,
   bridgeflow-database-virtual-column-stats-cell.active .stats-cell {
     opacity: 1;
-    background-color: var(--bridgeflow-hover-color);
+    background-color: var(--affine-hover-color);
     cursor: pointer;
   }
 
@@ -59,11 +59,11 @@ const styles = css`
 
   .stats-cell .label {
     text-transform: uppercase;
-    color: var(--bridgeflow-text-secondary-color);
+    color: var(--affine-text-secondary-color);
   }
 
   .stats-cell .value {
-    color: var(--bridgeflow-text-primary-color);
+    color: var(--affine-text-primary-color);
   }
 `;
 

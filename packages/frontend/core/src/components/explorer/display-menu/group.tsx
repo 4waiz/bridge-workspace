@@ -4,7 +4,7 @@ import { WorkspacePropertyService } from '@bridgeflow/core/modules/workspace-pro
 import { useI18n } from '@bridgeflow/i18n';
 import track from '@bridgeflow/track';
 import { DoneIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { cssVarV2 } from '@toeverything/theme/v2';
 import { useMemo } from 'react';
 

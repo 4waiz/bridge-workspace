@@ -4,7 +4,7 @@ import { WorkspaceAvatar } from '@bridgeflow/core/components/workspace-avatar';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { UNTITLED_WORKSPACE_NAME } from '@bridgeflow/env/constant';
 import { ArrowDownSmallIcon } from '@blocksuite/icons/rc';
-import { useServiceOptional } from '@toeverything/infra';
+import { useServiceOptional } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { forwardRef, type HTMLAttributes } from 'react';
 

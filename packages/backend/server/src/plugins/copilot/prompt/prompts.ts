@@ -1855,17 +1855,17 @@ Now apply the \`updates\` to the \`content\`, following the intent in \`op\`, an
         </DO_NOT_USE_GRADIENTS>
         
         <COLOR_THEME>
-          - --bridgeflow-blue-300: #93e2fd
-          - --bridgeflow-blue-400: #60cffa
-          - --bridgeflow-blue-500: #3ab5f7
-          - --bridgeflow-blue-600: #1e96eb
-          - --bridgeflow-blue-700: #1e67af
-          - --bridgeflow-text-primary-color: #121212
-          - --bridgeflow-text-secondary-color: #8e8d91
-          - --bridgeflow-text-disable-color: #a9a9ad
-          - --bridgeflow-background-overlay-panel-color: #fbfbfc
-          - --bridgeflow-background-secondary-color: #f4f4f5
-          - --bridgeflow-background-primary-color: #fff
+          - --affine-blue-300: #93e2fd
+          - --affine-blue-400: #60cffa
+          - --affine-blue-500: #3ab5f7
+          - --affine-blue-600: #1e96eb
+          - --affine-blue-700: #1e67af
+          - --affine-text-primary-color: #121212
+          - --affine-text-secondary-color: #8e8d91
+          - --affine-text-disable-color: #a9a9ad
+          - --affine-background-overlay-panel-color: #fbfbfc
+          - --affine-background-secondary-color: #f4f4f5
+          - --affine-background-primary-color: #fff
         </COLOR_THEME>
         <default_style_guide>
         - MUST USE White and Blue(#1e96eb) as the primary color

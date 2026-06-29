@@ -1,6 +1,6 @@
 import { DebugLogger } from '@bridgeflow/debug';
 import { UserFriendlyError } from '@bridgeflow/error';
-import { fromPromise, Service } from '@toeverything/infra';
+import { fromPromise, Service } from '@kanban-studios/infra';
 
 import type { ServerService } from './server';
 

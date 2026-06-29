@@ -43,18 +43,18 @@ const styles = css`
   }
 
   .all-frames-setting-button svg {
-    color: var(--bridgeflow-icon-secondary);
+    color: var(--affine-icon-secondary);
   }
 
   .all-frames-setting-button:hover svg,
   .all-frames-setting-button.active svg {
-    color: var(--bridgeflow-icon-color);
+    color: var(--affine-icon-color);
   }
 
   .all-frames-setting-label {
     width: 68px;
     height: 22px;
-    font-size: var(--bridgeflow-font-sm);
+    font-size: var(--affine-font-sm);
     font-weight: 500;
     line-height: 22px;
     color: var(--light-text-color-text-secondary-color, #8e8d91);
@@ -64,8 +64,8 @@ const styles = css`
     display: none;
     justify-content: center;
     align-items: center;
-    background: var(--bridgeflow-background-overlay-panel-color);
-    box-shadow: var(--bridgeflow-shadow-2);
+    background: var(--affine-background-overlay-panel-color);
+    box-shadow: var(--affine-shadow-2);
     border-radius: 8px;
   }
 
@@ -83,17 +83,17 @@ const styles = css`
     padding: 4px 8px;
     border-radius: 8px;
     margin: 4px 0;
-    border: 1px solid var(--bridgeflow-border-color);
-    background: var(--bridgeflow-white);
+    border: 1px solid var(--affine-border-color);
+    background: var(--affine-white);
   }
 
   .presentation-button:hover {
-    background: var(--bridgeflow-hover-color);
+    background: var(--affine-hover-color);
     cursor: pointer;
   }
 
   .presentation-button svg {
-    fill: var(--bridgeflow-icon-color);
+    fill: var(--affine-icon-color);
     margin-right: 4px;
   }
 

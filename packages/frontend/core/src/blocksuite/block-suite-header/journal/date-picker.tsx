@@ -6,7 +6,7 @@ import {
 } from '@bridgeflow/core/modules/journal';
 import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
 import type { Store } from '@blocksuite/bridgeflow/store';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import dayjs from 'dayjs';
 import { useCallback, useEffect, useRef, useState } from 'react';
 

@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@bridgeflow/reader": "workspace:*",
-    "@toeverything/infra": "workspace:*",
+    "@kanban-studios/infra": "workspace:*",
     "eventemitter2": "^6.4.9",
     "graphemer": "^1.4.0",
     "lib0": "^0.2.114",

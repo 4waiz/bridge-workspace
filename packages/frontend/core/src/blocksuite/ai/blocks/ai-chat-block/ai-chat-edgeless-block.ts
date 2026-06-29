@@ -20,8 +20,8 @@ export class EdgelessAIChatBlockComponent extends toGfxBlockComponent(
       height: `${height}px`,
       borderRadius: '8px',
       transformOrigin: '0 0',
-      boxShadow: 'var(--bridgeflow-shadow-1)',
-      border: '1px solid var(--bridgeflow-border-color)',
+      boxShadow: 'var(--affine-shadow-1)',
+      border: '1px solid var(--affine-border-color)',
       transform: `scale(${scale})`,
     };
 

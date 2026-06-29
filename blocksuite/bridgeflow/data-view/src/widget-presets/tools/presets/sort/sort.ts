@@ -30,7 +30,7 @@ const styles = css`
 
   .bridgeflow-database-sort-button:hover,
   .bridgeflow-database-sort-button.active {
-    background-color: var(--bridgeflow-hover-color);
+    background-color: var(--affine-hover-color);
   }
 
   .bridgeflow-database-sort-button {

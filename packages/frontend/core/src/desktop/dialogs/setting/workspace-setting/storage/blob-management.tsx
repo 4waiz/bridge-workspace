@@ -13,7 +13,7 @@ import type { ListedBlobRecord } from '@bridgeflow/nbstore';
 import track from '@bridgeflow/track';
 import { getAttachmentFileIcon } from '@blocksuite/bridgeflow/components/icons';
 import { DeleteIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import bytes from 'bytes';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 

@@ -4,7 +4,7 @@ import {
   type Signal,
 } from '@blocksuite/bridgeflow/shared/utils';
 import { signal } from '@preact/signals-core';
-import { LiveData, Service } from '@toeverything/infra';
+import { LiveData, Service } from '@kanban-studios/infra';
 
 import type { GraphQLService, SubscriptionService } from '../../cloud';
 import type { GlobalStateService } from '../../storage';

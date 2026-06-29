@@ -5,7 +5,7 @@ import {
 } from '@bridgeflow/core/modules/cloud';
 import { UrlService } from '@bridgeflow/core/modules/url';
 import type { CreateCheckoutSessionInput } from '@bridgeflow/graphql';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { nanoid } from 'nanoid';
 import {
   type PropsWithChildren,

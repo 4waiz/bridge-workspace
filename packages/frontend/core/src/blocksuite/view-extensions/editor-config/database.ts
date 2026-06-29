@@ -14,7 +14,7 @@ import {
 } from '@blocksuite/bridgeflow/components/context-menu';
 import type { DatabaseBlockModel } from '@blocksuite/bridgeflow/model';
 import { LinkIcon } from '@blocksuite/icons/lit';
-import type { FrameworkProvider } from '@toeverything/infra';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 
 export function createDatabaseOptionsConfig(framework: FrameworkProvider) {
   return {

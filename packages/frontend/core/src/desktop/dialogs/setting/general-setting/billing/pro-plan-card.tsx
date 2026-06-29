@@ -7,7 +7,7 @@ import {
   SubscriptionStatus,
 } from '@bridgeflow/graphql';
 import { type I18nString, i18nTime, Trans, useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useEffect } from 'react';
 
 import { RedeemCode } from '../plans/plan-card';

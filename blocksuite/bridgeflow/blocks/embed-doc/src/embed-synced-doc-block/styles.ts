@@ -38,7 +38,7 @@ export const blockStyles = css`
     height: calc(${EMBED_CARD_HEIGHT.syncedDoc}px + 36px);
   }
   .edgeless-block-portal-embed .bridgeflow-embed-synced-doc-container.surface {
-    border: 1px solid var(--bridgeflow-border-color);
+    border: 1px solid var(--affine-border-color);
   }
 
   bridgeflow-embed-synced-doc-block[data-nested-editor],
@@ -61,7 +61,7 @@ export const blockStyles = css`
     outline: 2px solid ${unsafeCSSVarV2('block/comment/highlightUnderline')};
   }
   .bridgeflow-embed-synced-doc-container.show-hover-border:hover {
-    border-color: var(--bridgeflow-border-color);
+    border-color: var(--affine-border-color);
   }
   .bridgeflow-embed-synced-doc-container.page {
     display: block;
@@ -78,7 +78,7 @@ export const blockStyles = css`
     left: 0;
     height: 34px;
     width: 100%;
-    background-color: var(--bridgeflow-white);
+    background-color: var(--affine-white);
     opacity: 0;
   }
   @media print {
@@ -96,7 +96,7 @@ export const blockStyles = css`
     width: 100%;
     height: 100%;
     padding: 0 var(--embed-padding);
-    background-color: var(--bridgeflow-hover-color);
+    background-color: var(--affine-hover-color);
   }
   .bridgeflow-embed-synced-doc-header svg {
     flex-shrink: 0;
@@ -141,11 +141,11 @@ export const blockStyles = css`
   }
 
   .bridgeflow-embed-synced-doc-editor-empty > span {
-    color: var(--bridgeflow-placeholder-color);
+    color: var(--affine-placeholder-color);
     font-feature-settings:
       'clig' off,
       'liga' off;
-    font-family: var(--bridgeflow-font-family);
+    font-family: var(--affine-font-family);
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
@@ -230,7 +230,7 @@ export const cardStyles = css`
   .bridgeflow-embed-synced-doc-card-content-title-icon svg {
     width: 16px;
     height: 16px;
-    fill: var(--bridgeflow-background-primary-color);
+    fill: var(--affine-background-primary-color);
   }
 
   .bridgeflow-embed-synced-doc-card-content-title-text {
@@ -240,9 +240,9 @@ export const cardStyles = css`
     word-break: break-word;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--bridgeflow-text-primary-color);
-    font-family: var(--bridgeflow-font-family);
-    font-size: var(--bridgeflow-font-sm);
+    color: var(--affine-text-primary-color);
+    font-family: var(--affine-font-family);
+    font-size: var(--affine-font-sm);
     font-style: normal;
     font-weight: 600;
     line-height: 22px;
@@ -264,9 +264,9 @@ export const cardStyles = css`
     word-break: break-word;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--bridgeflow-placeholder-color);
-    font-family: var(--bridgeflow-font-family);
-    font-size: var(--bridgeflow-font-xs);
+    color: var(--affine-placeholder-color);
+    font-family: var(--affine-font-family);
+    font-size: var(--affine-font-xs);
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
@@ -292,9 +292,9 @@ export const cardStyles = css`
     white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--bridgeflow-text-secondary-color);
-    font-family: var(--bridgeflow-font-family);
-    font-size: var(--bridgeflow-font-xs);
+    color: var(--affine-text-secondary-color);
+    font-family: var(--affine-font-family);
+    font-size: var(--affine-font-xs);
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
@@ -320,8 +320,8 @@ export const cardStyles = css`
     white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-family: var(--bridgeflow-font-family);
-    font-size: var(--bridgeflow-font-xs);
+    font-family: var(--affine-font-family);
+    font-size: var(--affine-font-xs);
     font-style: normal;
     font-weight: 500;
     line-height: 20px;
@@ -369,7 +369,7 @@ export const cardStyles = css`
 
   .bridgeflow-embed-synced-doc-card:not(.loading).deleted,
   .bridgeflow-embed-synced-doc-card:not(.loading).error {
-    background: var(--bridgeflow-background-secondary-color);
+    background: var(--affine-background-secondary-color);
   }
   .bridgeflow-embed-synced-doc-card:not(.loading):not(.error):not(
       .surface

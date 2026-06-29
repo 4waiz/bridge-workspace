@@ -6,7 +6,7 @@ import {
 } from '@bridgeflow/core/modules/workspace-property';
 import { generateUniqueNameInSequence } from '@bridgeflow/core/utils/unique-name';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import {

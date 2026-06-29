@@ -4,7 +4,7 @@ import {
   RecentDocsQuickSearchSession,
   TagsQuickSearchSession,
 } from '@bridgeflow/core/modules/quicksearch';
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 
 export class MobileSearchService extends Service {
   readonly recentDocs = this.framework.createEntity(

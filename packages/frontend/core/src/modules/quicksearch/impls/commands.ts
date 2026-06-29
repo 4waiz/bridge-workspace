@@ -5,7 +5,7 @@ import {
   PreconditionStrategy,
 } from '@bridgeflow/core/commands';
 import type { DocMode } from '@blocksuite/bridgeflow/model';
-import { Entity, LiveData } from '@toeverything/infra';
+import { Entity, LiveData } from '@kanban-studios/infra';
 import Fuse from 'fuse.js';
 
 import type { GlobalContextService } from '../../global-context';

@@ -2,7 +2,7 @@ import {
   type WorkspaceMetadata,
   WorkspacesService,
 } from '@bridgeflow/core/modules/workspace';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useEffect } from 'react';
 
 export function useWorkspaceInfo(meta?: WorkspaceMetadata) {

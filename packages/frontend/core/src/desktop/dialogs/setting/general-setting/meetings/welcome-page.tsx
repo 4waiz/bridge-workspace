@@ -2,7 +2,7 @@ import { Button } from '@bridgeflow/component';
 import { MeetingSettingsService } from '@bridgeflow/core/modules/media/services/meeting-settings';
 import { Trans, useI18n } from '@bridgeflow/i18n';
 import { DualLinkIcon } from '@blocksuite/icons/rc';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useTheme } from 'next-themes';
 import { useCallback } from 'react';
 

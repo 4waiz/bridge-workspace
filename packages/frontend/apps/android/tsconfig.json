@@ -7,6 +7,7 @@
   },
   "include": ["./src"],
   "references": [
+    { "path": "../../../../blocksuite/bridgeflow/all" },
     { "path": "../../component" },
     { "path": "../../core" },
     { "path": "../../../common/env" },
@@ -14,7 +15,6 @@
     { "path": "../mobile-shared" },
     { "path": "../../../common/nbstore" },
     { "path": "../../track" },
-    { "path": "../../../../blocksuite/bridgeflow/all" },
     { "path": "../../../common/infra" }
   ]
 }

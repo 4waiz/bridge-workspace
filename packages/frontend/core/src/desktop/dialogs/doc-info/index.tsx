@@ -3,7 +3,7 @@ import { BlocksuiteHeaderTitle } from '@bridgeflow/core/blocksuite/block-suite-h
 import type { DialogComponentProps } from '@bridgeflow/core/modules/dialogs';
 import type { WORKSPACE_DIALOG_SCHEMA } from '@bridgeflow/core/modules/dialogs/constant';
 import { type Doc, DocsService } from '@bridgeflow/core/modules/doc';
-import { FrameworkScope, useService } from '@toeverything/infra';
+import { FrameworkScope, useService } from '@kanban-studios/infra';
 import { useEffect, useState } from 'react';
 
 import { InfoTable } from './info-modal';

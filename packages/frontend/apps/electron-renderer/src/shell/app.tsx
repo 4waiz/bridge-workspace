@@ -12,7 +12,7 @@ import { configureDesktopApiModule } from '@bridgeflow/core/modules/desktop-api'
 import { configureI18nModule, I18nProvider } from '@bridgeflow/core/modules/i18n';
 import { configureStorageModule } from '@bridgeflow/core/modules/storage';
 import { configureAppThemeModule } from '@bridgeflow/core/modules/theme';
-import { Framework, FrameworkRoot } from '@toeverything/infra';
+import { Framework, FrameworkRoot } from '@kanban-studios/infra';
 
 import * as styles from './app.css';
 

@@ -1,5 +1,5 @@
 import { getDocCreatedByUpdatedByListQuery } from '@bridgeflow/graphql';
-import { Store, yjsGetPath } from '@toeverything/infra';
+import { Store, yjsGetPath } from '@kanban-studios/infra';
 import type { Observable } from 'rxjs';
 
 import type { WorkspaceService } from '../../workspace';

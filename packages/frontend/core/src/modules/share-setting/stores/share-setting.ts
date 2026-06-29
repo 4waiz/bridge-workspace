@@ -5,7 +5,7 @@ import {
   setEnableSharingMutation,
   setEnableUrlPreviewMutation,
 } from '@bridgeflow/graphql';
-import { Store } from '@toeverything/infra';
+import { Store } from '@kanban-studios/infra';
 
 export class WorkspaceShareSettingStore extends Store {
   constructor(private readonly workspaceServerService: WorkspaceServerService) {

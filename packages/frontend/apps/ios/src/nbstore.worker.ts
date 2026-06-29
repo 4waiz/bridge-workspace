@@ -15,7 +15,7 @@ import {
   StoreManagerConsumer,
   type WorkerManagerOps,
 } from '@bridgeflow/nbstore/worker/consumer';
-import { type MessageCommunicapable, OpConsumer } from '@toeverything/infra/op';
+import { type MessageCommunicapable, OpConsumer } from '@kanban-studios/infra/op';
 import { AsyncCall } from 'async-call-rpc';
 
 import { readEndpointToken } from './proxy';

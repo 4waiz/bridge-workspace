@@ -3,7 +3,7 @@ import type { AllPageFilterOption } from '@bridgeflow/core/components/atoms';
 import { allPageFilterSelectAtom } from '@bridgeflow/core/components/atoms';
 import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
 import { useI18n } from '@bridgeflow/i18n';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useAtom } from 'jotai';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 

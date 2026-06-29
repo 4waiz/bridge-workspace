@@ -1,5 +1,5 @@
 import type { DocMode } from '@blocksuite/bridgeflow/model';
-import { Entity, LiveData, MemoryMemento } from '@toeverything/infra';
+import { Entity, LiveData, MemoryMemento } from '@kanban-studios/infra';
 
 export class GlobalContext extends Entity {
   memento = new MemoryMemento();

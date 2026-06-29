@@ -74,13 +74,13 @@ const createAndShowNewToast = (
     bottom: 0;
     max-width: 480px;
     text-align: center;
-    font-family: var(--bridgeflow-font-family);
-    font-size: var(--bridgeflow-font-sm);
+    font-family: var(--affine-font-family);
+    font-size: var(--affine-font-sm);
     padding: 10px 16px;
     margin: 0;
-    color: var(--bridgeflow-white);
-    background: var(--bridgeflow-tooltip);
-    box-shadow: var(--bridgeflow-float-button-shadow);
+    color: var(--affine-white);
+    background: var(--affine-tooltip);
+    box-shadow: var(--affine-float-button-shadow);
     border-radius: 8px;
     opacity: 0;
     transform: translateY(100%);

@@ -9,7 +9,7 @@ import {
   parseAudioMediaKey,
   type PlaybackState,
   Service,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { clamp } from 'lodash-es';
 import { distinctUntilChanged } from 'rxjs';
 

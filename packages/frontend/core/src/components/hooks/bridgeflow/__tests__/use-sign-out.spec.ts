@@ -17,7 +17,7 @@ vi.mock('@bridgeflow/core/modules/cloud', () => ({
   DefaultServerService: class {},
 }));
 
-vi.mock('@toeverything/infra', () => {
+vi.mock('@kanban-studios/infra', () => {
   return {
     useService: () => ({ signOut: signOutFn }),
     useServices: () => ({

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/toeverything/bridgeflow/releases/latest/download/config.schema.json",
+  "$schema": "https://github.com/Kanban-Studios/bridgeflow/releases/latest/download/config.schema.json",
   "server": {
     "name": "BridgeFlow Self Hosted Server"
   }

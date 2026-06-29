@@ -7,7 +7,7 @@ import {
   SubscriptionVariant,
 } from '@bridgeflow/graphql';
 import { track } from '@bridgeflow/track';
-import { effect, fromPromise, useServices } from '@toeverything/infra';
+import { effect, fromPromise, useServices } from '@kanban-studios/infra';
 import { nanoid } from 'nanoid';
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';

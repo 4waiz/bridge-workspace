@@ -6,7 +6,7 @@ import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
 import { getBridgeFlowWorkspaceSchema } from '@bridgeflow/core/modules/workspace';
 import { type DocMode } from '@blocksuite/bridgeflow/model';
 import type { Workspace } from '@blocksuite/bridgeflow/store';
-import { useServices } from '@toeverything/infra';
+import { useServices } from '@kanban-studios/infra';
 import { useCallback, useMemo } from 'react';
 
 export const usePageHelper = (docCollection: Workspace) => {

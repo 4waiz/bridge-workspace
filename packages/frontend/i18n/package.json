@@ -15,7 +15,7 @@
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/toeverything/BridgeFlow.git"
+    "url": "git+https://github.com/Kanban-Studios/BridgeFlow.git"
   },
   "dependencies": {
     "@bridgeflow/debug": "workspace:*",

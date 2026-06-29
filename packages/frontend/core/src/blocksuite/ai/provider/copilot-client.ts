@@ -33,7 +33,7 @@ import {
   type RequestOptions,
   updateCopilotSessionMutation,
 } from '@bridgeflow/graphql';
-import { getCurrentStore } from '@toeverything/infra';
+import { getCurrentStore } from '@kanban-studios/infra';
 
 import {
   GeneralNetworkError,

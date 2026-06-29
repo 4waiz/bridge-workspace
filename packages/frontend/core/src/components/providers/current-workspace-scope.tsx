@@ -1,7 +1,7 @@
 import { useWorkspace } from '@bridgeflow/core/components/hooks/use-workspace';
 import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
 import { WorkspacesService } from '@bridgeflow/core/modules/workspace';
-import { FrameworkScope, useLiveData, useService } from '@toeverything/infra';
+import { FrameworkScope, useLiveData, useService } from '@kanban-studios/infra';
 
 export const CurrentWorkspaceScopeProvider = ({
   children,

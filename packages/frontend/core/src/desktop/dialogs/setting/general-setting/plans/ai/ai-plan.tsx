@@ -1,7 +1,7 @@
 import { Button } from '@bridgeflow/component';
 import { AuthService, SubscriptionService } from '@bridgeflow/core/modules/cloud';
 import { i18nTime, useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useEffect } from 'react';
 
 import { AICancel, AILogin, AIResume, AISubscribe } from './actions';
@@ -67,7 +67,7 @@ export const AIPlan = () => {
                 className={styles.purchaseButton}
                 displayedFrequency="monthly"
               />
-              <a href="https://awaizahmed.com" target="_blank" rel="noreferrer">
+              <a href="https://kanbanstudios.ae" target="_blank" rel="noreferrer">
                 <Button className={styles.learnAIButton}>
                   {t['com.bridgeflow.payment.ai.pricing-plan.learn']()}
                 </Button>

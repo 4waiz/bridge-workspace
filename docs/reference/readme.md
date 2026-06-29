@@ -4,4 +4,4 @@ This document is intended for developers who want to contribute to BridgeFlow. I
 
 ### The Infrastructure of BridgeFlow
 
-see {@link @toeverything/infra!}
+see {@link @kanban-studios/infra!}

@@ -1,6 +1,6 @@
 import type { DocsService } from '@bridgeflow/core/modules/doc';
 import type { ShareDocsListService } from '@bridgeflow/core/modules/share-doc';
-import { onStart, Service } from '@toeverything/infra';
+import { onStart, Service } from '@kanban-studios/infra';
 import { combineLatest, map, type Observable, of } from 'rxjs';
 
 import type { FilterProvider } from '../../provider';

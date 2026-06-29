@@ -12,7 +12,7 @@ import type { AttachmentBlockModel } from '@blocksuite/bridgeflow/model';
 import type { BridgeFlowTextAttributes } from '@blocksuite/bridgeflow/shared/types';
 import { type DeltaInsert, Text } from '@blocksuite/bridgeflow/store';
 import { computed } from '@preact/signals-core';
-import { Entity, LiveData } from '@toeverything/infra';
+import { Entity, LiveData } from '@kanban-studios/infra';
 import { cssVarV2 } from '@toeverything/theme/v2';
 
 import type { WorkspaceService } from '../../workspace';

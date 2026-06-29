@@ -48,7 +48,7 @@ describe('redirect proxy allowlist', () => {
       )
     ).toEqual({
       allow: true,
-      redirectTarget: 'https://github.com/toeverything/BridgeFlow',
+      redirectTarget: 'https://github.com/Kanban-Studios/BridgeFlow',
     });
   });
 

@@ -41,7 +41,7 @@ export class EmbedCardEditModal extends SignalWatcher(
       position: absolute;
       top: 0;
       left: 0;
-      z-index: var(--bridgeflow-z-index-popover);
+      z-index: var(--affine-z-index-popover);
       animation: bridgeflow-popover-fade-in 0.2s ease;
     }
 
@@ -65,8 +65,8 @@ export class EmbedCardEditModal extends SignalWatcher(
       gap: 12px;
       width: 421px;
 
-      color: var(--bridgeflow-icon-color);
-      box-shadow: var(--bridgeflow-overlay-shadow);
+      color: var(--affine-icon-color);
+      box-shadow: var(--affine-overlay-shadow);
       background: ${unsafeCSSVarV2('layer/background/overlayPanel')};
       border-radius: 4px;
       border: 0.5px solid ${unsafeCSSVarV2('layer/insideBorder/border')};
@@ -89,11 +89,11 @@ export class EmbedCardEditModal extends SignalWatcher(
       user-select: none;
       background: transparent;
       border: 1px solid ${unsafeCSSVarV2('input/border/default')};
-      color: var(--bridgeflow-text-primary-color);
+      color: var(--affine-text-primary-color);
     }
     ${fontSMStyle('.row .input')}
     .input::placeholder {
-      color: var(--bridgeflow-placeholder-color);
+      color: var(--affine-placeholder-color);
     }
     .input:focus {
       border-color: ${unsafeCSSVarV2('input/border/active')};

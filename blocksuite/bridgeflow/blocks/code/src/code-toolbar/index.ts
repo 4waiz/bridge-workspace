@@ -81,7 +81,7 @@ export class BridgeFlowCodeToolbarWidget extends WidgetComponent<
           container: this.block,
           // stacking-context(editor-host)
           portalStyles: {
-            zIndex: 'var(--bridgeflow-z-index-popover)',
+            zIndex: 'var(--affine-z-index-popover)',
           },
           computePosition: {
             referenceElement: codeBlock,

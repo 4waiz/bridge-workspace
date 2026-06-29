@@ -10,7 +10,7 @@ import {
   PageIcon,
   PrinterIcon,
 } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import type { ReactNode } from 'react';
 import { useCallback } from 'react';
 

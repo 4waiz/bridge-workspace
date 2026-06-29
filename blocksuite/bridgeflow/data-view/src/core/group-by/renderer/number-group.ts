@@ -17,7 +17,7 @@ export class NumberGroupView extends BaseGroup<number, NonNullable<unknown>> {
     }
 
     .data-view-group-title-number-view:hover {
-      background-color: var(--bridgeflow-hover-color);
+      background-color: var(--affine-hover-color);
     }
   `;
 

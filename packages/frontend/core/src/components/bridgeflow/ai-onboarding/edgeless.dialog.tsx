@@ -6,7 +6,7 @@ import { EditorService } from '@bridgeflow/core/modules/editor';
 import { useI18n } from '@bridgeflow/i18n';
 import { track } from '@bridgeflow/track';
 import { AiIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService, useServices } from '@toeverything/infra';
+import { useLiveData, useService, useServices } from '@kanban-studios/infra';
 import { cssVar } from '@toeverything/theme';
 import Lottie from 'lottie-react';
 import { useTheme } from 'next-themes';

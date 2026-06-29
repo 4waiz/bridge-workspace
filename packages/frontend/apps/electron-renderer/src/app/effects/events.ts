@@ -5,7 +5,7 @@ import { JournalService } from '@bridgeflow/core/modules/journal';
 import { LifecycleService } from '@bridgeflow/core/modules/lifecycle';
 import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
 import { apis, events } from '@bridgeflow/electron-api';
-import type { FrameworkProvider } from '@toeverything/infra';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 
 import { setupRecordingEvents } from './recording';
 import { getCurrentWorkspace } from './utils';

@@ -8,11 +8,11 @@ export const codeBlockStyles = css`
   }
 
   .bridgeflow-code-block-container {
-    font-size: var(--bridgeflow-font-xs);
-    line-height: var(--bridgeflow-line-height);
+    font-size: var(--affine-font-xs);
+    line-height: var(--affine-line-height);
     position: relative;
     padding: 32px 20px;
-    background: var(--bridgeflow-background-code-block);
+    background: var(--affine-background-code-block);
     border-radius: 10px;
     box-sizing: border-box;
   }
@@ -38,7 +38,7 @@ export const codeBlockStyles = css`
   }
 
   .bridgeflow-code-block-container .inline-editor {
-    font-family: var(--bridgeflow-font-code-family);
+    font-family: var(--affine-font-code-family);
     font-variant-ligatures: none;
   }
 
@@ -65,10 +65,10 @@ export const codeBlockStyles = css`
     white-space: nowrap;
     left: -0.5px;
     z-index: 1;
-    background: var(--bridgeflow-background-code-block);
-    font-size: var(--bridgeflow-font-xs);
-    line-height: var(--bridgeflow-line-height);
-    color: var(--bridgeflow-text-secondary);
+    background: var(--affine-background-code-block);
+    font-size: var(--affine-font-xs);
+    line-height: var(--affine-line-height);
+    color: var(--affine-text-secondary);
     box-sizing: border-box;
     user-select: none;
   }

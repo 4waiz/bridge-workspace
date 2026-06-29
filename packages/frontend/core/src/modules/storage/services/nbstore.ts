@@ -1,5 +1,5 @@
 import type { WorkerInitOptions } from '@bridgeflow/nbstore/worker/client';
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 
 import type { NbstoreProvider } from '../providers/nbstore';
 

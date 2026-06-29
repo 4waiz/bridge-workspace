@@ -1,5 +1,5 @@
 import { ServerDeploymentType } from '@bridgeflow/graphql';
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 
 import type { Server } from '../entities/server';
 import type { ServersService } from './servers';

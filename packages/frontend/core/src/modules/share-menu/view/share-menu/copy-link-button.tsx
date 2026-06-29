@@ -7,7 +7,7 @@ import { EditorService } from '@bridgeflow/core/modules/editor';
 import { useI18n } from '@bridgeflow/i18n';
 import type { DocMode } from '@blocksuite/bridgeflow/model';
 import { BlockIcon, EdgelessIcon, PageIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { useCallback, useMemo } from 'react';
 

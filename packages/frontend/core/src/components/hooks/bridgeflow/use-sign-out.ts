@@ -7,7 +7,7 @@ import { AuthService, DefaultServerService } from '@bridgeflow/core/modules/clou
 import { UserFriendlyError } from '@bridgeflow/error';
 import { ServerFeature } from '@bridgeflow/graphql';
 import { useI18n } from '@bridgeflow/i18n';
-import { useService, useServices } from '@toeverything/infra';
+import { useService, useServices } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import { useNavigateHelper } from '../use-navigate-helper';

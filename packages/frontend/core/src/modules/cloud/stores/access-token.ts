@@ -4,7 +4,7 @@ import {
   listUserAccessTokensQuery,
   revokeUserAccessTokenMutation,
 } from '@bridgeflow/graphql';
-import { Store } from '@toeverything/infra';
+import { Store } from '@kanban-studios/infra';
 
 import type { GraphQLService } from '../services/graphql';
 

@@ -5,7 +5,7 @@ import { JournalService } from '@bridgeflow/core/modules/journal';
 import { WorkbenchLink } from '@bridgeflow/core/modules/workbench';
 import { useI18n } from '@bridgeflow/i18n';
 import { EditIcon, TodayIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useMemo } from 'react';
 
 import * as styles from './journal-conflict-block.css';

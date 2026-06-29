@@ -5,7 +5,7 @@ import { type Tag, TagService } from '@bridgeflow/core/modules/tag';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { useI18n } from '@bridgeflow/i18n';
 import { TagsIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { cssVarV2 } from '@toeverything/theme/v2';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 

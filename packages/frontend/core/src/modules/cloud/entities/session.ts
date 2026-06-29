@@ -8,7 +8,7 @@ import {
   LiveData,
   onComplete,
   onStart,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { isEqual } from 'lodash-es';
 import { tap } from 'rxjs';
 

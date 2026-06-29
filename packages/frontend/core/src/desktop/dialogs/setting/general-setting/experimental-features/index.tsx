@@ -13,7 +13,7 @@ import {
   EmailIcon,
   GithubIcon,
 } from '@blocksuite/icons/rc';
-import { useLiveData, useServices } from '@toeverything/infra';
+import { useLiveData, useServices } from '@kanban-studios/infra';
 import { useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import { Suspense, useCallback, useState } from 'react';
@@ -101,8 +101,8 @@ const FeedbackIcon = ({ type }: { type: Flag['feedbackType'] }) => {
 
 const feedbackLink: Record<NonNullable<Flag['feedbackType']>, string> = {
   discord: BUILD_CONFIG.discordUrl,
-  email: 'https://awaizahmed.com',
-  github: 'https://awaizahmed.com',
+  email: 'https://kanbanstudios.ae',
+  github: 'https://kanbanstudios.ae',
 };
 
 const ExperimentalFeaturesItem = ({

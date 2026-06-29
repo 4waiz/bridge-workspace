@@ -3,8 +3,8 @@ import { css } from 'lit';
 export const listPrefix = css`
   .bridgeflow-list-block__prefix {
     display: flex;
-    color: var(--bridgeflow-blue-700);
-    font-size: var(--bridgeflow-font-sm);
+    color: var(--affine-blue-700);
+    font-size: var(--affine-font-sm);
     user-select: none;
     position: relative;
   }
@@ -21,7 +21,7 @@ export const listPrefix = css`
     cursor: pointer;
     width: 24px;
     height: 24px;
-    color: var(--bridgeflow-icon-color);
+    color: var(--affine-icon-color);
   }
 
   .bridgeflow-list-block__todo-prefix.readonly {
@@ -37,11 +37,11 @@ export const listPrefix = css`
 export const listBlockStyles = css`
   bridgeflow-list {
     display: block;
-    font-size: var(--bridgeflow-font-base);
+    font-size: var(--affine-font-base);
   }
 
   bridgeflow-list code {
-    font-size: calc(var(--bridgeflow-font-base) - 3px);
+    font-size: calc(var(--affine-font-base) - 3px);
     padding: 0px 4px 2px;
   }
 
@@ -62,7 +62,7 @@ export const listBlockStyles = css`
   }
 
   .bridgeflow-list--checked {
-    color: var(--bridgeflow-text-secondary-color);
+    color: var(--affine-text-secondary-color);
   }
 
   ${listPrefix}

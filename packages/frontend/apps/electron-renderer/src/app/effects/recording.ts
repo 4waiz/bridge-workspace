@@ -8,7 +8,7 @@ import { i18nTime } from '@bridgeflow/i18n';
 import track from '@bridgeflow/track';
 import type { AttachmentBlockModel } from '@blocksuite/bridgeflow/model';
 import type { BlobEngine } from '@blocksuite/bridgeflow/sync';
-import type { FrameworkProvider } from '@toeverything/infra';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 
 import { getCurrentWorkspace, isAiEnabled } from './utils';
 

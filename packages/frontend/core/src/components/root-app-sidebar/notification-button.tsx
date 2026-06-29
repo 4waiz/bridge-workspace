@@ -4,7 +4,7 @@ import { NotificationCountService } from '@bridgeflow/core/modules/notification'
 import { useI18n } from '@bridgeflow/i18n';
 import { track } from '@bridgeflow/track';
 import { NotificationIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useState } from 'react';
 
 import { NotificationList } from '../notification/list';

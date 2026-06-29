@@ -1199,7 +1199,7 @@ export const PackageList = [
   },
   {
     location: 'packages/common/infra',
-    name: '@toeverything/infra',
+    name: '@kanban-studios/infra',
     workspaceDependencies: [
       'packages/common/debug',
       'packages/common/env',
@@ -1213,9 +1213,9 @@ export const PackageList = [
     workspaceDependencies: [
       'packages/common/reader',
       'packages/common/infra',
+      'blocksuite/bridgeflow/all',
       'packages/common/error',
       'packages/common/graphql',
-      'blocksuite/bridgeflow/all',
     ],
   },
   {
@@ -1244,6 +1244,7 @@ export const PackageList = [
     location: 'packages/frontend/apps/android',
     name: '@bridgeflow/android',
     workspaceDependencies: [
+      'blocksuite/bridgeflow/all',
       'packages/frontend/component',
       'packages/frontend/core',
       'packages/common/env',
@@ -1251,7 +1252,6 @@ export const PackageList = [
       'packages/frontend/apps/mobile-shared',
       'packages/common/nbstore',
       'packages/frontend/track',
-      'blocksuite/bridgeflow/all',
       'packages/common/infra',
     ],
   },
@@ -1270,6 +1270,7 @@ export const PackageList = [
     location: 'packages/frontend/apps/electron-renderer',
     name: '@bridgeflow/electron-renderer',
     workspaceDependencies: [
+      'blocksuite/bridgeflow/all',
       'packages/frontend/component',
       'packages/frontend/core',
       'packages/common/debug',
@@ -1277,7 +1278,6 @@ export const PackageList = [
       'packages/frontend/i18n',
       'packages/common/nbstore',
       'packages/frontend/track',
-      'blocksuite/bridgeflow/all',
       'packages/common/infra',
       'tools/utils',
     ],
@@ -1286,6 +1286,7 @@ export const PackageList = [
     location: 'packages/frontend/apps/ios',
     name: '@bridgeflow/ios',
     workspaceDependencies: [
+      'blocksuite/bridgeflow/all',
       'packages/frontend/component',
       'packages/frontend/core',
       'packages/common/env',
@@ -1294,7 +1295,6 @@ export const PackageList = [
       'packages/frontend/apps/mobile-shared',
       'packages/common/nbstore',
       'packages/frontend/track',
-      'blocksuite/bridgeflow/all',
       'packages/common/infra',
       'tools/cli',
       'tools/utils',
@@ -1305,13 +1305,13 @@ export const PackageList = [
     location: 'packages/frontend/apps/mobile',
     name: '@bridgeflow/mobile',
     workspaceDependencies: [
+      'blocksuite/bridgeflow/all',
       'packages/frontend/component',
       'packages/frontend/core',
       'packages/common/env',
       'packages/frontend/i18n',
       'packages/common/nbstore',
       'packages/frontend/track',
-      'blocksuite/bridgeflow/all',
       'packages/common/infra',
     ],
   },
@@ -1342,14 +1342,20 @@ export const PackageList = [
       'packages/common/error',
       'packages/common/graphql',
       'packages/frontend/i18n',
-      'tools/utils',
       'blocksuite/bridgeflow/all',
+      'tools/utils',
     ],
   },
   {
     location: 'packages/frontend/core',
     name: '@bridgeflow/core',
     workspaceDependencies: [
+      'blocksuite/bridgeflow/all',
+      'blocksuite/bridgeflow/blocks/root',
+      'blocksuite/bridgeflow/components',
+      'blocksuite/bridgeflow/shared',
+      'blocksuite/framework/global',
+      'blocksuite/framework/std',
       'packages/frontend/component',
       'packages/common/debug',
       'packages/frontend/electron-api',
@@ -1361,12 +1367,6 @@ export const PackageList = [
       'packages/common/reader',
       'packages/frontend/templates',
       'packages/frontend/track',
-      'blocksuite/bridgeflow/all',
-      'blocksuite/bridgeflow/blocks/root',
-      'blocksuite/bridgeflow/components',
-      'blocksuite/bridgeflow/shared',
-      'blocksuite/framework/global',
-      'blocksuite/framework/std',
       'packages/common/infra',
       'blocksuite/bridgeflow/ext-loader',
     ],
@@ -1411,6 +1411,15 @@ export const PackageList = [
     workspaceDependencies: ['packages/common/debug'],
   },
   {
+    location: 'tests/blocksuite',
+    name: '@bridgeflow-test/blocksuite',
+    workspaceDependencies: [
+      'blocksuite/bridgeflow/all',
+      'blocksuite/integration-test',
+      'tests/kit',
+    ],
+  },
+  {
     location: 'tests/bridgeflow-cloud',
     name: '@bridgeflow-test/bridgeflow-cloud',
     workspaceDependencies: ['tests/kit'],
@@ -1441,20 +1450,11 @@ export const PackageList = [
     workspaceDependencies: ['tests/kit'],
   },
   {
-    location: 'tests/blocksuite',
-    name: '@bridgeflow-test/blocksuite',
-    workspaceDependencies: [
-      'tests/kit',
-      'blocksuite/bridgeflow/all',
-      'blocksuite/integration-test',
-    ],
-  },
-  {
     location: 'tests/kit',
     name: '@bridgeflow-test/kit',
     workspaceDependencies: [
-      'tools/utils',
       'blocksuite/bridgeflow/all',
+      'tools/utils',
       'packages/common/infra',
     ],
   },
@@ -1466,7 +1466,7 @@ export const PackageList = [
   {
     location: 'tools/@types/env',
     name: '@types/bridgeflow__env',
-    workspaceDependencies: ['packages/common/env', 'blocksuite/bridgeflow/all'],
+    workspaceDependencies: ['blocksuite/bridgeflow/all', 'packages/common/env'],
   },
   {
     location: 'tools/changelog',
@@ -1591,7 +1591,7 @@ export type PackageName =
   | '@bridgeflow/env'
   | '@bridgeflow/error'
   | '@bridgeflow/graphql'
-  | '@toeverything/infra'
+  | '@kanban-studios/infra'
   | '@bridgeflow/nbstore'
   | '@bridgeflow/reader'
   | '@bridgeflow/s3-compat'
@@ -1612,13 +1612,13 @@ export type PackageName =
   | '@bridgeflow/routes'
   | '@bridgeflow/templates'
   | '@bridgeflow/track'
+  | '@bridgeflow-test/blocksuite'
   | '@bridgeflow-test/bridgeflow-cloud'
   | '@bridgeflow-test/bridgeflow-cloud-copilot'
   | '@bridgeflow-test/bridgeflow-desktop'
   | '@bridgeflow-test/bridgeflow-desktop-cloud'
   | '@bridgeflow-test/bridgeflow-local'
   | '@bridgeflow-test/bridgeflow-mobile'
-  | '@bridgeflow-test/blocksuite'
   | '@bridgeflow-test/kit'
   | '@types/build-config'
   | '@types/bridgeflow__env'

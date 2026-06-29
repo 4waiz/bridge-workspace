@@ -6,7 +6,7 @@ import {
 } from '@bridgeflow/core/components/explorer/context';
 import { DocsExplorer } from '@bridgeflow/core/components/explorer/docs-view/docs-list';
 import { CollectionRulesService } from '@bridgeflow/core/modules/collection-rules';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useEffect, useState } from 'react';
 
 import { Page } from '../../components/page';

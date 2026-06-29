@@ -1,7 +1,7 @@
 import { PropertyValue, Tooltip } from '@bridgeflow/component';
 import { type DocRecord, DocService } from '@bridgeflow/core/modules/doc';
 import { i18nTime, useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useServices } from '@toeverything/infra';
+import { useLiveData, useServices } from '@kanban-studios/infra';
 
 import { PlainTextDocGroupHeader } from '../explorer/docs-view/group-header';
 import type { GroupHeaderProps } from '../explorer/types';

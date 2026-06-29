@@ -5,7 +5,7 @@ import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { useI18n } from '@bridgeflow/i18n';
 import { type DocMode } from '@blocksuite/bridgeflow/model';
 import { InformationIcon, LinkIcon } from '@blocksuite/icons/rc';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import * as styles from './edgeless-block-header.css';

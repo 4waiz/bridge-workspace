@@ -34,7 +34,7 @@ import {
 } from '@bridgeflow/core/modules/system-font-family';
 import { Trans, useI18n } from '@bridgeflow/i18n';
 import { DoneIcon, SearchIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService, useServices } from '@toeverything/infra';
+import { useLiveData, useService, useServices } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import {
   forwardRef,
@@ -320,7 +320,7 @@ const FontSizeSettings = () => {
       editorSettingService.editorSetting.set('fontSize', size);
       // Update CSS variable immediately
       document.documentElement.style.setProperty(
-        '--bridgeflow-font-base',
+        '--affine-font-base',
         `${size}px`
       );
     },
@@ -330,7 +330,7 @@ const FontSizeSettings = () => {
   // Apply current font size to CSS variable on mount
   useEffect(() => {
     document.documentElement.style.setProperty(
-      '--bridgeflow-font-base',
+      '--affine-font-base',
       `${settings.fontSize}px`
     );
   }, [settings.fontSize]);

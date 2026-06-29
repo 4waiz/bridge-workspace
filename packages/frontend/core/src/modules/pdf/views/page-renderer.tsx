@@ -1,6 +1,6 @@
 import { observeIntersection } from '@bridgeflow/component';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData } from '@toeverything/infra';
+import { useLiveData } from '@kanban-studios/infra';
 import { debounce } from 'lodash-es';
 import { forwardRef, useEffect, useMemo, useRef, useState } from 'react';
 

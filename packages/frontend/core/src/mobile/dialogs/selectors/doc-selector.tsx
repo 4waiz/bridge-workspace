@@ -6,7 +6,7 @@ import type {
 import { DocsService } from '@bridgeflow/core/modules/doc';
 import { DocDisplayMetaService } from '@bridgeflow/core/modules/doc-display-meta';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { cssVarV2 } from '@toeverything/theme/v2';
 import { useMemo } from 'react';
 

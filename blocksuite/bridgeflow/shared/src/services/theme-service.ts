@@ -9,7 +9,7 @@ import { type BlockStdScope, StdIdentifier } from '@blocksuite/std';
 import { Extension } from '@blocksuite/store';
 import { type Signal, signal } from '@preact/signals-core';
 import {
-  type BridgeFlowCssVariables,
+  type AffineCssVariables,
   combinedDarkCssVariables,
   combinedLightCssVariables,
 } from '@toeverything/theme';
@@ -79,7 +79,7 @@ export class ThemeService extends Extension {
    * `rgba(255,0,0)`
    * `#fff`
    * `light-dark(#fff, #000)`
-   * `var(--bridgeflow-palette-shape-blue)`
+   * `var(--affine-palette-shape-blue)`
    * ```
    */
   generateColorProperty(
@@ -113,7 +113,7 @@ export class ThemeService extends Extension {
    * ```
    * `rgba(255,0,0)`
    * `#fff`
-   * `--bridgeflow-palette-shape-blue`
+   * `--affine-palette-shape-blue`
    * ```
    */
   getColorValue(
@@ -140,7 +140,7 @@ export class ThemeService extends Extension {
       if (property.endsWith('transparent')) {
         return DefaultTheme.transparent;
       }
-      const key = property as keyof BridgeFlowCssVariables;
+      const key = property as keyof AffineCssVariables;
       // V1 theme
       const color =
         theme === ColorScheme.Dark

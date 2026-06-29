@@ -80,7 +80,7 @@ jobs:
         timeout-minutes: 10
         uses: ./.github/actions/setup-node
         with:
-          extra-flags: workspaces focus @bridgeflow/electron @bridgeflow/monorepo @bridgeflow/nbstore @toeverything/infra
+          extra-flags: workspaces focus @bridgeflow/electron @bridgeflow/monorepo @bridgeflow/nbstore @kanban-studios/infra
           hard-link-nm: false
           nmHoistingLimits: workspaces
           enableScripts: ${{ inputs.enable_scripts }}

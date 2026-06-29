@@ -5,7 +5,7 @@ import {
 } from '@bridgeflow/nbstore/idb';
 import { SqliteDocStorage, SqliteDocSyncStorage } from '@bridgeflow/nbstore/sqlite';
 import type { StoreClient } from '@bridgeflow/nbstore/worker/client';
-import { Entity } from '@toeverything/infra';
+import { Entity } from '@kanban-studios/infra';
 
 import type { ServerService } from '../../cloud';
 import type { NbstoreService } from '../../storage';

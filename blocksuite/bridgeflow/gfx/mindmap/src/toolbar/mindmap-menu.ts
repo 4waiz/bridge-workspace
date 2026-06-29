@@ -72,7 +72,7 @@ export class EdgelessMindmapMenu extends EdgelessToolbarToolMixin(
       width: 1px;
       transform: scaleX(0.5);
       height: 48px;
-      background: var(--bridgeflow-border-color);
+      background: var(--affine-border-color);
     }
     .text-item,
     .media-item {
@@ -106,7 +106,7 @@ export class EdgelessMindmapMenu extends EdgelessToolbarToolMixin(
     .media-item:hover,
     .mindmap-item[data-is-active='true'],
     .mindmap-item:hover {
-      background: var(--bridgeflow-hover-color);
+      background: var(--affine-hover-color);
     }
     .text-item > button.next,
     .media-item > button.next,

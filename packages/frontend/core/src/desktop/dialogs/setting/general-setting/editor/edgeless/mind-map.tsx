@@ -10,7 +10,7 @@ import { useI18n } from '@bridgeflow/i18n';
 import { getSurfaceBlock } from '@blocksuite/bridgeflow/blocks/surface';
 import { LayoutType, MindmapStyle } from '@blocksuite/bridgeflow/model';
 import type { Store } from '@blocksuite/bridgeflow/store';
-import { useFramework, useLiveData } from '@toeverything/infra';
+import { useFramework, useLiveData } from '@kanban-studios/infra';
 import { useCallback, useMemo } from 'react';
 
 import { DropdownMenu } from '../menu';

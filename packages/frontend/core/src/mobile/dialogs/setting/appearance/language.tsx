@@ -1,6 +1,6 @@
 import { I18nService } from '@bridgeflow/core/modules/i18n';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useMemo } from 'react';
 
 import { SettingDropdownSelect } from '../dropdown-select';

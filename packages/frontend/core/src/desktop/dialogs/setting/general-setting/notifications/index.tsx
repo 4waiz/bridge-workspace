@@ -10,7 +10,7 @@ import {
 } from '@bridgeflow/core/modules/cloud';
 import { UserFriendlyError } from '@bridgeflow/error';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import * as styles from './style.css';

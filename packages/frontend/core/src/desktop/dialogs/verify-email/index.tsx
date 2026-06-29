@@ -20,7 +20,7 @@ import {
   sendVerifyEmailMutation,
 } from '@bridgeflow/graphql';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useState } from 'react';
 
 export const VerifyEmailDialog = ({

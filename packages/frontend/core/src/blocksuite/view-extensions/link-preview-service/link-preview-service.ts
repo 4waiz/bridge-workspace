@@ -7,7 +7,7 @@ import {
 } from '@blocksuite/bridgeflow/shared/services';
 import { type ExtensionType } from '@blocksuite/bridgeflow/store';
 import type { Container } from '@blocksuite/global/di';
-import type { FrameworkProvider } from '@toeverything/infra';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 
 import { ServerService } from '../../../modules/cloud/services/server';
 

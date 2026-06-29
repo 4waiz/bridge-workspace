@@ -2,7 +2,7 @@ import { Button, Modal } from '@bridgeflow/component';
 import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
 import { IntegrationService } from '@bridgeflow/core/modules/integration';
 import { useI18n } from '@bridgeflow/i18n';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useCallback, useState } from 'react';
 
 import * as styles from './connected.css';

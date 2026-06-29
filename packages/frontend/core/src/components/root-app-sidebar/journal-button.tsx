@@ -4,7 +4,7 @@ import { JournalService } from '@bridgeflow/core/modules/journal';
 import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
 import { useI18n } from '@bridgeflow/i18n';
 import { TodayIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 
 export const AppSidebarJournalButton = () => {
   const t = useI18n();

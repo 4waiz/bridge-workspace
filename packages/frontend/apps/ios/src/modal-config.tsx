@@ -1,7 +1,7 @@
 import { ModalConfigContext } from '@bridgeflow/component';
 import { NavigationGestureService } from '@bridgeflow/core/mobile/modules/navigation-gesture';
 import { globalVars } from '@bridgeflow/core/mobile/styles/variables.css';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useCallback, useMemo } from 'react';
 
 export const ModalConfigProvider = ({ children }: React.PropsWithChildren) => {

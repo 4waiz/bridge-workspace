@@ -42,8 +42,8 @@ export class BridgeFlowReference extends WithDisposable(ShadowlessElement) {
     .bridgeflow-reference {
       white-space: normal;
       word-break: break-word;
-      color: var(--bridgeflow-text-primary-color);
-      fill: var(--bridgeflow-icon-color);
+      color: var(--affine-text-primary-color);
+      fill: var(--affine-icon-color);
       border-radius: 4px;
       text-decoration: none;
       cursor: pointer;
@@ -55,20 +55,20 @@ export class BridgeFlowReference extends WithDisposable(ShadowlessElement) {
       }
     }
     .bridgeflow-reference:hover {
-      background: var(--bridgeflow-hover-color);
+      background: var(--affine-hover-color);
     }
 
     .bridgeflow-reference[data-selected='true'] {
-      background: var(--bridgeflow-hover-color);
+      background: var(--affine-hover-color);
     }
 
     .bridgeflow-reference-title {
       margin-left: 4px;
-      border-bottom: 0.5px solid var(--bridgeflow-divider-color);
+      border-bottom: 0.5px solid var(--affine-divider-color);
       transition: border 0.2s ease-out;
     }
     .bridgeflow-reference-title:hover {
-      border-bottom: 0.5px solid var(--bridgeflow-icon-color);
+      border-bottom: 0.5px solid var(--affine-icon-color);
     }
   `;
 
@@ -268,9 +268,9 @@ export class BridgeFlowReference extends WithDisposable(ShadowlessElement) {
       attributes,
       isDeleted
         ? {
-            color: 'var(--bridgeflow-text-disable-color)',
+            color: 'var(--affine-text-disable-color)',
             textDecoration: 'line-through',
-            fill: 'var(--bridgeflow-text-disable-color)',
+            fill: 'var(--affine-text-disable-color)',
           }
         : {}
     );

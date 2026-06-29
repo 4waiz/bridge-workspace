@@ -1,4 +1,4 @@
-import { LiveData, Service } from '@toeverything/infra';
+import { LiveData, Service } from '@kanban-studios/infra';
 import dayjs from 'dayjs';
 
 import type { DocsService } from '../../doc';

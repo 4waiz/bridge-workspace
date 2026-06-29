@@ -4,7 +4,7 @@ import type {
   WorkspaceCalendarItemInput,
   WorkspaceCalendarsQuery,
 } from '@bridgeflow/graphql';
-import { Entity, LiveData } from '@toeverything/infra';
+import { Entity, LiveData } from '@kanban-studios/infra';
 import dayjs, { type Dayjs } from 'dayjs';
 
 import type { CalendarStore } from '../store/calendar';

@@ -6,7 +6,7 @@ import {
   type Language,
   SUPPORTED_LANGUAGES,
 } from '@bridgeflow/i18n';
-import { effect, Entity, fromPromise, LiveData } from '@toeverything/infra';
+import { effect, Entity, fromPromise, LiveData } from '@kanban-studios/infra';
 import { catchError, EMPTY, exhaustMap } from 'rxjs';
 
 import type { GlobalCache } from '../../storage';

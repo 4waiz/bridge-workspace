@@ -4,7 +4,7 @@ import {
   updateUserProfileMutation,
   uploadAvatarMutation,
 } from '@bridgeflow/graphql';
-import { Store } from '@toeverything/infra';
+import { Store } from '@kanban-studios/infra';
 
 import type { GlobalState } from '../../storage';
 import type { AuthSessionInfo } from '../entities/session';

@@ -2,18 +2,18 @@ import { css } from '@emotion/css';
 import { cssVarV2 } from '@toeverything/theme/v2';
 
 export const dataViewVars = {
-  cellTextSize: '--bridgeflow-data-view-cell-text-size',
-  cellTextLineHeight: '--bridgeflow-data-view-cell-text-line-height',
+  cellTextSize: '--affine-data-view-cell-text-size',
+  cellTextLineHeight: '--affine-data-view-cell-text-line-height',
 };
 
 export const dataViewRoot = css({
-  fontFamily: 'var(--bridgeflow-font-family)',
+  fontFamily: 'var(--affine-font-family)',
   [dataViewVars.cellTextSize]: '14px',
   [dataViewVars.cellTextLineHeight]: '22px',
 });
 
 export const withDataViewCssVariable = css({
-  fontFamily: 'var(--bridgeflow-font-family)',
+  fontFamily: 'var(--affine-font-family)',
   [dataViewVars.cellTextSize]: '14px',
   [dataViewVars.cellTextLineHeight]: '22px',
 });
@@ -30,7 +30,7 @@ export const p8 = css({
 
 export const hover = css({
   '&:hover, &.active': {
-    backgroundColor: 'var(--bridgeflow-hover-color)',
+    backgroundColor: 'var(--affine-hover-color)',
     cursor: 'pointer',
   },
 });
@@ -54,20 +54,20 @@ export const round8 = css({
   borderRadius: '8px',
 });
 export const color2 = css({
-  color: 'var(--bridgeflow-text-secondary-color)',
+  color: 'var(--affine-text-secondary-color)',
 });
 export const shadow2 = css({
-  boxShadow: 'var(--bridgeflow-shadow-2)',
+  boxShadow: 'var(--affine-shadow-2)',
 });
 
 export const dividerH = css({
   height: '1px',
-  backgroundColor: 'var(--bridgeflow-divider-color)',
+  backgroundColor: 'var(--affine-divider-color)',
   margin: '8px 0',
 });
 export const dividerV = css({
   width: '1px',
-  backgroundColor: 'var(--bridgeflow-divider-color)',
+  backgroundColor: 'var(--affine-divider-color)',
   margin: '0 8px',
 });
 

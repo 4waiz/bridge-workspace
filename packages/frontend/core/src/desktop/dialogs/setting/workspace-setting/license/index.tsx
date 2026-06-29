@@ -22,7 +22,7 @@ import {
   SubscriptionVariant,
 } from '@bridgeflow/graphql';
 import { useI18n } from '@bridgeflow/i18n';
-import { FrameworkScope, useLiveData, useService } from '@toeverything/infra';
+import { FrameworkScope, useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useState } from 'react';
 
 import { EnableCloudPanel } from '../preference/enable-cloud';

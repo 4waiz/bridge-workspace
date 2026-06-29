@@ -26,13 +26,13 @@ export class AskAIIcon extends WithDisposable(LitElement) {
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--bridgeflow-brand-color);
-      font-size: var(--bridgeflow-font-sm);
+      color: var(--affine-brand-color);
+      font-size: var(--affine-font-sm);
       font-weight: 500;
     }
 
     .ask-ai-icon-button.small {
-      font-size: var(--bridgeflow-font-xs);
+      font-size: var(--affine-font-xs);
       svg {
         scale: 0.8;
         margin-right: 2px;
@@ -40,7 +40,7 @@ export class AskAIIcon extends WithDisposable(LitElement) {
     }
 
     .ask-ai-icon-button.large {
-      font-size: var(--bridgeflow-font-md);
+      font-size: var(--affine-font-md);
       svg {
         scale: 1.2;
       }
@@ -52,7 +52,7 @@ export class AskAIIcon extends WithDisposable(LitElement) {
 
     .ask-ai-icon-button svg {
       margin-right: 4px;
-      color: var(--bridgeflow-brand-color);
+      color: var(--affine-brand-color);
     }
   `;
 

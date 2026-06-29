@@ -1,13 +1,10 @@
 import { globalStyle, keyframes, style } from '@vanilla-extract/css';
 
-const _pulse = keyframes({
-  '0%': {
-    boxShadow: '0 0 0 0 rgba(255, 86, 34, 0.14)',
-  },
-  '100%': {
-    boxShadow: '0 0 0 12px rgba(255, 86, 34, 0)',
-  },
-});
+// Reserved for future use (assistant button pulse animation):
+// const pulse = keyframes({
+//   '0%': { boxShadow: '0 0 0 0 rgba(255, 86, 34, 0.14)' },
+//   '100%': { boxShadow: '0 0 0 12px rgba(255, 86, 34, 0)' },
+// });
 
 const voiceLevel = keyframes({
   '0%': {

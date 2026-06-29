@@ -49,11 +49,11 @@ const GroupTitleMobile = (
         width: 20px;
         height: 20px;
         border-radius: 4px;
-        background-color: var(--bridgeflow-background-secondary-color);
+        background-color: var(--affine-background-secondary-color);
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(--bridgeflow-text-secondary-color);
+        color: var(--affine-text-secondary-color);
         font-size: var(--data-view-cell-text-size);
       }
 
@@ -146,11 +146,11 @@ export const GroupTitle = (
         width: 20px;
         height: 20px;
         border-radius: 4px;
-        background-color: var(--bridgeflow-background-secondary-color);
+        background-color: var(--affine-background-secondary-color);
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(--bridgeflow-text-secondary-color);
+        color: var(--affine-text-secondary-color);
         font-size: var(--data-view-cell-text-size);
       }
 
@@ -184,19 +184,19 @@ export const GroupTitle = (
       .group-header-icon svg {
         width: 16px;
         height: 16px;
-        color: var(--bridgeflow-icon-color);
-        fill: var(--bridgeflow-icon-color);
+        color: var(--affine-icon-color);
+        fill: var(--affine-icon-color);
       }
 
       .group-header-op:hover {
-        background-color: var(--bridgeflow-hover-color);
+        background-color: var(--affine-hover-color);
       }
 
       .group-header-op svg {
         width: 16px;
         height: 16px;
-        fill: var(--bridgeflow-icon-color);
-        color: var(--bridgeflow-icon-color);
+        fill: var(--affine-icon-color);
+        color: var(--affine-icon-color);
       }
 
       .group-header-title {

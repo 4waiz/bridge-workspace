@@ -12,12 +12,12 @@ export const DEFAULT_PAGE_BLOCK_WIDTH = 800;
 export const DEFAULT_PAGE_BLOCK_HEIGHT = DEFAULT_NOTE_HEIGHT;
 
 export enum NoteShadow {
-  Box = '--bridgeflow-note-shadow-box',
-  Film = '--bridgeflow-note-shadow-film',
-  Float = '--bridgeflow-note-shadow-float',
+  Box = '--affine-note-shadow-box',
+  Film = '--affine-note-shadow-film',
+  Float = '--affine-note-shadow-float',
   None = '',
-  Paper = '--bridgeflow-note-shadow-paper',
-  Sticker = '--bridgeflow-note-shadow-sticker',
+  Paper = '--affine-note-shadow-paper',
+  Sticker = '--affine-note-shadow-sticker',
 }
 
 export const NoteShadowMap = createEnumMap(NoteShadow);

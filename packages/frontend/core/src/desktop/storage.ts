@@ -9,7 +9,7 @@ import {
   ElectronGlobalState,
 } from '@bridgeflow/core/modules/storage/impls/electron';
 import { IDBGlobalState } from '@bridgeflow/core/modules/storage/impls/storage';
-import type { Framework } from '@toeverything/infra';
+import type { Framework } from '@kanban-studios/infra';
 
 export function configureElectronStateStorageImpls(framework: Framework) {
   framework.impl(GlobalCache, ElectronGlobalCache, [DesktopApiService]);

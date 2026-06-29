@@ -9,7 +9,7 @@ import {
 import { LifeCycleWatcher } from '@blocksuite/bridgeflow/std';
 import type { ExtensionType } from '@blocksuite/bridgeflow/store';
 import { batch, signal } from '@preact/signals-core';
-import type { FrameworkProvider } from '@toeverything/infra';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 
 export function KeyboardToolbarExtension(
   framework: FrameworkProvider

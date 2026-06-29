@@ -10,7 +10,7 @@ import {
 } from '@bridgeflow/core/modules/workbench/view/view-meta';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useState } from 'react';
 
 import { CollectionService } from '../../../../modules/collection';

@@ -1,6 +1,6 @@
 import { getStoreManager } from '@bridgeflow/core/blocksuite/manager/store';
 import { MarkdownTransformer } from '@blocksuite/bridgeflow/widgets/linked-doc';
-import { Entity } from '@toeverything/infra';
+import { Entity } from '@kanban-studios/infra';
 
 import type { TagService } from '../../tag';
 import {

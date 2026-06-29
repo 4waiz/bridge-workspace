@@ -1,6 +1,6 @@
 import { DesktopApiService } from '@bridgeflow/core/modules/desktop-api';
 import { I18nService } from '@bridgeflow/core/modules/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useEffect } from 'react';
 
 export const DesktopLanguageSync = () => {

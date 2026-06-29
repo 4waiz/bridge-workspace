@@ -11,7 +11,7 @@ import { UserFriendlyError } from '@bridgeflow/error';
 import { ServerFeature } from '@bridgeflow/graphql';
 import { useI18n } from '@bridgeflow/i18n';
 import track from '@bridgeflow/track';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import type React from 'react';
 import { useCallback, useEffect } from 'react';
 

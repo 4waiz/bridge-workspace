@@ -37,19 +37,19 @@ export class MenuButton extends MenuFocusable {
       padding: 4px;
       gap: 8px;
       border-radius: 4px;
-      color: var(--bridgeflow-icon-color);
+      color: var(--affine-icon-color);
     }
 
     .bridgeflow-menu-button:hover,
     bridgeflow-menu-button.active .bridgeflow-menu-button {
-      background-color: var(--bridgeflow-hover-color);
+      background-color: var(--affine-hover-color);
     }
 
     .bridgeflow-menu-button .bridgeflow-menu-action-text {
       flex: 1;
       font-size: 14px;
       line-height: 22px;
-      color: var(--bridgeflow-text-primary-color);
+      color: var(--affine-text-primary-color);
     }
 
     .bridgeflow-menu-button.focused {
@@ -57,12 +57,12 @@ export class MenuButton extends MenuFocusable {
     }
 
     .bridgeflow-menu-button.delete-item:hover {
-      background-color: var(--bridgeflow-background-error-color);
-      color: var(--bridgeflow-error-color);
+      background-color: var(--affine-background-error-color);
+      color: var(--affine-error-color);
     }
 
     .bridgeflow-menu-button.delete-item:hover .bridgeflow-menu-action-text {
-      color: var(--bridgeflow-error-color);
+      color: var(--affine-error-color);
     }
   `;
 
@@ -125,22 +125,22 @@ export class MobileMenuButton extends MenuFocusable {
       padding: 11px 8px;
       gap: 8px;
       border-radius: 4px;
-      color: var(--bridgeflow-icon-color);
+      color: var(--affine-icon-color);
     }
 
     .mobile-menu-button .bridgeflow-menu-action-text {
       flex: 1;
-      color: var(--bridgeflow-text-primary-color);
+      color: var(--affine-text-primary-color);
       font-size: 17px;
       line-height: 22px;
     }
 
     .mobile-menu-button.delete-item {
-      color: var(--bridgeflow-error-color);
+      color: var(--affine-error-color);
     }
 
     .mobile-menu-button.delete-item .mobile-menu-action-text {
-      color: var(--bridgeflow-error-color);
+      color: var(--affine-error-color);
     }
   `;
 

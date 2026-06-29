@@ -1,6 +1,6 @@
 import { AuthService } from '@bridgeflow/core/modules/cloud';
 import { OAuthProviderType } from '@bridgeflow/graphql';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useEffect } from 'react';
 import {
   type LoaderFunction,

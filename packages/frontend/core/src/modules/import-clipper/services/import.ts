@@ -1,6 +1,6 @@
 import { getStoreManager } from '@bridgeflow/core/blocksuite/manager/store';
 import { MarkdownTransformer } from '@blocksuite/bridgeflow/widgets/linked-doc';
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 
 import { DocsService } from '../../doc';
 import {

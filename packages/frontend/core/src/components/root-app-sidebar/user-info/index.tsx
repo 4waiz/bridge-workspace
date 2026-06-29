@@ -11,7 +11,7 @@ import {
   ServerService,
 } from '@bridgeflow/core/modules/cloud';
 import { GlobalDialogService } from '@bridgeflow/core/modules/dialogs';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import { Account } from './account';

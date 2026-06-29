@@ -2,7 +2,7 @@ import type { Collection } from '@bridgeflow/core/modules/collection';
 import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
 import { useI18n } from '@bridgeflow/i18n';
 import { AllDocsIcon, FilterIcon } from '@blocksuite/icons/rc';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import { ActionButton } from './action-button';

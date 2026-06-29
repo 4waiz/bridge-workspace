@@ -1,4 +1,4 @@
-import { Entity, LiveData } from '@toeverything/infra';
+import { Entity, LiveData } from '@kanban-studios/infra';
 import { uniq } from 'lodash-es';
 import { map, switchMap } from 'rxjs';
 

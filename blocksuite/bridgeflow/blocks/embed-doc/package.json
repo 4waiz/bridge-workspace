@@ -7,7 +7,7 @@
   },
   "sideEffects": false,
   "keywords": [],
-  "author": "toeverything",
+  "author": "Kanban Studios (https://kanbanstudios.ae)",
   "license": "MIT",
   "dependencies": {
     "@blocksuite/bridgeflow-block-embed": "workspace:*",

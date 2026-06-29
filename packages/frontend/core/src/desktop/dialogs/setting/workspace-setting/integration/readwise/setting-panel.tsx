@@ -8,7 +8,7 @@ import type { ReadwiseConfig } from '@bridgeflow/core/modules/integration/type';
 import { TagService } from '@bridgeflow/core/modules/tag';
 import { useI18n } from '@bridgeflow/i18n';
 import { PlusIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { type ReactNode, useCallback, useMemo, useState } from 'react';
 
 import {

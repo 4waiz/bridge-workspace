@@ -13,7 +13,7 @@ import type { BridgeFlowDNDData } from '@bridgeflow/core/types/dnd';
 import { useI18n } from '@bridgeflow/i18n';
 import { track } from '@bridgeflow/track';
 import { AddOrganizeIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useServices } from '@toeverything/infra';
+import { useLiveData, useServices } from '@kanban-studios/infra';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { CollapsibleSection } from '../../layouts/collapsible-section';

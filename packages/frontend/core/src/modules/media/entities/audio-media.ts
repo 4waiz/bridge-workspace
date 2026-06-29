@@ -9,7 +9,7 @@ import {
   type MediaStats,
   onComplete,
   onStart,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { clamp } from 'lodash-es';
 import { mergeMap, switchMap } from 'rxjs';
 

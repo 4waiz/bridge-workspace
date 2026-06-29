@@ -32,7 +32,7 @@ import {
   useLiveData,
   useService,
   useServices,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import type React from 'react';
 import {
   forwardRef,

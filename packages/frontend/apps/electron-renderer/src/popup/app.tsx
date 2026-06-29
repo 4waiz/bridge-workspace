@@ -5,7 +5,7 @@ import { configureI18nModule, I18nProvider } from '@bridgeflow/core/modules/i18n
 import { configureStorageModule } from '@bridgeflow/core/modules/storage';
 import { configureEssentialThemeModule } from '@bridgeflow/core/modules/theme';
 import { appInfo } from '@bridgeflow/electron-api';
-import { Framework, FrameworkRoot } from '@toeverything/infra';
+import { Framework, FrameworkRoot } from '@kanban-studios/infra';
 
 import * as styles from './app.css';
 import { Recording } from './recording';

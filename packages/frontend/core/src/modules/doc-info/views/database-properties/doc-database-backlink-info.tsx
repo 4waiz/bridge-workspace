@@ -10,7 +10,7 @@ import { TemplateDocService } from '@bridgeflow/core/modules/template-doc';
 import { useI18n } from '@bridgeflow/i18n';
 import type { DatabaseBlockDataSource } from '@blocksuite/bridgeflow/blocks/database';
 import { DatabaseTableViewIcon, PageIcon } from '@blocksuite/icons/rc';
-import { LiveData, useLiveData, useService } from '@toeverything/infra';
+import { LiveData, useLiveData, useService } from '@kanban-studios/infra';
 import { useMemo } from 'react';
 import type { Observable } from 'rxjs';
 

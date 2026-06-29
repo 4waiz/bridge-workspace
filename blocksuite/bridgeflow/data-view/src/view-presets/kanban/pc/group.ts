@@ -67,7 +67,7 @@ const styles = css`
     visibility: hidden;
     opacity: 0;
     transition: all 150ms cubic-bezier(0.42, 0, 1, 1);
-    color: var(--bridgeflow-text-secondary-color);
+    color: var(--affine-text-secondary-color);
   }
 
   bridgeflow-data-view-kanban-group:hover .add-card {
@@ -76,17 +76,17 @@ const styles = css`
   }
 
   bridgeflow-data-view-kanban-group .add-card:hover {
-    background-color: var(--bridgeflow-hover-color);
-    color: var(--bridgeflow-text-primary-color);
+    background-color: var(--affine-hover-color);
+    color: var(--affine-text-primary-color);
   }
 
   .sortable-ghost {
-    background-color: var(--bridgeflow-hover-color);
+    background-color: var(--affine-hover-color);
     opacity: 0.5;
   }
 
   .sortable-drag {
-    background-color: var(--bridgeflow-background-primary-color);
+    background-color: var(--affine-background-primary-color);
   }
 `;
 

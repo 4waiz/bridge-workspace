@@ -12,7 +12,7 @@ import { copyTextToClipboard } from '@bridgeflow/core/utils/clipboard';
 import { UserFriendlyError } from '@bridgeflow/error';
 import { Trans, useI18n } from '@bridgeflow/i18n';
 import { CopyIcon, FileIcon } from '@blocksuite/icons/rc';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useState } from 'react';
 
 import * as styles from './upload-license-modal.css';

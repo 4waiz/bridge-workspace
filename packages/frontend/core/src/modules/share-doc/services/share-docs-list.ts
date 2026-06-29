@@ -1,4 +1,4 @@
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 
 import type { WorkspaceService } from '../../workspace';
 import { ShareDocsList } from '../entities/share-docs-list';

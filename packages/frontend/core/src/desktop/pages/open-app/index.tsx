@@ -11,7 +11,7 @@ import {
   appSchemes,
   channelToScheme,
 } from '@bridgeflow/core/utils/channel';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useRef } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 

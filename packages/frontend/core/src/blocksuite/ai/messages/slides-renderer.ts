@@ -110,7 +110,7 @@ export class AISlidesRenderer extends WithDisposable(LitElement) {
           width: 100%;
           height: 100%;
           border-radius: 4px;
-          border: 1px solid var(--bridgeflow-border-color);
+          border: 1px solid var(--affine-border-color);
         }
 
         .mask {
@@ -161,10 +161,10 @@ export class AISlidesRenderer extends WithDisposable(LitElement) {
           overflow: hidden;
           display: block;
           height: 100%;
-          font-family: var(--bridgeflow-font-family);
-          font-size: var(--bridgeflow-font-base);
-          line-height: var(--bridgeflow-line-height);
-          color: var(--bridgeflow-text-primary-color);
+          font-family: var(--affine-font-family);
+          font-size: var(--affine-font-base);
+          line-height: var(--affine-line-height);
+          color: var(--affine-text-primary-color);
           font-weight: 400;
         }
 
@@ -174,10 +174,10 @@ export class AISlidesRenderer extends WithDisposable(LitElement) {
           overflow: hidden;
           height: 100%;
           touch-action: none;
-          background-color: var(--bridgeflow-background-primary-color);
+          background-color: var(--affine-background-primary-color);
           background-image: radial-gradient(
-            var(--bridgeflow-edgeless-grid-color) 1px,
-            var(--bridgeflow-background-primary-color) 1px
+            var(--affine-edgeless-grid-color) 1px,
+            var(--affine-background-primary-color) 1px
           );
           z-index: 0;
         }
@@ -186,9 +186,9 @@ export class AISlidesRenderer extends WithDisposable(LitElement) {
           position: absolute;
           transform-origin: center;
           box-sizing: border-box;
-          border: 2px solid var(--bridgeflow-white-10);
+          border: 2px solid var(--affine-white-10);
           border-radius: 8px;
-          box-shadow: var(--bridgeflow-shadow-3);
+          box-shadow: var(--affine-shadow-3);
           pointer-events: all;
         }
 

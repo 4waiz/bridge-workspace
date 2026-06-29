@@ -25,7 +25,7 @@ export const Footer = () => {
       <Section align="center" width="auto" style={{ margin: '1px auto' }}>
         <Row>
           <td>
-            <Link href="https://awaizahmed.com">awaizahmed.com</Link>
+            <Link href="https://kanbanstudios.ae">kanbanstudios.ae</Link>
           </td>
         </Row>
       </Section>

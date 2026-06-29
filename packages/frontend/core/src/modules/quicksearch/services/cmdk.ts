@@ -1,5 +1,5 @@
 import { track } from '@bridgeflow/track';
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 
 import type { DocsService } from '../../doc';
 import type { WorkbenchService } from '../../workbench';

@@ -14,7 +14,7 @@ import {
   InsertLeftIcon,
   InsertRightIcon,
 } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { useAtom } from 'jotai';
 import type { HTMLAttributes, PropsWithChildren } from 'react';

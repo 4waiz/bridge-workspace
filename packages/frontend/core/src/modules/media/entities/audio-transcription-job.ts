@@ -3,7 +3,7 @@ import type { TranscriptionBlockProps } from '@bridgeflow/core/blocksuite/ai/blo
 import { DebugLogger } from '@bridgeflow/debug';
 import { UserFriendlyError } from '@bridgeflow/error';
 import { AiJobStatus } from '@bridgeflow/graphql';
-import { Entity, LiveData } from '@toeverything/infra';
+import { Entity, LiveData } from '@kanban-studios/infra';
 
 import type { DefaultServerService, WorkspaceServerService } from '../../cloud';
 import { AuthService } from '../../cloud/services/auth';

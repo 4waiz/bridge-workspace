@@ -18,7 +18,7 @@ export class EmbedIframeLinkEditPopup extends SignalWatcher(
       padding: 12px;
       align-items: center;
       gap: 12px;
-      color: var(--bridgeflow-text-primary-color);
+      color: var(--affine-text-primary-color);
       border-radius: 8px;
       border: 0.5px solid ${unsafeCSSVarV2('layer/insideBorder/border')};
       background: ${unsafeCSSVarV2('layer/background/primary')};
@@ -28,14 +28,14 @@ export class EmbedIframeLinkEditPopup extends SignalWatcher(
         display: flex;
         width: 280px;
         align-items: center;
-        border: 1px solid var(--bridgeflow-border-color);
+        border: 1px solid var(--affine-border-color);
         border-radius: 4px;
         padding: 0 8px;
-        background-color: var(--bridgeflow-background-color);
+        background-color: var(--affine-background-color);
         gap: 8px;
 
         .input-label {
-          color: var(--bridgeflow-text-secondary-color);
+          color: var(--affine-text-secondary-color);
           font-size: 14px;
           margin-right: 8px;
           white-space: nowrap;
@@ -52,7 +52,7 @@ export class EmbedIframeLinkEditPopup extends SignalWatcher(
       }
 
       .input-container:focus-within {
-        border-color: var(--bridgeflow-blue-700);
+        border-color: var(--affine-blue-700);
         outline: none;
       }
 

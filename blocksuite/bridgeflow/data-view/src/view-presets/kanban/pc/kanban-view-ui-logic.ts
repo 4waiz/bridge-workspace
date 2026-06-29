@@ -306,11 +306,11 @@ const kanbanGroupsStyle = css({
 
   '&:hover::-webkit-scrollbar-thumb': {
     borderRadius: '16px',
-    backgroundColor: 'var(--bridgeflow-black-30)',
+    backgroundColor: 'var(--affine-black-30)',
   },
 
   '&:hover::-webkit-scrollbar-track': {
-    backgroundColor: 'var(--bridgeflow-hover-color)',
+    backgroundColor: 'var(--affine-hover-color)',
   },
 });
 
@@ -322,14 +322,14 @@ const addGroupIconStyle = css({
   cursor: 'pointer',
 
   '&:hover': {
-    backgroundColor: 'var(--bridgeflow-hover-color)',
+    backgroundColor: 'var(--affine-hover-color)',
   },
 
   '& svg': {
     width: '16px',
     height: '16px',
-    fill: 'var(--bridgeflow-icon-color)',
-    color: 'var(--bridgeflow-icon-color)',
+    fill: 'var(--affine-icon-color)',
+    color: 'var(--affine-icon-color)',
   },
 });
 

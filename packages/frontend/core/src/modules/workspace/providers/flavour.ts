@@ -5,7 +5,7 @@ import type {
 } from '@bridgeflow/nbstore';
 import type { WorkerInitOptions } from '@bridgeflow/nbstore/worker/client';
 import type { Workspace as BSWorkspace } from '@blocksuite/bridgeflow/store';
-import { createIdentifier, type LiveData } from '@toeverything/infra';
+import { createIdentifier, type LiveData } from '@kanban-studios/infra';
 
 import type { WorkspaceProfileInfo } from '../entities/profile';
 import type { Workspace } from '../entities/workspace';

@@ -6,7 +6,7 @@ import { AuthService, SubscriptionService } from '@bridgeflow/core/modules/cloud
 import { SubscriptionPlan } from '@bridgeflow/graphql';
 import { useI18n } from '@bridgeflow/i18n';
 import { track } from '@bridgeflow/track';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
 

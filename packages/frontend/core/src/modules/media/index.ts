@@ -1,4 +1,4 @@
-import type { Framework } from '@toeverything/infra';
+import type { Framework } from '@kanban-studios/infra';
 
 import { DefaultServerService, WorkspaceServerService } from '../cloud';
 import { GlobalState, GlobalStateService } from '../storage';

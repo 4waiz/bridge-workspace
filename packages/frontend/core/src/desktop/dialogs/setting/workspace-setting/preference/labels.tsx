@@ -1,7 +1,7 @@
 import { WorkspacePermissionService } from '@bridgeflow/core/modules/permissions';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { cssVarV2 } from '@toeverything/theme/v2';
 import { useEffect, useMemo } from 'react';
 

@@ -18,11 +18,11 @@ function applyBranding<T>(value: T): T {
     const replacements: Array<[string, string]> = [
       ['BridgeFlow Cloud', 'BRIDGE Flow'],
       ['BridgeFlow AI', 'Workspace AI'],
-      ['BridgeFlow.Pro', 'awaizahmed.com'],
-      ['ai.bridgeflow.pro', 'awaizahmed.com'],
-      ['app.bridgeflow.pro', 'awaizahmed.com'],
-      ['docs.bridgeflow.pro', 'awaizahmed.com'],
-      ['bridgeflow.pro', 'awaizahmed.com'],
+      ['BridgeFlow.Pro', 'kanbanstudios.ae'],
+      ['ai.bridgeflow.pro', 'kanbanstudios.ae'],
+      ['app.bridgeflow.pro', 'kanbanstudios.ae'],
+      ['docs.bridgeflow.pro', 'kanbanstudios.ae'],
+      ['bridgeflow.pro', 'kanbanstudios.ae'],
       ['BridgeFlow', 'BRIDGE Flow'],
     ];
 

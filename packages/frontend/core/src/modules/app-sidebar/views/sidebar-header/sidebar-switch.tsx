@@ -2,7 +2,7 @@ import { IconButton } from '@bridgeflow/component';
 import { NotificationCountService } from '@bridgeflow/core/modules/notification';
 import { track } from '@bridgeflow/track';
 import { SidebarIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { useCallback, useRef } from 'react';
 

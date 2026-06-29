@@ -23,7 +23,7 @@ export const embed: InitFn = (collection: Workspace, id: string) => {
     store.addBlock(
       'bridgeflow:embed-github',
       {
-        url: 'https://github.com/toeverything/BridgeFlow/pull/5453',
+        url: 'https://github.com/Kanban-Studios/BridgeFlow/pull/5453',
       },
       noteId
     );

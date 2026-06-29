@@ -1,4 +1,4 @@
-import { type Framework } from '@toeverything/infra';
+import { type Framework } from '@kanban-studios/infra';
 
 import { GlobalCache } from '../storage';
 import { I18nProvider } from './context';

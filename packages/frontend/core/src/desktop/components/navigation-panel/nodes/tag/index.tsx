@@ -10,7 +10,7 @@ import { TagService } from '@bridgeflow/core/modules/tag';
 import type { BridgeFlowDNDData } from '@bridgeflow/core/types/dnd';
 import { useI18n } from '@bridgeflow/i18n';
 import { track } from '@bridgeflow/track';
-import { useLiveData, useService, useServices } from '@toeverything/infra';
+import { useLiveData, useService, useServices } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { useCallback, useMemo } from 'react';
 

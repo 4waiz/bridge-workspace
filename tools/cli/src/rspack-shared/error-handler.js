@@ -21,7 +21,7 @@
       '<p class="p2">',
       'It looks like BRIDGE Flow cannot run in this environment.',
       "Please ensure you are using a supported browser or update your device's operating system to the latest version.",
-      'If the issue persists, visit <a href="https://awaizahmed.com">awaizahmed.com</a> for further assistance.',
+      'If the issue persists, visit <a href="https://kanbanstudios.ae">kanbanstudios.ae</a> for further assistance.',
       '</p>',
       '</div>',
       '</div>',

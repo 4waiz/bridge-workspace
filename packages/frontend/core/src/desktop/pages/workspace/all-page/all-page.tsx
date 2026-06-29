@@ -14,7 +14,7 @@ import { CollectionRulesService } from '@bridgeflow/core/modules/collection-rule
 import type { FilterParams } from '@bridgeflow/core/modules/collection-rules/types';
 import { WorkspaceLocalState } from '@bridgeflow/core/modules/workspace';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useState } from 'react';
 
 import {

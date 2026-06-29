@@ -9,7 +9,7 @@ import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { UNTITLED_WORKSPACE_NAME } from '@bridgeflow/env/constant';
 import { useI18n } from '@bridgeflow/i18n';
 import { ArrowRightSmallIcon } from '@blocksuite/icons/rc';
-import { FrameworkScope, useService } from '@toeverything/infra';
+import { FrameworkScope, useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import { DeleteLeaveWorkspace } from './delete-leave-workspace';
@@ -68,7 +68,7 @@ export const WorkspaceSettingDetail = ({
         <DeleteLeaveWorkspace onCloseSetting={onCloseSetting} />
         <SettingRow
           name={
-            <span style={{ color: 'var(--bridgeflow-text-secondary-color)' }}>
+            <span style={{ color: 'var(--affine-text-secondary-color)' }}>
               {t['com.bridgeflow.resetSyncStatus.button']()}
             </span>
           }

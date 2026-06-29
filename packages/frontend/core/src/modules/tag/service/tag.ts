@@ -1,4 +1,4 @@
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 import { cssVar } from '@toeverything/theme';
 
 import { TagList } from '../entities/tag-list';

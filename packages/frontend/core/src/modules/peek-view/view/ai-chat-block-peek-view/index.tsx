@@ -13,7 +13,7 @@ import { ServerService, SubscriptionService } from '@bridgeflow/core/modules/clo
 import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
 import { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
 import type { EditorHost } from '@blocksuite/bridgeflow/std';
-import { useFramework } from '@toeverything/infra';
+import { useFramework } from '@kanban-studios/infra';
 import { useMemo } from 'react';
 
 registerAIAppEffects();

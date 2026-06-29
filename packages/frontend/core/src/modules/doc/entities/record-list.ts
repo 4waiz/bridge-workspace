@@ -1,5 +1,5 @@
 import type { DocMode } from '@blocksuite/bridgeflow/model';
-import { Entity, LiveData } from '@toeverything/infra';
+import { Entity, LiveData } from '@kanban-studios/infra';
 import { map } from 'rxjs';
 
 import type { DocsStore } from '../stores/docs';

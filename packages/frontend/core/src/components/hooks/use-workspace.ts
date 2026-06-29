@@ -3,7 +3,7 @@ import {
   type WorkspaceMetadata,
   WorkspacesService,
 } from '@bridgeflow/core/modules/workspace';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useEffect, useState } from 'react';
 
 /**

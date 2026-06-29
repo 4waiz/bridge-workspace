@@ -13,7 +13,7 @@ import {
   InformationIcon,
   TemplateIcon,
 } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useState } from 'react';
 
 import { type DocRecord, DocsService } from '../../doc';
@@ -65,7 +65,7 @@ const Empty = () => {
       </span>
       <div className={styles.space} />
       <a
-        href="https://awaizahmed.com"
+        href="https://kanbanstudios.ae"
         target="_blank"
         rel="noopener noreferrer"
         className={styles.link}

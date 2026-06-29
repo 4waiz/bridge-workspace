@@ -1,5 +1,5 @@
 import { RadioGroup } from '@bridgeflow/component';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import { ViewService } from '../../services/view';

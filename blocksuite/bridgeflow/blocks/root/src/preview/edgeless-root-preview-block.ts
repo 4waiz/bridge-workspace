@@ -48,10 +48,10 @@ export class EdgelessRootPreviewBlockComponent extends BlockComponent<RootBlockM
 
     bridgeflow-edgeless-root-preview .edgeless-background {
       height: 100%;
-      background-color: var(--bridgeflow-background-primary-color);
+      background-color: var(--affine-background-primary-color);
       background-image: radial-gradient(
-        var(--bridgeflow-edgeless-grid-color) 1px,
-        var(--bridgeflow-background-primary-color) 1px
+        var(--affine-edgeless-grid-color) 1px,
+        var(--affine-background-primary-color) 1px
       );
     }
 

@@ -1,6 +1,6 @@
 import { toast, useConfirmModal } from '@bridgeflow/component';
 import { Trans, useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import { TagService } from '../service/tag';

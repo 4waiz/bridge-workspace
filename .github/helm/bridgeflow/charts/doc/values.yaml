@@ -1,6 +1,6 @@
 replicaCount: 1
 image:
-  repository: ghcr.io/toeverything/bridgeflow
+  repository: ghcr.io/Kanban-Studios/bridgeflow
   pullPolicy: IfNotPresent
   tag: ''
 

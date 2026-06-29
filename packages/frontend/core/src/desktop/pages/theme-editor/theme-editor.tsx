@@ -1,6 +1,6 @@
 import { RadioGroup, Scrollable } from '@bridgeflow/component';
 import { ThemeEditorService } from '@bridgeflow/core/modules/theme-editor';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useState } from 'react';
 
 import { ThemeEmpty } from './components/empty';

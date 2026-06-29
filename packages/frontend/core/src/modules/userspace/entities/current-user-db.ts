@@ -1,4 +1,4 @@
-import { Entity, LiveData } from '@toeverything/infra';
+import { Entity, LiveData } from '@kanban-studios/infra';
 import { Observable, of, switchMap } from 'rxjs';
 
 import type { AuthService } from '../../cloud';

@@ -140,7 +140,7 @@ test.describe('Formatting', () => {
 
     await highlightButton.click();
 
-    const yellow = 'var(--bridgeflow-text-highlight-yellow)';
+    const yellow = 'var(--affine-text-highlight-yellow)';
     const bgYellowButton = toolbar.locator('[data-testid="background-yellow"]');
     await bgYellowButton.click();
 

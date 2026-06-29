@@ -2,7 +2,7 @@ import { ErrorMessage, Skeleton } from '@bridgeflow/component';
 import { UserQuotaService } from '@bridgeflow/core/modules/cloud';
 import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import clsx from 'clsx';
 import { useEffect } from 'react';

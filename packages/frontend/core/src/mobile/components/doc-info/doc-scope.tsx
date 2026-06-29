@@ -1,5 +1,5 @@
 import { type Doc, DocsService } from '@bridgeflow/core/modules/doc';
-import { FrameworkScope, useService } from '@toeverything/infra';
+import { FrameworkScope, useService } from '@kanban-studios/infra';
 import { type PropsWithChildren, useEffect, useState } from 'react';
 
 export const DocFrameScope = ({

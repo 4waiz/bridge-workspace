@@ -37,7 +37,7 @@ export class EdgelessNoteMenu extends EdgelessToolbarToolMixin(LitElement) {
       justify-content: center;
       align-items: center;
       gap: 14px;
-      fill: var(--bridgeflow-icon-color);
+      fill: var(--affine-icon-color);
     }
     .button-group-container svg {
       width: 20px;
@@ -46,7 +46,7 @@ export class EdgelessNoteMenu extends EdgelessToolbarToolMixin(LitElement) {
     .divider {
       width: 1px;
       height: 24px;
-      background: var(--bridgeflow-border-color);
+      background: var(--affine-border-color);
       transform: scaleX(0.5);
       margin: 0 14px;
     }

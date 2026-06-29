@@ -42,9 +42,9 @@ export class AIPanelError extends WithDisposable(LitElement) {
         align-self: stretch;
         .answer-label {
           align-self: stretch;
-          color: var(--bridgeflow-text-secondary-color);
+          color: var(--affine-text-secondary-color);
           /* light/xsMedium */
-          font-size: var(--bridgeflow-font-xs);
+          font-size: var(--affine-font-xs);
           font-style: normal;
           font-weight: 500;
           line-height: 20px; /* 166.667% */
@@ -52,12 +52,12 @@ export class AIPanelError extends WithDisposable(LitElement) {
       }
       .error-info {
         align-self: stretch;
-        color: var(--bridgeflow-error-color, #eb4335);
+        color: var(--affine-error-color, #eb4335);
         font-feature-settings:
           'clig' off,
           'liga' off;
         /* light/sm */
-        font-size: var(--bridgeflow-font-sm);
+        font-size: var(--affine-font-sm);
         font-style: normal;
         font-weight: 400;
         line-height: 22px; /* 157.143% */
@@ -82,11 +82,11 @@ export class AIPanelError extends WithDisposable(LitElement) {
         align-items: center;
         gap: 4px;
         border-radius: 8px;
-        border: 1px solid var(--bridgeflow-border-color);
-        background: var(--bridgeflow-white);
-        color: var(--bridgeflow-text-primary-color);
+        border: 1px solid var(--affine-border-color);
+        background: var(--affine-white);
+        color: var(--affine-text-primary-color);
         /* light/xsMedium */
-        font-size: var(--bridgeflow-font-xs);
+        font-size: var(--affine-font-xs);
         font-style: normal;
         font-weight: 500;
         line-height: 20px; /* 166.667% */
@@ -95,9 +95,9 @@ export class AIPanelError extends WithDisposable(LitElement) {
         cursor: pointer;
       }
       .action-button.primary {
-        border: 1px solid var(--bridgeflow-black-10);
-        background: var(--bridgeflow-primary-color);
-        color: var(--bridgeflow-pure-white);
+        border: 1px solid var(--affine-black-10);
+        background: var(--affine-primary-color);
+        color: var(--affine-pure-white);
       }
       .action-button > span {
         display: flex;
@@ -106,7 +106,7 @@ export class AIPanelError extends WithDisposable(LitElement) {
         padding: 0 4px;
       }
       .action-button:not(.primary):hover {
-        background: var(--bridgeflow-hover-color);
+        background: var(--affine-hover-color);
       }
     }
 
@@ -124,8 +124,8 @@ export class AIPanelError extends WithDisposable(LitElement) {
 
     .response-list-container ai-item-list {
       --item-padding: 4px;
-      --item-icon-color: var(--bridgeflow-icon-secondary);
-      --item-icon-hover-color: var(--bridgeflow-icon-color);
+      --item-icon-color: var(--affine-icon-secondary);
+      --item-icon-hover-color: var(--affine-icon-color);
     }
   `;
 

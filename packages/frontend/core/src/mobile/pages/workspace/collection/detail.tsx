@@ -1,7 +1,7 @@
 import { useThemeColorV2 } from '@bridgeflow/component';
 import { CollectionService } from '@bridgeflow/core/modules/collection';
 import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
-import { useLiveData, useServices } from '@toeverything/infra';
+import { useLiveData, useServices } from '@kanban-studios/infra';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 

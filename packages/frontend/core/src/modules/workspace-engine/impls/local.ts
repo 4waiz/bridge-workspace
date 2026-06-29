@@ -31,8 +31,8 @@ import {
   SqliteV1DocStorage,
 } from '@bridgeflow/nbstore/sqlite/v1';
 import type { WorkerInitOptions } from '@bridgeflow/nbstore/worker/client';
-import type { FrameworkProvider } from '@toeverything/infra';
-import { LiveData, Service } from '@toeverything/infra';
+import type { FrameworkProvider } from '@kanban-studios/infra';
+import { LiveData, Service } from '@kanban-studios/infra';
 import { isEqual } from 'lodash-es';
 import { nanoid } from 'nanoid';
 import { Observable } from 'rxjs';

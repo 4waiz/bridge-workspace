@@ -18,9 +18,9 @@ import {
 import { progressPropertyModelConfig } from './define.js';
 
 const progressColors = {
-  empty: 'var(--bridgeflow-black-10)',
-  processing: 'var(--bridgeflow-processing-color)',
-  success: 'var(--bridgeflow-success-color)',
+  empty: 'var(--affine-black-10)',
+  processing: 'var(--affine-processing-color)',
+  success: 'var(--affine-success-color)',
 };
 
 export class ProgressCell extends BaseCellRenderer<number, number> {
@@ -118,7 +118,7 @@ export class ProgressCell extends BaseCellRenderer<number, number> {
     });
     const bgStyles = styleMap({
       backgroundColor:
-        progress === 0 ? progressColors.empty : 'var(--bridgeflow-hover-color)',
+        progress === 0 ? progressColors.empty : 'var(--affine-hover-color)',
     });
 
     return html`

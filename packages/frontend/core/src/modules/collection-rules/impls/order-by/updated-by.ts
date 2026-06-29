@@ -1,5 +1,5 @@
 import type { DocsService } from '@bridgeflow/core/modules/doc';
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 import { map, type Observable } from 'rxjs';
 
 import type { OrderByProvider } from '../../provider';

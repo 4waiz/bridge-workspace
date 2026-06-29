@@ -4,7 +4,7 @@ import {
   retryAudioTranscriptionMutation,
   submitAudioTranscriptionMutation,
 } from '@bridgeflow/graphql';
-import { Entity } from '@toeverything/infra';
+import { Entity } from '@kanban-studios/infra';
 
 import type { DefaultServerService, WorkspaceServerService } from '../../cloud';
 import { GraphQLService } from '../../cloud/services/graphql';

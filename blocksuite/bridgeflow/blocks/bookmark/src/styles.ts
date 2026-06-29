@@ -55,7 +55,7 @@ export const styles = css`
   .bridgeflow-bookmark-content-title-icon svg {
     width: 16px;
     height: 16px;
-    fill: var(--bridgeflow-background-primary-color);
+    fill: var(--affine-background-primary-color);
   }
 
   .bridgeflow-bookmark-content-title-text {
@@ -66,10 +66,10 @@ export const styles = css`
     word-break: break-word;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--bridgeflow-text-primary-color);
+    color: var(--affine-text-primary-color);
 
-    font-family: var(--bridgeflow-font-family);
-    font-size: var(--bridgeflow-font-sm);
+    font-family: var(--affine-font-family);
+    font-size: var(--affine-font-sm);
     font-style: normal;
     font-weight: 600;
     line-height: 22px;
@@ -86,10 +86,10 @@ export const styles = css`
     word-break: break-word;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--bridgeflow-text-primary-color);
+    color: var(--affine-text-primary-color);
 
-    font-family: var(--bridgeflow-font-family);
-    font-size: var(--bridgeflow-font-xs);
+    font-family: var(--affine-font-family);
+    font-size: var(--affine-font-xs);
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
@@ -113,19 +113,19 @@ export const styles = css`
     white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--bridgeflow-text-secondary-color);
+    color: var(--affine-text-secondary-color);
 
     font-family: ${unsafeCSS(baseTheme.fontSansFamily)};
-    font-size: var(--bridgeflow-font-xs);
+    font-size: var(--affine-font-xs);
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
   }
   .bridgeflow-bookmark-content-url:hover > span {
-    color: var(--bridgeflow-link-color);
+    color: var(--affine-link-color);
   }
   .bridgeflow-bookmark-content-url:hover {
-    fill: var(--bridgeflow-link-color);
+    fill: var(--affine-link-color);
   }
 
   .bridgeflow-bookmark-content-url-icon {
@@ -164,22 +164,22 @@ export const styles = css`
 
   .bridgeflow-bookmark-card.loading {
     .bridgeflow-bookmark-content-title-text {
-      color: var(--bridgeflow-placeholder-color);
+      color: var(--affine-placeholder-color);
     }
   }
 
   .bridgeflow-bookmark-card.error {
     .bridgeflow-bookmark-content-description {
-      color: var(--bridgeflow-placeholder-color);
+      color: var(--affine-placeholder-color);
     }
   }
 
   .bridgeflow-bookmark-card.selected {
     .bridgeflow-bookmark-content-url > span {
-      color: var(--bridgeflow-link-color);
+      color: var(--affine-link-color);
     }
     .bridgeflow-bookmark-content-url .bridgeflow-bookmark-content-url-icon {
-      color: var(--bridgeflow-link-color);
+      color: var(--affine-link-color);
     }
   }
 

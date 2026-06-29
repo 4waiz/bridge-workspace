@@ -1,5 +1,5 @@
 import { toArrayBuffer } from '@bridgeflow/core/utils/array-buffer';
-import { Entity, LiveData, ObjectPool } from '@toeverything/infra';
+import { Entity, LiveData, ObjectPool } from '@kanban-studios/infra';
 import { catchError, from, map, of, startWith, switchMap } from 'rxjs';
 
 import type { WorkspaceService } from '../../workspace';

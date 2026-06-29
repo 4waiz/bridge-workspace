@@ -6,7 +6,7 @@ import { UrlService } from '@bridgeflow/core/modules/url';
 import { UserFriendlyError } from '@bridgeflow/error';
 import { createCustomerPortalMutation } from '@bridgeflow/graphql';
 import { useI18n } from '@bridgeflow/i18n';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 
 import * as styles from './styles.css';
 

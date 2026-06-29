@@ -1,6 +1,6 @@
 import type { DocsService } from '@bridgeflow/core/modules/doc';
 import type { FavoriteService } from '@bridgeflow/core/modules/favorite';
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 import { combineLatest, map, type Observable } from 'rxjs';
 
 import type { FilterProvider } from '../../provider';

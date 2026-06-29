@@ -2,7 +2,7 @@ import { generateSubscriptionCallbackLink } from '@bridgeflow/core/components/ho
 import { AuthService, SubscriptionService } from '@bridgeflow/core/modules/cloud';
 import { UrlService } from '@bridgeflow/core/modules/url';
 import { SubscriptionPlan, SubscriptionRecurring } from '@bridgeflow/graphql';
-import { useFramework } from '@toeverything/infra';
+import { useFramework } from '@kanban-studios/infra';
 import { nanoid } from 'nanoid';
 import { useCallback } from 'react';
 

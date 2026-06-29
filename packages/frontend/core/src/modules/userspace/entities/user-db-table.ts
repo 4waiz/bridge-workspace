@@ -2,8 +2,8 @@ import type { DocFrontendDocState } from '@bridgeflow/nbstore';
 import type {
   Table as OrmTable,
   TableSchemaBuilder,
-} from '@toeverything/infra';
-import { Entity, LiveData } from '@toeverything/infra';
+} from '@kanban-studios/infra';
+import { Entity, LiveData } from '@kanban-studios/infra';
 
 import type { UserDBEngine } from './user-db-engine';
 

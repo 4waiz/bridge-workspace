@@ -2,7 +2,7 @@ import { Button } from '@bridgeflow/component';
 import { WorkspacePermissionService } from '@bridgeflow/core/modules/permissions';
 import { useI18n } from '@bridgeflow/i18n';
 import { DoneIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import * as styles from './self-host-team-plan.css';

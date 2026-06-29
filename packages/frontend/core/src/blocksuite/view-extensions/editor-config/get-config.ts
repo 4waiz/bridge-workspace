@@ -7,7 +7,7 @@ import { EditorSettingService } from '@bridgeflow/core/modules/editor-setting';
 import { ToolbarMoreMenuConfigExtension } from '@blocksuite/bridgeflow/components/toolbar';
 import { EditorSettingExtension } from '@blocksuite/bridgeflow/shared/services';
 import type { ExtensionType } from '@blocksuite/store';
-import type { FrameworkProvider } from '@toeverything/infra';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 
 export function getEditorConfigExtension(
   framework: FrameworkProvider

@@ -1,6 +1,6 @@
 import { ServerService } from '@bridgeflow/core/modules/cloud';
 import { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 
 export const useEnableAI = () => {
   const featureFlagService = useService(FeatureFlagService);

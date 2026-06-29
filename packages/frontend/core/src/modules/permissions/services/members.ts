@@ -2,7 +2,7 @@ import type {
   Permission,
   WorkspaceInviteLinkExpireTime,
 } from '@bridgeflow/graphql';
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 
 import type { WorkspaceService } from '../../workspace';
 import { WorkspaceMembers } from '../entities/members';

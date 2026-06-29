@@ -25,8 +25,8 @@ export class EdgelessFrameMenu extends EdgelessToolbarToolMixin(LitElement) {
       width: 40px;
       height: 24px;
       border-radius: 4px;
-      border: 1px solid var(--bridgeflow-border-color);
-      color: var(--bridgeflow-text-primary-color);
+      border: 1px solid var(--affine-border-color);
+      color: var(--affine-text-primary-color);
       line-height: 20px;
       font-weight: 400;
       font-size: 12px;
@@ -50,18 +50,18 @@ export class EdgelessFrameMenu extends EdgelessToolbarToolMixin(LitElement) {
       pointer-events: none;
     }
     .frame-add-button:hover::before {
-      background: var(--bridgeflow-hover-color);
+      background: var(--affine-hover-color);
     }
 
     .custom {
       width: 60px;
-      background: var(--bridgeflow-hover-color);
+      background: var(--affine-hover-color);
     }
 
     .divider {
       width: 1px;
       height: 20px;
-      background: var(--bridgeflow-border-color);
+      background: var(--affine-border-color);
       transform: scaleX(0.5);
     }
   `;

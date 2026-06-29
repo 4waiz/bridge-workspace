@@ -7,7 +7,7 @@ import {
 import { WorkspaceQuotaService } from '@bridgeflow/core/modules/quota';
 import { SubscriptionRecurring } from '@bridgeflow/graphql';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { CancelTeamAction } from '../../general-setting/plans/actions';

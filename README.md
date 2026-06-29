@@ -46,3 +46,7 @@ corepack yarn dev
 
 - The primary Bridge logo source provided for this workspace is `packages/frontend/admin/src/Icon (1).webp`.
 - Shared public brand assets live under `packages/frontend/core/public`.
+
+---
+
+© 2026 [Kanban Studios](https://kanbanstudios.ae). All rights reserved. BRIDGE Flow is a product of Kanban Studios.

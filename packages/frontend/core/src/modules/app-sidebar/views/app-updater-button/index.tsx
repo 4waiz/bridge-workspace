@@ -9,7 +9,7 @@ import {
   NewIcon,
   ResetIcon,
 } from '@blocksuite/icons/rc';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { useCallback, useMemo } from 'react';
 
@@ -199,7 +199,7 @@ export function AppUpdaterButton({
           onDownloadUpdate();
         }
       } else {
-        urlService.openPopupWindow(`https://awaizahmed.com`);
+        urlService.openPopupWindow(`https://kanbanstudios.ae`);
       }
     } else if (changelogUnread) {
       onOpenChangelog();

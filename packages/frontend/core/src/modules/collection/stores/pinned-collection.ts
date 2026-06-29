@@ -1,4 +1,4 @@
-import { Store } from '@toeverything/infra';
+import { Store } from '@kanban-studios/infra';
 import type { Observable } from 'rxjs';
 
 import type { WorkspaceDBService } from '../../db';

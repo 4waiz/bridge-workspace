@@ -7,12 +7,12 @@ const css = readFileSync(new URL('./global.css', import.meta.url), 'utf8');
 describe('admin global token mapping', () => {
   test('maps semantic colors to bridgeflow tokens', () => {
     expect(css).toContain(
-      '--background: var(--bridgeflow-v2-layer-background-primary);'
+      '--background: var(--affine-v2-layer-background-primary);'
     );
-    expect(css).toContain('--foreground: var(--bridgeflow-v2-text-primary);');
-    expect(css).toContain('--primary: var(--bridgeflow-v2-button-primary);');
-    expect(css).toContain('--ring: var(--bridgeflow-v2-input-border-active);');
-    expect(css).toContain('--radius: var(--bridgeflow-popover-radius);');
+    expect(css).toContain('--foreground: var(--affine-v2-text-primary);');
+    expect(css).toContain('--primary: var(--affine-v2-button-primary);');
+    expect(css).toContain('--ring: var(--affine-v2-input-border-active);');
+    expect(css).toContain('--radius: var(--affine-popover-radius);');
   });
 
   test('does not keep hardcoded shadcn light/dark values', () => {

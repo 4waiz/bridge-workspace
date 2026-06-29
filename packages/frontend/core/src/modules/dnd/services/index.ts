@@ -14,7 +14,7 @@ import {
 import { BlockStdScope } from '@blocksuite/bridgeflow/std';
 import type { SliceSnapshot } from '@blocksuite/bridgeflow/store';
 import type { DragBlockPayload } from '@blocksuite/bridgeflow/widgets/drag-handle';
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 
 import type { DocsService } from '../../doc';
 import type { EditorSettingService } from '../../editor-setting';

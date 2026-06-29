@@ -1,6 +1,6 @@
 import { DefaultServerService, type Server } from '@bridgeflow/core/modules/cloud';
 import type { AuthSessionStatus } from '@bridgeflow/core/modules/cloud/entities/session';
-import { FrameworkScope, useService } from '@toeverything/infra';
+import { FrameworkScope, useService } from '@kanban-studios/infra';
 import { useState } from 'react';
 
 import { AddSelfhostedStep } from './add-selfhosted';

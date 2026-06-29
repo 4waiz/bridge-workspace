@@ -11,7 +11,7 @@ import { IntegrationService } from '@bridgeflow/core/modules/integration';
 import type { ReadwiseHighlight } from '@bridgeflow/core/modules/integration/type';
 import { i18nTime, Trans, useI18n } from '@bridgeflow/i18n';
 import { InformationFillDuotoneIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import {
   type ChangeEvent,

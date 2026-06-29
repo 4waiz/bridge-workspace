@@ -1,5 +1,5 @@
 import { getDocSummaryQuery } from '@bridgeflow/graphql';
-import { Store } from '@toeverything/infra';
+import { Store } from '@kanban-studios/infra';
 import { map, Observable } from 'rxjs';
 
 import type { WorkspaceServerService } from '../../cloud';

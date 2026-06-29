@@ -255,7 +255,7 @@ test('should format quick bar be able to change background color', async ({
   // TODO(@fundon): these recent settings should be added to the dropdown menu.
   // await expect(highlight.highlightBtn).toHaveAttribute(
   //   'data-last-used',
-  //   'var(--bridgeflow-text-highlight-foreground-red)'
+  //   'var(--affine-text-highlight-foreground-red)'
   // );
 
   expect(await getPageSnapshot(page, true)).toMatchSnapshot(

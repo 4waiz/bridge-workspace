@@ -17,7 +17,7 @@ import {
   useLiveData,
   useService,
   useServices,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { lazy, Suspense, useCallback, useEffect } from 'react';
 import type { Subscription } from 'rxjs';

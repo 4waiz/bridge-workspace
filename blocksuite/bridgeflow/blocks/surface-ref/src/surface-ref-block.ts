@@ -89,10 +89,10 @@ export class SurfaceRefBlockComponent extends BlockComponent<SurfaceRefBlockMode
 
     .ref-content {
       position: relative;
-      background-color: var(--bridgeflow-background-primary-color);
+      background-color: var(--affine-background-primary-color);
       background: radial-gradient(
-        var(--bridgeflow-edgeless-grid-color) 1px,
-        var(--bridgeflow-background-primary-color) 1px
+        var(--affine-edgeless-grid-color) 1px,
+        var(--affine-background-primary-color) 1px
       );
     }
 

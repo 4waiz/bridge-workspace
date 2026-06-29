@@ -9,7 +9,7 @@ import { LanguageMenu } from '@bridgeflow/core/components/bridgeflow/language-me
 import { TraySettingService } from '@bridgeflow/core/modules/editor-setting/services/tray-settings';
 import { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useTheme } from 'next-themes';
 import { useCallback, useMemo } from 'react';
 

@@ -15,7 +15,7 @@ import {
 import { useI18n } from '@bridgeflow/i18n';
 import track from '@bridgeflow/track';
 import { AllDocsIcon } from '@blocksuite/icons/rc';
-import { LiveData, useLiveData, useService } from '@toeverything/infra';
+import { LiveData, useLiveData, useService } from '@kanban-studios/infra';
 import { cssVar } from '@toeverything/theme';
 import { useCallback, useEffect, useRef, useState } from 'react';
 

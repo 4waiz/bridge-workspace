@@ -1,5 +1,5 @@
 import type { IconData } from '@bridgeflow/component';
-import { Store } from '@toeverything/infra';
+import { Store } from '@kanban-studios/infra';
 
 import type { WorkspaceDBService } from '../../db';
 

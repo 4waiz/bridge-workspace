@@ -1,4 +1,4 @@
-import type { Framework } from '@toeverything/infra';
+import type { Framework } from '@kanban-studios/infra';
 
 import { DocsService } from '../doc';
 import { DocsSearchService } from '../docs-search';

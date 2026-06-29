@@ -17,7 +17,7 @@ import { createIsland, type Island } from '@bridgeflow/core/utils/island';
 import { ServerDeploymentType } from '@bridgeflow/graphql';
 import { Trans } from '@bridgeflow/i18n';
 import { ContactWithUsIcon } from '@blocksuite/icons/rc';
-import { FrameworkScope, useLiveData, useService } from '@toeverything/infra';
+import { FrameworkScope, useLiveData, useService } from '@kanban-studios/infra';
 import { debounce } from 'lodash-es';
 import {
   Suspense,

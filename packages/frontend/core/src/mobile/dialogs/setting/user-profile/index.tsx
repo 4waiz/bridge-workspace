@@ -4,7 +4,7 @@ import { useSignOut } from '@bridgeflow/core/components/hooks/bridgeflow/use-sig
 import { AuthService } from '@bridgeflow/core/modules/cloud';
 import { GlobalDialogService } from '@bridgeflow/core/modules/dialogs';
 import { ArrowRightSmallIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { type ReactNode } from 'react';
 
 import { UserPlanTag } from '../../../components';

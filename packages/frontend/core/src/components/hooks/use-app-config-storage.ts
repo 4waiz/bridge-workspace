@@ -1,6 +1,6 @@
 import { apis } from '@bridgeflow/electron-api';
-import type { AppConfigSchema } from '@toeverything/infra';
-import { AppConfigStorage, defaultAppConfig } from '@toeverything/infra';
+import type { AppConfigSchema } from '@kanban-studios/infra';
+import { AppConfigStorage, defaultAppConfig } from '@kanban-studios/infra';
 import type { Dispatch } from 'react';
 import { useEffect, useMemo, useState } from 'react';
 

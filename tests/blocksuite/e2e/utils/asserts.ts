@@ -86,7 +86,7 @@ export const defaultStore = {
               borderRadius: 8,
               borderSize: 4,
               borderStyle: 'none',
-              shadowType: '--bridgeflow-note-shadow-box',
+              shadowType: '--affine-note-shadow-box',
             },
           },
         },

@@ -1,6 +1,6 @@
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { Trans } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useMemo, useRef, useState } from 'react';
 
 import {
@@ -92,7 +92,7 @@ export const VirtualizedCollectionList = ({
             i18nKey="com.bridgeflow.collection.toolbar.selected"
             count={selectedCollectionIds.length}
           >
-            <div style={{ color: 'var(--bridgeflow-text-secondary-color)' }}>
+            <div style={{ color: 'var(--affine-text-secondary-color)' }}>
               {{ count: selectedCollectionIds.length } as any}
             </div>
             selected

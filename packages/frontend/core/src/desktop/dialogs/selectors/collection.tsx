@@ -17,7 +17,7 @@ import type { WORKSPACE_DIALOG_SCHEMA } from '@bridgeflow/core/modules/dialogs/c
 import { CompatibleFavoriteItemsAdapter } from '@bridgeflow/core/modules/favorite';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { cssVar } from '@toeverything/theme';
 import { useCallback, useMemo, useState } from 'react';
 

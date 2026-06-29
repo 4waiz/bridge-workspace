@@ -27,7 +27,7 @@ const styles = css`
   }
 
   .select-group:hover {
-    background-color: var(--bridgeflow-hover-color);
+    background-color: var(--affine-hover-color);
   }
 `;
 

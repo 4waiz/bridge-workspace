@@ -2,7 +2,7 @@ import { useConfirmModal, useLitPortalFactory } from '@bridgeflow/component';
 import { getViewManager } from '@bridgeflow/core/blocksuite/manager/view';
 import { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
-import { useFramework, useLiveData, useServices } from '@toeverything/infra';
+import { useFramework, useLiveData, useServices } from '@kanban-studios/infra';
 import { useMemo } from 'react';
 
 import { useEnableAI } from './use-enable-ai';

@@ -4,7 +4,7 @@ import { DocService } from '@bridgeflow/core/modules/doc';
 import { ShareMenuContent } from '@bridgeflow/core/modules/share-menu';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { ShareiOsIcon } from '@blocksuite/icons/rc';
-import { useServices } from '@toeverything/infra';
+import { useServices } from '@kanban-studios/infra';
 
 import * as styles from './page-header-share-button.css';
 

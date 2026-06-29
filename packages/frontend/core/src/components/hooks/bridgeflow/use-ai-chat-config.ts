@@ -14,7 +14,7 @@ import {
 import { TagService } from '@bridgeflow/core/modules/tag';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { createSignalFromObservable } from '@blocksuite/bridgeflow/shared/utils';
-import { useFramework } from '@toeverything/infra';
+import { useFramework } from '@kanban-studios/infra';
 
 export function useAIChatConfig() {
   const framework = useFramework();

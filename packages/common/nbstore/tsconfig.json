@@ -10,8 +10,8 @@
   "references": [
     { "path": "../reader" },
     { "path": "../infra" },
+    { "path": "../../../blocksuite/bridgeflow/all" },
     { "path": "../error" },
-    { "path": "../graphql" },
-    { "path": "../../../blocksuite/bridgeflow/all" }
+    { "path": "../graphql" }
   ]
 }

@@ -2,7 +2,7 @@ import { Button, Divider } from '@bridgeflow/component';
 import { WorkspacePropertyService } from '@bridgeflow/core/modules/workspace-property';
 import { useI18n } from '@bridgeflow/i18n';
 import track from '@bridgeflow/track';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useMemo } from 'react';
 
 import { WorkspacePropertyName } from '../../properties';

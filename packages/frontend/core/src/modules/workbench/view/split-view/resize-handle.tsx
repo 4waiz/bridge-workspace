@@ -1,6 +1,6 @@
 import { useDropTarget } from '@bridgeflow/component';
 import type { BridgeFlowDNDData } from '@bridgeflow/core/types/dnd';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useAtomValue } from 'jotai';
 import type { HTMLAttributes } from 'react';
 import { useCallback } from 'react';

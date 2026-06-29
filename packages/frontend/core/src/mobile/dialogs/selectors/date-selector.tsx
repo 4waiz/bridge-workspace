@@ -2,7 +2,7 @@ import { DatePicker, Menu } from '@bridgeflow/component';
 import type { DialogComponentProps } from '@bridgeflow/core/modules/dialogs';
 import type { WORKSPACE_DIALOG_SCHEMA } from '@bridgeflow/core/modules/dialogs/constant';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useState } from 'react';
 
 import { VirtualKeyboardService } from '../../modules/virtual-keyboard';

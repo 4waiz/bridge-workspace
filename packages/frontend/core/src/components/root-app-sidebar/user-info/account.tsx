@@ -1,6 +1,6 @@
 import { Avatar } from '@bridgeflow/component';
 import { AuthService } from '@bridgeflow/core/modules/cloud';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 
 import * as styles from './index.css';
 

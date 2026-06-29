@@ -17,7 +17,7 @@ import {
   SubscriptionVariant,
 } from '@bridgeflow/graphql';
 import { Trans, useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { cssVarV2 } from '@toeverything/theme/v2';
 import clsx from 'clsx';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -415,7 +415,7 @@ const ActionModal = ({
           components={{
             1: (
               <a
-                href="https://awaizahmed.com"
+                href="https://kanbanstudios.ae"
                 target="_blank"
                 rel="noreferrer"
                 style={{ color: cssVarV2('text/link') }}

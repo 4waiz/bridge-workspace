@@ -11,7 +11,7 @@ import {
   useLiveData,
   useServiceOptional,
   useServices,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { useCallback, useEffect, useState } from 'react';
 
 import { UserWithWorkspaceList } from './user-with-workspace-list';

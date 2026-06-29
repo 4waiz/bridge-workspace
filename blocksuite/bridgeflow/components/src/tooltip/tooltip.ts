@@ -20,12 +20,12 @@ const styles = css`
     box-sizing: border-box;
     max-width: 280px;
     min-height: 32px;
-    font-family: var(--bridgeflow-font-family);
-    font-size: var(--bridgeflow-font-sm);
+    font-family: var(--affine-font-family);
+    font-size: var(--affine-font-sm);
     border-radius: 4px;
     padding: 6px 12px;
-    color: var(--bridgeflow-white);
-    background: var(--bridgeflow-tooltip);
+    color: var(--affine-white);
+    background: var(--affine-tooltip);
 
     overflow-wrap: anywhere;
     white-space: normal;
@@ -47,25 +47,25 @@ const triangleMap = {
     bottom: '-6px',
     borderStyle: 'solid',
     borderWidth: '6px 5px 0 5px',
-    borderColor: 'var(--bridgeflow-tooltip) transparent transparent transparent',
+    borderColor: 'var(--affine-tooltip) transparent transparent transparent',
   },
   right: {
     left: '-6px',
     borderStyle: 'solid',
     borderWidth: '5px 6px 5px 0',
-    borderColor: 'transparent var(--bridgeflow-tooltip) transparent transparent',
+    borderColor: 'transparent var(--affine-tooltip) transparent transparent',
   },
   bottom: {
     top: '-6px',
     borderStyle: 'solid',
     borderWidth: '0 5px 6px 5px',
-    borderColor: 'transparent transparent var(--bridgeflow-tooltip) transparent',
+    borderColor: 'transparent transparent var(--affine-tooltip) transparent',
   },
   left: {
     right: '-6px',
     borderStyle: 'solid',
     borderWidth: '5px 0 5px 6px',
-    borderColor: 'transparent transparent transparent var(--bridgeflow-tooltip)',
+    borderColor: 'transparent transparent transparent var(--affine-tooltip)',
   },
 };
 
@@ -113,7 +113,7 @@ const updateArrowStyles = ({
  *   .offset=${4}
  *   .autoFlip=${true}
  *   .arrow=${true}
- *   .tooltipStyle=${css`:host { z-index: 0; --bridgeflow-tooltip: #fff; }`}
+ *   .tooltipStyle=${css`:host { z-index: 0; --affine-tooltip: #fff; }`}
  *   .allowInteractive=${false}
  * >
  *   Content
@@ -318,7 +318,7 @@ export class Tooltip extends LitElement {
   accessor tooltipStyle: CSSResult = css``;
 
   @property({ attribute: false })
-  accessor zIndex: number | string = 'var(--bridgeflow-z-index-popover)';
+  accessor zIndex: number | string = 'var(--affine-z-index-popover)';
 }
 
 declare global {

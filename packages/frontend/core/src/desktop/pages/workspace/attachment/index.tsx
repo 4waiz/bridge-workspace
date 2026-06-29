@@ -2,7 +2,7 @@ import { Skeleton } from '@bridgeflow/component';
 import { AttachmentViewerView } from '@bridgeflow/core/blocksuite/attachment-viewer';
 import { type Doc, DocsService } from '@bridgeflow/core/modules/doc';
 import { type AttachmentBlockModel } from '@blocksuite/bridgeflow/model';
-import { FrameworkScope, useLiveData, useService } from '@toeverything/infra';
+import { FrameworkScope, useLiveData, useService } from '@kanban-studios/infra';
 import { type ReactElement, useLayoutEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 

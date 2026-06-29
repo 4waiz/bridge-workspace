@@ -4,7 +4,7 @@ import { TemplateDocService } from '@bridgeflow/core/modules/template-doc';
 import { TemplateListMenuContentScrollable } from '@bridgeflow/core/modules/template-doc/view/template-list-menu';
 import { useI18n } from '@bridgeflow/i18n';
 import { CloseIcon, TemplateIcon } from '@blocksuite/icons/rc';
-import { LiveData, useLiveData, useService } from '@toeverything/infra';
+import { LiveData, useLiveData, useService } from '@kanban-studios/infra';
 import { useTheme } from 'next-themes';
 import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 

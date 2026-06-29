@@ -19,8 +19,8 @@ export class DocsPanel extends WithDisposable(ShadowlessElement) {
       display: flex;
       flex-direction: column;
       width: 100%;
-      background-color: var(--bridgeflow-background-secondary-color);
-      font-family: var(--bridgeflow-font-family);
+      background-color: var(--affine-background-secondary-color);
+      font-family: var(--affine-font-family);
       height: 100%;
       padding: 12px;
       gap: 4px;
@@ -29,7 +29,7 @@ export class DocsPanel extends WithDisposable(ShadowlessElement) {
       display: flex;
     }
     .doc-item {
-      color: var(--bridgeflow-text-primary-color);
+      color: var(--affine-text-primary-color);
     }
     .delete-doc-icon {
       display: none;
@@ -37,27 +37,27 @@ export class DocsPanel extends WithDisposable(ShadowlessElement) {
       border-radius: 4px;
     }
     .delete-doc-icon:hover {
-      background-color: var(--bridgeflow-hover-color);
+      background-color: var(--affine-hover-color);
     }
     .delete-doc-icon svg {
       width: 14px;
       height: 14px;
-      color: var(--bridgeflow-secondary-color);
-      fill: var(--bridgeflow-secondary-color);
+      color: var(--affine-secondary-color);
+      fill: var(--affine-secondary-color);
     }
     .new-doc-button {
       margin-bottom: 16px;
-      border: 1px solid var(--bridgeflow-border-color);
+      border: 1px solid var(--affine-border-color);
       border-radius: 4px;
       height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      color: var(--bridgeflow-text-primary-color);
+      color: var(--affine-text-primary-color);
     }
     .new-doc-button:hover {
-      background-color: var(--bridgeflow-hover-color);
+      background-color: var(--affine-hover-color);
     }
   `;
 
@@ -125,7 +125,7 @@ export class DocsPanel extends WithDisposable(ShadowlessElement) {
           const style = styleMap({
             backgroundColor:
               this.editor.doc.id === doc.id
-                ? 'var(--bridgeflow-hover-color)'
+                ? 'var(--affine-hover-color)'
                 : undefined,
             padding: '4px 4px 4px 8px',
             borderRadius: '4px',

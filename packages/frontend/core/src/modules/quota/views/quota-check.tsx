@@ -2,7 +2,7 @@ import { useConfirmModal } from '@bridgeflow/component';
 import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
 import { type I18nString, useI18n } from '@bridgeflow/i18n';
 import { InformationFillDuotoneIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect } from 'react';
 
 import { type WorkspaceMetadata, WorkspacesService } from '../../workspace';

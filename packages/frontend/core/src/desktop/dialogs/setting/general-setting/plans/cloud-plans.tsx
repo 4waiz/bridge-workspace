@@ -2,8 +2,8 @@ import { Switch } from '@bridgeflow/component';
 import { AuthService, SubscriptionService } from '@bridgeflow/core/modules/cloud';
 import { SubscriptionPlan, SubscriptionRecurring } from '@bridgeflow/graphql';
 import { Trans, useI18n } from '@bridgeflow/i18n';
-import { BridgeFlowIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useServices } from '@toeverything/infra';
+import { AfFiNeIcon } from '@blocksuite/icons/rc';
+import { useLiveData, useServices } from '@kanban-studios/infra';
 import {
   type ReactNode,
   type RefObject,
@@ -72,7 +72,7 @@ const proBenefits: BenefitsGetter = t => ({
   [t['com.bridgeflow.payment.cloud.pro.benefit.g1']()]: [
     {
       title: t['com.bridgeflow.payment.cloud.pro.benefit.g1-1'](),
-      icon: <BridgeFlowIcon />,
+      icon: <AfFiNeIcon />,
     },
     ...([2, 3, 4, 5, 7, 8] as const).map(i => ({
       title: t[`com.bridgeflow.payment.cloud.pro.benefit.g1-${i}`](),
@@ -84,7 +84,7 @@ const teamBenefits: BenefitsGetter = t => ({
   [t['com.bridgeflow.payment.cloud.team-workspace.benefit.g1']()]: [
     {
       title: t['com.bridgeflow.payment.cloud.team-workspace.benefit.g1-1'](),
-      icon: <BridgeFlowIcon />,
+      icon: <AfFiNeIcon />,
     },
     ...([2, 3, 4, 5, 6] as const).map(i => ({
       title: t[`com.bridgeflow.payment.cloud.team-workspace.benefit.g1-${i}`](),
@@ -288,7 +288,7 @@ export const CloudPlans = () => {
           questions, please contact our&nbsp;
           <a
             href="mailto:support@toeverything.info"
-            style={{ color: 'var(--bridgeflow-link-color)' }}
+            style={{ color: 'var(--affine-link-color)' }}
           >
             customer support
           </a>

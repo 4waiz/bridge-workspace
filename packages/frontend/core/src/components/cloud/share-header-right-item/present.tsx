@@ -2,7 +2,7 @@ import { Button } from '@bridgeflow/component/ui/button';
 import { EditorService } from '@bridgeflow/core/modules/editor';
 import { useI18n } from '@bridgeflow/i18n';
 import { PresentationIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 
 import * as styles from './styles.css';
 

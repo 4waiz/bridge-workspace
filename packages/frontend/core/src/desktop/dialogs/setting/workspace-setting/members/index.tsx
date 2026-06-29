@@ -4,7 +4,7 @@ import { BridgeFlowErrorBoundary } from '@bridgeflow/core/components/bridgeflow/
 import { useWorkspaceInfo } from '@bridgeflow/core/components/hooks/use-workspace-info';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { useI18n } from '@bridgeflow/i18n';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import type { ReactElement } from 'react';
 
 import type { SettingState } from '../../types';

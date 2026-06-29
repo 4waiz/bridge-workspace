@@ -6,7 +6,7 @@ import {
 import { ShareDocsListService } from '@bridgeflow/core/modules/share-doc';
 import { Trans, useI18n } from '@bridgeflow/i18n';
 import { FilterIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useServices } from '@toeverything/infra';
+import { useLiveData, useServices } from '@kanban-studios/infra';
 import { memo, type ReactNode, useCallback, useEffect, useState } from 'react';
 
 import {
@@ -229,7 +229,7 @@ export const EmptyList = ({ search }: { search?: string }) => {
           <Trans i18nKey="com.bridgeflow.selectPage.empty.tips" values={{ search }}>
             No page titles contain
             <span
-              style={{ fontWeight: 600, color: 'var(--bridgeflow-primary-color)' }}
+              style={{ fontWeight: 600, color: 'var(--affine-primary-color)' }}
             >
               search
             </span>

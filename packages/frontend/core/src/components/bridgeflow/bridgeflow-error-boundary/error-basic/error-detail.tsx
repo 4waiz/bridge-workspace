@@ -141,8 +141,8 @@ export function ContactUS() {
       components={{
         1: (
           <a
-            style={{ color: 'var(--bridgeflow-primary-color)' }}
-            href="https://awaizahmed.com"
+            style={{ color: 'var(--affine-primary-color)' }}
+            href="https://kanbanstudios.ae"
             target="__blank"
           />
         ),

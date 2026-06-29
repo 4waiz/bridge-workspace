@@ -1,7 +1,7 @@
 import { toDocSearchParams } from '@bridgeflow/core/modules/navigation';
 import type { IndexerPreferOptions, IndexerSyncState } from '@bridgeflow/nbstore';
 import type { ReferenceParams } from '@blocksuite/bridgeflow/model';
-import { fromPromise, LiveData, Service } from '@toeverything/infra';
+import { fromPromise, LiveData, Service } from '@kanban-studios/infra';
 import { isEmpty, omit } from 'lodash-es';
 import { map, type Observable, of, switchMap } from 'rxjs';
 import { z } from 'zod';

@@ -41,7 +41,7 @@ export class EdgelessTemplatePanel extends WithDisposable(LitElement) {
       width: 467px;
       height: 568px;
       border-radius: 12px;
-      background-color: var(--bridgeflow-background-overlay-panel-color);
+      background-color: var(--affine-background-overlay-panel-color);
       box-shadow: 0px 10px 80px 0px rgba(0, 0, 0, 0.2);
 
       display: flex;
@@ -53,15 +53,15 @@ export class EdgelessTemplatePanel extends WithDisposable(LitElement) {
     .search-bar {
       padding: 21px 24px;
       font-size: 18px;
-      color: var(--bridgeflow-secondary);
-      border-bottom: 1px solid var(--bridgeflow-divider-color);
+      color: var(--affine-secondary);
+      border-bottom: 1px solid var(--affine-divider-color);
 
       flex-shrink: 0;
     }
 
     .search-input {
       border: 0;
-      color: var(--bridgeflow-text-primary-color);
+      color: var(--affine-text-primary-color);
       font-size: 20px;
       background-color: inherit;
       outline: none;
@@ -69,7 +69,7 @@ export class EdgelessTemplatePanel extends WithDisposable(LitElement) {
     }
 
     .search-input::placeholder {
-      color: var(--bridgeflow-text-secondary-color);
+      color: var(--affine-text-secondary-color);
     }
 
     .template-categories {
@@ -82,7 +82,7 @@ export class EdgelessTemplatePanel extends WithDisposable(LitElement) {
     }
 
     .category-entry {
-      color: var(--bridgeflow-text-primary-color);
+      color: var(--affine-text-primary-color);
       font-size: 12px;
       font-weight: 600;
       line-height: 20px;
@@ -96,8 +96,8 @@ export class EdgelessTemplatePanel extends WithDisposable(LitElement) {
 
     .category-entry.selected,
     .category-entry:hover {
-      color: var(--bridgeflow-text-primary-color);
-      background-color: var(--bridgeflow-background-tertiary-color);
+      color: var(--affine-text-primary-color);
+      background-color: var(--affine-background-tertiary-color);
     }
 
     .template-viewport {
@@ -125,7 +125,7 @@ export class EdgelessTemplatePanel extends WithDisposable(LitElement) {
       width: 135px;
       height: 80px;
       box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.02);
-      background-color: var(--bridgeflow-background-primary-color);
+      background-color: var(--affine-background-primary-color);
       border-radius: 4px;
       cursor: pointer;
     }
@@ -135,7 +135,7 @@ export class EdgelessTemplatePanel extends WithDisposable(LitElement) {
       margin: 0 auto;
       width: 135px;
       height: 80px;
-      color: var(--bridgeflow-background-primary-color);
+      color: var(--affine-background-primary-color);
     }
 
     /* .template-item:hover::before {
@@ -153,8 +153,8 @@ export class EdgelessTemplatePanel extends WithDisposable(LitElement) {
       text-align: center;
       font-size: 12px;
 
-      background-color: var(--bridgeflow-primary-color);
-      color: var(--bridgeflow-white);
+      background-color: var(--affine-primary-color);
+      color: var(--affine-white);
     } */
 
     .template-item:hover::after {
@@ -165,9 +165,9 @@ export class EdgelessTemplatePanel extends WithDisposable(LitElement) {
       width: 100%;
       height: 100%;
       box-sizing: border-box;
-      border: 1px solid var(--bridgeflow-black-10);
+      border: 1px solid var(--affine-black-10);
       border-radius: 4px;
-      background-color: var(--bridgeflow-hover-color);
+      background-color: var(--affine-hover-color);
     }
 
     .template-item.loading::before {
@@ -192,7 +192,7 @@ export class EdgelessTemplatePanel extends WithDisposable(LitElement) {
       bottom: 0;
       position: absolute;
       transform: translateY(20px);
-      color: var(--bridgeflow-background-overlay-panel-color);
+      color: var(--affine-background-overlay-panel-color);
     }
   `;
 

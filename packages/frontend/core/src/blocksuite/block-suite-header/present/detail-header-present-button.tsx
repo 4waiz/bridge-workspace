@@ -1,7 +1,7 @@
 import { IconButton } from '@bridgeflow/component';
 import { EditorService } from '@bridgeflow/core/modules/editor';
 import { PresentationIcon } from '@blocksuite/icons/rc';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 
 export const DetailPageHeaderPresentButton = () => {
   const editorService = useService(EditorService);

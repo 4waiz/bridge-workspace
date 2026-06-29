@@ -20,7 +20,7 @@ import {
   sendSetPasswordEmailMutation,
 } from '@bridgeflow/graphql';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useEffect, useState } from 'react';
 
 export const ChangePasswordDialog = ({

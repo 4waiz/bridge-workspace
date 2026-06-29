@@ -10,7 +10,7 @@ import {
 import type { DatabaseBlockDataSource } from '@blocksuite/bridgeflow/blocks/database';
 import type { SelectTag } from '@blocksuite/data-view';
 import { MultiSelectIcon, SingleSelectIcon } from '@blocksuite/icons/rc';
-import { LiveData, useLiveData, useService } from '@toeverything/infra';
+import { LiveData, useLiveData, useService } from '@kanban-studios/infra';
 import { nanoid } from 'nanoid';
 import { useCallback, useMemo } from 'react';
 
@@ -166,7 +166,7 @@ const BlocksuiteDatabaseSelector = ({
 
   const onCreateTag = useCallback(
     (name: string, color: string) => {
-      // bs database uses --bridgeflow-tag-xxx colors
+      // bs database uses --affine-tag-xxx colors
       const newTag = {
         id: nanoid(),
         name: name,

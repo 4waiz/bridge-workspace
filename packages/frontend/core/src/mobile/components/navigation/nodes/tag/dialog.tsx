@@ -1,7 +1,7 @@
 import { type MenuSubProps, useMobileMenuController } from '@bridgeflow/component';
 import { TagService } from '@bridgeflow/core/modules/tag';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import {
   createContext,
   type Dispatch,

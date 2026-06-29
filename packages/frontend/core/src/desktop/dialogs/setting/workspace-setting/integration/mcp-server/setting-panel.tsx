@@ -5,7 +5,7 @@ import type { AccessToken } from '@bridgeflow/core/modules/cloud/stores/access-t
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { UserFriendlyError } from '@bridgeflow/error';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { type ReactNode, useEffect, useMemo, useState } from 'react';
 
 import { IntegrationSettingHeader } from '../setting';

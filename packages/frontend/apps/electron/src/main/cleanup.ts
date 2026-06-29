@@ -1,4 +1,4 @@
-import type { MediaStats } from '@toeverything/infra';
+import type { MediaStats } from '@kanban-studios/infra';
 import { app } from 'electron';
 
 import { logger } from './logger';

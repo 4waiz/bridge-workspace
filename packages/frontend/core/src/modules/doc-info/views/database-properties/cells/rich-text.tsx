@@ -5,7 +5,7 @@ import { RichText } from '@blocksuite/bridgeflow/rich-text';
 import type { BlockStdScope } from '@blocksuite/bridgeflow/std';
 import type { Store } from '@blocksuite/bridgeflow/store';
 import { TextIcon } from '@blocksuite/icons/rc';
-import { type LiveData, useLiveData } from '@toeverything/infra';
+import { type LiveData, useLiveData } from '@kanban-studios/infra';
 import { type CSSProperties, useEffect, useRef, useState } from 'react';
 import type * as Y from 'yjs';
 

@@ -9,7 +9,7 @@ import {
   type WorkbenchLinkProps,
 } from '@bridgeflow/core/modules/workbench';
 import type { DocMeta } from '@blocksuite/bridgeflow/store';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { forwardRef, type ReactNode, useMemo, useRef } from 'react';
 

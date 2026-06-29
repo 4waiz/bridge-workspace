@@ -13,7 +13,7 @@ import type { AuthSessionStatus } from '@bridgeflow/core/modules/cloud/entities/
 import { Unreachable } from '@bridgeflow/env/constant';
 import { UserFriendlyError } from '@bridgeflow/error';
 import { Trans, useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import {
   type Dispatch,
   type SetStateAction,

@@ -14,7 +14,7 @@ export const SeeAllLink = () => {
   return (
     <a
       className={styles.allPlansLink}
-      href="https://awaizahmed.com"
+      href="https://kanbanstudios.ae"
       target="_blank"
       rel="noopener noreferrer"
     >

@@ -877,7 +877,7 @@ export class ConnectionOverlay extends Overlay {
 
   private _getEmphasisColor(): string {
     return getComputedStyle(this.gfx.std.host).getPropertyValue(
-      '--bridgeflow-text-emphasis-color'
+      '--affine-text-emphasis-color'
     );
   }
 

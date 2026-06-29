@@ -1,4 +1,4 @@
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { type ComponentType, useMemo } from 'react';
 
 import { IntegrationPropertyService } from '../../services/integration-property';

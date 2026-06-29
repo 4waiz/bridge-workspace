@@ -4,7 +4,7 @@ import {
   type AudioMediaKey,
   ObjectPool,
   Service,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 
 import { AudioAttachmentBlock } from '../entities/audio-attachment-block';
 

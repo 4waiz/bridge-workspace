@@ -2,7 +2,7 @@ import { DocDisplayMetaService } from '@bridgeflow/core/modules/doc-display-meta
 import { JournalService } from '@bridgeflow/core/modules/journal';
 import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
 import { TodayIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import { TabItem } from './tab-item';

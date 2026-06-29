@@ -324,7 +324,7 @@ export class SelectionController implements ReactiveController {
             ${row
               .map(
                 cell => `
-              <td style="border: 1px solid var(--bridgeflow-border-color); padding: 8px 12px; min-width: ${DefaultColumnWidth}px; min-height: 22px;">${cell}</td>
+              <td style="border: 1px solid var(--affine-border-color); padding: 8px 12px; min-width: ${DefaultColumnWidth}px; min-height: 22px;">${cell}</td>
             `
               )
               .join('')}

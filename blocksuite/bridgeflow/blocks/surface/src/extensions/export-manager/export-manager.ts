@@ -408,11 +408,11 @@ export class ExportManager {
     if (edgelessBackground) {
       await this._drawEdgelessBackground(ctx, {
         backgroundColor: containerComputedStyle.getPropertyValue(
-          '--bridgeflow-background-primary-color'
+          '--affine-background-primary-color'
         ),
         size: getBgGridGap(edgelessBackground.zoom),
         gridColor: containerComputedStyle.getPropertyValue(
-          '--bridgeflow-edgeless-grid-color'
+          '--affine-edgeless-grid-color'
         ),
       });
     }

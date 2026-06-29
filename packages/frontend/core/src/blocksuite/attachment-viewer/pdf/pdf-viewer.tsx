@@ -20,7 +20,7 @@ import {
   ExpandIcon,
   InformationIcon,
 } from '@blocksuite/icons/rc';
-import { LiveData, useLiveData, useService } from '@toeverything/infra';
+import { LiveData, useLiveData, useService } from '@kanban-studios/infra';
 import { cssVar } from '@toeverything/theme';
 import clsx from 'clsx';
 import { nanoid } from 'nanoid';

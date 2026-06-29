@@ -1,5 +1,5 @@
 import { DebugLogger } from '@bridgeflow/debug';
-import { Entity, LiveData } from '@toeverything/infra';
+import { Entity, LiveData } from '@kanban-studios/infra';
 import {
   debounceTime,
   distinctUntilChanged,

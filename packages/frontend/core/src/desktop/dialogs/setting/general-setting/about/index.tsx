@@ -13,7 +13,7 @@ import { UrlService } from '@bridgeflow/core/modules/url';
 import { appIconMap, appNames } from '@bridgeflow/core/utils/channel';
 import { useI18n } from '@bridgeflow/i18n';
 import { ArrowRightSmallIcon, OpenInNewIcon } from '@blocksuite/icons/rc';
-import { useServices } from '@toeverything/infra';
+import { useServices } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import { useAppSettingHelper } from '../../../../../components/hooks/bridgeflow/use-app-setting-helper';

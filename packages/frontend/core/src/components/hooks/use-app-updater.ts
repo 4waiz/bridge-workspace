@@ -3,7 +3,7 @@ import { UrlService } from '@bridgeflow/core/modules/url';
 import type { UpdateMeta } from '@bridgeflow/electron-api';
 import { apis, events } from '@bridgeflow/electron-api';
 import { track } from '@bridgeflow/track';
-import { appSettingAtom, useService } from '@toeverything/infra';
+import { appSettingAtom, useService } from '@kanban-studios/infra';
 import { atom, useAtom, useAtomValue } from 'jotai';
 import { atomWithObservable, atomWithStorage } from 'jotai/utils';
 import { useCallback, useState } from 'react';

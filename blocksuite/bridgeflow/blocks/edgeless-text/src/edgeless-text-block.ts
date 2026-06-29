@@ -291,7 +291,7 @@ export class EdgelessTextBlockComponent extends GfxBlockComponent<EdgelessTextBl
       boxSizing: 'border-box',
       boxShadow: editing ? '0px 0px 0px 2px rgba(30, 150, 235, 0.3)' : 'none',
       fontWeight: '400',
-      lineHeight: 'var(--bridgeflow-line-height)',
+      lineHeight: 'var(--affine-line-height)',
       minWidth: !hasMaxWidth ? '220px' : undefined,
     };
 
@@ -331,8 +331,8 @@ export class EdgelessTextBlockComponent extends GfxBlockComponent<EdgelessTextBl
       '--edgeless-text-font-style': fontStyle,
       '--edgeless-text-font-weight': fontWeight,
       '--edgeless-text-text-align': textAlign,
-      '--bridgeflow-list-margin': '0',
-      '--bridgeflow-paragraph-margin': '0',
+      '--affine-list-margin': '0',
+      '--affine-paragraph-margin': '0',
     });
 
     return html`

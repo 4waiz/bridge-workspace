@@ -12,7 +12,7 @@ import type { ListHistoryQuery } from '@bridgeflow/graphql';
 import { listHistoryQuery, recoverDocMutation } from '@bridgeflow/graphql';
 import { i18nTime } from '@bridgeflow/i18n';
 import type { Workspace } from '@blocksuite/bridgeflow/store';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useEffect, useMemo } from 'react';
 import useSWRImmutable from 'swr/immutable';
 import {

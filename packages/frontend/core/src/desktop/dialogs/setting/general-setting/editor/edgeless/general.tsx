@@ -3,7 +3,7 @@ import { SettingRow } from '@bridgeflow/component/setting-components';
 import { EditorSettingService } from '@bridgeflow/core/modules/editor-setting';
 import type { EdgelessDefaultTheme } from '@bridgeflow/core/modules/editor-setting/schema';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useMemo } from 'react';
 
 import { menuTrigger } from '../style.css';

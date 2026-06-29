@@ -11,7 +11,7 @@ import { ShareDocsListService } from '@bridgeflow/core/modules/share-doc';
 import { useI18n } from '@bridgeflow/i18n';
 import track from '@bridgeflow/track';
 import { FilterMinusIcon, ViewLayersIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService, useServices } from '@toeverything/infra';
+import { useLiveData, useService, useServices } from '@kanban-studios/infra';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { AddItemPlaceholder } from '../../layouts/add-item-placeholder';

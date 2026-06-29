@@ -1,4 +1,4 @@
-import { LiveData, ObjectPool, Service } from '@toeverything/infra';
+import { LiveData, ObjectPool, Service } from '@kanban-studios/infra';
 import { map } from 'rxjs';
 
 import { Collection } from '../entities/collection';

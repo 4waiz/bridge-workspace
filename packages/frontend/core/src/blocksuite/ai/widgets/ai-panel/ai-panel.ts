@@ -52,7 +52,7 @@ export class BridgeFlowAIPanelWidget extends WidgetComponent {
       outline: none;
       border-radius: var(--8, 8px);
       border: 1px solid;
-      border-color: ${unsafeCSSVar('--bridgeflow-border-color')};
+      border-color: ${unsafeCSSVar('--affine-border-color')};
       background: ${unsafeCSSVar('backgroundOverlayPanelColor')};
       box-shadow: ${unsafeCSSVar('overlayShadow')};
 
@@ -63,23 +63,23 @@ export class BridgeFlowAIPanelWidget extends WidgetComponent {
       left: 0;
       overflow-y: auto;
       scrollbar-width: none !important;
-      z-index: var(--bridgeflow-z-index-popover);
-      --bridgeflow-font-family: var(--bridgeflow-font-sans-family);
+      z-index: var(--affine-z-index-popover);
+      --affine-font-family: var(--affine-font-sans-family);
     }
 
     :host([data-app-theme='light']) {
       background: ${unsafeCSS(
-        lightCssVariables['--bridgeflow-background-overlay-panel-color']
+        lightCssVariables['--affine-background-overlay-panel-color']
       )};
-      border-color: ${unsafeCSS(lightCssVariables['--bridgeflow-border-color'])};
-      box-shadow: ${unsafeCSS(lightCssVariables['--bridgeflow-overlay-shadow'])};
+      border-color: ${unsafeCSS(lightCssVariables['--affine-border-color'])};
+      box-shadow: ${unsafeCSS(lightCssVariables['--affine-overlay-shadow'])};
     }
     :host([data-app-theme='dark']) {
       background: ${unsafeCSS(
-        darkCssVariables['--bridgeflow-background-overlay-panel-color']
+        darkCssVariables['--affine-background-overlay-panel-color']
       )};
-      border-color: ${unsafeCSS(darkCssVariables['--bridgeflow-border-color'])};
-      box-shadow: ${unsafeCSS(darkCssVariables['--bridgeflow-overlay-shadow'])};
+      border-color: ${unsafeCSS(darkCssVariables['--affine-border-color'])};
+      box-shadow: ${unsafeCSS(darkCssVariables['--affine-overlay-shadow'])};
     }
 
     .ai-panel-container {

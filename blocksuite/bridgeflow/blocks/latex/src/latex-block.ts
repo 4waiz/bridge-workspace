@@ -134,7 +134,7 @@ export class LatexBlockComponent extends CaptionedBlockComponent<LatexBlockModel
       abortController: this._editorAbortController,
       shadowDom: false,
       portalStyles: {
-        zIndex: 'var(--bridgeflow-z-index-popover)',
+        zIndex: 'var(--affine-z-index-popover)',
       },
     });
 

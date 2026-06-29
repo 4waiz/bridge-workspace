@@ -4,7 +4,7 @@ import { GlobalDialogService } from '@bridgeflow/core/modules/dialogs';
 import type { Workspace } from '@bridgeflow/core/modules/workspace';
 import { WorkspacesService } from '@bridgeflow/core/modules/workspace';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import { useNavigateHelper } from '../use-navigate-helper';

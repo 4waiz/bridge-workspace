@@ -4,11 +4,11 @@
   <name>BridgeFlow</name>
   <summary>Productivity and note-taking app</summary>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>MIT AND LicenseRef-proprietary=https://github.com/toeverything/BridgeFlow/blob/canary/LICENSE</project_license>
+  <project_license>MIT AND LicenseRef-proprietary=https://github.com/Kanban-Studios/BridgeFlow/blob/canary/LICENSE</project_license>
   <url type="homepage">https://bridgeflow.pro</url>
-  <url type="bugtracker">https://github.com/toeverything/BridgeFlow/issues</url>
+  <url type="bugtracker">https://github.com/Kanban-Studios/BridgeFlow/issues</url>
   <url type="help">https://docs.bridgeflow.pro/</url>
-  <url type="vcs-browser">https://github.com/toeverything/BridgeFlow</url>
+  <url type="vcs-browser">https://github.com/Kanban-Studios/BridgeFlow</url>
   <url type="contribute">https://docs.bridgeflow.pro/contributing</url>
   <developer id="pro.bridgeflow.app">
     <name>bridgeflow</name>
@@ -65,7 +65,7 @@
   </screenshots>
   <releases>
     <release version="0.26.3" date="2026-02-24">
-      <url>https://github.com/toeverything/BridgeFlow/releases/tag/v0.26.3</url>
+      <url>https://github.com/Kanban-Studios/BridgeFlow/releases/tag/v0.26.3</url>
     </release>
   </releases>
 </component>

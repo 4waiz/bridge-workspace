@@ -67,24 +67,24 @@ module.exports = {
         },
         // Selfhost sidebar tokens
         sidebar: {
-          bg: 'var(--bridgeflow-v2-selfhost-layer-background-sidebarBg-sidebarBg)',
-          foreground: 'var(--bridgeflow-v2-selfhost-text-sidebar-primary)',
+          bg: 'var(--affine-v2-selfhost-layer-background-sidebarBg-sidebarBg)',
+          foreground: 'var(--affine-v2-selfhost-text-sidebar-primary)',
           'foreground-secondary':
-            'var(--bridgeflow-v2-selfhost-text-sidebar-secondary)',
-          hover: 'var(--bridgeflow-v2-selfhost-button-sidebarButton-bg-hover)',
-          active: 'var(--bridgeflow-v2-selfhost-button-sidebarButton-bg-select)',
+            'var(--affine-v2-selfhost-text-sidebar-secondary)',
+          hover: 'var(--affine-v2-selfhost-button-sidebarButton-bg-hover)',
+          active: 'var(--affine-v2-selfhost-button-sidebarButton-bg-select)',
         },
         // Chip / badge tokens
         chip: {
-          blue: 'var(--bridgeflow-v2-chip-label-blue)',
-          white: 'var(--bridgeflow-v2-chip-label-white)',
-          text: 'var(--bridgeflow-v2-chip-label-text)',
+          blue: 'var(--affine-v2-chip-label-blue)',
+          white: 'var(--affine-v2-chip-label-white)',
+          text: 'var(--affine-v2-chip-label-text)',
         },
         // Toggle tokens
         toggle: {
-          on: 'var(--bridgeflow-v2-selfhost-toggle-backgroundOn)',
-          off: 'var(--bridgeflow-v2-selfhost-toggle-backgroundOff)',
-          thumb: 'var(--bridgeflow-v2-selfhost-toggle-foreground)',
+          on: 'var(--affine-v2-selfhost-toggle-backgroundOn)',
+          off: 'var(--affine-v2-selfhost-toggle-backgroundOff)',
+          thumb: 'var(--affine-v2-selfhost-toggle-foreground)',
         },
       },
       borderRadius: {

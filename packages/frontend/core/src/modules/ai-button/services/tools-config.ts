@@ -2,7 +2,7 @@ import {
   createSignalFromObservable,
   type Signal,
 } from '@blocksuite/bridgeflow/shared/utils';
-import { LiveData, Service } from '@toeverything/infra';
+import { LiveData, Service } from '@kanban-studios/infra';
 import { map } from 'rxjs';
 
 import type { GlobalStateService } from '../../storage';

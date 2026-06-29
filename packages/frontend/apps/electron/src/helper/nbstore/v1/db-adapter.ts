@@ -1,6 +1,6 @@
 import type { InsertRow } from '@bridgeflow/native';
 import { SqliteConnection } from '@bridgeflow/native';
-import type { ByteKVBehavior } from '@toeverything/infra/storage';
+import type { ByteKVBehavior } from '@kanban-studios/infra/storage';
 
 import { logger } from '../../logger';
 

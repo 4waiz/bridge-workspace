@@ -1,6 +1,6 @@
 import { PageHeader } from '@bridgeflow/core/mobile/components';
 import type { Tag } from '@bridgeflow/core/modules/tag';
-import { useLiveData } from '@toeverything/infra';
+import { useLiveData } from '@kanban-studios/infra';
 
 import * as styles from './detail.css';
 

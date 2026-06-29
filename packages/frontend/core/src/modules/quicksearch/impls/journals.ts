@@ -1,6 +1,6 @@
 import { I18n, i18nTime } from '@bridgeflow/i18n';
 import { DateTimeIcon } from '@blocksuite/icons/rc';
-import { Entity, LiveData } from '@toeverything/infra';
+import { Entity, LiveData } from '@kanban-studios/infra';
 
 import type { WorkspaceDialogService } from '../../dialogs';
 import type { DocDisplayMetaService } from '../../doc-display-meta';

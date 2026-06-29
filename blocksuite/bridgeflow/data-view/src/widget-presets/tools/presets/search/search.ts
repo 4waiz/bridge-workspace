@@ -28,7 +28,7 @@ const styles = css`
   .search-container-expand {
     overflow: visible;
     width: 138px;
-    background-color: var(--bridgeflow-hover-color);
+    background-color: var(--affine-hover-color);
   }
 
   .search-input-container {
@@ -59,7 +59,7 @@ const styles = css`
   }
 
   .bridgeflow-database-search-input-icon:hover {
-    background: var(--bridgeflow-hover-color);
+    background: var(--affine-hover-color);
   }
 
   .search-container-expand .bridgeflow-database-search-input-icon {
@@ -73,7 +73,7 @@ const styles = css`
     padding: 0 2px 0 30px;
     border: none;
     font-family: ${unsafeCSS(baseTheme.fontSansFamily)};
-    font-size: var(--bridgeflow-font-sm);
+    font-size: var(--affine-font-sm);
     box-sizing: border-box;
     color: inherit;
     background: transparent;
@@ -81,8 +81,8 @@ const styles = css`
   }
 
   .bridgeflow-database-search-input::placeholder {
-    color: var(--bridgeflow-placeholder-color);
-    font-size: var(--bridgeflow-font-sm);
+    color: var(--affine-placeholder-color);
+    font-size: var(--affine-font-sm);
   }
 `;
 
@@ -164,7 +164,7 @@ export class DataViewHeaderToolsSearch extends WidgetBase<
                 boxSizing: 'border-box',
                 padding: '2px 6px',
                 borderRadius: '4px',
-                background: 'var(--bridgeflow-white-10)',
+                background: 'var(--affine-white-10)',
               })}
               >Esc</span
             >

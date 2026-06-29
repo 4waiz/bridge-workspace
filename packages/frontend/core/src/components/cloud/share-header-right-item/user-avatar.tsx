@@ -3,7 +3,7 @@ import { Menu, MenuItem, MenuSeparator } from '@bridgeflow/component/ui/menu';
 import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
 import { useI18n } from '@bridgeflow/i18n';
 import { SignOutIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useEffect, useMemo } from 'react';
 
 import { AuthService, SubscriptionService } from '../../../modules/cloud';

@@ -2,7 +2,7 @@ import { Avatar, Skeleton } from '@bridgeflow/component';
 import { PublicUserService } from '@bridgeflow/core/modules/cloud';
 import { useI18n } from '@bridgeflow/i18n';
 import { CloseIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { type MouseEventHandler, useCallback, useEffect } from 'react';
 
 import * as styles from './styles.css';

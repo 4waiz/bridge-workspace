@@ -8,7 +8,7 @@ import {
 } from '@bridgeflow/graphql';
 import { useI18n } from '@bridgeflow/i18n';
 import track from '@bridgeflow/track';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useCallback, useMemo } from 'react';
 
 import { CheckoutSlot } from '../../checkout-slot';

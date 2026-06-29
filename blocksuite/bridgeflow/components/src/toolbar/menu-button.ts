@@ -184,14 +184,14 @@ export class EditorMenuAction extends LitElement {
       text-overflow: ellipsis;
       cursor: pointer;
       gap: 8px;
-      color: var(--bridgeflow-text-primary-color);
+      color: var(--affine-text-primary-color);
       font-weight: 400;
       min-height: 30px; // 22 + 8
     }
 
     :host(:hover),
     :host([data-selected]) {
-      background-color: var(--bridgeflow-hover-color);
+      background-color: var(--affine-hover-color);
     }
 
     :host([data-selected]) {
@@ -200,18 +200,18 @@ export class EditorMenuAction extends LitElement {
 
     :host(:hover.delete),
     :host(:hover.delete) ::slotted(svg) {
-      background-color: var(--bridgeflow-background-error-color);
-      color: var(--bridgeflow-error-color);
+      background-color: var(--affine-background-error-color);
+      color: var(--affine-error-color);
     }
 
     :host([disabled]) {
       pointer-events: none;
       cursor: not-allowed;
-      color: var(--bridgeflow-text-disable-color);
+      color: var(--affine-text-disable-color);
     }
 
     ::slotted(svg) {
-      color: var(--bridgeflow-icon-color);
+      color: var(--affine-icon-color);
       font-size: 20px;
     }
 

@@ -6,7 +6,7 @@ import {
   onComplete,
   onStart,
   Service,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { switchMap, tap } from 'rxjs';
 
 import type { DesktopApiService } from '../../desktop-api';

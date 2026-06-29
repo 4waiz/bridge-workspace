@@ -56,22 +56,22 @@ export class ImageBlockFallbackCard extends WithDisposable(ShadowlessElement) {
       height: 16px;
       align-items: center;
       justify-content: center;
-      color: var(--bridgeflow-text-primary-color);
+      color: var(--affine-text-primary-color);
     }
 
     .bridgeflow-image-fallback-card-title-text {
-      color: var(--bridgeflow-placeholder-color);
-      font-family: var(--bridgeflow-font-family);
-      font-size: var(--bridgeflow-font-sm);
+      color: var(--affine-placeholder-color);
+      font-family: var(--affine-font-family);
+      font-size: var(--affine-font-sm);
       font-style: normal;
       font-weight: 600;
       line-height: 22px;
     }
 
     .bridgeflow-image-fallback-card-description {
-      color: var(--bridgeflow-text-secondary-color);
-      font-family: var(--bridgeflow-font-family);
-      font-size: var(--bridgeflow-font-xs);
+      color: var(--affine-text-secondary-color);
+      font-family: var(--affine-font-family);
+      font-size: var(--affine-font-xs);
       font-style: normal;
       font-weight: 400;
       line-height: 20px;
@@ -79,7 +79,7 @@ export class ImageBlockFallbackCard extends WithDisposable(ShadowlessElement) {
 
     .bridgeflow-image-fallback-card.loading {
       .bridgeflow-image-fallback-card-title {
-        color: var(--bridgeflow-placeholder-color);
+        color: var(--affine-placeholder-color);
       }
     }
 

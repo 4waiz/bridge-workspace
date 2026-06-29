@@ -1,4 +1,4 @@
-import { Store } from '@toeverything/infra';
+import { Store } from '@kanban-studios/infra';
 import { map } from 'rxjs';
 
 import type { GlobalCache } from '../../storage';

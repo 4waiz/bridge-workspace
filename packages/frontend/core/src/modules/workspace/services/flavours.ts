@@ -1,4 +1,4 @@
-import { LiveData, Service } from '@toeverything/infra';
+import { LiveData, Service } from '@kanban-studios/infra';
 import { combineLatest, map } from 'rxjs';
 
 import type { WorkspaceFlavoursProvider } from '../providers/flavour';

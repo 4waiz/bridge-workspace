@@ -9,7 +9,7 @@ import { validateAndReduceImage } from '@bridgeflow/core/utils/reduce-image';
 import { UNTITLED_WORKSPACE_NAME } from '@bridgeflow/env/constant';
 import { useI18n } from '@bridgeflow/i18n';
 import { CameraIcon } from '@blocksuite/icons/rc';
-import { LiveData, useLiveData, useService } from '@toeverything/infra';
+import { LiveData, useLiveData, useService } from '@kanban-studios/infra';
 import type { KeyboardEvent } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { map } from 'rxjs';

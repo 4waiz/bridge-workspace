@@ -7,52 +7,52 @@ export type SelectOptionColor = {
 };
 export const selectOptionColors: SelectOptionColor[] = [
   {
-    oldColor: 'var(--bridgeflow-tag-red)',
+    oldColor: 'var(--affine-tag-red)',
     color: cssVarV2('chip/label/red'),
     name: 'Red',
   },
   {
-    oldColor: 'var(--bridgeflow-tag-pink)',
+    oldColor: 'var(--affine-tag-pink)',
     color: cssVarV2('chip/label/magenta'),
     name: 'Magenta',
   },
   {
-    oldColor: 'var(--bridgeflow-tag-orange)',
+    oldColor: 'var(--affine-tag-orange)',
     color: cssVarV2('chip/label/orange'),
     name: 'Orange',
   },
   {
-    oldColor: 'var(--bridgeflow-tag-yellow)',
+    oldColor: 'var(--affine-tag-yellow)',
     color: cssVarV2('chip/label/yellow'),
     name: 'Yellow',
   },
   {
-    oldColor: 'var(--bridgeflow-tag-green)',
+    oldColor: 'var(--affine-tag-green)',
     color: cssVarV2('chip/label/green'),
     name: 'Green',
   },
   {
-    oldColor: 'var(--bridgeflow-tag-teal)',
+    oldColor: 'var(--affine-tag-teal)',
     color: cssVarV2('chip/label/teal'),
     name: 'Teal',
   },
   {
-    oldColor: 'var(--bridgeflow-tag-blue)',
+    oldColor: 'var(--affine-tag-blue)',
     color: cssVarV2('chip/label/blue'),
     name: 'Blue',
   },
   {
-    oldColor: 'var(--bridgeflow-tag-purple)',
+    oldColor: 'var(--affine-tag-purple)',
     color: cssVarV2('chip/label/purple'),
     name: 'Purple',
   },
   {
-    oldColor: 'var(--bridgeflow-tag-gray)',
+    oldColor: 'var(--affine-tag-gray)',
     color: cssVarV2('chip/label/grey'),
     name: 'Grey',
   },
   {
-    oldColor: 'var(--bridgeflow-tag-white)',
+    oldColor: 'var(--affine-tag-white)',
     color: cssVarV2('chip/label/white'),
     name: 'White',
   },
@@ -63,7 +63,7 @@ const oldColorMap = Object.fromEntries(
 );
 
 export const getColorByColor = (color: string) => {
-  if (color.startsWith('--bridgeflow-tag')) {
+  if (color.startsWith('--affine-tag')) {
     return oldColorMap[color] ?? color;
   }
   return color;

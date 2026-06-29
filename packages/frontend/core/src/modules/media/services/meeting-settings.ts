@@ -2,7 +2,7 @@ import type {
   MeetingSettingsKey,
   MeetingSettingsSchema,
 } from '@bridgeflow/electron/main/shared-state-schema';
-import { LiveData, Service } from '@toeverything/infra';
+import { LiveData, Service } from '@kanban-studios/infra';
 import { defaults } from 'lodash-es';
 
 import { DesktopApiService } from '../../desktop-api';

@@ -61,12 +61,13 @@ declare global {
   }
 }
 
-const _QUICK_PROMPTS = [
-  'How do I start my first note in BRIDGE Flow?',
-  'How should I use folders, tags, and collections together?',
-  'What is the fastest way to find docs and organize my workspace?',
-  'Give me a simple onboarding checklist for this app.',
-];
+// Reserved for future use (quick-prompt suggestions):
+// const QUICK_PROMPTS = [
+//   'How do I start my first note in BRIDGE Flow?',
+//   'How should I use folders, tags, and collections together?',
+//   'What is the fastest way to find docs and organize my workspace?',
+//   'Give me a simple onboarding checklist for this app.',
+// ];
 
 const FEATURE_CARDS = [
   {

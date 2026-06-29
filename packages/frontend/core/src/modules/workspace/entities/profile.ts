@@ -6,7 +6,7 @@ import {
   LiveData,
   onComplete,
   onStart,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { isEqual } from 'lodash-es';
 import { catchError, EMPTY, exhaustMap, tap } from 'rxjs';
 

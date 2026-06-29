@@ -1,6 +1,6 @@
 import type { DefaultOpenProperty } from '@bridgeflow/core/components/properties';
 import type { DocMode } from '@blocksuite/bridgeflow/model';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import type { Doc } from '../../doc';

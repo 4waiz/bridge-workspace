@@ -35,4 +35,4 @@ You accept and agree to the following terms and conditions for your past, presen
 
 ## How To Sign
 
-Visit https://cla-assistant.io/toeverything/BridgeFlow and sign it.
+Visit https://cla-assistant.io/Kanban-Studios/BridgeFlow and sign it.

@@ -20,7 +20,7 @@ import { WorkspacePropertyService } from '@bridgeflow/core/modules/workspace-pro
 import { useI18n } from '@bridgeflow/i18n';
 import track from '@bridgeflow/track';
 import { PlusIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useServices } from '@toeverything/infra';
+import { useLiveData, useServices } from '@kanban-studios/infra';
 import { useCallback, useEffect, useState } from 'react';
 
 import * as styles from './info-modal.css';

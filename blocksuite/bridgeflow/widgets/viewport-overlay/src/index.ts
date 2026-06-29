@@ -16,7 +16,7 @@ export class BridgeFlowViewportOverlayWidget extends WidgetComponent<RootBlockMo
       left: 0;
       background: transparent;
       pointer-events: none;
-      z-index: calc(var(--bridgeflow-z-index-popover) - 1);
+      z-index: calc(var(--affine-z-index-popover) - 1);
     }
 
     .bridgeflow-viewport-overlay-widget.lock {

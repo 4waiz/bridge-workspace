@@ -1,7 +1,7 @@
 import { Button } from '@bridgeflow/component/ui/button';
 import { GlobalDialogService } from '@bridgeflow/core/modules/dialogs';
 import { useI18n } from '@bridgeflow/i18n';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import * as styles from './styles.css';

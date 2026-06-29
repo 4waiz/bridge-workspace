@@ -25,7 +25,7 @@ export class TestBridgeFlowEditorContainer extends SignalWatcher(
       overflow-y: auto;
       container-name: viewport;
       container-type: inline-size;
-      font-family: var(--bridgeflow-font-family);
+      font-family: var(--affine-font-family);
     }
     .bridgeflow-page-viewport * {
       box-sizing: border-box;
@@ -39,7 +39,7 @@ export class TestBridgeFlowEditorContainer extends SignalWatcher(
 
     .playground-page-editor-container {
       flex-grow: 1;
-      font-family: var(--bridgeflow-font-family);
+      font-family: var(--affine-font-family);
       display: block;
     }
 
@@ -54,8 +54,8 @@ export class TestBridgeFlowEditorContainer extends SignalWatcher(
     }
 
     .edgeless-editor-container {
-      font-family: var(--bridgeflow-font-family);
-      background: var(--bridgeflow-background-primary-color);
+      font-family: var(--affine-font-family);
+      background: var(--affine-background-primary-color);
       display: block;
       height: 100%;
       position: relative;

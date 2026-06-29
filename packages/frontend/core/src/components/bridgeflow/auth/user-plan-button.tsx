@@ -1,7 +1,7 @@
 import { Tooltip } from '@bridgeflow/component/ui/tooltip';
 import { SubscriptionPlan } from '@bridgeflow/graphql';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { type SyntheticEvent, useEffect } from 'react';
 
 import { ServerService, SubscriptionService } from '../../../modules/cloud';

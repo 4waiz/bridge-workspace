@@ -43,7 +43,7 @@ export class RecordField extends SignalWatcher(
       gap: 6px;
       font-size: var(--data-view-cell-text-size);
       line-height: var(--data-view-cell-text-line-height);
-      color: var(--bridgeflow-text-secondary-color);
+      color: var(--affine-text-secondary-color);
       width: 160px;
       border-radius: 4px;
       cursor: pointer;
@@ -51,7 +51,7 @@ export class RecordField extends SignalWatcher(
     }
 
     .field-left:hover {
-      background-color: var(--bridgeflow-hover-color);
+      background-color: var(--affine-hover-color);
     }
 
     bridgeflow-data-view-record-field .icon {
@@ -64,7 +64,7 @@ export class RecordField extends SignalWatcher(
     bridgeflow-data-view-record-field .icon svg {
       width: 16px;
       height: 16px;
-      fill: var(--bridgeflow-icon-color);
+      fill: var(--affine-icon-color);
     }
 
     .filed-name {
@@ -89,7 +89,7 @@ export class RecordField extends SignalWatcher(
     }
 
     .field-content:hover {
-      background-color: var(--bridgeflow-hover-color);
+      background-color: var(--affine-hover-color);
     }
 
     .field-content.is-editing {
@@ -97,12 +97,12 @@ export class RecordField extends SignalWatcher(
     }
 
     .field-content.is-focus {
-      border: 1px solid var(--bridgeflow-primary-color);
+      border: 1px solid var(--affine-primary-color);
     }
 
     .field-content.empty::before {
       content: 'Empty';
-      color: var(--bridgeflow-text-disable-color);
+      color: var(--affine-text-disable-color);
       font-size: 14px;
       line-height: 22px;
     }

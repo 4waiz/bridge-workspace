@@ -17,7 +17,7 @@ export class AdapterPanelHeader extends SignalWatcher(LitElement) {
       align-items: center;
       justify-content: space-between;
       padding: 12px 16px;
-      background: var(--bridgeflow-background-primary-color);
+      background: var(--affine-background-primary-color);
     }
     .adapter-selector {
       display: flex;
@@ -26,17 +26,17 @@ export class AdapterPanelHeader extends SignalWatcher(LitElement) {
       width: 100px;
       cursor: pointer;
       border-radius: 4px;
-      border: 1px solid var(--bridgeflow-border-color);
+      border: 1px solid var(--affine-border-color);
       padding: 4px 8px;
     }
     .adapter-selector:hover {
-      background: var(--bridgeflow-hover-color);
+      background: var(--affine-hover-color);
     }
     .adapter-selector-label {
       display: flex;
       align-items: center;
-      color: var(--bridgeflow-text-primary-color);
-      font-size: var(--bridgeflow-font-xs);
+      color: var(--affine-text-primary-color);
+      font-size: var(--affine-font-xs);
     }
     .update-button {
       height: 20px;
@@ -46,10 +46,10 @@ export class AdapterPanelHeader extends SignalWatcher(LitElement) {
       justify-content: center;
       border-radius: 4px;
       cursor: pointer;
-      color: var(--bridgeflow-icon-color);
+      color: var(--affine-icon-color);
     }
     .update-button:hover {
-      background-color: var(--bridgeflow-hover-color);
+      background-color: var(--affine-hover-color);
     }
   `;
 
@@ -69,7 +69,7 @@ export class AdapterPanelHeader extends SignalWatcher(LitElement) {
         .abortController=${this._adapterMenuAbortController}
       ></bridgeflow-adapter-menu>`,
       portalStyles: {
-        zIndex: 'var(--bridgeflow-z-index-popover)',
+        zIndex: 'var(--affine-z-index-popover)',
       },
       container: this._adapterPanelHeader,
       computePosition: {

@@ -13,7 +13,7 @@ import {
   Text,
   Transformer,
 } from '@blocksuite/bridgeflow/store';
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 import { Doc as YDoc } from 'yjs';
 
 import type { DefaultServerService, WorkspaceServerService } from '../../cloud';

@@ -4,8 +4,8 @@ import { ConfigModal } from '@bridgeflow/core/components/mobile';
 import { resolveLinkToDoc } from '@bridgeflow/core/modules/navigation';
 import { useI18n } from '@bridgeflow/i18n';
 import { LinkIcon } from '@blocksuite/icons/rc';
-import type { LiveData } from '@toeverything/infra';
-import { useLiveData } from '@toeverything/infra';
+import type { LiveData } from '@kanban-studios/infra';
+import { useLiveData } from '@kanban-studios/infra';
 import {
   type ChangeEventHandler,
   type KeyboardEvent,

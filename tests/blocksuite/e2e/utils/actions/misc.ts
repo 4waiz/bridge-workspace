@@ -1205,7 +1205,7 @@ export async function getCurrentEditorTheme(page: Page) {
     .evaluate(() =>
       window
         .getComputedStyle(document.documentElement)
-        .getPropertyValue('--bridgeflow-theme-mode')
+        .getPropertyValue('--affine-theme-mode')
         .trim()
     );
   return mode;

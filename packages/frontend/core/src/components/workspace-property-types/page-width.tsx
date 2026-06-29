@@ -4,7 +4,7 @@ import { type DocRecord, DocService } from '@bridgeflow/core/modules/doc';
 import { EditorSettingService } from '@bridgeflow/core/modules/editor-setting';
 import { useI18n } from '@bridgeflow/i18n';
 import { LongerIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useMemo } from 'react';
 
 import { PlainTextDocGroupHeader } from '../explorer/docs-view/group-header';

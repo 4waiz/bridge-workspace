@@ -3,7 +3,7 @@ import { useAppSettingHelper } from '@bridgeflow/core/components/hooks/bridgeflo
 import type { BridgeFlowDNDData } from '@bridgeflow/core/types/dnd';
 import { useI18n } from '@bridgeflow/i18n';
 import track from '@bridgeflow/track';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { useSetAtom } from 'jotai';
 import { nanoid } from 'nanoid';

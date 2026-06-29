@@ -9,7 +9,7 @@ import {
   EditPropsStore,
 } from '@blocksuite/bridgeflow/shared/services';
 import { GfxControllerIdentifier } from '@blocksuite/bridgeflow/std/gfx';
-import type { FrameworkProvider } from '@toeverything/infra';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 import { html } from 'lit';
 
 import { BlocksuiteEditorJournalDocTitle } from '../../block-suite-editor/journal-doc-title';
@@ -59,7 +59,7 @@ export function patchForEdgelessNoteConfig(
           const leftPadding = parseInt(
             window
               .getComputedStyle(rootView)
-              .getPropertyValue('--bridgeflow-editor-side-padding')
+              .getPropertyValue('--affine-editor-side-padding')
               .replace('px', '')
           );
           if (isNaN(leftPadding)) {
@@ -69,7 +69,7 @@ export function patchForEdgelessNoteConfig(
           let editorWidth = parseInt(
             window
               .getComputedStyle(rootView)
-              .getPropertyValue('--bridgeflow-editor-width')
+              .getPropertyValue('--affine-editor-width')
               .replace('px', '')
           );
           if (isNaN(editorWidth)) {

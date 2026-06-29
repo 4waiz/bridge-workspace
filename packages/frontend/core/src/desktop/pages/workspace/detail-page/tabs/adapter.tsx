@@ -8,7 +8,7 @@ import {
 } from '@blocksuite/bridgeflow/shared/adapters';
 import type { EditorHost } from '@blocksuite/bridgeflow/std';
 import type { TransformerMiddleware } from '@blocksuite/bridgeflow/store';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useRef } from 'react';
 
 import * as styles from './adapter.css';

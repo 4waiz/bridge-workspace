@@ -27,7 +27,7 @@ import {
 } from '@bridgeflow/graphql';
 import { useI18n } from '@bridgeflow/i18n';
 import { GoogleIcon, LinkIcon, TodayIcon } from '@blocksuite/icons/rc';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import {
   type FormEvent,
   type ReactNode,

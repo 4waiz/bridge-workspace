@@ -4,7 +4,7 @@ import { WorkspacePermissionService } from '@bridgeflow/core/modules/permissions
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { useI18n } from '@bridgeflow/i18n';
 import type { BlobSyncState } from '@bridgeflow/nbstore';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { debounce } from 'lodash-es';
 import { useCallback, useEffect } from 'react';
 

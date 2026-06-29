@@ -1,6 +1,6 @@
 import { notify } from '@bridgeflow/component';
 import { I18n } from '@bridgeflow/i18n';
-import { OnEvent, Service } from '@toeverything/infra';
+import { OnEvent, Service } from '@kanban-studios/infra';
 import type { To } from 'history';
 import { debounce } from 'lodash-es';
 

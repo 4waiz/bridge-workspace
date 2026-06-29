@@ -1,5 +1,5 @@
 import { DebugLogger } from '@bridgeflow/debug';
-import { isAllowedRedirectTarget } from '@toeverything/infra';
+import { isAllowedRedirectTarget } from '@kanban-studios/infra';
 import { type LoaderFunction, Navigate, useLoaderData } from 'react-router-dom';
 
 const logger = new DebugLogger('redirect_proxy');

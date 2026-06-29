@@ -1,5 +1,5 @@
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useEffect } from 'react';
 import type { FallbackProps } from 'react-error-boundary';
 

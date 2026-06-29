@@ -1,7 +1,7 @@
 import { IconPicker, uniReactRoot } from '@bridgeflow/component';
 // Import the identifier for internal use
 import { type IconPickerService as IIconPickerService } from '@blocksuite/bridgeflow-shared/services';
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 
 // Re-export types from BlockSuite shared services
 export type {

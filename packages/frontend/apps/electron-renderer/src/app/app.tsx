@@ -5,7 +5,7 @@ import { router } from '@bridgeflow/core/desktop/router';
 import { I18nProvider } from '@bridgeflow/core/modules/i18n';
 import createEmotionCache from '@bridgeflow/core/utils/create-emotion-cache';
 import { CacheProvider } from '@emotion/react';
-import { FrameworkRoot, getCurrentStore } from '@toeverything/infra';
+import { FrameworkRoot, getCurrentStore } from '@kanban-studios/infra';
 import { Suspense, useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
 

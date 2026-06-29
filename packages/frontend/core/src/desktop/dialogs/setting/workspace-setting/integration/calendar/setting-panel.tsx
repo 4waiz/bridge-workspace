@@ -3,7 +3,7 @@ import { WorkspaceServerService } from '@bridgeflow/core/modules/cloud';
 import { IntegrationService } from '@bridgeflow/core/modules/integration';
 import { useI18n } from '@bridgeflow/i18n';
 import { TodayIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { IntegrationSettingHeader } from '../setting';

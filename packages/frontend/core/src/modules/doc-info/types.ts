@@ -1,5 +1,5 @@
 import type { DatabaseBlockDataSource } from '@blocksuite/bridgeflow/blocks/database';
-import type { LiveData } from '@toeverything/infra';
+import type { LiveData } from '@kanban-studios/infra';
 
 import type { Doc } from '../doc';
 

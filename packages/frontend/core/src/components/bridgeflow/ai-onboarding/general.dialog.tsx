@@ -5,7 +5,7 @@ import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
 import { Trans, useI18n } from '@bridgeflow/i18n';
 import { track } from '@bridgeflow/track';
 import { ArrowLeftSmallIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService, useServices } from '@toeverything/infra';
+import { useLiveData, useService, useServices } from '@kanban-studios/infra';
 import type { ReactNode } from 'react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
@@ -45,12 +45,12 @@ const getPlayList = (t: Translate): Array<PlayListItem> => [
     desc: (
       <Trans
         i18nKey="com.bridgeflow.ai-onboarding.general.5.description"
-        values={{ link: 'awaizahmed.com' }}
+        values={{ link: 'kanbanstudios.ae' }}
         components={{
           a: (
             <a
               className={styles.link}
-              href="https://awaizahmed.com"
+              href="https://kanbanstudios.ae"
               target="_blank"
               rel="noreferrer"
             />
@@ -223,7 +223,7 @@ export const AIOnboardingGeneral = () => {
               a: (
                 <a
                   className={styles.privacyLink}
-                  href="https://awaizahmed.com"
+                  href="https://kanbanstudios.ae"
                 />
               ),
             }}

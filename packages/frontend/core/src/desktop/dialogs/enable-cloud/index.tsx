@@ -15,7 +15,7 @@ import {
 import { WorkspacesService } from '@bridgeflow/core/modules/workspace';
 import { useI18n } from '@bridgeflow/i18n';
 import { CloudWorkspaceIcon } from '@blocksuite/icons/rc';
-import { FrameworkScope, useLiveData, useService } from '@toeverything/infra';
+import { FrameworkScope, useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useState } from 'react';
 
 import * as styles from './dialog.css';

@@ -10,7 +10,7 @@ import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-a
 import { ServersService } from '@bridgeflow/core/modules/cloud';
 import { UserFriendlyError } from '@bridgeflow/error';
 import { Trans, useI18n } from '@bridgeflow/i18n';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import {
   type Dispatch,
   type SetStateAction,
@@ -152,7 +152,7 @@ export const AddSelfhostedStep = ({
             components={{
               1: (
                 <a
-                  href="https://awaizahmed.com"
+                  href="https://kanbanstudios.ae"
                   target="_blank"
                   rel="noreferrer"
                 />

@@ -287,7 +287,7 @@ test('should be able to render listed prompt', async t => {
     content: 'links:\n{{#links}}- {{.}}\n{{/links}}',
   };
   const params = {
-    links: ['https://bridgeflow.pro', 'https://github.com/toeverything/bridgeflow'],
+    links: ['https://bridgeflow.pro', 'https://github.com/Kanban-Studios/bridgeflow'],
   };
 
   await prompt.set(promptName, 'test', [msg]);
@@ -295,7 +295,7 @@ test('should be able to render listed prompt', async t => {
 
   t.is(
     testPrompt?.finish(params).pop()?.content,
-    'links:\n- https://bridgeflow.pro\n- https://github.com/toeverything/bridgeflow\n',
+    'links:\n- https://bridgeflow.pro\n- https://github.com/Kanban-Studios/bridgeflow\n',
     'should render the prompt'
   );
 });

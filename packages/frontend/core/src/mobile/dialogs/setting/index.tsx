@@ -4,7 +4,7 @@ import type {
   WORKSPACE_DIALOG_SCHEMA,
 } from '@bridgeflow/core/modules/dialogs';
 import { useI18n } from '@bridgeflow/i18n';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useEffect } from 'react';
 
 import { AboutGroup } from './about';

@@ -5,7 +5,7 @@ import { FavoriteService } from '@bridgeflow/core/modules/favorite';
 import { NavigationPanelService } from '@bridgeflow/core/modules/navigation-panel';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useServices } from '@toeverything/infra';
+import { useLiveData, useServices } from '@kanban-studios/infra';
 import { useCallback, useMemo } from 'react';
 
 import { AddItemPlaceholder } from '../../layouts/add-item-placeholder';

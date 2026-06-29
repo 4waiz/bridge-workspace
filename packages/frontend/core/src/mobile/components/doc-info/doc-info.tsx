@@ -20,7 +20,7 @@ import { DocLinksService } from '@bridgeflow/core/modules/doc-link';
 import { WorkspacePropertyService } from '@bridgeflow/core/modules/workspace-property';
 import { useI18n } from '@bridgeflow/i18n';
 import { PlusIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useServices } from '@toeverything/infra';
+import { useLiveData, useServices } from '@kanban-studios/infra';
 import { Suspense, useCallback, useEffect, useState } from 'react';
 
 import * as styles from './doc-info.css';

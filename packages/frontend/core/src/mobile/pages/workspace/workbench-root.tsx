@@ -3,7 +3,7 @@ import {
   WorkbenchService,
 } from '@bridgeflow/core/modules/workbench';
 import { ViewRoot } from '@bridgeflow/core/modules/workbench/view/view-root';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useEffect } from 'react';
 import { type RouteObject, useLocation } from 'react-router-dom';
 

@@ -1,7 +1,7 @@
 import { useConfirmModal } from '@bridgeflow/component';
 import { GlobalDialogService } from '@bridgeflow/core/modules/dialogs';
 import { useI18n } from '@bridgeflow/i18n';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { atom, useAtom } from 'jotai';
 import { useCallback, useEffect } from 'react';
 

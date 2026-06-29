@@ -14,7 +14,7 @@ import { PeekViewManagerModal } from '@bridgeflow/core/modules/peek-view';
 import { QuotaCheck } from '@bridgeflow/core/modules/quota';
 import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
-import { LiveData, useLiveData, useService } from '@toeverything/infra';
+import { LiveData, useLiveData, useService } from '@kanban-studios/infra';
 import type { PropsWithChildren } from 'react';
 import { useEffect } from 'react';
 

@@ -17,9 +17,9 @@ export class AIAnswerWrapper extends LitElement {
       width: 100%;
       box-sizing: border-box;
       border-radius: 4px;
-      border: 1px solid var(--bridgeflow-border-color);
-      box-shadow: var(--bridgeflow-shadow-1);
-      background: var(--bridgeflow-background-secondary-color);
+      border: 1px solid var(--affine-border-color);
+      box-shadow: var(--affine-shadow-1);
+      background: var(--affine-background-secondary-color);
       overflow: hidden;
     }
 

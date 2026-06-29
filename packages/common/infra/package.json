@@ -1,5 +1,5 @@
 {
-  "name": "@toeverything/infra",
+  "name": "@kanban-studios/infra",
   "type": "module",
   "private": true,
   "sideEffects": false,

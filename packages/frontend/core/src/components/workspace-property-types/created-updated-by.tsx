@@ -4,7 +4,7 @@ import type { FilterParams } from '@bridgeflow/core/modules/collection-rules';
 import { type DocRecord, DocService } from '@bridgeflow/core/modules/doc';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { cssVarV2 } from '@toeverything/theme/v2';
 import { type ReactNode, useCallback, useEffect, useMemo, useRef } from 'react';
 

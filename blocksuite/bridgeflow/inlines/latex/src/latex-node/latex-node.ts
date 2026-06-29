@@ -30,7 +30,7 @@ export class BridgeFlowLatexNode extends SignalWatcher(
       white-space: nowrap;
       word-break: break-word;
       color: ${unsafeCSSVar('textPrimaryColor')};
-      fill: var(--bridgeflow-icon-color);
+      fill: var(--affine-icon-color);
       border-radius: 4px;
       text-decoration: none;
       cursor: pointer;
@@ -208,7 +208,7 @@ export class BridgeFlowLatexNode extends SignalWatcher(
       abortController: this._editorAbortController,
       shadowDom: false,
       portalStyles: {
-        zIndex: 'var(--bridgeflow-z-index-popover)',
+        zIndex: 'var(--affine-z-index-popover)',
       },
     });
 

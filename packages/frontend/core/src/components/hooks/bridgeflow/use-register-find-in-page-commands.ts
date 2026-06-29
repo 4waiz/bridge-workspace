@@ -4,7 +4,7 @@ import {
 } from '@bridgeflow/core/commands';
 import { FindInPageService } from '@bridgeflow/core/modules/find-in-page/services/find-in-page';
 import { track } from '@bridgeflow/track';
-import { useServiceOptional } from '@toeverything/infra';
+import { useServiceOptional } from '@kanban-studios/infra';
 import { useCallback, useEffect } from 'react';
 
 export function useRegisterFindInPageCommands() {

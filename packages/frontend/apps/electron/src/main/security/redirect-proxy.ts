@@ -1,4 +1,4 @@
-import { isAllowedRedirectTarget } from '@toeverything/infra/utils';
+import { isAllowedRedirectTarget } from '@kanban-studios/infra/utils';
 
 import { buildType, isDev } from '../config';
 

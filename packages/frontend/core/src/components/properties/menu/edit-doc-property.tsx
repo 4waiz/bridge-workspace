@@ -8,7 +8,7 @@ import type { DocCustomPropertyInfo } from '@bridgeflow/core/modules/db';
 import { WorkspacePropertyService } from '@bridgeflow/core/modules/workspace-property';
 import { Trans, useI18n } from '@bridgeflow/i18n';
 import { DeleteIcon, InvisibleIcon, ViewIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import {
   type KeyboardEventHandler,
   type MouseEvent,

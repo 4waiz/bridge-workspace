@@ -16,7 +16,7 @@ import { WorkspacePermissionService } from '@bridgeflow/core/modules/permissions
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { useI18n } from '@bridgeflow/i18n';
 import { ViewLayersIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService, useServices } from '@toeverything/infra';
+import { useLiveData, useService, useServices } from '@kanban-studios/infra';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -192,7 +192,7 @@ const Placeholder = ({ collection }: { collection: Collection }) => {
             display: 'flex',
             alignItems: 'center',
             gap: 8,
-            fontSize: 'var(--bridgeflow-font-xs)',
+            fontSize: 'var(--affine-font-xs)',
           }}
         >
           <div
@@ -201,13 +201,13 @@ const Placeholder = ({ collection }: { collection: Collection }) => {
               alignItems: 'center',
               gap: 4,
               cursor: 'pointer',
-              color: 'var(--bridgeflow-text-secondary-color)',
+              color: 'var(--affine-text-secondary-color)',
               ['WebkitAppRegion' as string]: 'no-drag',
             }}
             onClick={handleJumpToCollections}
           >
             <ViewLayersIcon
-              style={{ color: 'var(--bridgeflow-icon-color)' }}
+              style={{ color: 'var(--affine-icon-color)' }}
               fontSize={14}
             />
             {t['com.bridgeflow.collection.allCollections']()}
@@ -217,7 +217,7 @@ const Placeholder = ({ collection }: { collection: Collection }) => {
             data-testid="collection-name"
             style={{
               fontWeight: 600,
-              color: 'var(--bridgeflow-text-primary-color)',
+              color: 'var(--affine-text-primary-color)',
               ['WebkitAppRegion' as string]: 'no-drag',
             }}
           >

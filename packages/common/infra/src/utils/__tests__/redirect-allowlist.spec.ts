@@ -13,7 +13,7 @@ describe('redirect allowlist', () => {
 
   test('allows trusted domains and subdomains', () => {
     expect(
-      isAllowedRedirectTarget('https://github.com/toeverything/BridgeFlow', {
+      isAllowedRedirectTarget('https://github.com/Kanban-Studios/BridgeFlow', {
         currentHostname: 'self.example.com',
       })
     ).toBe(true);

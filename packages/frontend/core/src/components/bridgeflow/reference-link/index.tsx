@@ -7,7 +7,7 @@ import { WorkbenchLink } from '@bridgeflow/core/modules/workbench';
 import { track } from '@bridgeflow/track';
 import type { DocMode } from '@blocksuite/bridgeflow/model';
 import type { Workspace } from '@blocksuite/bridgeflow/store';
-import { LiveData, useLiveData, useService } from '@toeverything/infra';
+import { LiveData, useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { nanoid } from 'nanoid';
 import {

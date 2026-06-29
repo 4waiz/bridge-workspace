@@ -1,5 +1,5 @@
-import type { AppSetting } from '@toeverything/infra';
-import { appSettingAtom } from '@toeverything/infra';
+import type { AppSetting } from '@kanban-studios/infra';
+import { appSettingAtom } from '@kanban-studios/infra';
 import { useAtom } from 'jotai';
 import { useCallback, useMemo } from 'react';
 

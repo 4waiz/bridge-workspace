@@ -2,7 +2,7 @@ import { ServersService } from '@bridgeflow/core/modules/cloud';
 import { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
 import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
 import { WorkspacesService } from '@bridgeflow/core/modules/workspace';
-import type { FrameworkProvider } from '@toeverything/infra';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 
 export function getCurrentWorkspace(frameworkProvider: FrameworkProvider) {
   const currentWorkspaceId = frameworkProvider

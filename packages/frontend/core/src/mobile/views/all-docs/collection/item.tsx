@@ -4,7 +4,7 @@ import type { CollectionMeta } from '@bridgeflow/core/modules/collection';
 import { CompatibleFavoriteItemsAdapter } from '@bridgeflow/core/modules/favorite';
 import { WorkbenchLink } from '@bridgeflow/core/modules/workbench';
 import { ViewLayersIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { type MouseEvent, useCallback } from 'react';
 
 import { item, name, prefixIcon, suffixIcon } from './styles.css';

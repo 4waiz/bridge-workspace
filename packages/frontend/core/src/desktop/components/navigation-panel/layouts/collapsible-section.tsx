@@ -1,7 +1,7 @@
 import { CategoryDivider } from '@bridgeflow/core/modules/app-sidebar/views';
 import { NavigationPanelService } from '@bridgeflow/core/modules/navigation-panel';
 import * as Collapsible from '@radix-ui/react-collapsible';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import {
   type CSSProperties,

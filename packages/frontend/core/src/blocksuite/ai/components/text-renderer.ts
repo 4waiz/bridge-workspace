@@ -40,39 +40,39 @@ import { getCustomPageEditorBlockSpecs } from './page-editor-block-specs';
 const customHeadingStyles = css`
   .custom-heading {
     .h1 {
-      font-size: calc(var(--bridgeflow-font-h-1) - 2px);
+      font-size: calc(var(--affine-font-h-1) - 2px);
       code {
-        font-size: calc(var(--bridgeflow-font-base) + 6px);
+        font-size: calc(var(--affine-font-base) + 6px);
       }
     }
     .h2 {
-      font-size: calc(var(--bridgeflow-font-h-2) - 2px);
+      font-size: calc(var(--affine-font-h-2) - 2px);
       code {
-        font-size: calc(var(--bridgeflow-font-base) + 4px);
+        font-size: calc(var(--affine-font-base) + 4px);
       }
     }
     .h3 {
-      font-size: calc(var(--bridgeflow-font-h-3) - 2px);
+      font-size: calc(var(--affine-font-h-3) - 2px);
       code {
-        font-size: calc(var(--bridgeflow-font-base) + 2px);
+        font-size: calc(var(--affine-font-base) + 2px);
       }
     }
     .h4 {
-      font-size: calc(var(--bridgeflow-font-h-4) - 2px);
+      font-size: calc(var(--affine-font-h-4) - 2px);
       code {
-        font-size: var(--bridgeflow-font-base);
+        font-size: var(--affine-font-base);
       }
     }
     .h5 {
-      font-size: calc(var(--bridgeflow-font-h-5) - 2px);
+      font-size: calc(var(--affine-font-h-5) - 2px);
       code {
-        font-size: calc(var(--bridgeflow-font-base) - 2px);
+        font-size: calc(var(--affine-font-base) - 2px);
       }
     }
     .h6 {
-      font-size: calc(var(--bridgeflow-font-h-6) - 2px);
+      font-size: calc(var(--affine-font-h-6) - 2px);
       code {
-        font-size: calc(var(--bridgeflow-font-base) - 4px);
+        font-size: calc(var(--affine-font-base) - 4px);
       }
     }
   }
@@ -94,7 +94,7 @@ export class TextRenderer extends SignalWatcher(
   static override styles = css`
     .ai-answer-text-editor.bridgeflow-page-viewport {
       background: transparent;
-      font-family: var(--bridgeflow-font-family);
+      font-family: var(--affine-font-family);
       margin-top: 0;
       margin-bottom: 0;
     }
@@ -102,7 +102,7 @@ export class TextRenderer extends SignalWatcher(
     .ai-answer-text-editor .bridgeflow-page-root-block-container {
       padding: 0;
       margin: 0;
-      line-height: var(--bridgeflow-line-height);
+      line-height: var(--affine-line-height);
       color: ${unsafeCSSVarV2('text/primary')};
       font-weight: 400;
     }
@@ -127,7 +127,7 @@ export class TextRenderer extends SignalWatcher(
         .h6 {
           padding-left: 16px;
           color: ${unsafeCSSVarV2('text/link')};
-          font-size: var(--bridgeflow-font-base);
+          font-size: var(--affine-font-base);
 
           .toggle-icon {
             transform: translateX(0);
@@ -153,7 +153,7 @@ export class TextRenderer extends SignalWatcher(
       border-radius: 20px;
     }
     .text-renderer-container.show-scrollbar:hover::-webkit-scrollbar-thumb {
-      background-color: var(--bridgeflow-black-30);
+      background-color: var(--affine-black-30);
     }
     .text-renderer-container.show-scrollbar::-webkit-scrollbar-corner {
       display: none;
@@ -177,13 +177,13 @@ export class TextRenderer extends SignalWatcher(
 
     .text-renderer-container[data-app-theme='dark'] {
       .ai-answer-text-editor .bridgeflow-page-root-block-container {
-        color: ${unsafeCSS(darkCssVariablesV2['--bridgeflow-v2-text-primary'])};
+        color: ${unsafeCSS(darkCssVariablesV2['--affine-v2-text-primary'])};
       }
     }
 
     .text-renderer-container[data-app-theme='light'] {
       .ai-answer-text-editor .bridgeflow-page-root-block-container {
-        color: ${unsafeCSS(lightCssVariablesV2['--bridgeflow-v2-text-primary'])};
+        color: ${unsafeCSS(lightCssVariablesV2['--affine-v2-text-primary'])};
       }
     }
 

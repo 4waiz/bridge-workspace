@@ -13,7 +13,7 @@ export const filterableListStyles = css`
     max-height: 100%;
     pointer-events: auto;
     overflow: hidden;
-    z-index: var(--bridgeflow-z-index-popover);
+    z-index: var(--affine-z-index-popover);
   }
 
   .bridgeflow-filterable-list {
@@ -58,8 +58,8 @@ export const filterableListStyles = css`
   }
 
   .input-wrapper:focus-within {
-    border-color: var(--bridgeflow-blue-700);
-    box-shadow: var(--bridgeflow-active-shadow);
+    border-color: var(--affine-blue-700);
+    box-shadow: var(--affine-active-shadow);
   }
 
   ${scrollbarStyle('.items-container')}
@@ -82,8 +82,8 @@ export const filterableListStyles = css`
   }
 
   .filterable-item.focussed {
-    color: var(--bridgeflow-blue-700);
-    background: var(--bridgeflow-hover-color-filled);
+    color: var(--affine-blue-700);
+    background: var(--affine-hover-color-filled);
   }
 
   #filter-input {
@@ -103,7 +103,7 @@ export const filterableListStyles = css`
   }
 
   #filter-input::placeholder {
-    color: var(--bridgeflow-placeholder-color);
-    font-size: var(--bridgeflow-font-sm);
+    color: var(--affine-placeholder-color);
+    font-size: var(--affine-font-sm);
   }
 `;

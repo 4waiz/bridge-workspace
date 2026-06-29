@@ -25,7 +25,7 @@ import { getLastNoteBlock } from '@blocksuite/bridgeflow/shared/utils';
 import type { BlockStdScope, EditorHost } from '@blocksuite/bridgeflow/std';
 import type { Store } from '@blocksuite/bridgeflow/store';
 import { Slot } from '@radix-ui/react-slot';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { cssVar } from '@toeverything/theme';
 import clsx from 'clsx';
 import type { CSSProperties, HTMLAttributes } from 'react';
@@ -366,7 +366,7 @@ export const BlockSuiteEditor = (props: EditorProps) => {
   }, [loadStartTime, props.page, workspaceService]);
 
   return (
-    <Slot style={{ '--bridgeflow-font-family': fontFamily } as CSSProperties}>
+    <Slot style={{ '--affine-font-family': fontFamily } as CSSProperties}>
       {isLoading ? (
         <EditorLoading longerLoading={longerLoading} />
       ) : (

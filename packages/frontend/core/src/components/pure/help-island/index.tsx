@@ -5,7 +5,7 @@ import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
 import { UrlService } from '@bridgeflow/core/modules/url';
 import { useI18n } from '@bridgeflow/i18n';
 import { CloseIcon, NewIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService, useServices } from '@toeverything/infra';
+import { useLiveData, useService, useServices } from '@kanban-studios/infra';
 import { useCallback, useState } from 'react';
 
 import { ContactIcon, HelpIcon, KeyboardIcon } from './icons';

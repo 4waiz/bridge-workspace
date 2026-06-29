@@ -1,5 +1,5 @@
 import { WorkspaceScope } from '@bridgeflow/core/modules/workspace';
-import { type Framework } from '@toeverything/infra';
+import { type Framework } from '@kanban-studios/infra';
 
 import { MobileSearchService } from './service/search';
 

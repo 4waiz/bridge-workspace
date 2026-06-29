@@ -1,5 +1,5 @@
 import { sentry, tracker } from '@bridgeflow/track';
-import { APP_SETTINGS_STORAGE_KEY } from '@toeverything/infra/atom';
+import { APP_SETTINGS_STORAGE_KEY } from '@kanban-studios/infra/atom';
 
 tracker.init();
 sentry.init();

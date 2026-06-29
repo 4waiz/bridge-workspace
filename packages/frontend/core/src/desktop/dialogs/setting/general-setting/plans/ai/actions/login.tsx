@@ -1,7 +1,7 @@
 import { Button, type ButtonProps } from '@bridgeflow/component';
 import { GlobalDialogService } from '@bridgeflow/core/modules/dialogs';
 import { useI18n } from '@bridgeflow/i18n';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 export const AILogin = (btnProps: ButtonProps) => {

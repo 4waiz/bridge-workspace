@@ -11,7 +11,7 @@ import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
 import { WorkspacePermissionService } from '@bridgeflow/core/modules/permissions';
 import { useI18n } from '@bridgeflow/i18n';
 import { DeleteIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useState } from 'react';
 
 import {

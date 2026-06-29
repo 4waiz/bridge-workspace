@@ -38,7 +38,7 @@ This is the BridgeFlow iOS application built with Capacitor, React, and TypeScri
 - **React 19** - UI framework
 - **TypeScript** - Language
 - **Blocksuite** - Document editor
-- **DI Framework** - Dependency injection via `@toeverything/infra`
+- **DI Framework** - Dependency injection via `@kanban-studios/infra`
 
 ### Key Directories
 

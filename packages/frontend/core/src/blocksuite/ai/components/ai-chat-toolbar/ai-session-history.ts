@@ -41,8 +41,8 @@ export class AISessionHistory extends WithDisposable(ShadowlessElement) {
       .loading-title,
       .empty-title {
         font-weight: 600;
-        font-size: var(--bridgeflow-font-sm);
-        color: var(--bridgeflow-text-secondary-color);
+        font-size: var(--affine-font-sm);
+        color: var(--affine-text-secondary-color);
       }
 
       .ai-session-group {

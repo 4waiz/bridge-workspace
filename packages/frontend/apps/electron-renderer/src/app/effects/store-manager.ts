@@ -2,8 +2,8 @@ import { NbstoreProvider } from '@bridgeflow/core/modules/storage';
 import { apis } from '@bridgeflow/electron-api';
 import { StoreManagerClient } from '@bridgeflow/nbstore/worker/client';
 import { setTelemetryTransport } from '@bridgeflow/track';
-import type { Framework } from '@toeverything/infra';
-import { OpClient } from '@toeverything/infra/op';
+import type { Framework } from '@kanban-studios/infra';
+import { OpClient } from '@kanban-studios/infra/op';
 import { v4 as uuid } from 'uuid';
 
 function createStoreManagerClient() {

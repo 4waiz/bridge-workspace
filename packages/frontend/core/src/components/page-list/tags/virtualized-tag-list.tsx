@@ -1,7 +1,7 @@
 import type { Tag } from '@bridgeflow/core/modules/tag';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { Trans } from '@bridgeflow/i18n';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useCallback, useMemo, useRef, useState } from 'react';
 
 import { ListFloatingToolbar } from '../components/list-floating-toolbar';
@@ -107,7 +107,7 @@ export const VirtualizedTagList = ({
             i18nKey="com.bridgeflow.tag.toolbar.selected"
             count={selectedTagIds.length}
           >
-            <div style={{ color: 'var(--bridgeflow-text-secondary-color)' }}>
+            <div style={{ color: 'var(--affine-text-secondary-color)' }}>
               {{ count: selectedTagIds.length } as any}
             </div>
             selected

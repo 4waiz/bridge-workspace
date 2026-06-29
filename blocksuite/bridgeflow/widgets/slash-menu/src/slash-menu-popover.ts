@@ -417,7 +417,7 @@ export class InnerSlashMenu extends WithDisposable(LitElement) {
       abortController: this._subMenuAbortController,
     });
 
-    subMenuElement.style.zIndex = `calc(var(--bridgeflow-z-index-popover) + ${this.depth})`;
+    subMenuElement.style.zIndex = `calc(var(--affine-z-index-popover) + ${this.depth})`;
     subMenuElement.focus();
   };
 

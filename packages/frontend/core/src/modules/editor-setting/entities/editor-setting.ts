@@ -3,7 +3,7 @@ import {
   createSignalFromObservable,
   type Signal,
 } from '@blocksuite/bridgeflow/shared/utils';
-import { Entity, LiveData } from '@toeverything/infra';
+import { Entity, LiveData } from '@kanban-studios/infra';
 import { isObject, merge } from 'lodash-es';
 import type { Observable } from 'rxjs';
 import { map } from 'rxjs';

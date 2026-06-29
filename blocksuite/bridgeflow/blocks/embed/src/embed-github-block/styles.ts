@@ -49,7 +49,7 @@ export const styles = css`
   .bridgeflow-embed-github-content-title-icons svg {
     width: 16px;
     height: 16px;
-    color: var(--bridgeflow-pure-white);
+    color: var(--affine-pure-white);
   }
 
   .bridgeflow-embed-github-content-title-site-icon {
@@ -60,8 +60,8 @@ export const styles = css`
     align-items: center;
 
     .github-icon {
-      fill: var(--bridgeflow-black);
-      color: var(--bridgeflow-black);
+      fill: var(--affine-black);
+      color: var(--affine-black);
     }
   }
 
@@ -72,7 +72,7 @@ export const styles = css`
     padding: 3px 6px;
     border-radius: 20px;
 
-    color: var(--bridgeflow-pure-white);
+    color: var(--affine-pure-white);
     leading-trim: both;
 
     text-edge: cap;
@@ -80,7 +80,7 @@ export const styles = css`
       'clig' off,
       'liga' off;
     text-transform: capitalize;
-    font-family: var(--bridgeflow-font-family);
+    font-family: var(--affine-font-family);
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
@@ -126,10 +126,10 @@ export const styles = css`
     word-break: break-word;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--bridgeflow-text-primary-color);
+    color: var(--affine-text-primary-color);
 
-    font-family: var(--bridgeflow-font-family);
-    font-size: var(--bridgeflow-font-sm);
+    font-family: var(--affine-font-family);
+    font-size: var(--affine-font-sm);
     font-style: normal;
     font-weight: 600;
     line-height: 22px;
@@ -146,10 +146,10 @@ export const styles = css`
     white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--bridgeflow-text-primary-color);
+    color: var(--affine-text-primary-color);
 
-    font-family: var(--bridgeflow-font-family);
-    font-size: var(--bridgeflow-font-xs);
+    font-family: var(--affine-font-family);
+    font-size: var(--affine-font-xs);
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
@@ -177,19 +177,19 @@ export const styles = css`
     white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--bridgeflow-text-secondary-color);
+    color: var(--affine-text-secondary-color);
 
-    font-family: var(--bridgeflow-font-family);
-    font-size: var(--bridgeflow-font-xs);
+    font-family: var(--affine-font-family);
+    font-size: var(--affine-font-xs);
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
   }
   .bridgeflow-embed-github-content-url:hover > span {
-    color: var(--bridgeflow-link-color);
+    color: var(--affine-link-color);
   }
   .bridgeflow-embed-github-content-url:hover .open-icon {
-    fill: var(--bridgeflow-link-color);
+    fill: var(--affine-link-color);
   }
 
   .bridgeflow-embed-github-content-url-icon {
@@ -202,7 +202,7 @@ export const styles = css`
   .bridgeflow-embed-github-content-url-icon .open-icon {
     height: 12px;
     width: 12px;
-    fill: var(--bridgeflow-text-secondary-color);
+    fill: var(--affine-text-secondary-color);
   }
 
   .bridgeflow-embed-github-banner {
@@ -222,16 +222,16 @@ export const styles = css`
 
   .bridgeflow-embed-github-block.loading {
     .bridgeflow-embed-github-content-title-text {
-      color: var(--bridgeflow-placeholder-color);
+      color: var(--affine-placeholder-color);
     }
   }
 
   .bridgeflow-embed-github-block.selected {
     .bridgeflow-embed-github-content-url > span {
-      color: var(--bridgeflow-link-color);
+      color: var(--affine-link-color);
     }
     .bridgeflow-embed-github-content-url .open-icon {
-      fill: var(--bridgeflow-link-color);
+      fill: var(--affine-link-color);
     }
   }
 
@@ -293,8 +293,8 @@ export const styles = css`
       -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
 
-      font-family: var(--bridgeflow-font-family);
-      font-size: var(--bridgeflow-font-xs);
+      font-family: var(--affine-font-family);
+      font-size: var(--affine-font-xs);
       font-style: normal;
       font-weight: 600;
       line-height: 20px;
@@ -302,7 +302,7 @@ export const styles = css`
 
     .bridgeflow-embed-github-content-assignees-text.label {
       width: 72px;
-      color: var(--bridgeflow-text-primary-color);
+      color: var(--affine-text-primary-color);
       font-weight: 600;
     }
 
@@ -316,12 +316,12 @@ export const styles = css`
     }
 
     .bridgeflow-embed-github-content-assignees-text-users.user {
-      color: var(--bridgeflow-link-color);
+      color: var(--affine-link-color);
       cursor: pointer;
     }
 
     .bridgeflow-embed-github-content-assignees-text-users.placeholder {
-      color: var(--bridgeflow-placeholder-color);
+      color: var(--affine-placeholder-color);
     }
 
     .bridgeflow-embed-github-banner {

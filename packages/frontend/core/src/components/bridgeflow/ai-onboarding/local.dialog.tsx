@@ -6,7 +6,7 @@ import {
 import { AuthService } from '@bridgeflow/core/modules/cloud';
 import { useI18n } from '@bridgeflow/i18n';
 import { AiIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { cssVar } from '@toeverything/theme';
 import { useEffect, useMemo, useRef } from 'react';
 
@@ -45,7 +45,7 @@ export const AIOnboardingLocal = () => {
         key: 'learn-more',
         label: t['com.bridgeflow.ai-onboarding.local.action-learn-more'](),
         onClick: () => {
-          window.open('https://awaizahmed.com', '_blank', 'noreferrer');
+          window.open('https://kanbanstudios.ae', '_blank', 'noreferrer');
         },
       },
     ];

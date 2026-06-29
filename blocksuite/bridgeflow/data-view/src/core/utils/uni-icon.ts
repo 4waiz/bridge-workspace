@@ -15,7 +15,7 @@ export class BridgeFlowLitIcon extends ShadowlessElement {
     }
 
     bridgeflow-lit-icon svg {
-      fill: var(--bridgeflow-icon-color);
+      fill: var(--affine-icon-color);
     }
   `;
 

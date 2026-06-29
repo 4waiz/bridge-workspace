@@ -1,5 +1,5 @@
 import type { SpaceType } from '@bridgeflow/nbstore';
-import { AsyncLock } from '@toeverything/infra/utils';
+import { AsyncLock } from '@kanban-studios/infra/utils';
 import { Subject } from 'rxjs';
 import { applyUpdate, Doc as YDoc } from 'yjs';
 

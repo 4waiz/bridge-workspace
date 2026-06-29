@@ -1,5 +1,5 @@
 import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { useCallback, useEffect, useState } from 'react';
 

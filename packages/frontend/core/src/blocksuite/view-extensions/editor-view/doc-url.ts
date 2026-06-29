@@ -7,7 +7,7 @@ import {
   GenerateDocUrlExtension,
   ParseDocUrlExtension,
 } from '@blocksuite/bridgeflow/shared/services';
-import type { FrameworkProvider } from '@toeverything/infra';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 
 function patchParseDocUrlExtension(framework: FrameworkProvider) {
   const workspaceService = framework.get(WorkspaceService);

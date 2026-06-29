@@ -28,7 +28,7 @@ const styles = css`
   }
 
   bridgeflow-data-view-kanban-cell:hover {
-    background-color: var(--bridgeflow-hover-color);
+    background-color: var(--affine-hover-color);
   }
 
   bridgeflow-data-view-kanban-cell .icon {
@@ -43,8 +43,8 @@ const styles = css`
   bridgeflow-data-view-kanban-cell .icon svg {
     width: 16px;
     height: 16px;
-    fill: var(--bridgeflow-icon-color);
-    color: var(--bridgeflow-icon-color);
+    fill: var(--affine-icon-color);
+    color: var(--affine-icon-color);
   }
 
   .kanban-cell {
@@ -134,7 +134,7 @@ export class KanbanCell extends SignalWatcher(
     this.view.lockRows(this.isEditing$.value);
     this.dataset['editing'] = `${this.isEditing$.value}`;
     this.style.border = this.isFocus$.value
-      ? '1px solid var(--bridgeflow-primary-color)'
+      ? '1px solid var(--affine-primary-color)'
       : '';
     this.style.boxShadow = this.isEditing$.value
       ? '0px 0px 0px 2px rgba(30, 150, 235, 0.30)'

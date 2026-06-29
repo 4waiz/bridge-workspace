@@ -159,14 +159,14 @@ export class EdgelessGroupTitleEditor extends WithDisposable(
       left: x + 'px',
       top: `${y - GROUP_TITLE_OFFSET + 2}px`,
       minWidth: '8px',
-      fontFamily: 'var(--bridgeflow-font-family)',
-      color: 'var(--bridgeflow-text-primary-color)',
-      background: 'var(--bridgeflow-white-10)',
+      fontFamily: 'var(--affine-font-family)',
+      color: 'var(--affine-text-primary-color)',
+      background: 'var(--affine-white-10)',
       outline: 'none',
       zIndex: '1',
       border: `1px solid
-        var(--bridgeflow-primary-color)`,
-      boxShadow: 'var(--bridgeflow-active-shadow)',
+        var(--affine-primary-color)`,
+      boxShadow: 'var(--affine-active-shadow)',
     });
     return html`<rich-text
       .yText=${this.group.title}

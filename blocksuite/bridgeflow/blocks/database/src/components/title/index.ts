@@ -23,7 +23,7 @@ export class DatabaseTitle extends SignalWatcher(
       font-size: 20px;
       line-height: 28px;
       font-weight: 600;
-      color: var(--bridgeflow-text-primary-color);
+      color: var(--affine-text-primary-color);
       overflow: hidden;
     }
 
@@ -67,11 +67,11 @@ export class DatabaseTitle extends SignalWatcher(
       content: 'Untitled';
       position: absolute;
       pointer-events: none;
-      color: var(--bridgeflow-text-primary-color);
+      color: var(--affine-text-primary-color);
     }
 
     .bridgeflow-database-title [data-title-focus='true']::before {
-      color: var(--bridgeflow-placeholder-color);
+      color: var(--affine-placeholder-color);
     }
 
     .bridgeflow-database-title.comment-highlighted {

@@ -12,7 +12,7 @@ import { WorkspacePropertyService } from '@bridgeflow/core/modules/workspace-pro
 import type { BridgeFlowDNDData } from '@bridgeflow/core/types/dnd';
 import { useI18n } from '@bridgeflow/i18n';
 import { MoreHorizontalIcon } from '@blocksuite/icons/rc';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { type HTMLProps, useCallback, useState } from 'react';
 

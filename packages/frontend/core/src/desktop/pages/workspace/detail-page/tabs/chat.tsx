@@ -42,7 +42,7 @@ import { DocModeProvider } from '@blocksuite/bridgeflow/shared/services';
 import { createSignalFromObservable } from '@blocksuite/bridgeflow/shared/utils';
 import { CenterPeekIcon } from '@blocksuite/icons/rc';
 import type { Signal } from '@preact/signals-core';
-import { useFramework, useService } from '@toeverything/infra';
+import { useFramework, useService } from '@kanban-studios/infra';
 import { html } from 'lit';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 

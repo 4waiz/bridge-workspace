@@ -2,7 +2,7 @@ import { shallowEqual } from '@bridgeflow/component';
 import { DebugLogger } from '@bridgeflow/debug';
 import { ServerDeploymentType } from '@bridgeflow/graphql';
 import { flushTelemetry, setTelemetryContext, tracker } from '@bridgeflow/track';
-import { LiveData, OnEvent, Service } from '@toeverything/infra';
+import { LiveData, OnEvent, Service } from '@kanban-studios/infra';
 
 import type { AuthAccountInfo, Server, ServersService } from '../../cloud';
 import { getOfficialTelemetryEndpoint } from '../../cloud/constant';

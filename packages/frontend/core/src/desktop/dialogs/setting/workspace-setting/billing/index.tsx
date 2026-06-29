@@ -7,7 +7,7 @@ import {
 import { WorkspaceSubscriptionService } from '@bridgeflow/core/modules/cloud';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useState } from 'react';
 
 import { TeamResumeAction } from '../../general-setting/plans/actions';

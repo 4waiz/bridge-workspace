@@ -1,7 +1,7 @@
 import type { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
 import { toArrayBuffer } from '@bridgeflow/core/utils/array-buffer';
 import type { Workspace as WorkspaceInterface } from '@blocksuite/bridgeflow/store';
-import { Entity, LiveData, yjsGetPath } from '@toeverything/infra';
+import { Entity, LiveData, yjsGetPath } from '@kanban-studios/infra';
 import type { Observable } from 'rxjs';
 import { Doc as YDoc, transact } from 'yjs';
 

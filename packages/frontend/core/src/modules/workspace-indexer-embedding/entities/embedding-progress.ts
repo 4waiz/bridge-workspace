@@ -9,7 +9,7 @@ import {
   onComplete,
   onStart,
   smartRetry,
-} from '@toeverything/infra';
+} from '@kanban-studios/infra';
 import { EMPTY, interval, Subject } from 'rxjs';
 import { exhaustMap, mergeMap, switchMap, takeUntil } from 'rxjs/operators';
 

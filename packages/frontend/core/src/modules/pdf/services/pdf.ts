@@ -1,4 +1,4 @@
-import { ObjectPool, Service } from '@toeverything/infra';
+import { ObjectPool, Service } from '@kanban-studios/infra';
 
 import { PDF } from '../entities/pdf';
 

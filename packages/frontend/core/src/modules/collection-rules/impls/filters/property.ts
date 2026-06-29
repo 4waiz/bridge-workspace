@@ -1,5 +1,5 @@
 import type { WorkspacePropertyService } from '@bridgeflow/core/modules/workspace-property';
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 import { type Observable, switchMap } from 'rxjs';
 
 import { FilterProvider } from '../../provider';

@@ -4,7 +4,7 @@ import {
   type FontFamily,
 } from '@bridgeflow/core/modules/editor-setting';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useMemo } from 'react';
 
 import { SettingDropdownSelect } from '../dropdown-select';

@@ -11,7 +11,7 @@ import {
   type ViewExtensionContext,
   ViewExtensionProvider,
 } from '@blocksuite/bridgeflow/ext-loader';
-import { FrameworkProvider } from '@toeverything/infra';
+import { FrameworkProvider } from '@kanban-studios/infra';
 import type { TemplateResult } from 'lit';
 import { z } from 'zod';
 

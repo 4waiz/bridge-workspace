@@ -1,6 +1,6 @@
 import { NavigationGestureService } from '@bridgeflow/core/mobile/modules/navigation-gesture';
 import { onMenuOpen } from '@blocksuite/bridgeflow/components/context-menu';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { type PropsWithChildren, useCallback, useEffect, useRef } from 'react';
 
 export const BlocksuiteMenuConfigProvider = ({

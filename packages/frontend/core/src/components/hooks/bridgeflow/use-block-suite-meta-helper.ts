@@ -1,7 +1,7 @@
 import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
 import { DocsService } from '@bridgeflow/core/modules/doc';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import { useNavigateHelper } from '../use-navigate-helper';

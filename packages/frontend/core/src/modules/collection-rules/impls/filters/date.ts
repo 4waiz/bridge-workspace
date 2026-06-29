@@ -1,6 +1,6 @@
 import type { DocsService } from '@bridgeflow/core/modules/doc';
 import type { WorkspacePropertyFilter } from '@bridgeflow/core/modules/workspace-property';
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 import dayjs, { type Dayjs, isDayjs } from 'dayjs';
 import { map, type Observable } from 'rxjs';
 

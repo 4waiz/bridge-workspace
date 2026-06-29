@@ -6,7 +6,7 @@ import {
 import type { DialogComponentProps } from '@bridgeflow/core/modules/dialogs';
 import type { WORKSPACE_DIALOG_SCHEMA } from '@bridgeflow/core/modules/dialogs/constant';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
 import { EditCollection } from './edit-collection';
@@ -46,7 +46,7 @@ export const CollectionEditorDialog = ({
         style: {
           padding: 0,
           maxWidth: 944,
-          backgroundColor: 'var(--bridgeflow-background-primary-color)',
+          backgroundColor: 'var(--affine-background-primary-color)',
         },
       }}
       persistent

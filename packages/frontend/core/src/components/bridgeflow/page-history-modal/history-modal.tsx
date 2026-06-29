@@ -15,7 +15,7 @@ import type { Store, Workspace } from '@blocksuite/bridgeflow/store';
 import { CloseIcon, ToggleRightIcon } from '@blocksuite/icons/rc';
 import * as Collapsible from '@radix-ui/react-collapsible';
 import type { DialogContentProps } from '@radix-ui/react-dialog';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { atom, useAtom } from 'jotai';
 import type { PropsWithChildren } from 'react';
 import {
@@ -58,7 +58,7 @@ const contentOptions: DialogContentProps = {
   style: {
     padding: 0,
     maxWidth: 944,
-    backgroundColor: 'var(--bridgeflow-background-primary-color)',
+    backgroundColor: 'var(--affine-background-primary-color)',
     overflow: 'hidden',
   },
 };

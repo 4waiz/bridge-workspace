@@ -3,7 +3,7 @@ import {
   type ViewExtensionContext,
   ViewExtensionProvider,
 } from '@blocksuite/bridgeflow/ext-loader';
-import { FrameworkProvider } from '@toeverything/infra';
+import { FrameworkProvider } from '@kanban-studios/infra';
 import { z } from 'zod';
 
 const optionsSchema = z.object({

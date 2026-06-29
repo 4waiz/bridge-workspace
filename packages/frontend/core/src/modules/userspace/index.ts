@@ -1,6 +1,6 @@
 export { UserspaceService as UserDBService } from './services/userspace';
 
-import type { Framework } from '@toeverything/infra';
+import type { Framework } from '@kanban-studios/infra';
 
 import { AuthService, ServerService } from '../cloud';
 import { ServerScope } from '../cloud/scopes/server';

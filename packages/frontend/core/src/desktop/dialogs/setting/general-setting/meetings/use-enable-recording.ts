@@ -3,7 +3,7 @@ import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-a
 import { MeetingSettingsService } from '@bridgeflow/core/modules/media/services/meeting-settings';
 import { useI18n } from '@bridgeflow/i18n';
 import track from '@bridgeflow/track';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 
 export const useEnableRecording = () => {
   const meetingSettingsService = useService(MeetingSettingsService);

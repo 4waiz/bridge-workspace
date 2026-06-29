@@ -22,7 +22,7 @@ export const BridgeFlowIcon = (color: string) =>
         width="44"
         height="44"
         rx="8"
-        fill="var(--bridgeflow-white)"
+        fill="var(--affine-white)"
       />
       <rect
         x="10"
@@ -30,7 +30,7 @@ export const BridgeFlowIcon = (color: string) =>
         width="43"
         height="43"
         rx="7.5"
-        stroke="var(--bridgeflow-border-color)"
+        stroke="var(--affine-border-color)"
       />
       <g clip-path="url(#clip0_5885_200419)">
         <path

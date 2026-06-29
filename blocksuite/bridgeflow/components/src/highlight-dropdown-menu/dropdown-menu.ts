@@ -46,7 +46,7 @@ export class HighlightDropdownMenu extends LitElement {
   };
 
   override render() {
-    const prefix = '--bridgeflow-text-highlight';
+    const prefix = '--affine-text-highlight';
 
     return html`
       <editor-menu-button
@@ -56,8 +56,8 @@ export class HighlightDropdownMenu extends LitElement {
             <bridgeflow-highlight-duotone-icon
               style=${styleMap({
                 '--color':
-                  // latestHighlightColor ?? 'var(--bridgeflow-text-primary-color)',
-                  'var(--bridgeflow-text-primary-color)',
+                  // latestHighlightColor ?? 'var(--affine-text-primary-color)',
+                  'var(--affine-text-primary-color)',
               })}
             ></bridgeflow-highlight-duotone-icon>
             ${EditorChevronDown}
@@ -78,7 +78,7 @@ export class HighlightDropdownMenu extends LitElement {
               >
                 <bridgeflow-text-duotone-icon
                   style=${styleMap({
-                    '--color': value ?? 'var(--bridgeflow-text-primary-color)',
+                    '--color': value ?? 'var(--affine-text-primary-color)',
                   })}
                 ></bridgeflow-text-duotone-icon>
                 <span class="label capitalize"
@@ -99,7 +99,7 @@ export class HighlightDropdownMenu extends LitElement {
               >
                 <bridgeflow-text-duotone-icon
                   style=${styleMap({
-                    '--color': 'var(--bridgeflow-text-primary-color)',
+                    '--color': 'var(--affine-text-primary-color)',
                     '--background': value ?? 'transparent',
                   })}
                 ></bridgeflow-text-duotone-icon>

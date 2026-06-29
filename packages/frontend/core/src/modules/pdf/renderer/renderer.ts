@@ -1,5 +1,5 @@
 import { getWorkerUrl } from '@bridgeflow/env/worker';
-import { OpClient } from '@toeverything/infra/op';
+import { OpClient } from '@kanban-studios/infra/op';
 
 import type { ClientOps } from './ops';
 

@@ -1,7 +1,7 @@
 import { toArrayBuffer } from '@bridgeflow/core/utils/array-buffer';
 import type { DocMode } from '@blocksuite/bridgeflow/model';
 import { ZipTransformer } from '@blocksuite/bridgeflow/widgets/linked-doc';
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 
 import { DocsService } from '../../doc';
 import {

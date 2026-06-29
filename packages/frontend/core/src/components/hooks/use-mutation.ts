@@ -6,7 +6,7 @@ import type {
   QueryVariables,
   RecursiveMaybeFields,
 } from '@bridgeflow/graphql';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import type { GraphQLError } from 'graphql';
 import { useMemo } from 'react';
 import type { Key } from 'swr';

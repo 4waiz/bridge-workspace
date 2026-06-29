@@ -1,5 +1,5 @@
 import { getWorkspacePageMetaByIdQuery } from '@bridgeflow/graphql';
-import { Store } from '@toeverything/infra';
+import { Store } from '@kanban-studios/infra';
 
 import { type CloudDocMetaType } from '../entities/cloud-doc-meta';
 import type { WorkspaceServerService } from '../services/workspace-server';

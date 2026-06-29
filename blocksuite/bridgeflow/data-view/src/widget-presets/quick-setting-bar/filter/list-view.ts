@@ -38,12 +38,12 @@ export class FilterBar extends SignalWatcher(ShadowlessElement) {
       display: flex;
       align-items: center;
       padding: 4px;
-      background-color: var(--bridgeflow-white);
+      background-color: var(--affine-white);
     }
 
     .filter-bar-add-filter {
       white-space: nowrap;
-      color: var(--bridgeflow-text-secondary-color);
+      color: var(--affine-text-secondary-color);
       padding: 4px 8px;
       display: flex;
       align-items: center;
@@ -70,11 +70,11 @@ export class FilterBar extends SignalWatcher(ShadowlessElement) {
 
     filter-bar:hover::-webkit-scrollbar-thumb {
       border-radius: 16px;
-      background-color: var(--bridgeflow-black-30);
+      background-color: var(--affine-black-30);
     }
 
     filter-bar:hover::-webkit-scrollbar-track {
-      //background-color: var(--bridgeflow-hover-color);
+      //background-color: var(--affine-hover-color);
     }
   `;
 

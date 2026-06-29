@@ -1,7 +1,7 @@
 import { observeResize } from '@bridgeflow/component';
 import { AppSidebarService } from '@bridgeflow/core/modules/app-sidebar';
 import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import { useCallback, useEffect, useRef } from 'react';
 
 let OBSERVED = false;

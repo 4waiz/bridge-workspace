@@ -1,7 +1,7 @@
 import { Avatar, Tooltip } from '@bridgeflow/component';
 import { useCurrentServerService } from '@bridgeflow/core/components/providers/current-server-scope';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData } from '@toeverything/infra';
+import { useLiveData } from '@kanban-studios/infra';
 import {
   type ComponentType,
   type CSSProperties,

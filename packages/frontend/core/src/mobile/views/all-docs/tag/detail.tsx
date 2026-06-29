@@ -8,7 +8,7 @@ import { DocsExplorer } from '@bridgeflow/core/components/explorer/docs-view/doc
 import { Page } from '@bridgeflow/core/mobile/components/page';
 import { CollectionRulesService } from '@bridgeflow/core/modules/collection-rules';
 import type { Tag } from '@bridgeflow/core/modules/tag';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useEffect, useState } from 'react';
 
 import { TagDetailHeader } from './detail-header';

@@ -4,7 +4,7 @@ import type {
   QueryOptions,
   QueryResponse,
 } from '@bridgeflow/graphql';
-import { useService } from '@toeverything/infra';
+import { useService } from '@kanban-studios/infra';
 import type { GraphQLError } from 'graphql';
 import { useCallback, useMemo } from 'react';
 import type { SWRConfiguration, SWRResponse } from 'swr';

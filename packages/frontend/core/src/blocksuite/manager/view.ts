@@ -37,7 +37,7 @@ import { FoundationViewExtension } from '@blocksuite/bridgeflow/foundation/view'
 import { InlineCommentViewExtension } from '@blocksuite/bridgeflow/inlines/comment';
 import { BridgeFlowCanvasTextFonts } from '@blocksuite/bridgeflow/shared/services';
 import { LinkedDocViewExtension } from '@blocksuite/bridgeflow/widgets/linked-doc/view';
-import type { FrameworkProvider } from '@toeverything/infra';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 import type { TemplateResult } from 'lit';
 
 type Configure = {

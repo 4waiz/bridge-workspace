@@ -1,5 +1,5 @@
 import type { DocMode } from '@bridgeflow/graphql';
-import { Service } from '@toeverything/infra';
+import { Service } from '@kanban-studios/infra';
 
 import type { NotificationStore } from '../stores/notification';
 

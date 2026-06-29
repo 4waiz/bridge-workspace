@@ -8,7 +8,7 @@ export class NoteBlockComponent extends BlockComponent<NoteBlockModel> {
       display: flow-root;
     }
     .bridgeflow-note-block-container.selected {
-      background-color: var(--bridgeflow-hover-color);
+      background-color: var(--affine-hover-color);
     }
   `;
 

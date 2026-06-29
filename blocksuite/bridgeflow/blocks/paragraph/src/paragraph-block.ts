@@ -376,6 +376,6 @@ export class ParagraphBlockComponent extends CaptionedBlockComponent<ParagraphBl
   private accessor _richTextElement: RichText | null = null;
 
   override accessor blockContainerStyles = {
-    margin: 'var(--bridgeflow-paragraph-margin, 10px 0)',
+    margin: 'var(--affine-paragraph-margin, 10px 0)',
   };
 }

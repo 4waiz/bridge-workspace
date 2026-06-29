@@ -1143,7 +1143,7 @@ test('should add HTTP protocol into link automatically', async ({ page }) => {
 
   await page.keyboard.press('Space');
 
-  const link = 'https://github.com/toeverything/bridgeflow';
+  const link = 'https://github.com/Kanban-Studios/bridgeflow';
 
   const { toolbar, switchViewBtn, cardViewBtn } = toolbarButtons(page);
 

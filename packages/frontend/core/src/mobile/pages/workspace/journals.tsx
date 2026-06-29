@@ -5,7 +5,7 @@ import {
 import { JournalService } from '@bridgeflow/core/modules/journal';
 import { ViewService, WorkbenchService } from '@bridgeflow/core/modules/workbench';
 import { i18nTime } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { cssVarV2 } from '@toeverything/theme/v2';
 import dayjs from 'dayjs';
 import { useCallback, useLayoutEffect, useState } from 'react';

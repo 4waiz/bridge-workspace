@@ -1,6 +1,6 @@
 import { CaptchaService } from '@bridgeflow/core/modules/cloud';
 import { Turnstile } from '@marsidev/react-turnstile';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useCallback, useEffect } from 'react';
 
 import * as style from './style.css';

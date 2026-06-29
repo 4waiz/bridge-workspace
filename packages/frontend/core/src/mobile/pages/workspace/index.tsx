@@ -5,7 +5,7 @@ import { SharePage } from '@bridgeflow/core/desktop/pages/workspace/share/share-
 import { workbenchRoutes } from '@bridgeflow/core/mobile/workbench-router';
 import { ServersService } from '@bridgeflow/core/modules/cloud';
 import { WorkspacesService } from '@bridgeflow/core/modules/workspace';
-import { FrameworkScope, useLiveData, useServices } from '@toeverything/infra';
+import { FrameworkScope, useLiveData, useServices } from '@kanban-studios/infra';
 import {
   lazy as reactLazy,
   Suspense,

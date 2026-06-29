@@ -1,5 +1,5 @@
 import { DesktopApiService } from '@bridgeflow/core/modules/desktop-api';
-import { useServiceOptional } from '@toeverything/infra';
+import { useServiceOptional } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 import { redirect } from 'react-router-dom';
 

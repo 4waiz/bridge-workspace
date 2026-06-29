@@ -4,7 +4,7 @@ import {
   type ViewExtensionContext,
   ViewExtensionProvider,
 } from '@blocksuite/bridgeflow/ext-loader';
-import { FrameworkProvider } from '@toeverything/infra';
+import { FrameworkProvider } from '@kanban-studios/infra';
 import { z } from 'zod';
 
 import { patchUserExtensions } from './user';

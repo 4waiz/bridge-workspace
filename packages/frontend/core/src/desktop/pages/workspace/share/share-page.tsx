@@ -28,7 +28,7 @@ import { useI18n } from '@bridgeflow/i18n';
 import { DisposableGroup } from '@blocksuite/bridgeflow/global/disposable';
 import { RefNodeSlotsProvider } from '@blocksuite/bridgeflow/inlines/reference';
 import { type DocMode, DocModes } from '@blocksuite/bridgeflow/model';
-import { FrameworkScope, useLiveData, useService } from '@toeverything/infra';
+import { FrameworkScope, useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';

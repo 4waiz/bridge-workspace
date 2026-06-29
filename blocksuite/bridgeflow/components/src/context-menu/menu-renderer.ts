@@ -34,7 +34,7 @@ export class MenuComponent
 {
   static override styles = css`
     bridgeflow-menu {
-      font-family: var(--bridgeflow-font-family);
+      font-family: var(--affine-font-family);
       display: flex;
       flex-direction: column;
       user-select: none;
@@ -79,7 +79,7 @@ export class MenuComponent
     .no-results {
       font-size: 12px;
       line-height: 20px;
-      color: var(--bridgeflow-text-secondary-color);
+      color: var(--affine-text-secondary-color);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -183,7 +183,7 @@ export class MenuComponent
     });
     return html` <div style=${searchStyle} class="bridgeflow-menu-search-container">
       <div
-        style="font-size:20px;display:flex;align-items:center;color: var(--bridgeflow-text-secondary-color)"
+        style="font-size:20px;display:flex;align-items:center;color: var(--affine-text-secondary-color)"
       >
         ${SearchIcon()}
       </div>
@@ -224,7 +224,7 @@ export class MenuComponent
             </div>`
           : nothing}
         <div
-          style="flex:1;font-weight:500;font-size: 14px;line-height: 22px;color: var(--bridgeflow-text-primary-color)"
+          style="flex:1;font-weight:500;font-size: 14px;line-height: 22px;color: var(--affine-text-primary-color)"
         >
           ${title.text}
         </div>
@@ -259,7 +259,7 @@ export class MobileMenuComponent
   static override styles = css`
     mobile-menu {
       height: 100%;
-      font-family: var(--bridgeflow-font-family);
+      font-family: var(--affine-font-family);
       display: flex;
       flex-direction: column;
       user-select: none;
@@ -342,7 +342,7 @@ export class MobileMenuComponent
           font-style: normal;
           font-weight: 500;
           line-height: 22px;
-          color: var(--bridgeflow-text-primary-color);
+          color: var(--affine-text-primary-color);
           display: flex;
           justify-content: center;
 "
@@ -395,7 +395,7 @@ export const createModal = (container: HTMLElement = document.body) => {
   div.style.width = '100%';
   div.style.height = '100%';
   div.style.zIndex = '1001';
-  div.style.fontFamily = 'var(--bridgeflow-font-family)';
+  div.style.fontFamily = 'var(--affine-font-family)';
   container.append(div);
   return div;
 };

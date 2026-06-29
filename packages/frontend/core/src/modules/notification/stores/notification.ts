@@ -9,7 +9,7 @@ import {
   readNotificationMutation,
   type UnionNotificationBodyType,
 } from '@bridgeflow/graphql';
-import { Store } from '@toeverything/infra';
+import { Store } from '@kanban-studios/infra';
 import { map } from 'rxjs';
 
 import type { GraphQLService, ServerService } from '../../cloud';

@@ -8,7 +8,7 @@ import {
   StoreManagerConsumer,
   type WorkerManagerOps,
 } from '@bridgeflow/nbstore/worker/consumer';
-import { type MessageCommunicapable, OpConsumer } from '@toeverything/infra/op';
+import { type MessageCommunicapable, OpConsumer } from '@kanban-studios/infra/op';
 
 const consumer = new StoreManagerConsumer([
   ...idbStorages,

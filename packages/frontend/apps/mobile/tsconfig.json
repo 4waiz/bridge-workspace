@@ -7,13 +7,13 @@
   },
   "include": ["./src"],
   "references": [
+    { "path": "../../../../blocksuite/bridgeflow/all" },
     { "path": "../../component" },
     { "path": "../../core" },
     { "path": "../../../common/env" },
     { "path": "../../i18n" },
     { "path": "../../../common/nbstore" },
     { "path": "../../track" },
-    { "path": "../../../../blocksuite/bridgeflow/all" },
     { "path": "../../../common/infra" }
   ]
 }

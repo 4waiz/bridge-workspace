@@ -17,7 +17,7 @@ import {
   GfxControllerIdentifier,
   GfxPrimitiveElementModel,
 } from '@blocksuite/std/gfx';
-import type { FrameworkProvider } from '@toeverything/infra';
+import type { FrameworkProvider } from '@kanban-studios/infra';
 
 import { DocCommentManagerService } from '../../../modules/comment/services/doc-comment-manager';
 

@@ -85,7 +85,7 @@ export const styles = css`
   .bridgeflow-embed-loom-content-title-icon svg {
     width: 20px;
     height: 20px;
-    fill: var(--bridgeflow-background-primary-color);
+    fill: var(--affine-background-primary-color);
   }
 
   .bridgeflow-embed-loom-content-title-text {
@@ -98,10 +98,10 @@ export const styles = css`
     word-break: break-word;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--bridgeflow-text-primary-color);
+    color: var(--affine-text-primary-color);
 
-    font-family: var(--bridgeflow-font-family);
-    font-size: var(--bridgeflow-font-sm);
+    font-family: var(--affine-font-family);
+    font-size: var(--affine-font-sm);
     font-style: normal;
     font-weight: 600;
     line-height: 22px;
@@ -119,10 +119,10 @@ export const styles = css`
     white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--bridgeflow-text-primary-color);
+    color: var(--affine-text-primary-color);
 
-    font-family: var(--bridgeflow-font-family);
-    font-size: var(--bridgeflow-font-xs);
+    font-family: var(--affine-font-family);
+    font-size: var(--affine-font-xs);
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
@@ -146,19 +146,19 @@ export const styles = css`
     white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--bridgeflow-text-secondary-color);
+    color: var(--affine-text-secondary-color);
 
-    font-family: var(--bridgeflow-font-family);
-    font-size: var(--bridgeflow-font-xs);
+    font-family: var(--affine-font-family);
+    font-size: var(--affine-font-xs);
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
   }
   .bridgeflow-embed-loom-content-url:hover > span {
-    color: var(--bridgeflow-link-color);
+    color: var(--affine-link-color);
   }
   .bridgeflow-embed-loom-content-url:hover .open-icon {
-    fill: var(--bridgeflow-link-color);
+    fill: var(--affine-link-color);
   }
 
   .bridgeflow-embed-loom-content-url-icon {
@@ -171,21 +171,21 @@ export const styles = css`
   .bridgeflow-embed-loom-content-url-icon .open-icon {
     height: 12px;
     width: 12px;
-    fill: var(--bridgeflow-text-secondary-color);
+    fill: var(--affine-text-secondary-color);
   }
 
   .bridgeflow-embed-loom-block.loading {
     .bridgeflow-embed-loom-content-title-text {
-      color: var(--bridgeflow-placeholder-color);
+      color: var(--affine-placeholder-color);
     }
   }
 
   .bridgeflow-embed-loom-block.selected {
     .bridgeflow-embed-loom-content-url > span {
-      color: var(--bridgeflow-link-color);
+      color: var(--affine-link-color);
     }
     .bridgeflow-embed-loom-content-url .open-icon {
-      fill: var(--bridgeflow-link-color);
+      fill: var(--affine-link-color);
     }
   }
 `;

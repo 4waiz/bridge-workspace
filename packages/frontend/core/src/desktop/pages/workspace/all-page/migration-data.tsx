@@ -2,7 +2,7 @@ import { Button } from '@bridgeflow/component';
 import { DocCreatedByUpdatedBySyncService } from '@bridgeflow/core/modules/cloud';
 import { UserFriendlyError } from '@bridgeflow/error';
 import { useI18n } from '@bridgeflow/i18n';
-import { useLiveData, useService } from '@toeverything/infra';
+import { useLiveData, useService } from '@kanban-studios/infra';
 import { useTheme } from 'next-themes';
 import { useCallback, useMemo } from 'react';
 
