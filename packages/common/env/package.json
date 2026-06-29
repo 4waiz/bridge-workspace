@@ -1,5 +1,5 @@
 {
-  "name": "@affine/env",
+  "name": "@bridgeflow/env",
   "private": true,
   "type": "module",
   "devDependencies": {
@@ -15,8 +15,8 @@
     "./worker": "./src/worker.ts"
   },
   "peerDependencies": {
-    "@affine/templates": "workspace:*",
-    "@blocksuite/affine": "workspace:*"
+    "@blocksuite/bridgeflow": "workspace:*",
+    "@bridgeflow/templates": "workspace:*"
   },
   "dependencies": {
     "zod": "^3.25.76"

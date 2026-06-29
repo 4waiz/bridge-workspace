@@ -1,23 +1,23 @@
-import { BRAND_AI_NAME } from '@affine/component/brand';
-import type { AIToolsConfigService } from '@affine/core/modules/ai-button';
-import type { AIModelService } from '@affine/core/modules/ai-button/services/models';
+import { BRAND_AI_NAME } from '@bridgeflow/component/brand';
+import type { AIToolsConfigService } from '@bridgeflow/core/modules/ai-button';
+import type { AIModelService } from '@bridgeflow/core/modules/ai-button/services/models';
 import type {
   ServerService,
   SubscriptionService,
-} from '@affine/core/modules/cloud';
+} from '@bridgeflow/core/modules/cloud';
 import {
   type CopilotChatHistoryFragment,
   ServerDeploymentType,
   SubscriptionStatus,
-} from '@affine/graphql';
+} from '@bridgeflow/graphql';
 import {
   menu,
   popMenu,
   popupTargetFromElement,
-} from '@blocksuite/affine/components/context-menu';
-import { SignalWatcher, WithDisposable } from '@blocksuite/affine/global/lit';
-import { unsafeCSSVarV2 } from '@blocksuite/affine/shared/theme';
-import type { NotificationService } from '@blocksuite/affine-shared/services';
+} from '@blocksuite/bridgeflow/components/context-menu';
+import { SignalWatcher, WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { unsafeCSSVarV2 } from '@blocksuite/bridgeflow/shared/theme';
+import type { NotificationService } from '@blocksuite/bridgeflow-shared/services';
 import {
   AiOutlineIcon,
   ArrowDownSmallIcon,
@@ -46,7 +46,7 @@ export class ChatInputPreference extends SignalWatcher(
       display: flex;
       align-items: center;
       padding: 0px 4px;
-      color: var(--affine-v2-icon-primary);
+      color: var(--bridgeflow-v2-icon-primary);
       transition: all 0.23s ease;
       border-radius: 4px;
       background: transparent;
@@ -54,7 +54,7 @@ export class ChatInputPreference extends SignalWatcher(
       cursor: pointer;
     }
     .chat-input-preference-trigger:hover {
-      background-color: var(--affine-v2-layer-background-hoverOverlay);
+      background-color: var(--bridgeflow-v2-layer-background-hoverOverlay);
     }
     .chat-input-preference-trigger-label {
       font-size: 14px;

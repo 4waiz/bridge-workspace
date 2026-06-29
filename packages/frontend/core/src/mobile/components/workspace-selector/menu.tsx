@@ -1,21 +1,21 @@
-import { Divider, IconButton, Menu, MenuItem } from '@affine/component';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { useNavigateHelper } from '@affine/core/components/hooks/use-navigate-helper';
-import { useWorkspaceInfo } from '@affine/core/components/hooks/use-workspace-info';
-import { WorkspaceAvatar } from '@affine/core/components/workspace-avatar';
+import { Divider, IconButton, Menu, MenuItem } from '@bridgeflow/component';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { useNavigateHelper } from '@bridgeflow/core/components/hooks/use-navigate-helper';
+import { useWorkspaceInfo } from '@bridgeflow/core/components/hooks/use-workspace-info';
+import { WorkspaceAvatar } from '@bridgeflow/core/components/workspace-avatar';
 import {
   type AuthAccountInfo,
   AuthService,
   type Server,
   ServersService,
-} from '@affine/core/modules/cloud';
-import { GlobalDialogService } from '@affine/core/modules/dialogs';
-import { GlobalContextService } from '@affine/core/modules/global-context';
+} from '@bridgeflow/core/modules/cloud';
+import { GlobalDialogService } from '@bridgeflow/core/modules/dialogs';
+import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
 import {
   type WorkspaceMetadata,
   WorkspacesService,
-} from '@affine/core/modules/workspace';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/core/modules/workspace';
+import { useI18n } from '@bridgeflow/i18n';
 import {
   AccountIcon,
   CloseIcon,
@@ -112,14 +112,14 @@ const WorkspaceServerInfo = ({
   const menuItems = useMemo(
     () =>
       [
-        server !== 'affine-cloud' && server !== 'local' && (
+        server !== 'bridgeflow-cloud' && server !== 'local' && (
           <MenuItem
             prefixIcon={<DeleteIcon />}
             type="danger"
             key="delete-server"
             onClick={onDeleteServer}
           >
-            {t['com.affine.server.delete']()}
+            {t['com.bridgeflow.server.delete']()}
           </MenuItem>
         ),
         accountStatus === 'authenticated' && (
@@ -173,7 +173,7 @@ const LocalWorkspaces = ({
     <>
       <WorkspaceServerInfo
         server="local"
-        name={t['com.affine.workspaceList.workspaceListType.local']()}
+        name={t['com.bridgeflow.workspaceList.workspaceListType.local']()}
       />
       <WorkspaceList
         items={workspaces}
@@ -281,12 +281,12 @@ export const SelectorMenu = ({ onClose }: { onClose?: () => void }) => {
   const { jumpToPage } = useNavigateHelper();
 
   const servers = useLiveData(serversService.servers$);
-  const affineCloudServer = useMemo(
-    () => servers.find(s => s.id === 'affine-cloud') as Server,
+  const bridgeflowCloudServer = useMemo(
+    () => servers.find(s => s.id === 'bridgeflow-cloud') as Server,
     [servers]
   );
   const selfhostServers = useMemo(
-    () => servers.filter(s => s.id !== 'affine-cloud'),
+    () => servers.filter(s => s.id !== 'bridgeflow-cloud'),
     [servers]
   );
 
@@ -328,15 +328,15 @@ export const SelectorMenu = ({ onClose }: { onClose?: () => void }) => {
       </header>
       <div className={styles.divider} />
       <main className={styles.body}>
-        {/* 1. affine-cloud  */}
+        {/* 1. bridgeflow-cloud  */}
         <FrameworkScope
-          key={affineCloudServer.id}
-          scope={affineCloudServer.scope}
+          key={bridgeflowCloudServer.id}
+          scope={bridgeflowCloudServer.scope}
         >
           <CloudWorkSpaceList
-            server={affineCloudServer}
+            server={bridgeflowCloudServer}
             workspaces={cloudWorkspaces.filter(
-              ({ flavour }) => flavour === affineCloudServer.id
+              ({ flavour }) => flavour === bridgeflowCloudServer.id
             )}
             onClickWorkspace={handleClickWorkspace}
           />

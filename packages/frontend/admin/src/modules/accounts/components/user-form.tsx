@@ -1,8 +1,8 @@
-import { Button } from '@affine/admin/components/ui/button';
-import { Input } from '@affine/admin/components/ui/input';
-import { Label } from '@affine/admin/components/ui/label';
-import { Separator } from '@affine/admin/components/ui/separator';
-import type { FeatureType } from '@affine/graphql';
+import { Button } from '@bridgeflow/admin/components/ui/button';
+import { Input } from '@bridgeflow/admin/components/ui/input';
+import { Label } from '@bridgeflow/admin/components/ui/label';
+import { Separator } from '@bridgeflow/admin/components/ui/separator';
+import type { FeatureType } from '@bridgeflow/graphql';
 import { ChevronRightIcon } from 'lucide-react';
 import type { ChangeEvent } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';

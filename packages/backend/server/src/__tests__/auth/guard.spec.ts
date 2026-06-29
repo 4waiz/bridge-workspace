@@ -70,7 +70,7 @@ test.beforeEach(async t => {
     },
   });
 
-  t.context.u1 = await t.context.auth.signUp('u1@affine.pro', '1');
+  t.context.u1 = await t.context.auth.signUp('u1@bridgeflow.pro', '1');
   const session = await t.context.models.session.createSession();
   t.context.sessionId = session.id;
   await t.context.auth.createUserSession(t.context.u1.id, t.context.sessionId);
@@ -190,7 +190,7 @@ test('should record refresh client version when refreshed', async t => {
   await request(t.context.server)
     .get('/session')
     .set('cookie', `${AuthService.sessionCookieName}=${t.context.sessionId}`)
-    .set('x-affine-version', '0.25.2')
+    .set('x-bridgeflow-version', '0.25.2')
     .expect(200);
 
   const userSession = await t.context.db.userSession.findFirst({
@@ -235,7 +235,7 @@ test('should kick out unsupported client version on non-public handler', async t
   const res = await request(t.context.server)
     .get('/private')
     .set('Cookie', `${AuthService.sessionCookieName}=${t.context.sessionId}`)
-    .set('x-affine-version', '0.24.0')
+    .set('x-bridgeflow-version', '0.24.0')
     .expect(403);
 
   const setCookies = res.get('Set-Cookie') ?? [];
@@ -264,7 +264,7 @@ test('should not block public handler when client version is unsupported', async
   const res = await request(t.context.server)
     .get('/public')
     .set('Cookie', `${AuthService.sessionCookieName}=${t.context.sessionId}`)
-    .set('x-affine-version', '0.24.0')
+    .set('x-bridgeflow-version', '0.24.0')
     .expect(200);
 
   t.is(res.body.user, undefined);
@@ -295,7 +295,7 @@ test('should allow recent canary date version in canary namespace', async t => {
     const res = await request(t.context.server)
       .get('/private')
       .set('Cookie', `${AuthService.sessionCookieName}=${t.context.sessionId}`)
-      .set('x-affine-version', makeCanaryDateVersion(new Date(), '015'))
+      .set('x-bridgeflow-version', makeCanaryDateVersion(new Date(), '015'))
       .expect(200);
 
     t.is(res.body.user.id, t.context.u1.id);
@@ -329,7 +329,7 @@ test('should kick out old canary date version in canary namespace', async t => {
     const res = await request(t.context.server)
       .get('/private')
       .set('Cookie', `${AuthService.sessionCookieName}=${t.context.sessionId}`)
-      .set('x-affine-version', oldVersion)
+      .set('x-bridgeflow-version', oldVersion)
       .expect(403);
 
     t.is(

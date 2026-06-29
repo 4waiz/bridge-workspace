@@ -1,32 +1,32 @@
 // eslint-disable-next-line @typescript-eslint/no-restricted-imports
 import 'katex/dist/katex.min.css';
 
-import { useConfirmModal, useLitPortalFactory } from '@affine/component';
+import { useConfirmModal, useLitPortalFactory } from '@bridgeflow/component';
 import {
   type EdgelessEditor,
   LitDocEditor,
   LitDocTitle,
   LitEdgelessEditor,
   type PageEditor,
-} from '@affine/core/blocksuite/editors';
-import { getViewManager } from '@affine/core/blocksuite/manager/view';
-import { useEnableAI } from '@affine/core/components/hooks/affine/use-enable-ai';
-import { ServerService } from '@affine/core/modules/cloud';
-import type { DocCustomPropertyInfo } from '@affine/core/modules/db';
+} from '@bridgeflow/core/blocksuite/editors';
+import { getViewManager } from '@bridgeflow/core/blocksuite/manager/view';
+import { useEnableAI } from '@bridgeflow/core/components/hooks/bridgeflow/use-enable-ai';
+import { ServerService } from '@bridgeflow/core/modules/cloud';
+import type { DocCustomPropertyInfo } from '@bridgeflow/core/modules/db';
 import type {
   DatabaseRow,
   DatabaseValueCell,
-} from '@affine/core/modules/doc-info/types';
-import { EditorSettingService } from '@affine/core/modules/editor-setting';
-import { FeatureFlagService } from '@affine/core/modules/feature-flag';
-import { JournalService } from '@affine/core/modules/journal';
-import { useInsidePeekView } from '@affine/core/modules/peek-view';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { ServerFeature } from '@affine/graphql';
-import track from '@affine/track';
-import type { DocTitle } from '@blocksuite/affine/fragments/doc-title';
-import type { DocMode } from '@blocksuite/affine/model';
-import type { Store } from '@blocksuite/affine/store';
+} from '@bridgeflow/core/modules/doc-info/types';
+import { EditorSettingService } from '@bridgeflow/core/modules/editor-setting';
+import { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
+import { JournalService } from '@bridgeflow/core/modules/journal';
+import { useInsidePeekView } from '@bridgeflow/core/modules/peek-view';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { ServerFeature } from '@bridgeflow/graphql';
+import track from '@bridgeflow/track';
+import type { DocTitle } from '@blocksuite/bridgeflow/fragments/doc-title';
+import type { DocMode } from '@blocksuite/bridgeflow/model';
+import type { Store } from '@blocksuite/bridgeflow/store';
 import {
   useFramework,
   useLiveData,
@@ -255,7 +255,7 @@ export const BlocksuiteDocEditor = forwardRef<
 
   return (
     <>
-      <div className={styles.affineDocViewport}>
+      <div className={styles.bridgeflowDocViewport}>
         {!BUILD_CONFIG.isMobileEdition ? (
           <DocIconPicker docId={page.id} readonly={readonly || shared} />
         ) : null}
@@ -325,7 +325,7 @@ export const BlocksuiteEdgelessEditor = forwardRef<
         .then(() => {
           // make sure editor can get keyboard events on showing up
           editorRef.current
-            ?.querySelector<HTMLElement>('affine-edgeless-root')
+            ?.querySelector<HTMLElement>('bridgeflow-edgeless-root')
             ?.click();
         })
         .catch(console.error);
@@ -333,7 +333,7 @@ export const BlocksuiteEdgelessEditor = forwardRef<
   }, []);
 
   return (
-    <div className={styles.affineEdgelessDocViewport}>
+    <div className={styles.bridgeflowEdgelessDocViewport}>
       <LitEdgelessEditor ref={onDocRef} doc={page} specs={specs} />
       {portals}
     </div>

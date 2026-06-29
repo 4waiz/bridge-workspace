@@ -2,8 +2,8 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from '@affine/admin/components/ui/avatar';
-import { Button } from '@affine/admin/components/ui/button';
+} from '@bridgeflow/admin/components/ui/avatar';
+import { Button } from '@bridgeflow/admin/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,13 +11,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@affine/admin/components/ui/dropdown-menu';
+} from '@bridgeflow/admin/components/ui/dropdown-menu';
 import { MoreVerticalIcon } from '@blocksuite/icons/rc';
 import { CircleUser } from 'lucide-react';
 import { useCallback } from 'react';
 import { toast } from 'sonner';
 
-import { affineFetch } from '../../fetch-utils';
+import { bridgeflowFetch } from '../../fetch-utils';
 import { useCurrentUser, useRevalidateCurrentUser } from '../common';
 
 interface UserDropdownProps {
@@ -86,7 +86,7 @@ export function UserDropdown({ isCollapsed }: UserDropdownProps) {
   const relative = useRevalidateCurrentUser();
 
   const handleLogout = useCallback(() => {
-    affineFetch('/api/auth/sign-out', { method: 'POST' })
+    bridgeflowFetch('/api/auth/sign-out', { method: 'POST' })
       .then(() => {
         toast.success('Logged out successfully');
         return relative();

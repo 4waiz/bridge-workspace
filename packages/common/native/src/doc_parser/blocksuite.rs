@@ -132,7 +132,7 @@ pub(super) fn get_list_depth(
 
   while let Some(parent_id) = parent_lookup.get(&current_id) {
     if let Some(parent_block) = blocks.get(parent_id)
-      && get_flavour(parent_block).as_deref() == Some("affine:list")
+      && get_flavour(parent_block).as_deref() == Some("bridgeflow:list")
     {
       depth += 1;
       current_id = parent_id.clone();

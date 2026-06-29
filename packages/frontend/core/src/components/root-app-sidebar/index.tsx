@@ -5,14 +5,14 @@ import {
   QuickSearchInput,
   SidebarContainer,
   SidebarScrollableContainer,
-} from '@affine/core/modules/app-sidebar/views';
-import { AuthService } from '@affine/core/modules/cloud';
-import { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import { CMDKQuickSearchService } from '@affine/core/modules/quicksearch/services/cmdk';
-import type { Workspace } from '@affine/core/modules/workspace';
-import { useI18n } from '@affine/i18n';
-import { track } from '@affine/track';
-import type { Store } from '@blocksuite/affine/store';
+} from '@bridgeflow/core/modules/app-sidebar/views';
+import { AuthService } from '@bridgeflow/core/modules/cloud';
+import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
+import { CMDKQuickSearchService } from '@bridgeflow/core/modules/quicksearch/services/cmdk';
+import type { Workspace } from '@bridgeflow/core/modules/workspace';
+import { useI18n } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
+import type { Store } from '@blocksuite/bridgeflow/store';
 import {
   AllDocsIcon,
   HomeIcon,
@@ -97,7 +97,7 @@ const AllDocsButton = () => {
   return (
     <MenuLinkItem icon={<AllDocsIcon />} active={allPageActive} to={'/all'}>
       <span data-testid="all-pages">
-        {t['com.affine.workspaceSubPath.all']()}
+        {t['com.bridgeflow.workspaceSubPath.all']()}
       </span>
     </MenuLinkItem>
   );
@@ -220,7 +220,7 @@ export const RootAppSidebar = memo((): ReactElement => {
         {/* Utility items */}
         <CollapsibleSection
           path={['others']}
-          title={t['com.affine.rootAppSidebar.others']()}
+          title={t['com.bridgeflow.rootAppSidebar.others']()}
           contentStyle={{ padding: '6px 8px 0 8px' }}
         >
           <TrashButton />
@@ -245,7 +245,7 @@ export const RootAppSidebar = memo((): ReactElement => {
             onClick={onOpenSettingModal}
           >
             <span data-testid="settings-modal-trigger">
-              {t['com.affine.settingSidebar.title']()}
+              {t['com.bridgeflow.settingSidebar.title']()}
             </span>
           </MenuItem>
         </div>

@@ -1,14 +1,14 @@
 import { Global, Module } from '@nestjs/common';
 
 import { ConfigModule } from '../config';
-import { AFFiNELogger } from './service';
+import { BridgeFlowLogger } from './service';
 
 @Global()
 @Module({
   imports: [ConfigModule],
-  providers: [AFFiNELogger],
-  exports: [AFFiNELogger],
+  providers: [BridgeFlowLogger],
+  exports: [BridgeFlowLogger],
 })
 export class LoggerModule {}
 
-export { AFFiNELogger } from './service';
+export { BridgeFlowLogger } from './service';

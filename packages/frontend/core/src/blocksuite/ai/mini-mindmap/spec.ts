@@ -1,19 +1,19 @@
-import { SurfaceBlockSchema } from '@blocksuite/affine/blocks/surface';
-import { ConnectorElementRendererExtension } from '@blocksuite/affine/gfx/connector';
+import { SurfaceBlockSchema } from '@blocksuite/bridgeflow/blocks/surface';
+import { ConnectorElementRendererExtension } from '@blocksuite/bridgeflow/gfx/connector';
 import {
   MindmapElementRendererExtension,
   MindMapView,
-} from '@blocksuite/affine/gfx/mindmap';
-import { ShapeElementRendererExtension } from '@blocksuite/affine/gfx/shape';
-import { TextElementRendererExtension } from '@blocksuite/affine/gfx/text';
-import { RootBlockSchema } from '@blocksuite/affine/model';
+} from '@blocksuite/bridgeflow/gfx/mindmap';
+import { ShapeElementRendererExtension } from '@blocksuite/bridgeflow/gfx/shape';
+import { TextElementRendererExtension } from '@blocksuite/bridgeflow/gfx/text';
+import { RootBlockSchema } from '@blocksuite/bridgeflow/model';
 import {
   DocModeService,
   ThemeService,
-} from '@blocksuite/affine/shared/services';
-import { BlockViewExtension, FlavourExtension } from '@blocksuite/affine/std';
-import { ToolController } from '@blocksuite/affine/std/gfx';
-import type { BlockSchema, ExtensionType } from '@blocksuite/affine/store';
+} from '@blocksuite/bridgeflow/shared/services';
+import { BlockViewExtension, FlavourExtension } from '@blocksuite/bridgeflow/std';
+import { ToolController } from '@blocksuite/bridgeflow/std/gfx';
+import type { BlockSchema, ExtensionType } from '@blocksuite/bridgeflow/store';
 import { literal } from 'lit/static-html.js';
 import type { z } from 'zod';
 
@@ -23,14 +23,14 @@ import { MindmapSurfaceBlockService } from './surface-service.js';
 export const MiniMindmapSpecs: ExtensionType[] = [
   DocModeService,
   ThemeService,
-  FlavourExtension('affine:page'),
+  FlavourExtension('bridgeflow:page'),
   MindmapService,
   ToolController,
-  BlockViewExtension('affine:page', literal`mini-mindmap-root-block`),
-  FlavourExtension('affine:surface'),
+  BlockViewExtension('bridgeflow:page', literal`mini-mindmap-root-block`),
+  FlavourExtension('bridgeflow:surface'),
   MindMapView,
   MindmapSurfaceBlockService,
-  BlockViewExtension('affine:surface', literal`mini-mindmap-surface-block`),
+  BlockViewExtension('bridgeflow:surface', literal`mini-mindmap-surface-block`),
   TextElementRendererExtension,
   MindmapElementRendererExtension,
   ShapeElementRendererExtension,

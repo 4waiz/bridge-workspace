@@ -1,9 +1,9 @@
-import type { AffineDNDEntity } from '@affine/core/types/dnd';
+import type { BridgeFlowDNDEntity } from '@bridgeflow/core/types/dnd';
 
-export const allowedSplitViewEntityTypes: Set<AffineDNDEntity['type']> =
+export const allowedSplitViewEntityTypes: Set<BridgeFlowDNDEntity['type']> =
   new Set(['doc', 'collection', 'tag']);
 
-export const inferToFromEntity = (entity: AffineDNDEntity) => {
+export const inferToFromEntity = (entity: BridgeFlowDNDEntity) => {
   if (entity.type === 'doc') {
     return `/${entity.id}`;
   } else if (entity.type === 'collection') {

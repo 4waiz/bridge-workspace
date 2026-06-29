@@ -1,15 +1,15 @@
-import { Loading } from '@affine/component';
-import { Guard } from '@affine/core/components/guard';
-import type { NodeOperation } from '@affine/core/desktop/components/navigation-panel';
-import { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import { DocsService } from '@affine/core/modules/doc';
-import { DocDisplayMetaService } from '@affine/core/modules/doc-display-meta';
-import { DocsSearchService } from '@affine/core/modules/docs-search';
-import { FeatureFlagService } from '@affine/core/modules/feature-flag';
-import { GlobalContextService } from '@affine/core/modules/global-context';
-import { NavigationPanelService } from '@affine/core/modules/navigation-panel';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { useI18n } from '@affine/i18n';
+import { Loading } from '@bridgeflow/component';
+import { Guard } from '@bridgeflow/core/components/guard';
+import type { NodeOperation } from '@bridgeflow/core/desktop/components/navigation-panel';
+import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
+import { DocsService } from '@bridgeflow/core/modules/doc';
+import { DocDisplayMetaService } from '@bridgeflow/core/modules/doc-display-meta';
+import { DocsSearchService } from '@bridgeflow/core/modules/docs-search';
+import { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
+import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
+import { NavigationPanelService } from '@bridgeflow/core/modules/navigation-panel';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { useI18n } from '@bridgeflow/i18n';
 import {
   LiveData,
   MANUALLY_STOP,
@@ -187,7 +187,7 @@ export const NavigationPanelDocNode = ({
         {canEdit =>
           canEdit ? (
             <AddItemPlaceholder
-              label={t['com.affine.rootAppSidebar.explorer.doc-add-tooltip']()}
+              label={t['com.bridgeflow.rootAppSidebar.explorer.doc-add-tooltip']()}
               onClick={handleAddLinkedPage}
             />
           ) : null

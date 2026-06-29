@@ -25,7 +25,7 @@ final class FileAttachmentHeaderView: UIView {
   }
 
   private lazy var primaryLabel = UILabel().then {
-    $0.text = "" // 3 attachment, 1 AFFiNE docs
+    $0.text = "" // 3 attachment, 1 BridgeFlow docs
     $0.font = UIFont.preferredFont(forTextStyle: .footnote).bold
     $0.textColor = .label
     $0.numberOfLines = 1
@@ -34,14 +34,14 @@ final class FileAttachmentHeaderView: UIView {
   private lazy var secondaryLabel = UILabel().then {
     $0.text = "Referenced for AI"
     $0.font = UIFont.preferredFont(forTextStyle: .footnote)
-    $0.textColor = .affineTextSecondary
+    $0.textColor = .bridgeflowTextSecondary
     $0.numberOfLines = 1
   }
 
   private lazy var arrowButton = UIImageView().then {
     $0.image = UIImage(systemName: "chevron.down")
     $0.contentMode = .scaleAspectFit
-    $0.tintColor = .affineIconPrimary
+    $0.tintColor = .bridgeflowIconPrimary
   }
 
   // MARK: - Initialization
@@ -132,7 +132,7 @@ final class FileAttachmentHeaderView: UIView {
     }
 
     if docsCount > 0 {
-      components.append("\(docsCount) AFFiNE doc\(docsCount > 1 ? "s" : "")")
+      components.append("\(docsCount) BridgeFlow doc\(docsCount > 1 ? "s" : "")")
     }
 
     primaryLabel.text = components.joined(separator: ", ")

@@ -1,5 +1,5 @@
-import type { Collection } from '@affine/core/modules/collection';
-import { useI18n } from '@affine/i18n';
+import type { Collection } from '@bridgeflow/core/modules/collection';
+import { useI18n } from '@bridgeflow/i18n';
 import { DeleteIcon, FilterIcon } from '@blocksuite/icons/rc';
 import type { ReactNode } from 'react';
 import { useMemo } from 'react';
@@ -27,15 +27,15 @@ export const useActions = ({
       {
         icon: <FilterIcon />,
         name: 'edit',
-        tooltip: t['com.affine.collection-bar.action.tooltip.edit'](),
+        tooltip: t['com.bridgeflow.collection-bar.action.tooltip.edit'](),
         click: () => {
           openEdit(collection);
         },
       },
       {
-        icon: <DeleteIcon style={{ color: 'var(--affine-error-color)' }} />,
+        icon: <DeleteIcon style={{ color: 'var(--bridgeflow-error-color)' }} />,
         name: 'delete',
-        tooltip: t['com.affine.collection-bar.action.tooltip.delete'](),
+        tooltip: t['com.bridgeflow.collection-bar.action.tooltip.delete'](),
         click: onDelete,
       },
     ];

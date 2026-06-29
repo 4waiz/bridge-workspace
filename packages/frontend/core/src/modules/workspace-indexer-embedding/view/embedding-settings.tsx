@@ -1,16 +1,16 @@
-import { Button, notify, Switch, Tooltip } from '@affine/component';
+import { Button, notify, Switch, Tooltip } from '@bridgeflow/component';
 import {
   SettingHeader,
   SettingRow,
   SettingWrapper,
-} from '@affine/component/setting-components';
-import { Upload } from '@affine/core/components/pure/file-upload';
-import { EnableCloudPanel } from '@affine/core/desktop/dialogs/setting/workspace-setting/preference/enable-cloud';
-import { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import { UserFriendlyError } from '@affine/error';
-import { ServerFeature } from '@affine/graphql';
-import { useI18n } from '@affine/i18n';
-import track from '@affine/track';
+} from '@bridgeflow/component/setting-components';
+import { Upload } from '@bridgeflow/core/components/pure/file-upload';
+import { EnableCloudPanel } from '@bridgeflow/core/desktop/dialogs/setting/workspace-setting/preference/enable-cloud';
+import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
+import { UserFriendlyError } from '@bridgeflow/error';
+import { ServerFeature } from '@bridgeflow/graphql';
+import { useI18n } from '@bridgeflow/i18n';
+import track from '@bridgeflow/track';
 import { useLiveData, useService } from '@toeverything/infra';
 import type React from 'react';
 import { useCallback, useEffect } from 'react';
@@ -74,7 +74,7 @@ const EmbeddingCloud: React.FC<{ disabled: boolean }> = ({ disabled }) => {
           notify.error({
             title:
               t[
-                'com.affine.settings.workspace.indexer-embedding.embedding.switch.error'
+                'com.bridgeflow.settings.workspace.indexer-embedding.embedding.switch.error'
               ](),
             message: t[`error.${err.name}`](err.data),
           });
@@ -106,7 +106,7 @@ const EmbeddingCloud: React.FC<{ disabled: boolean }> = ({ disabled }) => {
           notify.error({
             title:
               t[
-                'com.affine.settings.workspace.indexer-embedding.embedding.remove-attachment.error'
+                'com.bridgeflow.settings.workspace.indexer-embedding.embedding.remove-attachment.error'
               ](),
             message: t[`error.${err.name}`](err.data),
           });
@@ -152,7 +152,7 @@ const EmbeddingCloud: React.FC<{ disabled: boolean }> = ({ disabled }) => {
             notify.error({
               title:
                 t[
-                  'com.affine.settings.workspace.indexer-embedding.embedding.update-ignored-docs.error'
+                  'com.bridgeflow.settings.workspace.indexer-embedding.embedding.update-ignored-docs.error'
                 ](),
               message: t[`error.${err.name}`](err.data),
             });
@@ -195,10 +195,10 @@ const EmbeddingCloud: React.FC<{ disabled: boolean }> = ({ disabled }) => {
     >
       <SettingRow
         name={t[
-          'com.affine.settings.workspace.indexer-embedding.embedding.switch.title'
+          'com.bridgeflow.settings.workspace.indexer-embedding.embedding.switch.title'
         ]()}
         desc={t[
-          'com.affine.settings.workspace.indexer-embedding.embedding.switch.description'
+          'com.bridgeflow.settings.workspace.indexer-embedding.embedding.switch.description'
         ]()}
       >
         <Switch
@@ -212,7 +212,7 @@ const EmbeddingCloud: React.FC<{ disabled: boolean }> = ({ disabled }) => {
         <>
           <SettingRow
             name={t[
-              'com.affine.settings.workspace.indexer-embedding.embedding.progress.title'
+              'com.bridgeflow.settings.workspace.indexer-embedding.embedding.progress.title'
             ]()}
             style={{ marginBottom: '0px' }}
           />
@@ -223,10 +223,10 @@ const EmbeddingCloud: React.FC<{ disabled: boolean }> = ({ disabled }) => {
 
       <SettingRow
         name={t[
-          'com.affine.settings.workspace.indexer-embedding.embedding.additional-attachments.title'
+          'com.bridgeflow.settings.workspace.indexer-embedding.embedding.additional-attachments.title'
         ]()}
         desc={t[
-          'com.affine.settings.workspace.indexer-embedding.embedding.additional-attachments.description'
+          'com.bridgeflow.settings.workspace.indexer-embedding.embedding.additional-attachments.description'
         ]()}
       >
         <Upload fileChange={handleAttachmentUpload}>
@@ -235,7 +235,7 @@ const EmbeddingCloud: React.FC<{ disabled: boolean }> = ({ disabled }) => {
             variant="primary"
           >
             {t[
-              'com.affine.settings.workspace.indexer-embedding.embedding.upload-file'
+              'com.bridgeflow.settings.workspace.indexer-embedding.embedding.upload-file'
             ]()}
           </Button>
         </Upload>
@@ -253,10 +253,10 @@ const EmbeddingCloud: React.FC<{ disabled: boolean }> = ({ disabled }) => {
 
       <SettingRow
         name={t[
-          'com.affine.settings.workspace.indexer-embedding.embedding.ignore-docs.title'
+          'com.bridgeflow.settings.workspace.indexer-embedding.embedding.ignore-docs.title'
         ]()}
         desc={t[
-          'com.affine.settings.workspace.indexer-embedding.embedding.ignore-docs.description'
+          'com.bridgeflow.settings.workspace.indexer-embedding.embedding.ignore-docs.description'
         ]()}
       >
         <Button
@@ -265,7 +265,7 @@ const EmbeddingCloud: React.FC<{ disabled: boolean }> = ({ disabled }) => {
           onClick={handleSelectDoc}
         >
           {t[
-            'com.affine.settings.workspace.indexer-embedding.embedding.select-doc'
+            'com.bridgeflow.settings.workspace.indexer-embedding.embedding.select-doc'
           ]()}
         </Button>
       </SettingRow>
@@ -297,17 +297,17 @@ export const EmbeddingSettings: React.FC<EmbeddingSettingsProps> = () => {
         content={
           !isEmbeddingEnabled &&
           t[
-            'com.affine.settings.workspace.indexer-embedding.embedding.disabled-tooltip'
+            'com.bridgeflow.settings.workspace.indexer-embedding.embedding.disabled-tooltip'
           ]()
         }
       >
         <SettingHeader
           data-testid="workspace-embedding-setting-header"
           title={t[
-            'com.affine.settings.workspace.indexer-embedding.embedding.title'
+            'com.bridgeflow.settings.workspace.indexer-embedding.embedding.title'
           ]()}
           subtitle={t[
-            'com.affine.settings.workspace.indexer-embedding.embedding.description'
+            'com.bridgeflow.settings.workspace.indexer-embedding.embedding.description'
           ]()}
         />
       </Tooltip>

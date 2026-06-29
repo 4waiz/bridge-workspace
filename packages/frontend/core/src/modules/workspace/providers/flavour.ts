@@ -2,9 +2,9 @@ import type {
   BlobStorage,
   DocStorage,
   ListedBlobRecord,
-} from '@affine/nbstore';
-import type { WorkerInitOptions } from '@affine/nbstore/worker/client';
-import type { Workspace as BSWorkspace } from '@blocksuite/affine/store';
+} from '@bridgeflow/nbstore';
+import type { WorkerInitOptions } from '@bridgeflow/nbstore/worker/client';
+import type { Workspace as BSWorkspace } from '@blocksuite/bridgeflow/store';
 import { createIdentifier, type LiveData } from '@toeverything/infra';
 
 import type { WorkspaceProfileInfo } from '../entities/profile';

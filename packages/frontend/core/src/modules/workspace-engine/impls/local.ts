@@ -1,11 +1,11 @@
-import { toArrayBuffer } from '@affine/core/utils/array-buffer';
-import { DebugLogger } from '@affine/debug';
+import { toArrayBuffer } from '@bridgeflow/core/utils/array-buffer';
+import { DebugLogger } from '@bridgeflow/debug';
 import {
   type BlobStorage,
   type DocStorage,
   type ListedBlobRecord,
   universalId,
-} from '@affine/nbstore';
+} from '@bridgeflow/nbstore';
 import {
   IndexedDBBlobStorage,
   IndexedDBBlobSyncStorage,
@@ -13,11 +13,11 @@ import {
   IndexedDBDocSyncStorage,
   IndexedDBIndexerStorage,
   IndexedDBIndexerSyncStorage,
-} from '@affine/nbstore/idb';
+} from '@bridgeflow/nbstore/idb';
 import {
   IndexedDBV1BlobStorage,
   IndexedDBV1DocStorage,
-} from '@affine/nbstore/idb/v1';
+} from '@bridgeflow/nbstore/idb/v1';
 import {
   SqliteBlobStorage,
   SqliteBlobSyncStorage,
@@ -25,12 +25,12 @@ import {
   SqliteDocSyncStorage,
   SqliteIndexerStorage,
   SqliteIndexerSyncStorage,
-} from '@affine/nbstore/sqlite';
+} from '@bridgeflow/nbstore/sqlite';
 import {
   SqliteV1BlobStorage,
   SqliteV1DocStorage,
-} from '@affine/nbstore/sqlite/v1';
-import type { WorkerInitOptions } from '@affine/nbstore/worker/client';
+} from '@bridgeflow/nbstore/sqlite/v1';
+import type { WorkerInitOptions } from '@bridgeflow/nbstore/worker/client';
 import type { FrameworkProvider } from '@toeverything/infra';
 import { LiveData, Service } from '@toeverything/infra';
 import { isEqual } from 'lodash-es';
@@ -52,11 +52,11 @@ import {
   normalizeWorkspaceIds,
 } from './workspace-id-utils';
 
-export const LOCAL_WORKSPACE_LOCAL_STORAGE_KEY = 'affine-local-workspace';
+export const LOCAL_WORKSPACE_LOCAL_STORAGE_KEY = 'bridgeflow-local-workspace';
 export const LOCAL_WORKSPACE_GLOBAL_STATE_KEY =
   'workspace-engine:local-workspace-ids:v1';
 const LOCAL_WORKSPACE_CHANGED_BROADCAST_CHANNEL_KEY =
-  'affine-local-workspace-changed';
+  'bridgeflow-local-workspace-changed';
 
 const logger = new DebugLogger('local-workspace');
 

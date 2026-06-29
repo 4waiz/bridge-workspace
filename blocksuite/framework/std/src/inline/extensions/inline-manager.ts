@@ -96,7 +96,7 @@ export type InlineManagerExtensionConfig<
 };
 
 const InlineManagerIdentifier = createIdentifier<unknown>(
-  'AffineInlineManager'
+  'BridgeFlowInlineManager'
 );
 
 export function InlineManagerExtension<

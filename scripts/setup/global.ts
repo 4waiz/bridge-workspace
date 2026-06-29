@@ -1,8 +1,8 @@
-import { setupGlobal } from '@affine/env/global';
-import { getBuildConfig } from '@affine-tools/utils/build-config';
-import { Package } from '@affine-tools/utils/workspace';
+import { setupGlobal } from '@bridgeflow/env/global';
+import { getBuildConfig } from '@bridgeflow-tools/utils/build-config';
+import { Package } from '@bridgeflow-tools/utils/workspace';
 
-globalThis.BUILD_CONFIG = getBuildConfig(new Package('@affine/web'), {
+globalThis.BUILD_CONFIG = getBuildConfig(new Package('@bridgeflow/web'), {
   mode: 'development',
   channel: 'canary',
 });

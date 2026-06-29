@@ -1,6 +1,6 @@
-import { Menu, MenuItem } from '@affine/component';
-import { type Server, ServersService } from '@affine/core/modules/cloud';
-import { useI18n } from '@affine/i18n';
+import { Menu, MenuItem } from '@bridgeflow/component';
+import { type Server, ServersService } from '@bridgeflow/core/modules/cloud';
+import { useI18n } from '@bridgeflow/i18n';
 import {
   ArrowDownSmallIcon,
   CloudWorkspaceIcon,
@@ -50,7 +50,7 @@ export const ServerSelector = ({
   );
   const selectedServerName =
     selectedId === 'local'
-      ? t['com.affine.workspaceList.workspaceListType.local']()
+      ? t['com.bridgeflow.workspaceList.workspaceListType.local']()
       : serverName;
 
   return (
@@ -113,7 +113,7 @@ const LocalSelectorItem = ({
       onClick={handleSelect}
       suffixIcon={active ? <DoneIcon className={styles.done} /> : null}
     >
-      {t['com.affine.workspaceList.workspaceListType.local']()}
+      {t['com.bridgeflow.workspaceList.workspaceListType.local']()}
     </MenuItem>
   );
 };
@@ -129,7 +129,7 @@ const ServerSelectorItem = ({
 }) => {
   const name = useLiveData(server.config$.selector(c => c.serverName));
 
-  const Icon = server.id === 'affine-cloud' ? CloudWorkspaceIcon : SelfhostIcon;
+  const Icon = server.id === 'bridgeflow-cloud' ? CloudWorkspaceIcon : SelfhostIcon;
 
   const handleSelect = useCallback(() => {
     onSelect?.(server.id);

@@ -1,9 +1,9 @@
-import { useQuery } from '@affine/admin/use-query';
-import type { AdminWorkspaceSort, FeatureType } from '@affine/graphql';
+import { useQuery } from '@bridgeflow/admin/use-query';
+import type { AdminWorkspaceSort, FeatureType } from '@bridgeflow/graphql';
 import {
   adminWorkspacesCountQuery,
   adminWorkspacesQuery,
-} from '@affine/graphql';
+} from '@bridgeflow/graphql';
 import { useEffect, useMemo, useState } from 'react';
 
 import type { WorkspaceFlagFilter } from './schema';

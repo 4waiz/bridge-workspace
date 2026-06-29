@@ -1,6 +1,6 @@
 [package]
 edition = "2024"
-name    = "affine_nbstore"
+name    = "bridgeflow_nbstore"
 version = "0.0.0"
 
 [lib]
@@ -8,12 +8,12 @@ crate-type = ["cdylib", "rlib"]
 
 [features]
 default    = []
-napi       = ["affine_common/napi"]
+napi       = ["bridgeflow_common/napi"]
 use-as-lib = ["napi-derive/noop", "napi/noop"]
 
 [dependencies]
-affine_common = { workspace = true, features = ["ydoc-loader"] }
-affine_schema = { path = "../schema" }
+bridgeflow_common = { workspace = true, features = ["ydoc-loader"] }
+bridgeflow_schema = { path = "../schema" }
 anyhow = { workspace = true }
 bincode = { version = "2.0.1", features = ["serde"] }
 chrono = { workspace = true }
@@ -38,7 +38,7 @@ zstd = "0.13"
 uniffi = { workspace = true }
 
 [build-dependencies]
-affine_schema = { path = "../schema" }
+bridgeflow_schema = { path = "../schema" }
 dotenvy = { workspace = true }
 napi-build = { workspace = true }
 sqlx = { workspace = true, default-features = false, features = [

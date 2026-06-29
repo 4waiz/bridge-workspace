@@ -1,11 +1,11 @@
-import { toast } from '@affine/component';
-import { getStoreManager } from '@affine/core/blocksuite/manager/store';
-import { AppSidebarService } from '@affine/core/modules/app-sidebar';
-import { DocsService } from '@affine/core/modules/doc';
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { getAFFiNEWorkspaceSchema } from '@affine/core/modules/workspace';
-import { type DocMode } from '@blocksuite/affine/model';
-import type { Workspace } from '@blocksuite/affine/store';
+import { toast } from '@bridgeflow/component';
+import { getStoreManager } from '@bridgeflow/core/blocksuite/manager/store';
+import { AppSidebarService } from '@bridgeflow/core/modules/app-sidebar';
+import { DocsService } from '@bridgeflow/core/modules/doc';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { getBridgeFlowWorkspaceSchema } from '@bridgeflow/core/modules/workspace';
+import { type DocMode } from '@blocksuite/bridgeflow/model';
+import type { Workspace } from '@blocksuite/bridgeflow/store';
 import { useServices } from '@toeverything/infra';
 import { useCallback, useMemo } from 'react';
 
@@ -66,7 +66,7 @@ export const usePageHelper = (docCollection: Workspace) => {
   const importFileAndOpen = useMemo(
     () => async () => {
       const { showImportModal } =
-        await import('@blocksuite/affine/widgets/linked-doc');
+        await import('@blocksuite/bridgeflow/widgets/linked-doc');
       const { promise, resolve, reject } =
         Promise.withResolvers<
           Parameters<
@@ -96,7 +96,7 @@ export const usePageHelper = (docCollection: Workspace) => {
       };
       showImportModal({
         collection: docCollection,
-        schema: getAFFiNEWorkspaceSchema(),
+        schema: getBridgeFlowWorkspaceSchema(),
         extensions: getStoreManager().config.init().value.get('store'),
         onSuccess,
         onFail: message => {

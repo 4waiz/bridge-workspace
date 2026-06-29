@@ -1,16 +1,16 @@
-import { Popover, uniReactRoot } from '@affine/component';
-import { Button } from '@affine/component/ui/button';
-import { Menu, MenuItem } from '@affine/component/ui/menu';
-import { PeekViewService } from '@affine/core/modules/peek-view/services/peek-view';
+import { Popover, uniReactRoot } from '@bridgeflow/component';
+import { Button } from '@bridgeflow/component/ui/button';
+import { Menu, MenuItem } from '@bridgeflow/component/ui/menu';
+import { PeekViewService } from '@bridgeflow/core/modules/peek-view/services/peek-view';
 import {
   type Cell,
   type CellRenderProps,
   createIcon,
   type DataViewCellLifeCycle,
   EditorHostKey,
-} from '@blocksuite/affine/blocks/database';
-import { openFilesWith } from '@blocksuite/affine/shared/utils';
-import type { BlobEngine } from '@blocksuite/affine/sync';
+} from '@blocksuite/bridgeflow/blocks/database';
+import { openFilesWith } from '@blocksuite/bridgeflow/shared/utils';
+import type { BlobEngine } from '@blocksuite/bridgeflow/sync';
 import {
   DeleteIcon,
   DownloadIcon,

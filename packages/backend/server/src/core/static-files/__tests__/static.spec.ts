@@ -45,7 +45,7 @@ async function createApp(basePath = '') {
 }
 
 test.serial('serves admin files and admin route fallback', async t => {
-  const fixtureRoot = mkdtempSync(join(tmpdir(), 'affine-static-files-'));
+  const fixtureRoot = mkdtempSync(join(tmpdir(), 'bridgeflow-static-files-'));
   initStaticFixture(fixtureRoot);
 
   const prevProjectRoot = env.projectRoot;
@@ -76,7 +76,7 @@ test.serial('serves admin files and admin route fallback', async t => {
 test.serial(
   'serves static assets from prefixed paths and returns 404 on missing',
   async t => {
-    const fixtureRoot = mkdtempSync(join(tmpdir(), 'affine-static-files-'));
+    const fixtureRoot = mkdtempSync(join(tmpdir(), 'bridgeflow-static-files-'));
     initStaticFixture(fixtureRoot);
 
     const prevProjectRoot = env.projectRoot;
@@ -107,7 +107,7 @@ test.serial(
 test.serial(
   'matches front container index behavior and cache header',
   async t => {
-    const fixtureRoot = mkdtempSync(join(tmpdir(), 'affine-static-files-'));
+    const fixtureRoot = mkdtempSync(join(tmpdir(), 'bridgeflow-static-files-'));
     initStaticFixture(fixtureRoot);
 
     const prevProjectRoot = env.projectRoot;
@@ -141,7 +141,7 @@ test.serial(
 );
 
 test.serial('uses mobile root only in dev namespace for mobile UA', async t => {
-  const fixtureRoot = mkdtempSync(join(tmpdir(), 'affine-static-files-'));
+  const fixtureRoot = mkdtempSync(join(tmpdir(), 'bridgeflow-static-files-'));
   initStaticFixture(fixtureRoot);
 
   const prevProjectRoot = env.projectRoot;

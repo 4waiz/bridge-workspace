@@ -1,4 +1,4 @@
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
 import { UploadIcon } from '@blocksuite/icons/rc';
 import {
   type ChangeEvent,

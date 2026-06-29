@@ -1,4 +1,4 @@
-import { Button, type ButtonProps } from '@affine/admin/components/ui/button';
+import { Button, type ButtonProps } from '@bridgeflow/admin/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -6,8 +6,8 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@affine/admin/components/ui/dialog';
-import { Input } from '@affine/admin/components/ui/input';
+} from '@bridgeflow/admin/components/ui/dialog';
+import { Input } from '@bridgeflow/admin/components/ui/input';
 import { type ReactNode, useCallback, useEffect, useState } from 'react';
 
 interface TypeConfirmDialogProps {

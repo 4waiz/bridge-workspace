@@ -2856,7 +2856,7 @@ export interface ServerConfigType {
 }
 
 export enum ServerDeploymentType {
-  Affine = 'Affine',
+  BridgeFlow = 'BridgeFlow',
   Selfhosted = 'Selfhosted',
 }
 

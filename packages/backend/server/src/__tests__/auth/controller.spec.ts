@@ -42,7 +42,7 @@ test.after.always(async t => {
 test('should be able to sign in with credential', async t => {
   const { app } = t.context;
 
-  const u1 = await app.createUser('u1@affine.pro');
+  const u1 = await app.createUser('u1@bridgeflow.pro');
 
   await app
     .POST('/api/auth/sign-in')
@@ -56,11 +56,11 @@ test('should be able to sign in with credential', async t => {
 test('should record sign in client version when header is provided', async t => {
   const { app, db } = t.context;
 
-  const u1 = await app.createUser('u1@affine.pro');
+  const u1 = await app.createUser('u1@bridgeflow.pro');
 
   await app
     .POST('/api/auth/sign-in')
-    .set('x-affine-version', '0.25.1')
+    .set('x-bridgeflow-version', '0.25.1')
     .send({ email: u1.email, password: u1.password })
     .expect(200);
 
@@ -84,7 +84,7 @@ test('should record sign in client version when header is provided', async t => 
 test('should be able to sign in with email', async t => {
   const { app } = t.context;
 
-  const u1 = await app.createUser('u1@affine.pro');
+  const u1 = await app.createUser('u1@bridgeflow.pro');
 
   const res = await app
     .POST('/api/auth/sign-in')
@@ -111,13 +111,13 @@ test('should be able to sign up with email', async t => {
 
   const res = await app
     .POST('/api/auth/sign-in')
-    .send({ email: 'u2@affine.pro' })
+    .send({ email: 'u2@bridgeflow.pro' })
     .expect(200);
 
-  t.is(res.body.email, 'u2@affine.pro');
+  t.is(res.body.email, 'u2@bridgeflow.pro');
   const signUpMail = app.mails.last('SignUp');
 
-  t.is(signUpMail.to, 'u2@affine.pro');
+  t.is(signUpMail.to, 'u2@bridgeflow.pro');
 
   const url = new URL(signUpMail.props.url);
   const email = url.searchParams.get('email');
@@ -126,7 +126,7 @@ test('should be able to sign up with email', async t => {
   await app.POST('/api/auth/magic-link').send({ email, token }).expect(201);
 
   const session = await currentUser(app);
-  t.is(session?.email, 'u2@affine.pro');
+  t.is(session?.email, 'u2@bridgeflow.pro');
 });
 
 test('should not be able to sign in if email is invalid', async t => {
@@ -143,7 +143,7 @@ test('should not be able to sign in if email is invalid', async t => {
 test('should not be able to sign in if forbidden', async t => {
   const { app, auth } = t.context;
 
-  const u1 = await app.createUser('u1@affine.pro');
+  const u1 = await app.createUser('u1@bridgeflow.pro');
   const canSignInStub = Sinon.stub(auth, 'canSignIn').resolves(false);
 
   await app
@@ -158,7 +158,7 @@ test('should not be able to sign in if forbidden', async t => {
 test('should forbid magic link with external callbackUrl', async t => {
   const { app } = t.context;
 
-  const u1 = await app.createUser('u1@affine.pro');
+  const u1 = await app.createUser('u1@bridgeflow.pro');
 
   await app
     .POST('/api/auth/sign-in')
@@ -173,7 +173,7 @@ test('should forbid magic link with external callbackUrl', async t => {
 test('should forbid magic link with untrusted redirect_uri in callbackUrl', async t => {
   const { app } = t.context;
 
-  const u1 = await app.createUser('u1@affine.pro');
+  const u1 = await app.createUser('u1@bridgeflow.pro');
 
   await app
     .POST('/api/auth/sign-in')
@@ -188,7 +188,7 @@ test('should forbid magic link with untrusted redirect_uri in callbackUrl', asyn
 test('should be able to sign out', async t => {
   const { app } = t.context;
 
-  const u1 = await app.createUser('u1@affine.pro');
+  const u1 = await app.createUser('u1@bridgeflow.pro');
 
   await app
     .POST('/api/auth/sign-in')
@@ -205,7 +205,7 @@ test('should be able to sign out', async t => {
 test('should be able to sign out when csrf header is missing (compat)', async t => {
   const { app } = t.context;
 
-  const u1 = await app.createUser('u1@affine.pro');
+  const u1 = await app.createUser('u1@bridgeflow.pro');
 
   const signInRes = await supertest(app.getHttpServer())
     .post('/api/auth/sign-in')
@@ -233,7 +233,7 @@ test('should be able to sign out when csrf header is missing (compat)', async t 
 test('should be able to sign out when duplicated csrf cookies exist', async t => {
   const { app } = t.context;
 
-  const u1 = await app.createUser('u1@affine.pro');
+  const u1 = await app.createUser('u1@bridgeflow.pro');
 
   const signInRes = await supertest(app.getHttpServer())
     .post('/api/auth/sign-in')
@@ -253,7 +253,7 @@ test('should be able to sign out when duplicated csrf cookies exist', async t =>
   await supertest(app.getHttpServer())
     .post('/api/auth/sign-out')
     .set('Cookie', cookieHeader)
-    .set('x-affine-csrf-token', csrf)
+    .set('x-bridgeflow-csrf-token', csrf)
     .expect(200);
 
   const sessionRes = await supertest(app.getHttpServer())
@@ -267,7 +267,7 @@ test('should be able to sign out when duplicated csrf cookies exist', async t =>
 test('should be able to sign out via GET /api/auth/sign-out (deprecated)', async t => {
   const { app } = t.context;
 
-  const u1 = await app.createUser('u1@affine.pro');
+  const u1 = await app.createUser('u1@bridgeflow.pro');
 
   await app
     .POST('/api/auth/sign-in')
@@ -284,7 +284,7 @@ test('should be able to sign out via GET /api/auth/sign-out (deprecated)', async
 test('should reject sign out when csrf token mismatched', async t => {
   const { app } = t.context;
 
-  const u1 = await app.createUser('u1@affine.pro');
+  const u1 = await app.createUser('u1@bridgeflow.pro');
 
   await app
     .POST('/api/auth/sign-in')
@@ -293,7 +293,7 @@ test('should reject sign out when csrf token mismatched', async t => {
 
   await app
     .POST('/api/auth/sign-out')
-    .set('x-affine-csrf-token', 'invalid')
+    .set('x-bridgeflow-csrf-token', 'invalid')
     .expect(HttpStatus.FORBIDDEN);
 
   const session = await currentUser(app);
@@ -303,7 +303,7 @@ test('should reject sign out when csrf token mismatched', async t => {
 test('should sign in desktop app via one-time open-app code', async t => {
   const { app } = t.context;
 
-  const u1 = await app.createUser('u1@affine.pro');
+  const u1 = await app.createUser('u1@bridgeflow.pro');
 
   await app
     .POST('/api/auth/sign-in')
@@ -353,7 +353,7 @@ test('should sign in desktop app via one-time open-app code', async t => {
 test('should be able to correct user id cookie', async t => {
   const { app } = t.context;
 
-  const u1 = await app.signupV1('u1@affine.pro');
+  const u1 = await app.signupV1('u1@bridgeflow.pro');
 
   const req = app.GET('/api/auth/session');
   let cookies = req.get('cookie') as unknown as string[];
@@ -383,8 +383,8 @@ test('should not throw on parse of a bad cookie', async t => {
 test('should be able to sign in another account in one session', async t => {
   const { app } = t.context;
 
-  const u1 = await app.createUser('u1@affine.pro');
-  const u2 = await app.createUser('u2@affine.pro');
+  const u1 = await app.createUser('u1@bridgeflow.pro');
+  const u2 = await app.createUser('u2@bridgeflow.pro');
 
   // sign in u1
   const res = await app
@@ -431,8 +431,8 @@ test('should be able to sign in another account in one session', async t => {
 test('should be able to sign out multiple accounts in one session', async t => {
   const { app } = t.context;
 
-  const u1 = await app.signupV1('u1@affine.pro');
-  const u2 = await app.signupV1('u2@affine.pro');
+  const u1 = await app.signupV1('u1@bridgeflow.pro');
+  const u2 = await app.signupV1('u2@bridgeflow.pro');
 
   // sign out u2
   await app.POST(`/api/auth/sign-out?user_id=${u2.id}`).expect(200);
@@ -539,7 +539,7 @@ test('should not be able to sign in if token is invalid', async t => {
 
   const res = await app
     .POST('/api/auth/magic-link')
-    .send({ email: 'u1@affine.pro', token: 'invalid' })
+    .send({ email: 'u1@bridgeflow.pro', token: 'invalid' })
     .expect(400);
 
   t.is(res.body.message, 'An invalid email token provided.');
@@ -548,7 +548,7 @@ test('should not be able to sign in if token is invalid', async t => {
 test('should not allow magic link OTP replay', async t => {
   const { app } = t.context;
 
-  const u1 = await app.createUser('u1@affine.pro');
+  const u1 = await app.createUser('u1@bridgeflow.pro');
 
   await app.POST('/api/auth/sign-in').send({ email: u1.email }).expect(200);
   const signInMail = app.mails.last('SignIn');
@@ -575,7 +575,7 @@ test('should not allow magic link OTP replay', async t => {
 test('should lock magic link OTP after too many attempts', async t => {
   const { app } = t.context;
 
-  const u1 = await app.createUser('u1@affine.pro');
+  const u1 = await app.createUser('u1@bridgeflow.pro');
 
   await app.POST('/api/auth/sign-in').send({ email: u1.email }).expect(200);
   const signInMail = app.mails.last('SignIn');

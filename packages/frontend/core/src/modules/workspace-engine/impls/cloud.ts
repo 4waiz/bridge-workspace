@@ -1,5 +1,5 @@
-import { toArrayBuffer } from '@affine/core/utils/array-buffer';
-import { DebugLogger } from '@affine/debug';
+import { toArrayBuffer } from '@bridgeflow/core/utils/array-buffer';
+import { DebugLogger } from '@bridgeflow/debug';
 import {
   createWorkspaceMutation,
   deleteWorkspaceMutation,
@@ -8,13 +8,13 @@ import {
   Permission,
   ServerDeploymentType,
   ServerFeature,
-} from '@affine/graphql';
+} from '@bridgeflow/graphql';
 import type {
   BlobStorage,
   DocStorage,
   ListedBlobRecord,
-} from '@affine/nbstore';
-import { CloudBlobStorage, StaticCloudDocStorage } from '@affine/nbstore/cloud';
+} from '@bridgeflow/nbstore';
+import { CloudBlobStorage, StaticCloudDocStorage } from '@bridgeflow/nbstore/cloud';
 import {
   IndexedDBBlobStorage,
   IndexedDBBlobSyncStorage,
@@ -22,11 +22,11 @@ import {
   IndexedDBDocSyncStorage,
   IndexedDBIndexerStorage,
   IndexedDBIndexerSyncStorage,
-} from '@affine/nbstore/idb';
+} from '@bridgeflow/nbstore/idb';
 import {
   IndexedDBV1BlobStorage,
   IndexedDBV1DocStorage,
-} from '@affine/nbstore/idb/v1';
+} from '@bridgeflow/nbstore/idb/v1';
 import {
   SqliteBlobStorage,
   SqliteBlobSyncStorage,
@@ -34,12 +34,12 @@ import {
   SqliteDocSyncStorage,
   SqliteIndexerStorage,
   SqliteIndexerSyncStorage,
-} from '@affine/nbstore/sqlite';
+} from '@bridgeflow/nbstore/sqlite';
 import {
   SqliteV1BlobStorage,
   SqliteV1DocStorage,
-} from '@affine/nbstore/sqlite/v1';
-import type { WorkerInitOptions } from '@affine/nbstore/worker/client';
+} from '@bridgeflow/nbstore/sqlite/v1';
+import type { WorkerInitOptions } from '@bridgeflow/nbstore/worker/client';
 import {
   catchErrorInto,
   effect,
@@ -80,13 +80,13 @@ import { WorkspaceImpl } from '../../workspace/impls/workspace';
 import { getWorkspaceProfileWorker } from './out-worker';
 
 const getCloudWorkspaceCacheKey = (serverId: string) => {
-  if (serverId === 'affine-cloud') {
+  if (serverId === 'bridgeflow-cloud') {
     return 'cloud-workspace:'; // FOR BACKWARD COMPATIBILITY
   }
   return `selfhosted-workspace-${serverId}:`;
 };
 
-const logger = new DebugLogger('affine:cloud-workspace-flavour-provider');
+const logger = new DebugLogger('bridgeflow:cloud-workspace-flavour-provider');
 
 class CloudWorkspaceFlavourProvider implements WorkspaceFlavourProvider {
   private readonly authService: AuthService;
@@ -332,7 +332,7 @@ class CloudWorkspaceFlavourProvider implements WorkspaceFlavourProvider {
   ): Promise<WorkspaceProfileInfo | undefined> {
     // get information from both cloud and local storage
 
-    // we use affine 'static' storage here, which use http protocol, no need to websocket.
+    // we use bridgeflow 'static' storage here, which use http protocol, no need to websocket.
     const cloudStorage = new StaticCloudDocStorage({
       id: id,
       serverBaseUrl: this.server.serverMetadata.baseUrl,
@@ -441,7 +441,7 @@ class CloudWorkspaceFlavourProvider implements WorkspaceFlavourProvider {
   }
 
   onWorkspaceInitialized(workspace: Workspace): void {
-    // bind the workspace to the affine cloud server
+    // bind the workspace to the bridgeflow cloud server
     workspace.scope.get(WorkspaceServerService).bindServer(this.server);
   }
 

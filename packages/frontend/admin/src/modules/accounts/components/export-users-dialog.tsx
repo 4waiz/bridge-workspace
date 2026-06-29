@@ -1,14 +1,14 @@
-import { Button } from '@affine/admin/components/ui/button';
-import { Checkbox } from '@affine/admin/components/ui/checkbox';
+import { Button } from '@bridgeflow/admin/components/ui/button';
+import { Checkbox } from '@bridgeflow/admin/components/ui/checkbox';
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@affine/admin/components/ui/dialog';
-import { Label } from '@affine/admin/components/ui/label';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
+} from '@bridgeflow/admin/components/ui/dialog';
+import { Label } from '@bridgeflow/admin/components/ui/label';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
 import { CopyIcon } from '@blocksuite/icons/rc';
 import { useCallback, useState } from 'react';
 import { toast } from 'sonner';

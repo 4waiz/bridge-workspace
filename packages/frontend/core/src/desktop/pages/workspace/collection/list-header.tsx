@@ -1,17 +1,17 @@
-import { Button, useConfirmModal } from '@affine/component';
-import { usePageHelper } from '@affine/core/blocksuite/block-suite-page-list/utils';
-import { PageListNewPageButton } from '@affine/core/components/page-list';
+import { Button, useConfirmModal } from '@bridgeflow/component';
+import { usePageHelper } from '@bridgeflow/core/blocksuite/block-suite-page-list/utils';
+import { PageListNewPageButton } from '@bridgeflow/core/components/page-list';
 import {
   type Collection,
   CollectionService,
-} from '@affine/core/modules/collection';
-import { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import type { DocRecord } from '@affine/core/modules/doc';
-import { WorkbenchLink } from '@affine/core/modules/workbench';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { useI18n } from '@affine/i18n';
-import track from '@affine/track';
-import type { DocMode } from '@blocksuite/affine/model';
+} from '@bridgeflow/core/modules/collection';
+import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
+import type { DocRecord } from '@bridgeflow/core/modules/doc';
+import { WorkbenchLink } from '@bridgeflow/core/modules/workbench';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { useI18n } from '@bridgeflow/i18n';
+import track from '@bridgeflow/track';
+import type { DocMode } from '@blocksuite/bridgeflow/model';
 import { ViewLayersIcon } from '@blocksuite/icons/rc';
 import { useLiveData, useServices } from '@toeverything/infra';
 import { useCallback } from 'react';
@@ -54,8 +54,8 @@ export const CollectionListHeader = ({
   const onConfirmAddDocument = useCallback(
     (createDocumentFn: () => DocRecord) => {
       openConfirmModal({
-        title: t['com.affine.collection.add-doc.confirm.title'](),
-        description: t['com.affine.collection.add-doc.confirm.description'](),
+        title: t['com.bridgeflow.collection.add-doc.confirm.title'](),
+        description: t['com.bridgeflow.collection.add-doc.confirm.description'](),
         cancelText: t['Cancel'](),
         confirmText: t['Confirm'](),
         confirmButtonOptions: {
@@ -88,7 +88,7 @@ export const CollectionListHeader = ({
       <div className={styles.breadcrumb}>
         <div className={styles.breadcrumbItem}>
           <WorkbenchLink to="/collection" className={styles.breadcrumbLink}>
-            {t['com.affine.collections.header']()}
+            {t['com.bridgeflow.collections.header']()}
           </WorkbenchLink>
         </div>
         <div className={styles.breadcrumbSeparator}>/</div>

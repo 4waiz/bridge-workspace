@@ -1,7 +1,7 @@
 {
-  "name": "BridgeWS",
-  "short_name": "BridgeWS",
-  "description": "BridgeWS merges docs, whiteboards, and databases into one enterprise workspace.",
+  "name": "BRIDGE Flow",
+  "short_name": "BRIDGE Flow",
+  "description": "BRIDGE Flow merges docs, whiteboards, and databases into one enterprise workspace.",
   "start_url": "/?source=pwa",
   "background_color": "#f5f1ec",
   "display": "standalone",

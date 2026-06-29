@@ -4,17 +4,17 @@ import {
   Menu,
   MenuItem,
   Tooltip,
-} from '@affine/component';
-import { AddFilterMenu } from '@affine/core/components/filter/add-filter';
+} from '@bridgeflow/component';
+import { AddFilterMenu } from '@bridgeflow/core/components/filter/add-filter';
 import {
   CollectionService,
   type PinnedCollectionRecord,
   PinnedCollectionService,
-} from '@affine/core/modules/collection';
-import type { FilterParams } from '@affine/core/modules/collection-rules';
-import { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import { useI18n } from '@affine/i18n';
-import track from '@affine/track';
+} from '@bridgeflow/core/modules/collection';
+import type { FilterParams } from '@bridgeflow/core/modules/collection-rules';
+import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
+import { useI18n } from '@bridgeflow/i18n';
+import track from '@bridgeflow/track';
 import {
   CloseIcon,
   CollectionsIcon,
@@ -114,7 +114,7 @@ export const PinnedCollections = ({
         }}
         role="button"
       >
-        {t['com.affine.all-docs.pinned-collection.all']()}
+        {t['com.bridgeflow.all-docs.pinned-collection.all']()}
       </div>
       {pinnedCollections.map((record, index) => (
         <PinnedCollectionItem
@@ -149,7 +149,7 @@ export const PinnedCollections = ({
       )}
       <div style={{ flex: 1 }}></div>
       {activeCollectionId && (
-        <Tooltip content={t['com.affine.all-docs.pinned-collection.edit']()}>
+        <Tooltip content={t['com.bridgeflow.all-docs.pinned-collection.edit']()}>
           <IconButton
             size="16"
             className={styles.editIconButton}
@@ -229,7 +229,7 @@ export const AddPinnedCollectionMenuContent = ({
           setAddingFilter(true);
         }}
       >
-        {t['com.affine.filter']()}
+        {t['com.bridgeflow.filter']()}
       </MenuItem>
       {unpinnedCollectionMetas.length > 0 && <Divider />}
       {unpinnedCollectionMetas.map(meta => (

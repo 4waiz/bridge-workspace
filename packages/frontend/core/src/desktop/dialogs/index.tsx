@@ -3,8 +3,8 @@ import {
   type GLOBAL_DIALOG_SCHEMA,
   GlobalDialogService,
   WorkspaceDialogService,
-} from '@affine/core/modules/dialogs';
-import type { WORKSPACE_DIALOG_SCHEMA } from '@affine/core/modules/dialogs/constant';
+} from '@bridgeflow/core/modules/dialogs';
+import type { WORKSPACE_DIALOG_SCHEMA } from '@bridgeflow/core/modules/dialogs/constant';
 import { useLiveData, useService } from '@toeverything/infra';
 
 import { ChangePasswordDialog } from './change-password';

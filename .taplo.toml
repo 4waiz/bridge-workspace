@@ -1,7 +1,7 @@
 exclude = [
   "node_modules/**/*.toml",
   "target/**/*.toml",
-  "packages/frontend/apps/ios/App/Packages/AffineGraphQL/**/*.toml",
+  "packages/frontend/apps/ios/App/Packages/BridgeFlowGraphQL/**/*.toml",
 ]
 
 # https://taplo.tamasfe.dev/configuration/formatter-options.html

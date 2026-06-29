@@ -1,12 +1,12 @@
-import { useMutation } from '@affine/admin/use-mutation';
-import { useQuery } from '@affine/admin/use-query';
-import { notify } from '@affine/component';
-import { UserFriendlyError } from '@affine/error';
+import { useMutation } from '@bridgeflow/admin/use-mutation';
+import { useQuery } from '@bridgeflow/admin/use-query';
+import { notify } from '@bridgeflow/component';
+import { UserFriendlyError } from '@bridgeflow/error';
 import {
   appConfigQuery,
   type UpdateAppConfigInput,
   updateAppConfigMutation,
-} from '@affine/graphql';
+} from '@bridgeflow/graphql';
 import { cloneDeep, get, merge, set } from 'lodash-es';
 import { useCallback, useEffect, useState } from 'react';
 

@@ -24,10 +24,10 @@ function isPathInWhiteList(filepath: string) {
 }
 
 const apiBaseByBuildType: Record<typeof buildType, string> = {
-  stable: 'https://app.affine.pro',
-  beta: 'https://insider.affine.pro',
-  internal: 'https://insider.affine.pro',
-  canary: 'https://affine.fail',
+  stable: 'https://app.bridgeflow.pro',
+  beta: 'https://insider.bridgeflow.pro',
+  internal: 'https://insider.bridgeflow.pro',
+  canary: 'https://bridgeflow.fail',
 };
 
 function resolveApiBaseUrl() {
@@ -126,12 +126,12 @@ const needRefererDomains = [
   /^(?:[a-zA-Z0-9-]+\.)*youtube-nocookie\.com$/,
   /^(?:[a-zA-Z0-9-]+\.)*googlevideo\.com$/,
 ];
-const defaultReferer = 'https://client.affine.local/';
-const affineDomains = [
-  /^(?:[a-z0-9-]+\.)*usercontent\.affine\.pro$/i,
-  /^(?:[a-z0-9-]+\.)*affine\.pro$/i,
-  /^(?:[a-z0-9-]+\.)*affine\.fail$/i,
-  /^(?:[a-z0-9-]+\.)*affine\.run$/i,
+const defaultReferer = 'https://client.bridgeflow.local/';
+const bridgeflowDomains = [
+  /^(?:[a-z0-9-]+\.)*usercontent\.bridgeflow\.pro$/i,
+  /^(?:[a-z0-9-]+\.)*bridgeflow\.pro$/i,
+  /^(?:[a-z0-9-]+\.)*bridgeflow\.fail$/i,
+  /^(?:[a-z0-9-]+\.)*bridgeflow\.run$/i,
 ];
 
 function setHeader(
@@ -176,7 +176,7 @@ function allowCors(
   headers: Record<string, string[]>,
   origin: string = 'assets://.'
 ) {
-  // Signed blob URLs redirect to *.usercontent.affine.pro without CORS headers.
+  // Signed blob URLs redirect to *.usercontent.bridgeflow.pro without CORS headers.
   setHeader(headers, 'Access-Control-Allow-Origin', origin);
   setHeader(headers, 'Access-Control-Allow-Credentials', 'true');
   setHeader(headers, 'Access-Control-Allow-Methods', 'GET, HEAD, PUT, OPTIONS');
@@ -234,7 +234,7 @@ export function registerProtocol() {
 
           const { protocol, hostname } = new URL(url);
 
-          // Adjust CORS for assets responses and allow blob redirects on affine domains
+          // Adjust CORS for assets responses and allow blob redirects on bridgeflow domains
           if (protocol === 'assets:') {
             delete responseHeaders['access-control-allow-origin'];
             delete responseHeaders['access-control-allow-headers'];
@@ -244,7 +244,7 @@ export function registerProtocol() {
             ensureFrameAncestors(responseHeaders, "'self'");
           } else if (
             (protocol === 'http:' || protocol === 'https:') &&
-            affineDomains.some(regex => regex.test(hostname))
+            bridgeflowDomains.some(regex => regex.test(hostname))
           ) {
             allowCors(responseHeaders);
           }
@@ -264,7 +264,7 @@ export function registerProtocol() {
 
     (async () => {
       // session cookies are set to assets:// on production
-      // if sending request to the cloud, attach the session cookie (to affine cloud server)
+      // if sending request to the cloud, attach the session cookie (to bridgeflow cloud server)
       if (
         url.protocol === 'http:' ||
         url.protocol === 'https:' ||

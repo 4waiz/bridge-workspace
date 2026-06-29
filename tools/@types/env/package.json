@@ -1,11 +1,11 @@
 {
-  "name": "@types/affine__env",
+  "name": "@types/bridgeflow__env",
   "private": true,
   "types": "./__all.d.ts",
   "type": "module",
   "dependencies": {
-    "@affine/env": "workspace:*",
-    "@blocksuite/affine": "workspace:*"
+    "@blocksuite/bridgeflow": "workspace:*",
+    "@bridgeflow/env": "workspace:*"
   },
   "version": "0.26.3"
 }

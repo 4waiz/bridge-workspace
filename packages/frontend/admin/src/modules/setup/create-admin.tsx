@@ -1,6 +1,6 @@
-import { BRAND_NAME } from '@affine/component/brand';
-import { Input } from '@affine/admin/components/ui/input';
-import { Label } from '@affine/admin/components/ui/label';
+import { BRAND_NAME } from '@bridgeflow/component/brand';
+import { Input } from '@bridgeflow/admin/components/ui/input';
+import { Label } from '@bridgeflow/admin/components/ui/label';
 import { useCallback } from 'react';
 
 type CreateAdminProps = {

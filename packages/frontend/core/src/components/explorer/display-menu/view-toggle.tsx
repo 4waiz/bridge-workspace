@@ -1,5 +1,5 @@
-import { RadioGroup, type RadioItem } from '@affine/component';
-import track from '@affine/track';
+import { RadioGroup, type RadioItem } from '@bridgeflow/component';
+import track from '@bridgeflow/track';
 import { useCallback } from 'react';
 
 import {

@@ -3,11 +3,11 @@ import {
   notify,
   PropertyValue,
   type RadioItem,
-} from '@affine/component';
-import type { FilterParams } from '@affine/core/modules/collection-rules';
-import { DocService } from '@affine/core/modules/doc';
-import { useI18n } from '@affine/i18n';
-import type { DocMode } from '@blocksuite/affine/model';
+} from '@bridgeflow/component';
+import type { FilterParams } from '@bridgeflow/core/modules/collection-rules';
+import { DocService } from '@bridgeflow/core/modules/doc';
+import { useI18n } from '@bridgeflow/i18n';
+import type { DocMode } from '@blocksuite/bridgeflow/model';
 import { EdgelessIcon, PageIcon } from '@blocksuite/icons/rc';
 import { useLiveData, useService } from '@toeverything/infra';
 import { useCallback, useMemo } from 'react';
@@ -49,12 +49,12 @@ export const DocPrimaryModeValue = ({
       notify.success({
         title:
           mode === 'page'
-            ? t['com.affine.toastMessage.defaultMode.page.title']()
-            : t['com.affine.toastMessage.defaultMode.edgeless.title'](),
+            ? t['com.bridgeflow.toastMessage.defaultMode.page.title']()
+            : t['com.bridgeflow.toastMessage.defaultMode.edgeless.title'](),
         message:
           mode === 'page'
-            ? t['com.affine.toastMessage.defaultMode.page.message']()
-            : t['com.affine.toastMessage.defaultMode.edgeless.message'](),
+            ? t['com.bridgeflow.toastMessage.defaultMode.page.message']()
+            : t['com.bridgeflow.toastMessage.defaultMode.edgeless.message'](),
       });
       onChange?.(mode, true);
     },
@@ -147,9 +147,9 @@ export const DocPrimaryModeGroupHeader = ({
   const t = useI18n();
   const text =
     groupId === 'edgeless'
-      ? t['com.affine.edgelessMode']()
+      ? t['com.bridgeflow.edgelessMode']()
       : groupId === 'page'
-        ? t['com.affine.pageMode']()
+        ? t['com.bridgeflow.pageMode']()
         : 'Default';
 
   return (

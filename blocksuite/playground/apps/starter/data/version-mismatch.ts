@@ -1,4 +1,4 @@
-import type { Workspace } from '@blocksuite/affine/store';
+import type { Workspace } from '@blocksuite/bridgeflow/store';
 import * as Y from 'yjs';
 
 import type { InitFn } from './utils.js';
@@ -9,14 +9,14 @@ export const versionMismatch: InitFn = (collection: Workspace, id: string) => {
   doc.load();
 
   tempDoc.load(() => {
-    const rootId = tempDoc.addBlock('affine:page', {});
-    tempDoc.addBlock('affine:surface', {}, rootId);
+    const rootId = tempDoc.addBlock('bridgeflow:page', {});
+    tempDoc.addBlock('bridgeflow:surface', {}, rootId);
     const noteId = tempDoc.addBlock(
-      'affine:note',
+      'bridgeflow:note',
       { xywh: '[0, 100, 800, 640]' },
       rootId
     );
-    const paragraphId = tempDoc.addBlock('affine:paragraph', {}, noteId);
+    const paragraphId = tempDoc.addBlock('bridgeflow:paragraph', {}, noteId);
     const blocks = tempDoc.spaceDoc.get('blocks') as Y.Map<unknown>;
     const paragraph = blocks.get(paragraphId) as Y.Map<unknown>;
     paragraph.set('sys:version', (paragraph.get('sys:version') as number) + 1);
@@ -24,7 +24,7 @@ export const versionMismatch: InitFn = (collection: Workspace, id: string) => {
     const update = Y.encodeStateAsUpdate(tempDoc.spaceDoc);
 
     Y.applyUpdate(doc.spaceDoc, update);
-    doc.addBlock('affine:paragraph', {}, noteId);
+    doc.addBlock('bridgeflow:paragraph', {}, noteId);
   });
 
   collection.removeDoc('tempDoc');

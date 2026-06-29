@@ -1,4 +1,4 @@
-import { i18nTime } from '@affine/i18n';
+import { i18nTime } from '@bridgeflow/i18n';
 import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
@@ -16,15 +16,15 @@ export class DateTime extends LitElement {
     .line {
       flex-grow: 1;
       height: 0.5px;
-      background-color: var(--affine-border-color);
+      background-color: var(--bridgeflow-border-color);
     }
     .date-time {
       padding: 0 8px;
-      font-size: var(--affine-font-xs);
+      font-size: var(--bridgeflow-font-xs);
       font-weight: 400;
       line-height: 22px;
       text-align: center;
-      color: var(--affine-text-secondary-color);
+      color: var(--bridgeflow-text-secondary-color);
     }
   `;
 

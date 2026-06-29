@@ -1,6 +1,6 @@
-import { useWorkspace } from '@affine/core/components/hooks/use-workspace';
-import { GlobalContextService } from '@affine/core/modules/global-context';
-import { WorkspacesService } from '@affine/core/modules/workspace';
+import { useWorkspace } from '@bridgeflow/core/components/hooks/use-workspace';
+import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
+import { WorkspacesService } from '@bridgeflow/core/modules/workspace';
 import { FrameworkScope, useLiveData, useService } from '@toeverything/infra';
 
 export const CurrentWorkspaceScopeProvider = ({

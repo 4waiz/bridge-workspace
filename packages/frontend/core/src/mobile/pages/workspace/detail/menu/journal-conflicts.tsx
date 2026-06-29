@@ -4,18 +4,18 @@ import {
   MobileMenuItem,
   MobileMenuSub,
   useConfirmModal,
-} from '@affine/component';
-import { Guard } from '@affine/core/components/guard';
-import { MoveToTrash } from '@affine/core/components/page-list';
+} from '@bridgeflow/component';
+import { Guard } from '@bridgeflow/core/components/guard';
+import { MoveToTrash } from '@bridgeflow/core/components/page-list';
 import {
   type DocRecord,
   DocService,
   DocsService,
-} from '@affine/core/modules/doc';
-import { DocDisplayMetaService } from '@affine/core/modules/doc-display-meta';
-import { JournalService } from '@affine/core/modules/journal';
-import { WorkbenchLink } from '@affine/core/modules/workbench';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/core/modules/doc';
+import { DocDisplayMetaService } from '@bridgeflow/core/modules/doc-display-meta';
+import { JournalService } from '@bridgeflow/core/modules/journal';
+import { WorkbenchLink } from '@bridgeflow/core/modules/workbench';
+import { useI18n } from '@bridgeflow/i18n';
 import { CalendarXmarkIcon, EditIcon, TodayIcon } from '@blocksuite/icons/rc';
 import { useLiveData, useService } from '@toeverything/infra';
 import { type MouseEvent, useCallback, useMemo } from 'react';
@@ -34,11 +34,11 @@ export const ResolveConflictOperations = ({
   const handleOpenTrashModal = useCallback(
     (docRecord: DocRecord) => {
       openConfirmModal({
-        title: t['com.affine.moveToTrash.confirmModal.title'](),
-        description: t['com.affine.moveToTrash.confirmModal.description']({
+        title: t['com.bridgeflow.moveToTrash.confirmModal.title'](),
+        description: t['com.bridgeflow.moveToTrash.confirmModal.description']({
           title: docRecord.title$.value || t['Untitled'](),
         }),
-        cancelText: t['com.affine.confirmModal.button.cancel'](),
+        cancelText: t['com.bridgeflow.confirmModal.button.cancel'](),
         confirmText: t.Delete(),
         confirmButtonOptions: {
           variant: 'error',
@@ -69,7 +69,7 @@ export const ResolveConflictOperations = ({
             data-testid="journal-conflict-remove-mark"
             disabled={!canEdit}
           >
-            {t['com.affine.page-properties.property.journal-remove']()}
+            {t['com.bridgeflow.page-properties.property.journal-remove']()}
           </MobileMenuItem>
         )}
       </Guard>
@@ -111,7 +111,7 @@ const DocItem = ({ docRecord }: { docRecord: DocRecord }) => {
         <div className={styles.docItem}>
           {title}
           <div className={styles.duplicateTag}>
-            {i18n['com.affine.page-properties.property.journal-duplicated']()}
+            {i18n['com.bridgeflow.page-properties.property.journal-duplicated']()}
           </div>
         </div>
       </MobileMenuItem>
@@ -152,7 +152,7 @@ const ConflictListMenuItem = ({ docRecords }: { docRecords: DocRecord[] }) => {
       }}
       items={<ConflictList docRecords={docRecords} />}
     >
-      {t['com.affine.m.selector.journal-menu.conflicts']()}
+      {t['com.bridgeflow.m.selector.journal-menu.conflicts']()}
     </MobileMenuSub>
   );
 };

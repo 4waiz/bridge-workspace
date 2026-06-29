@@ -1,16 +1,16 @@
 import {
   SettingHeader,
   SettingWrapper,
-} from '@affine/component/setting-components';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/component/setting-components';
+import { useI18n } from '@bridgeflow/i18n';
 
-import type { ShortcutsInfo } from '../../../../../components/hooks/affine/use-shortcuts';
+import type { ShortcutsInfo } from '../../../../../components/hooks/bridgeflow/use-shortcuts';
 import {
   useEdgelessShortcuts,
   useGeneralShortcuts,
   useMarkdownShortcuts,
   usePageShortcuts,
-} from '../../../../../components/hooks/affine/use-shortcuts';
+} from '../../../../../components/hooks/bridgeflow/use-shortcuts';
 import { shortcutKey, shortcutKeyContainer, shortcutRow } from './style.css';
 
 const ShortcutsPanel = ({
@@ -51,8 +51,8 @@ export const Shortcuts = () => {
   return (
     <>
       <SettingHeader
-        title={t['com.affine.keyboardShortcuts.title']()}
-        subtitle={t['com.affine.keyboardShortcuts.subtitle']()}
+        title={t['com.bridgeflow.keyboardShortcuts.title']()}
+        subtitle={t['com.bridgeflow.keyboardShortcuts.subtitle']()}
         data-testid="keyboard-shortcuts-title"
       />
       <ShortcutsPanel shortcutsInfo={generalShortcutsInfo} />

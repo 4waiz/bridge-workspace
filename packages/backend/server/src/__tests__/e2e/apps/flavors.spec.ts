@@ -1,4 +1,4 @@
-import { getCurrentUserQuery } from '@affine/graphql';
+import { getCurrentUserQuery } from '@bridgeflow/graphql';
 
 import { JobExecutor } from '../../../base/job/queue/executor';
 import { DatabaseDocReader, DocReader } from '../../../core/doc';

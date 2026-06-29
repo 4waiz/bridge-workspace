@@ -1,4 +1,4 @@
-import { BrandLogo } from '@affine/component/brand';
+import { BrandLogo } from '@bridgeflow/component/brand';
 import { Navigate } from 'react-router-dom';
 
 import { useServerConfig } from '../common';

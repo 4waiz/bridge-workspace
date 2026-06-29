@@ -1,24 +1,24 @@
-import { ColorScheme } from '@blocksuite/affine/model';
+import { ColorScheme } from '@blocksuite/bridgeflow/model';
 import {
   DocModeProvider,
   NotificationProvider,
   ThemeProvider,
   ToolbarFlag,
   ToolbarRegistryIdentifier,
-} from '@blocksuite/affine/shared/services';
-import { unsafeCSSVar } from '@blocksuite/affine/shared/theme';
+} from '@blocksuite/bridgeflow/shared/services';
+import { unsafeCSSVar } from '@blocksuite/bridgeflow/shared/theme';
 import {
   getPageRootByElement,
   stopPropagation,
-} from '@blocksuite/affine/shared/utils';
-import { WidgetComponent, WidgetViewExtension } from '@blocksuite/affine/std';
-import { GfxControllerIdentifier } from '@blocksuite/affine/std/gfx';
-import { RANGE_SYNC_EXCLUDE_ATTR } from '@blocksuite/affine/std/inline';
-import type { BaseSelection } from '@blocksuite/affine/store';
+} from '@blocksuite/bridgeflow/shared/utils';
+import { WidgetComponent, WidgetViewExtension } from '@blocksuite/bridgeflow/std';
+import { GfxControllerIdentifier } from '@blocksuite/bridgeflow/std/gfx';
+import { RANGE_SYNC_EXCLUDE_ATTR } from '@blocksuite/bridgeflow/std/inline';
+import type { BaseSelection } from '@blocksuite/bridgeflow/store';
 import {
-  AFFINE_VIEWPORT_OVERLAY_WIDGET,
-  type AffineViewportOverlayWidget,
-} from '@blocksuite/affine/widgets/viewport-overlay';
+  BRIDGEFLOW_VIEWPORT_OVERLAY_WIDGET,
+  type BridgeFlowViewportOverlayWidget,
+} from '@blocksuite/bridgeflow/widgets/viewport-overlay';
 import {
   autoPlacement,
   autoUpdate,
@@ -38,21 +38,21 @@ import { literal, unsafeStatic } from 'lit/static-html.js';
 import { type AIError } from '../../provider';
 import type { AIPanelGenerating } from './components/index.js';
 import type {
-  AffineAIPanelState,
-  AffineAIPanelWidgetConfig,
+  BridgeFlowAIPanelState,
+  BridgeFlowAIPanelWidgetConfig,
   AIActionAnswer,
 } from './type.js';
 import { mergeAIActionAnswer } from './utils';
-export const AFFINE_AI_PANEL_WIDGET = 'affine-ai-panel-widget';
+export const BRIDGEFLOW_AI_PANEL_WIDGET = 'bridgeflow-ai-panel-widget';
 
-export class AffineAIPanelWidget extends WidgetComponent {
+export class BridgeFlowAIPanelWidget extends WidgetComponent {
   static override styles = css`
     :host {
       display: flex;
       outline: none;
       border-radius: var(--8, 8px);
       border: 1px solid;
-      border-color: ${unsafeCSSVar('--affine-border-color')};
+      border-color: ${unsafeCSSVar('--bridgeflow-border-color')};
       background: ${unsafeCSSVar('backgroundOverlayPanelColor')};
       box-shadow: ${unsafeCSSVar('overlayShadow')};
 
@@ -63,23 +63,23 @@ export class AffineAIPanelWidget extends WidgetComponent {
       left: 0;
       overflow-y: auto;
       scrollbar-width: none !important;
-      z-index: var(--affine-z-index-popover);
-      --affine-font-family: var(--affine-font-sans-family);
+      z-index: var(--bridgeflow-z-index-popover);
+      --bridgeflow-font-family: var(--bridgeflow-font-sans-family);
     }
 
     :host([data-app-theme='light']) {
       background: ${unsafeCSS(
-        lightCssVariables['--affine-background-overlay-panel-color']
+        lightCssVariables['--bridgeflow-background-overlay-panel-color']
       )};
-      border-color: ${unsafeCSS(lightCssVariables['--affine-border-color'])};
-      box-shadow: ${unsafeCSS(lightCssVariables['--affine-overlay-shadow'])};
+      border-color: ${unsafeCSS(lightCssVariables['--bridgeflow-border-color'])};
+      box-shadow: ${unsafeCSS(lightCssVariables['--bridgeflow-overlay-shadow'])};
     }
     :host([data-app-theme='dark']) {
       background: ${unsafeCSS(
-        darkCssVariables['--affine-background-overlay-panel-color']
+        darkCssVariables['--bridgeflow-background-overlay-panel-color']
       )};
-      border-color: ${unsafeCSS(darkCssVariables['--affine-border-color'])};
-      box-shadow: ${unsafeCSS(darkCssVariables['--affine-overlay-shadow'])};
+      border-color: ${unsafeCSS(darkCssVariables['--bridgeflow-border-color'])};
+      box-shadow: ${unsafeCSS(darkCssVariables['--bridgeflow-overlay-shadow'])};
     }
 
     .ai-panel-container {
@@ -286,7 +286,7 @@ export class AffineAIPanelWidget extends WidgetComponent {
     }
   };
 
-  setState = (state: AffineAIPanelState, reference: Element) => {
+  setState = (state: BridgeFlowAIPanelState, reference: Element) => {
     this.state = state;
     this._autoUpdatePosition(reference);
   };
@@ -358,9 +358,9 @@ export class AffineAIPanelWidget extends WidgetComponent {
     const rootId = this.host.store.root?.id;
     return rootId
       ? (this.host.view.getWidget(
-          AFFINE_VIEWPORT_OVERLAY_WIDGET,
+          BRIDGEFLOW_VIEWPORT_OVERLAY_WIDGET,
           rootId
-        ) as AffineViewportOverlayWidget)
+        ) as BridgeFlowViewportOverlayWidget)
       : null;
   }
 
@@ -370,7 +370,7 @@ export class AffineAIPanelWidget extends WidgetComponent {
     //    child paragraph
     {
       const childrenContainer = reference.querySelector(
-        '.affine-block-children-container'
+        '.bridgeflow-block-children-container'
       );
       if (childrenContainer && childrenContainer.previousElementSibling) {
         reference = childrenContainer.previousElementSibling;
@@ -611,20 +611,20 @@ export class AffineAIPanelWidget extends WidgetComponent {
   }
 
   @property({ attribute: false })
-  accessor config: AffineAIPanelWidgetConfig | null = null;
+  accessor config: BridgeFlowAIPanelWidgetConfig | null = null;
 
   @query('ai-panel-generating')
   accessor generatingElement: AIPanelGenerating | null = null;
 
   @property()
-  accessor state: AffineAIPanelState = 'hidden';
+  accessor state: BridgeFlowAIPanelState = 'hidden';
 
   @property({ attribute: 'data-app-theme', reflect: true })
   accessor appTheme: ColorScheme = ColorScheme.Light;
 }
 
 export const aiPanelWidget = WidgetViewExtension(
-  'affine:page',
-  AFFINE_AI_PANEL_WIDGET,
-  literal`${unsafeStatic(AFFINE_AI_PANEL_WIDGET)}`
+  'bridgeflow:page',
+  BRIDGEFLOW_AI_PANEL_WIDGET,
+  literal`${unsafeStatic(BRIDGEFLOW_AI_PANEL_WIDGET)}`
 );

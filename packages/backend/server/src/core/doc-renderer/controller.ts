@@ -207,7 +207,7 @@ export class DocRendererController {
 
   // @TODO(@forehalo): pre-compile html template to accelerate serializing
   _render(opts: RenderOptions | null, assets: HtmlAssets): string {
-    // TODO(@forehalo): how can we enable the type reference to @affine/env
+    // TODO(@forehalo): how can we enable the type reference to @bridgeflow/env
     const envMeta: Record<string, any> = {
       publicPath: assets.publicPath,
       subPath: this.config.server.path,
@@ -219,8 +219,8 @@ export class DocRendererController {
     }
 
     const title = opts?.title
-      ? htmlSanitize(`${opts.title} | AFFiNE`)
-      : 'AFFiNE';
+      ? htmlSanitize(`${opts.title} | BridgeFlow`)
+      : 'BridgeFlow';
     const summary = opts ? htmlSanitize(opts.summary) : assets.description;
     const image = opts?.avatar ?? 'https://awaizahmed.com/imgs/bridge-logo.webp';
 
@@ -256,7 +256,7 @@ export class DocRendererController {
       content="${title}"
     />
     <meta name="twitter:description" content="${summary}" />
-    <meta name="twitter:site" content="@AffineOfficial" />
+    <meta name="twitter:site" content="@BridgeFlowOfficial" />
     <meta name="twitter:image" content="${image}" />
     <meta property="og:title" content="${title}" />
     <meta property="og:description" content="${summary}" />

@@ -1,10 +1,10 @@
-import { UserFriendlyError } from '@affine/error';
+import { UserFriendlyError } from '@bridgeflow/error';
 import {
   gqlFetcherFactory,
   type GraphQLQuery,
   type QueryOptions,
   type QueryResponse,
-} from '@affine/graphql';
+} from '@bridgeflow/graphql';
 import { fromPromise, Service } from '@toeverything/infra';
 import type { Observable } from 'rxjs';
 

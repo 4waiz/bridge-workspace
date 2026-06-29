@@ -1,7 +1,7 @@
-import { AIStoreExtension } from '@affine/core/blocksuite/store-extensions/ai';
-import type { FeatureFlagService } from '@affine/core/modules/feature-flag';
-import { StoreExtensionManager } from '@blocksuite/affine/ext-loader';
-import { getInternalStoreExtensions } from '@blocksuite/affine/extensions/store';
+import { AIStoreExtension } from '@bridgeflow/core/blocksuite/store-extensions/ai';
+import type { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
+import { StoreExtensionManager } from '@blocksuite/bridgeflow/ext-loader';
+import { getInternalStoreExtensions } from '@blocksuite/bridgeflow/extensions/store';
 
 import { FeatureFlagStoreExtension } from '../store-extensions/feature-flag';
 

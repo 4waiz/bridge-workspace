@@ -1,16 +1,16 @@
 import {
   TranscriptionBlockFlavour,
   type TranscriptionBlockModel,
-} from '@affine/core/blocksuite/ai/blocks/transcription-block/model';
-import { insertFromMarkdown } from '@affine/core/blocksuite/utils';
-import { toArrayBuffer } from '@affine/core/utils/array-buffer';
-import { encodeAudioBlobToOpusSlices } from '@affine/core/utils/opus-encoding';
-import { DebugLogger } from '@affine/debug';
-import { AiJobStatus } from '@affine/graphql';
-import track from '@affine/track';
-import type { AttachmentBlockModel } from '@blocksuite/affine/model';
-import type { AffineTextAttributes } from '@blocksuite/affine/shared/types';
-import { type DeltaInsert, Text } from '@blocksuite/affine/store';
+} from '@bridgeflow/core/blocksuite/ai/blocks/transcription-block/model';
+import { insertFromMarkdown } from '@bridgeflow/core/blocksuite/utils';
+import { toArrayBuffer } from '@bridgeflow/core/utils/array-buffer';
+import { encodeAudioBlobToOpusSlices } from '@bridgeflow/core/utils/opus-encoding';
+import { DebugLogger } from '@bridgeflow/debug';
+import { AiJobStatus } from '@bridgeflow/graphql';
+import track from '@bridgeflow/track';
+import type { AttachmentBlockModel } from '@blocksuite/bridgeflow/model';
+import type { BridgeFlowTextAttributes } from '@blocksuite/bridgeflow/shared/types';
+import { type DeltaInsert, Text } from '@blocksuite/bridgeflow/store';
 import { computed } from '@preact/signals-core';
 import { Entity, LiveData } from '@toeverything/infra';
 import { cssVarV2 } from '@toeverything/theme/v2';
@@ -115,7 +115,7 @@ export class AudioAttachmentBlock extends Entity<AttachmentBlockModel> {
     if (!transcriptionBlockProps) {
       // transcription block is not created yet, we need to create it
       this.props.store.addBlock(
-        'affine:transcription',
+        'bridgeflow:transcription',
         {
           transcription: {},
         },
@@ -181,14 +181,14 @@ export class AudioAttachmentBlock extends Entity<AttachmentBlockModel> {
       collapsed: boolean = false
     ) => {
       const calloutId = this.props.store.addBlock(
-        'affine:callout',
+        'bridgeflow:callout',
         {
           emoji,
         },
         this.transcriptionBlock$.value?.id
       );
       this.props.store.addBlock(
-        'affine:paragraph',
+        'bridgeflow:paragraph',
         {
           type: 'h6',
           collapsed,
@@ -212,7 +212,7 @@ export class AudioAttachmentBlock extends Entity<AttachmentBlockModel> {
           color = colorOptions[speakerToColors.size % colorOptions.length];
           speakerToColors.set(segment.speaker, color);
         }
-        const deltaInserts: DeltaInsert<AffineTextAttributes>[] = [
+        const deltaInserts: DeltaInsert<BridgeFlowTextAttributes>[] = [
           {
             insert: sanitizeText(segment.start + ' ' + segment.speaker),
             attributes: {
@@ -225,7 +225,7 @@ export class AudioAttachmentBlock extends Entity<AttachmentBlockModel> {
           },
         ];
         this.props.store.addBlock(
-          'affine:paragraph',
+          'bridgeflow:paragraph',
           {
             text: new Text(deltaInserts),
           },

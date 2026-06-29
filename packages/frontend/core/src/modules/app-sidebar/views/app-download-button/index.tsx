@@ -1,6 +1,6 @@
-import { BRAND_SITE_URL } from '@affine/component/brand';
-import { useCatchEventCallback } from '@affine/core/components/hooks/use-catch-event-hook';
-import { track } from '@affine/track';
+import { BRAND_SITE_URL } from '@bridgeflow/component/brand';
+import { useCatchEventCallback } from '@bridgeflow/core/components/hooks/use-catch-event-hook';
+import { track } from '@bridgeflow/track';
 import { CloseIcon, DownloadIcon } from '@blocksuite/icons/rc';
 import clsx from 'clsx';
 import { useCallback, useState } from 'react';

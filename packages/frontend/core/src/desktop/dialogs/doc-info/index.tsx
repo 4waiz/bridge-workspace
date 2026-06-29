@@ -1,8 +1,8 @@
-import { Modal, Scrollable } from '@affine/component';
-import { BlocksuiteHeaderTitle } from '@affine/core/blocksuite/block-suite-header/title';
-import type { DialogComponentProps } from '@affine/core/modules/dialogs';
-import type { WORKSPACE_DIALOG_SCHEMA } from '@affine/core/modules/dialogs/constant';
-import { type Doc, DocsService } from '@affine/core/modules/doc';
+import { Modal, Scrollable } from '@bridgeflow/component';
+import { BlocksuiteHeaderTitle } from '@bridgeflow/core/blocksuite/block-suite-header/title';
+import type { DialogComponentProps } from '@bridgeflow/core/modules/dialogs';
+import type { WORKSPACE_DIALOG_SCHEMA } from '@bridgeflow/core/modules/dialogs/constant';
+import { type Doc, DocsService } from '@bridgeflow/core/modules/doc';
 import { FrameworkScope, useService } from '@toeverything/infra';
 import { useEffect, useState } from 'react';
 

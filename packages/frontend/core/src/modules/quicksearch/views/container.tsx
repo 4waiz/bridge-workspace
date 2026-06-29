@@ -1,5 +1,5 @@
-import { UserFriendlyError } from '@affine/error';
-import { useI18n } from '@affine/i18n';
+import { UserFriendlyError } from '@bridgeflow/error';
+import { useI18n } from '@bridgeflow/i18n';
 import { useLiveData, useServices } from '@toeverything/infra';
 import { useCallback, useMemo } from 'react';
 

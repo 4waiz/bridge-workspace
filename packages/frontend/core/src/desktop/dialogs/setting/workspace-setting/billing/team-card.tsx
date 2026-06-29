@@ -1,12 +1,12 @@
-import { Button } from '@affine/component';
-import { SettingRow } from '@affine/component/setting-components';
+import { Button } from '@bridgeflow/component';
+import { SettingRow } from '@bridgeflow/component/setting-components';
 import {
   SubscriptionService,
   WorkspaceSubscriptionService,
-} from '@affine/core/modules/cloud';
-import { WorkspaceQuotaService } from '@affine/core/modules/quota';
-import { SubscriptionRecurring } from '@affine/graphql';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/core/modules/cloud';
+import { WorkspaceQuotaService } from '@bridgeflow/core/modules/quota';
+import { SubscriptionRecurring } from '@bridgeflow/graphql';
+import { useI18n } from '@bridgeflow/i18n';
 import { useLiveData, useService } from '@toeverything/infra';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
@@ -46,28 +46,28 @@ export const TeamCard = () => {
   const description = useMemo(() => {
     if (recurring === SubscriptionRecurring.Yearly) {
       return t[
-        'com.affine.settings.workspace.billing.team-workspace.description.billed.annually'
+        'com.bridgeflow.settings.workspace.billing.team-workspace.description.billed.annually'
       ]();
     }
     if (recurring === SubscriptionRecurring.Monthly) {
       return t[
-        'com.affine.settings.workspace.billing.team-workspace.description.billed.monthly'
+        'com.bridgeflow.settings.workspace.billing.team-workspace.description.billed.monthly'
       ]();
     }
-    return t['com.affine.payment.billing-setting.free-trial']();
+    return t['com.bridgeflow.payment.billing-setting.free-trial']();
   }, [recurring, t]);
 
   const expirationDate = useMemo(() => {
     if (expiration && endDate) {
       return t[
-        'com.affine.settings.workspace.billing.team-workspace.not-renewed'
+        'com.bridgeflow.settings.workspace.billing.team-workspace.not-renewed'
       ]({
         date: new Date(endDate).toLocaleDateString(),
       });
     }
     if (nextBillingDate && endDate) {
       return t[
-        'com.affine.settings.workspace.billing.team-workspace.next-billing-date'
+        'com.bridgeflow.settings.workspace.billing.team-workspace.next-billing-date'
       ]({
         date: new Date(endDate).toLocaleDateString(),
       });
@@ -101,7 +101,7 @@ export const TeamCard = () => {
           name={
             <CardNameLabelRow
               cardName={t[
-                'com.affine.settings.workspace.billing.team-workspace'
+                'com.bridgeflow.settings.workspace.billing.team-workspace'
               ]()}
               status={teamSubscription?.status}
             />
@@ -123,7 +123,7 @@ export const TeamCard = () => {
             onClick={handleClick}
           >
             {t[
-              'com.affine.settings.workspace.billing.team-workspace.cancel-plan'
+              'com.bridgeflow.settings.workspace.billing.team-workspace.cancel-plan'
             ]()}
           </Button>
         </CancelTeamAction>
@@ -133,8 +133,8 @@ export const TeamCard = () => {
         <span className={styles.billingFrequency}>
           /
           {teamSubscription?.recurring === SubscriptionRecurring.Monthly
-            ? t['com.affine.payment.billing-setting.month']()
-            : t['com.affine.payment.billing-setting.year']()}
+            ? t['com.bridgeflow.payment.billing-setting.month']()
+            : t['com.bridgeflow.payment.billing-setting.year']()}
         </span>
       </p>
     </div>

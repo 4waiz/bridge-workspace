@@ -3,10 +3,10 @@ import {
   ImageBlockModel,
   ListBlockModel,
   ParagraphBlockModel,
-} from '@blocksuite/affine/model';
-import { getSelectedModelsCommand } from '@blocksuite/affine/shared/commands';
-import { matchModels } from '@blocksuite/affine/shared/utils';
-import type { Chain, InitCommandCtx } from '@blocksuite/affine/std';
+} from '@blocksuite/bridgeflow/model';
+import { getSelectedModelsCommand } from '@blocksuite/bridgeflow/shared/commands';
+import { matchModels } from '@blocksuite/bridgeflow/shared/utils';
+import type { Chain, InitCommandCtx } from '@blocksuite/bridgeflow/std';
 import {
   CommentIcon,
   DoneIcon,

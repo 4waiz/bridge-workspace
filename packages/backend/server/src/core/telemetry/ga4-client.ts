@@ -49,7 +49,7 @@ export class Ga4Client {
           await this.post(payload);
         } catch {
           if (
-            env.DEPLOYMENT_TYPE === 'affine' &&
+            env.DEPLOYMENT_TYPE === 'bridgeflow' &&
             env.NODE_ENV === 'production'
           ) {
             // In production, we want to be resilient to GA4 failures, so we catch and ignore errors.

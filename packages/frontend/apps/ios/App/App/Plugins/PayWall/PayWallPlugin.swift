@@ -1,4 +1,4 @@
-import AffinePaywall
+import BridgeFlowPaywall
 import Capacitor
 import Foundation
 import SwiftUI

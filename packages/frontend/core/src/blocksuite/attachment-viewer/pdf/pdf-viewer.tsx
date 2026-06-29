@@ -1,7 +1,7 @@
-import { IconButton, Menu, observeResize } from '@affine/component';
-import type { PDF, PDFMeta, PDFRendererState } from '@affine/core/modules/pdf';
-import { PDFService, PDFStatus } from '@affine/core/modules/pdf';
-import { cacheBitmap } from '@affine/core/modules/pdf/cache/bitmap-cache';
+import { IconButton, Menu, observeResize } from '@bridgeflow/component';
+import type { PDF, PDFMeta, PDFRendererState } from '@bridgeflow/core/modules/pdf';
+import { PDFService, PDFStatus } from '@bridgeflow/core/modules/pdf';
+import { cacheBitmap } from '@bridgeflow/core/modules/pdf/cache/bitmap-cache';
 import {
   Item,
   List,
@@ -13,8 +13,8 @@ import {
   type PDFVirtuosoProps,
   Scroller,
   ScrollSeekPlaceholder,
-} from '@affine/core/modules/pdf/views';
-import track from '@affine/track';
+} from '@bridgeflow/core/modules/pdf/views';
+import track from '@bridgeflow/track';
 import {
   CollapseIcon,
   ExpandIcon,

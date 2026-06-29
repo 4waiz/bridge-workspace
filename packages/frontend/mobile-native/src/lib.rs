@@ -8,7 +8,7 @@ mod tests;
 #[cfg(any(target_os = "android", target_os = "ios", test))]
 #[cfg_attr(all(test, not(any(target_os = "android", target_os = "ios"))), allow(dead_code))]
 pub(crate) mod cache;
-use affine_common::hashcash::Stamp;
+use bridgeflow_common::hashcash::Stamp;
 pub(crate) use error::Result;
 pub use error::UniffiError;
 pub use ffi_types::{
@@ -16,7 +16,7 @@ pub use ffi_types::{
 };
 pub use storage::{DocStoragePool, new_doc_storage_pool};
 
-uniffi::setup_scaffolding!("affine_mobile_native");
+uniffi::setup_scaffolding!("bridgeflow_mobile_native");
 
 #[uniffi::export]
 pub fn hashcash_mint(resource: String, bits: u32) -> String {

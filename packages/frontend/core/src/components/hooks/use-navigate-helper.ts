@@ -1,7 +1,7 @@
-import type { SettingTab } from '@affine/core/modules/dialogs/constant';
-import { toDocSearchParams } from '@affine/core/modules/navigation';
-import { getOpenUrlInDesktopAppLink } from '@affine/core/modules/open-in-app';
-import type { DocMode } from '@blocksuite/affine/model';
+import type { SettingTab } from '@bridgeflow/core/modules/dialogs/constant';
+import { toDocSearchParams } from '@bridgeflow/core/modules/navigation';
+import { getOpenUrlInDesktopAppLink } from '@bridgeflow/core/modules/open-in-app';
+import type { DocMode } from '@blocksuite/bridgeflow/model';
 import { nanoid } from 'nanoid';
 import { createContext, useCallback, useContext, useMemo } from 'react';
 import type { NavigateFunction, NavigateOptions } from 'react-router-dom';

@@ -1,12 +1,12 @@
-import type { TagMeta } from '@affine/core/components/page-list';
-import { UserFriendlyError } from '@affine/error';
-import { I18n } from '@affine/i18n';
-import { createSignalFromObservable } from '@blocksuite/affine/shared/utils';
-import type { DocMeta } from '@blocksuite/affine/store';
+import type { TagMeta } from '@bridgeflow/core/components/page-list';
+import { UserFriendlyError } from '@bridgeflow/error';
+import { I18n } from '@bridgeflow/i18n';
+import { createSignalFromObservable } from '@blocksuite/bridgeflow/shared/utils';
+import type { DocMeta } from '@blocksuite/bridgeflow/store';
 import type {
   LinkedMenuGroup,
   LinkedMenuItem,
-} from '@blocksuite/affine/widgets/linked-doc';
+} from '@blocksuite/bridgeflow/widgets/linked-doc';
 import { CollectionsIcon, WarningIcon } from '@blocksuite/icons/lit';
 import { computed, signal } from '@preact/signals-core';
 import { Service } from '@toeverything/infra';
@@ -69,7 +69,7 @@ export class SearchMenuService extends Service {
     const rawMetas = currentWorkspace.docCollection.meta.docMetas;
     const recentDocs = this.recentDocsService.getRecentDocs();
     return {
-      name: I18n.t('com.affine.editor.at-menu.recent-docs'),
+      name: I18n.t('com.bridgeflow.editor.at-menu.recent-docs'),
       items: recentDocs
         .map(doc => {
           const meta = rawMetas.find(meta => meta.id === doc.id);
@@ -138,7 +138,7 @@ export class SearchMenuService extends Service {
 
     const overflowText = computed(() => {
       const overflowCount = docsSignal.value.length - MAX_DOCS;
-      return I18n.t('com.affine.editor.at-menu.more-docs-hint', {
+      return I18n.t('com.bridgeflow.editor.at-menu.more-docs-hint', {
         count: overflowCount > 100 ? '100+' : overflowCount,
       });
     });
@@ -148,7 +148,7 @@ export class SearchMenuService extends Service {
     });
 
     return {
-      name: I18n.t('com.affine.editor.at-menu.link-to-doc', {
+      name: I18n.t('com.bridgeflow.editor.at-menu.link-to-doc', {
         query,
       }),
       loading: loading,
@@ -263,7 +263,7 @@ export class SearchMenuService extends Service {
     const tags: TagMeta[] = this.tagService.tagList.tagMetas$.value;
     if (query.trim().length === 0) {
       return {
-        name: I18n.t('com.affine.editor.at-menu.tags', {
+        name: I18n.t('com.bridgeflow.editor.at-menu.tags', {
           query,
         }),
         items: tags.map(tag => this.toTagMenuItem(tag, action)),
@@ -280,7 +280,7 @@ export class SearchMenuService extends Service {
     const result = fuse.search(query);
 
     return {
-      name: I18n.t('com.affine.editor.at-menu.link-to-doc', {
+      name: I18n.t('com.bridgeflow.editor.at-menu.link-to-doc', {
         query,
       }),
       items: result.map(item => {
@@ -323,7 +323,7 @@ export class SearchMenuService extends Service {
     const collections = this.collectionService.collectionMetas$.value;
     if (query.trim().length === 0) {
       return {
-        name: I18n.t('com.affine.editor.at-menu.collections', {
+        name: I18n.t('com.bridgeflow.editor.at-menu.collections', {
           query,
         }),
         items: collections.map(collection =>
@@ -348,7 +348,7 @@ export class SearchMenuService extends Service {
     const result = fuse.search(query);
 
     return {
-      name: I18n.t('com.affine.editor.at-menu.link-to-doc', {
+      name: I18n.t('com.bridgeflow.editor.at-menu.link-to-doc', {
         query,
       }),
       items: result.map(item => {

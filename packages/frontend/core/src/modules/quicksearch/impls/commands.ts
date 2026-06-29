@@ -1,10 +1,10 @@
 import {
-  type AffineCommand,
-  AffineCommandRegistry,
+  type BridgeFlowCommand,
+  BridgeFlowCommandRegistry,
   type CommandCategory,
   PreconditionStrategy,
-} from '@affine/core/commands';
-import type { DocMode } from '@blocksuite/affine/model';
+} from '@bridgeflow/core/commands';
+import type { DocMode } from '@blocksuite/bridgeflow/model';
 import { Entity, LiveData } from '@toeverything/infra';
 import Fuse from 'fuse.js';
 
@@ -15,83 +15,83 @@ import type { QuickSearchItem } from '../types/item';
 import { highlighter } from '../utils/highlighter';
 
 const categories = {
-  'affine:recent': {
-    id: 'command:affine:recent',
-    label: { i18nKey: 'com.affine.cmdk.affine.category.affine.recent' },
+  'bridgeflow:recent': {
+    id: 'command:bridgeflow:recent',
+    label: { i18nKey: 'com.bridgeflow.cmdk.bridgeflow.category.bridgeflow.recent' },
     score: 10,
   },
-  'affine:navigation': {
-    id: 'command:affine:navigation',
+  'bridgeflow:navigation': {
+    id: 'command:bridgeflow:navigation',
     label: {
-      i18nKey: 'com.affine.cmdk.affine.category.affine.navigation',
+      i18nKey: 'com.bridgeflow.cmdk.bridgeflow.category.bridgeflow.navigation',
     },
     score: 10,
   },
-  'affine:creation': {
-    id: 'command:affine:creation',
-    label: { i18nKey: 'com.affine.cmdk.affine.category.affine.creation' },
+  'bridgeflow:creation': {
+    id: 'command:bridgeflow:creation',
+    label: { i18nKey: 'com.bridgeflow.cmdk.bridgeflow.category.bridgeflow.creation' },
     score: 10,
   },
-  'affine:general': {
-    id: 'command:affine:general',
-    label: { i18nKey: 'com.affine.cmdk.affine.category.affine.general' },
+  'bridgeflow:general': {
+    id: 'command:bridgeflow:general',
+    label: { i18nKey: 'com.bridgeflow.cmdk.bridgeflow.category.bridgeflow.general' },
     score: 10,
   },
-  'affine:layout': {
-    id: 'command:affine:layout',
-    label: { i18nKey: 'com.affine.cmdk.affine.category.affine.layout' },
+  'bridgeflow:layout': {
+    id: 'command:bridgeflow:layout',
+    label: { i18nKey: 'com.bridgeflow.cmdk.bridgeflow.category.bridgeflow.layout' },
     score: 10,
   },
-  'affine:pages': {
-    id: 'command:affine:pages',
-    label: { i18nKey: 'com.affine.cmdk.affine.category.affine.pages' },
+  'bridgeflow:pages': {
+    id: 'command:bridgeflow:pages',
+    label: { i18nKey: 'com.bridgeflow.cmdk.bridgeflow.category.bridgeflow.pages' },
     score: 10,
   },
-  'affine:edgeless': {
-    id: 'command:affine:edgeless',
-    label: { i18nKey: 'com.affine.cmdk.affine.category.affine.edgeless' },
+  'bridgeflow:edgeless': {
+    id: 'command:bridgeflow:edgeless',
+    label: { i18nKey: 'com.bridgeflow.cmdk.bridgeflow.category.bridgeflow.edgeless' },
     score: 10,
   },
-  'affine:collections': {
-    id: 'command:affine:collections',
+  'bridgeflow:collections': {
+    id: 'command:bridgeflow:collections',
     label: {
-      i18nKey: 'com.affine.cmdk.affine.category.affine.collections',
+      i18nKey: 'com.bridgeflow.cmdk.bridgeflow.category.bridgeflow.collections',
     },
     score: 10,
   },
-  'affine:settings': {
-    id: 'command:affine:settings',
-    label: { i18nKey: 'com.affine.cmdk.affine.category.affine.settings' },
+  'bridgeflow:settings': {
+    id: 'command:bridgeflow:settings',
+    label: { i18nKey: 'com.bridgeflow.cmdk.bridgeflow.category.bridgeflow.settings' },
     score: 10,
   },
-  'affine:updates': {
-    id: 'command:affine:updates',
-    label: { i18nKey: 'com.affine.cmdk.affine.category.affine.updates' },
+  'bridgeflow:updates': {
+    id: 'command:bridgeflow:updates',
+    label: { i18nKey: 'com.bridgeflow.cmdk.bridgeflow.category.bridgeflow.updates' },
     score: 10,
   },
-  'affine:help': {
-    id: 'command:affine:help',
-    label: { i18nKey: 'com.affine.cmdk.affine.category.affine.help' },
+  'bridgeflow:help': {
+    id: 'command:bridgeflow:help',
+    label: { i18nKey: 'com.bridgeflow.cmdk.bridgeflow.category.bridgeflow.help' },
     score: 10,
   },
   'editor:edgeless': {
     id: 'command:editor:edgeless',
-    label: { i18nKey: 'com.affine.cmdk.affine.category.editor.edgeless' },
+    label: { i18nKey: 'com.bridgeflow.cmdk.bridgeflow.category.editor.edgeless' },
     score: 10,
   },
   'editor:insert-object': {
     id: 'command:editor:insert-object',
-    label: { i18nKey: 'com.affine.cmdk.affine.category.editor.insert-object' },
+    label: { i18nKey: 'com.bridgeflow.cmdk.bridgeflow.category.editor.insert-object' },
     score: 10,
   },
   'editor:page': {
     id: 'command:editor:page',
-    label: { i18nKey: 'com.affine.cmdk.affine.category.editor.page' },
+    label: { i18nKey: 'com.bridgeflow.cmdk.bridgeflow.category.editor.page' },
     score: 10,
   },
-  'affine:results': {
-    id: 'command:affine:results',
-    label: { i18nKey: 'com.affine.cmdk.affine.category.results' },
+  'bridgeflow:results': {
+    id: 'command:bridgeflow:results',
+    label: { i18nKey: 'com.bridgeflow.cmdk.bridgeflow.category.results' },
     score: 10,
   },
 } satisfies Required<{
@@ -99,7 +99,7 @@ const categories = {
 }>;
 
 function filterCommandByContext(
-  command: AffineCommand,
+  command: BridgeFlowCommand,
   context: {
     docMode: DocMode | undefined;
   }
@@ -126,7 +126,7 @@ function filterCommandByContext(
 }
 
 function getAllCommand(context: { docMode: DocMode | undefined }) {
-  const commands = AffineCommandRegistry.getAll();
+  const commands = BridgeFlowCommandRegistry.getAll();
   return commands.filter(command => {
     return filterCommandByContext(command, context);
   });
@@ -134,7 +134,7 @@ function getAllCommand(context: { docMode: DocMode | undefined }) {
 
 export class CommandsQuickSearchSession
   extends Entity
-  implements QuickSearchSession<'commands', AffineCommand>
+  implements QuickSearchSession<'commands', BridgeFlowCommand>
 {
   constructor(private readonly contextService: GlobalContextService) {
     super();
@@ -160,7 +160,7 @@ export class CommandsQuickSearchSession
       ? fuse.search(query)
       : commands.map(item => ({ item, matches: [], score: 0 }));
 
-    return result.map<QuickSearchItem<'commands', AffineCommand>>(
+    return result.map<QuickSearchItem<'commands', BridgeFlowCommand>>(
       ({ item, matches, score = 1 }) => {
         const normalizedRange = ([start, end]: [number, number]) =>
           [

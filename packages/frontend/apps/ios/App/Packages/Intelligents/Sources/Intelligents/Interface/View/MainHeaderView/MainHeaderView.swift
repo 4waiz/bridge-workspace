@@ -6,18 +6,18 @@ class MainHeaderView: UIView {
 
   private lazy var closeButton = UIButton(type: .system).then {
     $0.imageView?.contentMode = .scaleAspectFit
-    $0.setImage(UIImage.affineClose, for: .normal)
-    $0.tintColor = UIColor.affineIconPrimary
-    $0.backgroundColor = UIColor.affineLayerBackgroundSecondary
+    $0.setImage(UIImage.bridgeflowClose, for: .normal)
+    $0.tintColor = UIColor.bridgeflowIconPrimary
+    $0.backgroundColor = UIColor.bridgeflowLayerBackgroundSecondary
     $0.layer.cornerRadius = 8
     $0.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
     $0.setContentHuggingPriority(.required, for: .horizontal)
   }
 
   private lazy var titleLabel = UILabel().then {
-    $0.text = "AFFiNE AI"
+    $0.text = "BridgeFlow AI"
     $0.font = .systemFont(ofSize: 16, weight: .medium)
-    $0.textColor = UIColor.affineTextPrimary
+    $0.textColor = UIColor.bridgeflowTextPrimary
     $0.textAlignment = .center
   }
 
@@ -27,8 +27,8 @@ class MainHeaderView: UIView {
 
   private lazy var dropdownButton = UIButton(type: .system).then {
     $0.imageView?.contentMode = .scaleAspectFit
-    $0.setImage(UIImage.affineArrowDown, for: .normal)
-    $0.tintColor = UIColor.affineIconPrimary
+    $0.setImage(UIImage.bridgeflowArrowDown, for: .normal)
+    $0.tintColor = UIColor.bridgeflowIconPrimary
     $0.addTarget(self, action: #selector(dropdownButtonTapped), for: .touchUpInside)
     $0.showsMenuAsPrimaryAction = true
     $0.menu = UIMenu(options: [.displayInline], children: [
@@ -47,15 +47,15 @@ class MainHeaderView: UIView {
 
   private lazy var menuButton = UIButton(type: .system).then {
     $0.imageView?.contentMode = .scaleAspectFit
-    $0.setImage(UIImage.affineMore, for: .normal)
-    $0.tintColor = UIColor.affineIconPrimary
-    $0.backgroundColor = UIColor.affineLayerBackgroundSecondary
+    $0.setImage(UIImage.bridgeflowMore, for: .normal)
+    $0.tintColor = UIColor.bridgeflowIconPrimary
+    $0.backgroundColor = UIColor.bridgeflowLayerBackgroundSecondary
     $0.layer.cornerRadius = 8
     $0.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
     $0.setContentHuggingPriority(.required, for: .horizontal)
     $0.showsMenuAsPrimaryAction = true
     $0.menu = .init(options: [.displayInline], children: [
-      UIAction(title: "Clear History", image: .affineBroom, handler: { _ in
+      UIAction(title: "Clear History", image: .bridgeflowBroom, handler: { _ in
         ChatManager.shared.clearCurrentSession()
         ChatManager.shared.clearAll()
       }),
@@ -81,7 +81,7 @@ class MainHeaderView: UIView {
   init() {
     super.init(frame: .zero)
 
-    backgroundColor = UIColor.affineLayerBackgroundPrimary
+    backgroundColor = UIColor.bridgeflowLayerBackgroundPrimary
     addSubview(mainStackView)
 
     mainStackView.snp.makeConstraints { make in

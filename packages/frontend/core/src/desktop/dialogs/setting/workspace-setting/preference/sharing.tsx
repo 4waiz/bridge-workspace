@@ -1,13 +1,13 @@
-import { Switch } from '@affine/component';
+import { Switch } from '@bridgeflow/component';
 import {
   SettingRow,
   SettingWrapper,
-} from '@affine/component/setting-components';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { WorkspacePermissionService } from '@affine/core/modules/permissions';
-import { WorkspaceShareSettingService } from '@affine/core/modules/share-setting';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/component/setting-components';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { WorkspacePermissionService } from '@bridgeflow/core/modules/permissions';
+import { WorkspaceShareSettingService } from '@bridgeflow/core/modules/share-setting';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { useI18n } from '@bridgeflow/i18n';
 import { useLiveData, useService } from '@toeverything/infra';
 
 export const SharingPanel = () => {
@@ -46,11 +46,11 @@ export const Sharing = () => {
   }
 
   return (
-    <SettingWrapper title={t['com.affine.settings.workspace.sharing.title']()}>
+    <SettingWrapper title={t['com.bridgeflow.settings.workspace.sharing.title']()}>
       <SettingRow
-        name={t['com.affine.settings.workspace.sharing.url-preview.title']()}
+        name={t['com.bridgeflow.settings.workspace.sharing.url-preview.title']()}
         desc={t[
-          'com.affine.settings.workspace.sharing.url-preview.description'
+          'com.bridgeflow.settings.workspace.sharing.url-preview.description'
         ]()}
       >
         <Switch
@@ -61,10 +61,10 @@ export const Sharing = () => {
       </SettingRow>
       <SettingRow
         name={t[
-          'com.affine.settings.workspace.sharing.workspace-sharing.title'
+          'com.bridgeflow.settings.workspace.sharing.workspace-sharing.title'
         ]()}
         desc={t[
-          'com.affine.settings.workspace.sharing.workspace-sharing.description'
+          'com.bridgeflow.settings.workspace.sharing.workspace-sharing.description'
         ]()}
       >
         <Switch

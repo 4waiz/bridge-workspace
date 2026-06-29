@@ -1,8 +1,8 @@
-import { shallowEqual } from '@affine/component';
-import type { TranscriptionBlockProps } from '@affine/core/blocksuite/ai/blocks/transcription-block/model';
-import { DebugLogger } from '@affine/debug';
-import { UserFriendlyError } from '@affine/error';
-import { AiJobStatus } from '@affine/graphql';
+import { shallowEqual } from '@bridgeflow/component';
+import type { TranscriptionBlockProps } from '@bridgeflow/core/blocksuite/ai/blocks/transcription-block/model';
+import { DebugLogger } from '@bridgeflow/debug';
+import { UserFriendlyError } from '@bridgeflow/error';
+import { AiJobStatus } from '@bridgeflow/graphql';
 import { Entity, LiveData } from '@toeverything/infra';
 
 import type { DefaultServerService, WorkspaceServerService } from '../../cloud';

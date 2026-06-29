@@ -1,22 +1,22 @@
 {
-  "name": "@affine/mobile",
+  "name": "@bridgeflow/mobile",
   "version": "0.26.3",
-  "description": "AFFiNE Desktop Web application",
+  "description": "BridgeFlow Desktop Web application",
   "private": true,
   "browser": "src/index.tsx",
   "scripts": {
-    "build": "affine bundle",
-    "dev": "affine bundle --dev"
+    "build": "bridgeflow bundle",
+    "dev": "bridgeflow bundle --dev"
   },
   "dependencies": {
-    "@affine/component": "workspace:*",
-    "@affine/core": "workspace:*",
-    "@affine/env": "workspace:*",
-    "@affine/i18n": "workspace:*",
-    "@affine/nbstore": "workspace:*",
-    "@affine/track": "workspace:*",
-    "@blocksuite/affine": "workspace:*",
+    "@blocksuite/bridgeflow": "workspace:*",
     "@blocksuite/icons": "^2.2.17",
+    "@bridgeflow/component": "workspace:*",
+    "@bridgeflow/core": "workspace:*",
+    "@bridgeflow/env": "workspace:*",
+    "@bridgeflow/i18n": "workspace:*",
+    "@bridgeflow/nbstore": "workspace:*",
+    "@bridgeflow/track": "workspace:*",
     "@sentry/react": "^10.40.0",
     "@toeverything/infra": "workspace:*",
     "react": "^19.2.1",

@@ -1,13 +1,13 @@
 # iOS
 
-AFFiNE iOS app.
+BridgeFlow iOS app.
 
 ## Build
 
 - `yarn install`
-- `BUILD_TYPE=canary PUBLIC_PATH="/" yarn affine @affine/ios build`
-- `yarn affine @affine/ios cap sync`
-- `yarn affine @affine/ios cap open ios`
+- `BUILD_TYPE=canary PUBLIC_PATH="/" yarn bridgeflow @bridgeflow/ios build`
+- `yarn bridgeflow @bridgeflow/ios cap sync`
+- `yarn bridgeflow @bridgeflow/ios cap open ios`
 
 ## Live Reload
 
@@ -16,5 +16,5 @@ AFFiNE iOS app.
 - `yarn install`
 - `yarn dev`
   - select `ios` for the "Distribution" option
-- `yarn affine @affine/ios sync:dev`
-- `yarn affine @affine/ios cap open ios`
+- `yarn bridgeflow @bridgeflow/ios sync:dev`
+- `yarn bridgeflow @bridgeflow/ios cap open ios`

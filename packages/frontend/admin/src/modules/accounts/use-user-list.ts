@@ -1,6 +1,6 @@
-import { useQuery } from '@affine/admin/use-query';
-import type { FeatureType } from '@affine/graphql';
-import { listUsersQuery } from '@affine/graphql';
+import { useQuery } from '@bridgeflow/admin/use-query';
+import type { FeatureType } from '@bridgeflow/graphql';
+import { listUsersQuery } from '@bridgeflow/graphql';
 import { useEffect, useMemo, useState } from 'react';
 
 export const useUserList = (filter?: {

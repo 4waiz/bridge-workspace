@@ -36,7 +36,7 @@ export const Footer = () => {
       </Section>
       <Section align="center" width="auto">
         <Row style={TextStyles}>
-          <td>Copyright 2023-{new Date().getUTCFullYear()} Bridge Workspace</td>
+          <td>Copyright 2023-{new Date().getUTCFullYear()} BRIDGE Flow</td>
         </Row>
       </Section>
     </Container>

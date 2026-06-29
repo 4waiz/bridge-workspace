@@ -1,4 +1,4 @@
-import type { GetWorkspacePageMetaByIdQuery } from '@affine/graphql';
+import type { GetWorkspacePageMetaByIdQuery } from '@bridgeflow/graphql';
 import {
   catchErrorInto,
   effect,

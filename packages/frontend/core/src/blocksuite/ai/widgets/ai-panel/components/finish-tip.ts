@@ -2,10 +2,10 @@ import {
   AIDoneIcon,
   CopyIcon,
   WarningIcon,
-} from '@blocksuite/affine/components/icons';
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import { NotificationProvider } from '@blocksuite/affine/shared/services';
-import type { EditorHost } from '@blocksuite/affine/std';
+} from '@blocksuite/bridgeflow/components/icons';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { NotificationProvider } from '@blocksuite/bridgeflow/shared/services';
+import type { EditorHost } from '@blocksuite/bridgeflow/std';
 import { baseTheme } from '@toeverything/theme';
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit';
 import { property, state } from 'lit/decorators.js';
@@ -27,7 +27,7 @@ export class AIFinishTip extends WithDisposable(LitElement) {
       padding: 0 12px;
       gap: 4px;
 
-      color: var(--affine-text-secondary-color);
+      color: var(--bridgeflow-text-secondary-color);
 
       .text {
         display: flex;
@@ -35,7 +35,7 @@ export class AIFinishTip extends WithDisposable(LitElement) {
         flex: 1 0 0;
 
         /* light/xs */
-        font-size: var(--affine-font-xs);
+        font-size: var(--bridgeflow-font-xs);
         font-style: normal;
         font-weight: 400;
         line-height: 20px; /* 166.667% */
@@ -56,12 +56,12 @@ export class AIFinishTip extends WithDisposable(LitElement) {
           user-select: none;
         }
         .copy:hover {
-          color: var(--affine-icon-color);
-          background: var(--affine-hover-color);
+          color: var(--bridgeflow-icon-color);
+          background: var(--bridgeflow-hover-color);
           cursor: pointer;
         }
         .copied {
-          color: var(--affine-brand-color);
+          color: var(--bridgeflow-brand-color);
         }
       }
     }
@@ -90,7 +90,7 @@ export class AIFinishTip extends WithDisposable(LitElement) {
                   }}
                 >
                   ${CopyIcon}
-                  <affine-tooltip>Copy</affine-tooltip>
+                  <bridgeflow-tooltip>Copy</bridgeflow-tooltip>
                 </div>`}
           </div>`
         : nothing}

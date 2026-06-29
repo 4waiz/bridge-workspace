@@ -2,11 +2,11 @@ import {
   EditorHostKey,
   propertyType,
   t,
-} from '@blocksuite/affine/blocks/database';
+} from '@blocksuite/bridgeflow/blocks/database';
 import {
   UserListProvider,
   UserProvider,
-} from '@blocksuite/affine/shared/services';
+} from '@blocksuite/bridgeflow/shared/services';
 import zod from 'zod';
 
 export const memberColumnType = propertyType('member');

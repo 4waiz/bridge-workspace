@@ -6,18 +6,18 @@ import {
   notify,
   Skeleton,
   useConfirmModal,
-} from '@affine/component';
+} from '@bridgeflow/component';
 import {
   Pagination,
   SettingHeader,
-} from '@affine/component/setting-components';
-import { Avatar } from '@affine/component/ui/avatar';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { useNavigateHelper } from '@affine/core/components/hooks/use-navigate-helper';
-import { BackupService } from '@affine/core/modules/backup/services';
-import { toArrayBuffer } from '@affine/core/utils/array-buffer';
-import { i18nTime, useI18n } from '@affine/i18n';
-import track from '@affine/track';
+} from '@bridgeflow/component/setting-components';
+import { Avatar } from '@bridgeflow/component/ui/avatar';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { useNavigateHelper } from '@bridgeflow/core/components/hooks/use-navigate-helper';
+import { BackupService } from '@bridgeflow/core/modules/backup/services';
+import { toArrayBuffer } from '@bridgeflow/core/utils/array-buffer';
+import { i18nTime, useI18n } from '@bridgeflow/i18n';
+import track from '@bridgeflow/track';
 import {
   DeleteIcon,
   LocalWorkspaceIcon,
@@ -33,7 +33,7 @@ const Empty = () => {
   const t = useI18n();
   return (
     <div className={styles.empty}>
-      {t['com.affine.settings.workspace.backup.empty']()}
+      {t['com.bridgeflow.settings.workspace.backup.empty']()}
     </div>
   );
 };
@@ -87,12 +87,12 @@ const BackupWorkspaceItem = ({ item }: { item: BackupWorkspaceItem }) => {
       return;
     }
     notify.success({
-      title: t['com.affine.settings.workspace.backup.import.success'](),
+      title: t['com.bridgeflow.settings.workspace.backup.import.success'](),
       actions: [
         {
           key: 'open',
           label:
-            t['com.affine.settings.workspace.backup.import.success.action'](),
+            t['com.bridgeflow.settings.workspace.backup.import.success.action'](),
           onClick: () => {
             jumpToPage(workspaceId, 'all');
           },
@@ -107,13 +107,13 @@ const BackupWorkspaceItem = ({ item }: { item: BackupWorkspaceItem }) => {
   const handleDelete = useCallback(
     (backupWorkspaceId: string) => {
       openConfirmModal({
-        title: t['com.affine.workspaceDelete.title'](),
-        children: t['com.affine.settings.workspace.backup.delete.warning'](),
+        title: t['com.bridgeflow.workspaceDelete.title'](),
+        children: t['com.bridgeflow.settings.workspace.backup.delete.warning'](),
         onConfirm: async () => {
           track.$.settingsPanel.archivedWorkspaces.deleteArchivedWorkspace();
           await backupService.deleteBackupWorkspace(backupWorkspaceId);
           notify.success({
-            title: t['com.affine.settings.workspace.backup.delete.success'](),
+            title: t['com.bridgeflow.settings.workspace.backup.delete.success'](),
           });
         },
         confirmText: t['Confirm'](),
@@ -141,7 +141,7 @@ const BackupWorkspaceItem = ({ item }: { item: BackupWorkspaceItem }) => {
         </div>
       </div>
       <div className={styles.listItemRightLabel}>
-        {t['com.affine.settings.workspace.backup.delete-at']({
+        {t['com.bridgeflow.settings.workspace.backup.delete-at']({
           date: i18nTime(item.updatedAt, {
             absolute: {
               accuracy: 'day',
@@ -167,7 +167,7 @@ const BackupWorkspaceItem = ({ item }: { item: BackupWorkspaceItem }) => {
                 prefixIcon={<LocalWorkspaceIcon />}
                 onClick={handleImport}
               >
-                {t['com.affine.settings.workspace.backup.import']()}
+                {t['com.bridgeflow.settings.workspace.backup.import']()}
               </MenuItem>
               <MenuItem
                 prefixIcon={<DeleteIcon />}
@@ -248,8 +248,8 @@ export const BackupSettingPanel = () => {
   return (
     <>
       <SettingHeader
-        title={t['com.affine.settings.workspace.backup']()}
-        subtitle={t['com.affine.settings.workspace.backup.subtitle']()}
+        title={t['com.bridgeflow.settings.workspace.backup']()}
+        subtitle={t['com.bridgeflow.settings.workspace.backup.subtitle']()}
         data-testid="backup-title"
       />
       {isEmpty ? (

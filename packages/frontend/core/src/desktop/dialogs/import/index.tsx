@@ -1,32 +1,32 @@
-import { Button, IconButton, IconType, Modal } from '@affine/component';
-import { getStoreManager } from '@affine/core/blocksuite/manager/store';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { useNavigateHelper } from '@affine/core/components/hooks/use-navigate-helper';
+import { Button, IconButton, IconType, Modal } from '@bridgeflow/component';
+import { getStoreManager } from '@bridgeflow/core/blocksuite/manager/store';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { useNavigateHelper } from '@bridgeflow/core/components/hooks/use-navigate-helper';
 import {
   type DialogComponentProps,
   GlobalDialogService,
   type WORKSPACE_DIALOG_SCHEMA,
-} from '@affine/core/modules/dialogs';
-import { ExplorerIconService } from '@affine/core/modules/explorer-icon/services/explorer-icon';
-import { OrganizeService } from '@affine/core/modules/organize';
-import { UrlService } from '@affine/core/modules/url';
+} from '@bridgeflow/core/modules/dialogs';
+import { ExplorerIconService } from '@bridgeflow/core/modules/explorer-icon/services/explorer-icon';
+import { OrganizeService } from '@bridgeflow/core/modules/organize';
+import { UrlService } from '@bridgeflow/core/modules/url';
 import {
-  getAFFiNEWorkspaceSchema,
+  getBridgeFlowWorkspaceSchema,
   type WorkspaceMetadata,
   WorkspaceService,
-} from '@affine/core/modules/workspace';
-import { DebugLogger } from '@affine/debug';
-import { useI18n } from '@affine/i18n';
-import track from '@affine/track';
-import { openFilesWith } from '@blocksuite/affine/shared/utils';
-import type { Workspace } from '@blocksuite/affine/store';
+} from '@bridgeflow/core/modules/workspace';
+import { DebugLogger } from '@bridgeflow/debug';
+import { useI18n } from '@bridgeflow/i18n';
+import track from '@bridgeflow/track';
+import { openFilesWith } from '@blocksuite/bridgeflow/shared/utils';
+import type { Workspace } from '@blocksuite/bridgeflow/store';
 import {
   DocxTransformer,
   HtmlTransformer,
   MarkdownTransformer,
   NotionHtmlTransformer,
   ZipTransformer,
-} from '@blocksuite/affine/widgets/linked-doc';
+} from '@blocksuite/bridgeflow/widgets/linked-doc';
 import {
   ExportToHtmlIcon,
   ExportToMarkdownIcon,
@@ -188,8 +188,8 @@ type ImportType =
   | 'snapshot'
   | 'html'
   | 'docx'
-  | 'dotaffinefile';
-type AcceptType = 'Markdown' | 'Zip' | 'Html' | 'Docx' | 'Skip'; // Skip is used for dotaffinefile
+  | 'dotbridgeflowfile';
+type AcceptType = 'Markdown' | 'Zip' | 'Html' | 'Docx' | 'Skip'; // Skip is used for dotbridgeflowfile
 type Status = 'idle' | 'importing' | 'success' | 'error';
 type ImportResult = {
   docIds: string[];
@@ -203,7 +203,7 @@ type ImportConfig = {
   importFunction: (
     docCollection: Workspace,
     files: File[],
-    handleImportAffineFile: () => Promise<WorkspaceMetadata | undefined>,
+    handleImportBridgeFlowFile: () => Promise<WorkspaceMetadata | undefined>,
     organizeService?: OrganizeService,
     explorerIconService?: ExplorerIconService
   ) => Promise<ImportResult>;
@@ -212,7 +212,7 @@ type ImportConfig = {
 const importOptions = [
   {
     key: 'markdown',
-    label: 'com.affine.import.markdown-files',
+    label: 'com.bridgeflow.import.markdown-files',
     prefixIcon: (
       <ExportToMarkdownIcon
         color={cssVarV2('icon/primary')}
@@ -225,20 +225,20 @@ const importOptions = [
   },
   {
     key: 'markdownZip',
-    label: 'com.affine.import.markdown-with-media-files',
+    label: 'com.bridgeflow.import.markdown-with-media-files',
     prefixIcon: (
       <ZipIcon color={cssVarV2('icon/primary')} width={20} height={20} />
     ),
     suffixIcon: (
       <HelpIcon color={cssVarV2('icon/primary')} width={20} height={20} />
     ),
-    suffixTooltip: 'com.affine.import.markdown-with-media-files.tooltip',
+    suffixTooltip: 'com.bridgeflow.import.markdown-with-media-files.tooltip',
     testId: 'editor-option-menu-import-markdown-with-media',
     type: 'markdownZip' as ImportType,
   },
   {
     key: 'html',
-    label: 'com.affine.import.html-files',
+    label: 'com.bridgeflow.import.html-files',
     prefixIcon: (
       <ExportToHtmlIcon
         color={cssVarV2('icon/primary')}
@@ -249,58 +249,58 @@ const importOptions = [
     suffixIcon: (
       <HelpIcon color={cssVarV2('icon/primary')} width={20} height={20} />
     ),
-    suffixTooltip: 'com.affine.import.html-files.tooltip',
+    suffixTooltip: 'com.bridgeflow.import.html-files.tooltip',
     testId: 'editor-option-menu-import-html',
     type: 'html' as ImportType,
   },
   {
     key: 'notion',
-    label: 'com.affine.import.notion',
+    label: 'com.bridgeflow.import.notion',
     prefixIcon: <NotionIcon color={cssVar('black')} width={20} height={20} />,
     suffixIcon: (
       <HelpIcon color={cssVarV2('icon/primary')} width={20} height={20} />
     ),
-    suffixTooltip: 'com.affine.import.notion.tooltip',
+    suffixTooltip: 'com.bridgeflow.import.notion.tooltip',
     testId: 'editor-option-menu-import-notion',
     type: 'notion' as ImportType,
   },
   {
     key: 'docx',
-    label: 'com.affine.import.docx',
+    label: 'com.bridgeflow.import.docx',
     prefixIcon: <FileIcon color={cssVar('black')} width={20} height={20} />,
     suffixIcon: (
       <HelpIcon color={cssVarV2('icon/primary')} width={20} height={20} />
     ),
-    suffixTooltip: 'com.affine.import.docx.tooltip',
+    suffixTooltip: 'com.bridgeflow.import.docx.tooltip',
     testId: 'editor-option-menu-import-docx',
     type: 'docx' as ImportType,
   },
   {
     key: 'snapshot',
-    label: 'com.affine.import.snapshot',
+    label: 'com.bridgeflow.import.snapshot',
     prefixIcon: (
       <PageIcon color={cssVarV2('icon/primary')} width={20} height={20} />
     ),
     suffixIcon: (
       <HelpIcon color={cssVarV2('icon/primary')} width={20} height={20} />
     ),
-    suffixTooltip: 'com.affine.import.snapshot.tooltip',
+    suffixTooltip: 'com.bridgeflow.import.snapshot.tooltip',
     testId: 'editor-option-menu-import-snapshot',
     type: 'snapshot' as ImportType,
   },
   BUILD_CONFIG.isElectron
     ? {
-        key: 'dotaffinefile',
-        label: 'com.affine.import.dotaffinefile',
+        key: 'dotbridgeflowfile',
+        label: 'com.bridgeflow.import.dotbridgeflowfile',
         prefixIcon: (
           <SaveIcon color={cssVarV2('icon/primary')} width={20} height={20} />
         ),
         suffixIcon: (
           <HelpIcon color={cssVarV2('icon/primary')} width={20} height={20} />
         ),
-        suffixTooltip: 'com.affine.import.dotaffinefile.tooltip',
-        testId: 'editor-option-menu-import-dotaffinefile',
-        type: 'dotaffinefile' as ImportType,
+        suffixTooltip: 'com.bridgeflow.import.dotbridgeflowfile.tooltip',
+        testId: 'editor-option-menu-import-dotbridgeflowfile',
+        type: 'dotbridgeflowfile' as ImportType,
       }
     : null,
 ].filter(v => v !== null);
@@ -311,7 +311,7 @@ const importConfigs: Record<ImportType, ImportConfig> = {
     importFunction: async (
       docCollection,
       files,
-      _handleImportAffineFile,
+      _handleImportBridgeFlowFile,
       _organizeService,
       _explorerIconService
     ) => {
@@ -321,7 +321,7 @@ const importConfigs: Record<ImportType, ImportConfig> = {
         const fileName = file.name.split('.').slice(0, -1).join('.');
         const docId = await MarkdownTransformer.importMarkdownToDoc({
           collection: docCollection,
-          schema: getAFFiNEWorkspaceSchema(),
+          schema: getBridgeFlowWorkspaceSchema(),
           markdown: text,
           fileName,
           extensions: getStoreManager().config.init().value.get('store'),
@@ -338,7 +338,7 @@ const importConfigs: Record<ImportType, ImportConfig> = {
     importFunction: async (
       docCollection,
       files,
-      _handleImportAffineFile,
+      _handleImportBridgeFlowFile,
       _organizeService,
       _explorerIconService
     ) => {
@@ -348,7 +348,7 @@ const importConfigs: Record<ImportType, ImportConfig> = {
       }
       const docIds = await MarkdownTransformer.importMarkdownZip({
         collection: docCollection,
-        schema: getAFFiNEWorkspaceSchema(),
+        schema: getBridgeFlowWorkspaceSchema(),
         imported: file,
         extensions: getStoreManager().config.init().value.get('store'),
       });
@@ -362,7 +362,7 @@ const importConfigs: Record<ImportType, ImportConfig> = {
     importFunction: async (
       docCollection,
       files,
-      _handleImportAffineFile,
+      _handleImportBridgeFlowFile,
       _organizeService,
       _explorerIconService
     ) => {
@@ -372,7 +372,7 @@ const importConfigs: Record<ImportType, ImportConfig> = {
         const fileName = file.name.split('.').slice(0, -1).join('.');
         const docId = await HtmlTransformer.importHTMLToDoc({
           collection: docCollection,
-          schema: getAFFiNEWorkspaceSchema(),
+          schema: getBridgeFlowWorkspaceSchema(),
           extensions: getStoreManager().config.init().value.get('store'),
           html: text,
           fileName,
@@ -389,7 +389,7 @@ const importConfigs: Record<ImportType, ImportConfig> = {
     importFunction: async (
       docCollection,
       files,
-      _handleImportAffineFile,
+      _handleImportBridgeFlowFile,
       organizeService,
       explorerIconService
     ) => {
@@ -400,7 +400,7 @@ const importConfigs: Record<ImportType, ImportConfig> = {
       const { entryId, pageIds, isWorkspaceFile, folderHierarchy } =
         await NotionHtmlTransformer.importNotionZip({
           collection: docCollection,
-          schema: getAFFiNEWorkspaceSchema(),
+          schema: getBridgeFlowWorkspaceSchema(),
           imported: file,
           extensions: getStoreManager().config.init().value.get('store'),
         });
@@ -453,7 +453,7 @@ const importConfigs: Record<ImportType, ImportConfig> = {
       for (const file of files) {
         const docId = await DocxTransformer.importDocx({
           collection: docCollection,
-          schema: getAFFiNEWorkspaceSchema(),
+          schema: getBridgeFlowWorkspaceSchema(),
           imported: file,
           extensions: getStoreManager().config.init().value.get('store'),
         });
@@ -467,7 +467,7 @@ const importConfigs: Record<ImportType, ImportConfig> = {
     importFunction: async (
       docCollection,
       files,
-      _handleImportAffineFile,
+      _handleImportBridgeFlowFile,
       _organizeService,
       _explorerIconService
     ) => {
@@ -478,7 +478,7 @@ const importConfigs: Record<ImportType, ImportConfig> = {
       const docIds = (
         await ZipTransformer.importDocs(
           docCollection,
-          getAFFiNEWorkspaceSchema(),
+          getBridgeFlowWorkspaceSchema(),
           file
         )
       )
@@ -490,16 +490,16 @@ const importConfigs: Record<ImportType, ImportConfig> = {
       };
     },
   },
-  dotaffinefile: {
+  dotbridgeflowfile: {
     fileOptions: { acceptType: 'Skip', multiple: false },
     importFunction: async (
       _,
       __,
-      handleImportAffineFile,
+      handleImportBridgeFlowFile,
       _organizeService,
       _explorerIconService
     ) => {
-      await handleImportAffineFile();
+      await handleImportBridgeFlowFile();
       return {
         docIds: [],
         entryId: undefined,
@@ -576,7 +576,7 @@ const ImportOptions = ({
         )}
       </div>
       <div className={style.importModalTip}>
-        {t['com.affine.import.modal.tip']()}{' '}
+        {t['com.bridgeflow.import.modal.tip']()}{' '}
         <a
           className={style.link}
           href={BUILD_CONFIG.discordUrl}
@@ -596,10 +596,10 @@ const ImportingStatus = () => {
   return (
     <>
       <div className={style.importModalTitle}>
-        {t['com.affine.import.status.importing.title']()}
+        {t['com.bridgeflow.import.status.importing.title']()}
       </div>
       <p className={style.importStatusContent}>
-        {t['com.affine.import.status.importing.message']()}
+        {t['com.bridgeflow.import.status.importing.message']()}
       </p>
     </>
   );
@@ -610,10 +610,10 @@ const SuccessStatus = ({ onComplete }: { onComplete: () => void }) => {
   return (
     <>
       <div className={style.importModalTitle}>
-        {t['com.affine.import.status.success.title']()}
+        {t['com.bridgeflow.import.status.success.title']()}
       </div>
       <p className={style.importStatusContent}>
-        {t['com.affine.import.status.success.message']()}{' '}
+        {t['com.bridgeflow.import.status.success.message']()}{' '}
         <a
           className={style.link}
           href={BUILD_CONFIG.discordUrl}
@@ -645,7 +645,7 @@ const ErrorStatus = ({
   return (
     <>
       <div className={style.importModalTitle}>
-        {t['com.affine.import.status.failed.title']()}
+        {t['com.bridgeflow.import.status.failed.title']()}
       </div>
       <p className={style.importStatusContent}>
         {error || 'Unknown error occurred'}
@@ -706,7 +706,7 @@ export const ImportDialog = ({
     [jumpToPage]
   );
 
-  const handleImportAffineFile = useMemo(() => {
+  const handleImportBridgeFlowFile = useMemo(() => {
     return async () => {
       track.$.navigationPanel.workspaceList.createWorkspace({
         control: 'import',
@@ -739,7 +739,7 @@ export const ImportDialog = ({
 
         if (!files || (files.length === 0 && acceptType !== 'Skip')) {
           throw new Error(
-            t['com.affine.import.status.failed.message.no-file-selected']()
+            t['com.bridgeflow.import.status.failed.message.no-file-selected']()
           );
         }
 
@@ -755,7 +755,7 @@ export const ImportDialog = ({
           await importConfig.importFunction(
             docCollection,
             files,
-            handleImportAffineFile,
+            handleImportBridgeFlowFile,
             organizeService,
             explorerIconService
           );
@@ -788,7 +788,7 @@ export const ImportDialog = ({
     [
       docCollection,
       explorerIconService,
-      handleImportAffineFile,
+      handleImportBridgeFlowFile,
       organizeService,
       t,
     ]

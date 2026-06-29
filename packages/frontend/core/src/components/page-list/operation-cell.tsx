@@ -5,20 +5,20 @@ import {
   toast,
   useConfirmModal,
   usePromptModal,
-} from '@affine/component';
-import { useBlockSuiteMetaHelper } from '@affine/core/components/hooks/affine/use-block-suite-meta-helper';
-import { useCatchEventCallback } from '@affine/core/components/hooks/use-catch-event-hook';
-import { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import { DocsService } from '@affine/core/modules/doc';
+} from '@bridgeflow/component';
+import { useBlockSuiteMetaHelper } from '@bridgeflow/core/components/hooks/bridgeflow/use-block-suite-meta-helper';
+import { useCatchEventCallback } from '@bridgeflow/core/components/hooks/use-catch-event-hook';
+import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
+import { DocsService } from '@bridgeflow/core/modules/doc';
 import {
   CompatibleFavoriteItemsAdapter,
   FavoriteService,
-} from '@affine/core/modules/favorite';
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { useI18n } from '@affine/i18n';
-import { track } from '@affine/track';
-import type { DocMeta } from '@blocksuite/affine/store';
+} from '@bridgeflow/core/modules/favorite';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { useI18n } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
+import type { DocMeta } from '@blocksuite/bridgeflow/store';
 import {
   DeleteIcon,
   DeletePermanentlyIcon,
@@ -107,11 +107,11 @@ const PageOperationCellMenuItem = ({
     track.allDocs.list.docMenu.deleteDoc();
 
     openConfirmModal({
-      title: t['com.affine.moveToTrash.confirmModal.title'](),
-      description: t['com.affine.moveToTrash.confirmModal.description']({
+      title: t['com.bridgeflow.moveToTrash.confirmModal.title'](),
+      description: t['com.bridgeflow.moveToTrash.confirmModal.description']({
         title: docRecord.title$.value || t['Untitled'](),
       }),
-      cancelText: t['com.affine.confirmModal.button.cancel'](),
+      cancelText: t['com.bridgeflow.confirmModal.button.cancel'](),
       confirmText: t.Delete(),
       confirmButtonOptions: {
         variant: 'error',
@@ -137,8 +137,8 @@ const PageOperationCellMenuItem = ({
     favAdapter.toggle(page.id, 'doc');
     toast(
       status
-        ? t['com.affine.toastMessage.removedFavorites']()
-        : t['com.affine.toastMessage.addedFavorites']()
+        ? t['com.bridgeflow.toastMessage.removedFavorites']()
+        : t['com.bridgeflow.toastMessage.addedFavorites']()
     );
   }, [page.id, favAdapter, t]);
 
@@ -183,23 +183,23 @@ const PageOperationCellMenuItem = ({
         prefixIcon={<IsFavoriteIcon favorite={favourite} />}
       >
         {favourite
-          ? t['com.affine.favoritePageOperation.remove']()
-          : t['com.affine.favoritePageOperation.add']()}
+          ? t['com.bridgeflow.favoritePageOperation.remove']()
+          : t['com.bridgeflow.favoritePageOperation.add']()}
       </MenuItem>
       <MenuItem onClick={onOpenInfoModal} prefixIcon={<InformationIcon />}>
-        {t['com.affine.page-properties.page-info.view']()}
+        {t['com.bridgeflow.page-properties.page-info.view']()}
       </MenuItem>
       <MenuItem onClick={onOpenInNewTab} prefixIcon={<OpenInNewIcon />}>
-        {t['com.affine.workbench.tab.page-menu-open']()}
+        {t['com.bridgeflow.workbench.tab.page-menu-open']()}
       </MenuItem>
       {BUILD_CONFIG.isElectron ? (
         <MenuItem onClick={onOpenInSplitView} prefixIcon={<SplitViewIcon />}>
-          {t['com.affine.workbench.split-view.page-menu-open']()}
+          {t['com.bridgeflow.workbench.split-view.page-menu-open']()}
         </MenuItem>
       ) : null}
 
       <MenuItem prefixIcon={<DuplicateIcon />} onSelect={onDuplicate}>
-        {t['com.affine.header.option.duplicate']()}
+        {t['com.bridgeflow.header.option.duplicate']()}
       </MenuItem>
 
       <MoveToTrash
@@ -228,8 +228,8 @@ export const PageOperationCell = ({
     favAdapter.toggle(page.id, 'doc');
     toast(
       status
-        ? t['com.affine.toastMessage.removedFavorites']()
-        : t['com.affine.toastMessage.addedFavorites']()
+        ? t['com.bridgeflow.toastMessage.removedFavorites']()
+        : t['com.bridgeflow.toastMessage.addedFavorites']()
     );
   }, [page.id, favAdapter, t]);
   return (
@@ -280,10 +280,10 @@ export const TrashOperationCell = ({
     e => {
       e.preventDefault();
       openConfirmModal({
-        title: `${t['com.affine.trashOperation.deletePermanently']()}?`,
-        description: t['com.affine.trashOperation.deleteDescription'](),
+        title: `${t['com.bridgeflow.trashOperation.deletePermanently']()}?`,
+        description: t['com.bridgeflow.trashOperation.deleteDescription'](),
         cancelText: t['Cancel'](),
-        confirmText: t['com.affine.trashOperation.delete'](),
+        confirmText: t['com.bridgeflow.trashOperation.delete'](),
         confirmButtonOptions: {
           variant: 'error',
         },
@@ -304,7 +304,7 @@ export const TrashOperationCell = ({
   return (
     <ColWrapper flex={1}>
       <IconButton
-        tooltip={t['com.affine.trashOperation.restoreIt']()}
+        tooltip={t['com.bridgeflow.trashOperation.restoreIt']()}
         tooltipOptions={tooltipSideTop}
         data-testid="restore-page-button"
         style={{ marginRight: '12px' }}
@@ -314,7 +314,7 @@ export const TrashOperationCell = ({
         <ResetIcon />
       </IconButton>
       <IconButton
-        tooltip={t['com.affine.trashOperation.deletePermanently']()}
+        tooltip={t['com.bridgeflow.trashOperation.deletePermanently']()}
         tooltipOptions={tooltipSideTopAlignEnd}
         data-testid="delete-page-button"
         onClick={onConfirmPermanentlyDelete}
@@ -364,13 +364,13 @@ export const CollectionOperationCell = ({
     (event: MouseEvent) => {
       handlePropagation(event);
       openPromptModal({
-        title: t['com.affine.editCollection.renameCollection'](),
-        label: t['com.affine.editCollectionName.name'](),
+        title: t['com.bridgeflow.editCollection.renameCollection'](),
+        label: t['com.bridgeflow.editCollectionName.name'](),
         inputOptions: {
-          placeholder: t['com.affine.editCollectionName.name.placeholder'](),
+          placeholder: t['com.bridgeflow.editCollectionName.name.placeholder'](),
         },
-        confirmText: t['com.affine.editCollection.save'](),
-        cancelText: t['com.affine.editCollection.button.cancel'](),
+        confirmText: t['com.bridgeflow.editCollection.save'](),
+        cancelText: t['com.bridgeflow.editCollection.button.cancel'](),
         confirmButtonOptions: {
           variant: 'primary',
         },
@@ -403,8 +403,8 @@ export const CollectionOperationCell = ({
     favAdapter.toggle(collectionId, 'collection');
     toast(
       status
-        ? t['com.affine.toastMessage.removedFavorites']()
-        : t['com.affine.toastMessage.addedFavorites']()
+        ? t['com.bridgeflow.toastMessage.removedFavorites']()
+        : t['com.bridgeflow.toastMessage.addedFavorites']()
     );
   }, [favAdapter, collectionId, t]);
 
@@ -415,8 +415,8 @@ export const CollectionOperationCell = ({
 
   const onConfirmAddDocToCollection = useCallback(() => {
     openConfirmModal({
-      title: t['com.affine.collection.add-doc.confirm.title'](),
-      description: t['com.affine.collection.add-doc.confirm.description'](),
+      title: t['com.bridgeflow.collection.add-doc.confirm.title'](),
+      description: t['com.bridgeflow.collection.add-doc.confirm.description'](),
       cancelText: t['Cancel'](),
       confirmText: t['Confirm'](),
       confirmButtonOptions: {
@@ -438,14 +438,14 @@ export const CollectionOperationCell = ({
       </ColWrapper>
       <IconButton
         onClick={handleEditName}
-        tooltip={t['com.affine.collection.menu.rename']()}
+        tooltip={t['com.bridgeflow.collection.menu.rename']()}
         tooltipOptions={tooltipSideTop}
       >
         <EditIcon />
       </IconButton>
       <IconButton
         onClick={handleEdit}
-        tooltip={t['com.affine.collection.menu.edit']()}
+        tooltip={t['com.bridgeflow.collection.menu.edit']()}
         tooltipOptions={tooltipSideTop}
       >
         <FilterIcon />
@@ -459,8 +459,8 @@ export const CollectionOperationCell = ({
                 prefixIcon={<IsFavoriteIcon favorite={favourite} />}
               >
                 {favourite
-                  ? t['com.affine.favoritePageOperation.remove']()
-                  : t['com.affine.favoritePageOperation.add']()}
+                  ? t['com.bridgeflow.favoritePageOperation.remove']()
+                  : t['com.bridgeflow.favoritePageOperation.add']()}
               </MenuItem>
               <MenuItem
                 onClick={onConfirmAddDocToCollection}

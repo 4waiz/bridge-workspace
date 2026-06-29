@@ -5,7 +5,7 @@
 //  Created by 秋星桥 on 6/30/25.
 //
 
-import AffineGraphQL
+import BridgeFlowGraphQL
 import Apollo
 import ApolloAPI
 import EventSource
@@ -165,7 +165,7 @@ private extension ChatManager {
 
     let messageParameters: [String: AnyHashable] = [
       // packages/frontend/core/src/blocksuite/ai/provider/setup-provider.tsx
-      "docs": editorData.documentAttachments.map(\.documentID), // affine doc
+      "docs": editorData.documentAttachments.map(\.documentID), // bridgeflow doc
       "files": [String](), // attachment in context, keep nil for now
       "searchMode": editorData.isSearchEnabled ? "MUST" : "AUTO",
     ]
@@ -198,7 +198,7 @@ private extension ChatManager {
       blob: attachmentCount == 1 ? "" : .none,
       blobs: attachmentCount > 1 && attachmentCount != 0 ? .some([]) : .none,
       content: .some(contextSnippet.isEmpty ? editorData.text : "\(contextSnippet)\n\(editorData.text)"),
-      params: .some(AffineGraphQL.JSON(_jsonValue: messageParameters)),
+      params: .some(BridgeFlowGraphQL.JSON(_jsonValue: messageParameters)),
       sessionId: sessionId
     ) else {
       report(sessionId, ChatError.unknownError)

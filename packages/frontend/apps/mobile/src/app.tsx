@@ -1,22 +1,22 @@
-import { AffineContext } from '@affine/core/components/context';
-import { AppFallback } from '@affine/core/mobile/components/app-fallback';
-import { configureMobileModules } from '@affine/core/mobile/modules';
-import { HapticProvider } from '@affine/core/mobile/modules/haptics';
-import { VirtualKeyboardProvider } from '@affine/core/mobile/modules/virtual-keyboard';
-import { router } from '@affine/core/mobile/router';
-import { configureCommonModules } from '@affine/core/modules';
-import { I18nProvider } from '@affine/core/modules/i18n';
-import { LifecycleService } from '@affine/core/modules/lifecycle';
+import { BridgeFlowContext } from '@bridgeflow/core/components/context';
+import { AppFallback } from '@bridgeflow/core/mobile/components/app-fallback';
+import { configureMobileModules } from '@bridgeflow/core/mobile/modules';
+import { HapticProvider } from '@bridgeflow/core/mobile/modules/haptics';
+import { VirtualKeyboardProvider } from '@bridgeflow/core/mobile/modules/virtual-keyboard';
+import { router } from '@bridgeflow/core/mobile/router';
+import { configureCommonModules } from '@bridgeflow/core/modules';
+import { I18nProvider } from '@bridgeflow/core/modules/i18n';
+import { LifecycleService } from '@bridgeflow/core/modules/lifecycle';
 import {
   configureLocalStorageStateStorageImpls,
   NbstoreProvider,
-} from '@affine/core/modules/storage';
-import { PopupWindowProvider } from '@affine/core/modules/url';
-import { configureBrowserWorkbenchModule } from '@affine/core/modules/workbench';
-import { configureBrowserWorkspaceFlavours } from '@affine/core/modules/workspace-engine';
-import { getWorkerUrl } from '@affine/env/worker';
-import { StoreManagerClient } from '@affine/nbstore/worker/client';
-import { setTelemetryTransport } from '@affine/track';
+} from '@bridgeflow/core/modules/storage';
+import { PopupWindowProvider } from '@bridgeflow/core/modules/url';
+import { configureBrowserWorkbenchModule } from '@bridgeflow/core/modules/workbench';
+import { configureBrowserWorkspaceFlavours } from '@bridgeflow/core/modules/workspace-engine';
+import { getWorkerUrl } from '@bridgeflow/env/worker';
+import { StoreManagerClient } from '@bridgeflow/nbstore/worker/client';
+import { setTelemetryTransport } from '@bridgeflow/track';
 import { Framework, FrameworkRoot, getCurrentStore } from '@toeverything/infra';
 import { OpClient } from '@toeverything/infra/op';
 import { Suspense } from 'react';
@@ -26,7 +26,7 @@ let storeManagerClient: StoreManagerClient;
 
 const workerUrl = getWorkerUrl('nbstore');
 if (window.SharedWorker) {
-  const worker = new SharedWorker(workerUrl, { name: 'affine-shared-worker' });
+  const worker = new SharedWorker(workerUrl, { name: 'bridgeflow-shared-worker' });
   storeManagerClient = new StoreManagerClient(new OpClient(worker.port));
 } else {
   const worker = new Worker(workerUrl);
@@ -150,13 +150,13 @@ export function App() {
     <Suspense>
       <FrameworkRoot framework={frameworkProvider}>
         <I18nProvider>
-          <AffineContext store={getCurrentStore()}>
+          <BridgeFlowContext store={getCurrentStore()}>
             <RouterProvider
               fallbackElement={<AppFallback />}
               router={router}
               future={future}
             />
-          </AffineContext>
+          </BridgeFlowContext>
         </I18nProvider>
       </FrameworkRoot>
     </Suspense>

@@ -1,4 +1,4 @@
-import { FeatureType } from '@affine/graphql';
+import { FeatureType } from '@bridgeflow/graphql';
 import {
   catchErrorInto,
   effect,

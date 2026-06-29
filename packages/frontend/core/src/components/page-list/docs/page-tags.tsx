@@ -1,5 +1,5 @@
-import { TagItem as TagItemComponent } from '@affine/core/components/tags';
-import type { Tag } from '@affine/core/modules/tag';
+import { TagItem as TagItemComponent } from '@bridgeflow/core/components/tags';
+import type { Tag } from '@bridgeflow/core/modules/tag';
 import { useLiveData } from '@toeverything/infra';
 
 export interface PageTagsProps {

@@ -1,5 +1,5 @@
-import { BRAND_SITE_URL } from '@affine/component/brand';
-import { useI18n } from '@affine/i18n';
+import { BRAND_SITE_URL } from '@bridgeflow/component/brand';
+import { useI18n } from '@bridgeflow/i18n';
 import { ArrowRightBigIcon } from '@blocksuite/icons/rc';
 
 import * as styles from './share-footer.css';
@@ -10,7 +10,7 @@ export const ShareFooter = () => {
     <div className={styles.footerContainer}>
       <div className={styles.footer}>
         <div className={styles.description}>
-          {t['com.affine.share-page.footer.description']()}
+          {t['com.bridgeflow.share-page.footer.description']()}
         </div>
         <a
           className={styles.getStartLink}
@@ -18,7 +18,7 @@ export const ShareFooter = () => {
           target="_blank"
           rel="noreferrer"
         >
-          {t['com.affine.share-page.footer.get-started']()}
+          {t['com.bridgeflow.share-page.footer.get-started']()}
           <ArrowRightBigIcon fontSize={16} />
         </a>
       </div>

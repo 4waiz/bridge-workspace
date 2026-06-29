@@ -1,12 +1,12 @@
-import { Button, Checkbox, Loading, Switch, Tooltip } from '@affine/component';
-import { SettingHeader } from '@affine/component/setting-components';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
+import { Button, Checkbox, Loading, Switch, Tooltip } from '@bridgeflow/component';
+import { SettingHeader } from '@bridgeflow/component/setting-components';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
 import {
-  AFFINE_FLAGS,
+  BRIDGEFLOW_FLAGS,
   FeatureFlagService,
   type Flag,
-} from '@affine/core/modules/feature-flag';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/core/modules/feature-flag';
+import { useI18n } from '@bridgeflow/i18n';
 import {
   ArrowRightSmallIcon,
   DiscordIcon,
@@ -40,7 +40,7 @@ const ExperimentalFeaturesPrompt = ({
     <div className={styles.promptRoot} data-testid="experimental-prompt">
       <div className={styles.promptTitle}>
         {t[
-          'com.affine.settings.workspace.experimental-features.prompt-header'
+          'com.bridgeflow.settings.workspace.experimental-features.prompt-header'
         ]()}
       </div>
       <div className={styles.promptArt}>
@@ -49,11 +49,11 @@ const ExperimentalFeaturesPrompt = ({
       <div className={styles.promptWarning}>
         <div className={styles.promptWarningTitle}>
           {t[
-            'com.affine.settings.workspace.experimental-features.prompt-warning-title'
+            'com.bridgeflow.settings.workspace.experimental-features.prompt-warning-title'
           ]()}
         </div>
         {t[
-          'com.affine.settings.workspace.experimental-features.prompt-warning'
+          'com.bridgeflow.settings.workspace.experimental-features.prompt-warning'
         ]()}
       </div>
 
@@ -66,7 +66,7 @@ const ExperimentalFeaturesPrompt = ({
           data-testid="experimental-prompt-disclaimer"
         />
         {t[
-          'com.affine.settings.workspace.experimental-features.prompt-disclaimer'
+          'com.bridgeflow.settings.workspace.experimental-features.prompt-disclaimer'
         ]()}
       </label>
 
@@ -78,7 +78,7 @@ const ExperimentalFeaturesPrompt = ({
           data-testid="experimental-confirm-button"
         >
           {t[
-            'com.affine.settings.workspace.experimental-features.get-started'
+            'com.bridgeflow.settings.workspace.experimental-features.get-started'
           ]()}
         </Button>
       </div>
@@ -168,21 +168,21 @@ const ExperimentalFeaturesMain = () => {
     <>
       <SettingHeader
         title={t[
-          'com.affine.settings.workspace.experimental-features.header.plugins'
+          'com.bridgeflow.settings.workspace.experimental-features.header.plugins'
         ]()}
         subtitle={t[
-          'com.affine.settings.workspace.experimental-features.header.subtitle'
+          'com.bridgeflow.settings.workspace.experimental-features.header.subtitle'
         ]()}
       />
       <div
         className={styles.settingsContainer}
         data-testid="experimental-settings"
       >
-        {Object.keys(AFFINE_FLAGS).map(key => (
+        {Object.keys(BRIDGEFLOW_FLAGS).map(key => (
           <ExperimentalFeaturesItem
             key={key}
             flagKey={key}
-            flag={featureFlagService.flags[key as keyof AFFINE_FLAGS]}
+            flag={featureFlagService.flags[key as keyof BRIDGEFLOW_FLAGS]}
           />
         ))}
       </div>
@@ -192,7 +192,7 @@ const ExperimentalFeaturesMain = () => {
 
 // TODO(@Peng): save to workspace meta instead?
 const experimentalFeaturesDisclaimerAtom = atomWithStorage(
-  'affine:experimental-features-disclaimer',
+  'bridgeflow:experimental-features-disclaimer',
   false
 );
 

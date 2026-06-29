@@ -1,6 +1,6 @@
-import { Avatar, Tooltip } from '@affine/component';
-import { useCurrentServerService } from '@affine/core/components/providers/current-server-scope';
-import { useI18n } from '@affine/i18n';
+import { Avatar, Tooltip } from '@bridgeflow/component';
+import { useCurrentServerService } from '@bridgeflow/core/components/providers/current-server-scope';
+import { useI18n } from '@bridgeflow/i18n';
 import { useLiveData } from '@toeverything/infra';
 import {
   type ComponentType,

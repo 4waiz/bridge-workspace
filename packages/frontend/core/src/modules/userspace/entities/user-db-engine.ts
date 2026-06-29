@@ -1,10 +1,10 @@
-import { ServerDeploymentType } from '@affine/graphql';
+import { ServerDeploymentType } from '@bridgeflow/graphql';
 import {
   IndexedDBDocStorage,
   IndexedDBDocSyncStorage,
-} from '@affine/nbstore/idb';
-import { SqliteDocStorage, SqliteDocSyncStorage } from '@affine/nbstore/sqlite';
-import type { StoreClient } from '@affine/nbstore/worker/client';
+} from '@bridgeflow/nbstore/idb';
+import { SqliteDocStorage, SqliteDocSyncStorage } from '@bridgeflow/nbstore/sqlite';
+import type { StoreClient } from '@bridgeflow/nbstore/worker/client';
 import { Entity } from '@toeverything/infra';
 
 import type { ServerService } from '../../cloud';

@@ -1,5 +1,5 @@
-import { AIStarIcon } from '@blocksuite/affine/components/icons';
-import { WithDisposable } from '@blocksuite/affine/global/lit';
+import { AIStarIcon } from '@blocksuite/bridgeflow/components/icons';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
 import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
@@ -26,13 +26,13 @@ export class AskAIIcon extends WithDisposable(LitElement) {
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--affine-brand-color);
-      font-size: var(--affine-font-sm);
+      color: var(--bridgeflow-brand-color);
+      font-size: var(--bridgeflow-font-sm);
       font-weight: 500;
     }
 
     .ask-ai-icon-button.small {
-      font-size: var(--affine-font-xs);
+      font-size: var(--bridgeflow-font-xs);
       svg {
         scale: 0.8;
         margin-right: 2px;
@@ -40,7 +40,7 @@ export class AskAIIcon extends WithDisposable(LitElement) {
     }
 
     .ask-ai-icon-button.large {
-      font-size: var(--affine-font-md);
+      font-size: var(--bridgeflow-font-md);
       svg {
         scale: 1.2;
       }
@@ -52,7 +52,7 @@ export class AskAIIcon extends WithDisposable(LitElement) {
 
     .ask-ai-icon-button svg {
       margin-right: 4px;
-      color: var(--affine-brand-color);
+      color: var(--bridgeflow-brand-color);
     }
   `;
 

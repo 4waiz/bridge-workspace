@@ -111,7 +111,7 @@ export async function clickTestOperationsMenuItem(page: Page, name: string) {
 export async function switchReadonly(page: Page, value = true) {
   await page.evaluate(_value => {
     const defaultPage = document.querySelector(
-      'affine-page-root,affine-edgeless-root'
+      'bridgeflow-page-root,bridgeflow-edgeless-root'
     ) as HTMLElement & {
       store: Store;
     };

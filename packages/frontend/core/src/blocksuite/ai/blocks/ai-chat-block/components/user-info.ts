@@ -1,4 +1,4 @@
-import { BRAND_AI_NAME } from '@affine/component/brand';
+import { BRAND_AI_NAME } from '@bridgeflow/component/brand';
 import { baseTheme } from '@toeverything/theme';
 import { css, html, LitElement, type TemplateResult, unsafeCSS } from 'lit';
 import { property } from 'lit/decorators.js';
@@ -7,7 +7,7 @@ import type {
   MessageRole,
   MessageUserInfo,
 } from '../../../components/ai-chat-messages';
-import { AffineAIIcon } from './icon';
+import { BridgeFlowAIIcon } from './icon';
 
 export class UserInfo extends LitElement {
   static override styles = css`
@@ -22,7 +22,7 @@ export class UserInfo extends LitElement {
       .user-avatar-container {
         width: 24px;
         height: 24px;
-        color: var(--affine-brand-color);
+        color: var(--bridgeflow-brand-color);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -41,14 +41,14 @@ export class UserInfo extends LitElement {
 
       .default-avatar,
       .avatar-image {
-        background-color: var(--affine-primary-color);
+        background-color: var(--bridgeflow-primary-color);
       }
 
       .user-name {
-        color: var(--affine-text-primary-color);
+        color: var(--bridgeflow-text-primary-color);
         text-align: justify;
         font-family: ${unsafeCSS(baseTheme.fontSansFamily)};
-        font-size: var(--affine-font-sm);
+        font-size: var(--bridgeflow-font-sm);
         font-style: normal;
         font-weight: 500;
         line-height: 22px;
@@ -111,7 +111,7 @@ export function UserInfoTemplate(
       ></user-info>`
     : html`<user-info
         .userName=${BRAND_AI_NAME}
-        .avatarIcon=${AffineAIIcon}
+        .avatarIcon=${BridgeFlowAIIcon}
       ></user-info>`;
 
   return userInfoTemplate;

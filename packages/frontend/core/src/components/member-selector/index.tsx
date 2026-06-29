@@ -6,11 +6,11 @@ import {
   type MenuRef,
   RowInput,
   Scrollable,
-} from '@affine/component';
+} from '@bridgeflow/component';
 import {
   type Member,
   MemberSearchService,
-} from '@affine/core/modules/permissions';
+} from '@bridgeflow/core/modules/permissions';
 import { DoneIcon } from '@blocksuite/icons/rc';
 import { useLiveData, useService } from '@toeverything/infra';
 import clsx from 'clsx';

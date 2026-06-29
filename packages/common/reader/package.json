@@ -1,5 +1,5 @@
 {
-  "name": "@affine/reader",
+  "name": "@bridgeflow/reader",
   "type": "module",
   "version": "0.26.3",
   "private": true,
@@ -10,18 +10,18 @@
     "./dist": "./dist/index.js"
   },
   "scripts": {
-    "build": "affine bundle -p @affine/reader",
-    "bundle": "affine bundle -p @affine/reader"
+    "build": "bridgeflow bundle -p @bridgeflow/reader",
+    "bundle": "bridgeflow bundle -p @bridgeflow/reader"
   },
   "dependencies": {
     "lodash-es": "^4.17.23",
     "yjs": "^13.6.27"
   },
   "devDependencies": {
-    "@blocksuite/affine": "workspace:*",
+    "@blocksuite/bridgeflow": "workspace:*",
     "vitest": "^4.0.18"
   },
   "peerDependencies": {
-    "@blocksuite/affine": "workspace:*"
+    "@blocksuite/bridgeflow": "workspace:*"
   }
 }

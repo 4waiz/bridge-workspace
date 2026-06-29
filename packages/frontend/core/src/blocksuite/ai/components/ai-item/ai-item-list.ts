@@ -1,11 +1,11 @@
-import { createLitPortal } from '@blocksuite/affine/components/portal';
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import { ThemeProvider } from '@blocksuite/affine/shared/services';
+import { createLitPortal } from '@blocksuite/bridgeflow/components/portal';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { ThemeProvider } from '@blocksuite/bridgeflow/shared/services';
 import {
   EditorHost,
   PropTypes,
   requiredProperties,
-} from '@blocksuite/affine/std';
+} from '@blocksuite/bridgeflow/std';
 import { flip, offset } from '@floating-ui/dom';
 import { baseTheme } from '@toeverything/theme';
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit';
@@ -31,9 +31,9 @@ export class AIItemList extends WithDisposable(LitElement) {
       display: flex;
       padding: 4px calc(var(--item-padding, 8px) + 4px);
       align-items: center;
-      color: var(--affine-text-secondary-color);
+      color: var(--bridgeflow-text-secondary-color);
       text-align: justify;
-      font-size: var(--affine-font-xs);
+      font-size: var(--bridgeflow-font-xs);
       font-style: normal;
       font-weight: 500;
       line-height: 20px;

@@ -1,15 +1,15 @@
-import type { CopilotChatHistoryFragment } from '@affine/graphql';
-import { Tooltip } from '@blocksuite/affine/components/tooltip';
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import { noop } from '@blocksuite/affine/global/utils';
-import { unsafeCSSVarV2 } from '@blocksuite/affine/shared/theme';
-import { createButtonPopper } from '@blocksuite/affine/shared/utils';
+import type { CopilotChatHistoryFragment } from '@bridgeflow/graphql';
+import { Tooltip } from '@blocksuite/bridgeflow/components/tooltip';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { noop } from '@blocksuite/bridgeflow/global/utils';
+import { unsafeCSSVarV2 } from '@blocksuite/bridgeflow/shared/theme';
+import { createButtonPopper } from '@blocksuite/bridgeflow/shared/utils';
 import type {
   BlockSelection,
   EditorHost,
   TextSelection,
-} from '@blocksuite/affine/std';
-import type { NotificationService } from '@blocksuite/affine-shared/services';
+} from '@blocksuite/bridgeflow/std';
+import type { NotificationService } from '@blocksuite/bridgeflow-shared/services';
 import { CopyIcon, MoreHorizontalIcon, ResetIcon } from '@blocksuite/icons/lit';
 import { css, html, LitElement, nothing, type PropertyValues } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
@@ -37,7 +37,7 @@ export class ChatCopyMore extends WithDisposable(LitElement) {
       }
 
       div:hover {
-        background-color: var(--affine-hover-color);
+        background-color: var(--bridgeflow-hover-color);
       }
 
       .button {
@@ -54,8 +54,8 @@ export class ChatCopyMore extends WithDisposable(LitElement) {
     .more-menu {
       width: 226px;
       border-radius: 8px;
-      background-color: var(--affine-background-overlay-panel-color);
-      box-shadow: var(--affine-menu-shadow);
+      background-color: var(--bridgeflow-background-overlay-panel-color);
+      box-shadow: var(--bridgeflow-menu-shadow);
       display: flex;
       flex-direction: column;
       gap: 4px;
@@ -76,7 +76,7 @@ export class ChatCopyMore extends WithDisposable(LitElement) {
       }
 
       > div:hover {
-        background-color: var(--affine-hover-color);
+        background-color: var(--bridgeflow-hover-color);
       }
     }
   `;
@@ -190,7 +190,7 @@ export class ChatCopyMore extends WithDisposable(LitElement) {
               data-testid="action-copy-button"
             >
               ${CopyIcon({ width: '20px', height: '20px' })}
-              <affine-tooltip>Copy</affine-tooltip>
+              <bridgeflow-tooltip>Copy</bridgeflow-tooltip>
             </div>`
           : nothing}
         ${isLast
@@ -200,7 +200,7 @@ export class ChatCopyMore extends WithDisposable(LitElement) {
               data-testid="action-retry-button"
             >
               ${ResetIcon({ width: '20px', height: '20px' })}
-              <affine-tooltip .autoShift=${true}>Retry</affine-tooltip>
+              <bridgeflow-tooltip .autoShift=${true}>Retry</bridgeflow-tooltip>
             </div>`
           : nothing}
         ${showMoreIcon && host

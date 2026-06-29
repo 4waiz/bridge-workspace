@@ -1,4 +1,4 @@
-import type { GetMembersByWorkspaceIdQuery } from '@affine/graphql';
+import type { GetMembersByWorkspaceIdQuery } from '@bridgeflow/graphql';
 import {
   catchErrorInto,
   effect,

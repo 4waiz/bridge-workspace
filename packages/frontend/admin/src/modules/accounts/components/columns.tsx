@@ -2,9 +2,9 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from '@affine/admin/components/ui/avatar';
-import { cn } from '@affine/admin/utils';
-import { FeatureType } from '@affine/graphql';
+} from '@bridgeflow/admin/components/ui/avatar';
+import { cn } from '@bridgeflow/admin/utils';
+import { FeatureType } from '@bridgeflow/graphql';
 import {
   AccountIcon,
   EmailIcon,

@@ -3,7 +3,7 @@ import type {
   OAuthProviderType,
   ServerDeploymentType,
   ServerFeature,
-} from '@affine/graphql';
+} from '@bridgeflow/graphql';
 
 export interface ServerMetadata {
   id: string;

@@ -1,5 +1,5 @@
-import type { SubscriptionQuery, SubscriptionRecurring } from '@affine/graphql';
-import { SubscriptionPlan } from '@affine/graphql';
+import type { SubscriptionQuery, SubscriptionRecurring } from '@bridgeflow/graphql';
+import { SubscriptionPlan } from '@bridgeflow/graphql';
 import {
   catchErrorInto,
   effect,

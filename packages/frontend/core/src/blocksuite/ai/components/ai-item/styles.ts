@@ -1,4 +1,4 @@
-import { unsafeCSSVar, unsafeCSSVarV2 } from '@blocksuite/affine/shared/theme';
+import { unsafeCSSVar, unsafeCSSVarV2 } from '@blocksuite/bridgeflow/shared/theme';
 import { darkCssVariables, lightCssVariables } from '@toeverything/theme';
 import {
   darkCssVariablesV2,
@@ -21,13 +21,13 @@ export const menuItemStyles = css`
   }
 
   .menu-item:hover {
-    background: ${unsafeCSSVar('--affine-hover-color')};
+    background: ${unsafeCSSVar('--bridgeflow-hover-color')};
     cursor: pointer;
   }
 
   .item-icon {
     display: flex;
-    color: ${unsafeCSSVar('--affine-brand-color')};
+    color: ${unsafeCSSVar('--bridgeflow-brand-color')};
 
     svg {
       width: 20px;
@@ -36,15 +36,15 @@ export const menuItemStyles = css`
   }
 
   .menu-item:hover .item-icon {
-    color: ${unsafeCSSVar('--affine-brand-color')};
+    color: ${unsafeCSSVar('--bridgeflow-brand-color')};
   }
 
   .menu-item.discard:hover {
-    background: ${unsafeCSSVar('--affine-background-error-color')};
+    background: ${unsafeCSSVar('--bridgeflow-background-error-color')};
     .item-name,
     .item-icon,
     .enter-icon {
-      color: ${unsafeCSSVar('--affine-error-color')};
+      color: ${unsafeCSSVar('--bridgeflow-error-color')};
     }
   }
 
@@ -59,7 +59,7 @@ export const menuItemStyles = css`
     font-feature-settings:
       'clig' off,
       'liga' off;
-    font-size: var(--affine-font-sm);
+    font-size: var(--bridgeflow-font-sm);
     font-style: normal;
     font-weight: 400;
     line-height: 22px;
@@ -67,7 +67,7 @@ export const menuItemStyles = css`
 
   .item-beta {
     color: ${unsafeCSSVarV2('text/secondary')};
-    font-size: var(--affine-font-xs);
+    font-size: var(--bridgeflow-font-xs);
     font-weight: 500;
     margin-left: 0.5em;
   }
@@ -89,51 +89,51 @@ export const menuItemStyles = css`
 
   .menu-item[data-app-theme='light'] {
     .item-name {
-      color: ${unsafeCSS(lightCssVariablesV2['--affine-v2-text-primary'])};
+      color: ${unsafeCSS(lightCssVariablesV2['--bridgeflow-v2-text-primary'])};
     }
 
     .item-beta {
-      color: ${unsafeCSS(lightCssVariablesV2['--affine-v2-text-secondary'])};
+      color: ${unsafeCSS(lightCssVariablesV2['--bridgeflow-v2-text-secondary'])};
     }
 
     .enter-icon,
     .arrow-right-icon {
-      color: ${unsafeCSS(lightCssVariablesV2['--affine-v2-icon-primary'])};
+      color: ${unsafeCSS(lightCssVariablesV2['--bridgeflow-v2-icon-primary'])};
     }
   }
 
   .menu-item[data-app-theme='light']:hover {
-    background: ${unsafeCSS(lightCssVariables['--affine-hover-color'])};
+    background: ${unsafeCSS(lightCssVariables['--bridgeflow-hover-color'])};
   }
 
   .menu-item.discard[data-app-theme='light']:hover {
     background: ${unsafeCSS(
-      lightCssVariables['--affine-background-error-color']
+      lightCssVariables['--bridgeflow-background-error-color']
     )};
   }
 
   .menu-item[data-app-theme='dark'] {
     .item-name {
-      color: ${unsafeCSS(darkCssVariablesV2['--affine-v2-text-primary'])};
+      color: ${unsafeCSS(darkCssVariablesV2['--bridgeflow-v2-text-primary'])};
     }
 
     .item-beta {
-      color: ${unsafeCSS(darkCssVariablesV2['--affine-v2-text-secondary'])};
+      color: ${unsafeCSS(darkCssVariablesV2['--bridgeflow-v2-text-secondary'])};
     }
 
     .enter-icon,
     .arrow-right-icon {
-      color: ${unsafeCSS(darkCssVariablesV2['--affine-v2-icon-primary'])};
+      color: ${unsafeCSS(darkCssVariablesV2['--bridgeflow-v2-icon-primary'])};
     }
   }
 
   .menu-item[data-app-theme='dark']:hover {
-    background: ${unsafeCSS(darkCssVariables['--affine-hover-color'])};
+    background: ${unsafeCSS(darkCssVariables['--bridgeflow-hover-color'])};
   }
 
   .menu-item.discard[data-app-theme='dark']:hover {
     background: ${unsafeCSS(
-      darkCssVariables['--affine-background-error-color']
+      darkCssVariables['--bridgeflow-background-error-color']
     )};
   }
 `;

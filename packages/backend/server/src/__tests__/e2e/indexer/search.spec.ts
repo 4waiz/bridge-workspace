@@ -3,7 +3,7 @@ import {
   SearchQueryOccur,
   SearchQueryType,
   SearchTable,
-} from '@affine/graphql';
+} from '@bridgeflow/graphql';
 
 import { DocRole } from '../../../models';
 import { IndexerService } from '../../../plugins/indexer/service';

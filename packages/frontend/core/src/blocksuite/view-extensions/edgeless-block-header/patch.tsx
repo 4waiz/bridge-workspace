@@ -1,14 +1,14 @@
-import type { ReactToLit } from '@affine/component';
-import { JournalService } from '@affine/core/modules/journal';
-import { EmbedSyncedDocConfigExtension } from '@blocksuite/affine/blocks/embed-doc';
-import { NoteConfigExtension } from '@blocksuite/affine/blocks/note';
-import { EDGELESS_BLOCK_CHILD_PADDING } from '@blocksuite/affine/blocks/root';
-import { Bound, Vec } from '@blocksuite/affine/global/gfx';
+import type { ReactToLit } from '@bridgeflow/component';
+import { JournalService } from '@bridgeflow/core/modules/journal';
+import { EmbedSyncedDocConfigExtension } from '@blocksuite/bridgeflow/blocks/embed-doc';
+import { NoteConfigExtension } from '@blocksuite/bridgeflow/blocks/note';
+import { EDGELESS_BLOCK_CHILD_PADDING } from '@blocksuite/bridgeflow/blocks/root';
+import { Bound, Vec } from '@blocksuite/bridgeflow/global/gfx';
 import {
   DocModeProvider,
   EditPropsStore,
-} from '@blocksuite/affine/shared/services';
-import { GfxControllerIdentifier } from '@blocksuite/affine/std/gfx';
+} from '@blocksuite/bridgeflow/shared/services';
+import { GfxControllerIdentifier } from '@blocksuite/bridgeflow/std/gfx';
 import type { FrameworkProvider } from '@toeverything/infra';
 import { html } from 'lit';
 
@@ -59,7 +59,7 @@ export function patchForEdgelessNoteConfig(
           const leftPadding = parseInt(
             window
               .getComputedStyle(rootView)
-              .getPropertyValue('--affine-editor-side-padding')
+              .getPropertyValue('--bridgeflow-editor-side-padding')
               .replace('px', '')
           );
           if (isNaN(leftPadding)) {
@@ -69,7 +69,7 @@ export function patchForEdgelessNoteConfig(
           let editorWidth = parseInt(
             window
               .getComputedStyle(rootView)
-              .getPropertyValue('--affine-editor-width')
+              .getPropertyValue('--bridgeflow-editor-width')
               .replace('px', '')
           );
           if (isNaN(editorWidth)) {

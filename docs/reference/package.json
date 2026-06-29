@@ -1,5 +1,5 @@
 {
-  "name": "@affine/docs",
+  "name": "@bridgeflow/docs",
   "type": "module",
   "private": true,
   "scripts": {

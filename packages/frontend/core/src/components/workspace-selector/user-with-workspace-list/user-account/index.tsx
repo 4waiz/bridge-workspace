@@ -1,4 +1,4 @@
-import { UserPlanButton } from '@affine/core/components/affine/auth/user-plan-button';
+import { UserPlanButton } from '@bridgeflow/core/components/bridgeflow/auth/user-plan-button';
 import type { SyntheticEvent } from 'react';
 
 import * as styles from './index.css';

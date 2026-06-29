@@ -2,17 +2,17 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from '@affine/admin/components/ui/avatar';
-import { Input } from '@affine/admin/components/ui/input';
-import { Label } from '@affine/admin/components/ui/label';
-import { Separator } from '@affine/admin/components/ui/separator';
-import { Switch } from '@affine/admin/components/ui/switch';
-import type { FeatureType } from '@affine/graphql';
+} from '@bridgeflow/admin/components/ui/avatar';
+import { Input } from '@bridgeflow/admin/components/ui/input';
+import { Label } from '@bridgeflow/admin/components/ui/label';
+import { Separator } from '@bridgeflow/admin/components/ui/separator';
+import { Switch } from '@bridgeflow/admin/components/ui/switch';
+import type { FeatureType } from '@bridgeflow/graphql';
 import {
   adminUpdateWorkspaceMutation,
   adminWorkspaceQuery,
   adminWorkspacesQuery,
-} from '@affine/graphql';
+} from '@bridgeflow/graphql';
 import { AccountIcon } from '@blocksuite/icons/rc';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';

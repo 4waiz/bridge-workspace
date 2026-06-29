@@ -1,6 +1,6 @@
-import { ConfirmModalProvider, PromptModalProvider } from '@affine/component';
-import { ProviderComposer } from '@affine/component/provider-composer';
-import { ThemeProvider } from '@affine/core/components/theme-provider';
+import { ConfirmModalProvider, PromptModalProvider } from '@bridgeflow/component';
+import { ProviderComposer } from '@bridgeflow/component/provider-composer';
+import { ThemeProvider } from '@bridgeflow/core/components/theme-provider';
 import type { createStore } from 'jotai';
 import { Provider } from 'jotai';
 import type { PropsWithChildren } from 'react';
@@ -8,11 +8,11 @@ import { useMemo } from 'react';
 
 import { useImageAntialiasing } from '../hooks/use-image-antialiasing';
 
-export type AffineContextProps = PropsWithChildren<{
+export type BridgeFlowContextProps = PropsWithChildren<{
   store?: ReturnType<typeof createStore>;
 }>;
 
-export function AffineContext(props: AffineContextProps) {
+export function BridgeFlowContext(props: BridgeFlowContextProps) {
   useImageAntialiasing();
   return (
     <ProviderComposer

@@ -1,21 +1,22 @@
 import type { CSSProperties } from 'react';
 
-export const BRAND_NAME = 'BridgeWS';
+export const BRAND_NAME = 'BRIDGE Flow';
+export const BRAND_TAGLINE = 'AI Innovation Canvas';
 export const BRAND_CLOUD_NAME = BRAND_NAME;
-export const BRAND_AI_NAME = 'BridgeWS AI';
+export const BRAND_AI_NAME = 'Workspace AI';
 export const BRAND_CREATOR_NAME = 'Awaiz Ahmed';
 export const BRAND_SITE_URL = 'https://awaizahmed.com';
 export const BRAND_LOGO_SRC = '/imgs/bridge-logo.webp';
 
 const brandReplacements: [RegExp, string][] = [
-  [/AFFiNE Cloud/g, BRAND_CLOUD_NAME],
-  [/AFFiNE AI/g, BRAND_AI_NAME],
-  [/AFFiNE\.Pro/g, 'awaizahmed.com'],
-  [/ai\.affine\.pro/g, 'awaizahmed.com'],
-  [/app\.affine\.pro/g, 'awaizahmed.com'],
-  [/docs\.affine\.pro/g, 'awaizahmed.com'],
-  [/affine\.pro/g, 'awaizahmed.com'],
-  [/AFFiNE/g, BRAND_NAME],
+  [/BridgeFlow Cloud/g, BRAND_CLOUD_NAME],
+  [/BridgeFlow AI/g, BRAND_AI_NAME],
+  [/BridgeFlow\.Pro/g, 'awaizahmed.com'],
+  [/ai\.bridgeflow\.pro/g, 'awaizahmed.com'],
+  [/app\.bridgeflow\.pro/g, 'awaizahmed.com'],
+  [/docs\.bridgeflow\.pro/g, 'awaizahmed.com'],
+  [/bridgeflow\.pro/g, 'awaizahmed.com'],
+  [/BridgeFlow/g, BRAND_NAME],
 ];
 
 export function replaceBrandText(value: string) {

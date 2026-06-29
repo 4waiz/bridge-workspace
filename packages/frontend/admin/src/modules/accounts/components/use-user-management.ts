@@ -1,8 +1,8 @@
 import {
   useMutateQueryResource,
   useMutation,
-} from '@affine/admin/use-mutation';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
+} from '@bridgeflow/admin/use-mutation';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
 import {
   createChangePasswordUrlMutation,
   createUserMutation,
@@ -15,7 +15,7 @@ import {
   listUsersQuery,
   updateAccountFeaturesMutation,
   updateAccountMutation,
-} from '@affine/graphql';
+} from '@bridgeflow/graphql';
 import { useCallback, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 

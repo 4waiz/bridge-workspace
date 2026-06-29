@@ -1,15 +1,15 @@
 {
-  "name": "@affine/electron",
+  "name": "@bridgeflow/electron",
   "private": true,
   "version": "0.26.3",
   "main": "./dist/main.js",
   "author": "toeverything",
   "repository": {
-    "url": "https://github.com/toeverything/AFFiNE",
+    "url": "https://github.com/toeverything/BridgeFlow",
     "type": "git"
   },
-  "description": "AFFiNE Desktop App",
-  "homepage": "https://github.com/toeverything/AFFiNE",
+  "description": "BRIDGE Flow Desktop App",
+  "homepage": "https://github.com/toeverything/BridgeFlow",
   "exports": {
     "./helper/exposed": "./src/helper/exposed.ts",
     "./main/exposed": "./src/main/exposed.ts",
@@ -32,10 +32,10 @@
     "make-nsis": "node ./scripts/make-nsis.ts"
   },
   "devDependencies": {
-    "@affine-tools/utils": "workspace:*",
-    "@affine/i18n": "workspace:*",
-    "@affine/native": "workspace:*",
-    "@affine/nbstore": "workspace:*",
+    "@bridgeflow-tools/utils": "workspace:*",
+    "@bridgeflow/i18n": "workspace:*",
+    "@bridgeflow/native": "workspace:*",
+    "@bridgeflow/nbstore": "workspace:*",
     "@electron-forge/cli": "^7.10.2",
     "@electron-forge/core": "^7.10.2",
     "@electron-forge/maker-deb": "^7.10.2",
@@ -87,9 +87,9 @@
   "build": {
     "protocols": [
       {
-        "name": "affine",
+        "name": "bridgeflow",
         "schemes": [
-          "affine"
+          "bridgeflow"
         ]
       }
     ]

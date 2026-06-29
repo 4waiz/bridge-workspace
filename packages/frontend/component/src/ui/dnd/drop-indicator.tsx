@@ -25,8 +25,8 @@ function getTreeElement({
   const style = {
     [styles.horizontalIndent]: `${instruction.currentLevel * instruction.indentPerLevel}px`,
     [styles.indicatorColor]: !isBlocked
-      ? cssVar('--affine-primary-color')
-      : cssVar('--affine-warning-color'),
+      ? cssVar('--bridgeflow-primary-color')
+      : cssVar('--bridgeflow-warning-color'),
   };
 
   if (instruction.type === 'reorder-above') {

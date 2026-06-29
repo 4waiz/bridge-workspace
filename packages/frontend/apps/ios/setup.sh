@@ -30,8 +30,8 @@ CURRENT_VERSION=$(grep "objectVersion = " "$XCPROJ_PATH" | awk -F ' = ' '{print 
 echo "[*] current object version: $CURRENT_VERSION"
 sed -i '' "s/objectVersion = $CURRENT_VERSION/objectVersion = 56/" "$XCPROJ_PATH"
 
-yarn affine @affine/ios build
-yarn affine @affine/ios sync
+yarn bridgeflow @bridgeflow/ios build
+yarn bridgeflow @bridgeflow/ios sync
 
 echo "[*] interacting with rust..."
 rustup target add aarch64-apple-ios
@@ -40,7 +40,7 @@ rustup target add aarch64-apple-darwin
 
 echo "[*] syncing apollo version..."
 LATEST_VERSION="1.23.0"
-sed -i '' "s/exact: \"[^\"]*\"/exact: \"$LATEST_VERSION\"/g" $SCRIPT_DIR_PATH/App/Packages/AffineGraphQL/Package.swift
+sed -i '' "s/exact: \"[^\"]*\"/exact: \"$LATEST_VERSION\"/g" $SCRIPT_DIR_PATH/App/Packages/BridgeFlowGraphQL/Package.swift
 echo "[*] apollo version synced to $LATEST_VERSION"
 
 echo "[*] backing up CustomScalars..."
@@ -48,13 +48,13 @@ TEMP_DIR=$(mktemp -d)
 mkdir -p "$TEMP_DIR"
 function cleanup { rm -rf "$TEMP_DIR"; }
 trap cleanup EXIT
-CUSTOM_SCALARS_DIR=$SCRIPT_DIR_PATH/App/Packages/AffineGraphQL/Sources/Schema/CustomScalars
+CUSTOM_SCALARS_DIR=$SCRIPT_DIR_PATH/App/Packages/BridgeFlowGraphQL/Sources/Schema/CustomScalars
 cp -r $CUSTOM_SCALARS_DIR/* $TEMP_DIR/
 
 echo "[*] codegen..."
 rm -rf $CUSTOM_SCALARS_DIR/*
-yarn affine @affine/ios codegen "1.23.0"
+yarn bridgeflow @bridgeflow/ios codegen "1.23.0"
 cp -r $TEMP_DIR/* $CUSTOM_SCALARS_DIR/
 
 echo "[+] setup complete"
-yarn affine @affine/ios xcode
+yarn bridgeflow @bridgeflow/ios xcode

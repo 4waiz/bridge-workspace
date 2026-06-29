@@ -1,7 +1,7 @@
-import { Button } from '@affine/component';
-import { AuthPageContainer } from '@affine/component/auth-components';
-import { useNavigateHelper } from '@affine/core/components/hooks/use-navigate-helper';
-import { Trans, useI18n } from '@affine/i18n';
+import { Button } from '@bridgeflow/component';
+import { AuthPageContainer } from '@bridgeflow/component/auth-components';
+import { useNavigateHelper } from '@bridgeflow/core/components/hooks/use-navigate-helper';
+import { Trans, useI18n } from '@bridgeflow/i18n';
 import { useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
@@ -17,7 +17,7 @@ export const Component = () => {
   const [params] = useSearchParams();
   const { jumpToIndex, jumpToOpenInApp } = useNavigateHelper();
 
-  const openAFFiNE = useCallback(() => {
+  const openBridgeFlow = useCallback(() => {
     if (params.get('client')) {
       return jumpToOpenInApp('bring-to-front');
     } else {
@@ -27,10 +27,10 @@ export const Component = () => {
 
   const subtitle = (
     <div className={styles.leftContentText}>
-      {t['com.affine.payment.upgrade-success-page.text']()}
+      {t['com.bridgeflow.payment.upgrade-success-page.text']()}
       <div>
         <Trans
-          i18nKey={'com.affine.payment.upgrade-success-page.support'}
+          i18nKey={'com.bridgeflow.payment.upgrade-success-page.support'}
           components={{
             1: (
               <a
@@ -46,11 +46,11 @@ export const Component = () => {
 
   return (
     <AuthPageContainer
-      title={t['com.affine.payment.upgrade-success-page.title']()}
+      title={t['com.bridgeflow.payment.upgrade-success-page.title']()}
       subtitle={subtitle}
     >
-      <Button variant="primary" size="extraLarge" onClick={openAFFiNE}>
-        {t['com.affine.other-page.nav.open-affine']()}
+      <Button variant="primary" size="extraLarge" onClick={openBridgeFlow}>
+        {t['com.bridgeflow.other-page.nav.open-bridgeflow']()}
       </Button>
     </AuthPageContainer>
   );

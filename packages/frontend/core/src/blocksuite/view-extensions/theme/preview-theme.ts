@@ -1,28 +1,28 @@
-import { AppThemeService } from '@affine/core/modules/theme';
-import { ColorScheme } from '@blocksuite/affine/model';
+import { AppThemeService } from '@bridgeflow/core/modules/theme';
+import { ColorScheme } from '@blocksuite/bridgeflow/model';
 import {
   type ThemeExtension,
   ThemeExtensionIdentifier,
-} from '@blocksuite/affine/shared/services';
+} from '@blocksuite/bridgeflow/shared/services';
 import {
   createSignalFromObservable,
   type Signal,
-} from '@blocksuite/affine/shared/utils';
+} from '@blocksuite/bridgeflow/shared/utils';
 import {
   type BlockStdScope,
   LifeCycleWatcher,
   StdIdentifier,
-} from '@blocksuite/affine/std';
+} from '@blocksuite/bridgeflow/std';
 import type { Container } from '@blocksuite/global/di';
 import type { FrameworkProvider } from '@toeverything/infra';
 import type { Observable } from 'rxjs';
 
 export function getPreviewThemeExtension(framework: FrameworkProvider) {
-  class AffinePagePreviewThemeExtension
+  class BridgeFlowPagePreviewThemeExtension
     extends LifeCycleWatcher
     implements ThemeExtension
   {
-    static override readonly key = 'affine-page-preview-theme';
+    static override readonly key = 'bridgeflow-page-preview-theme';
 
     readonly theme: Signal<ColorScheme>;
 
@@ -30,7 +30,7 @@ export function getPreviewThemeExtension(framework: FrameworkProvider) {
 
     static override setup(di: Container) {
       super.setup(di);
-      di.override(ThemeExtensionIdentifier, AffinePagePreviewThemeExtension, [
+      di.override(ThemeExtensionIdentifier, BridgeFlowPagePreviewThemeExtension, [
         StdIdentifier,
       ]);
     }
@@ -69,5 +69,5 @@ export function getPreviewThemeExtension(framework: FrameworkProvider) {
     }
   }
 
-  return AffinePagePreviewThemeExtension;
+  return BridgeFlowPagePreviewThemeExtension;
 }

@@ -1,6 +1,6 @@
-import { LoadingIcon } from '@blocksuite/affine/components/icons';
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import { unsafeCSSVar } from '@blocksuite/affine/shared/theme';
+import { LoadingIcon } from '@blocksuite/bridgeflow/components/icons';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { unsafeCSSVar } from '@blocksuite/bridgeflow/shared/theme';
 import { baseTheme } from '@toeverything/theme';
 import {
   css,

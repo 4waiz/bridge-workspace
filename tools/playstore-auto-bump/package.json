@@ -1,5 +1,5 @@
 {
-  "name": "@affine/playstore-auto-bump",
+  "name": "@bridgeflow/playstore-auto-bump",
   "version": "0.26.3",
   "private": true,
   "type": "module",
@@ -9,8 +9,8 @@
     "bump": "r ./index.ts"
   },
   "dependencies": {
-    "@affine-tools/cli": "workspace:*",
-    "@affine-tools/utils": "workspace:*",
+    "@bridgeflow-tools/cli": "workspace:*",
+    "@bridgeflow-tools/utils": "workspace:*",
     "@googleapis/androidpublisher": "^35.0.0",
     "typescript": "^5.9.3"
   },

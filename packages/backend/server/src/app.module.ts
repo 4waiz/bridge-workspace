@@ -123,9 +123,9 @@ export const FunctionalityModules = [
 ];
 
 export class AppModuleBuilder {
-  private readonly modules: AFFiNEModule[] = [];
+  private readonly modules: BridgeFlowModule[] = [];
 
-  use(...modules: AFFiNEModule[]): this {
+  use(...modules: BridgeFlowModule[]): this {
     modules.forEach(m => {
       this.modules.push(m);
     });
@@ -133,7 +133,7 @@ export class AppModuleBuilder {
     return this;
   }
 
-  useIf(predicator: () => boolean, ...modules: AFFiNEModule[]): this {
+  useIf(predicator: () => boolean, ...modules: BridgeFlowModule[]): this {
     if (predicator()) {
       this.use(...modules);
     }

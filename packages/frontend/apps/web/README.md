@@ -1,3 +1,3 @@
 # web
 
-AFFiNE Desktop Edition Web app.
+BridgeFlow Desktop Edition Web app.

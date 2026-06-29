@@ -1,6 +1,6 @@
-import { Button } from '@affine/component';
-import { useJournalRouteHelper } from '@affine/core/components/hooks/use-journal';
-import { useI18n } from '@affine/i18n';
+import { Button } from '@bridgeflow/component';
+import { useJournalRouteHelper } from '@bridgeflow/core/components/hooks/use-journal';
+import { useI18n } from '@bridgeflow/i18n';
 import { useCallback } from 'react';
 
 export const JournalTodayButton = () => {
@@ -19,7 +19,7 @@ export const JournalTodayButton = () => {
       onClick={onToday}
       style={{ height: 32, padding: '0px 8px' }}
     >
-      {t['com.affine.today']()}
+      {t['com.bridgeflow.today']()}
     </Button>
   );
 };

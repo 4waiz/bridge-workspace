@@ -1,18 +1,18 @@
-import { BrandLogo } from '@affine/component/brand';
-import { ScrollableContainer } from '@affine/component';
-import { MenuItem } from '@affine/component/ui/menu';
-import { AuthService, DefaultServerService } from '@affine/core/modules/cloud';
-import { GlobalDialogService } from '@affine/core/modules/dialogs';
-import { type WorkspaceMetadata } from '@affine/core/modules/workspace';
-import { ServerFeature } from '@affine/graphql';
-import { useI18n } from '@affine/i18n';
-import { track } from '@affine/track';
+import { BrandLogo } from '@bridgeflow/component/brand';
+import { ScrollableContainer } from '@bridgeflow/component';
+import { MenuItem } from '@bridgeflow/component/ui/menu';
+import { AuthService, DefaultServerService } from '@bridgeflow/core/modules/cloud';
+import { GlobalDialogService } from '@bridgeflow/core/modules/dialogs';
+import { type WorkspaceMetadata } from '@bridgeflow/core/modules/workspace';
+import { ServerFeature } from '@bridgeflow/graphql';
+import { useI18n } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
 import { useLiveData, useService } from '@toeverything/infra';
 import { useCallback } from 'react';
 
 import { AddWorkspace } from './add-workspace';
 import * as styles from './index.css';
-import { AFFiNEWorkspaceList } from './workspace-list';
+import { BridgeFlowWorkspaceList } from './workspace-list';
 
 export const SignInItem = () => {
   const globalDialogService = useService(GlobalDialogService);
@@ -37,10 +37,10 @@ export const SignInItem = () => {
 
         <div className={styles.signInTextContainer}>
           <div className={styles.signInTextPrimary}>
-            {t['com.affine.workspace.cloud.auth']()}
+            {t['com.bridgeflow.workspace.cloud.auth']()}
           </div>
           <div className={styles.signInTextSecondary}>
-            {t['com.affine.workspace.cloud.description']()}
+            {t['com.bridgeflow.workspace.cloud.description']()}
           </div>
         </div>
       </div>
@@ -119,7 +119,7 @@ export const UserWithWorkspaceList = ({
         scrollBarClassName={styles.scrollbar}
         scrollThumbClassName={styles.scrollbarThumb}
       >
-        <AFFiNEWorkspaceList
+        <BridgeFlowWorkspaceList
           onEventEnd={onEventEnd}
           onClickWorkspace={onClickWorkspace}
           showEnableCloudButton={showEnableCloudButton}

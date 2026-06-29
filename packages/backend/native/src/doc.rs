@@ -1,4 +1,4 @@
-use affine_common::{
+use bridgeflow_common::{
   doc_parser::{self, BlockInfo, CrawlResult, MarkdownResult, PageDocContent, WorkspaceDocContent},
   napi_utils::map_napi_err,
 };
@@ -147,7 +147,7 @@ pub fn read_all_doc_ids_from_root_doc(doc_bin: Buffer, include_trash: Option<boo
   Ok(result)
 }
 
-/// Converts markdown content to AFFiNE-compatible y-octo document binary.
+/// Converts markdown content to BridgeFlow-compatible y-octo document binary.
 ///
 /// # Arguments
 /// * `title` - The document title

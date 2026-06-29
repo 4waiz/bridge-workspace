@@ -1,10 +1,10 @@
-import { MobileMenu } from '@affine/component';
+import { MobileMenu } from '@bridgeflow/component';
 import {
   type BaseNavigationPanelTreeNodeProps,
   NavigationPanelTreeContext,
-} from '@affine/core/desktop/components/navigation-panel';
-import { WorkbenchLink } from '@affine/core/modules/workbench';
-import { extractEmojiIcon } from '@affine/core/utils';
+} from '@bridgeflow/core/desktop/components/navigation-panel';
+import { WorkbenchLink } from '@bridgeflow/core/modules/workbench';
+import { extractEmojiIcon } from '@bridgeflow/core/utils';
 import { ArrowDownSmallIcon, MoreHorizontalIcon } from '@blocksuite/icons/rc';
 import * as Collapsible from '@radix-ui/react-collapsible';
 import { assignInlineVars } from '@vanilla-extract/dynamic';

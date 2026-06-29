@@ -1,23 +1,23 @@
-import { Button, type ButtonProps } from '@affine/component/ui/button';
-import { Tooltip } from '@affine/component/ui/tooltip';
-import { generateSubscriptionCallbackLink } from '@affine/core/components/hooks/affine/use-subscription-notify';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
+import { Button, type ButtonProps } from '@bridgeflow/component/ui/button';
+import { Tooltip } from '@bridgeflow/component/ui/tooltip';
+import { generateSubscriptionCallbackLink } from '@bridgeflow/core/components/hooks/bridgeflow/use-subscription-notify';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
 import {
   AuthService,
   ServerService,
   SubscriptionService,
-} from '@affine/core/modules/cloud';
-import { GlobalDialogService } from '@affine/core/modules/dialogs';
-import { UrlService } from '@affine/core/modules/url';
+} from '@bridgeflow/core/modules/cloud';
+import { GlobalDialogService } from '@bridgeflow/core/modules/dialogs';
+import { UrlService } from '@bridgeflow/core/modules/url';
 import {
   type CreateCheckoutSessionInput,
   SubscriptionPlan,
   SubscriptionRecurring,
   SubscriptionStatus,
   SubscriptionVariant,
-} from '@affine/graphql';
-import { Trans, useI18n } from '@affine/i18n';
-import { track } from '@affine/track';
+} from '@bridgeflow/graphql';
+import { Trans, useI18n } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
 import { DoneIcon } from '@blocksuite/icons/rc';
 import { useLiveData, useService } from '@toeverything/infra';
 import clsx from 'clsx';
@@ -100,11 +100,11 @@ const getSignUpText = (
 ) => {
   switch (plan) {
     case SubscriptionPlan.Free:
-      return t['com.affine.payment.sign-up-free']();
+      return t['com.bridgeflow.payment.sign-up-free']();
     case SubscriptionPlan.Team:
-      return t['com.affine.payment.upgrade']();
+      return t['com.bridgeflow.payment.upgrade']();
     default:
-      return t['com.affine.payment.buy-pro']();
+      return t['com.bridgeflow.payment.buy-pro']();
   }
 };
 
@@ -160,7 +160,7 @@ const ActionButton = ({ detail, recurring }: PlanCardProps) => {
   if (isBeliever) {
     return (
       <Button className={styles.planAction} disabled>
-        {t['com.affine.payment.cloud.lifetime.included']()}
+        {t['com.bridgeflow.payment.cloud.lifetime.included']()}
       </Button>
     );
   }
@@ -169,7 +169,7 @@ const ActionButton = ({ detail, recurring }: PlanCardProps) => {
   if (isOnetime) {
     return isFree ? (
       <Button className={styles.planAction} disabled>
-        {t['com.affine.payment.cloud.onetime.included']()}
+        {t['com.bridgeflow.payment.cloud.onetime.included']()}
       </Button>
     ) : (
       <RedeemCode recurring={recurring} />
@@ -212,7 +212,7 @@ const CurrentPlan = () => {
   const t = useI18n();
   return (
     <Button className={styles.planAction}>
-      {t['com.affine.payment.current-plan']()}
+      {t['com.bridgeflow.payment.current-plan']()}
     </Button>
   );
 };
@@ -222,7 +222,7 @@ const Downgrade = ({ disabled }: { disabled?: boolean }) => {
   const [open, setOpen] = useState(false);
 
   const tooltipContent = disabled
-    ? t['com.affine.payment.downgraded-tooltip']()
+    ? t['com.bridgeflow.payment.downgraded-tooltip']()
     : null;
 
   const handleClick = useCallback(() => {
@@ -239,7 +239,7 @@ const Downgrade = ({ disabled }: { disabled?: boolean }) => {
             onClick={handleClick}
             disabled={disabled}
           >
-            {t['com.affine.payment.downgrade']()}
+            {t['com.bridgeflow.payment.downgrade']()}
           </Button>
         </div>
       </Tooltip>
@@ -270,7 +270,7 @@ const UpgradeToTeam = ({ recurring }: { recurring: SubscriptionRecurring }) => {
         variant="primary"
         data-event-args-url={`${url}${urlParams.toString() ? `&${urlParams.toString()}` : ''}`}
       >
-        {t['com.affine.payment.upgrade']()}
+        {t['com.bridgeflow.payment.upgrade']()}
       </Button>
     </a>
   );
@@ -344,7 +344,7 @@ export const Upgrade = ({
           {...props}
           {...btnProps}
         >
-          {children ?? t['com.affine.payment.upgrade']()}
+          {children ?? t['com.bridgeflow.payment.upgrade']()}
         </Button>
       )}
     />
@@ -406,7 +406,7 @@ const ChangeRecurring = ({
         disabled={disabled || isMutating}
         loading={isMutating}
       >
-        {t['com.affine.payment.change-to']({ to })}
+        {t['com.bridgeflow.payment.change-to']({ to })}
       </Button>
 
       <ConfirmLoadingModal
@@ -462,10 +462,10 @@ const ResumeButton = () => {
     <ResumeAction open={open} onOpenChange={setOpen}>
       <Button className={styles.resumeAction} onClick={handleClick}>
         <span data-show-hover="true" className={clsx(styles.resumeContent)}>
-          {t['com.affine.payment.resume-renewal']()}
+          {t['com.bridgeflow.payment.resume-renewal']()}
         </span>
         <span data-show-hover="false" className={clsx(styles.resumeContent)}>
-          {t['com.affine.payment.current-plan']()}
+          {t['com.bridgeflow.payment.current-plan']()}
         </span>
       </Button>
     </ResumeAction>
@@ -493,7 +493,7 @@ export const RedeemCode = ({
       plan={plan ?? SubscriptionPlan.Pro}
       {...btnProps}
     >
-      {children ?? t['com.affine.payment.redeem-code']()}
+      {children ?? t['com.bridgeflow.payment.redeem-code']()}
     </Upgrade>
   );
 };

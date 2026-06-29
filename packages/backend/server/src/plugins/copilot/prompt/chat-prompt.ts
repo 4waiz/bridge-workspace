@@ -1,4 +1,4 @@
-import { type Tokenizer } from '@affine/server-native';
+import { type Tokenizer } from '@bridgeflow/server-native';
 import { Logger } from '@nestjs/common';
 import { AiPrompt } from '@prisma/client';
 import Mustache from 'mustache';
@@ -134,13 +134,13 @@ export class ChatPrompt {
       currentDocId,
     } = params;
     return {
-      'affine::date': new Date().toLocaleDateString(),
-      'affine::language': language || 'same language as the user query',
-      'affine::timezone': timezone || 'no preference',
-      'affine::hasDocsRef': Array.isArray(docs) && docs.length > 0,
-      'affine::hasFilesRef': Array.isArray(files) && files.length > 0,
-      'affine::hasSelected': !!selectedMarkdown || !!selectedSnapshot || !!html,
-      'affine::hasCurrentDoc':
+      'bridgeflow::date': new Date().toLocaleDateString(),
+      'bridgeflow::language': language || 'same language as the user query',
+      'bridgeflow::timezone': timezone || 'no preference',
+      'bridgeflow::hasDocsRef': Array.isArray(docs) && docs.length > 0,
+      'bridgeflow::hasFilesRef': Array.isArray(files) && files.length > 0,
+      'bridgeflow::hasSelected': !!selectedMarkdown || !!selectedSnapshot || !!html,
+      'bridgeflow::hasCurrentDoc':
         typeof currentDocId === 'string' && currentDocId.trim().length > 0,
     };
   }
@@ -154,7 +154,7 @@ export class ChatPrompt {
     this.checkParams(params, sessionId);
 
     const { attachments: attach, ...restParams } = Object.fromEntries(
-      Object.entries(params).filter(([k]) => !k.startsWith('affine::'))
+      Object.entries(params).filter(([k]) => !k.startsWith('bridgeflow::'))
     );
     const paramsAttach = Array.isArray(attach) ? attach : [];
 

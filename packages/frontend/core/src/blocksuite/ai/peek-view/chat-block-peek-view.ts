@@ -1,31 +1,31 @@
 import type {
   AIDraftService,
   AIToolsConfigService,
-} from '@affine/core/modules/ai-button';
-import type { AIModelService } from '@affine/core/modules/ai-button/services/models';
+} from '@bridgeflow/core/modules/ai-button';
+import type { AIModelService } from '@bridgeflow/core/modules/ai-button/services/models';
 import type {
   ServerService,
   SubscriptionService,
-} from '@affine/core/modules/cloud';
-import type { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import type { FeatureFlagService } from '@affine/core/modules/feature-flag';
+} from '@bridgeflow/core/modules/cloud';
+import type { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
+import type { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
 import type {
   ContextEmbedStatus,
   CopilotChatHistoryFragment,
-} from '@affine/graphql';
+} from '@bridgeflow/graphql';
 import {
   CanvasElementType,
   EdgelessCRUDIdentifier,
   getSurfaceBlock,
-} from '@blocksuite/affine/blocks/surface';
-import { ViewExtensionManagerIdentifier } from '@blocksuite/affine/ext-loader';
-import { ConnectorMode } from '@blocksuite/affine/model';
+} from '@blocksuite/bridgeflow/blocks/surface';
+import { ViewExtensionManagerIdentifier } from '@blocksuite/bridgeflow/ext-loader';
+import { ConnectorMode } from '@blocksuite/bridgeflow/model';
 import {
   DocModeProvider,
   NotificationProvider,
   TelemetryProvider,
-} from '@blocksuite/affine/shared/services';
-import type { EditorHost } from '@blocksuite/affine/std';
+} from '@blocksuite/bridgeflow/shared/services';
+import type { EditorHost } from '@blocksuite/bridgeflow/std';
 import { html, LitElement, nothing, type PropertyValues } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -225,7 +225,7 @@ export class AIChatBlockPeekView extends LitElement {
     // create a new AI chat block
     const surfaceBlock = store
       .getAllModels()
-      .find(block => block.flavour === 'affine:surface');
+      .find(block => block.flavour === 'bridgeflow:surface');
     if (!surfaceBlock) {
       return;
     }
@@ -245,7 +245,7 @@ export class AIChatBlockPeekView extends LitElement {
 
     const crud = this.host.std.get(EdgelessCRUDIdentifier);
     const forkBlockId = crud.addBlock(
-      'affine:embed-ai-chat',
+      'bridgeflow:embed-ai-chat',
       {
         xywh: bound.serialize(),
         messages: JSON.stringify(messages),
@@ -512,7 +512,7 @@ export class AIChatBlockPeekView extends LitElement {
 
     this._textRendererOptions = {
       extensions,
-      affineFeatureFlagService: this.affineFeatureFlagService,
+      bridgeflowFeatureFlagService: this.bridgeflowFeatureFlagService,
     };
     this._historyMessages = this._deserializeHistoryChatMessages(
       this.historyMessagesString
@@ -599,10 +599,10 @@ export class AIChatBlockPeekView extends LitElement {
         .onEmbeddingProgressChange=${this.onEmbeddingProgressChange}
         .docDisplayConfig=${this.docDisplayConfig}
         .searchMenuConfig=${this.searchMenuConfig}
-        .affineWorkspaceDialogService=${this.affineWorkspaceDialogService}
+        .bridgeflowWorkspaceDialogService=${this.bridgeflowWorkspaceDialogService}
         .notificationService=${notificationService}
         .aiToolsConfigService=${this.aiToolsConfigService}
-        .affineFeatureFlagService=${this.affineFeatureFlagService}
+        .bridgeflowFeatureFlagService=${this.bridgeflowFeatureFlagService}
         .onChatSuccess=${this._onChatSuccess}
         .trackOptions=${{
           where: 'ai-chat-block',
@@ -640,10 +640,10 @@ export class AIChatBlockPeekView extends LitElement {
   accessor searchMenuConfig!: SearchMenuConfig;
 
   @property({ attribute: false })
-  accessor affineFeatureFlagService!: FeatureFlagService;
+  accessor bridgeflowFeatureFlagService!: FeatureFlagService;
 
   @property({ attribute: false })
-  accessor affineWorkspaceDialogService!: WorkspaceDialogService;
+  accessor bridgeflowWorkspaceDialogService!: WorkspaceDialogService;
 
   @property({ attribute: false })
   accessor aiDraftService!: AIDraftService;
@@ -695,8 +695,8 @@ export const AIChatBlockPeekViewTemplate = (
   searchMenuConfig: SearchMenuConfig,
   reasoningConfig: AIReasoningConfig,
   serverService: ServerService,
-  affineFeatureFlagService: FeatureFlagService,
-  affineWorkspaceDialogService: WorkspaceDialogService,
+  bridgeflowFeatureFlagService: FeatureFlagService,
+  bridgeflowWorkspaceDialogService: WorkspaceDialogService,
   aiDraftService: AIDraftService,
   aiToolsConfigService: AIToolsConfigService,
   subscriptionService: SubscriptionService,
@@ -710,8 +710,8 @@ export const AIChatBlockPeekViewTemplate = (
     .searchMenuConfig=${searchMenuConfig}
     .reasoningConfig=${reasoningConfig}
     .serverService=${serverService}
-    .affineFeatureFlagService=${affineFeatureFlagService}
-    .affineWorkspaceDialogService=${affineWorkspaceDialogService}
+    .bridgeflowFeatureFlagService=${bridgeflowFeatureFlagService}
+    .bridgeflowWorkspaceDialogService=${bridgeflowWorkspaceDialogService}
     .aiDraftService=${aiDraftService}
     .aiToolsConfigService=${aiToolsConfigService}
     .subscriptionService=${subscriptionService}

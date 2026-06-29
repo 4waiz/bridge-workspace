@@ -3,7 +3,7 @@
     {
       "children": [
       ],
-      "flavour": "affine:surface",
+      "flavour": "bridgeflow:surface",
       "id": "1",
       "props": {
         "elements": {
@@ -17,7 +17,7 @@
         {
           "children": [
           ],
-          "flavour": "affine:paragraph",
+          "flavour": "bridgeflow:paragraph",
           "id": "3",
           "props": {
             "collapsed": false,
@@ -37,7 +37,7 @@
         {
           "children": [
           ],
-          "flavour": "affine:bookmark",
+          "flavour": "bridgeflow:bookmark",
           "id": "4",
           "props": {
             "caption": null,
@@ -57,7 +57,7 @@
           "version": 1
         }
       ],
-      "flavour": "affine:note",
+      "flavour": "bridgeflow:note",
       "id": "2",
       "props": {
         "background": {
@@ -70,7 +70,7 @@
             "borderRadius": 8,
             "borderSize": 4,
             "borderStyle": "none",
-            "shadowType": "--affine-note-shadow-box"
+            "shadowType": "--bridgeflow-note-shadow-box"
           }
         },
         "hidden": false,
@@ -82,7 +82,7 @@
       "version": 1
     }
   ],
-  "flavour": "affine:page",
+  "flavour": "bridgeflow:page",
   "id": "0",
   "props": {
     "title": {

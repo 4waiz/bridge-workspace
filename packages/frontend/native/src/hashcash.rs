@@ -1,6 +1,6 @@
 use std::convert::TryFrom;
 
-use affine_common::hashcash::Stamp;
+use bridgeflow_common::hashcash::Stamp;
 use napi::{Env, Result, Task, bindgen_prelude::AsyncTask};
 use napi_derive::napi;
 

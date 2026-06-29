@@ -4,22 +4,22 @@ import {
   Loading,
   toast,
   Tooltip,
-} from '@affine/component';
-import { Guard } from '@affine/core/components/guard';
-import { useAppSettingHelper } from '@affine/core/components/hooks/affine/use-app-setting-helper';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import { DocsService } from '@affine/core/modules/doc';
-import { DocDisplayMetaService } from '@affine/core/modules/doc-display-meta';
-import { DocsSearchService } from '@affine/core/modules/docs-search';
-import { FeatureFlagService } from '@affine/core/modules/feature-flag';
-import { GlobalContextService } from '@affine/core/modules/global-context';
-import { NavigationPanelService } from '@affine/core/modules/navigation-panel';
-import { GuardService } from '@affine/core/modules/permissions';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import type { AffineDNDData } from '@affine/core/types/dnd';
-import { useI18n } from '@affine/i18n';
-import { track } from '@affine/track';
+} from '@bridgeflow/component';
+import { Guard } from '@bridgeflow/core/components/guard';
+import { useAppSettingHelper } from '@bridgeflow/core/components/hooks/bridgeflow/use-app-setting-helper';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
+import { DocsService } from '@bridgeflow/core/modules/doc';
+import { DocDisplayMetaService } from '@bridgeflow/core/modules/doc-display-meta';
+import { DocsSearchService } from '@bridgeflow/core/modules/docs-search';
+import { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
+import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
+import { NavigationPanelService } from '@bridgeflow/core/modules/navigation-panel';
+import { GuardService } from '@bridgeflow/core/modules/permissions';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import type { BridgeFlowDNDData } from '@bridgeflow/core/types/dnd';
+import { useI18n } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
 import {
   LiveData,
   MANUALLY_STOP,
@@ -161,7 +161,7 @@ export const NavigationPanelDocNode = ({
       dropTarget: {
         at: 'navigation-panel:doc',
       },
-    } satisfies AffineDNDData;
+    } satisfies BridgeFlowDNDData;
   }, [docId, location]);
 
   const handleRename = useAsyncCallback(
@@ -173,12 +173,12 @@ export const NavigationPanelDocNode = ({
   );
 
   const handleDropOnDoc = useAsyncCallback(
-    async (data: DropTargetDropEvent<AffineDNDData>) => {
+    async (data: DropTargetDropEvent<BridgeFlowDNDData>) => {
       if (data.treeInstruction?.type === 'make-child') {
         if (data.source.data.entity?.type === 'doc') {
           const canEdit = await guardService.can('Doc_Update', docId);
           if (!canEdit) {
-            toast(t['com.affine.no-permission']());
+            toast(t['com.bridgeflow.no-permission']());
             return;
           }
           await docsService.addLinkedDoc(docId, data.source.data.entity.id);
@@ -189,7 +189,7 @@ export const NavigationPanelDocNode = ({
             type: data.source.data.entity.type,
           });
         } else {
-          toast(t['com.affine.rootAppSidebar.doc.link-doc-only']());
+          toast(t['com.bridgeflow.rootAppSidebar.doc.link-doc-only']());
         }
       } else {
         onDrop?.(data);
@@ -213,11 +213,11 @@ export const NavigationPanelDocNode = ({
   );
 
   const handleDropOnPlaceholder = useAsyncCallback(
-    async (data: DropTargetDropEvent<AffineDNDData>) => {
+    async (data: DropTargetDropEvent<BridgeFlowDNDData>) => {
       if (data.source.data.entity?.type === 'doc') {
         const canEdit = await guardService.can('Doc_Update', docId);
         if (!canEdit) {
-          toast(t['com.affine.no-permission']());
+          toast(t['com.bridgeflow.no-permission']());
           return;
         }
         // TODO(eyhn): timeout&error handling
@@ -229,13 +229,13 @@ export const NavigationPanelDocNode = ({
           type: data.source.data.entity.type,
         });
       } else {
-        toast(t['com.affine.rootAppSidebar.doc.link-doc-only']());
+        toast(t['com.bridgeflow.rootAppSidebar.doc.link-doc-only']());
       }
     },
     [docId, docsService, guardService, t]
   );
 
-  const handleCanDrop = useMemo<DropTargetOptions<AffineDNDData>['canDrop']>(
+  const handleCanDrop = useMemo<DropTargetOptions<BridgeFlowDNDData>['canDrop']>(
     () => args => {
       const entityType = args.source.data.entity?.type;
       return args.treeInstruction?.type !== 'make-child'
@@ -289,7 +289,7 @@ export const NavigationPanelDocNode = ({
         referencesLoading &&
         !isCollapsed && (
           <Tooltip
-            content={t['com.affine.rootAppSidebar.docs.references-loading']()}
+            content={t['com.bridgeflow.rootAppSidebar.docs.references-loading']()}
           >
             <div className={styles.loadingIcon}>
               <Loading />

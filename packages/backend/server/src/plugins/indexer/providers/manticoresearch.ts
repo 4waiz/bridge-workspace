@@ -310,7 +310,7 @@ export class ManticoresearchProvider extends ElasticsearchProvider {
           // {
           //   term: {
           //     flavour: {
-          //       value: 'affine:page',
+          //       value: 'bridgeflow:page',
           //       boost: 1.5,
           //     },
           //   },
@@ -319,7 +319,7 @@ export class ManticoresearchProvider extends ElasticsearchProvider {
           // {
           //   match: {
           //     flavour_indexed: {
-          //       query: 'affine:page',
+          //       query: 'bridgeflow:page',
           //       boost: 1.5,
           //     },
           //   },

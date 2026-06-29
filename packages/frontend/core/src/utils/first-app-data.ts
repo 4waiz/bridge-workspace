@@ -1,15 +1,15 @@
 // the following import is used to ensure the block suite editor effects are run
 import '../blocksuite/block-suite-editor';
 
-import { DebugLogger } from '@affine/debug';
-import { DEFAULT_WORKSPACE_NAME } from '@affine/env/constant';
-import onboardingUrl from '@affine/templates/onboarding.zip';
-import { ZipTransformer } from '@blocksuite/affine/widgets/linked-doc';
+import { DebugLogger } from '@bridgeflow/debug';
+import { DEFAULT_WORKSPACE_NAME } from '@bridgeflow/env/constant';
+import onboardingUrl from '@bridgeflow/templates/onboarding.zip';
+import { ZipTransformer } from '@blocksuite/bridgeflow/widgets/linked-doc';
 
 import { DocsService } from '../modules/doc';
 import { OrganizeService } from '../modules/organize';
 import {
-  getAFFiNEWorkspaceSchema,
+  getBridgeFlowWorkspaceSchema,
   type WorkspacesService,
 } from '../modules/workspace';
 
@@ -25,7 +25,7 @@ export async function buildShowcaseWorkspace(
 
     await ZipTransformer.importDocs(
       docCollection,
-      getAFFiNEWorkspaceSchema(),
+      getBridgeFlowWorkspaceSchema(),
       blob
     );
   });
@@ -38,7 +38,7 @@ export async function buildShowcaseWorkspace(
 
   // should jump to the primary starter page
   const defaultDoc = docsService.list.docs$.value.find(p =>
-    p.title$.value.startsWith('Bridge Workspace')
+    p.title$.value.startsWith('BRIDGE Flow')
   );
   const folderTutorialDoc = docsService.list.docs$.value.find(p =>
     p.title$.value.startsWith('Using Folders and Tags')

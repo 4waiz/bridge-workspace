@@ -159,12 +159,12 @@ private class AttachmentManagementCell: UITableViewCell {
   let container = UIView().then {
     $0.layer.cornerRadius = 4
     $0.layer.borderWidth = 0.5
-    $0.layer.borderColor = UIColor.affineLayerBorder.cgColor
+    $0.layer.borderColor = UIColor.bridgeflowLayerBorder.cgColor
   }
 
   let iconView = UIImageView().then {
     $0.contentMode = .scaleAspectFit
-    $0.tintColor = .affineIconPrimary
+    $0.tintColor = .bridgeflowIconPrimary
     $0.setContentCompressionResistancePriority(.required, for: .horizontal)
   }
 
@@ -177,7 +177,7 @@ private class AttachmentManagementCell: UITableViewCell {
 
   let deleteButton = UIButton(type: .system).then {
     $0.setImage(UIImage(systemName: "xmark"), for: .normal)
-    $0.tintColor = .affineIconPrimary
+    $0.tintColor = .bridgeflowIconPrimary
     $0.setContentCompressionResistancePriority(.required, for: .horizontal)
   }
 
@@ -232,7 +232,7 @@ private class AttachmentManagementCell: UITableViewCell {
 
   override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
     super.traitCollectionDidChange(previousTraitCollection)
-    container.layer.borderColor = UIColor.affineLayerBorder.cgColor
+    container.layer.borderColor = UIColor.bridgeflowLayerBorder.cgColor
   }
 
   func configure(with item: _AttachmentManagementController.Item) {

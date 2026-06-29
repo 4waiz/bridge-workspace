@@ -1,6 +1,6 @@
-import { Avatar, Skeleton } from '@affine/component';
-import { PublicUserService } from '@affine/core/modules/cloud';
-import { useI18n } from '@affine/i18n';
+import { Avatar, Skeleton } from '@bridgeflow/component';
+import { PublicUserService } from '@bridgeflow/core/modules/cloud';
+import { useI18n } from '@bridgeflow/i18n';
 import { CloseIcon } from '@blocksuite/icons/rc';
 import { useLiveData, useService } from '@toeverything/infra';
 import { type MouseEventHandler, useCallback, useEffect } from 'react';

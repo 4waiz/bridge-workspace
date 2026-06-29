@@ -1,10 +1,10 @@
-import { notify } from '@affine/component';
-import { AffineOtherPageLayout } from '@affine/component/affine-other-page-layout';
-import { SignInPageContainer } from '@affine/component/auth-components';
-import { SignInPanel } from '@affine/core/components/sign-in';
-import { SignInBackgroundArts } from '@affine/core/components/sign-in/background-arts';
-import type { AuthSessionStatus } from '@affine/core/modules/cloud/entities/session';
-import { useI18n } from '@affine/i18n';
+import { notify } from '@bridgeflow/component';
+import { BridgeFlowOtherPageLayout } from '@bridgeflow/component/bridgeflow-other-page-layout';
+import { SignInPageContainer } from '@bridgeflow/component/auth-components';
+import { SignInPanel } from '@bridgeflow/core/components/sign-in';
+import { SignInBackgroundArts } from '@bridgeflow/core/components/sign-in/background-arts';
+import type { AuthSessionStatus } from '@bridgeflow/core/modules/cloud/entities/session';
+import { useI18n } from '@bridgeflow/i18n';
 import { useCallback, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
@@ -30,7 +30,7 @@ export const SignIn = ({
   useEffect(() => {
     if (error) {
       notify.error({
-        title: t['com.affine.auth.toast.title.failed'](),
+        title: t['com.bridgeflow.auth.toast.title.failed'](),
         message: error,
       });
     }
@@ -78,9 +78,9 @@ export const SignIn = ({
 
 export const Component = () => {
   return (
-    <AffineOtherPageLayout>
+    <BridgeFlowOtherPageLayout>
       <SignInBackgroundArts />
       <SignIn />
-    </AffineOtherPageLayout>
+    </BridgeFlowOtherPageLayout>
   );
 };

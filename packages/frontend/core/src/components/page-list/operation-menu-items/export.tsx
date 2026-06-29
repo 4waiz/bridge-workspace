@@ -1,7 +1,7 @@
-import { MenuItem, MenuSeparator, MenuSub } from '@affine/component';
-import { FeatureFlagService } from '@affine/core/modules/feature-flag';
-import { useI18n } from '@affine/i18n';
-import { track } from '@affine/track';
+import { MenuItem, MenuSeparator, MenuSub } from '@bridgeflow/component';
+import { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
+import { useI18n } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
 import {
   ExportIcon,
   ExportToHtmlIcon,
@@ -63,7 +63,7 @@ export const PrintMenuItems = ({
       className={className}
       type="pdf"
       icon={<PrinterIcon />}
-      label={t['com.affine.export.print']()}
+      label={t['com.bridgeflow.export.print']()}
     />
   );
 };

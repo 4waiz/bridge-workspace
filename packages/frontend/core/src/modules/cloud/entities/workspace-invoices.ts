@@ -1,4 +1,4 @@
-import type { InvoicesQuery } from '@affine/graphql';
+import type { InvoicesQuery } from '@bridgeflow/graphql';
 import {
   catchErrorInto,
   effect,

@@ -268,7 +268,7 @@ export class AuthController {
     const csrfCookie = req.cookies?.[AuthService.csrfCookieName] as
       | string
       | undefined;
-    const csrfHeader = req.get('x-affine-csrf-token');
+    const csrfHeader = req.get('x-bridgeflow-csrf-token');
     if (
       csrfHeader && // optional for backward compatibility, drop after 0.25.0 outdated
       (!csrfCookie || csrfCookie !== csrfHeader)

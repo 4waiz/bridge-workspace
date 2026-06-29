@@ -1,23 +1,23 @@
-import { configureElectronStateStorageImpls } from '@affine/core/desktop/storage';
-import { configureCommonModules } from '@affine/core/modules';
-import { configureAppTabsHeaderModule } from '@affine/core/modules/app-tabs-header';
-import { configureDesktopBackupModule } from '@affine/core/modules/backup';
-import { ValidatorProvider } from '@affine/core/modules/cloud';
+import { configureElectronStateStorageImpls } from '@bridgeflow/core/desktop/storage';
+import { configureCommonModules } from '@bridgeflow/core/modules';
+import { configureAppTabsHeaderModule } from '@bridgeflow/core/modules/app-tabs-header';
+import { configureDesktopBackupModule } from '@bridgeflow/core/modules/backup';
+import { ValidatorProvider } from '@bridgeflow/core/modules/cloud';
 import {
   configureDesktopApiModule,
   DesktopApiService,
-} from '@affine/core/modules/desktop-api';
+} from '@bridgeflow/core/modules/desktop-api';
 import {
   configureSpellCheckSettingModule,
   configureTraySettingModule,
-} from '@affine/core/modules/editor-setting';
-import { configureFindInPageModule } from '@affine/core/modules/find-in-page';
+} from '@bridgeflow/core/modules/editor-setting';
+import { configureFindInPageModule } from '@bridgeflow/core/modules/find-in-page';
 import {
   ClientSchemeProvider,
   PopupWindowProvider,
-} from '@affine/core/modules/url';
-import { configureDesktopWorkbenchModule } from '@affine/core/modules/workbench';
-import { configureBrowserWorkspaceFlavours } from '@affine/core/modules/workspace-engine';
+} from '@bridgeflow/core/modules/url';
+import { configureDesktopWorkbenchModule } from '@bridgeflow/core/modules/workbench';
+import { configureBrowserWorkspaceFlavours } from '@bridgeflow/core/modules/workspace-engine';
 import { Framework } from '@toeverything/infra';
 
 export function setupModules() {

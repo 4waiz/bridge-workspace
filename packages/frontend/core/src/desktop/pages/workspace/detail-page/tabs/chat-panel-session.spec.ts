@@ -1,5 +1,5 @@
 /* eslint-disable rxjs/finnish */
-import type { CopilotChatHistoryFragment } from '@affine/graphql';
+import type { CopilotChatHistoryFragment } from '@bridgeflow/graphql';
 import { describe, expect, test, vi } from 'vitest';
 
 import {

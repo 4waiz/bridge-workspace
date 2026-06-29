@@ -1,10 +1,10 @@
-import { Modal } from '@affine/component';
-import { CollectionService } from '@affine/core/modules/collection';
+import { Modal } from '@bridgeflow/component';
+import { CollectionService } from '@bridgeflow/core/modules/collection';
 import type {
   DialogComponentProps,
   WORKSPACE_DIALOG_SCHEMA,
-} from '@affine/core/modules/dialogs';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/core/modules/dialogs';
+import { useI18n } from '@bridgeflow/i18n';
 import { ViewLayersIcon } from '@blocksuite/icons/rc';
 import { useLiveData, useService } from '@toeverything/infra';
 import { cssVarV2 } from '@toeverything/theme/v2';
@@ -48,7 +48,7 @@ export const CollectionSelectorDialog = ({
         onBeforeConfirm={onBeforeConfirm}
         initial={init}
         data={list}
-        typeName={t[`com.affine.m.selector.type-collection`]()}
+        typeName={t[`com.bridgeflow.m.selector.type-collection`]()}
       />
     </Modal>
   );

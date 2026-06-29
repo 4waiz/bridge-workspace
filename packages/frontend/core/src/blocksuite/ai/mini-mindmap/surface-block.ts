@@ -2,13 +2,13 @@
 import {
   CanvasRenderer,
   type SurfaceBlockModel,
-} from '@blocksuite/affine/blocks/surface';
-import { fitContent } from '@blocksuite/affine/gfx/shape';
-import type { Bound } from '@blocksuite/affine/global/gfx';
-import type { Color, ShapeElementModel } from '@blocksuite/affine/model';
-import { ThemeProvider } from '@blocksuite/affine/shared/services';
-import { BlockComponent } from '@blocksuite/affine/std';
-import { GfxControllerIdentifier } from '@blocksuite/affine/std/gfx';
+} from '@blocksuite/bridgeflow/blocks/surface';
+import { fitContent } from '@blocksuite/bridgeflow/gfx/shape';
+import type { Bound } from '@blocksuite/bridgeflow/global/gfx';
+import type { Color, ShapeElementModel } from '@blocksuite/bridgeflow/model';
+import { ThemeProvider } from '@blocksuite/bridgeflow/shared/services';
+import { BlockComponent } from '@blocksuite/bridgeflow/std';
+import { GfxControllerIdentifier } from '@blocksuite/bridgeflow/std/gfx';
 import { html } from 'lit';
 import { query } from 'lit/decorators.js';
 
@@ -142,17 +142,17 @@ export class MindmapSurfaceBlock extends BlockComponent<SurfaceBlockModel> {
   override render() {
     return html`
       <style>
-        .affine-mini-mindmap-surface {
+        .bridgeflow-mini-mindmap-surface {
           width: 100%;
           height: 100%;
         }
       </style>
-      <div class="affine-mini-mindmap-surface">
+      <div class="bridgeflow-mini-mindmap-surface">
         <!-- attach cavnas later in renderer -->
       </div>
     `;
   }
 
-  @query('.affine-mini-mindmap-surface')
+  @query('.bridgeflow-mini-mindmap-surface')
   accessor editorContainer!: HTMLDivElement;
 }

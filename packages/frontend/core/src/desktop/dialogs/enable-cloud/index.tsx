@@ -1,19 +1,19 @@
-import { Button, Modal, notify } from '@affine/component';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { useNavigateHelper } from '@affine/core/components/hooks/use-navigate-helper';
-import { ServerSelector } from '@affine/core/components/server-selector';
+import { Button, Modal, notify } from '@bridgeflow/component';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { useNavigateHelper } from '@bridgeflow/core/components/hooks/use-navigate-helper';
+import { ServerSelector } from '@bridgeflow/core/components/server-selector';
 import {
   AuthService,
   type Server,
   ServersService,
-} from '@affine/core/modules/cloud';
+} from '@bridgeflow/core/modules/cloud';
 import {
   type DialogComponentProps,
   type GLOBAL_DIALOG_SCHEMA,
   GlobalDialogService,
-} from '@affine/core/modules/dialogs';
-import { WorkspacesService } from '@affine/core/modules/workspace';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/core/modules/dialogs';
+import { WorkspacesService } from '@bridgeflow/core/modules/workspace';
+import { useI18n } from '@bridgeflow/i18n';
 import { CloudWorkspaceIcon } from '@blocksuite/icons/rc';
 import { FrameworkScope, useLiveData, useService } from '@toeverything/infra';
 import { useCallback, useState } from 'react';
@@ -66,7 +66,7 @@ const Dialog = ({
     } catch (e) {
       console.error(e);
       notify.error({
-        title: t['com.affine.workspace.enable-cloud.failed'](),
+        title: t['com.bridgeflow.workspace.enable-cloud.failed'](),
       });
     }
   }, [
@@ -101,12 +101,12 @@ const Dialog = ({
       <CloudWorkspaceIcon width={'36px'} height={'36px'} />
       <div className={styles.textContainer}>
         <div className={styles.title}>
-          {t['com.affine.enableAffineCloudModal.custom-server.title']({
+          {t['com.bridgeflow.enableBridgeFlowCloudModal.custom-server.title']({
             workspaceName: workspace?.name$.value || 'untitled',
           })}
         </div>
         <div className={styles.description}>
-          {t['com.affine.enableAffineCloudModal.custom-server.description']()}
+          {t['com.bridgeflow.enableBridgeFlowCloudModal.custom-server.description']()}
         </div>
       </div>
       <div className={styles.serverSelector}>
@@ -123,7 +123,7 @@ const Dialog = ({
         size="extraLarge"
         variant="primary"
       >
-        {t['com.affine.enableAffineCloudModal.custom-server.enable']()}
+        {t['com.bridgeflow.enableBridgeFlowCloudModal.custom-server.enable']()}
       </Button>
     </div>
   );

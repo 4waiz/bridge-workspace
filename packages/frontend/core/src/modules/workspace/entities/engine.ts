@@ -1,7 +1,7 @@
 import type {
   StoreClient,
   WorkerInitOptions,
-} from '@affine/nbstore/worker/client';
+} from '@bridgeflow/nbstore/worker/client';
 import { Entity } from '@toeverything/infra';
 
 import type { FeatureFlagService } from '../../feature-flag';

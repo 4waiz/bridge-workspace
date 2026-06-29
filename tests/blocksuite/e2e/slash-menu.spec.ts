@@ -245,7 +245,7 @@ test.describe('slash menu should show and hide correctly', () => {
     await expect(slashMenu).toBeVisible();
 
     const slashItems = slashMenu.locator('icon-button');
-    const tooltip = page.locator('.affine-tooltip');
+    const tooltip = page.locator('.bridgeflow-tooltip');
 
     await slashItems.nth(0).hover();
     await expect(tooltip).toBeVisible();
@@ -785,11 +785,11 @@ test('should insert database', async ({ page }) => {
   await assertBlockCount(page, 'paragraph', 0);
   await assertBlockCount(page, 'database', 1);
 
-  const database = page.locator('affine-database');
+  const database = page.locator('bridgeflow-database');
   await expect(database).toBeVisible();
-  const titleColumn = page.locator('.affine-database-column').nth(0);
+  const titleColumn = page.locator('.bridgeflow-database-column').nth(0);
   expect(await titleColumn.innerText()).toBe('Title');
-  const defaultRows = page.locator('.affine-database-block-row');
+  const defaultRows = page.locator('.bridgeflow-database-block-row');
   expect(await defaultRows.count()).toBe(3);
 });
 
@@ -857,8 +857,8 @@ test('should slash menu can trigger linked doc popover', async ({ page }) => {
 
   await type(page, 'doc');
   await pressEnter(page);
-  await expect(page.locator('affine-reference')).toBeVisible();
+  await expect(page.locator('bridgeflow-reference')).toBeVisible();
   await expect(
-    page.locator('affine-reference .affine-reference-title')
+    page.locator('bridgeflow-reference .bridgeflow-reference-title')
   ).toHaveText('doc');
 });

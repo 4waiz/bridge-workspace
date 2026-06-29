@@ -1,0 +1,7 @@
+module bridgeflow_mobile_nativeFFI {
+    header "bridgeflow_mobile_nativeFFI.h"
+    export *
+    use "Darwin"
+    use "_Builtin_stdbool"
+    use "_Builtin_stdint"
+}

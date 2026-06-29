@@ -1,5 +1,5 @@
-import { UserFriendlyError } from '@affine/error';
-import { gqlFetcherFactory } from '@affine/graphql';
+import { UserFriendlyError } from '@bridgeflow/error';
+import { gqlFetcherFactory } from '@bridgeflow/graphql';
 
 import { DummyConnection } from '../../connection';
 
@@ -33,7 +33,7 @@ export class HttpConnection extends DummyConnection {
         headers: {
           ...this.requestHeaders,
           ...init?.headers,
-          'x-affine-version': BUILD_CONFIG.appVersion,
+          'x-bridgeflow-version': BUILD_CONFIG.appVersion,
         },
       })
       .catch(err => {

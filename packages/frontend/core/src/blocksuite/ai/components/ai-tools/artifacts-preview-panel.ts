@@ -1,6 +1,6 @@
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import { unsafeCSSVar, unsafeCSSVarV2 } from '@blocksuite/affine/shared/theme';
-import { ShadowlessElement } from '@blocksuite/affine/std';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { unsafeCSSVar, unsafeCSSVarV2 } from '@blocksuite/bridgeflow/shared/theme';
+import { ShadowlessElement } from '@blocksuite/bridgeflow/std';
 import { EmptyIcon } from '@blocksuite/icons/lit';
 import { css, html, nothing, type TemplateResult } from 'lit';
 import { property } from 'lit/decorators.js';

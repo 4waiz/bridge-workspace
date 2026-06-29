@@ -2169,7 +2169,7 @@ type ServerConfigType {
 }
 
 enum ServerDeploymentType {
-  Affine
+  BridgeFlow
   Selfhosted
 }
 

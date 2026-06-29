@@ -11,7 +11,7 @@ import { QuickSearchTagIcon } from '../views/tag-icon';
 const group: QuickSearchGroup = {
   id: 'tags',
   label: {
-    i18nKey: 'com.affine.cmdk.affine.category.affine.tags',
+    i18nKey: 'com.bridgeflow.cmdk.bridgeflow.category.bridgeflow.tags',
   },
   score: 10,
 };

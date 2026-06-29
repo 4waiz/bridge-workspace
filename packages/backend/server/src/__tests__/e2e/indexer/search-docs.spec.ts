@@ -1,4 +1,4 @@
-import { indexerSearchDocsQuery, SearchTable } from '@affine/graphql';
+import { indexerSearchDocsQuery, SearchTable } from '@bridgeflow/graphql';
 import { omit } from 'lodash-es';
 
 import { IndexerService } from '../../../plugins/indexer/service';

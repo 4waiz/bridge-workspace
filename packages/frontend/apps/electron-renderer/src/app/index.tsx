@@ -1,7 +1,7 @@
 import './setup';
 
-import { appConfigProxy } from '@affine/core/components/hooks/use-app-config-storage';
-import { Telemetry } from '@affine/core/components/telemetry';
+import { appConfigProxy } from '@bridgeflow/core/components/hooks/use-app-config-storage';
+import { Telemetry } from '@bridgeflow/core/components/telemetry';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 

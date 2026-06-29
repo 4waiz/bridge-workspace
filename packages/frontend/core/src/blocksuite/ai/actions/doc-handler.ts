@@ -1,6 +1,6 @@
-import { AIStarIconWithAnimation } from '@blocksuite/affine/components/icons';
-import { createLitPortal } from '@blocksuite/affine/components/portal';
-import { type EditorHost, TextSelection } from '@blocksuite/affine/std';
+import { AIStarIconWithAnimation } from '@blocksuite/bridgeflow/components/icons';
+import { createLitPortal } from '@blocksuite/bridgeflow/components/portal';
+import { type EditorHost, TextSelection } from '@blocksuite/bridgeflow/std';
 import { flip, offset } from '@floating-ui/dom';
 import { html, type TemplateResult } from 'lit';
 
@@ -23,7 +23,7 @@ import {
   selectAboveBlocks,
 } from '../utils/selection-utils';
 import { mergeStreamObjects } from '../utils/stream-objects';
-import type { AffineAIPanelWidget } from '../widgets/ai-panel/ai-panel';
+import type { BridgeFlowAIPanelWidget } from '../widgets/ai-panel/ai-panel';
 import type { AIActionAnswer } from '../widgets/ai-panel/type';
 import { actionToAnswerRenderer } from './answer-renderer';
 
@@ -173,7 +173,7 @@ function actionToGenerateAnswer<T extends keyof BlockSuitePresets.AIActions>(
  * Currently, only support text action
  */
 function updateAIPanelConfig<T extends keyof BlockSuitePresets.AIActions>(
-  aiPanel: AffineAIPanelWidget,
+  aiPanel: BridgeFlowAIPanelWidget,
   id: T,
   generatingIcon: TemplateResult<1>,
   variants?: Omit<
@@ -220,7 +220,7 @@ export function actionToHandler<T extends keyof BlockSuitePresets.AIActions>(
     if (!block) return;
     if (
       blocks.length === 1 &&
-      block.model.flavour === 'affine:image' &&
+      block.model.flavour === 'bridgeflow:image' &&
       id === 'createImage'
     ) {
       // if only one image block is selected, and the action is createImage

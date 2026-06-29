@@ -1,6 +1,6 @@
-import { DebugLogger } from '@affine/debug';
-import { DisposableGroup } from '@blocksuite/affine/global/disposable';
-import type { Store, Workspace } from '@blocksuite/affine/store';
+import { DebugLogger } from '@bridgeflow/debug';
+import { DisposableGroup } from '@blocksuite/bridgeflow/global/disposable';
+import type { Store, Workspace } from '@blocksuite/bridgeflow/store';
 import { useEffect, useState } from 'react';
 
 const logger = new DebugLogger('use-doc-collection-page');

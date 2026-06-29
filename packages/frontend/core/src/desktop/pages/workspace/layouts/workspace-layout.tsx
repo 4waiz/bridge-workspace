@@ -1,19 +1,19 @@
-import { uniReactRoot } from '@affine/component';
-import { AiLoginRequiredModal } from '@affine/core/components/affine/auth/ai-login-required';
-import { useResponsiveSidebar } from '@affine/core/components/hooks/use-responsive-siedebar';
-import { SWRConfigProvider } from '@affine/core/components/providers/swr-config-provider';
-import { WorkspaceSideEffects } from '@affine/core/components/providers/workspace-side-effects';
-import { AIIsland } from '@affine/core/desktop/components/ai-island';
-import { AppContainer } from '@affine/core/desktop/components/app-container';
-import { BridgeWorkspaceAssistant } from '@affine/core/desktop/components/bridge-workspace-assistant';
-import { DocumentTitle } from '@affine/core/desktop/components/document-title';
-import { WorkspaceDialogs } from '@affine/core/desktop/dialogs';
-import { DocsService } from '@affine/core/modules/doc';
-import { OrganizeService } from '@affine/core/modules/organize';
-import { PeekViewManagerModal } from '@affine/core/modules/peek-view';
-import { QuotaCheck } from '@affine/core/modules/quota';
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { WorkspaceService } from '@affine/core/modules/workspace';
+import { uniReactRoot } from '@bridgeflow/component';
+import { AiLoginRequiredModal } from '@bridgeflow/core/components/bridgeflow/auth/ai-login-required';
+import { useResponsiveSidebar } from '@bridgeflow/core/components/hooks/use-responsive-siedebar';
+import { SWRConfigProvider } from '@bridgeflow/core/components/providers/swr-config-provider';
+import { WorkspaceSideEffects } from '@bridgeflow/core/components/providers/workspace-side-effects';
+import { AIIsland } from '@bridgeflow/core/desktop/components/ai-island';
+import { AppContainer } from '@bridgeflow/core/desktop/components/app-container';
+import { BridgeFlowAssistant } from '@bridgeflow/core/desktop/components/bridge-flow-assistant';
+import { DocumentTitle } from '@bridgeflow/core/desktop/components/document-title';
+import { WorkspaceDialogs } from '@bridgeflow/core/desktop/dialogs';
+import { DocsService } from '@bridgeflow/core/modules/doc';
+import { OrganizeService } from '@bridgeflow/core/modules/organize';
+import { PeekViewManagerModal } from '@bridgeflow/core/modules/peek-view';
+import { QuotaCheck } from '@bridgeflow/core/modules/quota';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { LiveData, useLiveData, useService } from '@toeverything/infra';
 import type { PropsWithChildren } from 'react';
 import { useEffect } from 'react';
@@ -30,7 +30,7 @@ export const WorkspaceLayout = function WorkspaceLayout({
     }
 
     if (currentWorkspaceName === 'Demo Workspace') {
-      currentWorkspace.setName('Bridge Workspace');
+      currentWorkspace.setName('BRIDGE Flow');
     }
 
     const docsService = currentWorkspace.scope.get(DocsService);
@@ -47,7 +47,7 @@ export const WorkspaceLayout = function WorkspaceLayout({
       if (bridgeWorkspaceDoc) {
         await docsService.changeDocTitle(
           bridgeWorkspaceDoc.id,
-          'Bridge Workspace'
+          'BRIDGE Flow'
         );
       }
 
@@ -104,7 +104,7 @@ export const WorkspaceLayout = function WorkspaceLayout({
       {/* should show after workspace loaded */}
       {/* FIXME: wait for better ai, <WorkspaceAIOnboarding /> */}
       <AIIsland />
-      <BridgeWorkspaceAssistant />
+      <BridgeFlowAssistant />
       <uniReactRoot.Root />
     </SWRConfigProvider>
   );

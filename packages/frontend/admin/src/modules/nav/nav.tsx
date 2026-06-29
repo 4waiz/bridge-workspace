@@ -1,5 +1,5 @@
-import { cn } from '@affine/admin/utils';
-import { ROUTES } from '@affine/routes';
+import { cn } from '@bridgeflow/admin/utils';
+import { ROUTES } from '@bridgeflow/routes';
 import { AccountIcon, SelfhostIcon } from '@blocksuite/icons/rc';
 import {
   BarChart3Icon,

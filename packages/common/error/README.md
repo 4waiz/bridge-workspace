@@ -1,3 +1,3 @@
-# @affine/error
+# @bridgeflow/error
 
-AFFiNE error handler utilities
+BridgeFlow error handler utilities

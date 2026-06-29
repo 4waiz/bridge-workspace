@@ -1,1 +1,1 @@
-import '@affine/core/bootstrap/browser';
+import '@bridgeflow/core/bootstrap/browser';

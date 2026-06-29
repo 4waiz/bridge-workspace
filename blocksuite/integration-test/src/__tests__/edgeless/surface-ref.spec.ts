@@ -1,7 +1,7 @@
 import {
   type EdgelessRootBlockComponent,
   EdgelessRootService,
-} from '@blocksuite/affine/blocks/root';
+} from '@blocksuite/bridgeflow/blocks/root';
 import type { DocSnapshot } from '@blocksuite/store';
 import { beforeEach, describe, expect, test } from 'vitest';
 
@@ -42,7 +42,7 @@ describe('basic', () => {
     })!;
     await wait(0); // wait next frame
     frameId = service.crud.addBlock(
-      'affine:frame',
+      'bridgeflow:frame',
       {
         xywh: '[0, 0, 800, 200]',
         index: service.generateIndex(),
@@ -55,10 +55,10 @@ describe('basic', () => {
 
   test('surface-ref should be rendered in page mode', async () => {
     const surfaceRefId = doc.addBlock(
-      'affine:surface-ref',
+      'bridgeflow:surface-ref',
       {
         reference: frameId,
-        refFlavour: 'affine:frame',
+        refFlavour: 'bridgeflow:frame',
       },
       noteAId
     );
@@ -68,17 +68,17 @@ describe('basic', () => {
 
     expect(
       document.querySelector(
-        `affine-surface-ref[data-block-id="${surfaceRefId}"]`
+        `bridgeflow-surface-ref[data-block-id="${surfaceRefId}"]`
       )
     ).instanceOf(Element);
   });
 
   test('content in frame should be rendered in the correct order', async () => {
     const surfaceRefId = doc.addBlock(
-      'affine:surface-ref',
+      'bridgeflow:surface-ref',
       {
         reference: frameId,
-        refFlavour: 'affine:frame',
+        refFlavour: 'bridgeflow:frame',
       },
       noteAId
     );
@@ -87,10 +87,10 @@ describe('basic', () => {
     await wait();
 
     const surfaceRef = document.querySelector(
-      `affine-surface-ref[data-block-id="${surfaceRefId}"]`
+      `bridgeflow-surface-ref[data-block-id="${surfaceRefId}"]`
     ) as HTMLElement;
     const refBlocks = Array.from(
-      surfaceRef.querySelectorAll('affine-edgeless-note')
+      surfaceRef.querySelectorAll('bridgeflow-edgeless-note')
     ) as HTMLElement[];
     const stackingCanvas = Array.from(
       surfaceRef.querySelectorAll('.indexable-canvas')!
@@ -113,7 +113,7 @@ describe('basic', () => {
       },
     });
     const surfaceRefId = doc.addBlock(
-      'affine:surface-ref',
+      'bridgeflow:surface-ref',
       {
         reference: groupId,
         refFlavour: 'group',
@@ -125,10 +125,10 @@ describe('basic', () => {
     await wait();
 
     const surfaceRef = document.querySelector(
-      `affine-surface-ref[data-block-id="${surfaceRefId}"]`
+      `bridgeflow-surface-ref[data-block-id="${surfaceRefId}"]`
     ) as HTMLElement;
     const refBlocks = Array.from(
-      surfaceRef.querySelectorAll('affine-edgeless-note')
+      surfaceRef.querySelectorAll('bridgeflow-edgeless-note')
     ) as HTMLElement[];
     const stackingCanvas = Array.from(
       surfaceRef.querySelectorAll('.indexable-canvas')
@@ -143,10 +143,10 @@ describe('basic', () => {
 
   test('frame should be rendered in surface-ref viewport', async () => {
     const surfaceRefId = doc.addBlock(
-      'affine:surface-ref',
+      'bridgeflow:surface-ref',
       {
         reference: frameId,
-        refFlavour: 'affine:frame',
+        refFlavour: 'bridgeflow:frame',
       },
       noteAId
     );
@@ -155,13 +155,13 @@ describe('basic', () => {
     await wait();
 
     const surfaceRef = document.querySelector(
-      `affine-surface-ref[data-block-id="${surfaceRefId}"]`
+      `bridgeflow-surface-ref[data-block-id="${surfaceRefId}"]`
     ) as SurfaceRefBlockComponent;
 
     const edgeless = surfaceRef.previewEditor!.std.get(EdgelessRootService);
 
     const frame = surfaceRef.querySelector(
-      'affine-frame'
+      'bridgeflow-frame'
     ) as FrameBlockComponent;
 
     expect(
@@ -179,7 +179,7 @@ describe('basic', () => {
       },
     })!;
     const surfaceRefId = doc.addBlock(
-      'affine:surface-ref',
+      'bridgeflow:surface-ref',
       {
         reference: groupId,
         refFlavour: 'group',
@@ -191,7 +191,7 @@ describe('basic', () => {
     await wait();
 
     const surfaceRef = document.querySelector(
-      `affine-surface-ref[data-block-id="${surfaceRefId}"]`
+      `bridgeflow-surface-ref[data-block-id="${surfaceRefId}"]`
     ) as SurfaceRefBlockComponent;
 
     const edgeless = surfaceRef.previewEditor!.std.get(EdgelessRootService);
@@ -203,10 +203,10 @@ describe('basic', () => {
 
   test('viewport of surface-ref should be updated when the reference xywh updated', async () => {
     const surfaceRefId = doc.addBlock(
-      'affine:surface-ref',
+      'bridgeflow:surface-ref',
       {
         reference: frameId,
-        refFlavour: 'affine:frame',
+        refFlavour: 'bridgeflow:frame',
       },
       noteAId
     );
@@ -215,13 +215,13 @@ describe('basic', () => {
     await wait();
 
     const surfaceRef = document.querySelector(
-      `affine-surface-ref[data-block-id="${surfaceRefId}"]`
+      `bridgeflow-surface-ref[data-block-id="${surfaceRefId}"]`
     ) as SurfaceRefBlockComponent;
 
     const edgeless = surfaceRef.previewEditor!.std.get(EdgelessRootService);
 
     const frame = surfaceRef.querySelector(
-      'affine-frame'
+      'bridgeflow-frame'
     ) as FrameBlockComponent;
 
     const oldViewport = edgeless.viewport.viewportBounds;
@@ -242,7 +242,7 @@ describe('basic', () => {
       },
     });
     const surfaceRefId = doc.addBlock(
-      'affine:surface-ref',
+      'bridgeflow:surface-ref',
       {
         reference: groupId,
         refFlavour: 'group',
@@ -254,7 +254,7 @@ describe('basic', () => {
     await wait();
 
     const surfaceRef = document.querySelector(
-      `affine-surface-ref[data-block-id="${surfaceRefId}"]`
+      `bridgeflow-surface-ref[data-block-id="${surfaceRefId}"]`
     ) as HTMLElement;
 
     expect(surfaceRef).instanceOf(Element);
@@ -263,8 +263,8 @@ describe('basic', () => {
   });
 });
 
-import type { FrameBlockComponent } from '@blocksuite/affine/blocks/frame';
-import type { SurfaceRefBlockComponent } from '@blocksuite/affine/blocks/surface-ref';
+import type { FrameBlockComponent } from '@blocksuite/bridgeflow/blocks/frame';
+import type { SurfaceRefBlockComponent } from '@blocksuite/bridgeflow/blocks/surface-ref';
 
 import snapshot from '../snapshots/edgeless/surface-ref.spec.ts/surface-ref.json' assert { type: 'json' };
 
@@ -280,7 +280,7 @@ describe('clipboard', () => {
     editor.doc = newDoc!;
     await wait();
 
-    const surfaceRefs = newDoc!.getBlocksByFlavour('affine:surface-ref');
+    const surfaceRefs = newDoc!.getBlocksByFlavour('bridgeflow:surface-ref');
     expect(surfaceRefs).toHaveLength(2);
 
     const surfaceRefBlocks = surfaceRefs.map(({ id }) =>

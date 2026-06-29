@@ -38,8 +38,8 @@ permissions:
 env:
   BUILD_TYPE: ${{ inputs.build-type }}
   RELEASE_VERSION: ${{ inputs.app-version }}
-  DEBUG: 'affine:*,napi:*'
-  APP_NAME: affine
+  DEBUG: 'bridgeflow:*,napi:*'
+  APP_NAME: bridgeflow
   MACOSX_DEPLOYMENT_TARGET: '11.6'
 
 jobs:
@@ -58,10 +58,10 @@ jobs:
       - name: Setup @sentry/cli
         uses: ./.github/actions/setup-sentry
       - name: generate-assets
-        run: yarn affine @affine/electron generate-assets
+        run: yarn bridgeflow @bridgeflow/electron generate-assets
         env:
           SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-          SENTRY_PROJECT: 'affine'
+          SENTRY_PROJECT: 'bridgeflow'
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           SENTRY_RELEASE: ${{ inputs.app-version }}
@@ -196,7 +196,7 @@ jobs:
         timeout-minutes: 10
         uses: ./.github/actions/setup-node
         with:
-          extra-flags: workspaces focus @affine/electron @affine/monorepo
+          extra-flags: workspaces focus @bridgeflow/electron @bridgeflow/monorepo
           hard-link-nm: false
           nmHoistingLimits: workspaces
         env:
@@ -241,10 +241,10 @@ jobs:
           }
 
       - name: Make squirrel.windows installer
-        run: yarn affine @affine/electron make-squirrel --platform=${{ matrix.spec.platform }} --arch=${{ matrix.spec.arch }}
+        run: yarn bridgeflow @bridgeflow/electron make-squirrel --platform=${{ matrix.spec.platform }} --arch=${{ matrix.spec.arch }}
 
       - name: Make nsis.windows installer
-        run: yarn affine @affine/electron make-nsis --platform=${{ matrix.spec.platform }} --arch=${{ matrix.spec.arch }}
+        run: yarn bridgeflow @bridgeflow/electron make-nsis --platform=${{ matrix.spec.platform }} --arch=${{ matrix.spec.arch }}
 
       - name: Zip artifacts for faster upload
         run: Compress-Archive -CompressionLevel Fastest -Path packages/frontend/apps/electron/out/${{ env.BUILD_TYPE }}/make/* -DestinationPath archive.zip
@@ -340,21 +340,21 @@ jobs:
       - name: Save artifacts
         run: |
           mkdir -p builds
-          mv packages/frontend/apps/electron/out/*/make/zip/win32/${{ matrix.spec.arch }}/AFFiNE*-win32-${{ matrix.spec.arch }}-*.zip ./builds/affine-${{ env.RELEASE_VERSION }}-${{ env.BUILD_TYPE }}-windows-${{ matrix.spec.arch }}.zip
-          mv packages/frontend/apps/electron/out/*/make/squirrel.windows/${{ matrix.spec.arch }}/*.exe ./builds/affine-${{ env.RELEASE_VERSION }}-${{ env.BUILD_TYPE }}-windows-${{ matrix.spec.arch }}.exe
-          mv packages/frontend/apps/electron/out/*/make/nsis.windows/${{ matrix.spec.arch }}/*.exe ./builds/affine-${{ env.RELEASE_VERSION }}-${{ env.BUILD_TYPE }}-windows-${{ matrix.spec.arch }}.nsis.exe
+          mv packages/frontend/apps/electron/out/*/make/zip/win32/${{ matrix.spec.arch }}/BridgeFlow*-win32-${{ matrix.spec.arch }}-*.zip ./builds/bridgeflow-${{ env.RELEASE_VERSION }}-${{ env.BUILD_TYPE }}-windows-${{ matrix.spec.arch }}.zip
+          mv packages/frontend/apps/electron/out/*/make/squirrel.windows/${{ matrix.spec.arch }}/*.exe ./builds/bridgeflow-${{ env.RELEASE_VERSION }}-${{ env.BUILD_TYPE }}-windows-${{ matrix.spec.arch }}.exe
+          mv packages/frontend/apps/electron/out/*/make/nsis.windows/${{ matrix.spec.arch }}/*.exe ./builds/bridgeflow-${{ env.RELEASE_VERSION }}-${{ env.BUILD_TYPE }}-windows-${{ matrix.spec.arch }}.nsis.exe
 
       - uses: actions/attest-build-provenance@v4
         with:
           subject-path: |
-            ./builds/affine-${{ env.RELEASE_VERSION }}-${{ env.BUILD_TYPE }}-windows-${{ matrix.spec.arch }}.zip
-            ./builds/affine-${{ env.RELEASE_VERSION }}-${{ env.BUILD_TYPE }}-windows-${{ matrix.spec.arch }}.exe
-            ./builds/affine-${{ env.RELEASE_VERSION }}-${{ env.BUILD_TYPE }}-windows-${{ matrix.spec.arch }}.nsis.exe
+            ./builds/bridgeflow-${{ env.RELEASE_VERSION }}-${{ env.BUILD_TYPE }}-windows-${{ matrix.spec.arch }}.zip
+            ./builds/bridgeflow-${{ env.RELEASE_VERSION }}-${{ env.BUILD_TYPE }}-windows-${{ matrix.spec.arch }}.exe
+            ./builds/bridgeflow-${{ env.RELEASE_VERSION }}-${{ env.BUILD_TYPE }}-windows-${{ matrix.spec.arch }}.nsis.exe
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: affine-${{ matrix.spec.platform }}-${{ matrix.spec.arch }}-builds
+          name: bridgeflow-${{ matrix.spec.platform }}-${{ matrix.spec.arch }}-builds
           path: builds
 
   release:
@@ -373,27 +373,27 @@ jobs:
       - name: Download Artifacts (macos-x64)
         uses: actions/download-artifact@v4
         with:
-          name: affine-darwin-x64-builds
+          name: bridgeflow-darwin-x64-builds
           path: ./release
       - name: Download Artifacts (macos-arm64)
         uses: actions/download-artifact@v4
         with:
-          name: affine-darwin-arm64-builds
+          name: bridgeflow-darwin-arm64-builds
           path: ./release
       - name: Download Artifacts (windows-x64)
         uses: actions/download-artifact@v4
         with:
-          name: affine-win32-x64-builds
+          name: bridgeflow-win32-x64-builds
           path: ./release
       - name: Download Artifacts (windows-arm64)
         uses: actions/download-artifact@v4
         with:
-          name: affine-win32-arm64-builds
+          name: bridgeflow-win32-arm64-builds
           path: ./release
       - name: Download Artifacts (linux-x64)
         uses: actions/download-artifact@v4
         with:
-          name: affine-linux-x64-builds
+          name: bridgeflow-linux-x64-builds
           path: ./release
       - uses: actions/setup-node@v6
         with:

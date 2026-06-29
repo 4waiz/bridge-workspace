@@ -1,4 +1,4 @@
-import { TestWorkspace } from '@blocksuite/affine/store/test';
+import { TestWorkspace } from '@blocksuite/bridgeflow/store/test';
 import { getTestStoreManager } from '@blocksuite/integration-test/store';
 
 export function createEmptyDoc() {
@@ -12,10 +12,10 @@ export function createEmptyDoc() {
     doc,
     init() {
       doc.load();
-      const rootId = store.addBlock('affine:page', {});
-      store.addBlock('affine:surface', {}, rootId);
-      const noteId = store.addBlock('affine:note', {}, rootId);
-      store.addBlock('affine:paragraph', {}, noteId);
+      const rootId = store.addBlock('bridgeflow:page', {});
+      store.addBlock('bridgeflow:surface', {}, rootId);
+      const noteId = store.addBlock('bridgeflow:note', {}, rootId);
+      store.addBlock('bridgeflow:paragraph', {}, noteId);
       return store;
     },
   };

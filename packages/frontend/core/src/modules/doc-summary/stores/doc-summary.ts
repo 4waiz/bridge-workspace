@@ -1,4 +1,4 @@
-import { getDocSummaryQuery } from '@affine/graphql';
+import { getDocSummaryQuery } from '@bridgeflow/graphql';
 import { Store } from '@toeverything/infra';
 import { map, Observable } from 'rxjs';
 

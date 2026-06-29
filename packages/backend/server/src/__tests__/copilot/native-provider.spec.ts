@@ -33,7 +33,7 @@ import type { CopilotToolSet } from '../../plugins/copilot/tools';
 const mockDispatch = () =>
   (async function* (): AsyncIterableIterator<NativeLlmStreamEvent> {
     yield { type: 'text_delta', text: 'Use [^1] now' };
-    yield { type: 'citation', index: 1, url: 'https://affine.pro' };
+    yield { type: 'citation', index: 1, url: 'https://bridgeflow.pro' };
     yield { type: 'done', finish_reason: 'stop' };
   })();
 
@@ -108,7 +108,7 @@ class TestGeminiProvider extends GeminiProvider<{ apiKey: string }> {
   ) => NativeLlmStructuredResponse = () => ({
     id: 'structured_1',
     model: 'gemini-2.5-flash',
-    output_text: '{"summary":"AFFiNE native"}',
+    output_text: '{"summary":"BridgeFlow native"}',
     usage: {
       prompt_tokens: 4,
       completion_tokens: 3,
@@ -354,7 +354,7 @@ class TestOpenAIProvider extends OpenAIProvider {
       return {
         id: 'structured_openai_1',
         model: request.model,
-        output_text: '{"summary":"AFFiNE structured"}',
+        output_text: '{"summary":"BridgeFlow structured"}',
         usage: {
           prompt_tokens: 4,
           completion_tokens: 3,
@@ -418,7 +418,7 @@ test('NativeProviderAdapter streamText should append citation footnotes', async 
   const text = chunks.join('');
   t.true(text.includes('Use [^1] now'));
   t.true(
-    text.includes('[^1]: {"type":"url","url":"https%3A%2F%2Faffine.pro"}')
+    text.includes('[^1]: {"type":"url","url":"https%3A%2F%2Fbridgeflow.pro"}')
   );
 });
 
@@ -443,7 +443,7 @@ test('NativeProviderAdapter streamObject should append citation footnotes', asyn
     .join('');
   t.true(text.includes('Use [^1] now'));
   t.true(
-    text.includes('[^1]: {"type":"url","url":"https%3A%2F%2Faffine.pro"}')
+    text.includes('[^1]: {"type":"url","url":"https%3A%2F%2Fbridgeflow.pro"}')
   );
 });
 
@@ -741,7 +741,7 @@ test('buildNativeStructuredRequest should prefer explicit schema option', async 
       },
       {
         role: 'user',
-        content: 'Summarize AFFiNE in one sentence.',
+        content: 'Summarize BridgeFlow in one sentence.',
       },
     ],
     { schema }
@@ -762,7 +762,7 @@ test('buildNativeStructuredRequest should preserve caller strictness override', 
     { modelId: 'gpt-4.1' },
     [
       { role: 'system', content: 'Return JSON only.' },
-      { role: 'user', content: 'Summarize AFFiNE in one sentence.' },
+      { role: 'user', content: 'Summarize BridgeFlow in one sentence.' },
     ],
     { schema: z.object({ summary: z.string() }), strict: false }
   );
@@ -786,7 +786,7 @@ test('NativeProviderAdapter streamText should skip citation footnotes when disab
   const text = chunks.join('');
   t.true(text.includes('Use [^1] now'));
   t.false(
-    text.includes('[^1]: {"type":"url","url":"https%3A%2F%2Faffine.pro"}')
+    text.includes('[^1]: {"type":"url","url":"https%3A%2F%2Fbridgeflow.pro"}')
   );
 });
 
@@ -824,7 +824,7 @@ test('GeminiProvider should use native path for structured requests', async t =>
       },
       {
         role: 'user',
-        content: 'Summarize AFFiNE in one short sentence.',
+        content: 'Summarize BridgeFlow in one short sentence.',
       },
     ],
     { schema }
@@ -841,7 +841,7 @@ test('GeminiProvider should use native path for structured requests', async t =>
     required: ['summary'],
     additionalProperties: false,
   });
-  t.deepEqual(JSON.parse(result), { summary: 'AFFiNE native' });
+  t.deepEqual(JSON.parse(result), { summary: 'BridgeFlow native' });
 });
 
 test('GeminiProvider should retry only reparsable structured responses', async t => {
@@ -872,7 +872,7 @@ test('GeminiProvider should retry only reparsable structured responses', async t
       },
       {
         role: 'user',
-        content: 'Summarize AFFiNE in one short sentence.',
+        content: 'Summarize BridgeFlow in one short sentence.',
       },
     ],
     { schema: z.object({ summary: z.string() }), maxRetries: 2 }
@@ -900,7 +900,7 @@ test('GeminiProvider should treat maxRetries as retry count for backend failures
         },
         {
           role: 'user',
-          content: 'Summarize AFFiNE in one short sentence.',
+          content: 'Summarize BridgeFlow in one short sentence.',
         },
       ],
       { schema: z.object({ summary: z.string() }), maxRetries: 2 }
@@ -1337,13 +1337,13 @@ test('OpenAIProvider should use native structured dispatch', async t => {
       },
       {
         role: 'user',
-        content: 'Summarize AFFiNE in one sentence.',
+        content: 'Summarize BridgeFlow in one sentence.',
       },
     ],
     { schema }
   );
 
-  t.deepEqual(JSON.parse(result), { summary: 'AFFiNE structured' });
+  t.deepEqual(JSON.parse(result), { summary: 'BridgeFlow structured' });
   t.is(provider.structuredRequests.length, 1);
   t.deepEqual(provider.structuredRequests[0]?.schema, {
     type: 'object',

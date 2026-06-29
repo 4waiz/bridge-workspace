@@ -1,10 +1,10 @@
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import { GenerateDocUrlProvider } from '@blocksuite/affine/shared/services';
-import { createDefaultDoc } from '@blocksuite/affine/shared/utils';
-import { ShadowlessElement } from '@blocksuite/affine/std';
-import type { Doc, Workspace } from '@blocksuite/affine/store';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { GenerateDocUrlProvider } from '@blocksuite/bridgeflow/shared/services';
+import { createDefaultDoc } from '@blocksuite/bridgeflow/shared/utils';
+import { ShadowlessElement } from '@blocksuite/bridgeflow/std';
+import type { Doc, Workspace } from '@blocksuite/bridgeflow/store';
 import { CloseIcon } from '@blocksuite/icons/lit';
-import type { TestAffineEditorContainer } from '@blocksuite/integration-test';
+import type { TestBridgeFlowEditorContainer } from '@blocksuite/integration-test';
 import { css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
@@ -19,8 +19,8 @@ export class DocsPanel extends WithDisposable(ShadowlessElement) {
       display: flex;
       flex-direction: column;
       width: 100%;
-      background-color: var(--affine-background-secondary-color);
-      font-family: var(--affine-font-family);
+      background-color: var(--bridgeflow-background-secondary-color);
+      font-family: var(--bridgeflow-font-family);
       height: 100%;
       padding: 12px;
       gap: 4px;
@@ -29,7 +29,7 @@ export class DocsPanel extends WithDisposable(ShadowlessElement) {
       display: flex;
     }
     .doc-item {
-      color: var(--affine-text-primary-color);
+      color: var(--bridgeflow-text-primary-color);
     }
     .delete-doc-icon {
       display: none;
@@ -37,27 +37,27 @@ export class DocsPanel extends WithDisposable(ShadowlessElement) {
       border-radius: 4px;
     }
     .delete-doc-icon:hover {
-      background-color: var(--affine-hover-color);
+      background-color: var(--bridgeflow-hover-color);
     }
     .delete-doc-icon svg {
       width: 14px;
       height: 14px;
-      color: var(--affine-secondary-color);
-      fill: var(--affine-secondary-color);
+      color: var(--bridgeflow-secondary-color);
+      fill: var(--bridgeflow-secondary-color);
     }
     .new-doc-button {
       margin-bottom: 16px;
-      border: 1px solid var(--affine-border-color);
+      border: 1px solid var(--bridgeflow-border-color);
       border-radius: 4px;
       height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      color: var(--affine-text-primary-color);
+      color: var(--bridgeflow-text-primary-color);
     }
     .new-doc-button:hover {
-      background-color: var(--affine-hover-color);
+      background-color: var(--bridgeflow-hover-color);
     }
   `;
 
@@ -125,7 +125,7 @@ export class DocsPanel extends WithDisposable(ShadowlessElement) {
           const style = styleMap({
             backgroundColor:
               this.editor.doc.id === doc.id
-                ? 'var(--affine-hover-color)'
+                ? 'var(--bridgeflow-hover-color)'
                 : undefined,
             padding: '4px 4px 4px 8px',
             borderRadius: '4px',
@@ -161,7 +161,7 @@ export class DocsPanel extends WithDisposable(ShadowlessElement) {
   }
 
   @property({ attribute: false })
-  accessor editor!: TestAffineEditorContainer;
+  accessor editor!: TestBridgeFlowEditorContainer;
 
   @property({ attribute: false })
   accessor onClose!: () => void;

@@ -1,8 +1,8 @@
-import { IconButton, MobileMenu } from '@affine/component';
-import { useEnableCloud } from '@affine/core/components/hooks/affine/use-enable-cloud';
-import { DocService } from '@affine/core/modules/doc';
-import { ShareMenuContent } from '@affine/core/modules/share-menu';
-import { WorkspaceService } from '@affine/core/modules/workspace';
+import { IconButton, MobileMenu } from '@bridgeflow/component';
+import { useEnableCloud } from '@bridgeflow/core/components/hooks/bridgeflow/use-enable-cloud';
+import { DocService } from '@bridgeflow/core/modules/doc';
+import { ShareMenuContent } from '@bridgeflow/core/modules/share-menu';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { ShareiOsIcon } from '@blocksuite/icons/rc';
 import { useServices } from '@toeverything/infra';
 
@@ -28,7 +28,7 @@ export const PageHeaderShareButton = () => {
           <ShareMenuContent
             workspaceMetadata={workspace.meta}
             currentPage={doc}
-            onEnableAffineCloud={() =>
+            onEnableBridgeFlowCloud={() =>
               confirmEnableCloud(workspace, {
                 openPageId: doc.id,
               })

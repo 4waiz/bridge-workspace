@@ -1,9 +1,9 @@
-import { Button, Menu, MenuItem, MenuSeparator } from '@affine/component';
-import { DocsService } from '@affine/core/modules/doc';
-import { DocDisplayMetaService } from '@affine/core/modules/doc-display-meta';
-import { TemplateDocService } from '@affine/core/modules/template-doc';
-import { TemplateListMenuContentScrollable } from '@affine/core/modules/template-doc/view/template-list-menu';
-import { useI18n } from '@affine/i18n';
+import { Button, Menu, MenuItem, MenuSeparator } from '@bridgeflow/component';
+import { DocsService } from '@bridgeflow/core/modules/doc';
+import { DocDisplayMetaService } from '@bridgeflow/core/modules/doc-display-meta';
+import { TemplateDocService } from '@bridgeflow/core/modules/template-doc';
+import { TemplateListMenuContentScrollable } from '@bridgeflow/core/modules/template-doc/view/template-list-menu';
+import { useI18n } from '@bridgeflow/i18n';
 import { DeleteIcon, TemplateIcon } from '@blocksuite/icons/rc';
 import { useLiveData, useService } from '@toeverything/infra';
 import clsx from 'clsx';
@@ -59,7 +59,7 @@ export const JournalTemplateSetting = () => {
                     onClick={removeJournalTemplate}
                     type="danger"
                   >
-                    {t['com.affine.template-list.delete']()}
+                    {t['com.bridgeflow.template-list.delete']()}
                   </MenuItem>
                 </>
               ) : null

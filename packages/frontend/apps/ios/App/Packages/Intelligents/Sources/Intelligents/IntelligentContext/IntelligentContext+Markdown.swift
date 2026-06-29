@@ -10,7 +10,7 @@ import MarkdownView
 
 extension IntelligentContext {
   func prepareMarkdownViewThemes() {
-    MarkdownTheme.default.colors.body = .affineTextPrimary
-    MarkdownTheme.default.colors.highlight = .affineTextLink
+    MarkdownTheme.default.colors.body = .bridgeflowTextPrimary
+    MarkdownTheme.default.colors.highlight = .bridgeflowTextLink
   }
 }

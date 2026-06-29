@@ -70,11 +70,11 @@ test('should passthrough if version check is not enabled', async t => {
 
   t.is(res.status, 200);
 
-  res = await app.GET('/guarded/test').set('x-affine-version', '0.20.0');
+  res = await app.GET('/guarded/test').set('x-bridgeflow-version', '0.20.0');
 
   t.is(res.status, 200);
 
-  res = await app.GET('/guarded/test').set('x-affine-version', 'invalid');
+  res = await app.GET('/guarded/test').set('x-bridgeflow-version', 'invalid');
 
   t.is(res.status, 200);
   t.true(spy.notCalled);
@@ -90,11 +90,11 @@ test('should enforce hard required version when version range is invalid', async
     },
   });
 
-  let res = await app.GET('/guarded/test').set('x-affine-version', '0.25.0');
+  let res = await app.GET('/guarded/test').set('x-bridgeflow-version', '0.25.0');
 
   t.is(res.status, 200);
 
-  res = await app.GET('/guarded/test').set('x-affine-version', 'invalid');
+  res = await app.GET('/guarded/test').set('x-bridgeflow-version', 'invalid');
 
   t.is(res.status, 403);
   t.is(
@@ -104,11 +104,11 @@ test('should enforce hard required version when version range is invalid', async
 });
 
 test('should pass if client version is allowed', async t => {
-  let res = await app.GET('/guarded/test').set('x-affine-version', '0.25.0');
+  let res = await app.GET('/guarded/test').set('x-bridgeflow-version', '0.25.0');
 
   t.is(res.status, 200);
 
-  res = await app.GET('/guarded/test').set('x-affine-version', '0.26.0');
+  res = await app.GET('/guarded/test').set('x-bridgeflow-version', '0.26.0');
 
   t.is(res.status, 200);
 
@@ -120,7 +120,7 @@ test('should pass if client version is allowed', async t => {
     },
   });
 
-  res = await app.GET('/guarded/test').set('x-affine-version', '0.25.0');
+  res = await app.GET('/guarded/test').set('x-bridgeflow-version', '0.25.0');
 
   t.is(res.status, 200);
 });
@@ -134,7 +134,7 @@ test('should fail if client version is not set or invalid', async t => {
     'Unsupported client with version [unset_or_invalid], required version is [>=0.25.0].'
   );
 
-  res = await app.GET('/guarded/test').set('x-affine-version', 'invalid');
+  res = await app.GET('/guarded/test').set('x-bridgeflow-version', 'invalid');
 
   t.is(res.status, 403);
   t.is(
@@ -152,7 +152,7 @@ test('should tell upgrade if client version is lower than allowed', async t => {
     },
   });
 
-  let res = await app.GET('/guarded/test').set('x-affine-version', '0.25.0');
+  let res = await app.GET('/guarded/test').set('x-bridgeflow-version', '0.25.0');
 
   t.is(res.status, 403);
   t.is(
@@ -170,7 +170,7 @@ test('should tell downgrade if client version is higher than allowed', async t =
     },
   });
 
-  let res = await app.GET('/guarded/test').set('x-affine-version', '0.27.0');
+  let res = await app.GET('/guarded/test').set('x-bridgeflow-version', '0.27.0');
 
   t.is(res.status, 403);
   t.is(
@@ -190,18 +190,18 @@ test('should test prerelease version', async t => {
 
   let res = await app
     .GET('/guarded/test')
-    .set('x-affine-version', '0.25.0-canary.1');
+    .set('x-bridgeflow-version', '0.25.0-canary.1');
 
   // 0.25.0-canary.1 is lower than 0.25.0 obviously
   t.is(res.status, 403);
 
   res = await app
     .GET('/guarded/test')
-    .set('x-affine-version', '0.26.0-canary.1');
+    .set('x-bridgeflow-version', '0.26.0-canary.1');
 
   t.is(res.status, 200);
 
-  res = await app.GET('/guarded/test').set('x-affine-version', '0.26.0-beta.2');
+  res = await app.GET('/guarded/test').set('x-bridgeflow-version', '0.26.0-beta.2');
 
   t.is(res.status, 200);
 });
@@ -214,7 +214,7 @@ test('should allow recent canary date version in canary namespace', async t => {
   try {
     const res = await app
       .GET('/guarded/test')
-      .set('x-affine-version', makeCanaryDateVersion(new Date(), '015'));
+      .set('x-bridgeflow-version', makeCanaryDateVersion(new Date(), '015'));
 
     t.is(res.status, 200);
   } finally {
@@ -237,7 +237,7 @@ test('should reject old canary date version in canary namespace', async t => {
 
     const res = await app
       .GET('/guarded/test')
-      .set('x-affine-version', oldVersion);
+      .set('x-bridgeflow-version', oldVersion);
 
     t.is(res.status, 403);
     t.is(

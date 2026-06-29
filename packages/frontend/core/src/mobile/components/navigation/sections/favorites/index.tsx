@@ -1,10 +1,10 @@
-import { usePageHelper } from '@affine/core/blocksuite/block-suite-page-list/utils';
-import { NavigationPanelTreeRoot } from '@affine/core/desktop/components/navigation-panel';
-import type { FavoriteSupportTypeUnion } from '@affine/core/modules/favorite';
-import { FavoriteService } from '@affine/core/modules/favorite';
-import { NavigationPanelService } from '@affine/core/modules/navigation-panel';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { useI18n } from '@affine/i18n';
+import { usePageHelper } from '@bridgeflow/core/blocksuite/block-suite-page-list/utils';
+import { NavigationPanelTreeRoot } from '@bridgeflow/core/desktop/components/navigation-panel';
+import type { FavoriteSupportTypeUnion } from '@bridgeflow/core/modules/favorite';
+import { FavoriteService } from '@bridgeflow/core/modules/favorite';
+import { NavigationPanelService } from '@bridgeflow/core/modules/navigation-panel';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { useI18n } from '@bridgeflow/i18n';
 import { useLiveData, useServices } from '@toeverything/infra';
 import { useCallback, useMemo } from 'react';
 
@@ -44,7 +44,7 @@ export const NavigationPanelFavorites = () => {
   return (
     <CollapsibleSection
       path={path}
-      title={t['com.affine.rootAppSidebar.favorites']()}
+      title={t['com.bridgeflow.rootAppSidebar.favorites']()}
       testId="navigation-panel-favorites"
       headerTestId="navigation-panel-favorite-category-divider"
     >

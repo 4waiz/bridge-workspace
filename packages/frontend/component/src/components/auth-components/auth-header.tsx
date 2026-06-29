@@ -1,4 +1,4 @@
-import { BrandLogo } from '@affine/component/brand';
+import { BrandLogo } from '@bridgeflow/component/brand';
 import clsx from 'clsx';
 import type { FC } from 'react';
 

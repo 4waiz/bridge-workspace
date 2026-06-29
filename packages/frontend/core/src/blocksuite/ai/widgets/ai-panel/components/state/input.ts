@@ -1,8 +1,8 @@
-import { AIStarIcon } from '@blocksuite/affine/components/icons';
-import { SignalWatcher, WithDisposable } from '@blocksuite/affine/global/lit';
-import { ColorScheme } from '@blocksuite/affine/model';
-import { unsafeCSSVarV2 } from '@blocksuite/affine/shared/theme';
-import { stopPropagation } from '@blocksuite/affine/shared/utils';
+import { AIStarIcon } from '@blocksuite/bridgeflow/components/icons';
+import { SignalWatcher, WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { ColorScheme } from '@blocksuite/bridgeflow/model';
+import { unsafeCSSVarV2 } from '@blocksuite/bridgeflow/shared/theme';
+import { stopPropagation } from '@blocksuite/bridgeflow/shared/utils';
 import { SendIcon } from '@blocksuite/icons/lit';
 import {
   darkCssVariablesV2,
@@ -52,8 +52,8 @@ export class AIPanelInput extends SignalWatcher(WithDisposable(LitElement)) {
         color: ${unsafeCSSVarV2('text/primary')};
 
         /* light/sm */
-        font-family: var(--affine-font-family);
-        font-size: var(--affine-font-sm);
+        font-family: var(--bridgeflow-font-family);
+        font-size: var(--bridgeflow-font-sm);
         font-style: normal;
         font-weight: 400;
         line-height: 22px; /* 157.143% */
@@ -109,81 +109,81 @@ export class AIPanelInput extends SignalWatcher(WithDisposable(LitElement)) {
 
     :host([data-app-theme='light']) {
       .network svg {
-        color: ${unsafeCSS(lightCssVariablesV2['--affine-v2-icon-primary'])};
+        color: ${unsafeCSS(lightCssVariablesV2['--bridgeflow-v2-icon-primary'])};
       }
 
       .network[data-active='true'] svg {
-        color: ${unsafeCSS(lightCssVariablesV2['--affine-v2-icon-activated'])};
+        color: ${unsafeCSS(lightCssVariablesV2['--bridgeflow-v2-icon-activated'])};
       }
 
       textarea {
-        color: ${unsafeCSS(lightCssVariablesV2['--affine-v2-text-primary'])};
+        color: ${unsafeCSS(lightCssVariablesV2['--bridgeflow-v2-text-primary'])};
       }
 
       textarea::placeholder {
         color: ${unsafeCSS(
-          lightCssVariablesV2['--affine-v2-text-placeholder']
+          lightCssVariablesV2['--bridgeflow-v2-text-placeholder']
         )};
       }
 
       textarea::-moz-placeholder {
         color: ${unsafeCSS(
-          lightCssVariablesV2['--affine-v2-text-placeholder']
+          lightCssVariablesV2['--bridgeflow-v2-text-placeholder']
         )};
       }
 
       .arrow {
         background: ${unsafeCSS(
-          lightCssVariablesV2['--affine-v2-icon-disable']
+          lightCssVariablesV2['--bridgeflow-v2-icon-disable']
         )};
       }
 
       .arrow[data-active='true'] {
         background: ${unsafeCSS(
-          lightCssVariablesV2['--affine-v2-icon-activated']
+          lightCssVariablesV2['--bridgeflow-v2-icon-activated']
         )};
       }
 
       .arrow svg {
-        color: ${unsafeCSS(lightCssVariablesV2['--affine-v2-pure-white-text'])};
+        color: ${unsafeCSS(lightCssVariablesV2['--bridgeflow-v2-pure-white-text'])};
       }
     }
 
     :host([data-app-theme='dark']) {
       .network svg {
-        color: ${unsafeCSS(darkCssVariablesV2['--affine-v2-icon-primary'])};
+        color: ${unsafeCSS(darkCssVariablesV2['--bridgeflow-v2-icon-primary'])};
       }
 
       .network[data-active='true'] svg {
-        color: ${unsafeCSS(darkCssVariablesV2['--affine-v2-icon-activated'])};
+        color: ${unsafeCSS(darkCssVariablesV2['--bridgeflow-v2-icon-activated'])};
       }
 
       textarea {
-        color: ${unsafeCSS(darkCssVariablesV2['--affine-v2-text-primary'])};
+        color: ${unsafeCSS(darkCssVariablesV2['--bridgeflow-v2-text-primary'])};
       }
 
       textarea::placeholder {
-        color: ${unsafeCSS(darkCssVariablesV2['--affine-v2-text-placeholder'])};
+        color: ${unsafeCSS(darkCssVariablesV2['--bridgeflow-v2-text-placeholder'])};
       }
 
       textarea::-moz-placeholder {
-        color: ${unsafeCSS(darkCssVariablesV2['--affine-v2-text-placeholder'])};
+        color: ${unsafeCSS(darkCssVariablesV2['--bridgeflow-v2-text-placeholder'])};
       }
 
       .arrow {
         background: ${unsafeCSS(
-          darkCssVariablesV2['--affine-v2-icon-disable']
+          darkCssVariablesV2['--bridgeflow-v2-icon-disable']
         )};
       }
 
       .arrow[data-active='true'] {
         background: ${unsafeCSS(
-          darkCssVariablesV2['--affine-v2-icon-activated']
+          darkCssVariablesV2['--bridgeflow-v2-icon-activated']
         )};
       }
 
       .arrow svg {
-        color: ${unsafeCSS(darkCssVariablesV2['--affine-v2-pure-white-text'])};
+        color: ${unsafeCSS(darkCssVariablesV2['--bridgeflow-v2-pure-white-text'])};
       }
     }
   `;
@@ -240,7 +240,7 @@ export class AIPanelInput extends SignalWatcher(WithDisposable(LitElement)) {
         >
           ${SendIcon()}
           ${this._hasContent
-            ? html`<affine-tooltip .offsetY=${12}>Send to AI</affine-tooltip>`
+            ? html`<bridgeflow-tooltip .offsetY=${12}>Send to AI</bridgeflow-tooltip>`
             : nothing}
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { Text, type Workspace } from '@blocksuite/affine/store';
+import { Text, type Workspace } from '@blocksuite/bridgeflow/store';
 
 import type { InitFn } from './utils.js';
 
@@ -18,56 +18,56 @@ export const linked: InitFn = (collection: Workspace, id: string) => {
   docC.doc.clear();
 
   docB.load(() => {
-    const rootId = docB.addBlock('affine:page', {
+    const rootId = docB.addBlock('bridgeflow:page', {
       title: new Text(''),
     });
 
-    docB.addBlock('affine:surface', {}, rootId);
+    docB.addBlock('bridgeflow:surface', {}, rootId);
 
     // Add note block inside root block
-    const noteId = docB.addBlock('affine:note', {}, rootId);
+    const noteId = docB.addBlock('bridgeflow:note', {}, rootId);
     // Add paragraph block inside note block
-    docB.addBlock('affine:paragraph', {}, noteId);
+    docB.addBlock('bridgeflow:paragraph', {}, noteId);
   });
 
   docC.load(() => {
-    const rootId = docC.addBlock('affine:page', {
+    const rootId = docC.addBlock('bridgeflow:page', {
       title: new Text(''),
     });
 
-    docC.addBlock('affine:surface', {}, rootId);
+    docC.addBlock('bridgeflow:surface', {}, rootId);
 
     // Add note block inside root block
-    const noteId = docC.addBlock('affine:note', {}, rootId);
+    const noteId = docC.addBlock('bridgeflow:note', {}, rootId);
     // Add paragraph block inside note block
-    docC.addBlock('affine:paragraph', {}, noteId);
+    docC.addBlock('bridgeflow:paragraph', {}, noteId);
   });
 
   docA.load();
   // Add root block and surface block at root level
-  const rootId = docA.addBlock('affine:page', {
+  const rootId = docA.addBlock('bridgeflow:page', {
     title: new Text('Doc A'),
   });
 
-  docA.addBlock('affine:surface', {}, rootId);
+  docA.addBlock('bridgeflow:surface', {}, rootId);
 
   // Add note block inside root block
-  const noteId = docA.addBlock('affine:note', {}, rootId);
+  const noteId = docA.addBlock('bridgeflow:note', {}, rootId);
   // Add paragraph block inside note block
-  docA.addBlock('affine:paragraph', {}, noteId);
+  docA.addBlock('bridgeflow:paragraph', {}, noteId);
 
-  docA.addBlock('affine:embed-linked-doc', { pageId: docBId }, noteId);
+  docA.addBlock('bridgeflow:embed-linked-doc', { pageId: docBId }, noteId);
 
   docA.addBlock(
-    'affine:embed-linked-doc',
+    'bridgeflow:embed-linked-doc',
     { pageId: 'doc:deleted-example' },
     noteId
   );
 
-  docA.addBlock('affine:embed-linked-doc', { pageId: docCId }, noteId);
+  docA.addBlock('bridgeflow:embed-linked-doc', { pageId: docCId }, noteId);
 
   docA.addBlock(
-    'affine:embed-linked-doc',
+    'bridgeflow:embed-linked-doc',
     { pageId: 'doc:deleted-example-edgeless' },
     noteId
   );

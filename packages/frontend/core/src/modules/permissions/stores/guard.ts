@@ -3,7 +3,7 @@ import {
   getDocRolePermissionsQuery,
   type GetWorkspaceInfoQuery,
   getWorkspaceInfoQuery,
-} from '@affine/graphql';
+} from '@bridgeflow/graphql';
 import { Store } from '@toeverything/infra';
 
 import type { WorkspaceServerService } from '../../cloud';

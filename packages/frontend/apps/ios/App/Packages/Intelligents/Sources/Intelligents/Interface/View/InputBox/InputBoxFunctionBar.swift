@@ -1,8 +1,8 @@
 import SnapKit
 import UIKit
 
-private let unselectedColor: UIColor = .affineIconPrimary
-private let selectedColor: UIColor = .affineIconActivated
+private let unselectedColor: UIColor = .bridgeflowIconPrimary
+private let selectedColor: UIColor = .bridgeflowIconActivated
 
 private let configurableOptions: [ConfigurableOptions] = [
 //  .networking,
@@ -18,7 +18,7 @@ class InputBoxFunctionBar: UIView {
   weak var delegate: InputBoxFunctionBarDelegate?
 
   lazy var attachmentButton = UIButton(type: .system).then {
-    $0.setImage(UIImage.affinePlus, for: .normal)
+    $0.setImage(UIImage.bridgeflowPlus, for: .normal)
     $0.tintColor = unselectedColor
     $0.layer.borderWidth = 1
     $0.layer.cornerRadius = 4
@@ -28,7 +28,7 @@ class InputBoxFunctionBar: UIView {
   }
 
   lazy var toolButton = UIButton(type: .system).then {
-    $0.setImage(UIImage.affineTools, for: .normal)
+    $0.setImage(UIImage.bridgeflowTools, for: .normal)
     $0.tintColor = unselectedColor
     $0.imageView?.contentMode = .scaleAspectFit
     $0.addTarget(self, action: #selector(toolButtonTapped), for: .touchUpInside)
@@ -36,7 +36,7 @@ class InputBoxFunctionBar: UIView {
   }
 
   lazy var networkButton = UIButton(type: .system).then {
-    $0.setImage(UIImage.affineWeb, for: .normal)
+    $0.setImage(UIImage.bridgeflowWeb, for: .normal)
     $0.tintColor = unselectedColor
     $0.imageView?.contentMode = .scaleAspectFit
     $0.addTarget(self, action: #selector(networkButtonTapped), for: .touchUpInside)
@@ -44,7 +44,7 @@ class InputBoxFunctionBar: UIView {
   }
 
   lazy var deepThinkingButton = UIButton(type: .system).then {
-    $0.setImage(UIImage.affineThink, for: .normal)
+    $0.setImage(UIImage.bridgeflowThink, for: .normal)
     $0.tintColor = unselectedColor
     $0.imageView?.contentMode = .scaleAspectFit
     $0.addTarget(self, action: #selector(deepThinkingButtonTapped), for: .touchUpInside)
@@ -52,9 +52,9 @@ class InputBoxFunctionBar: UIView {
   }
 
   lazy var sendButton = UIButton(type: .system).then {
-    $0.setImage(UIImage.affineArrowUpBig, for: .normal)
-    $0.tintColor = UIColor.affineTextPureWhite
-    $0.backgroundColor = UIColor.affineButtonPrimary
+    $0.setImage(UIImage.bridgeflowArrowUpBig, for: .normal)
+    $0.tintColor = UIColor.bridgeflowTextPureWhite
+    $0.backgroundColor = UIColor.bridgeflowButtonPrimary
     $0.imageView?.contentMode = .scaleAspectFit
     $0.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
     $0.clipsToBounds = true
@@ -136,13 +136,13 @@ class InputBoxFunctionBar: UIView {
   // MARK: - Private Methods
 
   private func updateColors() {
-    attachmentButton.layer.borderColor = UIColor.affineLayerBorder.cgColor
+    attachmentButton.layer.borderColor = UIColor.bridgeflowLayerBorder.cgColor
   }
 
   private func createAttachmentMenu() -> UIMenu {
     let takePhotoAction = UIAction(
       title: "Take Photo or Video",
-      image: UIImage.affineCamera
+      image: UIImage.bridgeflowCamera
     ) { [weak self] _ in
       guard let self else { return }
       delegate?.functionBarDidTapTakePhoto(self)
@@ -150,7 +150,7 @@ class InputBoxFunctionBar: UIView {
 
     let photoLibraryAction = UIAction(
       title: "Photo Library",
-      image: UIImage.affineImage
+      image: UIImage.bridgeflowImage
     ) { [weak self] _ in
       guard let self else { return }
       delegate?.functionBarDidTapPhotoLibrary(self)
@@ -158,15 +158,15 @@ class InputBoxFunctionBar: UIView {
 
     let attachFilesAction = UIAction(
       title: "Attach Files (.pdf, .txt, .csv)",
-      image: UIImage.affineUpload
+      image: UIImage.bridgeflowUpload
     ) { [weak self] _ in
       guard let self else { return }
       delegate?.functionBarDidTapAttachFiles(self)
     }
 
     let embedDocsAction = UIAction(
-      title: "Add AFFiNE Docs",
-      image: UIImage.affinePage
+      title: "Add BridgeFlow Docs",
+      image: UIImage.bridgeflowPage
     ) { [weak self] _ in
       guard let self else { return }
       delegate?.functionBarDidTapEmbedDocs(self)

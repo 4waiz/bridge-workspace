@@ -12,5 +12,5 @@ export const TEST_WORKSPACE: WorkspaceProps = {
 
 export const TEST_DOC: DocProps = {
   title: 'Test Doc',
-  url: 'https://app.affine.pro',
+  url: 'https://app.bridgeflow.pro',
 };

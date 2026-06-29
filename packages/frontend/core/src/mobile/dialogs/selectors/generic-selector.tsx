@@ -4,9 +4,9 @@ import {
   SafeArea,
   Scrollable,
   useThemeColorMeta,
-} from '@affine/component';
-import { PageHeader } from '@affine/core/mobile/components';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/component';
+import { PageHeader } from '@bridgeflow/core/mobile/components';
+import { useI18n } from '@bridgeflow/i18n';
 import { ArrowRightSmallIcon } from '@blocksuite/icons/rc';
 import { cssVarV2 } from '@toeverything/theme/v2';
 import {
@@ -48,10 +48,10 @@ const ChangedRenderer = ({
   const t = useI18n();
 
   const addedText = added
-    ? t['com.affine.m.selector.info-added']({ count: `${added}`, type })
+    ? t['com.bridgeflow.m.selector.info-added']({ count: `${added}`, type })
     : '';
   const removedText = removed
-    ? t['com.affine.m.selector.info-removed']({
+    ? t['com.bridgeflow.m.selector.info-removed']({
         count: `${removed}`,
         type,
       })
@@ -193,7 +193,7 @@ export const GenericSelector = ({
     <div className={styles.root}>
       <PageHeader back backAction={onBack}>
         <span className={styles.headerTitle}>
-          {title ?? t['com.affine.m.selector.title']({ type: typeText })}
+          {title ?? t['com.bridgeflow.m.selector.title']({ type: typeText })}
         </span>
       </PageHeader>
       <Scrollable.Root className={styles.scrollArea}>
@@ -238,7 +238,7 @@ export const GenericSelector = ({
           ) : null}
 
           <div className={styles.totalInfo}>
-            {t['com.affine.m.selector.info-total']({
+            {t['com.bridgeflow.m.selector.info-total']({
               total: initial.length + '',
             })}
           </div>
@@ -250,7 +250,7 @@ export const GenericSelector = ({
             className={styles.actionButton}
             onClick={handleConfirm}
           >
-            {confirmText ?? t['com.affine.m.selector.confirm-default']()}
+            {confirmText ?? t['com.bridgeflow.m.selector.confirm-default']()}
           </Button>
         </div>
       </SafeArea>

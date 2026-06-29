@@ -219,7 +219,7 @@ export function Template(props: PropsWithChildren) {
             <Link href="https://awaizahmed.com">
               <Img
                 src={BRIDGE_LOGO_URL}
-                alt="Bridge Workspace logo"
+                alt="BRIDGE Flow logo"
                 height="32px"
               />
             </Link>

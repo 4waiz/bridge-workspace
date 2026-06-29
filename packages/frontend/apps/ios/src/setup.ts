@@ -1,3 +1,3 @@
-import '@affine/core/bootstrap/browser';
-import '@affine/core/bootstrap/cleanup';
+import '@bridgeflow/core/bootstrap/browser';
+import '@bridgeflow/core/bootstrap/cleanup';
 import './proxy';

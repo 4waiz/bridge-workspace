@@ -1,10 +1,10 @@
-import { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import type { SettingTab } from '@affine/core/modules/dialogs/constant';
-import { DocsService } from '@affine/core/modules/doc';
-import { JournalService } from '@affine/core/modules/journal';
-import { LifecycleService } from '@affine/core/modules/lifecycle';
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { apis, events } from '@affine/electron-api';
+import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
+import type { SettingTab } from '@bridgeflow/core/modules/dialogs/constant';
+import { DocsService } from '@bridgeflow/core/modules/doc';
+import { JournalService } from '@bridgeflow/core/modules/journal';
+import { LifecycleService } from '@bridgeflow/core/modules/lifecycle';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { apis, events } from '@bridgeflow/electron-api';
 import type { FrameworkProvider } from '@toeverything/infra';
 
 import { setupRecordingEvents } from './recording';

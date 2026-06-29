@@ -18,8 +18,8 @@ import { AskAIIcon } from '../components/ask-ai-icon';
 import { AskAIPanel } from '../components/ask-ai-panel';
 import { AskAIToolbarButton } from '../components/ask-ai-toolbar';
 import {
-  AFFINE_AI_PANEL_WIDGET,
-  AffineAIPanelWidget,
+  BRIDGEFLOW_AI_PANEL_WIDGET,
+  BridgeFlowAIPanelWidget,
 } from '../widgets/ai-panel/ai-panel';
 import {
   AIPanelAnswer,
@@ -31,22 +31,22 @@ import {
 import { AIFinishTip } from '../widgets/ai-panel/components/finish-tip';
 import { GeneratingPlaceholder } from '../widgets/ai-panel/components/generating-placeholder';
 import {
-  AFFINE_BLOCK_DIFF_WIDGET_FOR_BLOCK,
-  AffineBlockDiffWidgetForBlock,
+  BRIDGEFLOW_BLOCK_DIFF_WIDGET_FOR_BLOCK,
+  BridgeFlowBlockDiffWidgetForBlock,
 } from '../widgets/block-diff/block';
 import { BlockDiffOptions } from '../widgets/block-diff/options';
 import {
-  AFFINE_BLOCK_DIFF_WIDGET_FOR_PAGE,
-  AffineBlockDiffWidgetForPage,
+  BRIDGEFLOW_BLOCK_DIFF_WIDGET_FOR_PAGE,
+  BridgeFlowBlockDiffWidgetForPage,
 } from '../widgets/block-diff/page';
 import {
-  AFFINE_BLOCK_DIFF_PLAYGROUND,
-  AFFINE_BLOCK_DIFF_PLAYGROUND_MODAL,
+  BRIDGEFLOW_BLOCK_DIFF_PLAYGROUND,
+  BRIDGEFLOW_BLOCK_DIFF_PLAYGROUND_MODAL,
   BlockDiffPlayground,
   BlockDiffPlaygroundModal,
 } from '../widgets/block-diff/playground';
 import {
-  AFFINE_EDGELESS_COPILOT_WIDGET,
+  BRIDGEFLOW_EDGELESS_COPILOT_WIDGET,
   EdgelessCopilotWidget,
 } from '../widgets/edgeless-copilot';
 import { EdgelessCopilotPanel } from '../widgets/edgeless-copilot-panel';
@@ -63,8 +63,8 @@ const editorElements = {
   'ask-ai-button': AskAIButton,
   'ask-ai-toolbar-button': AskAIToolbarButton,
   'ask-ai-panel': AskAIPanel,
-  'affine-edgeless-ai-chat': EdgelessAIChatBlockComponent,
-  'affine-ai-chat': AIChatBlockComponent,
+  'bridgeflow-edgeless-ai-chat': EdgelessAIChatBlockComponent,
+  'bridgeflow-ai-chat': AIChatBlockComponent,
   'ai-chat-block-message': AIChatBlockMessage,
   'ai-chat-block-messages': AIChatBlockMessages,
   'ai-scrollable-text-renderer': AIScrollableTextRenderer,
@@ -80,12 +80,12 @@ const editorElements = {
   'ai-panel-generating': AIPanelGenerating,
   'ai-panel-error': AIPanelError,
   'ai-block-diff-options': BlockDiffOptions,
-  [AFFINE_BLOCK_DIFF_PLAYGROUND]: BlockDiffPlayground,
-  [AFFINE_BLOCK_DIFF_PLAYGROUND_MODAL]: BlockDiffPlaygroundModal,
-  [AFFINE_AI_PANEL_WIDGET]: AffineAIPanelWidget,
-  [AFFINE_EDGELESS_COPILOT_WIDGET]: EdgelessCopilotWidget,
-  [AFFINE_BLOCK_DIFF_WIDGET_FOR_BLOCK]: AffineBlockDiffWidgetForBlock,
-  [AFFINE_BLOCK_DIFF_WIDGET_FOR_PAGE]: AffineBlockDiffWidgetForPage,
+  [BRIDGEFLOW_BLOCK_DIFF_PLAYGROUND]: BlockDiffPlayground,
+  [BRIDGEFLOW_BLOCK_DIFF_PLAYGROUND_MODAL]: BlockDiffPlaygroundModal,
+  [BRIDGEFLOW_AI_PANEL_WIDGET]: BridgeFlowAIPanelWidget,
+  [BRIDGEFLOW_EDGELESS_COPILOT_WIDGET]: EdgelessCopilotWidget,
+  [BRIDGEFLOW_BLOCK_DIFF_WIDGET_FOR_BLOCK]: BridgeFlowBlockDiffWidgetForBlock,
+  [BRIDGEFLOW_BLOCK_DIFF_WIDGET_FOR_PAGE]: BridgeFlowBlockDiffWidgetForPage,
   'edgeless-copilot-panel': EdgelessCopilotPanel,
   'edgeless-copilot-toolbar-entry': EdgelessCopilotToolbarEntry,
   'transcription-block': LitTranscriptionBlock,

@@ -1,11 +1,11 @@
-import { Modal } from '@affine/component';
+import { Modal } from '@bridgeflow/component';
 import {
   type CollectionInfo,
   CollectionService,
-} from '@affine/core/modules/collection';
-import type { DialogComponentProps } from '@affine/core/modules/dialogs';
-import type { WORKSPACE_DIALOG_SCHEMA } from '@affine/core/modules/dialogs/constant';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/core/modules/collection';
+import type { DialogComponentProps } from '@bridgeflow/core/modules/dialogs';
+import type { WORKSPACE_DIALOG_SCHEMA } from '@bridgeflow/core/modules/dialogs/constant';
+import { useI18n } from '@bridgeflow/i18n';
 import { useLiveData, useService } from '@toeverything/infra';
 import { useCallback } from 'react';
 
@@ -46,13 +46,13 @@ export const CollectionEditorDialog = ({
         style: {
           padding: 0,
           maxWidth: 944,
-          backgroundColor: 'var(--affine-background-primary-color)',
+          backgroundColor: 'var(--bridgeflow-background-primary-color)',
         },
       }}
       persistent
     >
       <EditCollection
-        onConfirmText={t['com.affine.editCollection.save']()}
+        onConfirmText={t['com.bridgeflow.editCollection.save']()}
         init={info}
         mode={mode}
         onCancel={onCancel}

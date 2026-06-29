@@ -4,29 +4,29 @@ import {
   type InlineEditHandle,
   observeResize,
   useDraggable,
-} from '@affine/component';
-import { FavoriteButton } from '@affine/core/blocksuite/block-suite-header/favorite';
-import { InfoButton } from '@affine/core/blocksuite/block-suite-header/info';
-import { JournalWeekDatePicker } from '@affine/core/blocksuite/block-suite-header/journal/date-picker';
-import { JournalTodayButton } from '@affine/core/blocksuite/block-suite-header/journal/today-button';
-import { PageHeaderMenuButton } from '@affine/core/blocksuite/block-suite-header/menu';
-import { DetailPageHeaderPresentButton } from '@affine/core/blocksuite/block-suite-header/present/detail-header-present-button';
-import { BlocksuiteHeaderTitle } from '@affine/core/blocksuite/block-suite-header/title';
-import { EditorModeSwitch } from '@affine/core/blocksuite/block-suite-mode-switch';
-import { useRegisterCopyLinkCommands } from '@affine/core/components/hooks/affine/use-register-copy-link-commands';
-import { HeaderDivider } from '@affine/core/components/pure/header';
-import { DocService } from '@affine/core/modules/doc';
-import { DocDisplayMetaService } from '@affine/core/modules/doc-display-meta';
-import { EditorService } from '@affine/core/modules/editor';
-import { JournalService } from '@affine/core/modules/journal';
-import { SharePageButton } from '@affine/core/modules/share-menu';
-import { TemplateDocService } from '@affine/core/modules/template-doc';
-import { ViewIcon, ViewTitle } from '@affine/core/modules/workbench';
-import type { Workspace } from '@affine/core/modules/workspace';
-import type { AffineDNDData } from '@affine/core/types/dnd';
-import { useI18n } from '@affine/i18n';
-import { track } from '@affine/track';
-import type { Store } from '@blocksuite/affine/store';
+} from '@bridgeflow/component';
+import { FavoriteButton } from '@bridgeflow/core/blocksuite/block-suite-header/favorite';
+import { InfoButton } from '@bridgeflow/core/blocksuite/block-suite-header/info';
+import { JournalWeekDatePicker } from '@bridgeflow/core/blocksuite/block-suite-header/journal/date-picker';
+import { JournalTodayButton } from '@bridgeflow/core/blocksuite/block-suite-header/journal/today-button';
+import { PageHeaderMenuButton } from '@bridgeflow/core/blocksuite/block-suite-header/menu';
+import { DetailPageHeaderPresentButton } from '@bridgeflow/core/blocksuite/block-suite-header/present/detail-header-present-button';
+import { BlocksuiteHeaderTitle } from '@bridgeflow/core/blocksuite/block-suite-header/title';
+import { EditorModeSwitch } from '@bridgeflow/core/blocksuite/block-suite-mode-switch';
+import { useRegisterCopyLinkCommands } from '@bridgeflow/core/components/hooks/bridgeflow/use-register-copy-link-commands';
+import { HeaderDivider } from '@bridgeflow/core/components/pure/header';
+import { DocService } from '@bridgeflow/core/modules/doc';
+import { DocDisplayMetaService } from '@bridgeflow/core/modules/doc-display-meta';
+import { EditorService } from '@bridgeflow/core/modules/editor';
+import { JournalService } from '@bridgeflow/core/modules/journal';
+import { SharePageButton } from '@bridgeflow/core/modules/share-menu';
+import { TemplateDocService } from '@bridgeflow/core/modules/template-doc';
+import { ViewIcon, ViewTitle } from '@bridgeflow/core/modules/workbench';
+import type { Workspace } from '@bridgeflow/core/modules/workspace';
+import type { BridgeFlowDNDData } from '@bridgeflow/core/types/dnd';
+import { useI18n } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
+import type { Store } from '@blocksuite/bridgeflow/store';
 import { useLiveData, useService } from '@toeverything/infra';
 import clsx from 'clsx';
 import {
@@ -205,7 +205,7 @@ export function DetailPageHeader(
   });
 
   const { dragRef, dragging, CustomDragPreview } =
-    useDraggable<AffineDNDData>(() => {
+    useDraggable<BridgeFlowDNDData>(() => {
       return {
         data: {
           from: {

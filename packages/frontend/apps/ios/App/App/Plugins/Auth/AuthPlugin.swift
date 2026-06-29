@@ -115,7 +115,7 @@ public class AuthPlugin: CAPPlugin, CAPBridgedPlugin {
         let csrfToken = try self.csrfTokenFromCookie(endpoint)
 
         let (data, response) = try await self.fetch(endpoint, method: "POST", action: "/api/auth/sign-out", headers: [
-          "x-affine-csrf-token": csrfToken,
+          "x-bridgeflow-csrf-token": csrfToken,
         ], body: nil)
 
         if response.statusCode >= 400 {
@@ -140,7 +140,7 @@ public class AuthPlugin: CAPPlugin, CAPBridgedPlugin {
     }
 
     if let cookie = HTTPCookieStorage.shared.cookies(for: endpointUrl)?.first(where: {
-      $0.name == "affine_session"
+      $0.name == "bridgeflow_session"
     }) {
       return cookie.value
     } else {
@@ -154,7 +154,7 @@ public class AuthPlugin: CAPPlugin, CAPBridgedPlugin {
     }
 
     return HTTPCookieStorage.shared.cookies(for: endpointUrl)?.first(where: {
-      $0.name == "affine_csrf_token"
+      $0.name == "bridgeflow_csrf_token"
     })?.value
   }
 
@@ -173,7 +173,7 @@ public class AuthPlugin: CAPPlugin, CAPBridgedPlugin {
       request.setValue("application/json", forHTTPHeaderField: "Content-Type")
       request.httpBody = try JSONEncoder().encode(body!)
     }
-    request.setValue(AppConfigManager.getAffineVersion(), forHTTPHeaderField: "x-affine-version")
+    request.setValue(AppConfigManager.getBridgeFlowVersion(), forHTTPHeaderField: "x-bridgeflow-version")
     request.timeoutInterval = 10 // time out 10s
 
     let (data, response) = try await URLSession.shared.data(for: request)

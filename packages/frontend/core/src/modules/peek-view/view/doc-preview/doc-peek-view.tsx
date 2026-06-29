@@ -1,17 +1,17 @@
-import { Scrollable } from '@affine/component';
-import { PageDetailLoading } from '@affine/component/page-detail-skeleton';
-import { type AIChatParams, AIProvider } from '@affine/core/blocksuite/ai';
-import type { AffineEditorContainer } from '@affine/core/blocksuite/block-suite-editor';
-import { EditorOutlineViewer } from '@affine/core/blocksuite/outline-viewer';
-import { AffineErrorBoundary } from '@affine/core/components/affine/affine-error-boundary';
-import { useGuard } from '@affine/core/components/guard';
-import { PageNotFound } from '@affine/core/desktop/pages/404';
-import { EditorService } from '@affine/core/modules/editor';
-import { DebugLogger } from '@affine/debug';
-import { DisposableGroup } from '@blocksuite/affine/global/disposable';
-import { Bound } from '@blocksuite/affine/global/gfx';
-import { RefNodeSlotsProvider } from '@blocksuite/affine/inlines/reference';
-import { GfxControllerIdentifier } from '@blocksuite/affine/std/gfx';
+import { Scrollable } from '@bridgeflow/component';
+import { PageDetailLoading } from '@bridgeflow/component/page-detail-skeleton';
+import { type AIChatParams, AIProvider } from '@bridgeflow/core/blocksuite/ai';
+import type { BridgeFlowEditorContainer } from '@bridgeflow/core/blocksuite/block-suite-editor';
+import { EditorOutlineViewer } from '@bridgeflow/core/blocksuite/outline-viewer';
+import { BridgeFlowErrorBoundary } from '@bridgeflow/core/components/bridgeflow/bridgeflow-error-boundary';
+import { useGuard } from '@bridgeflow/core/components/guard';
+import { PageNotFound } from '@bridgeflow/core/desktop/pages/404';
+import { EditorService } from '@bridgeflow/core/modules/editor';
+import { DebugLogger } from '@bridgeflow/debug';
+import { DisposableGroup } from '@blocksuite/bridgeflow/global/disposable';
+import { Bound } from '@blocksuite/bridgeflow/global/gfx';
+import { RefNodeSlotsProvider } from '@blocksuite/bridgeflow/inlines/reference';
+import { GfxControllerIdentifier } from '@blocksuite/bridgeflow/std/gfx';
 import {
   FrameworkScope,
   useLiveData,
@@ -32,13 +32,13 @@ const logger = new DebugLogger('doc-peek-view');
 
 // Lazy load BlockSuiteEditor to break circular dependency
 const BlockSuiteEditor = lazy(() =>
-  import('@affine/core/blocksuite/block-suite-editor').then(module => ({
+  import('@bridgeflow/core/blocksuite/block-suite-editor').then(module => ({
     default: module.BlockSuiteEditor,
   }))
 );
 
 function fitViewport(
-  editor: AffineEditorContainer,
+  editor: BridgeFlowEditorContainer,
   xywh?: `[${number},${number},${number},${number}]`
 ) {
   try {
@@ -90,7 +90,7 @@ function DocPeekPreviewEditor({
   const isInTrash = useLiveData(doc.record.trash$);
 
   const handleOnEditorReady = useCallback(
-    (editorContainer: AffineEditorContainer) => {
+    (editorContainer: BridgeFlowEditorContainer) => {
       const disposableGroup = new DisposableGroup();
       const refNodeSlots =
         editorContainer.std.getOptional(RefNodeSlotsProvider);
@@ -158,10 +158,10 @@ function DocPeekPreviewEditor({
   const readonly = !canEdit || isInTrash;
 
   return (
-    <AffineErrorBoundary>
+    <BridgeFlowErrorBoundary>
       <Scrollable.Root>
         <Scrollable.Viewport
-          className={clsx('affine-page-viewport', styles.affineDocViewport)}
+          className={clsx('bridgeflow-page-viewport', styles.bridgeflowDocViewport)}
         >
           <Suspense fallback={<PageDetailLoading />}>
             <BlockSuiteEditor
@@ -183,7 +183,7 @@ function DocPeekPreviewEditor({
           openOutlinePanel={openOutlinePanel}
         />
       ) : null}
-    </AffineErrorBoundary>
+    </BridgeFlowErrorBoundary>
   );
 }
 

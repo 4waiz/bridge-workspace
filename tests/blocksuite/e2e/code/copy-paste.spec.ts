@@ -59,7 +59,7 @@ use fern::{
   await focusRichText(page);
   await pasteByKeyboard(page);
 
-  const locator = page.locator('affine-paragraph');
+  const locator = page.locator('bridgeflow-paragraph');
   await expect(locator).toBeHidden();
 });
 

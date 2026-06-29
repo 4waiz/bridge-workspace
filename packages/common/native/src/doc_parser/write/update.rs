@@ -1,6 +1,6 @@
 //! Update YDoc module
 //!
-//! Provides functionality to update existing AFFiNE documents by applying
+//! Provides functionality to update existing BridgeFlow documents by applying
 //! surgical y-octo operations based on content differences.
 
 use std::collections::HashMap;
@@ -558,7 +558,7 @@ mod tests {
     let mut caption = None;
     for (_, value) in blocks_map.iter() {
       if let Some(block_map) = value.to_map()
-        && get_string(&block_map, "sys:flavour").as_deref() == Some("affine:image")
+        && get_string(&block_map, "sys:flavour").as_deref() == Some("bridgeflow:image")
       {
         caption = get_string(&block_map, "prop:caption");
         break;
@@ -585,7 +585,7 @@ mod tests {
     let mut found = false;
     for (_, value) in blocks_map.iter() {
       if let Some(block_map) = value.to_map()
-        && get_string(&block_map, "sys:flavour").as_deref() == Some("affine:table")
+        && get_string(&block_map, "sys:flavour").as_deref() == Some("bridgeflow:table")
       {
         for key in block_map.keys() {
           if key.starts_with("prop:cells.")

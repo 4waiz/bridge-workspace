@@ -1,8 +1,8 @@
 import type {
   InviteLink,
   WorkspaceInviteLinkExpireTime,
-} from '@affine/graphql';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/graphql';
+import { useI18n } from '@bridgeflow/i18n';
 import { EmailIcon, LinkIcon } from '@blocksuite/icons/rc';
 
 import { RadioGroup } from '../../../ui/radio';
@@ -44,7 +44,7 @@ export const ModalContent = ({
 
   return (
     <div className={styles.modalContent}>
-      <div>{t['com.affine.payment.member.team.invite.description']()}</div>
+      <div>{t['com.bridgeflow.payment.member.team.invite.description']()}</div>
       <RadioGroup
         width={'100%'}
         value={inviteMethod}
@@ -55,7 +55,7 @@ export const ModalContent = ({
               <RadioItem
                 icon={<EmailIcon className={styles.iconStyle} />}
                 label={t[
-                  'com.affine.payment.member.team.invite.email-invite'
+                  'com.bridgeflow.payment.member.team.invite.email-invite'
                 ]()}
               />
             ),
@@ -65,7 +65,7 @@ export const ModalContent = ({
             label: (
               <RadioItem
                 icon={<LinkIcon className={styles.iconStyle} />}
-                label={t['com.affine.payment.member.team.invite.invite-link']()}
+                label={t['com.bridgeflow.payment.member.team.invite.invite-link']()}
               />
             ),
             value: 'link',

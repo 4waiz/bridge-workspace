@@ -5,13 +5,13 @@ import {
   templateToString,
   useConfirmModal,
   useDisposable,
-} from '@affine/component';
-import { Pagination } from '@affine/component/setting-components';
-import { BlobManagementService } from '@affine/core/modules/blob-management/services';
-import { useI18n } from '@affine/i18n';
-import type { ListedBlobRecord } from '@affine/nbstore';
-import track from '@affine/track';
-import { getAttachmentFileIcon } from '@blocksuite/affine/components/icons';
+} from '@bridgeflow/component';
+import { Pagination } from '@bridgeflow/component/setting-components';
+import { BlobManagementService } from '@bridgeflow/core/modules/blob-management/services';
+import { useI18n } from '@bridgeflow/i18n';
+import type { ListedBlobRecord } from '@bridgeflow/nbstore';
+import track from '@bridgeflow/track';
+import { getAttachmentFileIcon } from '@blocksuite/bridgeflow/components/icons';
 import { DeleteIcon } from '@blocksuite/icons/rc';
 import { useLiveData, useService } from '@toeverything/infra';
 import bytes from 'bytes';
@@ -23,7 +23,7 @@ const Empty = () => {
   const t = useI18n();
   return (
     <div className={styles.empty}>
-      {t['com.affine.settings.workspace.storage.unused-blobs.empty']()}
+      {t['com.bridgeflow.settings.workspace.storage.unused-blobs.empty']()}
     </div>
   );
 };
@@ -217,11 +217,11 @@ export const BlobManagementPanel = () => {
       openConfirmModal({
         title:
           t[
-            'com.affine.settings.workspace.storage.unused-blobs.delete.title'
+            'com.bridgeflow.settings.workspace.storage.unused-blobs.delete.title'
           ](),
         children:
           t[
-            'com.affine.settings.workspace.storage.unused-blobs.delete.warning'
+            'com.bridgeflow.settings.workspace.storage.unused-blobs.delete.warning'
           ](),
         onConfirm: async () => {
           setDeleting(true);
@@ -268,12 +268,12 @@ export const BlobManagementPanel = () => {
       {selectedBlobs.length > 0 ? (
         <div className={styles.blobManagementControls}>
           <div className={styles.blobManagementName}>
-            {`${selectedBlobs.length} ${t['com.affine.settings.workspace.storage.unused-blobs.selected']()}`}
+            {`${selectedBlobs.length} ${t['com.bridgeflow.settings.workspace.storage.unused-blobs.selected']()}`}
           </div>
           <div className={styles.spacer} />
           {showSelectAll && (
             <Button onClick={handleSelectAll} variant="primary">
-              {t['com.affine.keyboardShortcuts.selectAll']()}
+              {t['com.bridgeflow.keyboardShortcuts.selectAll']()}
             </Button>
           )}
           <Button
@@ -287,7 +287,7 @@ export const BlobManagementPanel = () => {
         </div>
       ) : (
         <div className={styles.blobManagementNameInactive}>
-          {`${t['com.affine.settings.workspace.storage.unused-blobs']()} (${unusedBlobs.length})`}
+          {`${t['com.bridgeflow.settings.workspace.storage.unused-blobs']()} (${unusedBlobs.length})`}
         </div>
       )}
       {isEmpty ? (

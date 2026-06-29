@@ -19,11 +19,11 @@ export class CurrentUserDBEditorSettingProvider
   ) {
     super();
 
-    const affineCloudServer = this.serversService.server$('affine-cloud').value; // TODO: support multiple servers
-    if (!affineCloudServer) {
-      throw new Error('affine-cloud server not found');
+    const bridgeflowCloudServer = this.serversService.server$('bridgeflow-cloud').value; // TODO: support multiple servers
+    if (!bridgeflowCloudServer) {
+      throw new Error('bridgeflow-cloud server not found');
     }
-    const userDBService = affineCloudServer.scope.get(UserDBService);
+    const userDBService = bridgeflowCloudServer.scope.get(UserDBService);
     this.currentUserDB$ = userDBService.currentUserDB.db$;
   }
 

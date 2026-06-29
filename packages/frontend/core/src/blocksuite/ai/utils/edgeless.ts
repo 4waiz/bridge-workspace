@@ -1,13 +1,13 @@
-import { SurfaceBlockModel } from '@blocksuite/affine/blocks/surface';
+import { SurfaceBlockModel } from '@blocksuite/bridgeflow/blocks/surface';
 import {
   MindmapElementModel,
   NoteBlockModel,
   RootBlockModel,
   type ShapeElementModel,
-} from '@blocksuite/affine/model';
-import { matchModels } from '@blocksuite/affine/shared/utils';
-import type { BlockComponent } from '@blocksuite/affine/std';
-import type { GfxModel } from '@blocksuite/affine/std/gfx';
+} from '@blocksuite/bridgeflow/model';
+import { matchModels } from '@blocksuite/bridgeflow/shared/utils';
+import type { BlockComponent } from '@blocksuite/bridgeflow/std';
+import type { GfxModel } from '@blocksuite/bridgeflow/std/gfx';
 
 export function mindMapToMarkdown(mindmap: MindmapElementModel) {
   let markdownStr = '';

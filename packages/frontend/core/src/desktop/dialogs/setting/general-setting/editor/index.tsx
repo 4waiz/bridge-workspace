@@ -1,5 +1,5 @@
-import { SettingHeader } from '@affine/component/setting-components';
-import { useI18n } from '@affine/i18n';
+import { SettingHeader } from '@bridgeflow/component/setting-components';
+import { useI18n } from '@bridgeflow/i18n';
 
 import { Edgeless } from './edgeless';
 import { General } from './general';
@@ -11,8 +11,8 @@ export const EditorSettings = () => {
   return (
     <>
       <SettingHeader
-        title={t['com.affine.settings.editorSettings.title']()}
-        subtitle={t['com.affine.settings.editorSettings.subtitle']()}
+        title={t['com.bridgeflow.settings.editorSettings.title']()}
+        subtitle={t['com.bridgeflow.settings.editorSettings.subtitle']()}
       />
       <General />
       <Page />

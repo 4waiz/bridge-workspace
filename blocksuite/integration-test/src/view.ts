@@ -1,5 +1,5 @@
-import { ViewExtensionManager } from '@blocksuite/affine/ext-loader';
-import { getInternalViewExtensions } from '@blocksuite/affine/extensions/view';
+import { ViewExtensionManager } from '@blocksuite/bridgeflow/ext-loader';
+import { getInternalViewExtensions } from '@blocksuite/bridgeflow/extensions/view';
 
 const manager = new ViewExtensionManager(getInternalViewExtensions());
 

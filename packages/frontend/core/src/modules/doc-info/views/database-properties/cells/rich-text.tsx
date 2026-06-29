@@ -1,9 +1,9 @@
-import { PropertyValue } from '@affine/component';
-import { ConfigModal } from '@affine/core/components/mobile';
-import { DefaultInlineManagerExtension } from '@blocksuite/affine/inlines/preset';
-import { RichText } from '@blocksuite/affine/rich-text';
-import type { BlockStdScope } from '@blocksuite/affine/std';
-import type { Store } from '@blocksuite/affine/store';
+import { PropertyValue } from '@bridgeflow/component';
+import { ConfigModal } from '@bridgeflow/core/components/mobile';
+import { DefaultInlineManagerExtension } from '@blocksuite/bridgeflow/inlines/preset';
+import { RichText } from '@blocksuite/bridgeflow/rich-text';
+import type { BlockStdScope } from '@blocksuite/bridgeflow/std';
+import type { Store } from '@blocksuite/bridgeflow/store';
 import { TextIcon } from '@blocksuite/icons/rc';
 import { type LiveData, useLiveData } from '@toeverything/infra';
 import { type CSSProperties, useEffect, useRef, useState } from 'react';

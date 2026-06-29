@@ -25,7 +25,7 @@ test.beforeEach(async t => {
   await t.context.app.initTestingDB();
 
   const allowlistedAdmin = await t.context.models.user.create({
-    email: 'admin@affine.pro',
+    email: 'admin@bridgeflow.pro',
     password: '1',
     emailVerifiedAt: new Date(),
   });
@@ -41,7 +41,7 @@ test.beforeEach(async t => {
   t.context.allowlistedAdminToken = allowlistedAdminToken.token;
 
   const nonAllowlistedAdmin = await t.context.models.user.create({
-    email: 'admin2@affine.pro',
+    email: 'admin2@bridgeflow.pro',
     password: '1',
     emailVerifiedAt: new Date(),
   });
@@ -57,7 +57,7 @@ test.beforeEach(async t => {
   t.context.nonAllowlistedAdminToken = nonAllowlistedAdminToken.token;
 
   const user = await t.context.models.user.create({
-    email: 'user@affine.pro',
+    email: 'user@bridgeflow.pro',
     password: '1',
     emailVerifiedAt: new Date(),
   });

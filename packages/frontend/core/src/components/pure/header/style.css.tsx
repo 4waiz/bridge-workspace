@@ -68,14 +68,14 @@ export const windowAppControl = style({
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: '0',
-  color: 'var(--affine-icon-color)',
+  color: 'var(--bridgeflow-icon-color)',
   selectors: {
     '&[data-type="close"]:hover': {
-      background: 'var(--affine-windows-close-button)',
-      color: 'var(--affine-pure-white)',
+      background: 'var(--bridgeflow-windows-close-button)',
+      color: 'var(--bridgeflow-pure-white)',
     },
     '&:hover': {
-      background: 'var(--affine-hover-color)',
+      background: 'var(--bridgeflow-hover-color)',
     },
   },
 } as ComplexStyleRule);
@@ -83,5 +83,5 @@ export const windowAppControl = style({
 export const headerDivider = style({
   height: '20px',
   width: '1px',
-  background: 'var(--affine-border-color)',
+  background: 'var(--bridgeflow-border-color)',
 });

@@ -1,5 +1,5 @@
-import type { DocMode } from '@blocksuite/affine/model';
-import type { Chain, EditorHost, InitCommandCtx } from '@blocksuite/affine/std';
+import type { DocMode } from '@blocksuite/bridgeflow/model';
+import type { Chain, EditorHost, InitCommandCtx } from '@blocksuite/bridgeflow/std';
 import type { TemplateResult } from 'lit';
 
 export interface AIItemGroupConfig {

@@ -1,12 +1,12 @@
-import { Menu, type MenuProps } from '@affine/component';
-import { useNavigateHelper } from '@affine/core/components/hooks/use-navigate-helper';
-import { GlobalContextService } from '@affine/core/modules/global-context';
-import { WorkbenchService } from '@affine/core/modules/workbench';
+import { Menu, type MenuProps } from '@bridgeflow/component';
+import { useNavigateHelper } from '@bridgeflow/core/components/hooks/use-navigate-helper';
+import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
 import {
   type WorkspaceMetadata,
   WorkspacesService,
-} from '@affine/core/modules/workspace';
-import { track } from '@affine/track';
+} from '@bridgeflow/core/modules/workspace';
+import { track } from '@bridgeflow/track';
 import {
   useLiveData,
   useServiceOptional,

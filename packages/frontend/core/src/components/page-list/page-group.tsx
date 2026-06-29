@@ -1,6 +1,6 @@
-import { shallowEqual } from '@affine/component';
-import type { CollectionMeta } from '@affine/core/modules/collection';
-import { useI18n } from '@affine/i18n';
+import { shallowEqual } from '@bridgeflow/component';
+import type { CollectionMeta } from '@bridgeflow/core/modules/collection';
+import { useI18n } from '@bridgeflow/i18n';
 import { ToggleRightIcon, ViewLayersIcon } from '@blocksuite/icons/rc';
 import { selectAtom } from 'jotai/utils';
 import type { MouseEventHandler } from 'react';
@@ -94,8 +94,8 @@ export const ItemGroupHeader = memo(function ItemGroupHeader<
       <button className={styles.selectAllButton} onClick={onSelectAll}>
         {t[
           allSelected
-            ? 'com.affine.page.group-header.clear'
-            : 'com.affine.page.group-header.select-all'
+            ? 'com.bridgeflow.page.group-header.clear'
+            : 'com.bridgeflow.page.group-header.select-all'
         ]()}
       </button>
     </div>

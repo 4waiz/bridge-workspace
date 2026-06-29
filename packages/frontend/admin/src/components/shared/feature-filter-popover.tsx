@@ -1,11 +1,11 @@
-import { Button } from '@affine/admin/components/ui/button';
-import { Checkbox } from '@affine/admin/components/ui/checkbox';
+import { Button } from '@bridgeflow/admin/components/ui/button';
+import { Checkbox } from '@bridgeflow/admin/components/ui/checkbox';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@affine/admin/components/ui/popover';
-import type { FeatureType } from '@affine/graphql';
+} from '@bridgeflow/admin/components/ui/popover';
+import type { FeatureType } from '@bridgeflow/graphql';
 import { useCallback } from 'react';
 
 type FeatureFilterPopoverProps = {

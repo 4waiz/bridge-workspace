@@ -1,10 +1,10 @@
-# Bridge Workspace
+# BRIDGE Flow
 
 <p align="center">
-  <img src="packages/frontend/admin/src/Icon%20(1).webp" alt="Bridge Workspace logo" width="160" />
+  <img src="packages/frontend/admin/src/Icon%20(1).webp" alt="BRIDGE Flow logo" width="160" />
 </p>
 
-Bridge Workspace is the monorepo for the BridgeWS product, including the frontend apps, backend services, shared editor packages, and repository tooling.
+BRIDGE Flow is the monorepo for the BRIDGE Flow product, including the frontend apps, backend services, shared editor packages, and repository tooling.
 
 ## Development
 
@@ -13,9 +13,9 @@ Bridge Workspace is the monorepo for the BridgeWS product, including the fronten
 - `yarn test`
 - `yarn lint`
 
-## Bridge Workspace AI Assistant
+## BRIDGE Flow AI Assistant
 
-The workspace now includes a floating `Bridge Workspace AI` assistant with:
+The workspace now includes a floating `BRIDGE Flow AI` assistant with:
 
 - Gemini-powered chat for in-app guidance
 - Browser microphone input for voice questions

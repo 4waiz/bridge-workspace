@@ -1,6 +1,6 @@
-import { ImageBlockModel } from '@blocksuite/affine/model';
-import { FetchUtils } from '@blocksuite/affine/shared/adapters';
-import type { BlockModel } from '@blocksuite/affine/store';
+import { ImageBlockModel } from '@blocksuite/bridgeflow/model';
+import { FetchUtils } from '@blocksuite/bridgeflow/shared/adapters';
+import type { BlockModel } from '@blocksuite/bridgeflow/store';
 import type { GfxModel } from '@blocksuite/std/gfx';
 
 export async function fetchImageToFile(

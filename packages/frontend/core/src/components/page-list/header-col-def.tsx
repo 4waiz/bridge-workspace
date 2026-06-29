@@ -1,4 +1,4 @@
-import { Trans } from '@affine/i18n';
+import { Trans } from '@bridgeflow/i18n';
 import { useMemo } from 'react';
 
 import { ListHeaderTitleCell } from './page-header';

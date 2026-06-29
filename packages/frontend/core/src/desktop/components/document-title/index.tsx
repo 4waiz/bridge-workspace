@@ -1,6 +1,6 @@
-import { BRAND_NAME } from '@affine/component/brand';
-import { NotificationCountService } from '@affine/core/modules/notification';
-import { WorkbenchService } from '@affine/core/modules/workbench';
+import { BRAND_NAME } from '@bridgeflow/component/brand';
+import { NotificationCountService } from '@bridgeflow/core/modules/notification';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
 import { useLiveData, useService } from '@toeverything/infra';
 import { useEffect } from 'react';
 

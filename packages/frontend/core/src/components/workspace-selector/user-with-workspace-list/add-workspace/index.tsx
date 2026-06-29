@@ -1,7 +1,7 @@
-import { MenuItem } from '@affine/component/ui/menu';
-import { DefaultServerService } from '@affine/core/modules/cloud';
-import { ServerFeature } from '@affine/graphql';
-import { useI18n } from '@affine/i18n';
+import { MenuItem } from '@bridgeflow/component/ui/menu';
+import { DefaultServerService } from '@bridgeflow/core/modules/cloud';
+import { ServerFeature } from '@bridgeflow/graphql';
+import { useI18n } from '@bridgeflow/i18n';
 import { ImportIcon, PlusIcon } from '@blocksuite/icons/rc';
 import { useLiveData, useService } from '@toeverything/infra';
 
@@ -36,7 +36,7 @@ export const AddWorkspace = ({
           className={styles.ItemContainer}
         >
           <div className={styles.ItemText}>
-            {t['com.affine.workspace.local.import']()}
+            {t['com.bridgeflow.workspace.local.import']()}
           </div>
         </MenuItem>
       )}
@@ -50,8 +50,8 @@ export const AddWorkspace = ({
       >
         <div className={styles.ItemText}>
           {enableLocalWorkspace
-            ? t['com.affine.workspaceList.addWorkspace.create']()
-            : t['com.affine.workspaceList.addWorkspace.create-cloud']()}
+            ? t['com.bridgeflow.workspaceList.addWorkspace.create']()
+            : t['com.bridgeflow.workspaceList.addWorkspace.create-cloud']()}
         </div>
       </MenuItem>
     </>

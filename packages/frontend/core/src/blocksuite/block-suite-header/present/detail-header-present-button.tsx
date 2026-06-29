@@ -1,5 +1,5 @@
-import { IconButton } from '@affine/component';
-import { EditorService } from '@affine/core/modules/editor';
+import { IconButton } from '@bridgeflow/component';
+import { EditorService } from '@bridgeflow/core/modules/editor';
 import { PresentationIcon } from '@blocksuite/icons/rc';
 import { useService } from '@toeverything/infra';
 

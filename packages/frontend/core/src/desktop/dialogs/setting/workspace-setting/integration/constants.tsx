@@ -1,6 +1,6 @@
-import { BrandLogo } from '@affine/component/brand';
-import { IntegrationTypeIcon } from '@affine/core/modules/integration';
-import type { I18nString } from '@affine/i18n';
+import { BrandLogo } from '@bridgeflow/component/brand';
+import { IntegrationTypeIcon } from '@bridgeflow/core/modules/integration';
+import type { I18nString } from '@bridgeflow/i18n';
 import { TodayIcon } from '@blocksuite/icons/rc';
 import type { ReactNode } from 'react';
 
@@ -27,33 +27,33 @@ type IntegrationCard = {
 const INTEGRATION_LIST = [
   {
     id: 'readwise' as const,
-    name: 'com.affine.integration.readwise.name',
-    desc: 'com.affine.integration.readwise.desc',
+    name: 'com.bridgeflow.integration.readwise.name',
+    desc: 'com.bridgeflow.integration.readwise.desc',
     icon: <IntegrationTypeIcon type="readwise" />,
     setting: <ReadwiseSettingPanel />,
   },
   {
     id: 'calendar' as const,
-    name: 'com.affine.integration.calendar.name',
-    desc: 'com.affine.integration.calendar.desc',
+    name: 'com.bridgeflow.integration.calendar.name',
+    desc: 'com.bridgeflow.integration.calendar.desc',
     icon: <TodayIcon />,
     setting: <CalendarSettingPanel />,
     cloud: true,
   },
   {
     id: 'mcp-server' as const,
-    name: 'com.affine.integration.mcp-server.name',
-    desc: 'com.affine.integration.mcp-server.desc',
+    name: 'com.bridgeflow.integration.mcp-server.name',
+    desc: 'com.bridgeflow.integration.mcp-server.desc',
     icon: <img src={MCPIcon} />,
     setting: <McpServerSettingPanel />,
     cloud: true,
   },
   {
     id: 'web-clipper' as const,
-    name: 'com.affine.integration.web-clipper.name',
-    desc: 'com.affine.integration.web-clipper.desc',
+    name: 'com.bridgeflow.integration.web-clipper.name',
+    desc: 'com.bridgeflow.integration.web-clipper.desc',
     icon: <BrandLogo variant="mark" />,
-    link: 'https://chromewebstore.google.com/detail/affine-web-clipper/mpbbkmbdpleomiogkbkkpfoljjpahmoi',
+    link: 'https://chromewebstore.google.com/detail/bridgeflow-web-clipper/mpbbkmbdpleomiogkbkkpfoljjpahmoi',
   },
 ] satisfies (IntegrationCard | false)[];
 

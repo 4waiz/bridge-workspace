@@ -1,15 +1,15 @@
-import { usePromptModal } from '@affine/component';
-import { useNavigateHelper } from '@affine/core/components/hooks/use-navigate-helper';
+import { usePromptModal } from '@bridgeflow/component';
+import { useNavigateHelper } from '@bridgeflow/core/components/hooks/use-navigate-helper';
 import {
   CollectionListHeader,
   VirtualizedCollectionList,
-} from '@affine/core/components/page-list';
+} from '@bridgeflow/core/components/page-list';
 import {
   ViewIcon,
   ViewTitle,
-} from '@affine/core/modules/workbench/view/view-meta';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/core/modules/workbench/view/view-meta';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { useI18n } from '@bridgeflow/i18n';
 import { useLiveData, useService } from '@toeverything/infra';
 import { useCallback, useState } from 'react';
 
@@ -33,18 +33,18 @@ export const AllCollection = () => {
 
   const handleCreateCollection = useCallback(() => {
     openPromptModal({
-      title: t['com.affine.editCollection.saveCollection'](),
-      label: t['com.affine.editCollectionName.name'](),
+      title: t['com.bridgeflow.editCollection.saveCollection'](),
+      label: t['com.bridgeflow.editCollectionName.name'](),
       inputOptions: {
-        placeholder: t['com.affine.editCollectionName.name.placeholder'](),
+        placeholder: t['com.bridgeflow.editCollectionName.name.placeholder'](),
       },
       children: (
         <div className={styles.createTips}>
-          {t['com.affine.editCollectionName.createTips']()}
+          {t['com.bridgeflow.editCollectionName.createTips']()}
         </div>
       ),
-      confirmText: t['com.affine.editCollection.save'](),
-      cancelText: t['com.affine.editCollection.button.cancel'](),
+      confirmText: t['com.bridgeflow.editCollection.save'](),
+      cancelText: t['com.bridgeflow.editCollection.button.cancel'](),
       confirmButtonOptions: {
         variant: 'primary',
       },

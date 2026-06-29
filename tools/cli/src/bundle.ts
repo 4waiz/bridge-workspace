@@ -1,8 +1,8 @@
 import { rmSync } from 'node:fs';
 import { cpus } from 'node:os';
 
-import { Logger } from '@affine-tools/utils/logger';
-import { Package } from '@affine-tools/utils/workspace';
+import { Logger } from '@bridgeflow-tools/utils/logger';
+import { Package } from '@bridgeflow-tools/utils/workspace';
 import rspack, { type MultiRspackOptions } from '@rspack/core';
 import {
   type Configuration as RspackDevServerConfiguration,
@@ -51,7 +51,7 @@ function getBaseWorkerConfigs(
   pkg: Package,
   createWorkerTargetConfig: CreateWorkerTargetConfig
 ) {
-  const core = new Package('@affine/core');
+  const core = new Package('@bridgeflow/core');
 
   return [
     createWorkerTargetConfig(
@@ -77,17 +77,17 @@ function getRspackBundleConfigs(pkg: Package): MultiRspackOptions {
   assertRspackSupportedPackage(pkg);
 
   switch (pkg.name) {
-    case '@affine/admin': {
+    case '@bridgeflow/admin': {
       return [
         createRspackHTMLTargetConfig(pkg, pkg.srcPath.join('index.tsx').value, {
           selfhostPublicPath: '/admin/',
         }),
       ] as MultiRspackOptions;
     }
-    case '@affine/web':
-    case '@affine/mobile':
-    case '@affine/ios':
-    case '@affine/android': {
+    case '@bridgeflow/web':
+    case '@bridgeflow/mobile':
+    case '@bridgeflow/ios':
+    case '@bridgeflow/android': {
       const workerConfigs = getBaseWorkerConfigs(
         pkg,
         createRspackWorkerTargetConfig
@@ -104,14 +104,14 @@ function getRspackBundleConfigs(pkg: Package): MultiRspackOptions {
           pkg,
           pkg.srcPath.join('index.tsx').value,
           {
-            showWelcomeScreen: pkg.name === '@affine/web',
+            showWelcomeScreen: pkg.name === '@bridgeflow/web',
           },
           workerConfigs.map(config => config.name)
         ),
         ...workerConfigs,
       ] as MultiRspackOptions;
     }
-    case '@affine/electron-renderer': {
+    case '@bridgeflow/electron-renderer': {
       const workerConfigs = getBaseWorkerConfigs(
         pkg,
         createRspackWorkerTargetConfig
@@ -137,12 +137,12 @@ function getRspackBundleConfigs(pkg: Package): MultiRspackOptions {
         ...workerConfigs,
       ] as MultiRspackOptions;
     }
-    case '@affine/server': {
+    case '@bridgeflow/server': {
       return [
         createRspackNodeTargetConfig(pkg, pkg.srcPath.join('index.ts').value),
       ] as MultiRspackOptions;
     }
-    case '@affine/reader': {
+    case '@bridgeflow/reader': {
       return [
         createRspackNodeTargetConfig(pkg, pkg.srcPath.join('index.ts').value, {
           outputFilename: 'index.js',

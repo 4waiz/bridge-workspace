@@ -1,10 +1,10 @@
-import type { CommentChangeAction, PublicUserType } from '@affine/graphql';
-import type { DocMode } from '@blocksuite/affine/model';
+import type { CommentChangeAction, PublicUserType } from '@bridgeflow/graphql';
+import type { DocMode } from '@blocksuite/bridgeflow/model';
 import type {
   BaseSelection,
   DocSnapshot,
   Store,
-} from '@blocksuite/affine/store';
+} from '@blocksuite/bridgeflow/store';
 
 export type CommentId = string;
 

@@ -1,10 +1,10 @@
-import type { EdgelessRootBlockComponent } from '@blocksuite/affine/blocks/root';
+import type { EdgelessRootBlockComponent } from '@blocksuite/bridgeflow/blocks/root';
 import {
   type GroupElementModel,
   LayoutType,
   NoteDisplayMode,
-} from '@blocksuite/affine/model';
-import type { MindmapElementModel } from '@blocksuite/affine-model';
+} from '@blocksuite/bridgeflow/model';
+import type { MindmapElementModel } from '@blocksuite/bridgeflow-model';
 import { beforeEach, describe, expect, test } from 'vitest';
 import * as Y from 'yjs';
 
@@ -113,7 +113,7 @@ describe('group', () => {
           borderRadius: 8,
           borderSize: 4,
           borderStyle: 'solid',
-          shadowType: '--affine-note-shadow-box',
+          shadowType: '--bridgeflow-note-shadow-box',
         },
         collapse: true,
         collapsedHeight: 100,

@@ -3,7 +3,7 @@ import {
   type SubscriptionQuery,
   SubscriptionRecurring,
   SubscriptionVariant,
-} from '@affine/graphql';
+} from '@bridgeflow/graphql';
 import {
   catchErrorInto,
   effect,

@@ -1,11 +1,11 @@
-import type { WeekDatePickerHandle } from '@affine/component';
-import { WeekDatePicker } from '@affine/component';
+import type { WeekDatePickerHandle } from '@bridgeflow/component';
+import { WeekDatePicker } from '@bridgeflow/component';
 import {
   JOURNAL_DATE_FORMAT,
   JournalService,
-} from '@affine/core/modules/journal';
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import type { Store } from '@blocksuite/affine/store';
+} from '@bridgeflow/core/modules/journal';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import type { Store } from '@blocksuite/bridgeflow/store';
 import { useLiveData, useService } from '@toeverything/infra';
 import dayjs from 'dayjs';
 import { useCallback, useEffect, useRef, useState } from 'react';

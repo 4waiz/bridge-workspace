@@ -1,6 +1,6 @@
-import type { SurfaceBlockModel } from '@blocksuite/affine/blocks/surface';
-import { AffineSchemas } from '@blocksuite/affine/schemas';
-import { ZipTransformer } from '@blocksuite/affine/widgets/linked-doc';
+import type { SurfaceBlockModel } from '@blocksuite/bridgeflow/blocks/surface';
+import { BridgeFlowSchemas } from '@blocksuite/bridgeflow/schemas';
+import { ZipTransformer } from '@blocksuite/bridgeflow/widgets/linked-doc';
 import type { PointLocation } from '@blocksuite/global/gfx';
 import { Schema } from '@blocksuite/store';
 import { beforeEach, expect, test } from 'vitest';
@@ -29,7 +29,7 @@ const skipFields = new Set(['_lastXYWH']);
 const snapshotTest = async (snapshotUrl: string, elementsCount: number) => {
   const transformer = ZipTransformer;
   const schema = new Schema();
-  schema.register(AffineSchemas);
+  schema.register(BridgeFlowSchemas);
 
   const snapshotFile = await fetch(snapshotUrl)
     .then(res => res.blob())
@@ -52,7 +52,7 @@ const snapshotTest = async (snapshotUrl: string, elementsCount: number) => {
   await wait();
 
   const surface = newDoc.getModelsByFlavour(
-    'affine:surface'
+    'bridgeflow:surface'
   )[0] as SurfaceBlockModel;
   const surfaceElements = [...surface['_elementModels']].map(
     ([_, { model }]) => model
@@ -100,12 +100,12 @@ beforeEach(async () => {
 const xywhPattern = /\[(\s*-?\d+(\.\d+)?\s*,){3}(\s*-?\d+(\.\d+)?\s*)\]/;
 
 test('snapshot 1 importing', async () => {
-  await snapshotTest('https://test.affineassets.com/test-snapshot-1.zip', 25);
+  await snapshotTest('https://test.bridgeflowassets.com/test-snapshot-1.zip', 25);
 });
 
 test('snapshot 2 importing', async () => {
   await snapshotTest(
-    'https://test.affineassets.com/test-snapshot-2%20(onboarding).zip',
+    'https://test.bridgeflowassets.com/test-snapshot-2%20(onboarding).zip',
     174
   );
 });

@@ -1,12 +1,12 @@
 import type {
   AuthService,
   PublicUserService,
-} from '@affine/core/modules/cloud';
-import { UserFriendlyError } from '@affine/error';
+} from '@bridgeflow/core/modules/cloud';
+import { UserFriendlyError } from '@bridgeflow/error';
 import {
-  type AffineUserInfo,
+  type BridgeFlowUserInfo,
   UserServiceExtension,
-} from '@blocksuite/affine/shared/services';
+} from '@blocksuite/bridgeflow/shared/services';
 
 export function patchUserExtensions(
   publicUserService: PublicUserService,
@@ -23,7 +23,7 @@ export function patchUserExtensions(
         name: account.label,
         avatar: account.avatar,
         removed: false,
-      } as AffineUserInfo;
+      } as BridgeFlowUserInfo;
     }).signal,
     // eslint-disable-next-line rxjs/finnish
     userInfo$(id) {

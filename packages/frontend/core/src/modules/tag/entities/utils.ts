@@ -14,7 +14,7 @@ const tagToPaletteLineMap: Record<string, string> = {
   [cssVar('tagGreen')]: cssVar('paletteLineGreen'),
 };
 
-// map var(--affine-tag-xxx) colors to var(--affine-chip-label-xxx)
+// map var(--bridgeflow-tag-xxx) colors to var(--bridgeflow-chip-label-xxx)
 const tagToChipColorMap: Record<string, string> = {
   [cssVar('tagRed')]: cssVarV2('chip/label/red'),
   [cssVar('tagTeal')]: cssVarV2('chip/label/teal'),
@@ -46,8 +46,8 @@ const paletteLineToChipMap: Record<string, string> = Object.fromEntries(
   ])
 );
 
-// hack: map var(--affine-tag-xxx)/var(--affine-chip-label-xxx) colors to var(--affine-palette-line-xxx)
-export const databaseTagColorToAffineLabel = (color: string) => {
+// hack: map var(--bridgeflow-tag-xxx)/var(--bridgeflow-chip-label-xxx) colors to var(--bridgeflow-palette-line-xxx)
+export const databaseTagColorToBridgeFlowLabel = (color: string) => {
   return chipToPaletteLineMap[color] || tagToPaletteLineMap[color] || color;
 };
 
@@ -55,6 +55,6 @@ export const databaseTagColorToV2 = (color: string) => {
   return tagToChipColorMap[color] || color;
 };
 
-export const affineLabelToDatabaseTagColor = (color: string) => {
+export const bridgeflowLabelToDatabaseTagColor = (color: string) => {
   return paletteLineToChipMap[color] || color;
 };

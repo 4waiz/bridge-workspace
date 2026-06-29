@@ -1,5 +1,5 @@
-import type { BlobStorage, DocStorage } from '@affine/nbstore';
-import type { Workspace } from '@blocksuite/affine/store';
+import type { BlobStorage, DocStorage } from '@bridgeflow/nbstore';
+import type { Workspace } from '@blocksuite/bridgeflow/store';
 import { Service } from '@toeverything/infra';
 
 import type { WorkspaceFlavoursService } from './flavours';

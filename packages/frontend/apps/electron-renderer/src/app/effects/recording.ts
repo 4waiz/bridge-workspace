@@ -1,13 +1,13 @@
-import type { DocProps } from '@affine/core/blocksuite/initialization';
-import { DocsService } from '@affine/core/modules/doc';
-import { AudioAttachmentService } from '@affine/core/modules/media/services/audio-attachment';
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { DebugLogger } from '@affine/debug';
-import { apis, events } from '@affine/electron-api';
-import { i18nTime } from '@affine/i18n';
-import track from '@affine/track';
-import type { AttachmentBlockModel } from '@blocksuite/affine/model';
-import type { BlobEngine } from '@blocksuite/affine/sync';
+import type { DocProps } from '@bridgeflow/core/blocksuite/initialization';
+import { DocsService } from '@bridgeflow/core/modules/doc';
+import { AudioAttachmentService } from '@bridgeflow/core/modules/media/services/audio-attachment';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { DebugLogger } from '@bridgeflow/debug';
+import { apis, events } from '@bridgeflow/electron-api';
+import { i18nTime } from '@bridgeflow/i18n';
+import track from '@bridgeflow/track';
+import type { AttachmentBlockModel } from '@blocksuite/bridgeflow/model';
+import type { BlobEngine } from '@blocksuite/bridgeflow/sync';
 import type { FrameworkProvider } from '@toeverything/infra';
 
 import { getCurrentWorkspace, isAiEnabled } from './utils';
@@ -92,7 +92,7 @@ export function setupRecordingEvents(frameworkProvider: FrameworkProvider) {
 
                 // add size and sourceId to the attachment later
                 const attachmentId = doc.addBlock(
-                  'affine:attachment',
+                  'bridgeflow:attachment',
                   {
                     name: attachmentName,
                     type: 'audio/opus',

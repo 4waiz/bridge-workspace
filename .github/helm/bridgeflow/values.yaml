@@ -1,0 +1,71 @@
+global:
+  app:
+    buildType: 'stable'
+  ingress:
+    enabled: false
+    className: ''
+    # hosts for ingress rules
+    # e.g.
+    # hosts:
+    #  - bridgeflow.pro
+    #  - www.bridgeflow.pro
+    hosts:
+      - bridgeflow.pro
+    tls: []
+  secret:
+    secretName: 'server-private-key'
+    privateKey: ''
+  database:
+    user: 'postgres'
+    host: 'pg-postgresql'
+    port: '5432'
+    name: 'bridgeflow'
+    password: ''
+  redis:
+    host: 'redis-master'
+    port: '6379'
+    username: ''
+    password: ''
+    database: 0
+  indexer:
+    provider: ''
+    endpoint: ''
+    username: ''
+    password: ''
+  docService:
+    name: 'bridgeflow-doc'
+    port: 3020
+  deployment:
+    # change to 'selfhosted' and 'unknown' if this chart is ready to be used for selfhosted deployment
+    type: 'bridgeflow'
+    platform: 'gcp'
+
+graphql:
+  service:
+    type: ClusterIP
+    port: 3000
+    annotations:
+      cloud.google.com/backend-config: '{"default": "bridgeflow-api-backendconfig"}'
+
+front:
+  services:
+    sync:
+      name: bridgeflow-sync
+      type: ClusterIP
+      port: 3010
+      annotations:
+        cloud.google.com/backend-config: '{"default": "bridgeflow-api-backendconfig"}'
+    renderer:
+      name: bridgeflow-renderer
+      type: ClusterIP
+      port: 3000
+      annotations:
+        cloud.google.com/backend-config: '{"default": "bridgeflow-api-backendconfig"}'
+    web:
+      name: bridgeflow-web
+      type: ClusterIP
+      port: 8080
+    doc:
+      type: ClusterIP
+      annotations:
+        cloud.google.com/backend-config: '{"default": "bridgeflow-api-backendconfig"}'

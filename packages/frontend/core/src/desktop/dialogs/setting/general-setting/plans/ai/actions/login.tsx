@@ -1,6 +1,6 @@
-import { Button, type ButtonProps } from '@affine/component';
-import { GlobalDialogService } from '@affine/core/modules/dialogs';
-import { useI18n } from '@affine/i18n';
+import { Button, type ButtonProps } from '@bridgeflow/component';
+import { GlobalDialogService } from '@bridgeflow/core/modules/dialogs';
+import { useI18n } from '@bridgeflow/i18n';
 import { useService } from '@toeverything/infra';
 import { useCallback } from 'react';
 
@@ -14,7 +14,7 @@ export const AILogin = (btnProps: ButtonProps) => {
 
   return (
     <Button onClick={onClickSignIn} variant="primary" {...btnProps}>
-      {t['com.affine.payment.ai.action.login.button-label']()}
+      {t['com.bridgeflow.payment.ai.action.login.button-label']()}
     </Button>
   );
 };

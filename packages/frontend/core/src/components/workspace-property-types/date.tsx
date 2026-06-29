@@ -3,9 +3,9 @@ import {
   Menu,
   type MenuRef,
   PropertyValue,
-} from '@affine/component';
-import type { FilterParams } from '@affine/core/modules/collection-rules';
-import { i18nTime, useI18n } from '@affine/i18n';
+} from '@bridgeflow/component';
+import type { FilterParams } from '@bridgeflow/core/modules/collection-rules';
+import { i18nTime, useI18n } from '@bridgeflow/i18n';
 import { DateTimeIcon } from '@blocksuite/icons/rc';
 import { cssVarV2 } from '@toeverything/theme/v2';
 import {
@@ -37,7 +37,7 @@ const useParsedDate = (value: string) => {
     parsedValue,
     displayValue:
       displayValue ??
-      t['com.affine.page-properties.property-value-placeholder'](),
+      t['com.bridgeflow.page-properties.property-value-placeholder'](),
   };
 };
 
@@ -138,7 +138,7 @@ const DateSelectorMenu = ({
         <span>{value}</span>
       ) : (
         <span style={{ color: cssVarV2('text/placeholder') }}>
-          {t['com.affine.filter.empty']()}
+          {t['com.bridgeflow.filter.empty']()}
         </span>
       )}
     </FilterValueMenu>

@@ -1,4 +1,4 @@
-import { UserFriendlyError } from '@affine/error';
+import { UserFriendlyError } from '@bridgeflow/error';
 import {
   abortBlobUploadMutation,
   BlobUploadMethod,
@@ -10,7 +10,7 @@ import {
   releaseDeletedBlobsMutation,
   setBlobMutation,
   workspaceBlobQuotaQuery,
-} from '@affine/graphql';
+} from '@bridgeflow/graphql';
 
 import {
   type BlobRecord,
@@ -79,7 +79,7 @@ export class CloudBlobStorage extends BlobStorageBase {
       {
         cache: 'default',
         headers: {
-          'x-affine-version': BUILD_CONFIG.appVersion,
+          'x-bridgeflow-version': BUILD_CONFIG.appVersion,
         },
         signal,
       }
@@ -103,7 +103,7 @@ export class CloudBlobStorage extends BlobStorageBase {
           const res = await this.connection.fetch(json.url, {
             cache: 'default',
             headers: {
-              'x-affine-version': BUILD_CONFIG.appVersion,
+              'x-bridgeflow-version': BUILD_CONFIG.appVersion,
             },
             signal,
           });

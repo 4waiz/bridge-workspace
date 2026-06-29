@@ -1,30 +1,30 @@
-import { CloudViewExtension } from '@affine/core/blocksuite/view-extensions/cloud';
-import { AffineEditorViewExtension } from '@affine/core/blocksuite/view-extensions/editor-view/editor-view';
-import { AffineThemeViewExtension } from '@affine/core/blocksuite/view-extensions/theme';
-import { I18n } from '@affine/i18n';
-import { CodeBlockViewExtension } from '@blocksuite/affine/blocks/code/view';
-import { DividerViewExtension } from '@blocksuite/affine/blocks/divider/view';
-import { LatexViewExtension as LatexBlockViewExtension } from '@blocksuite/affine/blocks/latex/view';
-import { ListViewExtension } from '@blocksuite/affine/blocks/list/view';
-import { NoteViewExtension } from '@blocksuite/affine/blocks/note/view';
-import { ParagraphViewExtension } from '@blocksuite/affine/blocks/paragraph/view';
-import { RootViewExtension } from '@blocksuite/affine/blocks/root/view';
+import { CloudViewExtension } from '@bridgeflow/core/blocksuite/view-extensions/cloud';
+import { BridgeFlowEditorViewExtension } from '@bridgeflow/core/blocksuite/view-extensions/editor-view/editor-view';
+import { BridgeFlowThemeViewExtension } from '@bridgeflow/core/blocksuite/view-extensions/theme';
+import { I18n } from '@bridgeflow/i18n';
+import { CodeBlockViewExtension } from '@blocksuite/bridgeflow/blocks/code/view';
+import { DividerViewExtension } from '@blocksuite/bridgeflow/blocks/divider/view';
+import { LatexViewExtension as LatexBlockViewExtension } from '@blocksuite/bridgeflow/blocks/latex/view';
+import { ListViewExtension } from '@blocksuite/bridgeflow/blocks/list/view';
+import { NoteViewExtension } from '@blocksuite/bridgeflow/blocks/note/view';
+import { ParagraphViewExtension } from '@blocksuite/bridgeflow/blocks/paragraph/view';
+import { RootViewExtension } from '@blocksuite/bridgeflow/blocks/root/view';
 import {
   PeekViewExtension,
   type PeekViewService,
-} from '@blocksuite/affine/components/peek';
+} from '@blocksuite/bridgeflow/components/peek';
 import {
   type ViewExtensionContext,
   ViewExtensionManager,
   ViewExtensionProvider,
-} from '@blocksuite/affine/ext-loader';
-import { PlainTextClipboardConfig } from '@blocksuite/affine/foundation/clipboard';
-import { LatexInlineSpecExtension } from '@blocksuite/affine/inlines/latex';
-import { LatexViewExtension as LatexInlineViewExtension } from '@blocksuite/affine/inlines/latex/view';
-import { LinkInlineSpecExtension } from '@blocksuite/affine/inlines/link';
-import { LinkViewExtension } from '@blocksuite/affine/inlines/link/view';
-import { MentionInlineSpecExtension } from '@blocksuite/affine/inlines/mention';
-import { MentionViewExtension } from '@blocksuite/affine/inlines/mention/view';
+} from '@blocksuite/bridgeflow/ext-loader';
+import { PlainTextClipboardConfig } from '@blocksuite/bridgeflow/foundation/clipboard';
+import { LatexInlineSpecExtension } from '@blocksuite/bridgeflow/inlines/latex';
+import { LatexViewExtension as LatexInlineViewExtension } from '@blocksuite/bridgeflow/inlines/latex/view';
+import { LinkInlineSpecExtension } from '@blocksuite/bridgeflow/inlines/link';
+import { LinkViewExtension } from '@blocksuite/bridgeflow/inlines/link/view';
+import { MentionInlineSpecExtension } from '@blocksuite/bridgeflow/inlines/mention';
+import { MentionViewExtension } from '@blocksuite/bridgeflow/inlines/mention/view';
 import {
   BackgroundInlineSpecExtension,
   BoldInlineSpecExtension,
@@ -34,9 +34,9 @@ import {
   ItalicInlineSpecExtension,
   StrikeInlineSpecExtension,
   UnderlineInlineSpecExtension,
-} from '@blocksuite/affine/inlines/preset';
-import { ReferenceInlineSpecExtension } from '@blocksuite/affine/inlines/reference';
-import { ReferenceViewExtension } from '@blocksuite/affine/inlines/reference/view';
+} from '@blocksuite/bridgeflow/inlines/preset';
+import { ReferenceInlineSpecExtension } from '@blocksuite/bridgeflow/inlines/reference';
+import { ReferenceViewExtension } from '@blocksuite/bridgeflow/inlines/reference/view';
 import {
   DefaultOpenDocExtension,
   DocDisplayMetaService,
@@ -48,12 +48,12 @@ import {
   PageViewportServiceExtension,
   ThemeService,
   ToolbarRegistryExtension,
-} from '@blocksuite/affine/shared/services';
-import type { AffineTextAttributes } from '@blocksuite/affine/shared/types';
-import { InlineManagerExtension } from '@blocksuite/affine/std/inline';
-import { LinkedDocViewExtension } from '@blocksuite/affine/widgets/linked-doc/view';
-import { ToolbarViewExtension } from '@blocksuite/affine/widgets/toolbar/view';
-import { ViewportOverlayViewExtension } from '@blocksuite/affine/widgets/viewport-overlay/view';
+} from '@blocksuite/bridgeflow/shared/services';
+import type { BridgeFlowTextAttributes } from '@blocksuite/bridgeflow/shared/types';
+import { InlineManagerExtension } from '@blocksuite/bridgeflow/std/inline';
+import { LinkedDocViewExtension } from '@blocksuite/bridgeflow/widgets/linked-doc/view';
+import { ToolbarViewExtension } from '@blocksuite/bridgeflow/widgets/toolbar/view';
+import { ViewportOverlayViewExtension } from '@blocksuite/bridgeflow/widgets/viewport-overlay/view';
 import type { FrameworkProvider } from '@toeverything/infra';
 import { z } from 'zod';
 
@@ -89,7 +89,7 @@ class CommentEditorViewExtensionProvider extends ViewExtensionProvider<CommentEd
       FileSizeLimitService,
 
       ...InlineSpecExtensions,
-      InlineManagerExtension<AffineTextAttributes>({
+      InlineManagerExtension<BridgeFlowTextAttributes>({
         id: 'DefaultInlineManager',
         specs: [
           BoldInlineSpecExtension.identifier,
@@ -145,9 +145,9 @@ export function getCommentEditorViewManager(framework: FrameworkProvider) {
       ViewportOverlayViewExtension,
       LinkedDocViewExtension,
 
-      // Affine side
-      AffineThemeViewExtension,
-      AffineEditorViewExtension,
+      // BridgeFlow side
+      BridgeFlowThemeViewExtension,
+      BridgeFlowEditorViewExtension,
 
       // for rendering mentions
       CloudViewExtension,
@@ -155,7 +155,7 @@ export function getCommentEditorViewManager(framework: FrameworkProvider) {
 
     manager.configure(ParagraphViewExtension, {
       getPlaceholder: () => {
-        return I18n.t('com.affine.notification.comment-prompt');
+        return I18n.t('com.bridgeflow.notification.comment-prompt');
       },
     });
 

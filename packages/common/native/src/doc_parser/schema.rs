@@ -1,6 +1,6 @@
-pub(super) const PAGE_FLAVOUR: &str = "affine:page";
-pub(super) const NOTE_FLAVOUR: &str = "affine:note";
-pub(super) const SURFACE_FLAVOUR: &str = "affine:surface";
+pub(super) const PAGE_FLAVOUR: &str = "bridgeflow:page";
+pub(super) const NOTE_FLAVOUR: &str = "bridgeflow:note";
+pub(super) const SURFACE_FLAVOUR: &str = "bridgeflow:surface";
 
 pub(super) const SYS_ID: &str = "sys:id";
 pub(super) const SYS_FLAVOUR: &str = "sys:flavour";

@@ -1,5 +1,5 @@
-import { Button, RowInput } from '@affine/component';
-import { useI18n } from '@affine/i18n';
+import { Button, RowInput } from '@bridgeflow/component';
+import { useI18n } from '@bridgeflow/i18n';
 import clsx from 'clsx';
 import { useCallback, useState } from 'react';
 
@@ -46,7 +46,7 @@ export const RenameContent = ({
         {DescRenderer ? (
           <DescRenderer input={value} />
         ) : (
-          t['com.affine.m.rename-to']({ name: value })
+          t['com.bridgeflow.m.rename-to']({ name: value })
         )}
       </div>
       <div className={styles.doneWrapper}>

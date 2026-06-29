@@ -1,10 +1,10 @@
-import { getStoreManager } from '@affine/core/blocksuite/manager/store';
-import { toArrayBuffer } from '@affine/core/utils/array-buffer';
-import { Container } from '@blocksuite/affine/global/di';
+import { getStoreManager } from '@bridgeflow/core/blocksuite/manager/store';
+import { toArrayBuffer } from '@bridgeflow/core/utils/array-buffer';
+import { Container } from '@blocksuite/bridgeflow/global/di';
 import {
   customImageProxyMiddleware,
   MarkdownAdapter,
-} from '@blocksuite/affine/shared/adapters';
+} from '@blocksuite/bridgeflow/shared/adapters';
 import {
   type BlockModel,
   type DocSnapshot,
@@ -12,13 +12,13 @@ import {
   type Store,
   Text,
   Transformer,
-} from '@blocksuite/affine/store';
+} from '@blocksuite/bridgeflow/store';
 import { Service } from '@toeverything/infra';
 import { Doc as YDoc } from 'yjs';
 
 import type { DefaultServerService, WorkspaceServerService } from '../../cloud';
 import {
-  getAFFiNEWorkspaceSchema,
+  getBridgeFlowWorkspaceSchema,
   type WorkspaceService,
 } from '../../workspace';
 import { WorkspaceImpl } from '../../workspace/impls/workspace';
@@ -69,7 +69,7 @@ export class SnapshotHelper extends Service {
   // todo: cache the transformer?
   getTransformer() {
     const collection = this.getTempWorkspace();
-    const schema = getAFFiNEWorkspaceSchema();
+    const schema = getBridgeFlowWorkspaceSchema();
     const imageProxyUrl = new URL(
       BUILD_CONFIG.imageProxyUrl,
       this.serverService.baseUrl
@@ -130,15 +130,15 @@ export class SnapshotHelper extends Service {
       const store = doc.getStore();
       store.load(() => {
         // Add root page block with empty title
-        const rootId = store.addBlock('affine:page', {
+        const rootId = store.addBlock('bridgeflow:page', {
           title: new Text(''),
         });
 
         // Add note block
-        const noteId = store.addBlock('affine:note', {}, rootId);
+        const noteId = store.addBlock('bridgeflow:note', {}, rootId);
 
         // Add default paragraph block
-        store.addBlock('affine:paragraph', {}, noteId);
+        store.addBlock('bridgeflow:paragraph', {}, noteId);
       });
 
       // Reset history to prevent initial creation operations from being undone

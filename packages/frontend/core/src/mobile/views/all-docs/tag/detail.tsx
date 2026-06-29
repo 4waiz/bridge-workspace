@@ -1,13 +1,13 @@
-import { Wrapper } from '@affine/component';
-import { EmptyDocs } from '@affine/core/components/affine/empty';
+import { Wrapper } from '@bridgeflow/component';
+import { EmptyDocs } from '@bridgeflow/core/components/bridgeflow/empty';
 import {
   createDocExplorerContext,
   DocExplorerContext,
-} from '@affine/core/components/explorer/context';
-import { DocsExplorer } from '@affine/core/components/explorer/docs-view/docs-list';
-import { Page } from '@affine/core/mobile/components/page';
-import { CollectionRulesService } from '@affine/core/modules/collection-rules';
-import type { Tag } from '@affine/core/modules/tag';
+} from '@bridgeflow/core/components/explorer/context';
+import { DocsExplorer } from '@bridgeflow/core/components/explorer/docs-view/docs-list';
+import { Page } from '@bridgeflow/core/mobile/components/page';
+import { CollectionRulesService } from '@bridgeflow/core/modules/collection-rules';
+import type { Tag } from '@bridgeflow/core/modules/tag';
 import { useLiveData, useService } from '@toeverything/infra';
 import { useEffect, useState } from 'react';
 

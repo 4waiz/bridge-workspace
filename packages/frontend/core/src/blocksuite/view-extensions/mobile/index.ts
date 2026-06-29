@@ -1,9 +1,9 @@
-import { KeyboardToolbarExtension } from '@affine/core/blocksuite/view-extensions/mobile/keyboard-toolbar-extension';
-import { MobileFeatureFlagControl } from '@affine/core/blocksuite/view-extensions/mobile/mobile-feature-flag-control';
+import { KeyboardToolbarExtension } from '@bridgeflow/core/blocksuite/view-extensions/mobile/keyboard-toolbar-extension';
+import { MobileFeatureFlagControl } from '@bridgeflow/core/blocksuite/view-extensions/mobile/mobile-feature-flag-control';
 import {
   type ViewExtensionContext,
   ViewExtensionProvider,
-} from '@blocksuite/affine/ext-loader';
+} from '@blocksuite/bridgeflow/ext-loader';
 import { FrameworkProvider } from '@toeverything/infra';
 import { z } from 'zod';
 

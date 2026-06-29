@@ -1,5 +1,5 @@
-import { toReactNode } from '@affine/component';
-import { BlockComponent } from '@blocksuite/affine/std';
+import { toReactNode } from '@bridgeflow/component';
+import { BlockComponent } from '@blocksuite/bridgeflow/std';
 import { useLiveData, useService } from '@toeverything/infra';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 

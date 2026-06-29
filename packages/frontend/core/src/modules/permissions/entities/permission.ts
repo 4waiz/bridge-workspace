@@ -1,4 +1,4 @@
-import { Permission } from '@affine/graphql';
+import { Permission } from '@bridgeflow/graphql';
 import {
   backoffRetry,
   effect,

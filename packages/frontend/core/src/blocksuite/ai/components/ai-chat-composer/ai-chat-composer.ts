@@ -3,13 +3,13 @@ import './ai-chat-composer-tip';
 import type {
   AIDraftService,
   AIToolsConfigService,
-} from '@affine/core/modules/ai-button';
-import type { AIModelService } from '@affine/core/modules/ai-button/services/models';
+} from '@bridgeflow/core/modules/ai-button';
+import type { AIModelService } from '@bridgeflow/core/modules/ai-button/services/models';
 import type {
   ServerService,
   SubscriptionService,
-} from '@affine/core/modules/cloud';
-import type { WorkspaceDialogService } from '@affine/core/modules/dialogs';
+} from '@bridgeflow/core/modules/cloud';
+import type { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
 import type {
   ContextEmbedStatus,
   ContextWorkspaceEmbeddingStatus,
@@ -17,15 +17,15 @@ import type {
   CopilotContextBlob,
   CopilotContextDoc,
   CopilotContextFile,
-} from '@affine/graphql';
-import { SignalWatcher, WithDisposable } from '@blocksuite/affine/global/lit';
-import type { EditorHost } from '@blocksuite/affine/std';
-import { ShadowlessElement } from '@blocksuite/affine/std';
-import { uuidv4 } from '@blocksuite/affine/store';
+} from '@bridgeflow/graphql';
+import { SignalWatcher, WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import type { EditorHost } from '@blocksuite/bridgeflow/std';
+import { ShadowlessElement } from '@blocksuite/bridgeflow/std';
+import { uuidv4 } from '@blocksuite/bridgeflow/store';
 import type {
   FeatureFlagService,
   NotificationService,
-} from '@blocksuite/affine-shared/services';
+} from '@blocksuite/bridgeflow-shared/services';
 import { css, html, type PropertyValues } from 'lit';
 import { property, state } from 'lit/decorators.js';
 
@@ -69,7 +69,7 @@ export class AIChatComposer extends SignalWatcher(
       display: flex;
       flex-direction: column;
       gap: 4px;
-      color: var(--affine-text-secondary-color);
+      color: var(--bridgeflow-text-secondary-color);
       font-size: 12px;
       user-select: none;
     }
@@ -128,7 +128,7 @@ export class AIChatComposer extends SignalWatcher(
   accessor serverService!: ServerService;
 
   @property({ attribute: false })
-  accessor affineWorkspaceDialogService!: WorkspaceDialogService;
+  accessor bridgeflowWorkspaceDialogService!: WorkspaceDialogService;
 
   @property({ attribute: false })
   accessor notificationService!: NotificationService;
@@ -140,7 +140,7 @@ export class AIChatComposer extends SignalWatcher(
   accessor aiToolsConfigService!: AIToolsConfigService;
 
   @property({ attribute: false })
-  accessor affineFeatureFlagService!: FeatureFlagService;
+  accessor bridgeflowFeatureFlagService!: FeatureFlagService;
 
   @property({ attribute: false })
   accessor subscriptionService!: SubscriptionService;
@@ -196,7 +196,7 @@ export class AIChatComposer extends SignalWatcher(
         .docDisplayConfig=${this.docDisplayConfig}
         .searchMenuConfig=${this.searchMenuConfig}
         .serverService=${this.serverService}
-        .affineFeatureFlagService=${this.affineFeatureFlagService}
+        .bridgeflowFeatureFlagService=${this.bridgeflowFeatureFlagService}
         .aiDraftService=${this.aiDraftService}
         .aiToolsConfigService=${this.aiToolsConfigService}
         .notificationService=${this.notificationService}

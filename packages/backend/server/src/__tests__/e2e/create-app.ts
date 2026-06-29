@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 
-import { gqlFetcherFactory } from '@affine/graphql';
+import { gqlFetcherFactory } from '@bridgeflow/graphql';
 import { INestApplication, ModuleMetadata } from '@nestjs/common';
 import { NestApplication } from '@nestjs/core';
 import { Test, TestingModuleBuilder } from '@nestjs/testing';
@@ -10,7 +10,7 @@ import graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.mjs';
 import supertest from 'supertest';
 
 import {
-  AFFiNELogger,
+  BridgeFlowLogger,
   CacheInterceptor,
   CloudThrottlerGuard,
   EventBus,
@@ -79,7 +79,7 @@ export class TestingApp extends NestApplication {
       .set('Cookie', cookies);
 
     if (this.csrfCookie) {
-      req.set('x-affine-csrf-token', this.csrfCookie);
+      req.set('x-bridgeflow-csrf-token', this.csrfCookie);
     }
 
     return req;
@@ -244,7 +244,7 @@ export async function createApp(
     rawBody: true,
   });
 
-  const logger = new AFFiNELogger();
+  const logger = new BridgeFlowLogger();
   logger.setLogLevels([TEST_LOG_LEVEL]);
   app.useLogger(logger);
   app.use(cookieParser());

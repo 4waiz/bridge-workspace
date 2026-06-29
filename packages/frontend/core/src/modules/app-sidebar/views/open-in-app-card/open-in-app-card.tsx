@@ -1,11 +1,11 @@
-import { BRAND_SITE_URL } from '@affine/component/brand';
-import { Button, Checkbox, IconButton } from '@affine/component';
+import { BRAND_SITE_URL } from '@bridgeflow/component/brand';
+import { Button, Checkbox, IconButton } from '@bridgeflow/component';
 import {
   OpenInAppService,
   OpenLinkMode,
-} from '@affine/core/modules/open-in-app';
-import { appIconMap } from '@affine/core/utils';
-import { Trans, useI18n } from '@affine/i18n';
+} from '@bridgeflow/core/modules/open-in-app';
+import { appIconMap } from '@bridgeflow/core/utils';
+import { Trans, useI18n } from '@bridgeflow/i18n';
 import { CloseIcon } from '@blocksuite/icons/rc';
 import { useLiveData, useService } from '@toeverything/infra';
 import { useCallback, useState } from 'react';
@@ -49,7 +49,7 @@ export const OpenInAppCard = () => {
       </div>
       <div className={styles.contentCol}>
         <div className={styles.titleRow}>
-          {t.t('com.affine.open-in-app.card.title')}
+          {t.t('com.bridgeflow.open-in-app.card.title')}
           <div className={styles.spacer} />
           <IconButton
             className={styles.closeButton}
@@ -58,7 +58,7 @@ export const OpenInAppCard = () => {
           />
         </div>
         <div className={styles.subtitleRow}>
-          <Trans i18nKey="com.affine.open-in-app.card.subtitle">
+          <Trans i18nKey="com.bridgeflow.open-in-app.card.subtitle">
             Don&apos;t have the app?
             <a
               href={BUILD_CONFIG.downloadUrl || BRAND_SITE_URL}
@@ -78,7 +78,7 @@ export const OpenInAppCard = () => {
               checked={remember}
               onChange={onToggleRemember}
             />
-            {t.t('com.affine.open-in-app.card.remember')}
+            {t.t('com.bridgeflow.open-in-app.card.remember')}
           </label>
           <div className={styles.spacer} />
           <div className={styles.buttonGroup}>
@@ -88,7 +88,7 @@ export const OpenInAppCard = () => {
               className={styles.button}
               onClick={onDismiss}
             >
-              {t.t('com.affine.open-in-app.card.button.dismiss')}
+              {t.t('com.bridgeflow.open-in-app.card.button.dismiss')}
             </Button>
             <Button
               variant="primary"
@@ -96,7 +96,7 @@ export const OpenInAppCard = () => {
               className={styles.button}
               onClick={onOpen}
             >
-              {t.t('com.affine.open-in-app.card.button.open')}
+              {t.t('com.bridgeflow.open-in-app.card.button.open')}
             </Button>
           </div>
         </div>

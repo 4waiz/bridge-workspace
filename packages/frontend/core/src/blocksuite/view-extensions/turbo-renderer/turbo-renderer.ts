@@ -1,13 +1,13 @@
-import { getWorkerUrl } from '@affine/env/worker';
-import { CodeLayoutHandlerExtension } from '@blocksuite/affine/blocks/code';
-import { ImageLayoutHandlerExtension } from '@blocksuite/affine/blocks/image';
-import { ListLayoutHandlerExtension } from '@blocksuite/affine/blocks/list';
-import { NoteLayoutHandlerExtension } from '@blocksuite/affine/blocks/note';
-import { ParagraphLayoutHandlerExtension } from '@blocksuite/affine/blocks/paragraph';
+import { getWorkerUrl } from '@bridgeflow/env/worker';
+import { CodeLayoutHandlerExtension } from '@blocksuite/bridgeflow/blocks/code';
+import { ImageLayoutHandlerExtension } from '@blocksuite/bridgeflow/blocks/image';
+import { ListLayoutHandlerExtension } from '@blocksuite/bridgeflow/blocks/list';
+import { NoteLayoutHandlerExtension } from '@blocksuite/bridgeflow/blocks/note';
+import { ParagraphLayoutHandlerExtension } from '@blocksuite/bridgeflow/blocks/paragraph';
 import {
   TurboRendererConfigFactory,
   ViewportTurboRendererExtension,
-} from '@blocksuite/affine/gfx/turbo-renderer';
+} from '@blocksuite/bridgeflow/gfx/turbo-renderer';
 
 function createPainterWorker() {
   const worker = new Worker(getWorkerUrl('turbo-painter'));

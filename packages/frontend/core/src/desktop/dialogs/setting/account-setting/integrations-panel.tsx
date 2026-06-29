@@ -6,14 +6,14 @@ import {
   MenuItem,
   Modal,
   notify,
-} from '@affine/component';
+} from '@bridgeflow/component';
 import {
   useQuery,
   type UseQueryConfig,
-} from '@affine/core/components/hooks/use-query';
-import { GraphQLService } from '@affine/core/modules/cloud';
-import { UrlService } from '@affine/core/modules/url';
-import { UserFriendlyError } from '@affine/error';
+} from '@bridgeflow/core/components/hooks/use-query';
+import { GraphQLService } from '@bridgeflow/core/modules/cloud';
+import { UrlService } from '@bridgeflow/core/modules/url';
+import { UserFriendlyError } from '@bridgeflow/error';
 import {
   type CalendarAccountsQuery,
   calendarAccountsQuery,
@@ -24,8 +24,8 @@ import {
   linkCalDavAccountMutation,
   linkCalendarAccountMutation,
   unlinkCalendarAccountMutation,
-} from '@affine/graphql';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/graphql';
+import { useI18n } from '@bridgeflow/i18n';
 import { GoogleIcon, LinkIcon, TodayIcon } from '@blocksuite/icons/rc';
 import { useService } from '@toeverything/infra';
 import {
@@ -143,15 +143,15 @@ const CalDAVLinkDialog = ({
     } = {};
     if (!selectedProvider) {
       nextErrors.provider =
-        t['com.affine.integration.calendar.caldav.field.provider.error']();
+        t['com.bridgeflow.integration.calendar.caldav.field.provider.error']();
     }
     if (!username.trim()) {
       nextErrors.username =
-        t['com.affine.integration.calendar.caldav.field.username.error']();
+        t['com.bridgeflow.integration.calendar.caldav.field.username.error']();
     }
     if (!password) {
       nextErrors.password =
-        t['com.affine.integration.calendar.caldav.field.password.error']();
+        t['com.bridgeflow.integration.calendar.caldav.field.password.error']();
     }
     if (Object.keys(nextErrors).length) {
       setErrors(nextErrors);
@@ -176,7 +176,7 @@ const CalDAVLinkDialog = ({
       const message =
         error instanceof UserFriendlyError ? error.message : String(error);
       notify.error({
-        title: t['com.affine.integration.calendar.caldav.link.failed'](),
+        title: t['com.bridgeflow.integration.calendar.caldav.link.failed'](),
         message: message || undefined,
       });
     } finally {
@@ -197,7 +197,7 @@ const CalDAVLinkDialog = ({
     <Modal
       open={open}
       width={480}
-      title={t['com.affine.integration.calendar.caldav.link.title']()}
+      title={t['com.bridgeflow.integration.calendar.caldav.link.title']()}
       onOpenChange={nextOpen => {
         if (!nextOpen) onClose();
       }}
@@ -205,7 +205,7 @@ const CalDAVLinkDialog = ({
     >
       <div className={styles.caldavField}>
         <div className={styles.caldavLabel}>
-          {t['com.affine.integration.calendar.caldav.field.provider']()}
+          {t['com.bridgeflow.integration.calendar.caldav.field.provider']()}
         </div>
         <Menu
           items={providers.map(provider => (
@@ -224,7 +224,7 @@ const CalDAVLinkDialog = ({
           >
             {selectedProvider?.label ??
               t[
-                'com.affine.integration.calendar.caldav.field.provider.placeholder'
+                'com.bridgeflow.integration.calendar.caldav.field.provider.placeholder'
               ]()}
           </Button>
         </Menu>
@@ -233,7 +233,7 @@ const CalDAVLinkDialog = ({
         ) : null}
         {selectedProvider?.requiresAppPassword ? (
           <div className={styles.caldavHint}>
-            {t['com.affine.integration.calendar.caldav.hint.app-password']()}
+            {t['com.bridgeflow.integration.calendar.caldav.hint.app-password']()}
             {selectedProvider.docsUrl ? (
               <a
                 className={styles.caldavLink}
@@ -241,7 +241,7 @@ const CalDAVLinkDialog = ({
                 target="_blank"
                 rel="noreferrer noopener"
               >
-                {t['com.affine.integration.calendar.caldav.hint.learn-more']()}
+                {t['com.bridgeflow.integration.calendar.caldav.hint.learn-more']()}
               </a>
             ) : null}
           </div>
@@ -253,20 +253,20 @@ const CalDAVLinkDialog = ({
               target="_blank"
               rel="noreferrer noopener"
             >
-              {t['com.affine.integration.calendar.caldav.hint.guide']()}
+              {t['com.bridgeflow.integration.calendar.caldav.hint.guide']()}
             </a>
           </div>
         ) : null}
       </div>
       <div className={styles.caldavField}>
         <div className={styles.caldavLabel}>
-          {t['com.affine.integration.calendar.caldav.field.username']()}
+          {t['com.bridgeflow.integration.calendar.caldav.field.username']()}
         </div>
         <Input
           value={username}
           onInput={handleUsernameInput}
           placeholder={t[
-            'com.affine.integration.calendar.caldav.field.username.placeholder'
+            'com.bridgeflow.integration.calendar.caldav.field.username.placeholder'
           ]()}
           status={errors.username ? 'error' : 'default'}
           disabled={submitting}
@@ -277,13 +277,13 @@ const CalDAVLinkDialog = ({
       </div>
       <div className={styles.caldavField}>
         <div className={styles.caldavLabel}>
-          {t['com.affine.integration.calendar.caldav.field.password']()}
+          {t['com.bridgeflow.integration.calendar.caldav.field.password']()}
         </div>
         <Input
           value={password}
           onInput={handlePasswordInput}
           placeholder={t[
-            'com.affine.integration.calendar.caldav.field.password.placeholder'
+            'com.bridgeflow.integration.calendar.caldav.field.password.placeholder'
           ]()}
           type="password"
           status={errors.password ? 'error' : 'default'}
@@ -295,13 +295,13 @@ const CalDAVLinkDialog = ({
       </div>
       <div className={styles.caldavField}>
         <div className={styles.caldavLabel}>
-          {t['com.affine.integration.calendar.caldav.field.displayName']()}
+          {t['com.bridgeflow.integration.calendar.caldav.field.displayName']()}
         </div>
         <Input
           value={displayName}
           onInput={handleDisplayNameInput}
           placeholder={t[
-            'com.affine.integration.calendar.caldav.field.displayName.placeholder'
+            'com.bridgeflow.integration.calendar.caldav.field.displayName.placeholder'
           ]()}
           disabled={submitting}
         />
@@ -316,7 +316,7 @@ const CalDAVLinkDialog = ({
           disabled={submitting || !providers.length}
           onClick={() => void handleSubmit()}
         >
-          {t['com.affine.integration.calendar.account.link']()}
+          {t['com.bridgeflow.integration.calendar.account.link']()}
         </Button>
       </div>
     </Modal>
@@ -354,7 +354,7 @@ export const IntegrationsPanel = () => {
     { query: calendarAccountsQuery },
     useMemo(
       () =>
-        makeConfig(t['com.affine.integration.calendar.account.load-error']()),
+        makeConfig(t['com.bridgeflow.integration.calendar.account.load-error']()),
       [makeConfig, t]
     )
   );
@@ -368,7 +368,7 @@ export const IntegrationsPanel = () => {
 
     useMemo(
       () =>
-        makeConfig(t['com.affine.integration.calendar.provider.load-error']()),
+        makeConfig(t['com.bridgeflow.integration.calendar.provider.load-error']()),
       [makeConfig, t]
     )
   );
@@ -417,7 +417,7 @@ export const IntegrationsPanel = () => {
       } catch (error) {
         console.error('Failed to link calendar account', error);
         notify.error({
-          title: t['com.affine.integration.calendar.auth.start-error'](),
+          title: t['com.bridgeflow.integration.calendar.auth.start-error'](),
         });
       } finally {
         setLinking(false);
@@ -458,7 +458,7 @@ export const IntegrationsPanel = () => {
       } catch (error) {
         console.error('Failed to unlink calendar account', error);
         notify.error({
-          title: t['com.affine.integration.calendar.account.unlink-error'](),
+          title: t['com.bridgeflow.integration.calendar.account.unlink-error'](),
         });
       } finally {
         setUnlinkingAccountId(null);
@@ -480,14 +480,14 @@ export const IntegrationsPanel = () => {
         }}
       />
       <CollapsibleWrapper
-        title={t['com.affine.integration.integrations']()}
-        caption={t['com.affine.integration.setting.description']()}
+        title={t['com.bridgeflow.integration.integrations']()}
+        caption={t['com.bridgeflow.integration.setting.description']()}
       >
         <div className={styles.panel}>
           <div className={styles.panelHeader}>
             <div className={styles.panelTitle}>
               <TodayIcon />
-              <span>{t['com.affine.integration.calendar.name']()}</span>
+              <span>{t['com.bridgeflow.integration.calendar.name']()}</span>
             </div>
             {providerOptions.length ? (
               <Menu
@@ -503,12 +503,12 @@ export const IntegrationsPanel = () => {
                 contentOptions={{ align: 'end' }}
               >
                 <Button variant="primary" loading={linking}>
-                  {t['com.affine.integration.calendar.account.link']()}
+                  {t['com.bridgeflow.integration.calendar.account.link']()}
                 </Button>
               </Menu>
             ) : (
               <Button variant="primary" disabled>
-                {t['com.affine.integration.calendar.account.link']()}
+                {t['com.bridgeflow.integration.calendar.account.link']()}
               </Button>
             )}
           </div>
@@ -527,11 +527,11 @@ export const IntegrationsPanel = () => {
                 const showStatus =
                   account.status !== 'active' || Boolean(account.lastError);
                 const statusMessage = account.lastError
-                  ? t['com.affine.integration.calendar.account.status.failed']({
+                  ? t['com.bridgeflow.integration.calendar.account.status.failed']({
                       error: account.lastError,
                     })
                   : t[
-                      'com.affine.integration.calendar.account.status.failed-reconnect'
+                      'com.bridgeflow.integration.calendar.account.status.failed-reconnect'
                     ]();
 
                 return (
@@ -545,7 +545,7 @@ export const IntegrationsPanel = () => {
                         <div className={styles.accountMeta}>
                           {subtitle ? <span>{subtitle}</span> : null}
                           <span>
-                            {t['com.affine.integration.calendar.account.count'](
+                            {t['com.bridgeflow.integration.calendar.account.count'](
                               { count: String(account.calendarsCount) }
                             )}
                           </span>
@@ -564,7 +564,7 @@ export const IntegrationsPanel = () => {
                         disabled={unlinkingAccountId === account.id}
                         onClick={() => void handleUnlink(account.id)}
                       >
-                        {t['com.affine.integration.calendar.account.unlink']()}
+                        {t['com.bridgeflow.integration.calendar.account.unlink']()}
                       </Button>
                     </div>
                   </div>
@@ -573,7 +573,7 @@ export const IntegrationsPanel = () => {
             </div>
           ) : (
             <div className={styles.empty}>
-              {t['com.affine.integration.calendar.account.linked-empty']()}
+              {t['com.bridgeflow.integration.calendar.account.linked-empty']()}
             </div>
           )}
         </div>

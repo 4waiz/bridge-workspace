@@ -4,21 +4,21 @@ import {
   Menu,
   PropertyCollapsibleContent,
   PropertyCollapsibleSection,
-} from '@affine/component';
-import { BacklinkGroups } from '@affine/core/blocksuite/block-suite-editor/bi-directional-link-panel';
-import { CreatePropertyMenuItems } from '@affine/core/components/properties/menu/create-doc-property';
-import { WorkspacePropertyRow } from '@affine/core/components/properties/table';
-import type { DocCustomPropertyInfo } from '@affine/core/modules/db';
-import { DocDatabaseBacklinkInfo } from '@affine/core/modules/doc-info';
+} from '@bridgeflow/component';
+import { BacklinkGroups } from '@bridgeflow/core/blocksuite/block-suite-editor/bi-directional-link-panel';
+import { CreatePropertyMenuItems } from '@bridgeflow/core/components/properties/menu/create-doc-property';
+import { WorkspacePropertyRow } from '@bridgeflow/core/components/properties/table';
+import type { DocCustomPropertyInfo } from '@bridgeflow/core/modules/db';
+import { DocDatabaseBacklinkInfo } from '@bridgeflow/core/modules/doc-info';
 import type {
   DatabaseRow,
   DatabaseValueCell,
-} from '@affine/core/modules/doc-info/types';
-import { DocLinksService } from '@affine/core/modules/doc-link';
-import { GuardService } from '@affine/core/modules/permissions';
-import { WorkspacePropertyService } from '@affine/core/modules/workspace-property';
-import { useI18n } from '@affine/i18n';
-import track from '@affine/track';
+} from '@bridgeflow/core/modules/doc-info/types';
+import { DocLinksService } from '@bridgeflow/core/modules/doc-link';
+import { GuardService } from '@bridgeflow/core/modules/permissions';
+import { WorkspacePropertyService } from '@bridgeflow/core/modules/workspace-property';
+import { useI18n } from '@bridgeflow/i18n';
+import track from '@bridgeflow/track';
 import { PlusIcon } from '@blocksuite/icons/rc';
 import { useLiveData, useServices } from '@toeverything/infra';
 import { useCallback, useEffect, useState } from 'react';
@@ -97,24 +97,24 @@ export const InfoTable = ({
   return (
     <>
       <PropertyCollapsibleSection
-        title={t.t('com.affine.workspace.properties')}
+        title={t.t('com.bridgeflow.workspace.properties')}
       >
         <PropertyCollapsibleContent
           className={styles.tableBodyRoot}
           collapseButtonText={({ hide, isCollapsed }) =>
             isCollapsed
               ? hide === 1
-                ? t['com.affine.page-properties.more-property.one']({
+                ? t['com.bridgeflow.page-properties.more-property.one']({
                     count: hide.toString(),
                   })
-                : t['com.affine.page-properties.more-property.more']({
+                : t['com.bridgeflow.page-properties.more-property.more']({
                     count: hide.toString(),
                   })
               : hide === 1
-                ? t['com.affine.page-properties.hide-property.one']({
+                ? t['com.bridgeflow.page-properties.hide-property.one']({
                     count: hide.toString(),
                   })
-                : t['com.affine.page-properties.hide-property.more']({
+                : t['com.bridgeflow.page-properties.hide-property.more']({
                     count: hide.toString(),
                   })
           }
@@ -139,7 +139,7 @@ export const InfoTable = ({
               prefix={<PlusIcon />}
               className={styles.addPropertyButton}
             >
-              {t['com.affine.page-properties.add-property']()}
+              {t['com.bridgeflow.page-properties.add-property']()}
             </Button>
           ) : (
             <Menu
@@ -155,7 +155,7 @@ export const InfoTable = ({
                 prefix={<PlusIcon />}
                 className={styles.addPropertyButton}
               >
-                {t['com.affine.page-properties.add-property']()}
+                {t['com.bridgeflow.page-properties.add-property']()}
               </Button>
             </Menu>
           )}
@@ -169,7 +169,7 @@ export const InfoTable = ({
             count={backlinks.length}
             references={<BacklinkGroups />}
             onClick={onClose}
-            label={t['com.affine.page-properties.backlinks']()}
+            label={t['com.bridgeflow.page-properties.backlinks']()}
           />
           <Divider size="thinner" />
         </>
@@ -180,7 +180,7 @@ export const InfoTable = ({
             count={links.length}
             references={links}
             onClick={onClose}
-            label={t['com.affine.page-properties.outgoing-links']()}
+            label={t['com.bridgeflow.page-properties.outgoing-links']()}
           />
           <Divider size="thinner" />
         </>

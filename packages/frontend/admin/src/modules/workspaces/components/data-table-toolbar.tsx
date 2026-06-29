@@ -1,7 +1,7 @@
-import { Button } from '@affine/admin/components/ui/button';
-import { Input } from '@affine/admin/components/ui/input';
-import type { FeatureType } from '@affine/graphql';
-import { AdminWorkspaceSort } from '@affine/graphql';
+import { Button } from '@bridgeflow/admin/components/ui/button';
+import { Input } from '@bridgeflow/admin/components/ui/input';
+import type { FeatureType } from '@bridgeflow/graphql';
+import { AdminWorkspaceSort } from '@bridgeflow/graphql';
 import type { Table } from '@tanstack/react-table';
 import {
   type ChangeEvent,

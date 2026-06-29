@@ -41,7 +41,7 @@ export enum NodeEnv {
 }
 
 export enum DeploymentType {
-  Affine = 'affine',
+  BridgeFlow = 'bridgeflow',
   Selfhosted = 'selfhosted',
 }
 
@@ -58,7 +58,7 @@ export type AppEnv = {
 };
 
 globalThis.CLS_REQUEST_HOST = 'CLS_REQUEST_HOST';
-globalThis.CUSTOM_CONFIG_PATH = join(homedir(), '.affine/config');
+globalThis.CUSTOM_CONFIG_PATH = join(homedir(), '.bridgeflow/config');
 globalThis.readEnv = function readEnv<T>(
   env: string,
   defaultValue: T,
@@ -83,13 +83,13 @@ globalThis.readEnv = function readEnv<T>(
 export class Env implements AppEnv {
   NODE_ENV = (process.env.NODE_ENV ?? NodeEnv.Production) as NodeEnv;
   NAMESPACE = readEnv(
-    'AFFINE_ENV',
+    'BRIDGEFLOW_ENV',
     Namespace.Production,
     Object.values(Namespace)
   );
   DEPLOYMENT_TYPE = readEnv(
     'DEPLOYMENT_TYPE',
-    this.dev ? DeploymentType.Affine : DeploymentType.Selfhosted,
+    this.dev ? DeploymentType.BridgeFlow : DeploymentType.Selfhosted,
     Object.values(DeploymentType)
   );
   FLAVOR = readEnv('SERVER_FLAVOR', Flavor.AllInOne, Object.values(Flavor));

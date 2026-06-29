@@ -1,6 +1,6 @@
-import { WidgetComponent, WidgetViewExtension } from '@blocksuite/affine/std';
-import { ThemeProvider } from '@blocksuite/affine-shared/services';
-import { unsafeCSSVarV2 } from '@blocksuite/affine-shared/theme';
+import { WidgetComponent, WidgetViewExtension } from '@blocksuite/bridgeflow/std';
+import { ThemeProvider } from '@blocksuite/bridgeflow-shared/services';
+import { unsafeCSSVarV2 } from '@blocksuite/bridgeflow-shared/theme';
 import { css, html, nothing, type TemplateResult } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
 import { literal, unsafeStatic } from 'lit/static-html.js';
@@ -9,10 +9,10 @@ import { BlockDiffProvider } from '../../services/block-diff';
 import type { Block } from '../../utils/apply-model/markdown-diff';
 import { blockDiffWidgetForPage } from './page';
 
-export const AFFINE_BLOCK_DIFF_WIDGET_FOR_BLOCK =
-  'affine-block-diff-widget-for-block';
+export const BRIDGEFLOW_BLOCK_DIFF_WIDGET_FOR_BLOCK =
+  'bridgeflow-block-diff-widget-for-block';
 
-export class AffineBlockDiffWidgetForBlock extends WidgetComponent {
+export class BridgeFlowBlockDiffWidgetForBlock extends WidgetComponent {
   static override styles = css`
     .ai-block-diff {
       position: relative;
@@ -231,7 +231,7 @@ export class AffineBlockDiffWidgetForBlock extends WidgetComponent {
 }
 
 export const blockDiffWidgetForBlock = WidgetViewExtension(
-  'affine:note/*',
-  AFFINE_BLOCK_DIFF_WIDGET_FOR_BLOCK,
-  literal`${unsafeStatic(AFFINE_BLOCK_DIFF_WIDGET_FOR_BLOCK)}`
+  'bridgeflow:note/*',
+  BRIDGEFLOW_BLOCK_DIFF_WIDGET_FOR_BLOCK,
+  literal`${unsafeStatic(BRIDGEFLOW_BLOCK_DIFF_WIDGET_FOR_BLOCK)}`
 );

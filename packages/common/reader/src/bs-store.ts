@@ -1,5 +1,5 @@
-import { StoreExtensionManager } from '@blocksuite/affine/ext-loader';
-import { getInternalStoreExtensions } from '@blocksuite/affine/extensions/store';
+import { StoreExtensionManager } from '@blocksuite/bridgeflow/ext-loader';
+import { getInternalStoreExtensions } from '@blocksuite/bridgeflow/extensions/store';
 
 const manager = new StoreExtensionManager(getInternalStoreExtensions());
 

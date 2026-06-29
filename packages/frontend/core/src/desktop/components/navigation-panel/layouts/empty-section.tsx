@@ -1,4 +1,4 @@
-import { Button } from '@affine/component';
+import { Button } from '@bridgeflow/component';
 import clsx from 'clsx';
 import {
   cloneElement,

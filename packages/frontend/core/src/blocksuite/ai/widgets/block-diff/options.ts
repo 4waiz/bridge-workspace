@@ -1,6 +1,6 @@
-import track from '@affine/track';
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import { unsafeCSSVar, unsafeCSSVarV2 } from '@blocksuite/affine/shared/theme';
+import track from '@bridgeflow/track';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { unsafeCSSVar, unsafeCSSVarV2 } from '@blocksuite/bridgeflow/shared/theme';
 import { CloseIcon, DoneIcon } from '@blocksuite/icons/lit';
 import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';

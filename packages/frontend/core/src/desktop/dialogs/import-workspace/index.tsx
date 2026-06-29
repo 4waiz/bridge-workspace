@@ -1,13 +1,13 @@
-import { toast } from '@affine/component';
+import { toast } from '@bridgeflow/component';
 import {
   type DialogComponentProps,
   type GLOBAL_DIALOG_SCHEMA,
-} from '@affine/core/modules/dialogs';
-import { WorkspacesService } from '@affine/core/modules/workspace';
-import { _addLocalWorkspace } from '@affine/core/modules/workspace-engine';
-import { DebugLogger } from '@affine/debug';
-import { apis } from '@affine/electron-api';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/core/modules/dialogs';
+import { WorkspacesService } from '@bridgeflow/core/modules/workspace';
+import { _addLocalWorkspace } from '@bridgeflow/core/modules/workspace-engine';
+import { DebugLogger } from '@bridgeflow/debug';
+import { apis } from '@bridgeflow/electron-api';
+import { useI18n } from '@bridgeflow/i18n';
 import { useService } from '@toeverything/infra';
 import { useLayoutEffect, useRef } from 'react';
 

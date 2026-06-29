@@ -1,5 +1,5 @@
-import { NotificationCenter } from '@affine/component';
-import { DefaultServerService } from '@affine/core/modules/cloud';
+import { NotificationCenter } from '@bridgeflow/component';
+import { DefaultServerService } from '@bridgeflow/core/modules/cloud';
 import { FrameworkScope, useService } from '@toeverything/infra';
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';

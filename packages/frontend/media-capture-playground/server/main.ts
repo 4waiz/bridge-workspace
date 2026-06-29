@@ -6,7 +6,7 @@ import {
   type ApplicationInfo,
   type AudioCaptureSession,
   ShareableContent,
-} from '@affine/native';
+} from '@bridgeflow/native';
 import type { FSWatcher } from 'chokidar';
 import chokidar from 'chokidar';
 import express, {

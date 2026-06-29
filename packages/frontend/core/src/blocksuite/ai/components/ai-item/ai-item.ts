@@ -1,11 +1,11 @@
-import { ArrowRightIcon, EnterIcon } from '@blocksuite/affine/components/icons';
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import { ColorScheme } from '@blocksuite/affine/model';
+import { ArrowRightIcon, EnterIcon } from '@blocksuite/bridgeflow/components/icons';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import { ColorScheme } from '@blocksuite/bridgeflow/model';
 import {
   EditorHost,
   PropTypes,
   requiredProperties,
-} from '@blocksuite/affine/std';
+} from '@blocksuite/bridgeflow/std';
 import { css, html, LitElement, nothing } from 'lit';
 import { property, query } from 'lit/decorators.js';
 

@@ -1,4 +1,4 @@
-import { getPublicUserByIdQuery } from '@affine/graphql';
+import { getPublicUserByIdQuery } from '@bridgeflow/graphql';
 import { Store } from '@toeverything/infra';
 
 import type { GraphQLService } from '../services/graphql';

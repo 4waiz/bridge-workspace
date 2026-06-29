@@ -16,12 +16,12 @@ on:
 env:
   DEBUG: napi:*
   BUILD_TYPE: canary
-  APP_NAME: affine
-  AFFINE_ENV: dev
+  APP_NAME: bridgeflow
+  BRIDGEFLOW_ENV: dev
   COVERAGE: true
   MACOSX_DEPLOYMENT_TARGET: '11.6'
-  DEPLOYMENT_TYPE: affine
-  AFFINE_INDEXER_ENABLED: true
+  DEPLOYMENT_TYPE: bridgeflow
+  BRIDGEFLOW_INDEXER_ENABLED: true
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -42,7 +42,7 @@ jobs:
       fail-fast: false
       matrix:
         language: ['javascript', 'typescript']
-        project: ['affine', 'blocksuite']
+        project: ['bridgeflow', 'blocksuite']
 
     steps:
       - name: Checkout repository
@@ -52,10 +52,10 @@ jobs:
         uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
-          source-root: ${{ matrix.project == 'affine' && '.' || 'blocksuite' }}
+          source-root: ${{ matrix.project == 'bridgeflow' && '.' || 'blocksuite' }}
 
       - name: Delete blocksuite before codeql analysis
-        if: ${{ matrix.project == 'affine' }}
+        if: ${{ matrix.project == 'bridgeflow' }}
         run: rm -rf blocksuite
 
       - name: Autobuild
@@ -94,7 +94,7 @@ jobs:
           electron-install: false
           full-cache: true
       - name: Run i18n codegen
-        run: yarn affine @affine/i18n build
+        run: yarn bridgeflow @bridgeflow/i18n build
       - name: Run ESLint
         run: yarn lint:eslint --max-warnings=0
       - name: Run Prettier
@@ -118,15 +118,15 @@ jobs:
           electron-install: false
           full-cache: true
       - name: Run i18n codegen
-        run: yarn affine @affine/i18n build
+        run: yarn bridgeflow @bridgeflow/i18n build
       - name: Run Type Check
         run: yarn typecheck
       - name: Run BS Docs Build
         run: |
-          yarn affine bs-docs build
+          yarn bridgeflow bs-docs build
           git checkout packages/frontend/i18n/src/i18n-completenesses.json
           if git status --porcelain | grep -q .; then
-            echo "Run 'yarn typecheck && yarn affine bs-docs build' and make sure all changes are submitted"
+            echo "Run 'yarn typecheck && yarn bridgeflow bs-docs build' and make sure all changes are submitted"
             exit 1
           else
             echo "All changes are submitted"
@@ -163,7 +163,7 @@ jobs:
       - uses: ./.github/actions/build-rust
         with:
           target: x86_64-unknown-linux-gnu
-          package: 'affine'
+          package: 'bridgeflow'
           no-build: 'true'
       - name: fmt check
         run: |
@@ -173,8 +173,8 @@ jobs:
       - name: Clippy
         run: |
           rustup component add clippy
-          cargo clippy --workspace --exclude affine_server_native --all-targets --all-features -- -D warnings
-          cargo clippy -p affine_server_native --all-targets --all-features -- -D warnings
+          cargo clippy --workspace --exclude bridgeflow_server_native --all-targets --all-features -- -D warnings
+          cargo clippy -p bridgeflow_server_native --all-targets --all-features -- -D warnings
 
   check-git-status:
     name: Check Git Status
@@ -196,13 +196,13 @@ jobs:
 
       - name: Run Check
         run: |
-          yarn affine init
-          yarn affine gql build
-          yarn affine i18n build
-          yarn affine server genconfig
+          yarn bridgeflow init
+          yarn bridgeflow gql build
+          yarn bridgeflow i18n build
+          yarn bridgeflow server genconfig
           git checkout packages/frontend/i18n/src/i18n-completenesses.json
           if git status --porcelain | grep -q .; then
-            echo "Run 'yarn affine init && yarn affine gql build && yarn affine i18n build && yarn affine server genconfig' and make sure all changes are submitted"
+            echo "Run 'yarn bridgeflow init && yarn bridgeflow gql build && yarn bridgeflow i18n build && yarn bridgeflow server genconfig' and make sure all changes are submitted"
             exit 1
           else
             echo "All changes are submitted"
@@ -232,7 +232,7 @@ jobs:
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
         with:
-          extra-flags: workspaces focus @affine/monorepo @affine-test/blocksuite @blocksuite/playground @blocksuite/integration-test
+          extra-flags: workspaces focus @bridgeflow/monorepo @bridgeflow-test/blocksuite @blocksuite/playground @blocksuite/integration-test
           playwright-install: true
           playwright-platform: 'chromium'
           electron-install: false
@@ -242,7 +242,7 @@ jobs:
         run: yarn workspace @blocksuite/playground build
 
       - name: Run playwright tests
-        run: yarn workspace @affine-test/blocksuite test --forbid-only --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+        run: yarn workspace @bridgeflow-test/blocksuite test --forbid-only --shard=${{ matrix.shard }}/${{ strategy.job-total }}
 
       - name: Upload test results
         if: always()
@@ -260,7 +260,7 @@ jobs:
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
         with:
-          extra-flags: workspaces focus @affine/monorepo @affine-test/blocksuite @blocksuite/playground @blocksuite/integration-test
+          extra-flags: workspaces focus @bridgeflow/monorepo @bridgeflow-test/blocksuite @blocksuite/playground @blocksuite/integration-test
           playwright-install: true
           playwright-platform: 'chromium,firefox,webkit'
           electron-install: false
@@ -272,7 +272,7 @@ jobs:
       - name: Run playwright tests
         run: |
           yarn workspace @blocksuite/integration-test test:unit
-          yarn workspace @affine-test/blocksuite test "cross-platform/" --forbid-only
+          yarn workspace @bridgeflow-test/blocksuite test "cross-platform/" --forbid-only
 
       - name: Upload test results
         if: always()
@@ -298,14 +298,14 @@ jobs:
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
         with:
-          extra-flags: workspaces focus @affine/monorepo @affine-test/affine-local @affine/web @affine/server
+          extra-flags: workspaces focus @bridgeflow/monorepo @bridgeflow-test/bridgeflow-local @bridgeflow/web @bridgeflow/server
           playwright-install: true
           playwright-platform: 'chromium'
           electron-install: false
           full-cache: true
 
       - name: Run playwright tests
-        run: yarn affine @affine-test/affine-local e2e --forbid-only --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+        run: yarn bridgeflow @bridgeflow-test/bridgeflow-local e2e --forbid-only --shard=${{ matrix.shard }}/${{ strategy.job-total }}
 
       - name: Upload test results
         if: always()
@@ -330,13 +330,13 @@ jobs:
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
         with:
-          extra-flags: workspaces focus @affine/monorepo @affine-test/affine-mobile @affine/mobile
+          extra-flags: workspaces focus @bridgeflow/monorepo @bridgeflow-test/bridgeflow-mobile @bridgeflow/mobile
           playwright-install: true
           electron-install: false
           full-cache: true
 
       - name: Run playwright tests
-        run: yarn affine @affine-test/affine-mobile e2e --forbid-only --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+        run: yarn bridgeflow @bridgeflow-test/bridgeflow-mobile e2e --forbid-only --shard=${{ matrix.shard }}/${{ strategy.job-total }}
 
       - name: Upload test results
         if: always()
@@ -367,10 +367,10 @@ jobs:
           playwright-platform: 'chromium,firefox,webkit'
           full-cache: true
 
-      - name: Download affine.linux-x64-gnu.node
+      - name: Download bridgeflow.linux-x64-gnu.node
         uses: actions/download-artifact@v4
         with:
-          name: affine.linux-x64-gnu.node
+          name: bridgeflow.linux-x64-gnu.node
           path: ./packages/frontend/native
 
       - name: Unit Test
@@ -382,11 +382,11 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./.coverage/store/lcov.info
           flags: unittest
-          name: affine
+          name: bridgeflow
           fail_ci_if_error: false
 
   build-native-linux:
-    name: Build AFFiNE native (x86_64-unknown-linux-gnu)
+    name: Build BridgeFlow native (x86_64-unknown-linux-gnu)
     runs-on: ubuntu-latest
     env:
       CARGO_PROFILE_RELEASE_DEBUG: '1'
@@ -395,7 +395,7 @@ jobs:
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
         with:
-          extra-flags: workspaces focus @affine/native
+          extra-flags: workspaces focus @bridgeflow/native
           electron-install: false
       - name: Setup filename
         id: filename
@@ -403,12 +403,12 @@ jobs:
         shell: bash
         run: |
           PLATFORM_ARCH_ABI="$(node -e "console.log(require('@napi-rs/cli').parseTriple('x86_64-unknown-linux-gnu').platformArchABI)")"
-          echo "filename=affine.$PLATFORM_ARCH_ABI.node" >> "$GITHUB_OUTPUT"
-      - name: Build AFFiNE native
+          echo "filename=bridgeflow.$PLATFORM_ARCH_ABI.node" >> "$GITHUB_OUTPUT"
+      - name: Build BridgeFlow native
         uses: ./.github/actions/build-rust
         with:
           target: x86_64-unknown-linux-gnu
-          package: '@affine/native'
+          package: '@bridgeflow/native'
       - name: Upload ${{ steps.filename.outputs.filename }}
         uses: actions/upload-artifact@v4
         if: always()
@@ -418,7 +418,7 @@ jobs:
           if-no-files-found: error
 
   build-native-macos:
-    name: Build AFFiNE native (${{ matrix.spec.target }})
+    name: Build BridgeFlow native (${{ matrix.spec.target }})
     runs-on: ${{ matrix.spec.os }}
     env:
       CARGO_PROFILE_RELEASE_DEBUG: '1'
@@ -434,7 +434,7 @@ jobs:
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
         with:
-          extra-flags: workspaces focus @affine/native
+          extra-flags: workspaces focus @bridgeflow/native
           electron-install: false
       - name: Setup filename
         id: filename
@@ -442,12 +442,12 @@ jobs:
         shell: bash
         run: |
           PLATFORM_ARCH_ABI="$(node -e "console.log(require('@napi-rs/cli').parseTriple('${{ matrix.spec.target }}').platformArchABI)")"
-          echo "filename=affine.$PLATFORM_ARCH_ABI.node" >> "$GITHUB_OUTPUT"
-      - name: Build AFFiNE native
+          echo "filename=bridgeflow.$PLATFORM_ARCH_ABI.node" >> "$GITHUB_OUTPUT"
+      - name: Build BridgeFlow native
         uses: ./.github/actions/build-rust
         with:
           target: ${{ matrix.spec.target }}
-          package: '@affine/native'
+          package: '@bridgeflow/native'
       - name: Upload ${{ steps.filename.outputs.filename }}
         uses: actions/upload-artifact@v4
         if: always()
@@ -459,7 +459,7 @@ jobs:
   # Split Windows build because it's too slow
   # and other ci jobs required linux native
   build-native-windows:
-    name: Build AFFiNE native (${{ matrix.spec.target }})
+    name: Build BridgeFlow native (${{ matrix.spec.target }})
     runs-on: ${{ matrix.spec.os }}
     env:
       CARGO_PROFILE_RELEASE_DEBUG: '1'
@@ -483,7 +483,7 @@ jobs:
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
         with:
-          extra-flags: workspaces focus @affine/native
+          extra-flags: workspaces focus @bridgeflow/native
           electron-install: false
       - name: Setup filename
         id: filename
@@ -491,12 +491,12 @@ jobs:
         shell: bash
         run: |
           PLATFORM_ARCH_ABI="$(node -e "console.log(require('@napi-rs/cli').parseTriple('${{ matrix.spec.target }}').platformArchABI)")"
-          echo "filename=affine.$PLATFORM_ARCH_ABI.node" >> "$GITHUB_OUTPUT"
-      - name: Build AFFiNE native
+          echo "filename=bridgeflow.$PLATFORM_ARCH_ABI.node" >> "$GITHUB_OUTPUT"
+      - name: Build BridgeFlow native
         uses: ./.github/actions/build-rust
         with:
           target: ${{ matrix.spec.target }}
-          package: '@affine/native'
+          package: '@bridgeflow/native'
       - name: Upload ${{ steps.filename.outputs.filename }}
         uses: actions/upload-artifact@v4
         if: always()
@@ -515,13 +515,13 @@ jobs:
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
         with:
-          extra-flags: workspaces focus @affine/server-native
+          extra-flags: workspaces focus @bridgeflow/server-native
           electron-install: false
       - name: Build Rust
         uses: ./.github/actions/build-rust
         with:
           target: 'x86_64-unknown-linux-gnu'
-          package: '@affine/server-native'
+          package: '@bridgeflow/server-native'
       - name: Upload server-native.node
         uses: actions/upload-artifact@v4
         if: always()
@@ -531,18 +531,18 @@ jobs:
           if-no-files-found: error
 
   build-electron-renderer:
-    name: Build @affine/electron renderer
+    name: Build @bridgeflow/electron renderer
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
         with:
-          extra-flags: workspaces focus @affine/monorepo @affine/electron-renderer @affine/nbstore @toeverything/infra
+          extra-flags: workspaces focus @bridgeflow/monorepo @bridgeflow/electron-renderer @bridgeflow/nbstore @toeverything/infra
           electron-install: false
           full-cache: true
       - name: Build Electron renderer
-        run: yarn affine @affine/electron-renderer build
+        run: yarn bridgeflow @bridgeflow/electron-renderer build
         env:
           DISTRIBUTION: desktop
       - name: zip web
@@ -565,15 +565,15 @@ jobs:
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
         with:
-          extra-flags: workspaces focus @affine-tools/cli @affine/monorepo @affine/native
+          extra-flags: workspaces focus @bridgeflow-tools/cli @bridgeflow/monorepo @bridgeflow/native
           electron-install: false
-      - name: Download affine.linux-x64-gnu.node
+      - name: Download bridgeflow.linux-x64-gnu.node
         uses: actions/download-artifact@v4
         with:
-          name: affine.linux-x64-gnu.node
+          name: bridgeflow.linux-x64-gnu.node
           path: ./packages/frontend/native
       - name: Unit Test
-        run: yarn affine @affine/native test
+        run: yarn bridgeflow @bridgeflow/native test
 
   server-test:
     name: Server Test
@@ -587,13 +587,13 @@ jobs:
         total_nodes: [4]
     env:
       NODE_ENV: test
-      DATABASE_URL: postgresql://affine:affine@localhost:5432/affine
+      DATABASE_URL: postgresql://bridgeflow:bridgeflow@localhost:5432/bridgeflow
       REDIS_SERVER_HOST: localhost
     services:
       postgres:
         image: pgvector/pgvector:pg16
         env:
-          POSTGRES_PASSWORD: affine
+          POSTGRES_PASSWORD: bridgeflow
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -620,7 +620,7 @@ jobs:
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
         with:
-          extra-flags: workspaces focus @affine/monorepo @affine/server
+          extra-flags: workspaces focus @bridgeflow/monorepo @bridgeflow/server
           electron-install: false
           full-cache: true
 
@@ -634,7 +634,7 @@ jobs:
         uses: ./.github/actions/server-test-env
 
       - name: Run server tests
-        run: yarn affine @affine/server test:coverage --forbid-only
+        run: yarn bridgeflow @bridgeflow/server test:coverage --forbid-only
         env:
           CARGO_TARGET_DIR: '${{ github.workspace }}/target'
           CI_NODE_INDEX: ${{ matrix.node_index }}
@@ -646,7 +646,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./packages/backend/server/.coverage/lcov.info
           flags: server-test
-          name: affine
+          name: bridgeflow
           fail_ci_if_error: false
 
   server-test-elasticsearch:
@@ -656,15 +656,15 @@ jobs:
       - build-server-native
     env:
       NODE_ENV: test
-      DATABASE_URL: postgresql://affine:affine@localhost:5432/affine
+      DATABASE_URL: postgresql://bridgeflow:bridgeflow@localhost:5432/bridgeflow
       REDIS_SERVER_HOST: localhost
-      AFFINE_INDEXER_SEARCH_PROVIDER: elasticsearch
-      AFFINE_INDEXER_SEARCH_ENDPOINT: http://localhost:9200
+      BRIDGEFLOW_INDEXER_SEARCH_PROVIDER: elasticsearch
+      BRIDGEFLOW_INDEXER_SEARCH_ENDPOINT: http://localhost:9200
     services:
       postgres:
         image: pgvector/pgvector:pg16
         env:
-          POSTGRES_PASSWORD: affine
+          POSTGRES_PASSWORD: bridgeflow
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -701,7 +701,7 @@ jobs:
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
         with:
-          extra-flags: workspaces focus @affine/monorepo @affine/server
+          extra-flags: workspaces focus @bridgeflow/monorepo @bridgeflow/server
           electron-install: false
           full-cache: true
 
@@ -715,7 +715,7 @@ jobs:
         uses: ./.github/actions/server-test-env
 
       - name: Run server tests with elasticsearch only
-        run: yarn affine @affine/server test:coverage "**/*/*elasticsearch.spec.ts" --forbid-only
+        run: yarn bridgeflow @bridgeflow/server test:coverage "**/*/*elasticsearch.spec.ts" --forbid-only
         env:
           CARGO_TARGET_DIR: '${{ github.workspace }}/target'
 
@@ -725,7 +725,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./packages/backend/server/.coverage/lcov.info
           flags: server-test
-          name: affine
+          name: bridgeflow
           fail_ci_if_error: false
 
   server-e2e-test:
@@ -736,13 +736,13 @@ jobs:
       - build-server-native
     env:
       NODE_ENV: test
-      DATABASE_URL: postgresql://affine:affine@localhost:5432/affine
+      DATABASE_URL: postgresql://bridgeflow:bridgeflow@localhost:5432/bridgeflow
       REDIS_SERVER_HOST: localhost
     services:
       postgres:
         image: pgvector/pgvector:pg16
         env:
-          POSTGRES_PASSWORD: affine
+          POSTGRES_PASSWORD: bridgeflow
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -764,7 +764,7 @@ jobs:
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
         with:
-          extra-flags: workspaces focus @affine/monorepo @affine/server
+          extra-flags: workspaces focus @bridgeflow/monorepo @bridgeflow/server
           electron-install: false
           full-cache: true
 
@@ -778,7 +778,7 @@ jobs:
         uses: ./.github/actions/server-test-env
 
       - name: Run server tests
-        run: yarn affine @affine/server e2e:coverage --forbid-only
+        run: yarn bridgeflow @bridgeflow/server e2e:coverage --forbid-only
 
       - name: Upload server test coverage results
         uses: codecov/codecov-action@v5
@@ -786,7 +786,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./packages/backend/server/.coverage/lcov.info
           flags: server-test
-          name: affine
+          name: bridgeflow
           fail_ci_if_error: false
 
   miri:
@@ -896,7 +896,7 @@ jobs:
         uses: ./.github/actions/build-rust
         with:
           target: x86_64-unknown-linux-gnu
-          package: 'affine'
+          package: 'bridgeflow'
           no-build: 'true'
 
       - name: Install latest nextest release
@@ -905,7 +905,7 @@ jobs:
           tool: nextest@0.9.98
 
       - name: Run tests
-        run: cargo nextest run --workspace --exclude affine_server_native --features use-as-lib --release --no-fail-fast
+        run: cargo nextest run --workspace --exclude bridgeflow_server_native --features use-as-lib --release --no-fail-fast
 
   copilot-test-filter:
     name: Copilot test filter
@@ -928,7 +928,7 @@ jobs:
               - 'packages/backend/server/tests/copilot.*'
               - 'packages/frontend/core/src/blocksuite/ai/**'
               - 'packages/frontend/core/src/modules/workspace-indexer-embedding/**'
-              - 'tests/affine-cloud-copilot/**'
+              - 'tests/bridgeflow-cloud-copilot/**'
 
       - name: Decide test scope
         id: decision
@@ -955,13 +955,13 @@ jobs:
     env:
       NODE_ENV: test
       DISTRIBUTION: web
-      DATABASE_URL: postgresql://affine:affine@localhost:5432/affine
+      DATABASE_URL: postgresql://bridgeflow:bridgeflow@localhost:5432/bridgeflow
       REDIS_SERVER_HOST: localhost
     services:
       postgres:
         image: pgvector/pgvector:pg16
         env:
-          POSTGRES_PASSWORD: affine
+          POSTGRES_PASSWORD: bridgeflow
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -988,7 +988,7 @@ jobs:
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
         with:
-          extra-flags: workspaces focus @affine/monorepo @affine/server
+          extra-flags: workspaces focus @bridgeflow/monorepo @bridgeflow/server
           electron-install: false
           full-cache: true
 
@@ -1004,7 +1004,7 @@ jobs:
         uses: ./.github/actions/server-test-env
 
       - name: Run server tests
-        run: yarn affine @affine/server test:copilot:coverage --forbid-only
+        run: yarn bridgeflow @bridgeflow/server test:copilot:coverage --forbid-only
         env:
           CARGO_TARGET_DIR: '${{ github.workspace }}/target'
 
@@ -1014,7 +1014,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./packages/backend/server/.coverage/lcov.info
           flags: server-test
-          name: affine
+          name: bridgeflow
           fail_ci_if_error: false
 
   copilot-e2e-test:
@@ -1023,10 +1023,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DISTRIBUTION: web
-      DATABASE_URL: postgresql://affine:affine@localhost:5432/affine
+      DATABASE_URL: postgresql://bridgeflow:bridgeflow@localhost:5432/bridgeflow
       IN_CI_TEST: true
       REDIS_SERVER_HOST: localhost
-      DEPLOYMENT_TYPE: affine
+      DEPLOYMENT_TYPE: bridgeflow
     strategy:
       fail-fast: false
       matrix:
@@ -1039,7 +1039,7 @@ jobs:
       postgres:
         image: pgvector/pgvector:pg16
         env:
-          POSTGRES_PASSWORD: affine
+          POSTGRES_PASSWORD: bridgeflow
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -1061,7 +1061,7 @@ jobs:
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
         with:
-          extra-flags: workspaces focus @affine/monorepo @affine-test/affine-cloud-copilot @affine/web @affine/server
+          extra-flags: workspaces focus @bridgeflow/monorepo @bridgeflow-test/bridgeflow-cloud-copilot @bridgeflow/web @bridgeflow/server
           playwright-install: true
           playwright-platform: 'chromium'
           electron-install: false
@@ -1081,7 +1081,7 @@ jobs:
       - name: Run Copilot E2E Test ${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
         uses: ./.github/actions/copilot-test
         with:
-          script: yarn affine @affine-test/affine-cloud-copilot e2e --forbid-only --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+          script: yarn bridgeflow @bridgeflow-test/bridgeflow-cloud-copilot e2e --forbid-only --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
   cloud-e2e-test:
     name: ${{ matrix.tests.name }}
@@ -1091,7 +1091,7 @@ jobs:
       - build-native-linux
     env:
       DISTRIBUTION: web
-      DATABASE_URL: postgresql://affine:affine@localhost:5432/affine
+      DATABASE_URL: postgresql://bridgeflow:bridgeflow@localhost:5432/bridgeflow
       REDIS_SERVER_HOST: localhost
       IN_CI_TEST: true
     strategy:
@@ -1100,24 +1100,24 @@ jobs:
         tests:
           - name: 'Cloud E2E Test 1/2'
             shard: 1
-            script: yarn affine @affine-test/affine-cloud e2e --forbid-only --shard=1/2
+            script: yarn bridgeflow @bridgeflow-test/bridgeflow-cloud e2e --forbid-only --shard=1/2
           - name: 'Cloud E2E Test 2/2'
             shard: 2
-            script: yarn affine @affine-test/affine-cloud e2e --forbid-only --shard=2/2
+            script: yarn bridgeflow @bridgeflow-test/bridgeflow-cloud e2e --forbid-only --shard=2/2
           - name: 'Cloud Desktop E2E Test'
             shard: desktop
             script: |
-              yarn affine @affine/electron build:dev
+              yarn bridgeflow @bridgeflow/electron build:dev
               # Workaround for Electron apps failing to initialize on Ubuntu 24.04 due to AppArmor restrictions
               # Disables unprivileged user namespaces restriction to allow Electron apps to run
               # Reference: https://github.com/electron/electron/issues/42510
               sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
-              xvfb-run --auto-servernum --server-args="-screen 0 1280x960x24" -- yarn affine @affine-test/affine-desktop-cloud e2e
+              xvfb-run --auto-servernum --server-args="-screen 0 1280x960x24" -- yarn bridgeflow @bridgeflow-test/bridgeflow-desktop-cloud e2e
     services:
       postgres:
         image: pgvector/pgvector:pg16
         env:
-          POSTGRES_PASSWORD: affine
+          POSTGRES_PASSWORD: bridgeflow
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -1144,7 +1144,7 @@ jobs:
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
         with:
-          extra-flags: workspaces focus @affine/monorepo @affine-test/affine-cloud @affine-test/affine-desktop-cloud @affine/web @affine/server @affine/electron @affine/electron-renderer @affine/nbstore @toeverything/infra
+          extra-flags: workspaces focus @bridgeflow/monorepo @bridgeflow-test/bridgeflow-cloud @bridgeflow-test/bridgeflow-desktop-cloud @bridgeflow/web @bridgeflow/server @bridgeflow/electron @bridgeflow/electron-renderer @bridgeflow/nbstore @toeverything/infra
           playwright-install: true
           playwright-platform: 'chromium'
           electron-install: ${{ matrix.tests.shard == 'desktop' && 'true' || 'false' }}
@@ -1156,10 +1156,10 @@ jobs:
           name: server-native.node
           path: ./packages/backend/native
 
-      - name: Download affine.linux-x64-gnu.node
+      - name: Download bridgeflow.linux-x64-gnu.node
         uses: actions/download-artifact@v4
         with:
-          name: affine.linux-x64-gnu.node
+          name: bridgeflow.linux-x64-gnu.node
           path: ./packages/frontend/native
 
       - name: Prepare Server Test Environment
@@ -1225,7 +1225,7 @@ jobs:
         uses: ./.github/actions/setup-node
         timeout-minutes: 10
         with:
-          extra-flags: workspaces focus @affine/electron @affine/monorepo @affine-test/affine-desktop @affine/nbstore @toeverything/infra
+          extra-flags: workspaces focus @bridgeflow/electron @bridgeflow/monorepo @bridgeflow-test/bridgeflow-desktop @bridgeflow/nbstore @toeverything/infra
           playwright-install: ${{ matrix.spec.test && 'true' || 'false' }}
           playwright-platform: 'chromium'
           hard-link-nm: false
@@ -1236,7 +1236,7 @@ jobs:
         shell: bash
         run: |
           PLATFORM_ARCH_ABI="$(node -e "console.log(require('@napi-rs/cli').parseTriple('${{ matrix.spec.target }}').platformArchABI)")"
-          echo "filename=affine.$PLATFORM_ARCH_ABI.node" >> "$GITHUB_OUTPUT"
+          echo "filename=bridgeflow.$PLATFORM_ARCH_ABI.node" >> "$GITHUB_OUTPUT"
 
       - name: Download ${{ steps.filename.outputs.filename }}
         uses: actions/download-artifact@v4
@@ -1247,7 +1247,7 @@ jobs:
       - name: Run unit tests
         if: ${{ matrix.spec.test }}
         shell: bash
-        run: yarn affine @affine/electron vitest
+        run: yarn bridgeflow @bridgeflow/electron vitest
 
       - name: Download web artifact
         uses: ./.github/actions/download-web
@@ -1255,7 +1255,7 @@ jobs:
           path: packages/frontend/apps/electron/resources/web-static
 
       - name: Build Desktop Layers
-        run: yarn affine @affine/electron build
+        run: yarn bridgeflow @bridgeflow/electron build
 
       - name: Run desktop tests
         if: ${{ matrix.spec.os == 'ubuntu-latest' }}
@@ -1264,11 +1264,11 @@ jobs:
           # Disables unprivileged user namespaces restriction to allow Electron apps to run
           # Reference: https://github.com/electron/electron/issues/42510
           sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
-          xvfb-run --auto-servernum --server-args="-screen 0 1280x960x24" -- yarn affine @affine-test/affine-desktop e2e
+          xvfb-run --auto-servernum --server-args="-screen 0 1280x960x24" -- yarn bridgeflow @bridgeflow-test/bridgeflow-desktop e2e
 
       - name: Run desktop tests
         if: ${{ matrix.spec.test && matrix.spec.os != 'ubuntu-latest' }}
-        run: yarn affine @affine-test/affine-desktop e2e
+        run: yarn bridgeflow @bridgeflow-test/bridgeflow-desktop e2e
 
       - name: Make bundle (macOS)
         if: ${{ matrix.spec.target == 'aarch64-apple-darwin' }}
@@ -1276,7 +1276,7 @@ jobs:
           SKIP_BUNDLE: true
           SKIP_WEB_BUILD: true
           HOIST_NODE_MODULES: 1
-        run: yarn affine @affine/electron package --platform=darwin --arch=arm64
+        run: yarn bridgeflow @bridgeflow/electron package --platform=darwin --arch=arm64
 
       - name: Make Bundle (Windows)
         if: ${{ matrix.spec.target == 'x86_64-pc-windows-msvc' }}
@@ -1286,9 +1286,9 @@ jobs:
           SKIP_WEB_BUILD: true
           HOIST_NODE_MODULES: 1
         run: |
-          rm -rf packages/frontend/apps/electron/node_modules/@affine/nbstore/node_modules/@blocksuite/affine/node_modules
-          rm -rf packages/frontend/apps/electron/node_modules/@affine/native/node_modules
-          yarn affine @affine/electron package --platform=win32 --arch=x64
+          rm -rf packages/frontend/apps/electron/node_modules/@bridgeflow/nbstore/node_modules/@blocksuite/bridgeflow/node_modules
+          rm -rf packages/frontend/apps/electron/node_modules/@bridgeflow/native/node_modules
+          yarn bridgeflow @bridgeflow/electron package --platform=win32 --arch=x64
 
       - name: Make Bundle (Linux)
         run: |
@@ -1298,7 +1298,7 @@ jobs:
           flatpak update
           # some flatpak deps need git protocol.file.allow
           git config --global protocol.file.allow always
-          yarn affine @affine/electron make --platform=linux --arch=x64
+          yarn bridgeflow @bridgeflow/electron make --platform=linux --arch=x64
         if: ${{ matrix.spec.target == 'x86_64-unknown-linux-gnu' }}
         env:
           SKIP_WEB_BUILD: 1
@@ -1307,7 +1307,7 @@ jobs:
       - name: Output check
         if: ${{ matrix.spec.os == 'macos-latest' && matrix.spec.arch == 'arm64' }}
         run: |
-          yarn affine @affine/electron node ./scripts/macos-arm64-output-check.ts
+          yarn bridgeflow @bridgeflow/electron node ./scripts/macos-arm64-output-check.ts
 
       - name: Upload test results
         if: always()

@@ -1,7 +1,7 @@
-import { Button } from '@affine/component';
-import { DocCreatedByUpdatedBySyncService } from '@affine/core/modules/cloud';
-import { UserFriendlyError } from '@affine/error';
-import { useI18n } from '@affine/i18n';
+import { Button } from '@bridgeflow/component';
+import { DocCreatedByUpdatedBySyncService } from '@bridgeflow/core/modules/cloud';
+import { UserFriendlyError } from '@bridgeflow/error';
+import { useI18n } from '@bridgeflow/i18n';
 import { useLiveData, useService } from '@toeverything/infra';
 import { useTheme } from 'next-themes';
 import { useCallback, useMemo } from 'react';
@@ -48,23 +48,23 @@ export const MigrationAllDocsDataNotification = () => {
   return (
     <div className={styles.migrationDataNotificationContainer}>
       <div className={styles.migrationDataNotificationTitle}>
-        {t['com.affine.migration-all-docs-notification.header']()}
+        {t['com.bridgeflow.migration-all-docs-notification.header']()}
       </div>
       <div className={styles.migrationDataNotificationContent}>
         <MigrationBackgroundCover />
-        {t['com.affine.migration-all-docs-notification.desc']()}
+        {t['com.bridgeflow.migration-all-docs-notification.desc']()}
       </div>
 
       {error && (
         <div className={styles.migrationDataNotificationError}>
-          {t['com.affine.migration-all-docs-notification.error']({
+          {t['com.bridgeflow.migration-all-docs-notification.error']({
             errorMessage: errorMessage ?? '',
           })}
         </div>
       )}
 
       <Button loading={syncing} onClick={handleSync}>
-        {t['com.affine.migration-all-docs-notification.button']()}
+        {t['com.bridgeflow.migration-all-docs-notification.button']()}
         {syncing ? ` (${Math.floor(progress * 100)}%)...` : ''}
       </Button>
     </div>

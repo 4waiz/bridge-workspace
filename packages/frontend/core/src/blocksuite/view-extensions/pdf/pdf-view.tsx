@@ -1,12 +1,12 @@
-import type { ReactToLit } from '@affine/component';
-import { AttachmentEmbedPreview } from '@affine/core/blocksuite/attachment-viewer/attachment-embed-preview';
-import { AttachmentEmbedConfigIdentifier } from '@blocksuite/affine/blocks/attachment';
-import { Bound } from '@blocksuite/affine/global/gfx';
+import type { ReactToLit } from '@bridgeflow/component';
+import { AttachmentEmbedPreview } from '@bridgeflow/core/blocksuite/attachment-viewer/attachment-embed-preview';
+import { AttachmentEmbedConfigIdentifier } from '@blocksuite/bridgeflow/blocks/attachment';
+import { Bound } from '@blocksuite/bridgeflow/global/gfx';
 import {
   EMBED_CARD_HEIGHT,
   EMBED_CARD_WIDTH,
-} from '@blocksuite/affine/shared/consts';
-import type { ExtensionType } from '@blocksuite/affine/store';
+} from '@blocksuite/bridgeflow/shared/consts';
+import type { ExtensionType } from '@blocksuite/bridgeflow/store';
 
 export function patchForPDFEmbedView(reactToLit: ReactToLit): ExtensionType {
   return {

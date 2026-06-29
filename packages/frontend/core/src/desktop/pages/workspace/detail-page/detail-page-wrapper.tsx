@@ -1,8 +1,8 @@
-import { type Doc, DocsService } from '@affine/core/modules/doc';
-import type { Editor } from '@affine/core/modules/editor';
-import { EditorsService } from '@affine/core/modules/editor';
-import { ViewService } from '@affine/core/modules/workbench/services/view';
-import { WorkspaceService } from '@affine/core/modules/workspace';
+import { type Doc, DocsService } from '@bridgeflow/core/modules/doc';
+import type { Editor } from '@bridgeflow/core/modules/editor';
+import { EditorsService } from '@bridgeflow/core/modules/editor';
+import { ViewService } from '@bridgeflow/core/modules/workbench/services/view';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { FrameworkScope, useLiveData, useService } from '@toeverything/infra';
 import {
   type PropsWithChildren,

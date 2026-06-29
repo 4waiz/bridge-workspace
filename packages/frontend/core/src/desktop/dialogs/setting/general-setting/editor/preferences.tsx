@@ -1,32 +1,32 @@
-import { Button } from '@affine/component';
+import { Button } from '@bridgeflow/component';
 import {
   SettingRow,
   SettingWrapper,
-} from '@affine/component/setting-components';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/component/setting-components';
+import { useI18n } from '@bridgeflow/i18n';
 
 export const Preferences = () => {
   const t = useI18n();
   return (
     <SettingWrapper
-      title={t['com.affine.settings.editorSettings.preferences']()}
+      title={t['com.bridgeflow.settings.editorSettings.preferences']()}
     >
       <SettingRow
         name={t[
-          'com.affine.settings.editorSettings.preferences.export.title'
+          'com.bridgeflow.settings.editorSettings.preferences.export.title'
         ]()}
         desc={t[
-          'com.affine.settings.editorSettings.preferences.export.description'
+          'com.bridgeflow.settings.editorSettings.preferences.export.description'
         ]()}
       >
         <Button>Export</Button>
       </SettingRow>
       <SettingRow
         name={t[
-          'com.affine.settings.editorSettings.preferences.import.title'
+          'com.bridgeflow.settings.editorSettings.preferences.import.title'
         ]()}
         desc={t[
-          'com.affine.settings.editorSettings.preferences.import.description'
+          'com.bridgeflow.settings.editorSettings.preferences.import.description'
         ]()}
       >
         <Button>Import</Button>

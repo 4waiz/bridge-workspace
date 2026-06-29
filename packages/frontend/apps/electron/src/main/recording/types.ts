@@ -1,6 +1,6 @@
 import type { WriteStream } from 'node:fs';
 
-import type { ApplicationInfo, AudioCaptureSession } from '@affine/native';
+import type { ApplicationInfo, AudioCaptureSession } from '@bridgeflow/native';
 
 export interface TappableAppInfo {
   info: ApplicationInfo;

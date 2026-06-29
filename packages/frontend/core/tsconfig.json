@@ -17,13 +17,13 @@
     { "path": "../../common/nbstore" },
     { "path": "../../common/reader" },
     { "path": "../track" },
-    { "path": "../../../blocksuite/affine/all" },
-    { "path": "../../../blocksuite/affine/blocks/root" },
-    { "path": "../../../blocksuite/affine/components" },
-    { "path": "../../../blocksuite/affine/shared" },
+    { "path": "../../../blocksuite/bridgeflow/all" },
+    { "path": "../../../blocksuite/bridgeflow/blocks/root" },
+    { "path": "../../../blocksuite/bridgeflow/components" },
+    { "path": "../../../blocksuite/bridgeflow/shared" },
     { "path": "../../../blocksuite/framework/global" },
     { "path": "../../../blocksuite/framework/std" },
     { "path": "../../common/infra" },
-    { "path": "../../../blocksuite/affine/ext-loader" }
+    { "path": "../../../blocksuite/bridgeflow/ext-loader" }
   ]
 }

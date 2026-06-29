@@ -1,4 +1,4 @@
-import { cn } from '@affine/admin/utils';
+import { cn } from '@bridgeflow/admin/utils';
 import { NavLink } from 'react-router-dom';
 
 interface NavItemProps {

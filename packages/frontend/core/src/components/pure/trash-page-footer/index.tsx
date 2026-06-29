@@ -1,14 +1,14 @@
-import { Button } from '@affine/component/ui/button';
-import { ConfirmModal } from '@affine/component/ui/modal';
-import { DocService } from '@affine/core/modules/doc';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { useI18n } from '@affine/i18n';
+import { Button } from '@bridgeflow/component/ui/button';
+import { ConfirmModal } from '@bridgeflow/component/ui/modal';
+import { DocService } from '@bridgeflow/core/modules/doc';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { useI18n } from '@bridgeflow/i18n';
 import { DeleteIcon, ResetIcon } from '@blocksuite/icons/rc';
 import { useService } from '@toeverything/infra';
 import { useCallback, useState } from 'react';
 
-import { useAppSettingHelper } from '../../../components/hooks/affine/use-app-setting-helper';
-import { useBlockSuiteMetaHelper } from '../../../components/hooks/affine/use-block-suite-meta-helper';
+import { useAppSettingHelper } from '../../../components/hooks/bridgeflow/use-app-setting-helper';
+import { useBlockSuiteMetaHelper } from '../../../components/hooks/bridgeflow/use-block-suite-meta-helper';
 import { useNavigateHelper } from '../../../components/hooks/use-navigate-helper';
 import { toast } from '../../../utils';
 import * as styles from './styles.css';
@@ -22,12 +22,12 @@ export const TrashPageFooter = () => {
   const { jumpToPage } = useNavigateHelper();
   const { restoreFromTrash } = useBlockSuiteMetaHelper();
   const [open, setOpen] = useState(false);
-  const hintText = t['com.affine.cmdk.affine.editor.trash-footer-hint']();
+  const hintText = t['com.bridgeflow.cmdk.bridgeflow.editor.trash-footer-hint']();
 
   const onRestore = useCallback(() => {
     restoreFromTrash(doc.id);
     toast(
-      t['com.affine.toastMessage.restored']({
+      t['com.bridgeflow.toastMessage.restored']({
         title: doc.meta$.value.title || 'Untitled',
       })
     );
@@ -36,7 +36,7 @@ export const TrashPageFooter = () => {
   const onConfirmDelete = useCallback(() => {
     jumpToPage(workspace.id, 'all');
     docCollection.removeDoc(doc.id);
-    toast(t['com.affine.toastMessage.permanentlyDeleted']());
+    toast(t['com.bridgeflow.toastMessage.permanentlyDeleted']());
   }, [jumpToPage, workspace.id, docCollection, doc.id, t]);
 
   const onDelete = useCallback(() => {
@@ -51,7 +51,7 @@ export const TrashPageFooter = () => {
       <div className={styles.deleteHintText}>{hintText}</div>
       <div className={styles.group}>
         <Button
-          tooltip={t['com.affine.trashOperation.restoreIt']()}
+          tooltip={t['com.bridgeflow.trashOperation.restoreIt']()}
           data-testid="page-restore-button"
           variant="primary"
           onClick={onRestore}
@@ -60,7 +60,7 @@ export const TrashPageFooter = () => {
           prefixClassName={styles.icon}
         />
         <Button
-          tooltip={t['com.affine.trashOperation.deletePermanently']()}
+          tooltip={t['com.bridgeflow.trashOperation.deletePermanently']()}
           variant="error"
           onClick={onDelete}
           className={styles.buttonContainer}
@@ -69,10 +69,10 @@ export const TrashPageFooter = () => {
         />
       </div>
       <ConfirmModal
-        title={t['com.affine.trashOperation.delete.title']()}
-        cancelText={t['com.affine.confirmModal.button.cancel']()}
-        description={t['com.affine.trashOperation.delete.description']()}
-        confirmText={t['com.affine.trashOperation.delete']()}
+        title={t['com.bridgeflow.trashOperation.delete.title']()}
+        cancelText={t['com.bridgeflow.confirmModal.button.cancel']()}
+        description={t['com.bridgeflow.trashOperation.delete.description']()}
+        confirmText={t['com.bridgeflow.trashOperation.delete']()}
         confirmButtonOptions={{
           variant: 'error',
         }}

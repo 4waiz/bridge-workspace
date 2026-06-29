@@ -1,23 +1,23 @@
-import { notify } from '@affine/component';
+import { notify } from '@bridgeflow/component';
 import {
   AuthContainer,
   AuthContent,
   AuthFooter,
   AuthHeader,
   AuthInput,
-} from '@affine/component/auth-components';
-import { Button } from '@affine/component/ui/button';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
+} from '@bridgeflow/component/auth-components';
+import { Button } from '@bridgeflow/component/ui/button';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
 import {
   AuthService,
   CaptchaService,
   ServerService,
-} from '@affine/core/modules/cloud';
-import type { AuthSessionStatus } from '@affine/core/modules/cloud/entities/session';
-import { Unreachable } from '@affine/env/constant';
-import { UserFriendlyError } from '@affine/error';
-import { ServerDeploymentType } from '@affine/graphql';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/core/modules/cloud';
+import type { AuthSessionStatus } from '@bridgeflow/core/modules/cloud/entities/session';
+import { Unreachable } from '@bridgeflow/env/constant';
+import { UserFriendlyError } from '@bridgeflow/error';
+import { ServerDeploymentType } from '@bridgeflow/graphql';
+import { useI18n } from '@bridgeflow/i18n';
 import { useLiveData, useService } from '@toeverything/infra';
 import type { Dispatch, SetStateAction } from 'react';
 import { useCallback, useEffect, useState } from 'react';
@@ -66,15 +66,15 @@ export const SignInWithPasswordStep = ({
   useEffect(() => {
     if (loginStatus === 'authenticated') {
       notify.success({
-        title: t['com.affine.auth.toast.title.signed-in'](),
-        message: t['com.affine.auth.toast.message.signed-in'](),
+        title: t['com.bridgeflow.auth.toast.title.signed-in'](),
+        message: t['com.bridgeflow.auth.toast.message.signed-in'](),
       });
     }
     onAuthenticated?.(loginStatus);
   }, [loginStatus, onAuthenticated, t]);
 
   useEffect(() => {
-    setPasswordErrorHint(t['com.affine.auth.password.error']());
+    setPasswordErrorHint(t['com.bridgeflow.auth.password.error']());
   }, [t]);
 
   const onSignIn = useAsyncCallback(async () => {
@@ -98,11 +98,11 @@ export const SignInWithPasswordStep = ({
         error.is('PASSWORD_REQUIRED')
       ) {
         setPasswordError(true);
-        setPasswordErrorHint(t['com.affine.auth.password.error']());
+        setPasswordErrorHint(t['com.bridgeflow.auth.password.error']());
       } else {
         setPasswordError(false);
         notify.error({
-          title: t['com.affine.auth.toast.title.failed'](),
+          title: t['com.bridgeflow.auth.toast.title.failed'](),
           message: error.is('REQUEST_ABORTED')
             ? t['error.NETWORK_ERROR']()
             : t[`error.${error.name}`](error.data),
@@ -129,25 +129,25 @@ export const SignInWithPasswordStep = ({
 
   return (
     <AuthContainer>
-      <AuthHeader title={t['com.affine.auth.sign.in']()} />
+      <AuthHeader title={t['com.bridgeflow.auth.sign.in']()} />
 
       <AuthContent>
         <AuthInput
-          label={t['com.affine.settings.email']()}
+          label={t['com.bridgeflow.settings.email']()}
           disabled={true}
           value={email}
         />
         <AuthInput
           autoFocus
           data-testid="password-input"
-          label={t['com.affine.auth.password']()}
+          label={t['com.bridgeflow.auth.password']()}
           value={password}
           type="password"
           onChange={(value: string) => {
             setPassword(value);
             if (passwordError) {
               setPasswordError(false);
-              setPasswordErrorHint(t['com.affine.auth.password.error']());
+              setPasswordErrorHint(t['com.bridgeflow.auth.password.error']());
             }
           }}
           error={passwordError}
@@ -161,7 +161,7 @@ export const SignInWithPasswordStep = ({
               className={styles.linkButton}
               onClick={sendMagicLink}
             >
-              {t['com.affine.auth.sign.auth.code.send-email.sign-in']()}
+              {t['com.bridgeflow.auth.sign.auth.code.send-email.sign-in']()}
             </a>
           </div>
         )}
@@ -174,7 +174,7 @@ export const SignInWithPasswordStep = ({
           disabled={isLoading || (!verifyToken && needCaptcha)}
           onClick={onSignIn}
         >
-          {t['com.affine.auth.sign.in']()}
+          {t['com.bridgeflow.auth.sign.in']()}
         </Button>
       </AuthContent>
       <AuthFooter>

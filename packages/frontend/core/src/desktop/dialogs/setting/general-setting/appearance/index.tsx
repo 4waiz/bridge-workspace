@@ -1,19 +1,19 @@
-import type { RadioItem } from '@affine/component';
-import { RadioGroup, Switch } from '@affine/component';
+import type { RadioItem } from '@bridgeflow/component';
+import { RadioGroup, Switch } from '@bridgeflow/component';
 import {
   SettingHeader,
   SettingRow,
   SettingWrapper,
-} from '@affine/component/setting-components';
-import { LanguageMenu } from '@affine/core/components/affine/language-menu';
-import { TraySettingService } from '@affine/core/modules/editor-setting/services/tray-settings';
-import { FeatureFlagService } from '@affine/core/modules/feature-flag';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/component/setting-components';
+import { LanguageMenu } from '@bridgeflow/core/components/bridgeflow/language-menu';
+import { TraySettingService } from '@bridgeflow/core/modules/editor-setting/services/tray-settings';
+import { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
+import { useI18n } from '@bridgeflow/i18n';
 import { useLiveData, useService } from '@toeverything/infra';
 import { useTheme } from 'next-themes';
 import { useCallback, useMemo } from 'react';
 
-import { useAppSettingHelper } from '../../../../../components/hooks/affine/use-app-setting-helper';
+import { useAppSettingHelper } from '../../../../../components/hooks/bridgeflow/use-app-setting-helper';
 import { OpenInAppLinksMenu } from './links';
 import { settingWrapper } from './style.css';
 import { ThemeEditorSetting } from './theme-editor-setting';
@@ -22,17 +22,17 @@ export const getThemeOptions = (t: ReturnType<typeof useI18n>) =>
   [
     {
       value: 'system',
-      label: t['com.affine.themeSettings.system'](),
+      label: t['com.bridgeflow.themeSettings.system'](),
       testId: 'system-theme-trigger',
     },
     {
       value: 'light',
-      label: t['com.affine.themeSettings.light'](),
+      label: t['com.bridgeflow.themeSettings.light'](),
       testId: 'light-theme-trigger',
     },
     {
       value: 'dark',
-      label: t['com.affine.themeSettings.dark'](),
+      label: t['com.bridgeflow.themeSettings.dark'](),
       testId: 'dark-theme-trigger',
     },
   ] satisfies RadioItem[];
@@ -68,11 +68,11 @@ const MenubarSetting = () => {
     <>
       <SettingWrapper
         id="menubar"
-        title={t['com.affine.appearanceSettings.menubar.title']()}
+        title={t['com.bridgeflow.appearanceSettings.menubar.title']()}
       >
         <SettingRow
-          name={t['com.affine.appearanceSettings.menubar.toggle']()}
-          desc={t['com.affine.appearanceSettings.menubar.description']()}
+          name={t['com.bridgeflow.appearanceSettings.menubar.toggle']()}
+          desc={t['com.bridgeflow.appearanceSettings.menubar.description']()}
         >
           <Switch
             checked={traySetting.enabled}
@@ -84,15 +84,15 @@ const MenubarSetting = () => {
         <SettingWrapper
           id="windowBehavior"
           title={t[
-            'com.affine.appearanceSettings.menubar.windowBehavior.title'
+            'com.bridgeflow.appearanceSettings.menubar.windowBehavior.title'
           ]()}
         >
           <SettingRow
             name={t[
-              'com.affine.appearanceSettings.menubar.windowBehavior.openOnLeftClick.toggle'
+              'com.bridgeflow.appearanceSettings.menubar.windowBehavior.openOnLeftClick.toggle'
             ]()}
             desc={t[
-              'com.affine.appearanceSettings.menubar.windowBehavior.openOnLeftClick.description'
+              'com.bridgeflow.appearanceSettings.menubar.windowBehavior.openOnLeftClick.description'
             ]()}
           >
             <Switch
@@ -104,10 +104,10 @@ const MenubarSetting = () => {
           </SettingRow>
           <SettingRow
             name={t[
-              'com.affine.appearanceSettings.menubar.windowBehavior.minimizeToTray.toggle'
+              'com.bridgeflow.appearanceSettings.menubar.windowBehavior.minimizeToTray.toggle'
             ]()}
             desc={t[
-              'com.affine.appearanceSettings.menubar.windowBehavior.minimizeToTray.description'
+              'com.bridgeflow.appearanceSettings.menubar.windowBehavior.minimizeToTray.description'
             ]()}
           >
             <Switch
@@ -119,10 +119,10 @@ const MenubarSetting = () => {
           </SettingRow>
           <SettingRow
             name={t[
-              'com.affine.appearanceSettings.menubar.windowBehavior.closeToTray.toggle'
+              'com.bridgeflow.appearanceSettings.menubar.windowBehavior.closeToTray.toggle'
             ]()}
             desc={t[
-              'com.affine.appearanceSettings.menubar.windowBehavior.closeToTray.description'
+              'com.bridgeflow.appearanceSettings.menubar.windowBehavior.closeToTray.description'
             ]()}
           >
             <Switch
@@ -132,10 +132,10 @@ const MenubarSetting = () => {
           </SettingRow>
           <SettingRow
             name={t[
-              'com.affine.appearanceSettings.menubar.windowBehavior.startMinimized.toggle'
+              'com.bridgeflow.appearanceSettings.menubar.windowBehavior.startMinimized.toggle'
             ]()}
             desc={t[
-              'com.affine.appearanceSettings.menubar.windowBehavior.startMinimized.description'
+              'com.bridgeflow.appearanceSettings.menubar.windowBehavior.startMinimized.description'
             ]()}
           >
             <Switch
@@ -163,20 +163,20 @@ export const AppearanceSettings = () => {
   return (
     <>
       <SettingHeader
-        title={t['com.affine.appearanceSettings.title']()}
-        subtitle={t['com.affine.appearanceSettings.subtitle']()}
+        title={t['com.bridgeflow.appearanceSettings.title']()}
+        subtitle={t['com.bridgeflow.appearanceSettings.subtitle']()}
       />
 
-      <SettingWrapper title={t['com.affine.appearanceSettings.theme.title']()}>
+      <SettingWrapper title={t['com.bridgeflow.appearanceSettings.theme.title']()}>
         <SettingRow
-          name={t['com.affine.appearanceSettings.color.title']()}
-          desc={t['com.affine.appearanceSettings.color.description']()}
+          name={t['com.bridgeflow.appearanceSettings.color.title']()}
+          desc={t['com.bridgeflow.appearanceSettings.color.description']()}
         >
           <ThemeSettings />
         </SettingRow>
         <SettingRow
-          name={t['com.affine.appearanceSettings.language.title']()}
-          desc={t['com.affine.appearanceSettings.language.description']()}
+          name={t['com.bridgeflow.appearanceSettings.language.title']()}
+          desc={t['com.bridgeflow.appearanceSettings.language.description']()}
         >
           <div className={settingWrapper}>
             <LanguageMenu />
@@ -184,8 +184,8 @@ export const AppearanceSettings = () => {
         </SettingRow>
         {BUILD_CONFIG.isElectron ? (
           <SettingRow
-            name={t['com.affine.appearanceSettings.clientBorder.title']()}
-            desc={t['com.affine.appearanceSettings.clientBorder.description']()}
+            name={t['com.bridgeflow.appearanceSettings.clientBorder.title']()}
+            desc={t['com.bridgeflow.appearanceSettings.clientBorder.description']()}
             data-testid="client-border-style-trigger"
           >
             <Switch
@@ -197,11 +197,11 @@ export const AppearanceSettings = () => {
         {enableThemeEditor ? <ThemeEditorSetting /> : null}
       </SettingWrapper>
 
-      <SettingWrapper title={t['com.affine.appearanceSettings.images.title']()}>
+      <SettingWrapper title={t['com.bridgeflow.appearanceSettings.images.title']()}>
         <SettingRow
-          name={t['com.affine.appearanceSettings.images.antialiasing.title']()}
+          name={t['com.bridgeflow.appearanceSettings.images.antialiasing.title']()}
           desc={t[
-            'com.affine.appearanceSettings.images.antialiasing.description'
+            'com.bridgeflow.appearanceSettings.images.antialiasing.description'
           ]()}
           data-testid="image-antialiasing-trigger"
         >
@@ -215,10 +215,10 @@ export const AppearanceSettings = () => {
       </SettingWrapper>
 
       {BUILD_CONFIG.isWeb && !environment.isMobile ? (
-        <SettingWrapper title={t['com.affine.setting.appearance.links']()}>
+        <SettingWrapper title={t['com.bridgeflow.setting.appearance.links']()}>
           <SettingRow
-            name={t['com.affine.setting.appearance.open-in-app']()}
-            desc={t['com.affine.setting.appearance.open-in-app.hint']()}
+            name={t['com.bridgeflow.setting.appearance.open-in-app']()}
+            desc={t['com.bridgeflow.setting.appearance.open-in-app.hint']()}
             data-testid="open-in-app-links-trigger"
           >
             <OpenInAppLinksMenu />
@@ -227,13 +227,13 @@ export const AppearanceSettings = () => {
       ) : null}
 
       <SettingWrapper
-        title={t['com.affine.appearanceSettings.sidebar.title']()}
+        title={t['com.bridgeflow.appearanceSettings.sidebar.title']()}
       >
         {BUILD_CONFIG.isElectron ? (
           <SettingRow
-            name={t['com.affine.appearanceSettings.noisyBackground.title']()}
+            name={t['com.bridgeflow.appearanceSettings.noisyBackground.title']()}
             desc={t[
-              'com.affine.appearanceSettings.noisyBackground.description'
+              'com.bridgeflow.appearanceSettings.noisyBackground.description'
             ]()}
           >
             <Switch
@@ -246,9 +246,9 @@ export const AppearanceSettings = () => {
         ) : null}
         {BUILD_CONFIG.isElectron && environment.isMacOs && (
           <SettingRow
-            name={t['com.affine.appearanceSettings.translucentUI.title']()}
+            name={t['com.bridgeflow.appearanceSettings.translucentUI.title']()}
             desc={t[
-              'com.affine.appearanceSettings.translucentUI.description'
+              'com.bridgeflow.appearanceSettings.translucentUI.description'
             ]()}
           >
             <Switch
@@ -261,10 +261,10 @@ export const AppearanceSettings = () => {
         )}
         <SettingRow
           name={t[
-            'com.affine.appearanceSettings.showLinkedDocInSidebar.title'
+            'com.bridgeflow.appearanceSettings.showLinkedDocInSidebar.title'
           ]()}
           desc={t[
-            'com.affine.appearanceSettings.showLinkedDocInSidebar.description'
+            'com.bridgeflow.appearanceSettings.showLinkedDocInSidebar.description'
           ]()}
         >
           <Switch

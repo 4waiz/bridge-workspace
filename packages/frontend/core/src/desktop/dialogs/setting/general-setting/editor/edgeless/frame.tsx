@@ -1,9 +1,9 @@
-import { MenuItem, MenuTrigger } from '@affine/component';
-import { SettingRow } from '@affine/component/setting-components';
-import { EditorSettingService } from '@affine/core/modules/editor-setting';
-import { useI18n } from '@affine/i18n';
-import { DefaultTheme } from '@blocksuite/affine/model';
-import type { Store } from '@blocksuite/affine/store';
+import { MenuItem, MenuTrigger } from '@bridgeflow/component';
+import { SettingRow } from '@bridgeflow/component/setting-components';
+import { EditorSettingService } from '@bridgeflow/core/modules/editor-setting';
+import { useI18n } from '@bridgeflow/i18n';
+import { DefaultTheme } from '@blocksuite/bridgeflow/model';
+import type { Store } from '@blocksuite/bridgeflow/store';
 import { useFramework, useLiveData } from '@toeverything/infra';
 import { isEqual } from 'lodash-es';
 import { useCallback, useMemo } from 'react';
@@ -27,7 +27,7 @@ export const FrameSettings = () => {
     DefaultTheme.transparent
   );
 
-  const { background } = settings['affine:frame'];
+  const { background } = settings['bridgeflow:frame'];
   const currentColor = useMemo(() => {
     return getCurrentColor(background);
   }, [getCurrentColor, background]);
@@ -35,7 +35,7 @@ export const FrameSettings = () => {
   const colorItems = useMemo(() => {
     return palettes.map(({ key, value, resolvedValue }) => {
       const handler = () => {
-        editorSetting.set('affine:frame', { background: value });
+        editorSetting.set('bridgeflow:frame', { background: value });
       };
       const isSelected = isEqual(background, value);
       return (
@@ -52,20 +52,20 @@ export const FrameSettings = () => {
   }, [editorSetting, background, palettes]);
 
   const getElements = useCallback((doc: Store) => {
-    return doc.getBlocksByFlavour('affine:frame') || [];
+    return doc.getBlocksByFlavour('bridgeflow:frame') || [];
   }, []);
 
   return (
     <>
       <EdgelessSnapshot
-        title={t['com.affine.settings.editorSettings.edgeless.frame']()}
+        title={t['com.bridgeflow.settings.editorSettings.edgeless.frame']()}
         docName="frame"
-        keyName="affine:frame"
+        keyName="bridgeflow:frame"
         getElements={getElements}
       />
       <SettingRow
         name={t[
-          'com.affine.settings.editorSettings.edgeless.frame.background'
+          'com.bridgeflow.settings.editorSettings.edgeless.frame.background'
         ]()}
         desc={''}
       >

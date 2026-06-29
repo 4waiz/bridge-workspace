@@ -1,5 +1,5 @@
-import { toArrayBuffer } from '@affine/core/utils/array-buffer';
-import { DebugLogger } from '@affine/debug';
+import { toArrayBuffer } from '@bridgeflow/core/utils/array-buffer';
+import { DebugLogger } from '@bridgeflow/debug';
 import {
   catchErrorInto,
   effect,

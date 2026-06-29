@@ -1,11 +1,11 @@
 {
-  "name": "@affine/server",
+  "name": "@bridgeflow/server",
   "private": true,
   "version": "0.26.3",
-  "description": "Affine Node.js server",
+  "description": "BridgeFlow Node.js server",
   "type": "module",
   "scripts": {
-    "build": "affine bundle -p @affine/server",
+    "build": "bridgeflow bundle -p @bridgeflow/server",
     "dev": "nodemon ./src/index.ts",
     "dev:mail": "email dev -d src/mails",
     "test": "ava --concurrency 1 --serial",
@@ -23,9 +23,9 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@affine/s3-compat": "workspace:*",
-    "@affine/server-native": "workspace:*",
     "@apollo/server": "^4.13.0",
+    "@bridgeflow/s3-compat": "workspace:*",
+    "@bridgeflow/server-native": "workspace:*",
     "@fal-ai/serverless-client": "^0.15.0",
     "@google-cloud/opentelemetry-cloud-trace-exporter": "^3.0.0",
     "@google-cloud/opentelemetry-resource-util": "^3.0.0",
@@ -109,9 +109,9 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
-    "@affine-tools/cli": "workspace:*",
-    "@affine-tools/utils": "workspace:*",
-    "@affine/graphql": "workspace:*",
+    "@bridgeflow-tools/cli": "workspace:*",
+    "@bridgeflow-tools/utils": "workspace:*",
+    "@bridgeflow/graphql": "workspace:*",
     "@faker-js/faker": "^10.1.0",
     "@nestjs/swagger": "^11.2.0",
     "@nestjs/testing": "patch:@nestjs/testing@npm%3A10.4.15#~/.yarn/patches/@nestjs-testing-npm-10.4.15-d591a1705a.patch",
@@ -150,9 +150,9 @@
     ],
     "env": {
       "NODE_ENV": "development",
-      "AFFINE_ENV": "dev",
-      "AFFINE_SERVER_EXTERNAL_URL": "http://localhost:8080",
-      "DEBUG": "affine:*",
+      "BRIDGEFLOW_ENV": "dev",
+      "BRIDGEFLOW_SERVER_EXTERNAL_URL": "http://localhost:8080",
+      "DEBUG": "bridgeflow:*",
       "FORCE_COLOR": true,
       "DEBUG_COLORS": true
     },

@@ -15,7 +15,7 @@
     "build": "typedoc"
   },
   "dependencies": {
-    "@blocksuite/affine": "workspace:*"
+    "@blocksuite/bridgeflow": "workspace:*"
   },
   "version": "0.26.3"
 }

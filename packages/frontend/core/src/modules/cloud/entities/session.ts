@@ -1,4 +1,4 @@
-import { UserFriendlyError } from '@affine/error';
+import { UserFriendlyError } from '@bridgeflow/error';
 import {
   backoffRetry,
   effect,

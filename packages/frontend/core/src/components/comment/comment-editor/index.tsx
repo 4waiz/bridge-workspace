@@ -1,15 +1,15 @@
-import { IconButton, notify, toast } from '@affine/component';
-import { LitDocEditor, type PageEditor } from '@affine/core/blocksuite/editors';
-import { SnapshotHelper } from '@affine/core/modules/comment/services/snapshot-helper';
-import type { CommentAttachment } from '@affine/core/modules/comment/types';
-import { PeekViewService } from '@affine/core/modules/peek-view';
-import { downloadResourceWithUrl } from '@affine/core/utils/resource';
-import { DebugLogger } from '@affine/debug';
-import { getAttachmentFileIconRC } from '@blocksuite/affine/components/icons';
-import { type RichText, selectTextModel } from '@blocksuite/affine/rich-text';
-import { ViewportElementExtension } from '@blocksuite/affine/shared/services';
-import { openFilesWith } from '@blocksuite/affine/shared/utils';
-import { type DocSnapshot, nanoid, Store } from '@blocksuite/affine/store';
+import { IconButton, notify, toast } from '@bridgeflow/component';
+import { LitDocEditor, type PageEditor } from '@bridgeflow/core/blocksuite/editors';
+import { SnapshotHelper } from '@bridgeflow/core/modules/comment/services/snapshot-helper';
+import type { CommentAttachment } from '@bridgeflow/core/modules/comment/types';
+import { PeekViewService } from '@bridgeflow/core/modules/peek-view';
+import { downloadResourceWithUrl } from '@bridgeflow/core/utils/resource';
+import { DebugLogger } from '@bridgeflow/debug';
+import { getAttachmentFileIconRC } from '@blocksuite/bridgeflow/components/icons';
+import { type RichText, selectTextModel } from '@blocksuite/bridgeflow/rich-text';
+import { ViewportElementExtension } from '@blocksuite/bridgeflow/shared/services';
+import { openFilesWith } from '@blocksuite/bridgeflow/shared/utils';
+import { type DocSnapshot, nanoid, Store } from '@blocksuite/bridgeflow/store';
 import {
   ArrowUpBigIcon,
   AttachmentIcon,
@@ -29,7 +29,7 @@ import {
   useState,
 } from 'react';
 
-import { useAsyncCallback } from '../../hooks/affine-async-hooks';
+import { useAsyncCallback } from '../../hooks/bridgeflow-async-hooks';
 import { getCommentEditorViewManager } from './specs';
 import * as styles from './style.css';
 

@@ -1,16 +1,16 @@
-import type { FeatureFlagService } from '@affine/core/modules/feature-flag';
-import { WithDisposable } from '@blocksuite/affine/global/lit';
-import type { ColorScheme } from '@blocksuite/affine/model';
-import { unsafeCSSVarV2 } from '@blocksuite/affine/shared/theme';
+import type { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import type { ColorScheme } from '@blocksuite/bridgeflow/model';
+import { unsafeCSSVarV2 } from '@blocksuite/bridgeflow/shared/theme';
 import {
   type BlockSelection,
   type EditorHost,
   ShadowlessElement,
   type TextSelection,
-} from '@blocksuite/affine/std';
-import type { ExtensionType } from '@blocksuite/affine/store';
-import type { NotificationService } from '@blocksuite/affine-shared/services';
-import { isInsidePageEditor } from '@blocksuite/affine-shared/utils';
+} from '@blocksuite/bridgeflow/std';
+import type { ExtensionType } from '@blocksuite/bridgeflow/store';
+import type { NotificationService } from '@blocksuite/bridgeflow-shared/services';
+import { isInsidePageEditor } from '@blocksuite/bridgeflow-shared/utils';
 import {
   CopyIcon,
   InsertBleowIcon,
@@ -115,7 +115,7 @@ export class SectionEditTool extends WithDisposable(ShadowlessElement) {
   accessor extensions!: ExtensionType[];
 
   @property({ attribute: false })
-  accessor affineFeatureFlagService!: FeatureFlagService;
+  accessor bridgeflowFeatureFlagService!: FeatureFlagService;
 
   @property({ attribute: false })
   accessor notificationService!: NotificationService;
@@ -171,7 +171,7 @@ export class SectionEditTool extends WithDisposable(ShadowlessElement) {
                 }}
               >
                 ${CopyIcon()}
-                <affine-tooltip>Copy</affine-tooltip>
+                <bridgeflow-tooltip>Copy</bridgeflow-tooltip>
               </div>
               ${this.independentMode
                 ? nothing
@@ -203,7 +203,7 @@ export class SectionEditTool extends WithDisposable(ShadowlessElement) {
                     }}
                   >
                     ${InsertBleowIcon()}
-                    <affine-tooltip>Insert below</affine-tooltip>
+                    <bridgeflow-tooltip>Insert below</bridgeflow-tooltip>
                   </div>`}
               ${this.independentMode
                 ? nothing
@@ -215,7 +215,7 @@ export class SectionEditTool extends WithDisposable(ShadowlessElement) {
                     }}
                   >
                     ${LinkedPageIcon()}
-                    <affine-tooltip>Create new doc</affine-tooltip>
+                    <bridgeflow-tooltip>Create new doc</bridgeflow-tooltip>
                   </div>`}
             </div>
           </div>
@@ -223,7 +223,7 @@ export class SectionEditTool extends WithDisposable(ShadowlessElement) {
             .text=${result.content}
             .state=${'finished'}
             .extensions=${this.extensions}
-            .affineFeatureFlagService=${this.affineFeatureFlagService}
+            .bridgeflowFeatureFlagService=${this.bridgeflowFeatureFlagService}
             .theme=${this.theme}
           ></chat-content-rich-text>
         </div>

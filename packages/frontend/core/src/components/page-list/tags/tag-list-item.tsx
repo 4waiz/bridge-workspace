@@ -1,8 +1,8 @@
-import { Checkbox, useDraggable } from '@affine/component';
-import { WorkbenchLink } from '@affine/core/modules/workbench';
-import type { AffineDNDData } from '@affine/core/types/dnd';
-import { stopPropagation } from '@affine/core/utils';
-import { useI18n } from '@affine/i18n';
+import { Checkbox, useDraggable } from '@bridgeflow/component';
+import { WorkbenchLink } from '@bridgeflow/core/modules/workbench';
+import type { BridgeFlowDNDData } from '@bridgeflow/core/types/dnd';
+import { stopPropagation } from '@bridgeflow/core/utils';
+import { useI18n } from '@bridgeflow/i18n';
 import type { ForwardedRef, PropsWithChildren } from 'react';
 import { forwardRef, useCallback, useMemo } from 'react';
 
@@ -26,7 +26,7 @@ const TagListTitleCell = ({ title }: Pick<TagListItemProps, 'title'>) => {
         data-testid="page-list-item-preview-text"
         className={styles.titleCellPreview}
       >
-        {` · ${t['com.affine.tags.count']({ count: pageCount || 0 })}`}
+        {` · ${t['com.bridgeflow.tags.count']({ count: pageCount || 0 })}`}
       </div> */}
     </div>
   );
@@ -81,7 +81,7 @@ const TagListOperationsCell = ({
 };
 
 export const TagListItem = (props: TagListItemProps) => {
-  const { dragRef, CustomDragPreview, dragging } = useDraggable<AffineDNDData>(
+  const { dragRef, CustomDragPreview, dragging } = useDraggable<BridgeFlowDNDData>(
     () => ({
       canDrag: props.draggable,
       data: {

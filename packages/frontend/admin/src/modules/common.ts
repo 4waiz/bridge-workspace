@@ -1,9 +1,9 @@
-import type { GetCurrentUserFeaturesQuery } from '@affine/graphql';
+import type { GetCurrentUserFeaturesQuery } from '@bridgeflow/graphql';
 import {
   adminServerConfigQuery,
   FeatureType,
   getCurrentUserFeaturesQuery,
-} from '@affine/graphql';
+} from '@bridgeflow/graphql';
 import { useEffect, useState } from 'react';
 
 import { useMutateQueryResource } from '../use-mutation';

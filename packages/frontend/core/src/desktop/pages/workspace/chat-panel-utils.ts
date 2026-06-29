@@ -1,5 +1,5 @@
-import type { I18nInstance } from '@affine/i18n';
-import type { NotificationService } from '@blocksuite/affine/shared/services';
+import type { I18nInstance } from '@bridgeflow/i18n';
+import type { NotificationService } from '@blocksuite/bridgeflow/shared/services';
 
 export type SessionDeleteCleanupFn = (
   session: BlockSuitePresets.AIRecentSession
@@ -25,14 +25,14 @@ export function createSessionDeleteHandler({
   return async (sessionToDelete: BlockSuitePresets.AIRecentSession) => {
     if (canDeleteSession && !canDeleteSession(sessionToDelete)) {
       notificationService.toast(
-        t['com.affine.ai.chat-panel.session.delete.toast.failed']()
+        t['com.bridgeflow.ai.chat-panel.session.delete.toast.failed']()
       );
       return;
     }
 
     const confirm = await notificationService.confirm({
-      title: t['com.affine.ai.chat-panel.session.delete.confirm.title'](),
-      message: t['com.affine.ai.chat-panel.session.delete.confirm.message'](),
+      title: t['com.bridgeflow.ai.chat-panel.session.delete.confirm.title'](),
+      message: t['com.bridgeflow.ai.chat-panel.session.delete.confirm.message'](),
       confirmText: t['Delete'](),
       cancelText: t['Cancel'](),
     });
@@ -44,12 +44,12 @@ export function createSessionDeleteHandler({
     try {
       await cleanupSession(sessionToDelete);
       notificationService.toast(
-        t['com.affine.ai.chat-panel.session.delete.toast.success']()
+        t['com.bridgeflow.ai.chat-panel.session.delete.toast.success']()
       );
     } catch (error) {
       console.error(error);
       notificationService.toast(
-        t['com.affine.ai.chat-panel.session.delete.toast.failed']()
+        t['com.bridgeflow.ai.chat-panel.session.delete.toast.failed']()
       );
       return;
     }

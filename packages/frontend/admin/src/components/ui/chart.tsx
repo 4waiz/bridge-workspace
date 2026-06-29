@@ -1,4 +1,4 @@
-import { cn } from '@affine/admin/utils';
+import { cn } from '@bridgeflow/admin/utils';
 import { createContext, forwardRef, useContext, useId, useMemo } from 'react';
 import type { TooltipProps } from 'recharts';
 import { ResponsiveContainer, Tooltip as RechartsTooltip } from 'recharts';

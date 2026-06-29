@@ -1,16 +1,16 @@
-import { BRAND_AI_NAME } from '@affine/component/brand';
-import type { AIToolsConfigService } from '@affine/core/modules/ai-button';
-import type { PeekViewService } from '@affine/core/modules/peek-view';
-import type { AppThemeService } from '@affine/core/modules/theme';
-import type { CopilotChatHistoryFragment } from '@affine/graphql';
-import { WithDisposable } from '@blocksuite/affine/global/lit';
+import { BRAND_AI_NAME } from '@bridgeflow/component/brand';
+import type { AIToolsConfigService } from '@bridgeflow/core/modules/ai-button';
+import type { PeekViewService } from '@bridgeflow/core/modules/peek-view';
+import type { AppThemeService } from '@bridgeflow/core/modules/theme';
+import type { CopilotChatHistoryFragment } from '@bridgeflow/graphql';
+import { WithDisposable } from '@blocksuite/bridgeflow/global/lit';
 import {
   DocModeProvider,
   type FeatureFlagService,
   type NotificationService,
-} from '@blocksuite/affine/shared/services';
-import { type EditorHost, ShadowlessElement } from '@blocksuite/affine/std';
-import type { BaseSelection, ExtensionType } from '@blocksuite/affine/store';
+} from '@blocksuite/bridgeflow/shared/services';
+import { type EditorHost, ShadowlessElement } from '@blocksuite/bridgeflow/std';
+import type { BaseSelection, ExtensionType } from '@blocksuite/bridgeflow/store';
 import { ArrowDownBigIcon as ArrowDownIcon } from '@blocksuite/icons/lit';
 import type { Signal } from '@preact/signals-core';
 import { css, html, nothing, type PropertyValues } from 'lit';
@@ -19,7 +19,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { debounce } from 'lodash-es';
 
-import { AffineIcon } from '../../_common/icons';
+import { BridgeFlowIcon } from '../../_common/icons';
 import { type AIError, AIProvider, UnauthorizedError } from '../../provider';
 import { mergeStreamObjects } from '../../utils/stream-objects';
 import type { DocDisplayConfig } from '../ai-chat-chips';
@@ -57,8 +57,8 @@ export class AIChatMessages extends WithDisposable(ShadowlessElement) {
       align-items: center;
       gap: 10px;
       margin-bottom: 4px;
-      color: var(--affine-text-primary-color);
-      font-size: var(--affine-font-sm);
+      color: var(--bridgeflow-text-primary-color);
+      font-size: var(--bridgeflow-font-sm);
       font-weight: 500;
       user-select: none;
     }
@@ -83,12 +83,12 @@ export class AIChatMessages extends WithDisposable(ShadowlessElement) {
     .messages-placeholder-title {
       font-size: 18px;
       font-weight: 600;
-      color: var(--affine-text-primary-color);
+      color: var(--bridgeflow-text-primary-color);
     }
 
     .messages-placeholder-title[data-loading='true'] {
-      font-size: var(--affine-font-sm);
-      color: var(--affine-text-secondary-color);
+      font-size: var(--bridgeflow-font-sm);
+      color: var(--bridgeflow-text-secondary-color);
     }
 
     .onboarding-wrapper {
@@ -112,13 +112,13 @@ export class AIChatMessages extends WithDisposable(ShadowlessElement) {
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      color: var(--affine-text-secondary-color);
+      color: var(--bridgeflow-text-secondary-color);
     }
 
     .onboarding-item-text {
-      font-size: var(--affine-font-xs);
+      font-size: var(--bridgeflow-font-xs);
       font-weight: 400;
-      color: var(--affine-text-primary-color);
+      color: var(--bridgeflow-text-primary-color);
       white-space: nowrap;
     }
 
@@ -131,9 +131,9 @@ export class AIChatMessages extends WithDisposable(ShadowlessElement) {
       border-radius: 50%;
       width: 32px;
       height: 32px;
-      border: 0.5px solid var(--affine-border-color);
-      background-color: var(--affine-background-primary-color);
-      box-shadow: var(--affine-shadow-2);
+      border: 0.5px solid var(--bridgeflow-border-color);
+      background-color: var(--bridgeflow-background-primary-color);
+      box-shadow: var(--bridgeflow-shadow-2);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -186,10 +186,10 @@ export class AIChatMessages extends WithDisposable(ShadowlessElement) {
   accessor extensions!: ExtensionType[];
 
   @property({ attribute: false })
-  accessor affineFeatureFlagService!: FeatureFlagService;
+  accessor bridgeflowFeatureFlagService!: FeatureFlagService;
 
   @property({ attribute: false })
-  accessor affineThemeService!: AppThemeService;
+  accessor bridgeflowThemeService!: AppThemeService;
 
   @property({ attribute: false })
   accessor notificationService!: NotificationService;
@@ -279,10 +279,10 @@ export class AIChatMessages extends WithDisposable(ShadowlessElement) {
               class="messages-placeholder"
               data-testid="chat-panel-messages-placeholder"
             >
-              ${AffineIcon(
+              ${BridgeFlowIcon(
                 isHistoryLoading
-                  ? 'var(--affine-icon-secondary)'
-                  : 'var(--affine-primary-color)'
+                  ? 'var(--bridgeflow-icon-secondary)'
+                  : 'var(--bridgeflow-primary-color)'
               )}
               <div
                 class="messages-placeholder-title"
@@ -316,8 +316,8 @@ export class AIChatMessages extends WithDisposable(ShadowlessElement) {
                     .status=${isLast ? status : 'idle'}
                     .error=${isLast ? error : null}
                     .extensions=${this.extensions}
-                    .affineFeatureFlagService=${this.affineFeatureFlagService}
-                    .affineThemeService=${this.affineThemeService}
+                    .bridgeflowFeatureFlagService=${this.bridgeflowFeatureFlagService}
+                    .bridgeflowThemeService=${this.bridgeflowThemeService}
                     .notificationService=${this.notificationService}
                     .retry=${() => this.retry()}
                     .width=${this.width}

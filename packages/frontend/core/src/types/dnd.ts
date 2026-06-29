@@ -1,6 +1,6 @@
-import type { DNDData } from '@affine/component';
+import type { DNDData } from '@bridgeflow/component';
 
-export type AffineDNDEntity =
+export type BridgeFlowDNDEntity =
   | {
       type: 'doc';
       id: string;
@@ -22,9 +22,9 @@ export type AffineDNDEntity =
       id: string;
     };
 
-export interface AffineDNDData extends DNDData {
+export interface BridgeFlowDNDData extends DNDData {
   draggable: {
-    entity?: AffineDNDEntity;
+    entity?: BridgeFlowDNDEntity;
     from?:
       | {
           at: 'navigation-panel:organize:folder-node';

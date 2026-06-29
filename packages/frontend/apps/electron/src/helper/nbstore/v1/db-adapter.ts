@@ -1,5 +1,5 @@
-import type { InsertRow } from '@affine/native';
-import { SqliteConnection } from '@affine/native';
+import type { InsertRow } from '@bridgeflow/native';
+import { SqliteConnection } from '@bridgeflow/native';
 import type { ByteKVBehavior } from '@toeverything/infra/storage';
 
 import { logger } from '../../logger';

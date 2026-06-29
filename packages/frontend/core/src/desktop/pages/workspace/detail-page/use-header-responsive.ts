@@ -1,6 +1,6 @@
-import { EditorService } from '@affine/core/modules/editor';
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { useViewPosition } from '@affine/core/modules/workbench/view/use-view-position';
+import { EditorService } from '@bridgeflow/core/modules/editor';
+import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
+import { useViewPosition } from '@bridgeflow/core/modules/workbench/view/use-view-position';
 import { useLiveData, useService } from '@toeverything/infra';
 
 export const useDetailPageHeaderResponsive = (availableWidth: number) => {

@@ -1,11 +1,11 @@
-import { Menu, MenuSeparator } from '@affine/component';
-import { MenuItem as SidebarMenuItem } from '@affine/core/modules/app-sidebar/views';
+import { Menu, MenuSeparator } from '@bridgeflow/component';
+import { MenuItem as SidebarMenuItem } from '@bridgeflow/core/modules/app-sidebar/views';
 import {
   TemplateListMenuAdd,
   TemplateListMenuContentScrollable,
-} from '@affine/core/modules/template-doc/view/template-list-menu';
-import { useI18n } from '@affine/i18n';
-import track from '@affine/track';
+} from '@bridgeflow/core/modules/template-doc/view/template-list-menu';
+import { useI18n } from '@bridgeflow/i18n';
+import track from '@bridgeflow/track';
 import { TemplateIcon } from '@blocksuite/icons/rc';
 import { useCallback, useState } from 'react';
 

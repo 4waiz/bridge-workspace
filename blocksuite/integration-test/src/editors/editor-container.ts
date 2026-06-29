@@ -1,23 +1,23 @@
-import { SignalWatcher, WithDisposable } from '@blocksuite/affine/global/lit';
-import type { DocMode } from '@blocksuite/affine/model';
-import { ThemeProvider } from '@blocksuite/affine/shared/services';
-import { BlockStdScope, ShadowlessElement } from '@blocksuite/affine/std';
+import { SignalWatcher, WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import type { DocMode } from '@blocksuite/bridgeflow/model';
+import { ThemeProvider } from '@blocksuite/bridgeflow/shared/services';
+import { BlockStdScope, ShadowlessElement } from '@blocksuite/bridgeflow/std';
 import {
   type BlockModel,
   type ExtensionType,
   type Store,
-} from '@blocksuite/affine/store';
+} from '@blocksuite/bridgeflow/store';
 import { computed, signal } from '@preact/signals-core';
 import { css, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { keyed } from 'lit/directives/keyed.js';
 import { when } from 'lit/directives/when.js';
 
-export class TestAffineEditorContainer extends SignalWatcher(
+export class TestBridgeFlowEditorContainer extends SignalWatcher(
   WithDisposable(ShadowlessElement)
 ) {
   static override styles = css`
-    .affine-page-viewport {
+    .bridgeflow-page-viewport {
       position: relative;
       display: flex;
       flex-direction: column;
@@ -25,21 +25,21 @@ export class TestAffineEditorContainer extends SignalWatcher(
       overflow-y: auto;
       container-name: viewport;
       container-type: inline-size;
-      font-family: var(--affine-font-family);
+      font-family: var(--bridgeflow-font-family);
     }
-    .affine-page-viewport * {
+    .bridgeflow-page-viewport * {
       box-sizing: border-box;
     }
 
     @media print {
-      .affine-page-viewport {
+      .bridgeflow-page-viewport {
         height: auto;
       }
     }
 
     .playground-page-editor-container {
       flex-grow: 1;
-      font-family: var(--affine-font-family);
+      font-family: var(--bridgeflow-font-family);
       display: block;
     }
 
@@ -54,8 +54,8 @@ export class TestAffineEditorContainer extends SignalWatcher(
     }
 
     .edgeless-editor-container {
-      font-family: var(--affine-font-family);
-      background: var(--affine-background-primary-color);
+      font-family: var(--bridgeflow-font-family);
+      background: var(--bridgeflow-background-primary-color);
       display: block;
       height: 100%;
       position: relative;
@@ -72,7 +72,7 @@ export class TestAffineEditorContainer extends SignalWatcher(
       }
     }
 
-    .affine-edgeless-viewport {
+    .bridgeflow-edgeless-viewport {
       display: block;
       height: 100%;
       position: relative;
@@ -187,8 +187,8 @@ export class TestAffineEditorContainer extends SignalWatcher(
         <div
           data-theme=${mode === 'page' ? appTheme : edgelessTheme}
           class=${mode === 'page'
-            ? 'affine-page-viewport'
-            : 'affine-edgeless-viewport'}
+            ? 'bridgeflow-page-viewport'
+            : 'bridgeflow-edgeless-viewport'}
         >
           ${when(
             mode === 'page',
@@ -216,6 +216,6 @@ export class TestAffineEditorContainer extends SignalWatcher(
 
 declare global {
   interface HTMLElementTagNameMap {
-    'affine-editor-container': TestAffineEditorContainer;
+    'bridgeflow-editor-container': TestBridgeFlowEditorContainer;
   }
 }

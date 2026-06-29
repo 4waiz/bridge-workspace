@@ -4,10 +4,10 @@ import {
   MenuItem,
   type MenuProps,
   Scrollable,
-} from '@affine/component';
-import { useAsyncCallback } from '@affine/core/components/hooks/affine-async-hooks';
-import { inferOpenMode } from '@affine/core/utils';
-import { useI18n } from '@affine/i18n';
+} from '@bridgeflow/component';
+import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
+import { inferOpenMode } from '@bridgeflow/core/utils';
+import { useI18n } from '@bridgeflow/i18n';
 import {
   DualLinkIcon,
   InformationIcon,
@@ -61,7 +61,7 @@ const Empty = () => {
     <div className={styles.empty}>
       <InformationIcon className={styles.emptyIcon} />
       <span className={styles.emptyText}>
-        {t['com.affine.template-list.empty']()}
+        {t['com.bridgeflow.template-list.empty']()}
       </span>
       <div className={styles.space} />
       <a
@@ -168,7 +168,7 @@ export const TemplateListMenuAdd = () => {
       onClick={createNewTemplate}
       onAuxClick={createNewTemplate}
     >
-      {t['com.affine.template-list.create-new']()}
+      {t['com.bridgeflow.template-list.create-new']()}
     </MenuItem>
   );
 };

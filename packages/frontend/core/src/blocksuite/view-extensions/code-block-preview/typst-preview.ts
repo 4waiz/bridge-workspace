@@ -1,7 +1,7 @@
-import { CodeBlockPreviewExtension } from '@blocksuite/affine/blocks/code';
-import { SignalWatcher, WithDisposable } from '@blocksuite/affine/global/lit';
-import type { CodeBlockModel } from '@blocksuite/affine/model';
-import { unsafeCSSVarV2 } from '@blocksuite/affine/shared/theme';
+import { CodeBlockPreviewExtension } from '@blocksuite/bridgeflow/blocks/code';
+import { SignalWatcher, WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import type { CodeBlockModel } from '@blocksuite/bridgeflow/model';
+import { unsafeCSSVarV2 } from '@blocksuite/bridgeflow/shared/theme';
 import { ShadowlessElement } from '@blocksuite/std';
 import { css, html, nothing } from 'lit';
 import { property, query, state } from 'lit/decorators.js';

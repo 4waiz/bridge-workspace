@@ -11,7 +11,7 @@ pub mod image;
 pub mod llm;
 pub mod tiktoken;
 
-use affine_common::napi_utils::map_napi_err;
+use bridgeflow_common::napi_utils::map_napi_err;
 use napi::{Result, Status, bindgen_prelude::*};
 use y_octo::Doc;
 
@@ -37,10 +37,10 @@ pub fn merge_updates_in_apply_way(updates: Vec<Buffer>) -> Result<Buffer> {
 }
 
 #[napi]
-pub const AFFINE_PRO_PUBLIC_KEY: Option<&'static str> = std::option_env!("AFFINE_PRO_PUBLIC_KEY");
+pub const BRIDGEFLOW_PRO_PUBLIC_KEY: Option<&'static str> = std::option_env!("BRIDGEFLOW_PRO_PUBLIC_KEY");
 
 #[napi]
-pub const AFFINE_PRO_LICENSE_AES_KEY: Option<&'static str> = std::option_env!("AFFINE_PRO_LICENSE_AES_KEY");
+pub const BRIDGEFLOW_PRO_LICENSE_AES_KEY: Option<&'static str> = std::option_env!("BRIDGEFLOW_PRO_LICENSE_AES_KEY");
 
 #[cfg(test)]
 mod tests {

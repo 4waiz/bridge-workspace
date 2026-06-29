@@ -1,17 +1,17 @@
-import { useAppSettingHelper } from '@affine/core/components/hooks/affine/use-app-setting-helper';
-import { WindowsAppControls } from '@affine/core/components/pure/header/windows-app-controls';
-import { ThemeProvider } from '@affine/core/components/theme-provider';
-import { configureElectronStateStorageImpls } from '@affine/core/desktop/storage';
-import { configureAppSidebarModule } from '@affine/core/modules/app-sidebar';
-import { ShellAppSidebarFallback } from '@affine/core/modules/app-sidebar/views';
+import { useAppSettingHelper } from '@bridgeflow/core/components/hooks/bridgeflow/use-app-setting-helper';
+import { WindowsAppControls } from '@bridgeflow/core/components/pure/header/windows-app-controls';
+import { ThemeProvider } from '@bridgeflow/core/components/theme-provider';
+import { configureElectronStateStorageImpls } from '@bridgeflow/core/desktop/storage';
+import { configureAppSidebarModule } from '@bridgeflow/core/modules/app-sidebar';
+import { ShellAppSidebarFallback } from '@bridgeflow/core/modules/app-sidebar/views';
 import {
   AppTabsHeader,
   configureAppTabsHeaderModule,
-} from '@affine/core/modules/app-tabs-header';
-import { configureDesktopApiModule } from '@affine/core/modules/desktop-api';
-import { configureI18nModule, I18nProvider } from '@affine/core/modules/i18n';
-import { configureStorageModule } from '@affine/core/modules/storage';
-import { configureAppThemeModule } from '@affine/core/modules/theme';
+} from '@bridgeflow/core/modules/app-tabs-header';
+import { configureDesktopApiModule } from '@bridgeflow/core/modules/desktop-api';
+import { configureI18nModule, I18nProvider } from '@bridgeflow/core/modules/i18n';
+import { configureStorageModule } from '@bridgeflow/core/modules/storage';
+import { configureAppThemeModule } from '@bridgeflow/core/modules/theme';
 import { Framework, FrameworkRoot } from '@toeverything/infra';
 
 import * as styles from './app.css';

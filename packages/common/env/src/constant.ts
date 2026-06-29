@@ -9,7 +9,7 @@ declare global {
   };
 }
 
-export const DEFAULT_WORKSPACE_NAME = 'Bridge Workspace';
+export const DEFAULT_WORKSPACE_NAME = 'BRIDGE Flow';
 export const UNTITLED_WORKSPACE_NAME = 'Untitled';
 
 export const DEFAULT_SORT_KEY = 'updatedDate';

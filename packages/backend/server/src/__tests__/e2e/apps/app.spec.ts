@@ -1,4 +1,4 @@
-import { getCurrentUserQuery } from '@affine/graphql';
+import { getCurrentUserQuery } from '@bridgeflow/graphql';
 
 import { Mockers } from '../../mocks';
 import { app, e2e } from '../test';

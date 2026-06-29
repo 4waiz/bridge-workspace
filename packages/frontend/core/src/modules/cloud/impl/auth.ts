@@ -4,7 +4,7 @@ import { AuthProvider } from '../provider/auth';
 import { ServerScope } from '../scopes/server';
 import { FetchService } from '../services/fetch';
 
-const CSRF_COOKIE_NAME = 'affine_csrf_token';
+const CSRF_COOKIE_NAME = 'bridgeflow_csrf_token';
 
 function getCookieValue(name: string) {
   if (typeof document === 'undefined') {
@@ -83,7 +83,7 @@ export function configureDefaultAuthProvider(framework: Framework) {
         const csrfToken = getCookieValue(CSRF_COOKIE_NAME);
         await fetchService.fetch('/api/auth/sign-out', {
           method: 'POST',
-          headers: csrfToken ? { 'x-affine-csrf-token': csrfToken } : undefined,
+          headers: csrfToken ? { 'x-bridgeflow-csrf-token': csrfToken } : undefined,
         });
       },
     };

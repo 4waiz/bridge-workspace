@@ -1,4 +1,4 @@
-import { UserFriendlyError } from '@affine/error';
+import { UserFriendlyError } from '@bridgeflow/error';
 import {
   gqlFetcherFactory,
   type OauthProvidersQuery,
@@ -6,7 +6,7 @@ import {
   type ServerConfigQuery,
   serverConfigQuery,
   ServerFeature,
-} from '@affine/graphql';
+} from '@bridgeflow/graphql';
 import { Store } from '@toeverything/infra';
 
 export type ServerConfigType = ServerConfigQuery['serverConfig'] &
@@ -70,7 +70,7 @@ export class ServerConfigStore extends Store {
         context: {
           signal: abortSignal,
           headers: {
-            'x-affine-version': BUILD_CONFIG.appVersion,
+            'x-bridgeflow-version': BUILD_CONFIG.appVersion,
           },
         },
       });
@@ -82,7 +82,7 @@ export class ServerConfigStore extends Store {
           context: {
             signal: abortSignal,
             headers: {
-              'x-affine-version': BUILD_CONFIG.appVersion,
+              'x-bridgeflow-version': BUILD_CONFIG.appVersion,
             },
           },
         });

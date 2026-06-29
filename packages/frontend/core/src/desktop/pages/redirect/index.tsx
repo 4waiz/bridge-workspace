@@ -1,4 +1,4 @@
-import { DebugLogger } from '@affine/debug';
+import { DebugLogger } from '@bridgeflow/debug';
 import { isAllowedRedirectTarget } from '@toeverything/infra';
 import { type LoaderFunction, Navigate, useLoaderData } from 'react-router-dom';
 

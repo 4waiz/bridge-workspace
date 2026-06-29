@@ -1,5 +1,5 @@
-import { Label } from '@affine/admin/components/ui/label';
-import { cn } from '@affine/admin/utils';
+import { Label } from '@bridgeflow/admin/components/ui/label';
+import { cn } from '@bridgeflow/admin/utils';
 import type * as LabelPrimitive from '@radix-ui/react-label';
 import { Slot } from '@radix-ui/react-slot';
 import { createContext, forwardRef, useContext, useId, useMemo } from 'react';

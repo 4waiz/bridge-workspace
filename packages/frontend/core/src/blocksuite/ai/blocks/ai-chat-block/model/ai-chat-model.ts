@@ -1,12 +1,12 @@
 import {
   type GfxCommonBlockProps,
   GfxCompatible,
-} from '@blocksuite/affine/std/gfx';
+} from '@blocksuite/bridgeflow/std/gfx';
 import {
   BlockModel,
   BlockSchemaExtension,
   defineBlockSchema,
-} from '@blocksuite/affine/store';
+} from '@blocksuite/bridgeflow/store';
 
 type AIChatProps = {
   messages: string; // JSON string of ChatMessage[]
@@ -16,7 +16,7 @@ type AIChatProps = {
 } & Omit<GfxCommonBlockProps, 'rotate'>;
 
 export const AIChatBlockSchema = defineBlockSchema({
-  flavour: 'affine:embed-ai-chat',
+  flavour: 'bridgeflow:embed-ai-chat',
   props: (): AIChatProps => ({
     xywh: '[0,0,0,0]',
     index: 'a0',

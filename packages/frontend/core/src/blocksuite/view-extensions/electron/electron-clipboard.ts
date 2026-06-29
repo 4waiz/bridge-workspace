@@ -1,5 +1,5 @@
-import { DesktopApiService } from '@affine/core/modules/desktop-api';
-import { NativeClipboardExtension } from '@blocksuite/affine/shared/services';
+import { DesktopApiService } from '@bridgeflow/core/modules/desktop-api';
+import { NativeClipboardExtension } from '@blocksuite/bridgeflow/shared/services';
 import type { FrameworkProvider } from '@toeverything/infra';
 
 export function patchForClipboardInElectron(framework: FrameworkProvider) {

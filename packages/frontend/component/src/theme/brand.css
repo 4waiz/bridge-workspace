@@ -48,57 +48,57 @@ html[data-theme='dark'],
 
 html[data-theme],
 [data-theme] {
-  --affine-brand-color: var(--bridge-brand-primary);
-  --affine-primary-color: var(--bridge-brand-primary);
-  --affine-secondary-color: var(--bridge-brand-primary-soft);
-  --affine-tertiary-color: rgba(255, 86, 34, 0.06);
-  --affine-hover-color: var(--bridge-brand-hover);
-  --affine-icon-color: var(--bridge-brand-icon);
-  --affine-icon-secondary: var(--bridge-brand-muted);
-  --affine-border-color: var(--bridge-brand-border);
-  --affine-divider-color: var(--bridge-brand-border);
-  --affine-placeholder-color: var(--bridge-brand-muted);
-  --affine-quote-color: var(--bridge-brand-muted);
-  --affine-link-color: var(--bridge-brand-primary);
-  --affine-edgeless-grid-color: var(--bridge-brand-grid);
-  --affine-edgeless-grid-strong-color: var(--bridge-brand-grid-strong);
-  --affine-text-emphasis-color: var(--bridge-brand-ink-strong);
-  --affine-text-primary-color: var(--bridge-brand-text-primary);
-  --affine-text-secondary-color: var(--bridge-brand-text-secondary);
-  --affine-blue: var(--bridge-brand-primary);
-  --affine-background-primary-color: var(--bridge-brand-bg);
-  --affine-background-secondary-color: var(--bridge-brand-surface-alt);
-  --affine-background-modal-color: var(--bridge-brand-modal);
-  --affine-background-overlay-panel-color: var(--bridge-brand-overlay);
-  --affine-background-code-block: var(--bridge-brand-surface-alt);
-  --affine-background-tertiary-color: var(--bridge-brand-surface);
-  --affine-v2-button-primary: var(--bridge-brand-primary);
-  --affine-v2-icon-activated: var(--bridge-brand-primary);
-  --affine-v2-icon-primary: var(--bridge-brand-icon);
-  --affine-v2-text-primary: var(--bridge-brand-text-primary);
-  --affine-v2-text-secondary: var(--bridge-brand-text-secondary);
-  --affine-v2-text-placeholder: var(--bridge-brand-muted);
-  --affine-v2-layer-background-primary: var(--bridge-brand-bg);
-  --affine-v2-layer-background-hoverOverlay: var(--bridge-brand-hover);
-  --affine-v2-layer-background-modal: var(--bridge-brand-modal);
-  --affine-v2-layer-background-overlayPanel: var(--bridge-brand-overlay);
-  --affine-v2-layer-background-secondary: var(--bridge-brand-surface-alt);
-  --affine-v2-layer-insideBorder-border: var(--bridge-brand-border);
-  --affine-v2-layer-insideBorder-primaryBorder: var(
+  --bridgeflow-brand-color: var(--bridge-brand-primary);
+  --bridgeflow-primary-color: var(--bridge-brand-primary);
+  --bridgeflow-secondary-color: var(--bridge-brand-primary-soft);
+  --bridgeflow-tertiary-color: rgba(255, 86, 34, 0.06);
+  --bridgeflow-hover-color: var(--bridge-brand-hover);
+  --bridgeflow-icon-color: var(--bridge-brand-icon);
+  --bridgeflow-icon-secondary: var(--bridge-brand-muted);
+  --bridgeflow-border-color: var(--bridge-brand-border);
+  --bridgeflow-divider-color: var(--bridge-brand-border);
+  --bridgeflow-placeholder-color: var(--bridge-brand-muted);
+  --bridgeflow-quote-color: var(--bridge-brand-muted);
+  --bridgeflow-link-color: var(--bridge-brand-primary);
+  --bridgeflow-edgeless-grid-color: var(--bridge-brand-grid);
+  --bridgeflow-edgeless-grid-strong-color: var(--bridge-brand-grid-strong);
+  --bridgeflow-text-emphasis-color: var(--bridge-brand-ink-strong);
+  --bridgeflow-text-primary-color: var(--bridge-brand-text-primary);
+  --bridgeflow-text-secondary-color: var(--bridge-brand-text-secondary);
+  --bridgeflow-blue: var(--bridge-brand-primary);
+  --bridgeflow-background-primary-color: var(--bridge-brand-bg);
+  --bridgeflow-background-secondary-color: var(--bridge-brand-surface-alt);
+  --bridgeflow-background-modal-color: var(--bridge-brand-modal);
+  --bridgeflow-background-overlay-panel-color: var(--bridge-brand-overlay);
+  --bridgeflow-background-code-block: var(--bridge-brand-surface-alt);
+  --bridgeflow-background-tertiary-color: var(--bridge-brand-surface);
+  --bridgeflow-v2-button-primary: var(--bridge-brand-primary);
+  --bridgeflow-v2-icon-activated: var(--bridge-brand-primary);
+  --bridgeflow-v2-icon-primary: var(--bridge-brand-icon);
+  --bridgeflow-v2-text-primary: var(--bridge-brand-text-primary);
+  --bridgeflow-v2-text-secondary: var(--bridge-brand-text-secondary);
+  --bridgeflow-v2-text-placeholder: var(--bridge-brand-muted);
+  --bridgeflow-v2-layer-background-primary: var(--bridge-brand-bg);
+  --bridgeflow-v2-layer-background-hoverOverlay: var(--bridge-brand-hover);
+  --bridgeflow-v2-layer-background-modal: var(--bridge-brand-modal);
+  --bridgeflow-v2-layer-background-overlayPanel: var(--bridge-brand-overlay);
+  --bridgeflow-v2-layer-background-secondary: var(--bridge-brand-surface-alt);
+  --bridgeflow-v2-layer-insideBorder-border: var(--bridge-brand-border);
+  --bridgeflow-v2-layer-insideBorder-primaryBorder: var(
     --bridge-brand-border-strong
   );
-  --affine-v2-dialog-background-primary: var(--bridge-brand-overlay);
-  --affine-v2-button-secondary: var(--bridge-brand-surface);
-  --affine-v2-button-innerBlackBorder: var(--bridge-brand-border-strong);
-  --affine-v2-tab-divider-divider: var(--bridge-brand-border);
-  --affine-v2-tab-tabBackground-default: var(--bridge-brand-surface-alt);
-  --affine-v2-tab-tabBackground-active: var(--bridge-brand-surface);
-  --affine-v2-tab-fontColor-default: var(--bridge-brand-text-secondary);
-  --affine-v2-tab-fontColor-hover: var(--bridge-brand-text-primary);
-  --affine-v2-tab-fontColor-active: var(--bridge-brand-ink-strong);
-  --affine-v2-tab-iconColor-default: var(--bridge-brand-muted);
-  --affine-v2-tab-iconColor-hover: var(--bridge-brand-primary);
-  --affine-v2-tab-iconColor-active: var(--bridge-brand-primary);
+  --bridgeflow-v2-dialog-background-primary: var(--bridge-brand-overlay);
+  --bridgeflow-v2-button-secondary: var(--bridge-brand-surface);
+  --bridgeflow-v2-button-innerBlackBorder: var(--bridge-brand-border-strong);
+  --bridgeflow-v2-tab-divider-divider: var(--bridge-brand-border);
+  --bridgeflow-v2-tab-tabBackground-default: var(--bridge-brand-surface-alt);
+  --bridgeflow-v2-tab-tabBackground-active: var(--bridge-brand-surface);
+  --bridgeflow-v2-tab-fontColor-default: var(--bridge-brand-text-secondary);
+  --bridgeflow-v2-tab-fontColor-hover: var(--bridge-brand-text-primary);
+  --bridgeflow-v2-tab-fontColor-active: var(--bridge-brand-ink-strong);
+  --bridgeflow-v2-tab-iconColor-default: var(--bridge-brand-muted);
+  --bridgeflow-v2-tab-iconColor-hover: var(--bridge-brand-primary);
+  --bridgeflow-v2-tab-iconColor-active: var(--bridge-brand-primary);
 }
 
 html,

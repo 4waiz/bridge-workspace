@@ -1,5 +1,5 @@
-import { AuthService } from '@affine/core/modules/cloud';
-import { OAuthProviderType } from '@affine/graphql';
+import { AuthService } from '@bridgeflow/core/modules/cloud';
+import { OAuthProviderType } from '@bridgeflow/graphql';
 import { useService } from '@toeverything/infra';
 import { useEffect } from 'react';
 import {
@@ -14,7 +14,7 @@ import { z } from 'zod';
 import { supportedClient } from './common';
 
 const supportedProvider = z.nativeEnum(OAuthProviderType);
-const CSRF_COOKIE_NAME = 'affine_csrf_token';
+const CSRF_COOKIE_NAME = 'bridgeflow_csrf_token';
 
 function getCookieValue(name: string) {
   if (typeof document === 'undefined') {
@@ -56,7 +56,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     const csrfToken = getCookieValue(CSRF_COOKIE_NAME);
     await fetch('/api/auth/sign-out', {
       method: 'POST',
-      headers: csrfToken ? { 'x-affine-csrf-token': csrfToken } : undefined,
+      headers: csrfToken ? { 'x-bridgeflow-csrf-token': csrfToken } : undefined,
     });
   }
 

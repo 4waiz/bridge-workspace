@@ -1,30 +1,30 @@
-import { Scrollable } from '@affine/component';
-import { PageDetailLoading } from '@affine/component/page-detail-skeleton';
-import type { AIChatParams } from '@affine/core/blocksuite/ai';
-import { AIProvider } from '@affine/core/blocksuite/ai';
-import type { AffineEditorContainer } from '@affine/core/blocksuite/block-suite-editor';
-import { EditorOutlineViewer } from '@affine/core/blocksuite/outline-viewer';
-import { AffineErrorBoundary } from '@affine/core/components/affine/affine-error-boundary';
-// import { PageAIOnboarding } from '@affine/core/components/affine/ai-onboarding';
-import { GlobalPageHistoryModal } from '@affine/core/components/affine/page-history-modal';
-import { CommentSidebar } from '@affine/core/components/comment/sidebar';
-import { useGuard } from '@affine/core/components/guard';
-import { useAppSettingHelper } from '@affine/core/components/hooks/affine/use-app-setting-helper';
-import { useEnableAI } from '@affine/core/components/hooks/affine/use-enable-ai';
-import { useRegisterBlocksuiteEditorCommands } from '@affine/core/components/hooks/affine/use-register-blocksuite-editor-commands';
-import { useActiveBlocksuiteEditor } from '@affine/core/components/hooks/use-block-suite-editor';
-import { PageDetailEditor } from '@affine/core/components/page-detail-editor';
-import { WorkspacePropertySidebar } from '@affine/core/components/properties/sidebar';
-import { TrashPageFooter } from '@affine/core/components/pure/trash-page-footer';
-import { TopTip } from '@affine/core/components/top-tip';
-import { ServerService } from '@affine/core/modules/cloud';
-import { DocService } from '@affine/core/modules/doc';
-import { EditorService } from '@affine/core/modules/editor';
-import { FeatureFlagService } from '@affine/core/modules/feature-flag';
-import { GlobalContextService } from '@affine/core/modules/global-context';
-import { JournalService } from '@affine/core/modules/journal';
-import { PeekViewService } from '@affine/core/modules/peek-view';
-import { RecentDocsService } from '@affine/core/modules/quicksearch';
+import { Scrollable } from '@bridgeflow/component';
+import { PageDetailLoading } from '@bridgeflow/component/page-detail-skeleton';
+import type { AIChatParams } from '@bridgeflow/core/blocksuite/ai';
+import { AIProvider } from '@bridgeflow/core/blocksuite/ai';
+import type { BridgeFlowEditorContainer } from '@bridgeflow/core/blocksuite/block-suite-editor';
+import { EditorOutlineViewer } from '@bridgeflow/core/blocksuite/outline-viewer';
+import { BridgeFlowErrorBoundary } from '@bridgeflow/core/components/bridgeflow/bridgeflow-error-boundary';
+// import { PageAIOnboarding } from '@bridgeflow/core/components/bridgeflow/ai-onboarding';
+import { GlobalPageHistoryModal } from '@bridgeflow/core/components/bridgeflow/page-history-modal';
+import { CommentSidebar } from '@bridgeflow/core/components/comment/sidebar';
+import { useGuard } from '@bridgeflow/core/components/guard';
+import { useAppSettingHelper } from '@bridgeflow/core/components/hooks/bridgeflow/use-app-setting-helper';
+import { useEnableAI } from '@bridgeflow/core/components/hooks/bridgeflow/use-enable-ai';
+import { useRegisterBlocksuiteEditorCommands } from '@bridgeflow/core/components/hooks/bridgeflow/use-register-blocksuite-editor-commands';
+import { useActiveBlocksuiteEditor } from '@bridgeflow/core/components/hooks/use-block-suite-editor';
+import { PageDetailEditor } from '@bridgeflow/core/components/page-detail-editor';
+import { WorkspacePropertySidebar } from '@bridgeflow/core/components/properties/sidebar';
+import { TrashPageFooter } from '@bridgeflow/core/components/pure/trash-page-footer';
+import { TopTip } from '@bridgeflow/core/components/top-tip';
+import { ServerService } from '@bridgeflow/core/modules/cloud';
+import { DocService } from '@bridgeflow/core/modules/doc';
+import { EditorService } from '@bridgeflow/core/modules/editor';
+import { FeatureFlagService } from '@bridgeflow/core/modules/feature-flag';
+import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
+import { JournalService } from '@bridgeflow/core/modules/journal';
+import { PeekViewService } from '@bridgeflow/core/modules/peek-view';
+import { RecentDocsService } from '@bridgeflow/core/modules/quicksearch';
 import {
   useIsActiveView,
   ViewBody,
@@ -32,15 +32,15 @@ import {
   ViewService,
   ViewSidebarTab,
   WorkbenchService,
-} from '@affine/core/modules/workbench';
-import { WorkspaceService } from '@affine/core/modules/workspace';
-import { isNewTabTrigger } from '@affine/core/utils';
-import { ServerFeature } from '@affine/graphql';
-import track from '@affine/track';
-import { DisposableGroup } from '@blocksuite/affine/global/disposable';
-import { RefNodeSlotsProvider } from '@blocksuite/affine/inlines/reference';
-import { focusBlockEnd } from '@blocksuite/affine/shared/commands';
-import { getLastNoteBlock } from '@blocksuite/affine/shared/utils';
+} from '@bridgeflow/core/modules/workbench';
+import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
+import { isNewTabTrigger } from '@bridgeflow/core/utils';
+import { ServerFeature } from '@bridgeflow/graphql';
+import track from '@bridgeflow/track';
+import { DisposableGroup } from '@blocksuite/bridgeflow/global/disposable';
+import { RefNodeSlotsProvider } from '@blocksuite/bridgeflow/inlines/reference';
+import { focusBlockEnd } from '@blocksuite/bridgeflow/shared/commands';
+import { getLastNoteBlock } from '@blocksuite/bridgeflow/shared/utils';
 import {
   AiIcon,
   ChartPanelIcon,
@@ -195,7 +195,7 @@ const DetailPageImpl = memo(function DetailPageImpl() {
   const isJournal = !!useLiveData(journalService.journalDate$(doc.id));
 
   const onLoad = useCallback(
-    (editorContainer: AffineEditorContainer) => {
+    (editorContainer: BridgeFlowEditorContainer) => {
       const std = editorContainer.std;
       const disposable = new DisposableGroup();
 
@@ -226,7 +226,7 @@ const DetailPageImpl = memo(function DetailPageImpl() {
         const refNodeSlots = std.getOptional(RefNodeSlotsProvider);
         if (refNodeSlots) {
           disposable.add(
-            // the event should not be emitted by AffineReference
+            // the event should not be emitted by BridgeFlowReference
             refNodeSlots.docLinkClicked.subscribe(
               ({ pageId, params, openMode, event, host }) => {
                 if (host !== editorContainer.host) {
@@ -340,7 +340,7 @@ const DetailPageImpl = memo(function DetailPageImpl() {
           data-has-scroll-top={hasScrollTop}
         >
           {/* Add a key to force rerender when page changed, to avoid error boundary persisting. */}
-          <AffineErrorBoundary key={doc.id}>
+          <BridgeFlowErrorBoundary key={doc.id}>
             <TopTip pageId={doc.id} workspace={workspace} />
             <Scrollable.Root>
               <Scrollable.Viewport
@@ -348,8 +348,8 @@ const DetailPageImpl = memo(function DetailPageImpl() {
                 ref={scrollViewportRef}
                 data-dragging={dragging}
                 className={clsx(
-                  'affine-page-viewport',
-                  styles.affineDocViewport,
+                  'bridgeflow-page-viewport',
+                  styles.bridgeflowDocViewport,
                   styles.editorContainer,
                   { [styles.pageModeViewportContentBox]: mode === 'page' }
                 )}
@@ -367,7 +367,7 @@ const DetailPageImpl = memo(function DetailPageImpl() {
               show={mode === 'page' && !isSideBarOpen}
               openOutlinePanel={openOutlinePanel}
             />
-          </AffineErrorBoundary>
+          </BridgeFlowErrorBoundary>
           {isInTrash ? <TrashPageFooter /> : null}
         </div>
       </ViewBody>
@@ -439,7 +439,7 @@ const DetailPageImpl = memo(function DetailPageImpl() {
         </ViewSidebarTab>
       )}
 
-      {workspace.flavour === 'affine-cloud' && enableViewAnalyticsPanel && (
+      {workspace.flavour === 'bridgeflow-cloud' && enableViewAnalyticsPanel && (
         <ViewSidebarTab tabId="analytics" icon={<ChartPanelIcon />}>
           <Scrollable.Root className={styles.sidebarScrollArea}>
             <Scrollable.Viewport>

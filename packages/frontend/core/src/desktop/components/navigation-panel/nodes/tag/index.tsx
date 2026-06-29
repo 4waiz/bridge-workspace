@@ -2,14 +2,14 @@ import {
   type DropTargetDropEvent,
   type DropTargetOptions,
   toast,
-} from '@affine/component';
-import { GlobalContextService } from '@affine/core/modules/global-context';
-import { NavigationPanelService } from '@affine/core/modules/navigation-panel';
-import type { Tag } from '@affine/core/modules/tag';
-import { TagService } from '@affine/core/modules/tag';
-import type { AffineDNDData } from '@affine/core/types/dnd';
-import { useI18n } from '@affine/i18n';
-import { track } from '@affine/track';
+} from '@bridgeflow/component';
+import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
+import { NavigationPanelService } from '@bridgeflow/core/modules/navigation-panel';
+import type { Tag } from '@bridgeflow/core/modules/tag';
+import { TagService } from '@bridgeflow/core/modules/tag';
+import type { BridgeFlowDNDData } from '@bridgeflow/core/types/dnd';
+import { useI18n } from '@bridgeflow/i18n';
+import { track } from '@bridgeflow/track';
 import { useLiveData, useService, useServices } from '@toeverything/infra';
 import clsx from 'clsx';
 import { useCallback, useMemo } from 'react';
@@ -88,7 +88,7 @@ export const NavigationPanelTagNode = ({
       dropTarget: {
         at: 'navigation-panel:tag',
       },
-    } satisfies AffineDNDData;
+    } satisfies BridgeFlowDNDData;
   }, [location, tagId]);
 
   const handleRename = useCallback(
@@ -104,7 +104,7 @@ export const NavigationPanelTagNode = ({
   );
 
   const handleDropOnTag = useCallback(
-    (data: DropTargetDropEvent<AffineDNDData>) => {
+    (data: DropTargetDropEvent<BridgeFlowDNDData>) => {
       if (data.treeInstruction?.type === 'make-child' && tagRecord) {
         if (data.source.data.entity?.type === 'doc') {
           tagRecord.tag(data.source.data.entity.id);
@@ -115,7 +115,7 @@ export const NavigationPanelTagNode = ({
             type: data.source.data.entity.type,
           });
         } else {
-          toast(t['com.affine.rootAppSidebar.tag.doc-only']());
+          toast(t['com.bridgeflow.rootAppSidebar.tag.doc-only']());
         }
       } else {
         onDrop?.(data);
@@ -139,19 +139,19 @@ export const NavigationPanelTagNode = ({
   );
 
   const handleDropOnPlaceholder = useCallback(
-    (data: DropTargetDropEvent<AffineDNDData>) => {
+    (data: DropTargetDropEvent<BridgeFlowDNDData>) => {
       if (tagRecord) {
         if (data.source.data.entity?.type === 'doc') {
           tagRecord.tag(data.source.data.entity.id);
         } else {
-          toast(t['com.affine.rootAppSidebar.tag.doc-only']());
+          toast(t['com.bridgeflow.rootAppSidebar.tag.doc-only']());
         }
       }
     },
     [t, tagRecord]
   );
 
-  const handleCanDrop = useMemo<DropTargetOptions<AffineDNDData>['canDrop']>(
+  const handleCanDrop = useMemo<DropTargetOptions<BridgeFlowDNDData>['canDrop']>(
     () => args => {
       const entityType = args.source.data.entity?.type;
       return args.treeInstruction?.type !== 'make-child'

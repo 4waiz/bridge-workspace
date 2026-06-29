@@ -1,4 +1,4 @@
-import track from '@affine/track';
+import track from '@bridgeflow/track';
 
 /**
  * Wrap the track function to add default properties to the first argument
