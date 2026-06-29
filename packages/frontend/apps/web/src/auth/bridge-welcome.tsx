@@ -43,7 +43,7 @@ function firstName(user: BridgeUser) {
   const raw = (user?.name || user?.email || '').trim();
   if (!raw) return 'there';
   const handle = raw.includes('@') ? raw.split('@')[0] : raw;
-  const first = handle.split(/[\s._-]+/).filter(Boolean)[0] || handle;
+  const first = handle.split(/[\s._-]+/).find(Boolean) || handle;
   return first.charAt(0).toUpperCase() + first.slice(1);
 }
 
@@ -84,7 +84,7 @@ export function BridgeWelcome() {
     if (!show) return;
     const t = setTimeout(() => dismiss(), 7000);
     return () => clearTimeout(t);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [show]);
 
   const dismiss = () => {
