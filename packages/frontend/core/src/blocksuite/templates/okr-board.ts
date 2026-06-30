@@ -162,18 +162,7 @@ export function buildOkrBoard(doc: StoreLike, surfaceId: string) {
   field(1060, 'OWNER:');
   field(1300, 'QUARTER:  Q____  20____');
 
-  // BRIDGE wordmark
-  text({
-    x: 1380,
-    y: 38,
-    w: 200,
-    text: 'BRIDGE',
-    color: WHITE,
-    size: 38,
-    weight: BOLD,
-    align: 'right',
-  });
-  shape({ x: 1542, y: 36, w: 30, h: 9, fill: ORANGE });
+  // (BRIDGE wordmark removed — it overlapped the QUARTER field)
 
   // ===================== OBJECTIVE COLUMNS ===============================
   const colW = 486;

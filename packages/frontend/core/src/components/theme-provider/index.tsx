@@ -66,11 +66,11 @@ function ThemeToggle() {
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       style={{
         position: 'fixed',
-        top: 9,
-        right: 52,
+        top: 60,
+        right: 16,
         zIndex: 2147483401,
-        width: 36,
-        height: 36,
+        width: 34,
+        height: 34,
         borderRadius: '50%',
         display: 'flex',
         alignItems: 'center',
