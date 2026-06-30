@@ -231,18 +231,18 @@ export function buildOkrBoard(doc: StoreLike, surfaceId: string) {
     shape({
       x,
       y: top,
-      w: 60,
+      w: 84,
       h: 52,
       fill: BLACK,
       text: `0${i + 1}`,
       color: WHITE,
-      size: 26,
+      size: 22,
       weight: BOLD,
     });
     shape({
-      x: x + 60,
+      x: x + 84,
       y: top,
-      w: colW - 60,
+      w: colW - 84,
       h: 52,
       fill: ORANGE,
       text: `   OBJECTIVE ${i + 1}`,
@@ -302,9 +302,9 @@ export function buildOkrBoard(doc: StoreLike, surfaceId: string) {
         h: 26,
         fill: BLACK,
         radius: 0.12,
-        text: `KR${r + 1}`,
+        text: 'K',
         color: WHITE,
-        size: 12,
+        size: 13,
         weight: BOLD,
       });
       text({
