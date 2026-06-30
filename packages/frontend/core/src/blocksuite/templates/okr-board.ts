@@ -325,7 +325,7 @@ export function buildOkrBoard(doc: StoreLike, surfaceId: string) {
         weight: SEMI,
         align: 'right',
       });
-      shape({ x: x + 78, y: ry + 30, w: colW - 100, h: 1, fill: TINT });
+      shape({ x: x + 20, y: ry + 30, w: colW - 40, h: 1, fill: TINT });
     });
 
     // INITIATIVES
@@ -366,7 +366,7 @@ export function buildOkrBoard(doc: StoreLike, surfaceId: string) {
       text({
         x: x + 64,
         y: ry + 4,
-        w: colW - 220,
+        w: colW - 240,
         text: desc,
         color: INK,
         size: 12,
@@ -380,7 +380,7 @@ export function buildOkrBoard(doc: StoreLike, surfaceId: string) {
         size: 11.5,
         align: 'right',
       });
-      shape({ x: x + 64, y: ry + 30, w: colW - 86, h: 1, fill: TINT });
+      shape({ x: x + 20, y: ry + 30, w: colW - 40, h: 1, fill: TINT });
     });
   });
 
