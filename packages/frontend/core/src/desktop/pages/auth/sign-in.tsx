@@ -76,11 +76,13 @@ export const SignIn = ({
   );
 };
 
+// The AFFiNE cloud sign-in page is unused here: auth is handled by the Supabase
+// gate and the app runs local-only. If anything routes to /sign-in, bounce
+// straight back to the app instead of showing this page.
 export const Component = () => {
-  return (
-    <BridgeFlowOtherPageLayout>
-      <SignInBackgroundArts />
-      <SignIn />
-    </BridgeFlowOtherPageLayout>
-  );
+  const { jumpToIndex } = useNavigateHelper();
+  useEffect(() => {
+    jumpToIndex(RouteLogic.REPLACE);
+  }, [jumpToIndex]);
+  return null;
 };
