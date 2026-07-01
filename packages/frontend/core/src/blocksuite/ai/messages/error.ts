@@ -218,7 +218,7 @@ const generalErrorText =
 
 const GeneralErrorRenderer = (props: ErrorProps = {}) => {
   const onClick = () => {
-    window.open('mailto:support@toeverything.info', '_blank');
+    window.open('mailto:support@bridgeflow.pro', '_blank');
   };
 
   return html`<ai-error-wrapper
@@ -226,7 +226,7 @@ const GeneralErrorRenderer = (props: ErrorProps = {}) => {
     .errorMessage=${props.errorMessage ?? ''}
     .showDetailPanel=${!!props.errorMessage}
     .actionText=${props.actionText ?? 'Contact us'}
-    .actionTooltip=${props.actionTooltip ?? 'support@toeverything.info'}
+    .actionTooltip=${props.actionTooltip ?? 'support@bridgeflow.pro'}
     .onClick=${onClick}
   ></ai-error-wrapper>`;
 };
