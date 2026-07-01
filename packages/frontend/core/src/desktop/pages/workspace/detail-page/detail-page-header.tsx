@@ -1,3 +1,4 @@
+import type { Store } from '@blocksuite/bridgeflow/store';
 import {
   Divider,
   DragHandle,
@@ -14,6 +15,7 @@ import { DetailPageHeaderPresentButton } from '@bridgeflow/core/blocksuite/block
 import { BlocksuiteHeaderTitle } from '@bridgeflow/core/blocksuite/block-suite-header/title';
 import { EditorModeSwitch } from '@bridgeflow/core/blocksuite/block-suite-mode-switch';
 import { useRegisterCopyLinkCommands } from '@bridgeflow/core/components/hooks/bridgeflow/use-register-copy-link-commands';
+import { NavigateContext } from '@bridgeflow/core/components/hooks/use-navigate-helper';
 import { HeaderDivider } from '@bridgeflow/core/components/pure/header';
 import { DocService } from '@bridgeflow/core/modules/doc';
 import { DocDisplayMetaService } from '@bridgeflow/core/modules/doc-display-meta';
@@ -26,7 +28,6 @@ import type { Workspace } from '@bridgeflow/core/modules/workspace';
 import type { BridgeFlowDNDData } from '@bridgeflow/core/types/dnd';
 import { useI18n } from '@bridgeflow/i18n';
 import { track } from '@bridgeflow/track';
-import type { Store } from '@blocksuite/bridgeflow/store';
 import { useLiveData, useService } from '@kanban-studios/infra';
 import clsx from 'clsx';
 import {
@@ -34,6 +35,7 @@ import {
   type HTMLAttributes,
   memo,
   useCallback,
+  useContext,
   useEffect,
   useRef,
   useState,
@@ -123,6 +125,50 @@ export function JournalPageHeader({ page, workspace }: PageHeaderProps) {
   );
 }
 
+// Entry point to the live Operational Excellence rollup dashboard.
+// Sits immediately to the left of the Share button.
+function OeDashboardButton() {
+  // app-level navigate — the header lives inside the workbench's nested router
+  const navigate = useContext(NavigateContext);
+  return (
+    <button
+      type="button"
+      title="Operational Excellence dashboard"
+      onClick={() => navigate?.('/okr-dashboard')}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 6,
+        height: 32,
+        padding: '0 12px',
+        marginRight: 8,
+        flexShrink: 0,
+        border: '1px solid var(--affine-border-color, #e4e4e6)',
+        borderRadius: 8,
+        background: 'transparent',
+        color: 'var(--affine-text-primary-color, inherit)',
+        fontSize: 14,
+        fontWeight: 500,
+        lineHeight: 1,
+        cursor: 'pointer',
+      }}
+    >
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        aria-hidden="true"
+      >
+        <rect x="2" y="8" width="3" height="6" rx="1" fill="#f15a29" />
+        <rect x="6.5" y="5" width="3" height="9" rx="1" fill="#f15a29" />
+        <rect x="11" y="2" width="3" height="12" rx="1" fill="#f15a29" />
+      </svg>
+      Dashboard
+    </button>
+  );
+}
+
 export function NormalPageHeader({ page, workspace }: PageHeaderProps) {
   const titleInputHandleRef = useRef<InlineEditHandle>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -177,6 +223,8 @@ export function NormalPageHeader({ page, workspace }: PageHeaderProps) {
       <div className={styles.spacer} />
 
       {!hidePresent ? <DetailPageHeaderPresentButton /> : null}
+
+      <OeDashboardButton />
 
       {page && !hideShare ? (
         <SharePageButton workspace={workspace} page={page} />

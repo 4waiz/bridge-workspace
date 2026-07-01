@@ -1,6 +1,6 @@
 import { notify } from '@bridgeflow/component';
-import { BridgeFlowOtherPageLayout } from '@bridgeflow/component/bridgeflow-other-page-layout';
 import { SignInPageContainer } from '@bridgeflow/component/auth-components';
+import { BridgeFlowOtherPageLayout } from '@bridgeflow/component/bridgeflow-other-page-layout';
 import { SignInPanel } from '@bridgeflow/core/components/sign-in';
 import { SignInBackgroundArts } from '@bridgeflow/core/components/sign-in/background-arts';
 import type { AuthSessionStatus } from '@bridgeflow/core/modules/cloud/entities/session';

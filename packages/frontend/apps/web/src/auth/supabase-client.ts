@@ -27,5 +27,9 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   },
 });
 
+// Expose the singleton so @bridgeflow/core (which cannot import the web app)
+// can reuse the SAME authenticated client for OKR data + realtime.
+(globalThis as any).__bridgeSupabase = supabase;
+
 // convenience for manual sign-out from the app / console
 (globalThis as any).bridgeSignOut = () => supabase.auth.signOut();

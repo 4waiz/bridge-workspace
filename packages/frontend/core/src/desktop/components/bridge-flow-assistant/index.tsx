@@ -2,7 +2,7 @@ import { BRAND_AI_NAME } from '@bridgeflow/component/brand';
 import clsx from 'clsx';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import bwsIconUrl from './bws-icon.webp';
+import sohelIconUrl from './sohelsicon.png';
 import * as styles from './styles.css';
 
 type AssistantRole = 'assistant' | 'user';
@@ -72,8 +72,7 @@ declare global {
 const FEATURE_CARDS = [
   {
     title: 'Getting Started',
-    prompt:
-      'Walk me through how to get started in BRIDGE Flow as a new user.',
+    prompt: 'Walk me through how to get started in BRIDGE Flow as a new user.',
   },
   {
     title: 'Organize Better',
@@ -476,8 +475,8 @@ export const BridgeFlowAssistant = () => {
           <header className={styles.panelHeader}>
             <div className={styles.titleGroup}>
               <img
-                src={bwsIconUrl}
-                alt="BWS"
+                src={sohelIconUrl}
+                alt="Sohel"
                 className={styles.headerAvatarImage}
               />
               <div className={styles.headerText}>
@@ -518,11 +517,6 @@ export const BridgeFlowAssistant = () => {
           <div className={styles.content}>
             <div className={styles.messages} ref={scrollerRef}>
               <div className={styles.assistantRow}>
-                <img
-                  src={bwsIconUrl}
-                  alt="BWS"
-                  className={styles.avatarImage}
-                />
                 <div className={styles.assistantColumn}>
                   <div className={styles.assistantBubble}>
                     <div className={styles.bubbleMeta}>BRIDGE Flow AI</div>
@@ -567,16 +561,9 @@ export const BridgeFlowAssistant = () => {
               {messages.map(message =>
                 message.role === 'assistant' ? (
                   <div className={styles.assistantRow} key={message.id}>
-                    <img
-                      src={bwsIconUrl}
-                      alt="BWS"
-                      className={styles.avatarImage}
-                    />
                     <div className={styles.assistantColumn}>
                       <div className={styles.assistantBubble}>
-                        <div className={styles.bubbleMeta}>
-                          BRIDGE Flow AI
-                        </div>
+                        <div className={styles.bubbleMeta}>BRIDGE Flow AI</div>
                         <div className={styles.bubbleText}>
                           {splitMessage(message.text).map((part, index) => (
                             <p key={`${message.id}-${index}`}>{part}</p>
@@ -599,16 +586,9 @@ export const BridgeFlowAssistant = () => {
               )}
               {loading ? (
                 <div className={styles.assistantRow}>
-                  <img
-                    src={bwsIconUrl}
-                    alt="BWS"
-                    className={styles.avatarImage}
-                  />
                   <div className={styles.assistantColumn}>
                     <div className={styles.assistantBubble}>
-                      <div className={styles.bubbleMeta}>
-                        BRIDGE Flow AI
-                      </div>
+                      <div className={styles.bubbleMeta}>BRIDGE Flow AI</div>
                       <div className={styles.bubbleText}>
                         <p>Thinking about the best next step for you...</p>
                       </div>

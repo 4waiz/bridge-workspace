@@ -7,18 +7,20 @@ import {
   ViewLayersIcon,
 } from '@blocksuite/icons/rc';
 import { usePageHelper } from '@bridgeflow/core/blocksuite/block-suite-page-list/utils';
-import { buildOkrBoard } from '@bridgeflow/core/blocksuite/templates/okr-board';
+import { getTemplate } from '@bridgeflow/core/blocksuite/templates/registry';
+import { NavigateContext } from '@bridgeflow/core/components/hooks/use-navigate-helper';
 import { WorkspaceDialogService } from '@bridgeflow/core/modules/dialogs';
 import type { DocRecord } from '@bridgeflow/core/modules/doc';
 import { DocsService } from '@bridgeflow/core/modules/doc';
 import { DocDisplayMetaService } from '@bridgeflow/core/modules/doc-display-meta';
+import { type Tag, TagService } from '@bridgeflow/core/modules/tag';
 import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
 import { inferOpenMode } from '@bridgeflow/core/utils';
 import track from '@bridgeflow/track';
 import { useLiveData, useService } from '@kanban-studios/infra';
 import type { CSSProperties, MouseEvent, ReactNode } from 'react';
-import { memo, useCallback, useMemo, useState } from 'react';
+import { memo, useCallback, useContext, useMemo, useState } from 'react';
 
 import * as styles from './styles.css';
 
@@ -117,20 +119,6 @@ const QuickStartCard = ({ item }: { item: QuickStartItem }) => {
 // Recent boards
 // ----------------------------------------------------------------------------
 
-// Deterministic mock collaborator + tag data keyed off the doc id so cards feel
-// alive without persisting anything. Replaced by real presence data later.
-const COLLAB_PALETTE = ['#f15a29', '#3884FF', '#865EFF', '#2EB85C', '#ED4A8A'];
-const TAG_POOL = ['Product', 'Strategy', 'Research', 'Design', 'Planning'];
-
-function hashString(value: string) {
-  let h = 0;
-  for (let i = 0; i < value.length; i++) {
-    h = (h << 5) - h + value.charCodeAt(i);
-    h |= 0;
-  }
-  return Math.abs(h);
-}
-
 interface RecentDocCardProps {
   docId: string;
   onClick: () => void;
@@ -146,6 +134,7 @@ const RecentDocCard = memo(function RecentDocCard({
   const docRecord = useLiveData(docsService.list.doc$(docId));
   const title = useLiveData(docRecord?.title$);
   const Icon = useLiveData(docDisplayMetaService.icon$(docId));
+  const primaryMode = useLiveData(docRecord?.primaryMode$);
   const updatedDate = useLiveData(
     docRecord?.meta$.map(
       (m: { updatedDate?: number } | undefined) => m?.updatedDate
@@ -166,17 +155,7 @@ const RecentDocCard = memo(function RecentDocCard({
     return new Date(updatedDate).toLocaleDateString();
   }, [updatedDate, now]);
 
-  const meta = useMemo(() => {
-    const h = hashString(docId);
-    const collabCount = (h % 3) + 1;
-    const isPrivate = h % 2 === 0;
-    const tag = TAG_POOL[h % TAG_POOL.length];
-    const collaborators = Array.from({ length: collabCount }, (_, i) => ({
-      color: COLLAB_PALETTE[(h + i) % COLLAB_PALETTE.length],
-      letter: String.fromCharCode(65 + ((h + i * 7) % 26)),
-    }));
-    return { collaborators, isPrivate, tag };
-  }, [docId]);
+  const modeLabel = primaryMode === 'page' ? 'Doc' : 'Board';
 
   if (!docRecord) return null;
 
@@ -190,9 +169,7 @@ const RecentDocCard = memo(function RecentDocCard({
       <div className={styles.recentBody}>
         <span className={styles.recentCardTitle}>{title || 'Untitled'}</span>
         <div className={styles.recentCardMeta}>
-          <span className={styles.recentTag}>{meta.tag}</span>
-          <span className={styles.recentDot} />
-          <span>{meta.isPrivate ? 'Private' : 'Team'}</span>
+          <span className={styles.recentTag}>{modeLabel}</span>
           {timeAgo && (
             <>
               <span className={styles.recentDot} />
@@ -200,17 +177,6 @@ const RecentDocCard = memo(function RecentDocCard({
             </>
           )}
         </div>
-      </div>
-      <div className={styles.avatarCluster}>
-        {meta.collaborators.map((c, i) => (
-          <span
-            key={i}
-            className={styles.avatar}
-            style={{ background: c.color }}
-          >
-            {c.letter}
-          </span>
-        ))}
       </div>
     </button>
   );
@@ -225,7 +191,7 @@ interface TemplateItem {
   icon: ReactNode;
   title: string;
   description: string;
-  uses: string;
+  category: string;
   color: IconColor;
   onClick: (e?: MouseEvent) => void;
 }
@@ -255,7 +221,7 @@ const TemplateCard = ({ item }: { item: TemplateItem }) => {
         <span className={styles.templateIconSmall} style={iconStyle}>
           {item.icon}
         </span>
-        {item.uses} uses
+        {item.category}
       </span>
     </button>
   );
@@ -265,23 +231,37 @@ const TemplateCard = ({ item }: { item: TemplateItem }) => {
 // Spaces
 // ----------------------------------------------------------------------------
 
-interface SpaceItem {
-  id: string;
-  name: string;
-  count: string;
-  color: string;
+// Spaces are the workspace's real tags: name, colour and live doc count all
+// come straight from the tag itself (no mock counts).
+const SpaceTagCard = memo(function SpaceTagCard({
+  tag,
+  onClick,
+}: {
+  tag: Tag;
   onClick: () => void;
-}
+}) {
+  const name = useLiveData(tag.value$);
+  const color = useLiveData(tag.color$);
+  const pageIds = useLiveData(tag.pageIds$);
+  const count = pageIds?.length ?? 0;
 
-const SpaceCard = ({ item }: { item: SpaceItem }) => (
-  <button className={styles.spaceCard} onClick={item.onClick} tabIndex={0}>
-    <span className={styles.spaceDot} style={{ background: item.color }} />
-    <span className={styles.spaceBody}>
-      <span className={styles.spaceName}>{item.name}</span>
-      <span className={styles.spaceCount}>{item.count}</span>
-    </span>
-  </button>
-);
+  if (!name) return null;
+
+  return (
+    <button className={styles.spaceCard} onClick={onClick} tabIndex={0}>
+      <span
+        className={styles.spaceDot}
+        style={{ background: color || ICON_COLORS.orange.fg }}
+      />
+      <span className={styles.spaceBody}>
+        <span className={styles.spaceName}>{name}</span>
+        <span className={styles.spaceCount}>
+          {count === 1 ? '1 doc' : `${count} docs`}
+        </span>
+      </span>
+    </button>
+  );
+});
 
 // ----------------------------------------------------------------------------
 // AI recommendations
@@ -367,22 +347,40 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
     [createEdgeless]
   );
 
-  const handleCreateOkr = useCallback(
-    (e?: MouseEvent) => {
+  // Every template tile builds its own real board from the registry (BMC opens
+  // a Business Model Canvas, Roadmap opens a roadmap, …) instead of a blank
+  // canvas. Falls back to a plain board if an id is somehow unregistered.
+  const handleCreateFromTemplate = useCallback(
+    (templateId: string, e?: MouseEvent) => {
+      const template = getTemplate(templateId);
+      if (!template) {
+        createEdgeless({ at: inferOpenMode(e) });
+        return;
+      }
       const record = docsService.createDoc({
-        primaryMode: 'edgeless',
-        title: 'OKR Quarterly Plan',
+        primaryMode: template.mode,
+        title: template.title,
         docProps: {
           onStoreLoad: (storeDoc, { surfaceId }) => {
-            buildOkrBoard(storeDoc as never, surfaceId);
+            template.build(storeDoc as never, surfaceId);
           },
         },
       });
       workbench.openDoc(record.id, { at: inferOpenMode(e) });
       track.$.navigationPanel.$.createDoc();
     },
-    [docsService, workbench]
+    [docsService, workbench, createEdgeless]
   );
+
+  // `useNavigate` inside the workbench targets its nested router; use the
+  // app-level navigate (NavigateContext) to reach the top-level /okr-editor.
+  const navigate = useContext(NavigateContext);
+  const handleCreateOkr = useCallback(() => {
+    // Opens the department picker → structured, Supabase-backed OKR editor,
+    // whose data feeds the live /okr-dashboard rollup.
+    navigate?.('/okr-editor');
+    track.$.navigationPanel.$.createDoc();
+  }, [navigate]);
 
   const handleImport = useCallback(() => {
     track.$.navigationPanel.importModal.open();
@@ -503,75 +501,75 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
         icon: <EdgelessIcon />,
         title: 'Product Strategy',
         description: 'Vision, pillars and bets on one board',
-        uses: '4.2k',
+        category: 'Strategy',
         color: ICON_COLORS.orange,
-        onClick: handleCreateEdgeless,
+        onClick: e => handleCreateFromTemplate('product-strategy', e),
       },
       {
         id: 'sprint-planning',
         icon: <ViewLayersIcon />,
         title: 'Sprint Planning',
         description: 'Backlog, capacity and sprint goals',
-        uses: '6.1k',
+        category: 'Planning',
         color: ICON_COLORS.purple,
-        onClick: handleCreatePage,
+        onClick: e => handleCreateFromTemplate('sprint-planning', e),
       },
       {
         id: 'research-synthesis',
         icon: <PageIcon />,
         title: 'Research Synthesis',
         description: 'Cluster findings into clear insights',
-        uses: '2.8k',
+        category: 'Research',
         color: ICON_COLORS.blue,
-        onClick: handleCreateEdgeless,
+        onClick: e => handleCreateFromTemplate('research-synthesis', e),
       },
       {
         id: 'workshop-canvas',
         icon: <EdgelessIcon />,
         title: 'Workshop Canvas',
         description: 'Facilitate sessions with structure',
-        uses: '3.5k',
+        category: 'Facilitation',
         color: ICON_COLORS.pink,
-        onClick: handleCreateEdgeless,
+        onClick: e => handleCreateFromTemplate('workshop-canvas', e),
       },
       {
         id: 'customer-journey',
         icon: <TimelineIcon />,
         title: 'Customer Journey Map',
         description: 'Map touchpoints, pains and moments',
-        uses: '5.0k',
+        category: 'Design',
         color: ICON_COLORS.teal,
-        onClick: handleCreateEdgeless,
+        onClick: e => handleCreateFromTemplate('customer-journey', e),
       },
       {
         id: 'ai-flow-builder',
         icon: <AiSparkIcon />,
         title: 'AI Flow Builder',
         description: 'Chain AI steps into a pipeline',
-        uses: '1.9k',
+        category: 'Automation',
         color: ICON_COLORS.amber,
-        onClick: handleCreateEdgeless,
+        onClick: e => handleCreateFromTemplate('ai-flow-builder', e),
       },
       {
         id: 'roadmap',
         icon: <TimelineIcon />,
         title: 'Roadmap',
         description: 'Quarters, themes and milestones',
-        uses: '7.3k',
+        category: 'Planning',
         color: ICON_COLORS.green,
-        onClick: handleCreateEdgeless,
+        onClick: e => handleCreateFromTemplate('roadmap', e),
       },
       {
         id: 'business-model',
         icon: <DatabaseTableViewIcon />,
         title: 'Business Model Canvas',
         description: 'Nine building blocks in one view',
-        uses: '2.4k',
+        category: 'Strategy',
         color: ICON_COLORS.indigo,
-        onClick: handleCreateEdgeless,
+        onClick: e => handleCreateFromTemplate('business-model', e),
       },
     ],
-    [handleCreatePage, handleCreateEdgeless]
+    [handleCreateFromTemplate]
   );
 
   const okrItems: TemplateItem[] = useMemo(
@@ -581,7 +579,7 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
         icon: <TargetIcon />,
         title: 'OKR Quarterly Plan',
         description: 'Objectives, key results & initiatives on one board',
-        uses: '8.7k',
+        category: 'Planning',
         color: ICON_COLORS.orange,
         onClick: handleCreateOkr,
       },
@@ -589,46 +587,8 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
     [handleCreateOkr]
   );
 
-  const spaceItems: SpaceItem[] = useMemo(
-    () => [
-      {
-        id: 'product',
-        name: 'Product',
-        count: '24 boards',
-        color: '#f15a29',
-        onClick: handleViewAll,
-      },
-      {
-        id: 'engineering',
-        name: 'Engineering',
-        count: '18 boards',
-        color: '#3884FF',
-        onClick: handleViewAll,
-      },
-      {
-        id: 'strategy',
-        name: 'Strategy',
-        count: '9 boards',
-        color: '#865EFF',
-        onClick: handleViewAll,
-      },
-      {
-        id: 'research',
-        name: 'Research',
-        count: '12 boards',
-        color: '#2EB85C',
-        onClick: handleViewAll,
-      },
-      {
-        id: 'operations',
-        name: 'Operations',
-        count: '7 boards',
-        color: '#00B8D4',
-        onClick: handleViewAll,
-      },
-    ],
-    [handleViewAll]
-  );
+  const tagService = useService(TagService);
+  const tags = useLiveData(tagService.tagList.tags$);
 
   const aiRecItems: AiRecItem[] = useMemo(
     () => [
@@ -667,6 +627,11 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
         <div className={styles.welcomeSection}>
           <div className={styles.welcomeText}>
             <span className={styles.eyebrow}>AI Innovation Canvas</span>
+            <style>
+              {
+                "@font-face{font-family:'BridgeScript';src:url('/fonts/Kalam-Bold.woff2') format('woff2');font-display:swap;font-weight:700}"
+              }
+            </style>
             <h1 className={styles.welcomeTitle}>
               {workspaceName || 'BRIDGE Flow'}
             </h1>
@@ -773,11 +738,23 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>Spaces</h2>
             </div>
-            <div className={styles.spacesGrid}>
-              {spaceItems.map(item => (
-                <SpaceCard key={item.id} item={item} />
-              ))}
-            </div>
+            {tags.length > 0 ? (
+              <div className={styles.spacesGrid}>
+                {tags.map(tag => (
+                  <SpaceTagCard
+                    key={tag.id}
+                    tag={tag}
+                    onClick={handleViewAll}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className={styles.emptyState}>
+                <p className={styles.emptyText}>
+                  Tag your docs to group them into spaces.
+                </p>
+              </div>
+            )}
           </div>
 
           <div className={styles.aiPanel}>
