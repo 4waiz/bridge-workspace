@@ -8,6 +8,14 @@
  * @bridgeflow/core cannot import the web app, so we read that shared singleton
  * here — one client, one auth session, app-wide.
  */
+import { OKR_DEMO, OKR_TEAMS } from './okr-seed-data';
+import {
+  buildOkrWorkbook,
+  type ParsedObjective,
+  type ParsedTeamOkr,
+  type ParsedWorkbook,
+  parseOkrWorkbook,
+} from './xlsx-lite';
 
 // Minimal slice of the supabase-js surface we use (keeps core dependency-free).
 interface SupabaseLike {
@@ -15,6 +23,16 @@ interface SupabaseLike {
   channel: (name: string) => any;
   removeChannel: (channel: any) => void;
   auth: { getUser: () => Promise<{ data: { user: { id: string } | null } }> };
+  storage?: {
+    from: (bucket: string) => {
+      download: (path: string) => Promise<{ data: Blob | null; error: any }>;
+      upload: (
+        path: string,
+        body: Blob | ArrayBuffer | Uint8Array,
+        opts?: { upsert?: boolean; contentType?: string }
+      ) => Promise<{ data: any; error: any }>;
+    };
+  };
 }
 
 export function getSupabase(): SupabaseLike | null {
@@ -402,4 +420,331 @@ export async function saveTeamOkr(
     const ins = await sb.from('objectives').insert(rows);
     if (ins.error) throw ins.error;
   }
+}
+
+// ===========================================================================
+// Excel template  (Download)  +  Excel import  (Upload)
+// ===========================================================================
+
+export const OKR_TEMPLATE_BUCKET = 'okr-templates';
+export const OKR_TEMPLATE_FILE = 'bridge_xpi_okrs_template.xlsx';
+/** Committed static copy served by Cloudflare Pages (public/okr/...). */
+export const OKR_TEMPLATE_STATIC_URL = '/okr/bridge_xpi_okrs_template.xlsx';
+export const XLSX_MIME =
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+
+/** Build the demo-populated template in the browser (always in sync). */
+export async function buildTemplateBlob(): Promise<Blob> {
+  const bytes = await buildOkrWorkbook(OKR_DEMO, OKR_TEAMS);
+  // Uint8Array is a valid BlobPart at runtime; cast past the stricter
+  // ArrayBuffer-vs-ArrayBufferLike lib typing.
+  return new Blob([bytes as unknown as BlobPart], { type: XLSX_MIME });
+}
+
+/**
+ * Get the downloadable template. Tries, in order:
+ *   1. Supabase Storage (the "in the database" copy)
+ *   2. the committed static file under /okr/
+ *   3. an in-browser build from the demo data (never fails)
+ */
+export async function getTemplateBlob(): Promise<Blob> {
+  const sb = getSupabase();
+  if (sb?.storage) {
+    try {
+      const { data } = await sb.storage
+        .from(OKR_TEMPLATE_BUCKET)
+        .download(OKR_TEMPLATE_FILE);
+      if (data && data.size > 0) return data;
+    } catch {
+      /* fall through */
+    }
+  }
+  try {
+    const res = await fetch(OKR_TEMPLATE_STATIC_URL, { cache: 'no-store' });
+    if (res.ok) {
+      const blob = await res.blob();
+      if (blob.size > 0) return blob;
+    }
+  } catch {
+    /* fall through */
+  }
+  return buildTemplateBlob();
+}
+
+/** Upload the current demo template to Supabase Storage (admin helper). */
+export async function uploadTemplateToStorage(): Promise<void> {
+  const sb = getSupabase();
+  if (!sb?.storage) throw new Error('Supabase Storage unavailable.');
+  const blob = await buildTemplateBlob();
+  const { error } = await sb.storage
+    .from(OKR_TEMPLATE_BUCKET)
+    .upload(OKR_TEMPLATE_FILE, blob, { upsert: true, contentType: XLSX_MIME });
+  if (error) throw error;
+}
+
+/** Parse an uploaded .xlsx into structured OKRs (no DB writes). */
+export async function parseOkrFile(file: File): Promise<ParsedWorkbook> {
+  const buf = await file.arrayBuffer();
+  return parseOkrWorkbook(buf);
+}
+
+// ---- team-name matching (Excel name -> DB team) ---------------------------
+function normName(s: string): string {
+  return s.toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+// tolerant aliases so slightly different labels still resolve to a team key
+const TEAM_ALIASES: Record<string, string> = {
+  agile: 'agile',
+  aianalytics: 'ai-analytics',
+  ai: 'ai-analytics',
+  aiandanalytics: 'ai-analytics',
+  opex: 'opex',
+  operationalexcellence: 'opex',
+  industry50: 'industry-5',
+  industry5: 'industry-5',
+  businessoperation: 'business-operation',
+  businessoperations: 'business-operation',
+  businessops: 'business-operation',
+  leansixsigmaspecialprojects: 'lean-six-sigma',
+  leansixsigmaandspecialprojects: 'lean-six-sigma',
+  leansixsigma: 'lean-six-sigma',
+  sixsigma: 'lean-six-sigma',
+  lean: 'lean-six-sigma',
+  externalengagement: 'external-engagement',
+};
+
+/** Resolve an Excel team label to a DB team row (or null if none matches). */
+export function matchTeam(excelName: string, dbTeams: Team[]): Team | null {
+  const n = normName(excelName);
+  // 1. exact normalized name
+  let hit = dbTeams.find(t => normName(t.name) === n);
+  if (hit) return hit;
+  // 2. via alias -> key
+  const key = TEAM_ALIASES[n];
+  if (key) {
+    hit = dbTeams.find(
+      t => t.key === key || normName(t.name) === normName(key)
+    );
+    if (hit) return hit;
+  }
+  // 3. loose contains
+  hit = dbTeams.find(
+    t => normName(t.name).includes(n) || n.includes(normName(t.name))
+  );
+  return hit ?? null;
+}
+
+// ---- full-detail objective (objective + KRs + initiatives) ----------------
+export interface FullKeyResult {
+  description: string;
+  target_text: string;
+}
+export interface FullInitiative {
+  description: string;
+  owner: string;
+}
+export interface FullObjective {
+  title: string;
+  progress: number;
+  keyResults: FullKeyResult[];
+  initiatives: FullInitiative[];
+}
+
+function targetText(kr: {
+  unit: string;
+  baseline: number;
+  target: number;
+  current: number;
+}): string {
+  const u = kr.unit ? ` ${kr.unit}` : '';
+  return `Target ${kr.target}${u} · now ${kr.current}${u} (baseline ${kr.baseline}${u})`;
+}
+
+/** Turn a parsed objective into the DB-shaped full objective. */
+export function parsedToFullObjective(obj: ParsedObjective): FullObjective {
+  const seen = new Set<string>();
+  const initiatives: FullInitiative[] = [];
+  for (const kr of obj.keyResults) {
+    const desc = kr.initiative.trim();
+    if (desc && !seen.has(desc.toLowerCase())) {
+      seen.add(desc.toLowerCase());
+      initiatives.push({ description: desc, owner: kr.owner });
+    }
+  }
+  return {
+    title: obj.title || `Objective ${obj.number}`,
+    progress: clampProgress(obj.progress),
+    keyResults: obj.keyResults
+      .filter(kr => kr.description)
+      .map(kr => ({
+        description: kr.description,
+        target_text: targetText(kr),
+      })),
+    initiatives,
+  };
+}
+
+/**
+ * Persist a team's OKR WITH key results + initiatives. Upserts the OKR,
+ * replaces its objectives, and (re)creates each objective's KRs + initiatives.
+ * Relies on ON DELETE CASCADE to clear old KRs/initiatives.
+ */
+export async function saveFullOkr(
+  teamId: string,
+  meta: OkrMeta,
+  objectives: FullObjective[]
+): Promise<void> {
+  const sb = getSupabase();
+  if (!sb) throw new Error('Not signed in.');
+
+  const okrRes = await sb
+    .from('okrs')
+    .upsert(
+      {
+        team_id: teamId,
+        quarter: CURRENT_QUARTER,
+        year: CURRENT_YEAR,
+        area: meta.area,
+        owner: meta.owner,
+        focus_note: meta.focus_note,
+      },
+      { onConflict: 'team_id,quarter,year' }
+    )
+    .select('id')
+    .single();
+  if (okrRes.error) throw okrRes.error;
+  const okrId = okrRes.data.id as string;
+
+  // deleting objectives cascades to key_results + initiatives
+  const del = await sb.from('objectives').delete().eq('okr_id', okrId);
+  if (del.error) throw del.error;
+
+  const kept = objectives.filter(o => o.title.trim().length > 0);
+  if (!kept.length) return;
+
+  const objRows = kept.map((o, i) => ({
+    okr_id: okrId,
+    team_id: teamId,
+    position: i + 1,
+    title: o.title.trim(),
+    progress: clampProgress(o.progress),
+  }));
+  const objIns = await sb
+    .from('objectives')
+    .insert(objRows)
+    .select('id,position');
+  if (objIns.error) throw objIns.error;
+
+  const posToId = new Map<number, string>();
+  for (const r of objIns.data ?? []) posToId.set(r.position, r.id);
+
+  const krRows: any[] = [];
+  const initRows: any[] = [];
+  kept.forEach((o, i) => {
+    const objectiveId = posToId.get(i + 1);
+    if (!objectiveId) return;
+    o.keyResults.forEach((kr, ki) => {
+      krRows.push({
+        objective_id: objectiveId,
+        team_id: teamId,
+        position: ki + 1,
+        description: kr.description,
+        target_text: kr.target_text,
+      });
+    });
+    o.initiatives.forEach((it, ii) => {
+      initRows.push({
+        objective_id: objectiveId,
+        team_id: teamId,
+        position: ii + 1,
+        description: it.description,
+        owner: it.owner,
+      });
+    });
+  });
+  if (krRows.length) {
+    const r = await sb.from('key_results').insert(krRows);
+    if (r.error) throw r.error;
+  }
+  if (initRows.length) {
+    const r = await sb.from('initiatives').insert(initRows);
+    if (r.error) throw r.error;
+  }
+}
+
+// ---- org-wide import ------------------------------------------------------
+export type ImportOutcome = 'imported' | 'skipped' | 'error';
+export interface TeamImportResult {
+  excelName: string;
+  team: Team | null;
+  outcome: ImportOutcome;
+  objectiveCount: number;
+  message?: string;
+}
+
+/**
+ * Write every parsed team's OKR (objectives + KRs + initiatives) to Supabase.
+ * Teams that don't match a DB team are skipped; teams the signed-in user can't
+ * write (RLS) surface as an error with a hint. Returns a per-team report.
+ */
+export async function importParsedWorkbook(
+  parsed: ParsedWorkbook,
+  dbTeams: Team[]
+): Promise<TeamImportResult[]> {
+  const results: TeamImportResult[] = [];
+  for (const pt of parsed.teams) {
+    const team = matchTeam(pt.teamName, dbTeams);
+    const objectives = pt.objectives.map(parsedToFullObjective);
+    if (!team) {
+      results.push({
+        excelName: pt.teamName,
+        team: null,
+        outcome: 'skipped',
+        objectiveCount: objectives.length,
+        message: 'No matching team in the dashboard',
+      });
+      continue;
+    }
+    try {
+      await saveFullOkr(
+        team.id,
+        {
+          area: 'Excellence Department',
+          owner: pt.owner || team.name,
+          focus_note: 'Focus on the results that drive the biggest impact.',
+        },
+        objectives
+      );
+      results.push({
+        excelName: pt.teamName,
+        team,
+        outcome: 'imported',
+        objectiveCount: objectives.length,
+      });
+    } catch (e: any) {
+      const raw = e?.message ?? String(e);
+      const rls = /row-level security|violates|policy/i.test(raw);
+      results.push({
+        excelName: pt.teamName,
+        team,
+        outcome: 'error',
+        objectiveCount: objectives.length,
+        message: rls
+          ? 'No permission to write this team (needs admin — see 0002 migration)'
+          : raw,
+      });
+    }
+  }
+  return results;
+}
+
+/** Pull the parsed OKR for a single team (used to fill the editor after import). */
+export function editableFromParsed(
+  pt: ParsedTeamOkr | undefined
+): EditableObjective[] {
+  if (!pt) return [];
+  return pt.objectives.map(o => ({
+    title: o.title || `Objective ${o.number}`,
+    progress: clampProgress(o.progress),
+  }));
 }

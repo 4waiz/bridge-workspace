@@ -3,6 +3,7 @@ import {
   type ReactNode,
   useCallback,
   useEffect,
+  useRef,
   useState,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -11,18 +12,26 @@ import {
   clampProgress,
   CURRENT_QUARTER,
   CURRENT_YEAR,
+  editableFromParsed,
   type EditableObjective,
   fetchTeamOkr,
   getMyTeamId,
   getTeams,
+  getTemplateBlob,
+  importParsedWorkbook,
+  matchTeam,
   type OkrMeta,
+  parseOkrFile,
   saveTeamOkr,
   setMyTeam,
   STATUS_COLOR,
   STATUS_LABEL,
   statusFromProgress,
   type Team,
+  type TeamImportResult,
 } from '../okr-dashboard/okr-data';
+import { OKR_TEAMS } from '../okr-dashboard/okr-seed-data';
+import type { ParsedWorkbook } from '../okr-dashboard/xlsx-lite';
 
 // theme-aware tokens (flip automatically light <-> dark)
 const T = {
@@ -40,36 +49,65 @@ function rgba(hex: string, a: number): string {
   return `rgba(${parseInt(h.slice(0, 2), 16)},${parseInt(h.slice(2, 4), 16)},${parseInt(h.slice(4, 6), 16)},${a})`;
 }
 
+function triggerDownload(blob: Blob, filename: string) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.append(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
+}
+
 export function OkrEditor() {
   const navigate = useNavigate();
+  // The picker renders instantly from the fixed roster; DB rows (with real ids)
+  // load in the background so there is never a "loading teams…" wait.
   const [teams, setTeams] = useState<Team[]>([]);
+  const teamsRef = useRef<Team[]>([]);
+  const teamsPromise = useRef<Promise<Team[]> | null>(null);
+
   const [phase, setPhase] = useState<'pick' | 'edit'>('pick');
-  const [pick, setPick] = useState<string | null>(null);
+  const [pick, setPick] = useState<string>(OKR_TEAMS[0]?.key ?? '');
   const [teamId, setTeamId] = useState<string | null>(null);
+  const [teamName, setTeamName] = useState<string>('');
   const [meta, setMeta] = useState<OkrMeta>({
     area: '',
     owner: '',
     focus_note: '',
   });
   const [objectives, setObjectives] = useState<EditableObjective[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [busy, setBusy] = useState(false);
   const [saving, setSaving] = useState(false);
   const [savedAt, setSavedAt] = useState<Date | null>(null);
   const [dirty, setDirty] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Excel import/preview state
+  const fileInput = useRef<HTMLInputElement>(null);
+  const [preview, setPreview] = useState<ParsedWorkbook | null>(null);
+  const [importing, setImporting] = useState(false);
+  const [importResults, setImportResults] = useState<TeamImportResult[] | null>(
+    null
+  );
+  const [toast, setToast] = useState<string | null>(null);
+
+  // Background: load DB teams (for ids + import matching) + my team preselect.
   useEffect(() => {
-    (async () => {
-      try {
-        const [ts, myId] = await Promise.all([getTeams(), getMyTeamId()]);
-        setTeams(ts);
-        setPick(myId ?? ts[0]?.id ?? null);
-      } catch (e: any) {
-        setError(e?.message ?? String(e));
-      } finally {
-        setLoading(false);
-      }
-    })().catch(() => {});
+    const p = getTeams();
+    teamsPromise.current = p;
+    p.then(ts => {
+      teamsRef.current = ts;
+      setTeams(ts);
+    }).catch(() => {});
+    getMyTeamId()
+      .then(id => {
+        if (!id) return;
+        const mine = teamsRef.current.find(t => t.id === id);
+        if (mine) setPick(mine.key);
+      })
+      .catch(() => {});
   }, []);
 
   // warn on tab close with unsaved edits
@@ -84,23 +122,49 @@ export function OkrEditor() {
     return () => window.removeEventListener('beforeunload', h);
   }, [dirty]);
 
-  const chooseTeam = useCallback(async (id: string) => {
-    setError(null);
-    setLoading(true);
-    try {
-      await setMyTeam(id);
-      const data = await fetchTeamOkr(id);
-      setTeamId(id);
-      setMeta(data.meta);
-      setObjectives(data.objectives);
-      setDirty(false);
-      setPhase('edit');
-    } catch (e: any) {
-      setError(e?.message ?? String(e));
-    } finally {
-      setLoading(false);
+  const resolveDbTeam = useCallback(async (key: string): Promise<Team> => {
+    let ts = teamsRef.current;
+    if (!ts.length && teamsPromise.current) {
+      ts = await teamsPromise.current.catch(() => []);
+      teamsRef.current = ts;
     }
+    const seed = OKR_TEAMS.find(t => t.key === key);
+    const hit =
+      ts.find(t => t.key === key) ?? (seed ? matchTeam(seed.name, ts) : null);
+    if (!hit) {
+      throw new Error(
+        `“${seed?.name ?? key}” isn’t in the database yet. Run supabase/seed.sql (7 teams) and sign in.`
+      );
+    }
+    return hit;
   }, []);
+
+  const loadTeam = useCallback(async (dbTeam: Team) => {
+    await setMyTeam(dbTeam.id);
+    const data = await fetchTeamOkr(dbTeam.id);
+    setTeamId(dbTeam.id);
+    setTeamName(dbTeam.name);
+    setMeta(data.meta);
+    setObjectives(data.objectives);
+    setDirty(false);
+  }, []);
+
+  const chooseTeam = useCallback(
+    async (key: string) => {
+      setError(null);
+      setBusy(true);
+      try {
+        const dbTeam = await resolveDbTeam(key);
+        await loadTeam(dbTeam);
+        setPhase('edit');
+      } catch (e: any) {
+        setError(e?.message ?? String(e));
+      } finally {
+        setBusy(false);
+      }
+    },
+    [resolveDbTeam, loadTeam]
+  );
 
   const save = useCallback(async () => {
     if (!teamId) return;
@@ -119,8 +183,8 @@ export function OkrEditor() {
 
   const guardedLeave = useCallback(
     (to: number | string) => {
-      // auto-save is on — flush any pending edit before leaving
       if (dirty) save().catch(() => {});
+      // split only to satisfy react-router's number|To navigate overloads
       if (typeof to === 'number') {
         navigate(to);
         return;
@@ -130,7 +194,7 @@ export function OkrEditor() {
     [dirty, save, navigate]
   );
 
-  // Auto-save: persist 2s after the last edit — no need to press Save.
+  // Auto-save: persist 2s after the last edit.
   useEffect(() => {
     if (phase !== 'edit' || !dirty || !teamId || saving) return;
     const timer = setTimeout(() => {
@@ -154,7 +218,88 @@ export function OkrEditor() {
     setDirty(true);
   };
 
-  const teamName = teams.find(t => t.id === teamId)?.name ?? '';
+  // ---- Excel: download / upload / import ----
+  const onDownload = useCallback(async () => {
+    setBusy(true);
+    setError(null);
+    try {
+      const blob = await getTemplateBlob();
+      triggerDownload(blob, 'bridge_xpi_okrs_template.xlsx');
+      setToast(
+        'Template downloaded — fill the OKRs tab, then Upload & import.'
+      );
+    } catch (e: any) {
+      setError(e?.message ?? String(e));
+    } finally {
+      setBusy(false);
+    }
+  }, []);
+
+  const onPickFile = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      e.target.value = ''; // allow re-selecting the same file
+      if (!file) return;
+      setError(null);
+      setImportResults(null);
+      setBusy(true);
+      try {
+        const parsed = await parseOkrFile(file);
+        if (!parsed.teams.length) {
+          setError(
+            parsed.warnings[0] ??
+              'No OKR rows found in that file. Use the downloaded template.'
+          );
+          return;
+        }
+        setPreview(parsed);
+      } catch (err: any) {
+        setError(err?.message ?? String(err));
+      } finally {
+        setBusy(false);
+      }
+    },
+    []
+  );
+
+  const applyImport = useCallback(async () => {
+    if (!preview) return;
+    setImporting(true);
+    setError(null);
+    try {
+      const results = await importParsedWorkbook(preview, teamsRef.current);
+      setImportResults(results);
+      // refresh the currently-open team from the DB so the editor reflects it
+      if (teamId) {
+        try {
+          const data = await fetchTeamOkr(teamId);
+          setMeta(data.meta);
+          setObjectives(data.objectives);
+          setDirty(false);
+        } catch {
+          // fall back to the parsed values for the current team
+          const mine = preview.teams.find(
+            pt => matchTeam(pt.teamName, teamsRef.current)?.id === teamId
+          );
+          const objs = editableFromParsed(mine);
+          if (objs.length) setObjectives(objs);
+        }
+      }
+      const ok = results.filter(r => r.outcome === 'imported').length;
+      setToast(`Imported ${ok} team${ok === 1 ? '' : 's'} into the dashboard.`);
+    } catch (e: any) {
+      setError(e?.message ?? String(e));
+    } finally {
+      setImporting(false);
+    }
+  }, [preview, teamId]);
+
+  // auto-dismiss toast
+  useEffect(() => {
+    if (!toast) return;
+    const t = setTimeout(() => setToast(null), 4200);
+    return () => clearTimeout(t);
+  }, [toast]);
 
   // ---- render ----
   return (
@@ -170,42 +315,33 @@ export function OkrEditor() {
               {CURRENT_YEAR} OKR.
             </p>
 
-            {loading ? (
-              <div style={{ color: T.sub, padding: 12 }}>Loading teams…</div>
-            ) : teams.length === 0 ? (
-              <div style={{ color: T.sub, padding: 12 }}>
-                No teams found. Run <code>supabase/seed.sql</code> and make sure
-                you’re signed in.
-              </div>
-            ) : (
-              <div style={S.pickList}>
-                {teams.map(t => {
-                  const on = pick === t.id;
-                  return (
-                    <button
-                      key={t.id}
-                      onClick={() => setPick(t.id)}
+            <div style={S.pickList}>
+              {OKR_TEAMS.map(t => {
+                const on = pick === t.key;
+                return (
+                  <button
+                    key={t.key}
+                    onClick={() => setPick(t.key)}
+                    style={{
+                      ...S.pickItem,
+                      borderColor: on ? T.accent : T.border,
+                      background: on ? rgba('#f15a29', 0.1) : 'transparent',
+                    }}
+                  >
+                    <span
                       style={{
-                        ...S.pickItem,
-                        borderColor: on ? T.accent : T.border,
-                        background: on ? rgba('#f15a29', 0.1) : 'transparent',
+                        ...S.radio,
+                        borderColor: on ? T.accent : T.sub,
                       }}
                     >
-                      <span
-                        style={{
-                          ...S.radio,
-                          borderColor: on ? T.accent : T.sub,
-                        }}
-                      >
-                        {on ? <span style={S.radioDot} /> : null}
-                      </span>
-                      <span style={{ ...S.teamDot, background: t.accent }} />
-                      {t.name}
-                    </button>
-                  );
-                })}
-              </div>
-            )}
+                      {on ? <span style={S.radioDot} /> : null}
+                    </span>
+                    <span style={{ ...S.teamDot, background: t.accent }} />
+                    {t.name}
+                  </button>
+                );
+              })}
+            </div>
 
             {error ? <div style={S.err}>{error}</div> : null}
 
@@ -214,14 +350,11 @@ export function OkrEditor() {
                 Cancel
               </button>
               <button
-                style={{
-                  ...S.primaryBtn,
-                  opacity: pick && !loading ? 1 : 0.5,
-                }}
-                disabled={!pick || loading}
+                style={{ ...S.primaryBtn, opacity: pick && !busy ? 1 : 0.5 }}
+                disabled={!pick || busy}
                 onClick={() => pick && void chooseTeam(pick)}
               >
-                Continue →
+                {busy ? 'Loading…' : 'Continue →'}
               </button>
             </div>
           </div>
@@ -245,6 +378,39 @@ export function OkrEditor() {
               View dashboard →
             </button>
           </header>
+
+          {/* Excel toolbar */}
+          <div style={{ ...S.toolbar, borderColor: T.border }}>
+            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+              <button
+                style={{ ...S.toolBtn, borderColor: T.border }}
+                onClick={() => void onDownload()}
+                disabled={busy}
+                title="Download the Excel template (demo data pre-filled)"
+              >
+                ⬇ Download template
+              </button>
+              <button
+                style={{ ...S.toolBtn, borderColor: T.border }}
+                onClick={() => fileInput.current?.click()}
+                disabled={busy}
+                title="Upload a filled-in Excel to import into the dashboard"
+              >
+                ⬆ Upload &amp; import
+              </button>
+              <input
+                ref={fileInput}
+                type="file"
+                accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                style={{ display: 'none' }}
+                onChange={e => void onPickFile(e)}
+              />
+            </div>
+            <span style={{ color: T.sub, fontSize: 12.5 }}>
+              Excel import updates the whole dashboard · or edit the sliders
+              below by hand
+            </span>
+          </div>
 
           {/* OKR meta */}
           <div style={{ ...S.metaRow }}>
@@ -391,7 +557,195 @@ export function OkrEditor() {
           <div style={{ height: 80 }} />
         </>
       )}
+
+      {toast ? (
+        <div style={{ ...S.toast, background: T.card, borderColor: T.border }}>
+          {toast}
+        </div>
+      ) : null}
+
+      {preview ? (
+        <ImportPreview
+          preview={preview}
+          teams={teams}
+          currentTeamId={teamId}
+          importing={importing}
+          results={importResults}
+          onApply={() => void applyImport()}
+          onClose={() => {
+            setPreview(null);
+            setImportResults(null);
+          }}
+        />
+      ) : null}
     </div>
+  );
+}
+
+// ---- Import preview modal --------------------------------------------------
+function ImportPreview({
+  preview,
+  teams,
+  currentTeamId,
+  importing,
+  results,
+  onApply,
+  onClose,
+}: {
+  preview: ParsedWorkbook;
+  teams: Team[];
+  currentTeamId: string | null;
+  importing: boolean;
+  results: TeamImportResult[] | null;
+  onApply: () => void;
+  onClose: () => void;
+}) {
+  const resultFor = (excelName: string) =>
+    results?.find(r => r.excelName === excelName);
+  const totalObjs = preview.teams.reduce((s, t) => s + t.objectives.length, 0);
+  const totalKrs = preview.teams.reduce(
+    (s, t) => s + t.objectives.reduce((a, o) => a + o.keyResults.length, 0),
+    0
+  );
+
+  return (
+    <div style={S.modalWrap} onClick={onClose}>
+      <div
+        style={{ ...S.modal, background: T.card, borderColor: T.border }}
+        onClick={e => e.stopPropagation()}
+      >
+        <div style={S.modalHead}>
+          <div>
+            <h2 style={{ margin: 0, fontSize: 19, fontWeight: 800 }}>
+              Preview import
+            </h2>
+            <p style={{ margin: '4px 0 0', color: T.sub, fontSize: 13 }}>
+              {preview.teams.length} team
+              {preview.teams.length === 1 ? '' : 's'} · {totalObjs} objectives ·{' '}
+              {totalKrs} key results
+            </p>
+          </div>
+          <button style={S.removeBtn} onClick={onClose} title="Close">
+            ✕
+          </button>
+        </div>
+
+        <div style={S.modalBody}>
+          {preview.teams.map(pt => {
+            const match = matchTeam(pt.teamName, teams);
+            const res = resultFor(pt.teamName);
+            const isCurrent = match?.id && match.id === currentTeamId;
+            return (
+              <div
+                key={pt.teamName}
+                style={{ ...S.previewTeam, borderColor: T.border }}
+              >
+                <div style={S.previewTeamHead}>
+                  <span style={{ fontWeight: 700 }}>
+                    {pt.teamName}
+                    {isCurrent ? (
+                      <span style={{ ...S.badgeYou, color: T.accent }}>
+                        {' '}
+                        (your team)
+                      </span>
+                    ) : null}
+                  </span>
+                  {res ? (
+                    <ResultChip res={res} />
+                  ) : match ? (
+                    <span style={{ ...S.mapChip, color: T.sub }}>
+                      → {match.name}
+                    </span>
+                  ) : (
+                    <span
+                      style={{ ...S.mapChip, color: STATUS_COLOR.off_track }}
+                    >
+                      no matching team — will skip
+                    </span>
+                  )}
+                </div>
+                {pt.objectives.map(o => {
+                  const st = statusFromProgress(o.progress);
+                  const c = STATUS_COLOR[st];
+                  return (
+                    <div key={o.number} style={S.previewObj}>
+                      <span style={{ flex: 1 }}>
+                        {o.title || `Objective ${o.number}`}
+                      </span>
+                      <span style={{ color: T.sub, fontSize: 12 }}>
+                        {o.keyResults.length} KR
+                      </span>
+                      <span style={{ ...S.miniBarTrack, background: T.track }}>
+                        <span
+                          style={{
+                            ...S.miniBarFill,
+                            width: `${o.progress}%`,
+                            background: c,
+                          }}
+                        />
+                      </span>
+                      <span
+                        style={{
+                          width: 38,
+                          textAlign: 'right',
+                          color: c,
+                          fontWeight: 700,
+                        }}
+                      >
+                        {o.progress}%
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
+
+        <div style={{ ...S.modalFoot, borderColor: T.border }}>
+          <span style={{ color: T.sub, fontSize: 12.5, flex: 1 }}>
+            {results
+              ? 'Import finished — teams you can’t write need the admin policy (0002 migration).'
+              : 'Applies to every matching team on the dashboard.'}
+          </span>
+          <button style={S.ghostBtn} onClick={onClose}>
+            {results ? 'Done' : 'Cancel'}
+          </button>
+          {!results ? (
+            <button
+              style={{ ...S.primaryBtn, opacity: importing ? 0.6 : 1 }}
+              disabled={importing}
+              onClick={onApply}
+            >
+              {importing ? 'Importing…' : 'Apply to dashboard'}
+            </button>
+          ) : null}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ResultChip({ res }: { res: TeamImportResult }) {
+  const map = {
+    imported: { c: STATUS_COLOR.on_track, label: 'Imported ✓' },
+    skipped: { c: '#9aa3b2', label: 'Skipped' },
+    error: { c: STATUS_COLOR.off_track, label: 'Failed' },
+  } as const;
+  const m = map[res.outcome];
+  return (
+    <span
+      style={{
+        ...S.mapChip,
+        color: m.c,
+        background: rgba(m.c === '#9aa3b2' ? '#9aa3b2' : m.c, 0.14),
+        border: `1px solid ${rgba(m.c === '#9aa3b2' ? '#9aa3b2' : m.c, 0.4)}`,
+      }}
+      title={res.message ?? ''}
+    >
+      {m.label}
+      {res.message && res.outcome !== 'imported' ? ` · ${res.message}` : ''}
+    </span>
   );
 }
 
@@ -472,7 +826,7 @@ const S: Record<string, CSSProperties> = {
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     gap: 16,
-    marginBottom: 20,
+    marginBottom: 16,
   },
   title: { fontSize: 26, fontWeight: 800, margin: '6px 0 0' },
   link: {
@@ -483,6 +837,26 @@ const S: Record<string, CSSProperties> = {
     fontSize: 13,
     cursor: 'pointer',
     padding: 0,
+  },
+  toolbar: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: 12,
+    flexWrap: 'wrap',
+    padding: '12px 0 18px',
+    borderBottom: '1px solid',
+    marginBottom: 22,
+  },
+  toolBtn: {
+    padding: '9px 16px',
+    borderRadius: 9,
+    border: '1px solid',
+    background: 'transparent',
+    color: 'inherit',
+    fontSize: 13.5,
+    fontWeight: 600,
+    cursor: 'pointer',
   },
   metaRow: { display: 'flex', gap: 16, marginBottom: 24, flexWrap: 'wrap' },
   input: {
@@ -589,4 +963,91 @@ const S: Record<string, CSSProperties> = {
     fontSize: 13,
     margin: '14px 0',
   },
+  toast: {
+    position: 'fixed',
+    left: '50%',
+    bottom: 92,
+    transform: 'translateX(-50%)',
+    border: '1px solid',
+    borderRadius: 10,
+    padding: '11px 18px',
+    fontSize: 13.5,
+    boxShadow: '0 8px 24px rgba(0,0,0,0.28)',
+    zIndex: 10001,
+  },
+  // modal
+  modalWrap: {
+    position: 'fixed',
+    inset: 0,
+    background: 'rgba(0,0,0,0.55)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 10000,
+    padding: 20,
+  },
+  modal: {
+    width: 'min(640px, 96vw)',
+    maxHeight: '86vh',
+    display: 'flex',
+    flexDirection: 'column',
+    border: '1px solid',
+    borderRadius: 16,
+    boxShadow: '0 20px 60px rgba(0,0,0,0.4)',
+  },
+  modalHead: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    padding: '20px 22px 12px',
+  },
+  modalBody: {
+    overflowY: 'auto',
+    padding: '4px 22px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 12,
+  },
+  modalFoot: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 10,
+    padding: '14px 22px',
+    borderTop: '1px solid',
+  },
+  previewTeam: {
+    border: '1px solid',
+    borderRadius: 12,
+    padding: '12px 14px',
+  },
+  previewTeamHead: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: 10,
+    marginBottom: 8,
+  },
+  badgeYou: { fontSize: 12, fontWeight: 700 },
+  mapChip: {
+    fontSize: 11.5,
+    fontWeight: 600,
+    padding: '3px 8px',
+    borderRadius: 7,
+    whiteSpace: 'nowrap',
+  },
+  previewObj: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 10,
+    padding: '5px 0',
+    fontSize: 13.5,
+  },
+  miniBarTrack: {
+    width: 90,
+    height: 6,
+    borderRadius: 4,
+    overflow: 'hidden',
+    flexShrink: 0,
+  },
+  miniBarFill: { display: 'block', height: '100%', borderRadius: 4 },
 };
