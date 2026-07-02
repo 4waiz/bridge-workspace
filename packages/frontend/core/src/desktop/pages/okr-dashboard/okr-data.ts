@@ -279,6 +279,86 @@ export async function fetchTeamOkr(
   return { meta, objectives };
 }
 
+// ---- Objective drill-down -------------------------------------------------
+export interface KeyResult {
+  id: string;
+  objective_id: string;
+  team_id: string;
+  position: number;
+  description: string | null;
+  target_text: string | null;
+}
+export interface Initiative {
+  id: string;
+  objective_id: string;
+  team_id: string;
+  position: number;
+  description: string | null;
+  owner: string | null;
+}
+export interface ObjectiveDetail {
+  objective: Objective;
+  team: Team | null;
+  siblings: Objective[];
+  keyResults: KeyResult[];
+  initiatives: Initiative[];
+  teamProgress: number;
+}
+
+/** Everything needed for the visual objective drill-down page. */
+export async function fetchObjectiveDetail(
+  objectiveId: string
+): Promise<ObjectiveDetail> {
+  const sb = getSupabase();
+  if (!sb) throw new Error('Not signed in.');
+
+  const objRes = await sb
+    .from('objectives')
+    .select('*')
+    .eq('id', objectiveId)
+    .maybeSingle();
+  if (objRes.error) throw objRes.error;
+  const objective: Objective | null = objRes.data ?? null;
+  if (!objective) throw new Error('Objective not found.');
+
+  const [teamRes, sibRes, krRes, initRes] = await Promise.all([
+    sb.from('teams').select('*').eq('id', objective.team_id).maybeSingle(),
+    sb
+      .from('objectives')
+      .select('*')
+      .eq('team_id', objective.team_id)
+      .order('position'),
+    sb
+      .from('key_results')
+      .select('*')
+      .eq('objective_id', objectiveId)
+      .order('position'),
+    sb
+      .from('initiatives')
+      .select('*')
+      .eq('objective_id', objectiveId)
+      .order('position'),
+  ]);
+  const err = teamRes.error || sibRes.error || krRes.error || initRes.error;
+  if (err) throw err;
+
+  const siblings: Objective[] = sibRes.data ?? [];
+  const teamProgress = siblings.length
+    ? Math.round(
+        siblings.reduce((s, o) => s + (o.progress ?? 0), 0) / siblings.length
+      )
+    : 0;
+
+  return {
+    objective,
+    team: teamRes.data ?? null,
+    siblings,
+    keyResults: krRes.data ?? [],
+    initiatives: initRes.data ?? [],
+    teamProgress,
+  };
+}
+
 /** Persist a team's OKR (upsert the OKR row, replace its objectives). */
 export async function saveTeamOkr(
   teamId: string,

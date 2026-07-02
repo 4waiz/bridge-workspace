@@ -121,6 +121,10 @@ export const topLevelRoutes = [
         lazy: () => import('./pages/okr-editor'),
       },
       {
+        path: '/okr-objective/:objectiveId',
+        lazy: () => import('./pages/okr-objective'),
+      },
+      {
         path: '/clipper/import',
         lazy: () => import('./pages/import-clipper'),
       },

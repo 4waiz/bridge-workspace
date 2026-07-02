@@ -119,20 +119,25 @@ export function OkrEditor() {
 
   const guardedLeave = useCallback(
     (to: number | string) => {
-      if (
-        dirty &&
-        !window.confirm('You have unsaved changes. Leave without saving?')
-      ) {
-        return;
-      }
+      // auto-save is on — flush any pending edit before leaving
+      if (dirty) save().catch(() => {});
       if (typeof to === 'number') {
         navigate(to);
         return;
       }
       navigate(to);
     },
-    [dirty, navigate]
+    [dirty, save, navigate]
   );
+
+  // Auto-save: persist 2s after the last edit — no need to press Save.
+  useEffect(() => {
+    if (phase !== 'edit' || !dirty || !teamId || saving) return;
+    const timer = setTimeout(() => {
+      save().catch(() => {});
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [phase, dirty, teamId, saving, save]);
 
   const patchObj = (i: number, patch: Partial<EditableObjective>) => {
     setObjectives(prev =>
@@ -362,22 +367,24 @@ export function OkrEditor() {
             style={{ ...S.saveBar, background: T.card, borderColor: T.border }}
           >
             <span style={{ color: T.sub, fontSize: 13 }}>
-              {dirty
-                ? 'Unsaved changes'
-                : savedAt
-                  ? `Saved ✓ ${savedAt.toLocaleTimeString()}`
-                  : 'Up to date'}
+              {saving
+                ? 'Saving…'
+                : dirty
+                  ? 'Editing… auto-saves'
+                  : savedAt
+                    ? `Saved ✓ ${savedAt.toLocaleTimeString()}`
+                    : 'Auto-save on'}
             </span>
             <div style={{ display: 'flex', gap: 10 }}>
               <button style={S.ghostBtn} onClick={() => guardedLeave(-1)}>
                 Close
               </button>
               <button
-                style={{ ...S.primaryBtn, opacity: saving ? 0.6 : 1 }}
-                disabled={saving}
+                style={{ ...S.primaryBtn, opacity: saving || !dirty ? 0.6 : 1 }}
+                disabled={saving || !dirty}
                 onClick={() => void save()}
               >
-                {saving ? 'Saving…' : 'Save'}
+                {saving ? 'Saving…' : 'Save now'}
               </button>
             </div>
           </div>

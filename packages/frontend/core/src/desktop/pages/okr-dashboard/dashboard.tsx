@@ -65,10 +65,23 @@ function Badge({ status, progress }: { status: Status; progress: number }) {
 }
 
 // ---- one objective row (bar coloured by the TEAM status, per the mockup) --
-function ObjectiveRow({ obj, color }: { obj: Objective; color: string }) {
+function ObjectiveRow({
+  obj,
+  color,
+  onOpen,
+}: {
+  obj: Objective;
+  color: string;
+  onOpen: (id: string) => void;
+}) {
   const pct = Math.max(0, Math.min(100, Math.round(obj.progress ?? 0)));
   return (
-    <div style={{ marginBottom: 14 }}>
+    <button
+      type="button"
+      onClick={() => onOpen(obj.id)}
+      title="Open objective details"
+      style={S.objRowBtn}
+    >
       <div style={S.objTop}>
         <span style={S.objTitle}>{obj.title || 'Untitled objective'}</span>
         <span style={S.objPct}>{pct}%</span>
@@ -85,12 +98,18 @@ function ObjectiveRow({ obj, color }: { obj: Objective; color: string }) {
           }}
         />
       </div>
-    </div>
+    </button>
   );
 }
 
 // ---- team card ------------------------------------------------------------
-function TeamCard({ rollup }: { rollup: TeamRollup }) {
+function TeamCard({
+  rollup,
+  onOpen,
+}: {
+  rollup: TeamRollup;
+  onOpen: (id: string) => void;
+}) {
   const { team, objectives, progress, status } = rollup;
   const color = STATUS_COLOR[status];
   return (
@@ -102,7 +121,9 @@ function TeamCard({ rollup }: { rollup: TeamRollup }) {
         ) : null}
       </div>
       {objectives.length ? (
-        objectives.map(o => <ObjectiveRow key={o.id} obj={o} color={color} />)
+        objectives.map(o => (
+          <ObjectiveRow key={o.id} obj={o} color={color} onOpen={onOpen} />
+        ))
       ) : (
         <div style={S.emptyCard}>
           No objectives yet — edit this team&apos;s OKR.
@@ -193,6 +214,11 @@ export function OkrDashboard() {
     return () => window.removeEventListener('keydown', onKey);
   }, [navigate]);
 
+  const openObjective = useCallback(
+    (id: string) => navigate(`/okr-objective/${id}`),
+    [navigate]
+  );
+
   const counts = model?.counts ?? { on_track: 0, at_risk: 0, off_track: 0 };
 
   return (
@@ -267,7 +293,7 @@ export function OkrDashboard() {
       ) : (
         <div style={S.grid}>
           {model.teams.map(r => (
-            <TeamCard key={r.team.id} rollup={r} />
+            <TeamCard key={r.team.id} rollup={r} onOpen={openObjective} />
           ))}
 
           {/* STATUS OVERVIEW cell */}
@@ -379,6 +405,18 @@ const S: Record<string, CSSProperties> = {
     marginBottom: 18,
   },
   teamName: { fontSize: 20, fontWeight: 800, margin: 0, letterSpacing: -0.2 },
+  objRowBtn: {
+    display: 'block',
+    width: '100%',
+    textAlign: 'left',
+    background: 'transparent',
+    border: 'none',
+    padding: '4px 6px',
+    margin: '0 -6px 10px',
+    borderRadius: 8,
+    cursor: 'pointer',
+    color: 'inherit',
+  },
   objTop: {
     display: 'flex',
     justifyContent: 'space-between',
