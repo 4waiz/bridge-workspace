@@ -66,6 +66,10 @@ export function krProgress(kr: {
   target: number;
   current: number;
 }): number {
+  // A current of 0 means "not measured yet" (blank), not "achieved 0" — so it
+  // reads as 0% rather than overshooting a lower-is-better target. (Unless the
+  // target itself is 0, where 0 is a genuinely achieved value.)
+  if (kr.current === 0 && kr.target !== 0) return 0;
   const span = kr.target - kr.baseline;
   const raw =
     span === 0
