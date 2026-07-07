@@ -214,6 +214,17 @@ export function OkrDashboard() {
     return () => window.removeEventListener('keydown', onKey);
   }, [navigate]);
 
+  // The dashboard is a TV/wall view — show it a notch larger than the rest of
+  // the app (whole app runs at 1.5x; here 1.75x). Restore on close.
+  useEffect(() => {
+    const el = document.documentElement;
+    const prev = el.style.zoom;
+    el.style.zoom = '1.75';
+    return () => {
+      el.style.zoom = prev || '1.5';
+    };
+  }, []);
+
   const openObjective = useCallback(
     (id: string) => navigate(`/okr-objective/${id}`),
     [navigate]

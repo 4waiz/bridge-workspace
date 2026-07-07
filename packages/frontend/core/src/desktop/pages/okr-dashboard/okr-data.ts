@@ -443,11 +443,22 @@ export async function buildTemplateBlob(): Promise<Blob> {
 
 /**
  * Get the downloadable template. Tries, in order:
- *   1. Supabase Storage (the "in the database" copy)
- *   2. the committed static file under /okr/
- *   3. an in-browser build from the demo data (never fails)
+ *   1. the committed static file under /okr/ — the fully-styled, demo-filled
+ *      design (navy headers, pink status banding, formulas). This is the copy
+ *      the team wants, so it wins over everything else.
+ *   2. Supabase Storage (an admin-uploaded copy, if any)
+ *   3. an in-browser build from the demo data (unstyled, never fails)
  */
 export async function getTemplateBlob(): Promise<Blob> {
+  try {
+    const res = await fetch(OKR_TEMPLATE_STATIC_URL, { cache: 'no-store' });
+    if (res.ok) {
+      const blob = await res.blob();
+      if (blob.size > 0) return blob;
+    }
+  } catch {
+    /* fall through */
+  }
   const sb = getSupabase();
   if (sb?.storage) {
     try {
@@ -458,15 +469,6 @@ export async function getTemplateBlob(): Promise<Blob> {
     } catch {
       /* fall through */
     }
-  }
-  try {
-    const res = await fetch(OKR_TEMPLATE_STATIC_URL, { cache: 'no-store' });
-    if (res.ok) {
-      const blob = await res.blob();
-      if (blob.size > 0) return blob;
-    }
-  } catch {
-    /* fall through */
   }
   return buildTemplateBlob();
 }

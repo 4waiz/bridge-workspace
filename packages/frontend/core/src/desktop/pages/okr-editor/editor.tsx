@@ -252,14 +252,25 @@ export function OkrEditor() {
           );
           return;
         }
-        setPreview(parsed);
+        // Each department only imports its own OKR — show/apply just this team.
+        const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+        const mine = parsed.teams.filter(
+          pt => norm(pt.teamName) === norm(teamName)
+        );
+        if (!mine.length) {
+          setError(
+            `No rows for your team (${teamName}) were found in that file. Make sure the "Team" column says "${teamName}".`
+          );
+          return;
+        }
+        setPreview({ ...parsed, teams: mine });
       } catch (err: any) {
         setError(err?.message ?? String(err));
       } finally {
         setBusy(false);
       }
     },
-    []
+    [teamName]
   );
 
   const applyImport = useCallback(async () => {
@@ -379,24 +390,37 @@ export function OkrEditor() {
             </button>
           </header>
 
-          {/* Excel toolbar */}
-          <div style={{ ...S.toolbar, borderColor: T.border }}>
-            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+          {/* Excel toolbar — the primary workflow, so make it stand out */}
+          <div
+            style={{
+              ...S.toolbar,
+              borderColor: rgba('#f15a29', 0.35),
+              background: rgba('#f15a29', 0.06),
+            }}
+          >
+            <div>
+              <div style={S.toolbarKicker}>EXCEL SYNC</div>
+              <span style={{ color: T.sub, fontSize: 13 }}>
+                Import updates the whole dashboard · or edit the sliders below
+                by hand
+              </span>
+            </div>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <button
-                style={{ ...S.toolBtn, borderColor: T.border }}
+                style={{ ...S.downloadBtn, opacity: busy ? 0.6 : 1 }}
                 onClick={() => void onDownload()}
                 disabled={busy}
                 title="Download the Excel template (demo data pre-filled)"
               >
-                ⬇ Download template
+                <span style={S.btnIcon}>⬇</span> Download template
               </button>
               <button
-                style={{ ...S.toolBtn, borderColor: T.border }}
+                style={{ ...S.uploadBtn, opacity: busy ? 0.6 : 1 }}
                 onClick={() => fileInput.current?.click()}
                 disabled={busy}
                 title="Upload a filled-in Excel to import into the dashboard"
               >
-                ⬆ Upload &amp; import
+                <span style={S.btnIcon}>⬆</span> Upload &amp; import
               </button>
               <input
                 ref={fileInput}
@@ -406,10 +430,6 @@ export function OkrEditor() {
                 onChange={e => void onPickFile(e)}
               />
             </div>
-            <span style={{ color: T.sub, fontSize: 12.5 }}>
-              Excel import updates the whole dashboard · or edit the sliders
-              below by hand
-            </span>
           </div>
 
           {/* OKR meta */}
@@ -705,8 +725,8 @@ function ImportPreview({
         <div style={{ ...S.modalFoot, borderColor: T.border }}>
           <span style={{ color: T.sub, fontSize: 12.5, flex: 1 }}>
             {results
-              ? 'Import finished - teams you can’t write need the admin policy (0002 migration).'
-              : 'Applies to every matching team on the dashboard.'}
+              ? 'Import finished - if your team can’t be written you need the admin policy (0002 migration).'
+              : 'Applies your team’s OKR to the dashboard.'}
           </span>
           <button style={S.ghostBtn} onClick={onClose}>
             {results ? 'Done' : 'Cancel'}
@@ -842,21 +862,49 @@ const S: Record<string, CSSProperties> = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    gap: 12,
+    gap: 16,
     flexWrap: 'wrap',
-    padding: '12px 0 18px',
-    borderBottom: '1px solid',
-    marginBottom: 22,
-  },
-  toolBtn: {
-    padding: '9px 16px',
-    borderRadius: 9,
+    padding: '16px 20px',
     border: '1px solid',
-    background: 'transparent',
-    color: 'inherit',
-    fontSize: 13.5,
-    fontWeight: 600,
+    borderRadius: 14,
+    marginBottom: 24,
+  },
+  toolbarKicker: {
+    fontSize: 12,
+    fontWeight: 800,
+    letterSpacing: 1.4,
+    color: '#f15a29',
+    marginBottom: 4,
+  },
+  btnIcon: { fontSize: 16, marginRight: 2 },
+  downloadBtn: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: 8,
+    padding: '12px 22px',
+    borderRadius: 11,
+    border: 'none',
+    background: '#f15a29',
+    color: '#fff',
+    fontSize: 15,
+    fontWeight: 700,
     cursor: 'pointer',
+    boxShadow: '0 6px 18px rgba(241,90,41,0.35)',
+    whiteSpace: 'nowrap',
+  },
+  uploadBtn: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: 8,
+    padding: '12px 22px',
+    borderRadius: 11,
+    border: '2px solid #f15a29',
+    background: 'rgba(241,90,41,0.12)',
+    color: '#f15a29',
+    fontSize: 15,
+    fontWeight: 700,
+    cursor: 'pointer',
+    whiteSpace: 'nowrap',
   },
   metaRow: { display: 'flex', gap: 16, marginBottom: 24, flexWrap: 'wrap' },
   input: {

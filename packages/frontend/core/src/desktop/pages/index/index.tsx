@@ -37,7 +37,7 @@ import { AppContainer } from '../../components/app-container';
  * - initCloud: boolean, if true, when user is logged in, create a cloud workspace
  */
 export const Component = ({
-  defaultIndexRoute = 'all',
+  defaultIndexRoute = 'home',
   children,
   fallback,
 }: {
@@ -76,7 +76,11 @@ export const Component = ({
     if (createOnceRef.current) return;
     createOnceRef.current = true;
     // TODO: support selfhosted
-    buildShowcaseWorkspace(workspacesService, 'bridgeflow-cloud', BRAND_CLOUD_NAME)
+    buildShowcaseWorkspace(
+      workspacesService,
+      'bridgeflow-cloud',
+      BRAND_CLOUD_NAME
+    )
       .then(({ meta, defaultDocId }) => {
         if (defaultDocId) {
           jumpToPage(meta.id, defaultDocId);
@@ -161,7 +165,7 @@ export const Component = ({
               createdWorkspace.defaultPageId
             );
           } else {
-            openPage(createdWorkspace.meta.id, 'all');
+            openPage(createdWorkspace.meta.id, 'home');
           }
         }
       })
