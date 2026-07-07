@@ -1,5 +1,5 @@
 -- =====================================================================
--- BRIDGE Flow — OKR + Operational Excellence Dashboard schema
+-- BRIDGE Flow - OKR + Operational Excellence Dashboard schema
 -- Project: kcmwwaxajeaojkpjbjjl
 -- Run this in the Supabase SQL editor (or `supabase db push`).
 -- Idempotent: safe to re-run.
@@ -188,7 +188,7 @@ begin
 end $$;
 
 -- =====================================================================
--- Realtime — publish the tables the live dashboard subscribes to
+-- Realtime - publish the tables the live dashboard subscribes to
 -- =====================================================================
 do $$
 declare tbl text;

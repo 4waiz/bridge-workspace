@@ -1,5 +1,5 @@
 /**
- * Canonical BRIDGE XPI roster + demo OKR content — the single source of truth
+ * Canonical BRIDGE XPI roster + demo OKR content - the single source of truth
  * shared by:
  *   - the editor department picker (renders instantly, no "loading teams…")
  *   - the Excel template builder (Download) + parser (Upload)
@@ -60,7 +60,7 @@ export interface SeedTeamOkr {
   objectives: SeedObjective[];
 }
 
-/** KR progress % — identical to the Excel formula, clamped to 0..100. */
+/** KR progress % - identical to the Excel formula, clamped to 0..100. */
 export function krProgress(kr: {
   baseline: number;
   target: number;

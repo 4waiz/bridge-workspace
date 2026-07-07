@@ -2,7 +2,7 @@
  * Tiny, dependency-light .xlsx read/write for the BRIDGE XPI OKR tracker.
  *
  * Uses jszip (already in the monorepo) for the zip container and hand-rolled
- * OOXML for the parts we need — no SheetJS/ExcelJS. Text cells are written as
+ * OOXML for the parts we need - no SheetJS/ExcelJS. Text cells are written as
  * inline strings (valid OOXML, read by Excel / Sheets / LibreOffice) so we
  * don't have to maintain a sharedStrings table on the way out.
  *
@@ -137,15 +137,15 @@ const STYLES_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 function instructionsRows(teams: SeedTeam[]): string[] {
   const lines: CellValue[][] = [
-    [`BRIDGE XPI — OKR Tracker — ${OKR_QUARTER_LABEL}`],
+    [`BRIDGE XPI - OKR Tracker - ${OKR_QUARTER_LABEL}`],
     [''],
     ['How to fill in this file'],
-    ["1. Go to the 'OKRs' tab — that is the only sheet you need to edit."],
+    ["1. Go to the 'OKRs' tab - that is the only sheet you need to edit."],
     ['2. Each row is ONE Key Result (KR). One Objective with 3 KRs = 3 rows.'],
     [
       '3. Fill in: Objective Description, KR Description, Unit, Baseline, Target, Current Value, Initiatives, Owner.',
     ],
-    ["4. Leave 'Progress (%)' and 'Status' — they are recomputed on upload."],
+    ["4. Leave 'Progress (%)' and 'Status' - they are recomputed on upload."],
     [
       '5. Up to 3 Objectives per team and 3 KRs per Objective (rows are pre-created for every team).',
     ],
@@ -158,15 +158,15 @@ function instructionsRows(teams: SeedTeam[]): string[] {
     [''],
     ['How Status is calculated'],
     ['Progress (%) = (Current Value − Baseline) / (Target − Baseline)'],
-    ['Green  — On Track:   Progress ≥ 70%'],
-    ['Yellow — At Risk:    Progress 50% to 69%'],
-    ['Red    — Off Track:  Progress < 50%'],
+    ['Green  - On Track:   Progress ≥ 70%'],
+    ['Yellow - At Risk:    Progress 50% to 69%'],
+    ['Red    - Off Track:  Progress < 50%'],
     [''],
     ['Teams in this tracker'],
     [teams.map(t => t.name).join('  |  ')],
     [''],
     [
-      'Tip: keep the Dashboard tab open on a TV — it reflects the latest upload.',
+      'Tip: keep the Dashboard tab open on a TV - it reflects the latest upload.',
     ],
   ];
   return lines.map((v, i) => rowXml(i + 1, v, i === 0));
@@ -174,7 +174,7 @@ function instructionsRows(teams: SeedTeam[]): string[] {
 
 function dashboardRows(demo: SeedTeamOkr[], teams: SeedTeam[]): string[] {
   const rows: string[] = [];
-  rows.push(rowXml(1, [`BRIDGE XPI — OKRs ${OKR_QUARTER_LABEL}`], true));
+  rows.push(rowXml(1, [`BRIDGE XPI - OKRs ${OKR_QUARTER_LABEL}`], true));
   const header = [
     'Team',
     'Status',

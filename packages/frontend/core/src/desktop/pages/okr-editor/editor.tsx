@@ -226,7 +226,7 @@ export function OkrEditor() {
       const blob = await getTemplateBlob();
       triggerDownload(blob, 'bridge_xpi_okrs_template.xlsx');
       setToast(
-        'Template downloaded — fill the OKRs tab, then Upload & import.'
+        'Template downloaded - fill the OKRs tab, then Upload & import.'
       );
     } catch (e: any) {
       setError(e?.message ?? String(e));
@@ -459,7 +459,7 @@ export function OkrEditor() {
                 <div style={S.objTopRow}>
                   <input
                     style={{ ...S.input, borderColor: T.border, flex: 1 }}
-                    placeholder={`Objective ${i + 1} — what do we want to achieve?`}
+                    placeholder={`Objective ${i + 1} - what do we want to achieve?`}
                     value={o.title}
                     onChange={e => patchObj(i, { title: e.target.value })}
                   />
@@ -660,7 +660,7 @@ function ImportPreview({
                     <span
                       style={{ ...S.mapChip, color: STATUS_COLOR.off_track }}
                     >
-                      no matching team — will skip
+                      no matching team - will skip
                     </span>
                   )}
                 </div>
@@ -705,7 +705,7 @@ function ImportPreview({
         <div style={{ ...S.modalFoot, borderColor: T.border }}>
           <span style={{ color: T.sub, fontSize: 12.5, flex: 1 }}>
             {results
-              ? 'Import finished — teams you can’t write need the admin policy (0002 migration).'
+              ? 'Import finished - teams you can’t write need the admin policy (0002 migration).'
               : 'Applies to every matching team on the dashboard.'}
           </span>
           <button style={S.ghostBtn} onClick={onClose}>

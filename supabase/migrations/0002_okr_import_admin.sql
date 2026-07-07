@@ -1,5 +1,5 @@
 -- =====================================================================
--- BRIDGE Flow — OKR Excel import: admin write policy + template storage
+-- BRIDGE Flow - OKR Excel import: admin write policy + template storage
 -- Run AFTER 0001_okr_dashboard.sql. Idempotent.
 --
 -- Why: the Excel template is an ORG-WIDE file (all teams). A normal user can

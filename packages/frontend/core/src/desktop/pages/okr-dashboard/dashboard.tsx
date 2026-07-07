@@ -126,7 +126,7 @@ function TeamCard({
         ))
       ) : (
         <div style={S.emptyCard}>
-          No objectives yet — edit this team&apos;s OKR.
+          No objectives yet - edit this team&apos;s OKR.
         </div>
       )}
     </div>
@@ -231,7 +231,7 @@ export function OkrDashboard() {
       <header style={S.header}>
         <div style={{ minWidth: 0 }}>
           <h1 style={S.title}>
-            BRIDGE XPI — OKRs {CURRENT_QUARTER} {CURRENT_YEAR}
+            BRIDGE XPI - OKRs {CURRENT_QUARTER} {CURRENT_YEAR}
           </h1>
           <div style={{ ...S.subtitle, color: T.sub }}>
             {model?.area ?? 'Excellence Department'} · Auto-updated from OKRs ·{' '}

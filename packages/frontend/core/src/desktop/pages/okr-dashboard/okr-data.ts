@@ -6,7 +6,7 @@
  * The Supabase client is created by the web app and published on
  * globalThis.__bridgeSupabase (apps/web/src/auth/supabase-client.ts).
  * @bridgeflow/core cannot import the web app, so we read that shared singleton
- * here — one client, one auth session, app-wide.
+ * here - one client, one auth session, app-wide.
  */
 import { OKR_DEMO, OKR_TEAMS } from './okr-seed-data';
 import {
@@ -116,7 +116,7 @@ export interface DashboardModel {
 
 export async function fetchDashboardModel(): Promise<DashboardModel> {
   const sb = getSupabase();
-  if (!sb) throw new Error('Not signed in — Supabase client unavailable.');
+  if (!sb) throw new Error('Not signed in - Supabase client unavailable.');
 
   const [teamsRes, objsRes, okrsRes] = await Promise.all([
     sb.from('teams').select('*').order('sort_order'),
@@ -730,7 +730,7 @@ export async function importParsedWorkbook(
         outcome: 'error',
         objectiveCount: objectives.length,
         message: rls
-          ? 'No permission to write this team (needs admin — see 0002 migration)'
+          ? 'No permission to write this team (needs admin - see 0002 migration)'
           : raw,
       });
     }
