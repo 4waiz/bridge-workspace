@@ -93,3 +93,6 @@ af.cmd
 
 # playwright
 storageState.json
+
+# local deploy staging (oversized build assets moved out before Cloudflare upload)
+.deploy-excluded/

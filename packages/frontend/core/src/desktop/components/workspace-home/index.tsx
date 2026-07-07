@@ -667,6 +667,18 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
           </div>
         </div>
 
+        {/* OKR */}
+        <div className={styles.sectionWrapper}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>OKR</h2>
+          </div>
+          <div className={styles.templatesRow}>
+            {okrItems.map(item => (
+              <TemplateCard key={item.id} item={item} />
+            ))}
+          </div>
+        </div>
+
         {/* Templates */}
         <div className={styles.sectionWrapper}>
           <div className={styles.sectionHeader}>
@@ -677,18 +689,6 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
           </div>
           <div className={styles.templatesRow}>
             {templateItems.map(item => (
-              <TemplateCard key={item.id} item={item} />
-            ))}
-          </div>
-        </div>
-
-        {/* OKR */}
-        <div className={styles.sectionWrapper}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>OKR</h2>
-          </div>
-          <div className={styles.templatesRow}>
-            {okrItems.map(item => (
               <TemplateCard key={item.id} item={item} />
             ))}
           </div>

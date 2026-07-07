@@ -1,7 +1,7 @@
 import { type FormEvent, useState } from 'react';
 
-import { BRIDGE_ICON, BRIDGE_WORDMARK_LIGHT } from './logos';
-import { supabase } from './supabase-client';
+import { BRIDGE_LOGO_DARK, BRIDGE_LOGO_LIGHT } from './brand-logos';
+import { setRememberMe, supabase } from './supabase-client';
 
 type Mode = 'signin' | 'signup';
 
@@ -20,6 +20,7 @@ export function BridgeAuthPage() {
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
   const [showPw, setShowPw] = useState(false);
+  const [remember, setRemember] = useState(true);
 
   const switchMode = (m: Mode) => {
     setMode(m);
@@ -48,6 +49,7 @@ export function BridgeAuthPage() {
     setLoading(true);
     try {
       if (mode === 'signin') {
+        setRememberMe(remember);
         const { error } = await supabase.auth.signInWithPassword({
           email,
           password,
@@ -63,7 +65,9 @@ export function BridgeAuthPage() {
         if (data.session) {
           // auto signed-in (email confirmation disabled) → gate flips
         } else if (data.user && data.user.identities?.length === 0) {
-          setError('An account with this email already exists. Try signing in.');
+          setError(
+            'An account with this email already exists. Try signing in.'
+          );
         } else {
           setInfo(
             'Account created. Check your inbox to confirm your email, then sign in.'
@@ -105,11 +109,12 @@ export function BridgeAuthPage() {
 
       {/* ---- Brand panel ---- */}
       <aside className="bfauth-brand">
-        <div className="bfauth-brand-top">
-          <img className="bfauth-wordmark" src={BRIDGE_WORDMARK_LIGHT} alt="BRIDGE" />
-        </div>
         <div className="bfauth-brand-mid">
-          <p className="bfauth-eyebrow">BRIDGE Flow — AI Innovation Canvas</p>
+          <img
+            className="bfauth-eyebrow-logo"
+            src={BRIDGE_LOGO_DARK}
+            alt="BRIDGE Flow"
+          />
           <h1 className="bfauth-headline">
             Where ideas
             <br />
@@ -135,7 +140,11 @@ export function BridgeAuthPage() {
       {/* ---- Form panel ---- */}
       <main className="bfauth-form-wrap">
         <div className="bfauth-card">
-          <img className="bfauth-mark" src={BRIDGE_ICON} alt="BRIDGE Flow" />
+          <img
+            className="bfauth-mark"
+            src={BRIDGE_LOGO_LIGHT}
+            alt="BRIDGE Flow"
+          />
           <h2 className="bfauth-title">
             {mode === 'signin' ? 'Welcome back' : 'Create your account'}
           </h2>
@@ -162,7 +171,11 @@ export function BridgeAuthPage() {
             </button>
           </div>
 
-          <form onSubmit={onSubmit} className="bfauth-fields" noValidate>
+          <form
+            onSubmit={e => void onSubmit(e)}
+            className="bfauth-fields"
+            noValidate
+          >
             <label className="bfauth-label">
               Email
               <input
@@ -182,7 +195,9 @@ export function BridgeAuthPage() {
                 <input
                   className="bfauth-input"
                   type={showPw ? 'text' : 'password'}
-                  autoComplete={mode === 'signin' ? 'current-password' : 'new-password'}
+                  autoComplete={
+                    mode === 'signin' ? 'current-password' : 'new-password'
+                  }
                   placeholder=""
                   value={password}
                   onChange={e => setPassword(e.target.value)}
@@ -214,6 +229,19 @@ export function BridgeAuthPage() {
               </label>
             )}
 
+            {mode === 'signin' && (
+              <label className="bfauth-remember">
+                <input
+                  type="checkbox"
+                  className="bfauth-check"
+                  checked={remember}
+                  onChange={e => setRemember(e.target.checked)}
+                  disabled={loading}
+                />
+                <span>Remember me</span>
+              </label>
+            )}
+
             {error && <div className="bfauth-msg bfauth-err">{error}</div>}
             {info && <div className="bfauth-msg bfauth-info">{info}</div>}
 
@@ -231,7 +259,7 @@ export function BridgeAuthPage() {
               <button
                 type="button"
                 className="bfauth-forgot"
-                onClick={onForgot}
+                onClick={() => void onForgot()}
                 disabled={loading}
               >
                 Forgot password?
@@ -271,9 +299,14 @@ const STYLES = `
 .bfauth-brand{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;
   padding:48px 56px;color:#fff;background:linear-gradient(155deg,#434b5a 0%,#3d4451 45%,#2f343f 100%)}
 .bfauth-brand-top{position:relative;z-index:2}
+.bfauth-lockup{display:flex;align-items:center;gap:14px}
+.bfauth-lockup-icon{height:46px;width:46px;object-fit:contain;border-radius:11px;
+  box-shadow:0 4px 14px rgba(241,90,41,.35);flex:0 0 auto}
 .bfauth-wordmark{height:34px;width:auto;display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.25))}
 .bfauth-brand-mid{position:relative;z-index:2;max-width:460px}
 .bfauth-eyebrow{margin:0 0 18px;font-size:14px;font-weight:700;letter-spacing:1.5px;color:#f4a58c}
+.bfauth-eyebrow-logo{display:block;height:42px;width:auto;margin:0 0 22px;
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,.3))}
 .bfauth-headline{margin:0;font-size:64px;line-height:1.04;font-weight:700;letter-spacing:-.5px}
 .bfauth-accent{color:#f15a29}
 .bfauth-rule{display:block;width:64px;height:4px;background:#f15a29;border-radius:2px;margin:28px 0 30px}
@@ -294,7 +327,7 @@ const STYLES = `
 .bfauth-form-wrap{display:flex;align-items:center;justify-content:center;padding:40px 24px;background:#f6f7f9}
 .bfauth-card{width:100%;max-width:420px;background:#fff;border:1px solid #e7e9ec;border-radius:14px;
   padding:40px 38px;box-shadow:0 24px 60px -28px rgba(45,52,63,.45)}
-.bfauth-mark{width:52px;height:52px;object-fit:contain;margin-bottom:20px}
+.bfauth-mark{height:40px;width:auto;object-fit:contain;display:block;margin-bottom:22px}
 .bfauth-title{margin:0;font-size:26px;font-weight:700;letter-spacing:-.3px;color:#2f343f}
 .bfauth-sub{margin:8px 0 24px;font-size:14.5px;color:#8a9099;line-height:1.4}
 
@@ -314,6 +347,18 @@ const STYLES = `
 .bfauth-eye{position:absolute;right:10px;border:0;background:transparent;color:#8a9099;font-size:12.5px;font-weight:600;
   cursor:pointer;padding:6px;font-family:inherit}
 .bfauth-eye:hover{color:#f15a29}
+
+.bfauth-remember{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:600;color:#5a616c;
+  cursor:pointer;user-select:none;margin-top:-2px}
+.bfauth-check{appearance:none;-webkit-appearance:none;-moz-appearance:none;position:relative;
+  width:20px;height:20px;flex:0 0 auto;margin:0;border:2px solid #cfd3da;border-radius:6px;background:#fff;
+  cursor:pointer;transition:background .15s,border-color .15s}
+.bfauth-check:hover{border-color:#f15a29}
+.bfauth-check:checked{background:#f15a29;border-color:#f15a29}
+.bfauth-check:checked::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;
+  border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+.bfauth-check:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(241,90,41,.25)}
+.bfauth-check:disabled{cursor:not-allowed;opacity:.6}
 
 .bfauth-msg{font-size:13px;line-height:1.4;padding:10px 12px;border-radius:8px}
 .bfauth-err{color:#b42318;background:#fef3f2;border:1px solid #fecdc9}
