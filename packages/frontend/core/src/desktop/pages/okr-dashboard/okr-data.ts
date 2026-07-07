@@ -88,10 +88,44 @@ export const STATUS_DESC: Record<Status, string> = {
   off_track: 'Corrective action required',
 };
 
-/** Progress % -> status. >=70 on track, >=50 at risk, else off track. */
-export function statusFromProgress(progress: number): Status {
-  if (progress >= 70) return 'on_track';
-  if (progress >= 50) return 'at_risk';
+/**
+ * Fraction (0..100) of the current quarter that has elapsed — i.e. where a
+ * team "should" be if they progressed linearly. Month 1 ≈ 33%, month 2 ≈ 66%,
+ * end of quarter ≈ 100%. This is the pace benchmark that status is judged
+ * against, so early in the quarter the bar is low and late it is high.
+ */
+export function quarterExpectedPct(
+  quarter: string = CURRENT_QUARTER,
+  year: number = CURRENT_YEAR,
+  now: Date = new Date()
+): number {
+  const q = parseInt(quarter.replace(/\D/g, ''), 10) || 1; // 1..4
+  const startMonth = (q - 1) * 3; // 0-indexed
+  const start = new Date(year, startMonth, 1).getTime();
+  const end = new Date(year, startMonth + 3, 1).getTime(); // first day after quarter
+  if (end <= start) return 0;
+  const frac = (now.getTime() - start) / (end - start);
+  return Math.max(0, Math.min(100, Math.round(frac * 100)));
+}
+
+/** How far behind pace (in progress points) still counts as "at risk". */
+export const PACE_AT_RISK_BAND = 25;
+
+/**
+ * Status is PACE-BASED, not a fixed threshold: compare actual progress against
+ * how far into the quarter we are (`expected`).
+ *   - on or ahead of pace (incl. target met/exceeded) → On Track
+ *   - up to PACE_AT_RISK_BAND points behind pace       → At Risk
+ *   - further behind                                   → Off Track
+ * So 33% in month 1 is On Track, but 90% in the last month (expected ~100%)
+ * is At Risk. Defaults `expected` to the live quarter pace.
+ */
+export function statusFromProgress(
+  progress: number,
+  expected: number = quarterExpectedPct()
+): Status {
+  if (progress >= expected) return 'on_track';
+  if (progress >= expected - PACE_AT_RISK_BAND) return 'at_risk';
   return 'off_track';
 }
 

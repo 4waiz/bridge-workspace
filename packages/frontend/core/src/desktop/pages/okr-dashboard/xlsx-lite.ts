@@ -17,17 +17,34 @@ import JSZip from 'jszip';
 import {
   krProgress,
   objectiveProgress,
+  OKR_QUARTER,
   OKR_QUARTER_LABEL,
   OKR_TEAMS,
+  OKR_YEAR,
   type SeedTeam,
   type SeedTeamOkr,
 } from './okr-seed-data';
 
-// ---- shared status labels (kept local to avoid an import cycle with
-//      okr-data.ts, which imports THIS module). Thresholds match the app. ----
-function statusLabelFor(progress: number): string {
-  if (progress >= 70) return 'On Track';
-  if (progress >= 50) return 'At Risk';
+// ---- pace-based status (kept local to avoid an import cycle with okr-data.ts,
+//      which imports THIS module). Mirrors okr-data.ts statusFromProgress:
+//      status compares progress against how far into the quarter we are. ----
+/** Fraction (0..100) of the current quarter elapsed today. */
+function quarterExpectedPct(now: Date = new Date()): number {
+  const q = parseInt(String(OKR_QUARTER).replace(/\D/g, ''), 10) || 1;
+  const startMonth = (q - 1) * 3;
+  const start = new Date(OKR_YEAR, startMonth, 1).getTime();
+  const end = new Date(OKR_YEAR, startMonth + 3, 1).getTime();
+  if (end <= start) return 0;
+  const frac = (now.getTime() - start) / (end - start);
+  return Math.max(0, Math.min(100, Math.round(frac * 100)));
+}
+
+function statusLabelFor(
+  progress: number,
+  expected: number = quarterExpectedPct()
+): string {
+  if (progress >= expected) return 'On Track';
+  if (progress >= expected - 25) return 'At Risk';
   return 'Off Track';
 }
 
@@ -157,10 +174,19 @@ function instructionsRows(teams: SeedTeam[]): string[] {
     ],
     [''],
     ['How Status is calculated'],
-    ['Progress (%) = (Current Value − Baseline) / (Target − Baseline)'],
-    ['Green  - On Track:   Progress ≥ 70%'],
-    ['Yellow - At Risk:    Progress 50% to 69%'],
-    ['Red    - Off Track:  Progress < 50%'],
+    [
+      'Progress (%) = (Current Value − Baseline) / (Target − Baseline), capped 0–100%.',
+    ],
+    [
+      'A Current Value of 0 counts as "not measured yet" (0%). Beating the target caps at 100%.',
+    ],
+    [
+      'Status is PACE-based: it compares Progress with how far into the quarter we are',
+    ],
+    ['(month 1 ≈ 33%, month 2 ≈ 66%, end ≈ 100%).'],
+    ['Green  - On Track:   at or ahead of the expected pace'],
+    ['Yellow - At Risk:    up to 25 points behind pace'],
+    ['Red    - Off Track:  more than 25 points behind pace'],
     [''],
     ['Teams in this tracker'],
     [teams.map(t => t.name).join('  |  ')],
