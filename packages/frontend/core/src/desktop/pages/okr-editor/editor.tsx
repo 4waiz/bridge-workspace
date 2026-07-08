@@ -30,19 +30,28 @@ import {
   type Team,
   type TeamImportResult,
 } from '../okr-dashboard/okr-data';
-import { OKR_TEAMS } from '../okr-dashboard/okr-seed-data';
+import { demoForTeam, OKR_TEAMS } from '../okr-dashboard/okr-seed-data';
 import type { ParsedWorkbook } from '../okr-dashboard/xlsx-lite';
 
-// theme-aware tokens (flip automatically light <-> dark)
+// Light UI palette (matches the OKR editor design).
 const T = {
-  bg: 'var(--affine-background-primary-color, #0b0d10)',
-  card: 'var(--affine-background-overlay-panel-color, #14171c)',
-  border: 'var(--affine-border-color, rgba(255,255,255,0.09))',
-  text: 'var(--affine-text-primary-color, #e8eaed)',
-  sub: 'var(--affine-text-secondary-color, #9aa3b2)',
-  track: 'var(--affine-hover-color, rgba(255,255,255,0.07))',
-  accent: 'var(--affine-primary-color, #f15a29)',
+  bg: '#f3f4f6',
+  card: '#ffffff',
+  border: '#e6e8ee',
+  text: '#20242e',
+  sub: '#7b8290',
+  track: '#eceef2',
+  accent: '#f15a29',
 };
+
+const initialsOf = (s: string): string =>
+  (s || 'OK')
+    .split(/\s+/)
+    .map(w => w[0])
+    .filter(Boolean)
+    .slice(0, 2)
+    .join('')
+    .toUpperCase();
 
 function rgba(hex: string, a: number): string {
   const h = hex.replace('#', '');
@@ -92,6 +101,7 @@ export function OkrEditor() {
     null
   );
   const [toast, setToast] = useState<string | null>(null);
+  const [menuFor, setMenuFor] = useState<number | null>(null);
 
   // Background: load DB teams (for ids + import matching) + my team preselect.
   useEffect(() => {
@@ -144,7 +154,10 @@ export function OkrEditor() {
     const data = await fetchTeamOkr(dbTeam.id);
     setTeamId(dbTeam.id);
     setTeamName(dbTeam.name);
-    setMeta(data.meta);
+    // Owner comes from the Excel/seed roster so each team shows its person
+    // (e.g. Agile → Mateus Rocha), falling back to the DB value if unmapped.
+    const seedOwner = demoForTeam(dbTeam.key)?.owner ?? '';
+    setMeta({ ...data.meta, owner: seedOwner || data.meta.owner || '' });
     setObjectives(data.objectives);
     setDirty(false);
   }, []);
@@ -284,7 +297,7 @@ export function OkrEditor() {
       if (teamId) {
         try {
           const data = await fetchTeamOkr(teamId);
-          setMeta(data.meta);
+          setMeta(prev => ({ ...data.meta, owner: prev.owner }));
           setObjectives(data.objectives);
           setDirty(false);
         } catch {
@@ -312,14 +325,35 @@ export function OkrEditor() {
     return () => clearTimeout(t);
   }, [toast]);
 
+  // ---- summary for the stat row ----
+  const objCount = objectives.length;
+  const avgProgress = objCount
+    ? Math.round(
+        objectives.reduce((s, o) => s + (o.progress ?? 0), 0) / objCount
+      )
+    : 0;
+  const statuses = objectives.map(o => statusFromProgress(o.progress));
+  const notOk = statuses.filter(s => s !== 'on_track').length;
+  const overall = statuses.some(s => s === 'off_track')
+    ? 'off_track'
+    : statuses.some(s => s === 'at_risk')
+      ? 'at_risk'
+      : 'on_track';
+  const overallColor = STATUS_COLOR[overall];
+  const overallSub =
+    objCount === 0
+      ? 'No objectives yet'
+      : notOk === 0
+        ? 'All objectives on track'
+        : `${notOk} objective${notOk === 1 ? '' : 's'} to watch`;
+  const avatarText = initialsOf(meta.owner || teamName);
+
   // ---- render ----
   return (
     <div style={{ ...S.root, background: T.bg, color: T.text }}>
       {phase === 'pick' ? (
         <div style={S.pickWrap}>
-          <div
-            style={{ ...S.pickCard, background: T.card, borderColor: T.border }}
-          >
+          <div style={S.pickCard}>
             <h1 style={S.pickTitle}>Which department are you from?</h1>
             <p style={{ ...S.pickSub, color: T.sub }}>
               Pick your team to load and edit its {CURRENT_QUARTER}{' '}
@@ -336,14 +370,11 @@ export function OkrEditor() {
                     style={{
                       ...S.pickItem,
                       borderColor: on ? T.accent : T.border,
-                      background: on ? rgba('#f15a29', 0.1) : 'transparent',
+                      background: on ? rgba('#f15a29', 0.08) : '#fff',
                     }}
                   >
                     <span
-                      style={{
-                        ...S.radio,
-                        borderColor: on ? T.accent : T.sub,
-                      }}
+                      style={{ ...S.radio, borderColor: on ? T.accent : T.sub }}
                     >
                       {on ? <span style={S.radioDot} /> : null}
                     </span>
@@ -372,217 +403,323 @@ export function OkrEditor() {
         </div>
       ) : (
         <>
-          {/* header */}
-          <header style={S.header}>
-            <div>
-              <button style={S.link} onClick={() => setPhase('pick')}>
-                ← Change department
-              </button>
-              <h1 style={S.title}>
-                {teamName} · OKR {CURRENT_QUARTER} {CURRENT_YEAR}
-              </h1>
-            </div>
-            <button
-              style={S.link}
-              onClick={() => guardedLeave('/okr-dashboard')}
-            >
-              View dashboard →
-            </button>
-          </header>
-
-          {/* Excel toolbar — the primary workflow, so make it stand out */}
-          <div
-            style={{
-              ...S.toolbar,
-              borderColor: rgba('#f15a29', 0.35),
-              background: rgba('#f15a29', 0.06),
-            }}
-          >
-            <div>
-              <div style={S.toolbarKicker}>EXCEL SYNC</div>
-              <span style={{ color: T.sub, fontSize: 13 }}>
-                Import updates the whole dashboard · or edit the sliders below
-                by hand
-              </span>
-            </div>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+          {/* top app bar */}
+          <div style={S.appbar}>
+            <div style={S.appbarLeft}>
               <button
-                style={{ ...S.downloadBtn, opacity: busy ? 0.6 : 1 }}
-                onClick={() => void onDownload()}
-                disabled={busy}
-                title="Download the Excel template (demo data pre-filled)"
+                style={S.appMenu}
+                onClick={() => setPhase('pick')}
+                title="Change department"
               >
-                <span style={S.btnIcon}>⬇</span> Download template
+                ☰
               </button>
-              <button
-                style={{ ...S.uploadBtn, opacity: busy ? 0.6 : 1 }}
-                onClick={() => fileInput.current?.click()}
-                disabled={busy}
-                title="Upload a filled-in Excel to import into the dashboard"
-              >
-                <span style={S.btnIcon}>⬆</span> Upload &amp; import
-              </button>
-              <input
-                ref={fileInput}
-                type="file"
-                accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                style={{ display: 'none' }}
-                onChange={e => void onPickFile(e)}
-              />
+              <span style={S.appMark}>◎</span>
+              <span style={S.appTitle}>OKRs</span>
+            </div>
+            <div style={S.appbarRight}>
+              <span style={S.bell}>🔔</span>
+              <span style={S.avatar}>{avatarText}</span>
             </div>
           </div>
 
-          {/* OKR meta */}
-          <div style={{ ...S.metaRow }}>
-            <Field label="Area / Discipline">
-              <input
-                style={{ ...S.input, borderColor: T.border }}
-                value={meta.area}
-                onChange={e => {
-                  setMeta({ ...meta, area: e.target.value });
-                  setDirty(true);
-                }}
-              />
-            </Field>
-            <Field label="Owner">
-              <input
-                style={{ ...S.input, borderColor: T.border }}
-                value={meta.owner}
-                onChange={e => {
-                  setMeta({ ...meta, owner: e.target.value });
-                  setDirty(true);
-                }}
-              />
-            </Field>
-          </div>
-
-          {/* objectives */}
-          <div style={S.objHead}>
-            <span>OBJECTIVES</span>
-            <span style={{ color: T.sub, fontWeight: 400 }}>
-              progress drives the dashboard status colour
-            </span>
-          </div>
-
-          {objectives.map((o, i) => {
-            const st = statusFromProgress(o.progress);
-            const c = STATUS_COLOR[st];
-            return (
-              <div
-                key={i}
-                style={{
-                  ...S.objCard,
-                  background: T.card,
-                  borderColor: T.border,
-                }}
+          <div style={S.content}>
+            {/* header */}
+            <header style={S.header}>
+              <div>
+                <button style={S.link} onClick={() => setPhase('pick')}>
+                  ← Change department
+                </button>
+                <h1 style={S.title}>
+                  {teamName} · OKR {CURRENT_QUARTER} {CURRENT_YEAR}
+                </h1>
+              </div>
+              <button
+                style={S.link}
+                onClick={() => guardedLeave('/okr-dashboard')}
               >
-                <div style={S.objTopRow}>
-                  <input
-                    style={{ ...S.input, borderColor: T.border, flex: 1 }}
-                    placeholder={`Objective ${i + 1} - what do we want to achieve?`}
-                    value={o.title}
-                    onChange={e => patchObj(i, { title: e.target.value })}
-                  />
-                  <button
-                    style={S.removeBtn}
-                    title="Remove objective"
-                    onClick={() => removeObj(i)}
-                  >
-                    ✕
-                  </button>
+                View dashboard ↗
+              </button>
+            </header>
+
+            {/* Excel Sync */}
+            <div style={S.toolbar}>
+              <div>
+                <div style={S.toolbarKicker}>
+                  <span style={S.toolbarIcon}>▦</span> EXCEL SYNC
                 </div>
-                <div style={S.progressRow}>
-                  <input
-                    type="range"
-                    min={0}
-                    max={100}
-                    value={o.progress}
-                    onChange={e =>
-                      patchObj(i, {
-                        progress: clampProgress(Number(e.target.value)),
-                      })
-                    }
-                    style={{ flex: 1, accentColor: c }}
-                  />
-                  <div style={S.pctBox}>
-                    <input
-                      type="number"
-                      min={0}
-                      max={100}
-                      value={o.progress}
-                      onChange={e =>
-                        patchObj(i, {
-                          progress: clampProgress(Number(e.target.value)),
-                        })
-                      }
-                      style={{
-                        ...S.input,
-                        borderColor: T.border,
-                        width: 58,
-                        textAlign: 'right',
-                      }}
-                    />
-                    <span style={{ color: T.sub }}>%</span>
-                  </div>
-                  <span
-                    style={{
-                      ...S.statusChip,
-                      color: c,
-                      background: rgba(c, 0.14),
-                      border: `1px solid ${rgba(c, 0.45)}`,
-                    }}
-                  >
-                    {STATUS_LABEL[st]}
-                  </span>
+                <span style={{ color: T.sub, fontSize: 13 }}>
+                  Import updates across the whole dashboard, or edit the sliders
+                  below by hand.
+                </span>
+              </div>
+              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                <button
+                  style={{ ...S.downloadBtn, opacity: busy ? 0.6 : 1 }}
+                  onClick={() => void onDownload()}
+                  disabled={busy}
+                  title="Download the Excel template (demo data pre-filled)"
+                >
+                  <span style={S.btnIcon}>⬇</span> Download template
+                </button>
+                <button
+                  style={{ ...S.uploadBtn, opacity: busy ? 0.6 : 1 }}
+                  onClick={() => fileInput.current?.click()}
+                  disabled={busy}
+                  title="Upload a filled-in Excel to import into the dashboard"
+                >
+                  <span style={S.btnIcon}>⬆</span> Upload &amp; import
+                </button>
+                <input
+                  ref={fileInput}
+                  type="file"
+                  accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                  style={{ display: 'none' }}
+                  onChange={e => void onPickFile(e)}
+                />
+              </div>
+            </div>
+
+            {/* summary stat row */}
+            <div style={S.statRow}>
+              <div style={S.statCell}>
+                <span
+                  style={{
+                    ...S.statIcon,
+                    background: rgba('#f15a29', 0.12),
+                    color: '#f15a29',
+                  }}
+                >
+                  ◎
+                </span>
+                <div>
+                  <div style={S.statLabel}>Objectives</div>
+                  <div style={S.statValue}>{objCount}</div>
+                  <div style={S.statSub}>Total objectives</div>
                 </div>
               </div>
-            );
-          })}
+              <div style={S.statDivider} />
+              <div style={S.statCell}>
+                <span
+                  style={{
+                    ...S.statIcon,
+                    background: rgba('#2eb85c', 0.12),
+                    color: '#2eb85c',
+                  }}
+                >
+                  ↗
+                </span>
+                <div>
+                  <div style={S.statLabel}>Average progress</div>
+                  <div style={S.statValue}>{avgProgress}%</div>
+                  <div style={S.statSub}>Across all objectives</div>
+                </div>
+              </div>
+              <div style={S.statDivider} />
+              <div style={S.statCell}>
+                <span
+                  style={{
+                    ...S.statIcon,
+                    background: rgba(overallColor, 0.14),
+                    color: overallColor,
+                  }}
+                >
+                  ✓
+                </span>
+                <div>
+                  <div style={S.statLabel}>Overall status</div>
+                  <div
+                    style={{
+                      ...S.statValue,
+                      fontSize: 18,
+                      color: overallColor,
+                    }}
+                  >
+                    {STATUS_LABEL[overall]}
+                  </div>
+                  <div style={S.statSub}>{overallSub}</div>
+                </div>
+              </div>
+            </div>
 
-          <button
-            style={{ ...S.addBtn, borderColor: T.border }}
-            onClick={addObj}
-          >
-            + Add objective
-          </button>
+            {/* meta */}
+            <div style={S.metaRow}>
+              <Field label="Area / Discipline">
+                <div style={S.inputWrap}>
+                  <span style={S.inputIcon}>👥</span>
+                  <input
+                    style={{ ...S.input, paddingLeft: 38 }}
+                    value={meta.area}
+                    onChange={e => {
+                      setMeta({ ...meta, area: e.target.value });
+                      setDirty(true);
+                    }}
+                  />
+                </div>
+              </Field>
+              <Field label="Owner">
+                <div style={S.inputWrap}>
+                  <span style={S.inputIcon}>👤</span>
+                  <input
+                    style={{ ...S.input, paddingLeft: 38 }}
+                    value={meta.owner}
+                    onChange={e => {
+                      setMeta({ ...meta, owner: e.target.value });
+                      setDirty(true);
+                    }}
+                  />
+                </div>
+              </Field>
+            </div>
 
-          {error ? <div style={S.err}>{error}</div> : null}
+            {/* objectives */}
+            <div style={S.objHead}>
+              <span>OBJECTIVES</span>
+              <span style={{ color: T.sub, fontWeight: 500, letterSpacing: 0 }}>
+                progress drives the dashboard status
+              </span>
+            </div>
+
+            {objectives.map((o, i) => {
+              const st = statusFromProgress(o.progress);
+              const c = STATUS_COLOR[st];
+              return (
+                <div key={i} style={S.objCard}>
+                  <div style={S.objTopRow}>
+                    <span style={S.objBadge}>{i + 1}</span>
+                    <input
+                      style={S.objTitleInput}
+                      placeholder={`Objective ${i + 1} — what do we want to achieve?`}
+                      value={o.title}
+                      onChange={e => patchObj(i, { title: e.target.value })}
+                    />
+                    <div style={{ position: 'relative' }}>
+                      <button
+                        style={S.kebab}
+                        title="Options"
+                        onClick={() => setMenuFor(menuFor === i ? null : i)}
+                      >
+                        ⋮
+                      </button>
+                      {menuFor === i ? (
+                        <div style={S.menu}>
+                          <button
+                            style={S.menuItem}
+                            onClick={() => {
+                              removeObj(i);
+                              setMenuFor(null);
+                            }}
+                          >
+                            Remove objective
+                          </button>
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                  <div style={S.progressRow}>
+                    <div style={S.sliderWrap}>
+                      <div
+                        style={{
+                          ...S.sliderBubble,
+                          left: `${o.progress}%`,
+                          color: c,
+                        }}
+                      >
+                        {o.progress}%
+                      </div>
+                      <input
+                        type="range"
+                        min={0}
+                        max={100}
+                        value={o.progress}
+                        onChange={e =>
+                          patchObj(i, {
+                            progress: clampProgress(Number(e.target.value)),
+                          })
+                        }
+                        style={{ ...S.slider, accentColor: c }}
+                      />
+                      <div style={S.sliderEnds}>
+                        <span>0%</span>
+                        <span>100%</span>
+                      </div>
+                    </div>
+                    <div style={S.pctBox}>
+                      <input
+                        type="number"
+                        min={0}
+                        max={100}
+                        value={o.progress}
+                        onChange={e =>
+                          patchObj(i, {
+                            progress: clampProgress(Number(e.target.value)),
+                          })
+                        }
+                        style={S.pctInput}
+                      />
+                      <span style={{ color: T.sub }}>%</span>
+                    </div>
+                    <span
+                      style={{
+                        ...S.statusChip,
+                        color: c,
+                        background: rgba(c, 0.12),
+                        border: `1px solid ${rgba(c, 0.4)}`,
+                      }}
+                    >
+                      ● {STATUS_LABEL[st]}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+
+            <button style={S.addBtn} onClick={addObj}>
+              ＋ Add objective
+            </button>
+
+            {error ? <div style={S.err}>{error}</div> : null}
+            <div style={{ height: 96 }} />
+          </div>
 
           {/* sticky save bar */}
-          <div
-            style={{ ...S.saveBar, background: T.card, borderColor: T.border }}
-          >
-            <span style={{ color: T.sub, fontSize: 13 }}>
-              {saving
-                ? 'Saving…'
-                : dirty
-                  ? 'Editing… auto-saves'
-                  : savedAt
-                    ? `Saved ✓ ${savedAt.toLocaleTimeString()}`
-                    : 'Auto-save on'}
-            </span>
-            <div style={{ display: 'flex', gap: 10 }}>
-              <button style={S.ghostBtn} onClick={() => guardedLeave(-1)}>
-                Close
-              </button>
-              <button
-                style={{ ...S.primaryBtn, opacity: saving || !dirty ? 0.6 : 1 }}
-                disabled={saving || !dirty}
-                onClick={() => void save()}
-              >
-                {saving ? 'Saving…' : 'Save now'}
-              </button>
+          <div style={S.saveBar}>
+            <div style={S.saveBarInner}>
+              <span style={S.saveStatus}>
+                <span style={S.saveDot}>✓</span>
+                <span>
+                  <b style={{ color: T.text }}>
+                    {saving
+                      ? 'Saving…'
+                      : dirty
+                        ? 'Editing… auto-saves'
+                        : savedAt
+                          ? `Saved · ${savedAt.toLocaleTimeString()}`
+                          : 'Auto-save on'}
+                  </b>
+                  <span style={S.saveSub}>
+                    {' '}
+                    All changes are saved automatically
+                  </span>
+                </span>
+              </span>
+              <div style={{ display: 'flex', gap: 10 }}>
+                <button style={S.ghostBtn} onClick={() => guardedLeave(-1)}>
+                  Close
+                </button>
+                <button
+                  style={{ ...S.primaryBtn, opacity: saving ? 0.6 : 1 }}
+                  disabled={saving}
+                  onClick={() => void save()}
+                >
+                  {saving ? 'Saving…' : 'Save now'}
+                </button>
+              </div>
             </div>
           </div>
-          <div style={{ height: 80 }} />
         </>
       )}
 
-      {toast ? (
-        <div style={{ ...S.toast, background: T.card, borderColor: T.border }}>
-          {toast}
-        </div>
-      ) : null}
+      {toast ? <div style={S.toast}>{toast}</div> : null}
 
       {preview ? (
         <ImportPreview
@@ -630,10 +767,7 @@ function ImportPreview({
 
   return (
     <div style={S.modalWrap} onClick={onClose}>
-      <div
-        style={{ ...S.modal, background: T.card, borderColor: T.border }}
-        onClick={e => e.stopPropagation()}
-      >
+      <div style={S.modal} onClick={e => e.stopPropagation()}>
         <div style={S.modalHead}>
           <div>
             <h2 style={{ margin: 0, fontSize: 19, fontWeight: 800 }}>
@@ -645,7 +779,7 @@ function ImportPreview({
               {totalKrs} key results
             </p>
           </div>
-          <button style={S.removeBtn} onClick={onClose} title="Close">
+          <button style={S.kebab} onClick={onClose} title="Close">
             ✕
           </button>
         </div>
@@ -656,10 +790,7 @@ function ImportPreview({
             const res = resultFor(pt.teamName);
             const isCurrent = match?.id && match.id === currentTeamId;
             return (
-              <div
-                key={pt.teamName}
-                style={{ ...S.previewTeam, borderColor: T.border }}
-              >
+              <div key={pt.teamName} style={S.previewTeam}>
                 <div style={S.previewTeamHead}>
                   <span style={{ fontWeight: 700 }}>
                     {pt.teamName}
@@ -722,7 +853,7 @@ function ImportPreview({
           })}
         </div>
 
-        <div style={{ ...S.modalFoot, borderColor: T.border }}>
+        <div style={S.modalFoot}>
           <span style={{ color: T.sub, fontSize: 12.5, flex: 1 }}>
             {results
               ? 'Import finished - if your team can’t be written you need the admin policy (0002 migration).'
@@ -771,12 +902,16 @@ function ResultChip({ res }: { res: TeamImportResult }) {
 
 function Field({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <label style={{ display: 'block', flex: 1 }}>
-      <div style={{ fontSize: 12, color: T.sub, marginBottom: 5 }}>{label}</div>
+    <label style={{ display: 'block', flex: 1, minWidth: 240 }}>
+      <div style={{ fontSize: 12.5, color: T.sub, marginBottom: 6 }}>
+        {label}
+      </div>
       {children}
     </label>
   );
 }
+
+const FONT = 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
 
 const S: Record<string, CSSProperties> = {
   root: {
@@ -784,9 +919,62 @@ const S: Record<string, CSSProperties> = {
     inset: 0,
     zIndex: 9999,
     overflowY: 'auto',
-    padding: '28px 32px 40px',
-    fontFamily:
-      'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    fontFamily: FONT,
+  },
+  content: {
+    maxWidth: 1120,
+    margin: '0 auto',
+    padding: '24px 28px 40px',
+  },
+  // top app bar
+  appbar: {
+    position: 'sticky',
+    top: 0,
+    zIndex: 5,
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: 58,
+    padding: '0 22px',
+    background: '#fff',
+    borderBottom: `1px solid ${T.border}`,
+  },
+  appbarLeft: { display: 'flex', alignItems: 'center', gap: 12 },
+  appbarRight: { display: 'flex', alignItems: 'center', gap: 16 },
+  appMenu: {
+    border: 'none',
+    background: 'transparent',
+    color: T.sub,
+    fontSize: 18,
+    cursor: 'pointer',
+    padding: 4,
+    lineHeight: 1,
+  },
+  appMark: {
+    width: 26,
+    height: 26,
+    borderRadius: 7,
+    background: T.accent,
+    color: '#fff',
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 15,
+    flexShrink: 0,
+  },
+  appTitle: { fontSize: 16, fontWeight: 800, color: T.text },
+  bell: { fontSize: 15, opacity: 0.7 },
+  avatar: {
+    width: 32,
+    height: 32,
+    borderRadius: '50%',
+    background: rgba('#f15a29', 0.15),
+    color: T.accent,
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 12.5,
+    fontWeight: 800,
   },
   // picker
   pickWrap: {
@@ -794,14 +982,17 @@ const S: Record<string, CSSProperties> = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 24,
   },
   pickCard: {
     width: 'min(460px, 92vw)',
-    border: '1px solid',
+    background: '#fff',
+    border: `1px solid ${T.border}`,
     borderRadius: 16,
     padding: 28,
+    boxShadow: '0 20px 50px -30px rgba(20,24,34,.4)',
   },
-  pickTitle: { fontSize: 22, fontWeight: 800, margin: 0 },
+  pickTitle: { fontSize: 22, fontWeight: 800, margin: 0, color: T.text },
   pickSub: { fontSize: 13.5, margin: '8px 0 18px' },
   pickList: { display: 'flex', flexDirection: 'column', gap: 8 },
   pickItem: {
@@ -813,7 +1004,7 @@ const S: Record<string, CSSProperties> = {
     padding: '11px 14px',
     borderRadius: 10,
     border: '1px solid',
-    color: 'inherit',
+    color: T.text,
     fontSize: 15,
     cursor: 'pointer',
   },
@@ -827,12 +1018,7 @@ const S: Record<string, CSSProperties> = {
     justifyContent: 'center',
     flexShrink: 0,
   },
-  radioDot: {
-    width: 8,
-    height: 8,
-    borderRadius: '50%',
-    background: '#f15a29',
-  },
+  radioDot: { width: 8, height: 8, borderRadius: '50%', background: '#f15a29' },
   teamDot: { width: 10, height: 10, borderRadius: 3, flexShrink: 0 },
   pickActions: {
     display: 'flex',
@@ -840,24 +1026,31 @@ const S: Record<string, CSSProperties> = {
     gap: 10,
     marginTop: 22,
   },
-  // editor
+  // header
   header: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     gap: 16,
-    marginBottom: 16,
+    marginBottom: 18,
   },
-  title: { fontSize: 26, fontWeight: 800, margin: '6px 0 0' },
+  title: {
+    fontSize: 27,
+    fontWeight: 800,
+    margin: '6px 0 0',
+    color: T.text,
+    letterSpacing: -0.3,
+  },
   link: {
     background: 'transparent',
     border: 'none',
-    color: 'inherit',
-    opacity: 0.75,
+    color: T.sub,
     fontSize: 13,
     cursor: 'pointer',
     padding: 0,
+    fontWeight: 600,
   },
+  // Excel Sync
   toolbar: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -865,127 +1058,305 @@ const S: Record<string, CSSProperties> = {
     gap: 16,
     flexWrap: 'wrap',
     padding: '16px 20px',
-    border: '1px solid',
+    border: `1px solid ${rgba('#f15a29', 0.25)}`,
+    background: rgba('#f15a29', 0.05),
     borderRadius: 14,
-    marginBottom: 24,
+    marginBottom: 18,
   },
   toolbarKicker: {
-    fontSize: 12,
+    display: 'flex',
+    alignItems: 'center',
+    gap: 7,
+    fontSize: 12.5,
     fontWeight: 800,
-    letterSpacing: 1.4,
+    letterSpacing: 1.2,
     color: '#f15a29',
     marginBottom: 4,
   },
-  btnIcon: { fontSize: 16, marginRight: 2 },
+  toolbarIcon: { fontSize: 14 },
+  btnIcon: { fontSize: 15, marginRight: 2 },
   downloadBtn: {
     display: 'inline-flex',
     alignItems: 'center',
     gap: 8,
-    padding: '12px 22px',
+    padding: '11px 20px',
     borderRadius: 11,
     border: 'none',
     background: '#f15a29',
     color: '#fff',
-    fontSize: 15,
+    fontSize: 14.5,
     fontWeight: 700,
     cursor: 'pointer',
-    boxShadow: '0 6px 18px rgba(241,90,41,0.35)',
+    boxShadow: '0 6px 16px rgba(241,90,41,0.3)',
     whiteSpace: 'nowrap',
   },
   uploadBtn: {
     display: 'inline-flex',
     alignItems: 'center',
     gap: 8,
-    padding: '12px 22px',
+    padding: '11px 20px',
     borderRadius: 11,
-    border: '2px solid #f15a29',
-    background: 'rgba(241,90,41,0.12)',
+    border: '1.5px solid #f15a29',
+    background: '#fff',
     color: '#f15a29',
-    fontSize: 15,
+    fontSize: 14.5,
     fontWeight: 700,
     cursor: 'pointer',
     whiteSpace: 'nowrap',
   },
-  metaRow: { display: 'flex', gap: 16, marginBottom: 24, flexWrap: 'wrap' },
+  // stat row
+  statRow: {
+    display: 'flex',
+    alignItems: 'stretch',
+    gap: 0,
+    background: '#fff',
+    border: `1px solid ${T.border}`,
+    borderRadius: 16,
+    padding: '18px 8px',
+    marginBottom: 22,
+    flexWrap: 'wrap',
+  },
+  statCell: {
+    flex: 1,
+    minWidth: 200,
+    display: 'flex',
+    alignItems: 'center',
+    gap: 14,
+    padding: '4px 20px',
+  },
+  statDivider: { width: 1, background: T.border, alignSelf: 'stretch' },
+  statIcon: {
+    width: 44,
+    height: 44,
+    borderRadius: 12,
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 20,
+    flexShrink: 0,
+  },
+  statLabel: { fontSize: 12.5, color: T.sub, fontWeight: 600 },
+  statValue: {
+    fontSize: 26,
+    fontWeight: 800,
+    color: T.text,
+    lineHeight: 1.15,
+  },
+  statSub: { fontSize: 12, color: T.sub },
+  // meta
+  metaRow: { display: 'flex', gap: 20, marginBottom: 26, flexWrap: 'wrap' },
+  inputWrap: { position: 'relative', display: 'flex', alignItems: 'center' },
+  inputIcon: {
+    position: 'absolute',
+    left: 13,
+    fontSize: 14,
+    opacity: 0.6,
+    pointerEvents: 'none',
+  },
   input: {
     width: '100%',
-    padding: '9px 12px',
-    borderRadius: 8,
-    border: '1px solid',
-    background: 'transparent',
-    color: 'inherit',
-    fontSize: 14,
+    height: 46,
+    padding: '0 14px',
+    borderRadius: 10,
+    border: `1px solid ${T.border}`,
+    background: '#fff',
+    color: T.text,
+    fontSize: 14.5,
     boxSizing: 'border-box',
+    fontFamily: FONT,
   },
   objHead: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'baseline',
-    fontSize: 13,
+    fontSize: 12.5,
     fontWeight: 800,
     letterSpacing: 1,
+    color: T.text,
     marginBottom: 12,
   },
   objCard: {
-    border: '1px solid',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 12,
+    background: '#fff',
+    border: `1px solid ${T.border}`,
+    borderRadius: 14,
+    padding: '18px 20px',
+    marginBottom: 14,
+    boxShadow: '0 1px 2px rgba(20,24,34,.04)',
   },
-  objTopRow: { display: 'flex', gap: 10, alignItems: 'center' },
-  removeBtn: {
+  objTopRow: { display: 'flex', gap: 12, alignItems: 'center' },
+  objBadge: {
+    width: 30,
+    height: 30,
+    borderRadius: 9,
+    background: rgba('#f15a29', 0.1),
+    color: T.accent,
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 14,
+    fontWeight: 800,
+    flexShrink: 0,
+  },
+  objTitleInput: {
+    flex: 1,
+    height: 40,
+    padding: '0 12px',
+    borderRadius: 9,
+    border: `1px solid transparent`,
+    background: 'transparent',
+    color: T.text,
+    fontSize: 16,
+    fontWeight: 600,
+    boxSizing: 'border-box',
+    fontFamily: FONT,
+  },
+  kebab: {
     background: 'transparent',
     border: 'none',
-    color: 'inherit',
-    opacity: 0.5,
-    fontSize: 15,
+    color: T.sub,
+    fontSize: 18,
     cursor: 'pointer',
-    padding: 6,
+    padding: '4px 8px',
+    borderRadius: 8,
     flexShrink: 0,
+    lineHeight: 1,
+  },
+  menu: {
+    position: 'absolute',
+    right: 0,
+    top: '100%',
+    marginTop: 4,
+    background: '#fff',
+    border: `1px solid ${T.border}`,
+    borderRadius: 10,
+    boxShadow: '0 10px 30px -8px rgba(20,24,34,.3)',
+    zIndex: 10,
+    minWidth: 160,
+    padding: 6,
+  },
+  menuItem: {
+    width: '100%',
+    textAlign: 'left',
+    background: 'transparent',
+    border: 'none',
+    color: '#e5341f',
+    fontSize: 13.5,
+    fontWeight: 600,
+    padding: '9px 10px',
+    borderRadius: 7,
+    cursor: 'pointer',
   },
   progressRow: {
     display: 'flex',
     alignItems: 'center',
-    gap: 14,
-    marginTop: 14,
+    gap: 18,
+    marginTop: 18,
+    flexWrap: 'wrap',
   },
-  pctBox: { display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0 },
-  statusChip: {
-    fontSize: 12,
+  sliderWrap: {
+    position: 'relative',
+    flex: 1,
+    minWidth: 220,
+    paddingTop: 18,
+  },
+  sliderBubble: {
+    position: 'absolute',
+    top: 0,
+    transform: 'translateX(-50%)',
+    fontSize: 12.5,
+    fontWeight: 800,
+    whiteSpace: 'nowrap',
+  },
+  slider: { width: '100%', accentColor: '#f15a29', cursor: 'pointer' },
+  sliderEnds: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    fontSize: 11,
+    color: T.sub,
+    marginTop: 4,
+  },
+  pctBox: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 5,
+    flexShrink: 0,
+  },
+  pctInput: {
+    width: 64,
+    height: 40,
+    padding: '0 10px',
+    borderRadius: 9,
+    border: `1px solid ${T.border}`,
+    background: '#fff',
+    color: T.text,
+    fontSize: 14.5,
     fontWeight: 700,
-    padding: '4px 10px',
-    borderRadius: 8,
+    textAlign: 'right',
+    boxSizing: 'border-box',
+    fontFamily: FONT,
+  },
+  statusChip: {
+    fontSize: 12.5,
+    fontWeight: 700,
+    padding: '7px 12px',
+    borderRadius: 9,
     whiteSpace: 'nowrap',
     flexShrink: 0,
   },
   addBtn: {
     width: '100%',
-    padding: '11px',
-    borderRadius: 10,
-    border: '1px dashed',
-    background: 'transparent',
-    color: 'inherit',
-    opacity: 0.8,
+    padding: '14px',
+    borderRadius: 12,
+    border: `1.5px dashed ${rgba('#f15a29', 0.4)}`,
+    background: rgba('#f15a29', 0.03),
+    color: T.accent,
     fontSize: 14,
+    fontWeight: 700,
     cursor: 'pointer',
     marginTop: 4,
   },
   saveBar: {
     position: 'fixed',
-    left: 32,
-    right: 32,
-    bottom: 20,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: '#fff',
+    borderTop: `1px solid ${T.border}`,
+    boxShadow: '0 -6px 20px -12px rgba(20,24,34,.25)',
+    zIndex: 20,
+  },
+  saveBarInner: {
+    maxWidth: 1120,
+    margin: '0 auto',
+    padding: '14px 28px',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '12px 18px',
-    border: '1px solid',
-    borderRadius: 12,
-    boxShadow: '0 8px 24px rgba(0,0,0,0.25)',
+    gap: 16,
   },
+  saveStatus: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 10,
+    fontSize: 13,
+    color: T.sub,
+  },
+  saveDot: {
+    width: 24,
+    height: 24,
+    borderRadius: '50%',
+    background: rgba('#2eb85c', 0.15),
+    color: '#2eb85c',
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 13,
+    flexShrink: 0,
+  },
+  saveSub: { color: T.sub, fontSize: 12.5 },
   primaryBtn: {
-    padding: '9px 22px',
-    borderRadius: 9,
+    padding: '11px 24px',
+    borderRadius: 10,
     border: 'none',
     background: '#f15a29',
     color: '#fff',
@@ -994,19 +1365,20 @@ const S: Record<string, CSSProperties> = {
     cursor: 'pointer',
   },
   ghostBtn: {
-    padding: '9px 18px',
-    borderRadius: 9,
-    border: '1px solid var(--affine-border-color, rgba(255,255,255,0.15))',
-    background: 'transparent',
-    color: 'inherit',
+    padding: '11px 20px',
+    borderRadius: 10,
+    border: `1px solid ${T.border}`,
+    background: '#fff',
+    color: T.text,
     fontSize: 14,
+    fontWeight: 600,
     cursor: 'pointer',
   },
   err: {
-    color: '#e5341f',
-    background: 'rgba(229,52,31,0.1)',
-    border: '1px solid rgba(229,52,31,0.4)',
-    borderRadius: 8,
+    color: '#b42318',
+    background: '#fef3f2',
+    border: '1px solid #fecdc9',
+    borderRadius: 10,
     padding: '10px 14px',
     fontSize: 13,
     margin: '14px 0',
@@ -1016,18 +1388,20 @@ const S: Record<string, CSSProperties> = {
     left: '50%',
     bottom: 92,
     transform: 'translateX(-50%)',
-    border: '1px solid',
+    background: T.text,
+    color: '#fff',
+    border: 'none',
     borderRadius: 10,
     padding: '11px 18px',
     fontSize: 13.5,
-    boxShadow: '0 8px 24px rgba(0,0,0,0.28)',
+    boxShadow: '0 12px 30px -8px rgba(20,24,34,.5)',
     zIndex: 10001,
   },
   // modal
   modalWrap: {
     position: 'fixed',
     inset: 0,
-    background: 'rgba(0,0,0,0.55)',
+    background: 'rgba(20,24,34,0.45)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -1037,11 +1411,12 @@ const S: Record<string, CSSProperties> = {
   modal: {
     width: 'min(640px, 96vw)',
     maxHeight: '86vh',
+    background: '#fff',
     display: 'flex',
     flexDirection: 'column',
-    border: '1px solid',
+    border: `1px solid ${T.border}`,
     borderRadius: 16,
-    boxShadow: '0 20px 60px rgba(0,0,0,0.4)',
+    boxShadow: '0 30px 70px -20px rgba(20,24,34,.5)',
   },
   modalHead: {
     display: 'flex',
@@ -1061,10 +1436,10 @@ const S: Record<string, CSSProperties> = {
     alignItems: 'center',
     gap: 10,
     padding: '14px 22px',
-    borderTop: '1px solid',
+    borderTop: `1px solid ${T.border}`,
   },
   previewTeam: {
-    border: '1px solid',
+    border: `1px solid ${T.border}`,
     borderRadius: 12,
     padding: '12px 14px',
   },
