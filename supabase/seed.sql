@@ -65,7 +65,7 @@ declare
     "objectives": [
       {
         "title": "Speed up value delivery",
-        "progress": 49,
+        "progress": 93,
         "key_results": [
           {
             "description": "Reduce lead time for changes",
@@ -97,7 +97,7 @@ declare
       },
       {
         "title": "Reduce technical debt",
-        "progress": 75,
+        "progress": 97,
         "key_results": [
           {
             "description": "Raise unit-test coverage",
@@ -129,7 +129,7 @@ declare
       },
       {
         "title": "Grow agile-culture adoption",
-        "progress": 68,
+        "progress": 84,
         "key_results": [
           {
             "description": "Teams running healthy retros",
@@ -167,7 +167,7 @@ declare
     "objectives": [
       {
         "title": "Scale generative AI across operations",
-        "progress": 50,
+        "progress": 56,
         "key_results": [
           {
             "description": "Business processes with an AI assist",
@@ -199,7 +199,7 @@ declare
       },
       {
         "title": "Stand up real-time data pipelines",
-        "progress": 55,
+        "progress": 78,
         "key_results": [
           {
             "description": "Datasets available in near-real-time",
@@ -231,7 +231,7 @@ declare
       },
       {
         "title": "Build AI literacy in every team",
-        "progress": 48,
+        "progress": 55,
         "key_results": [
           {
             "description": "Staff completing AI foundations",
@@ -269,7 +269,7 @@ declare
     "objectives": [
       {
         "title": "Reduce recurring operating costs",
-        "progress": 83,
+        "progress": 92,
         "key_results": [
           {
             "description": "Annualised cost reduction",
@@ -301,7 +301,7 @@ declare
       },
       {
         "title": "Hit critical process SLAs",
-        "progress": 82,
+        "progress": 97,
         "key_results": [
           {
             "description": "Priority requests within SLA",
@@ -333,7 +333,7 @@ declare
       },
       {
         "title": "Map & optimise core processes",
-        "progress": 75,
+        "progress": 82,
         "key_results": [
           {
             "description": "Core processes documented",
@@ -403,7 +403,7 @@ declare
       },
       {
         "title": "Execute approved investment",
-        "progress": 44,
+        "progress": 67,
         "key_results": [
           {
             "description": "Capital plan executed",
@@ -435,7 +435,7 @@ declare
       },
       {
         "title": "Upskill the workforce",
-        "progress": 38,
+        "progress": 41,
         "key_results": [
           {
             "description": "Employees upskilled (I5.0)",
@@ -473,7 +473,7 @@ declare
     "objectives": [
       {
         "title": "Improve operational predictability",
-        "progress": 75,
+        "progress": 96,
         "key_results": [
           {
             "description": "Forecast accuracy",
@@ -505,7 +505,7 @@ declare
       },
       {
         "title": "Shorten approval cycle time",
-        "progress": 77,
+        "progress": 91,
         "key_results": [
           {
             "description": "Average approval turnaround",
@@ -537,7 +537,7 @@ declare
       },
       {
         "title": "Raise internal-stakeholder satisfaction",
-        "progress": 67,
+        "progress": 85,
         "key_results": [
           {
             "description": "Internal NPS",
@@ -575,7 +575,7 @@ declare
     "objectives": [
       {
         "title": "Deliver improvement projects",
-        "progress": 54,
+        "progress": 75,
         "key_results": [
           {
             "description": "DMAIC projects completed",
@@ -607,7 +607,7 @@ declare
       },
       {
         "title": "Certify Belts across the org",
-        "progress": 49,
+        "progress": 59,
         "key_results": [
           {
             "description": "Green Belts certified",
@@ -639,7 +639,7 @@ declare
       },
       {
         "title": "Validate financial savings",
-        "progress": 50,
+        "progress": 75,
         "key_results": [
           {
             "description": "Validated savings (finance-signed)",
@@ -677,7 +677,7 @@ declare
     "objectives": [
       {
         "title": "Grow partnerships & alliances",
-        "progress": 40,
+        "progress": 60,
         "key_results": [
           {
             "description": "Active strategic partnerships",
@@ -709,7 +709,7 @@ declare
       },
       {
         "title": "Raise brand & thought leadership",
-        "progress": 34,
+        "progress": 42,
         "key_results": [
           {
             "description": "Speaking slots / publications",
@@ -741,7 +741,7 @@ declare
       },
       {
         "title": "Strengthen stakeholder engagement",
-        "progress": 41,
+        "progress": 69,
         "key_results": [
           {
             "description": "Key stakeholders with a plan",
