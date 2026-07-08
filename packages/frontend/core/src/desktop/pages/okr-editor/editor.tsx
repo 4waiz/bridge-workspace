@@ -69,6 +69,17 @@ function triggerDownload(blob: Blob, filename: string) {
   setTimeout(() => URL.revokeObjectURL(url), 4000);
 }
 
+// A transparent native range overlays the drawn track/fill line below it; only
+// its thumb is visible (coloured per objective via the --okr-c CSS variable).
+const SLIDER_CSS = `
+.okr-range{-webkit-appearance:none;appearance:none;position:absolute;inset:0;width:100%;height:20px;margin:0;padding:0;background:transparent;cursor:pointer;z-index:2}
+.okr-range:focus{outline:none}
+.okr-range::-webkit-slider-runnable-track{-webkit-appearance:none;height:20px;background:transparent;border:none}
+.okr-range::-moz-range-track{height:20px;background:transparent;border:none}
+.okr-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;margin-top:1px;border-radius:50%;background:var(--okr-c,#2eb85c);border:3px solid #fff;box-shadow:0 1px 5px rgba(20,24,34,.3);cursor:pointer}
+.okr-range::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--okr-c,#2eb85c);border:3px solid #fff;box-shadow:0 1px 5px rgba(20,24,34,.3);cursor:pointer}
+`;
+
 export function OkrEditor() {
   const navigate = useNavigate();
   // The picker renders instantly from the fixed roster; DB rows (with real ids)
@@ -351,6 +362,7 @@ export function OkrEditor() {
   // ---- render ----
   return (
     <div style={{ ...S.root, background: T.bg, color: T.text }}>
+      <style>{SLIDER_CSS}</style>
       {phase === 'pick' ? (
         <div style={S.pickWrap}>
           <div style={S.pickCard}>
@@ -459,7 +471,7 @@ export function OkrEditor() {
                   disabled={busy}
                   title="Download the Excel template (demo data pre-filled)"
                 >
-                  <span style={S.btnIcon}>⬇</span> Download template
+                  Download template
                 </button>
                 <button
                   style={{ ...S.uploadBtn, opacity: busy ? 0.6 : 1 }}
@@ -467,7 +479,7 @@ export function OkrEditor() {
                   disabled={busy}
                   title="Upload a filled-in Excel to import into the dashboard"
                 >
-                  <span style={S.btnIcon}>⬆</span> Upload &amp; import
+                  Upload &amp; import
                 </button>
                 <input
                   ref={fileInput}
@@ -626,18 +638,30 @@ export function OkrEditor() {
                       >
                         {o.progress}%
                       </div>
-                      <input
-                        type="range"
-                        min={0}
-                        max={100}
-                        value={o.progress}
-                        onChange={e =>
-                          patchObj(i, {
-                            progress: clampProgress(Number(e.target.value)),
-                          })
-                        }
-                        style={{ ...S.slider, accentColor: c }}
-                      />
+                      <div style={S.sliderRow}>
+                        <div style={S.trackLine}>
+                          <div
+                            style={{
+                              ...S.trackFill,
+                              width: `${o.progress}%`,
+                              background: c,
+                            }}
+                          />
+                        </div>
+                        <input
+                          className="okr-range"
+                          type="range"
+                          min={0}
+                          max={100}
+                          value={o.progress}
+                          onChange={e =>
+                            patchObj(i, {
+                              progress: clampProgress(Number(e.target.value)),
+                            })
+                          }
+                          style={{ ['--okr-c' as string]: c } as CSSProperties}
+                        />
+                      </div>
                       <div style={S.sliderEnds}>
                         <span>0%</span>
                         <span>100%</span>
@@ -1257,7 +1281,7 @@ const S: Record<string, CSSProperties> = {
     position: 'relative',
     flex: 1,
     minWidth: 220,
-    paddingTop: 18,
+    paddingTop: 22,
   },
   sliderBubble: {
     position: 'absolute',
@@ -1267,13 +1291,30 @@ const S: Record<string, CSSProperties> = {
     fontWeight: 800,
     whiteSpace: 'nowrap',
   },
-  slider: { width: '100%', accentColor: '#f15a29', cursor: 'pointer' },
+  sliderRow: { position: 'relative', height: 20 },
+  trackLine: {
+    position: 'absolute',
+    top: 7,
+    left: 0,
+    right: 0,
+    height: 6,
+    borderRadius: 4,
+    background: T.track,
+    overflow: 'hidden',
+  },
+  trackFill: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    height: 6,
+    borderRadius: 4,
+  },
   sliderEnds: {
     display: 'flex',
     justifyContent: 'space-between',
     fontSize: 11,
     color: T.sub,
-    marginTop: 4,
+    marginTop: 8,
   },
   pctBox: {
     display: 'flex',
