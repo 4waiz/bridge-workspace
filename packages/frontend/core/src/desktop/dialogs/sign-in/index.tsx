@@ -1,45 +1,17 @@
-import { Modal } from '@bridgeflow/component';
-import { SignInPanel, type SignInStep } from '@bridgeflow/core/components/sign-in';
-import type { AuthSessionStatus } from '@bridgeflow/core/modules/cloud/entities/session';
 import type {
   DialogComponentProps,
   GLOBAL_DIALOG_SCHEMA,
 } from '@bridgeflow/core/modules/dialogs';
-import { useCallback } from 'react';
+import { useEffect } from 'react';
+
+// BRIDGE Flow authenticates through its own (Supabase) sign-in gate; the AFFiNE
+// cloud sign-in is disabled. If anything opens the 'sign-in' dialog, close it
+// immediately and render nothing so the cloud sign-in never appears.
 export const SignInDialog = ({
   close,
-  server: initialServerBaseUrl,
-  step,
 }: DialogComponentProps<GLOBAL_DIALOG_SCHEMA['sign-in']>) => {
-  const onAuthenticated = useCallback(
-    (status: AuthSessionStatus) => {
-      if (status === 'authenticated') {
-        close();
-      }
-    },
-    [close]
-  );
-  return (
-    <Modal
-      open
-      persistent
-      onOpenChange={() => close()}
-      width={400}
-      contentOptions={{
-        ['data-testid' as string]: 'auth-modal',
-        style: {
-          padding: '44px 40px 20px',
-          minHeight: 550,
-          maxHeight: 650,
-        },
-      }}
-    >
-      <SignInPanel
-        onSkip={close}
-        onAuthenticated={onAuthenticated}
-        server={initialServerBaseUrl}
-        initStep={step as SignInStep}
-      />
-    </Modal>
-  );
+  useEffect(() => {
+    close();
+  }, [close]);
+  return null;
 };

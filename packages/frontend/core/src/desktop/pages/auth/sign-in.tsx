@@ -1,12 +1,10 @@
 import { notify } from '@bridgeflow/component';
 import { SignInPageContainer } from '@bridgeflow/component/auth-components';
-import { BridgeFlowOtherPageLayout } from '@bridgeflow/component/bridgeflow-other-page-layout';
 import { SignInPanel } from '@bridgeflow/core/components/sign-in';
-import { SignInBackgroundArts } from '@bridgeflow/core/components/sign-in/background-arts';
 import type { AuthSessionStatus } from '@bridgeflow/core/modules/cloud/entities/session';
 import { useI18n } from '@bridgeflow/i18n';
 import { useCallback, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 
 import {
   RouteLogic,
@@ -77,10 +75,8 @@ export const SignIn = ({
 };
 
 export const Component = () => {
-  return (
-    <BridgeFlowOtherPageLayout>
-      <SignInBackgroundArts />
-      <SignIn />
-    </BridgeFlowOtherPageLayout>
-  );
+  // BRIDGE Flow authenticates through its own (Supabase) sign-in gate; the
+  // AFFiNE cloud sign-in is disabled. Bounce any navigation to /sign-in back
+  // into the app instead of showing the cloud sign-in page.
+  return <Navigate to="/" replace />;
 };
