@@ -22,6 +22,7 @@ import {
   matchTeam,
   type OkrMeta,
   parseOkrFile,
+  rollupStatus,
   saveTeamOkr,
   setMyTeam,
   STATUS_COLOR,
@@ -113,6 +114,38 @@ export function OkrEditor() {
   );
   const [toast, setToast] = useState<string | null>(null);
   const [menuFor, setMenuFor] = useState<number | null>(null);
+
+  // Header profile / notification dropdowns.
+  const [hdrMenu, setHdrMenu] = useState<null | 'profile' | 'notif'>(null);
+  const appbarRightRef = useRef<HTMLDivElement>(null);
+
+  // Close the header dropdown on outside click or Escape.
+  useEffect(() => {
+    if (!hdrMenu) return;
+    const onDown = (e: MouseEvent) => {
+      if (!appbarRightRef.current?.contains(e.target as Node)) setHdrMenu(null);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setHdrMenu(null);
+    };
+    document.addEventListener('mousedown', onDown);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onDown);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [hdrMenu]);
+
+  // The editor is authored to fit at 1.2x so 100% browser zoom shows it the way
+  // the team prefers. Restore the app default (1.5x) on close.
+  useEffect(() => {
+    const el = document.documentElement;
+    const prev = el.style.zoom;
+    el.style.zoom = '1.2';
+    return () => {
+      el.style.zoom = prev || '1.5';
+    };
+  }, []);
 
   // Background: load DB teams (for ids + import matching) + my team preselect.
   useEffect(() => {
@@ -345,11 +378,7 @@ export function OkrEditor() {
     : 0;
   const statuses = objectives.map(o => statusFromProgress(o.progress));
   const notOk = statuses.filter(s => s !== 'on_track').length;
-  const overall = statuses.some(s => s === 'off_track')
-    ? 'off_track'
-    : statuses.some(s => s === 'at_risk')
-      ? 'at_risk'
-      : 'on_track';
+  const overall = rollupStatus(objectives.map(o => o.progress));
   const overallColor = STATUS_COLOR[overall];
   const overallSub =
     objCount === 0
@@ -358,6 +387,36 @@ export function OkrEditor() {
         ? 'All objectives on track'
         : `${notOk} objective${notOk === 1 ? '' : 's'} to watch`;
   const avatarText = initialsOf(meta.owner || teamName);
+
+  // Header notifications, derived from the current OKR state.
+  const notifs: { title: string; sub: string; color: string }[] = [];
+  if (dirty) {
+    notifs.push({
+      title: 'Unsaved changes',
+      sub: 'Your edits have not been saved yet.',
+      color: T.accent,
+    });
+  }
+  objectives.forEach(o => {
+    const st = statusFromProgress(o.progress);
+    if (st !== 'on_track' && (o.title || '').trim()) {
+      notifs.push({
+        title: o.title,
+        sub: `${STATUS_LABEL[st]} · ${o.progress}% progress`,
+        color: STATUS_COLOR[st],
+      });
+    }
+  });
+  if (savedAt) {
+    notifs.push({
+      title: 'Last saved',
+      sub: savedAt.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
+      color: STATUS_COLOR.on_track,
+    });
+  }
 
   // ---- render ----
   return (
@@ -428,9 +487,105 @@ export function OkrEditor() {
               <span style={S.appMark}>◎</span>
               <span style={S.appTitle}>OKRs</span>
             </div>
-            <div style={S.appbarRight}>
-              <span style={S.bell}>🔔</span>
-              <span style={S.avatar}>{avatarText}</span>
+            <div style={S.appbarRight} ref={appbarRightRef}>
+              <button
+                style={{
+                  ...S.iconBtn,
+                  ...(hdrMenu === 'notif' ? S.iconBtnOn : null),
+                }}
+                onClick={() =>
+                  setHdrMenu(m => (m === 'notif' ? null : 'notif'))
+                }
+                title="Notifications"
+                aria-label="Notifications"
+              >
+                <span style={S.bell}>🔔</span>
+                {notifs.length > 0 ? (
+                  <span style={S.badge}>{notifs.length}</span>
+                ) : null}
+              </button>
+              <button
+                style={{
+                  ...S.avatarBtn,
+                  ...(hdrMenu === 'profile' ? S.iconBtnOn : null),
+                }}
+                onClick={() =>
+                  setHdrMenu(m => (m === 'profile' ? null : 'profile'))
+                }
+                title="Account"
+                aria-label="Account"
+              >
+                <span style={S.avatar}>{avatarText}</span>
+              </button>
+
+              {hdrMenu === 'notif' ? (
+                <div style={S.dropdown}>
+                  <div style={S.ddHead}>Notifications</div>
+                  {notifs.length === 0 ? (
+                    <div style={S.ddEmpty}>{'You’re all caught up 🎉'}</div>
+                  ) : (
+                    notifs.map((n, i) => (
+                      <div key={i} style={S.ddNotif}>
+                        <span style={{ ...S.ddDot, background: n.color }} />
+                        <div>
+                          <div style={S.ddNotifTitle}>{n.title}</div>
+                          <div style={S.ddNotifSub}>{n.sub}</div>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              ) : null}
+
+              {hdrMenu === 'profile' ? (
+                <div style={S.dropdown}>
+                  <div style={S.ddProfile}>
+                    <span style={S.ddAvatar}>{avatarText}</span>
+                    <div style={{ minWidth: 0 }}>
+                      <div style={S.ddName}>{meta.owner || teamName}</div>
+                      <div style={S.ddSub}>{teamName} · OKR editor</div>
+                    </div>
+                  </div>
+                  <div style={S.ddSep} />
+                  <button
+                    style={S.ddItem}
+                    onClick={() => {
+                      setHdrMenu(null);
+                      window.dispatchEvent(new Event('bridge-open-profile'));
+                    }}
+                  >
+                    <span style={S.ddItemIcon}>⚙️</span> Settings
+                  </button>
+                  <button
+                    style={S.ddItem}
+                    onClick={() => {
+                      setHdrMenu(null);
+                      setPhase('pick');
+                    }}
+                  >
+                    <span style={S.ddItemIcon}>🔀</span> Change department
+                  </button>
+                  <button
+                    style={S.ddItem}
+                    onClick={() => {
+                      setHdrMenu(null);
+                      guardedLeave('/okr-dashboard');
+                    }}
+                  >
+                    <span style={S.ddItemIcon}>📊</span> View dashboard
+                  </button>
+                  <div style={S.ddSep} />
+                  <button
+                    style={{ ...S.ddItem, color: '#b42318' }}
+                    onClick={() => {
+                      setHdrMenu(null);
+                      void (globalThis as any).bridgeSignOut?.();
+                    }}
+                  >
+                    <span style={S.ddItemIcon}>↩︎</span> Sign out
+                  </button>
+                </div>
+              ) : null}
             </div>
           </div>
 
@@ -964,7 +1119,143 @@ const S: Record<string, CSSProperties> = {
     borderBottom: `1px solid ${T.border}`,
   },
   appbarLeft: { display: 'flex', alignItems: 'center', gap: 12 },
-  appbarRight: { display: 'flex', alignItems: 'center', gap: 16 },
+  appbarRight: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 8,
+    position: 'relative',
+  },
+  iconBtn: {
+    position: 'relative',
+    border: 'none',
+    background: 'transparent',
+    borderRadius: 9,
+    padding: 6,
+    cursor: 'pointer',
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    lineHeight: 1,
+  },
+  iconBtnOn: { background: rgba('#20242e', 0.06) },
+  avatarBtn: {
+    border: 'none',
+    background: 'transparent',
+    borderRadius: '50%',
+    padding: 2,
+    cursor: 'pointer',
+    display: 'inline-flex',
+  },
+  badge: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    minWidth: 15,
+    height: 15,
+    padding: '0 3px',
+    borderRadius: 8,
+    background: T.accent,
+    color: '#fff',
+    fontSize: 9.5,
+    fontWeight: 800,
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxSizing: 'border-box',
+  },
+  dropdown: {
+    position: 'absolute',
+    top: 'calc(100% + 8px)',
+    right: 0,
+    width: 288,
+    maxHeight: 380,
+    overflowY: 'auto',
+    background: '#fff',
+    border: `1px solid ${T.border}`,
+    borderRadius: 14,
+    boxShadow: '0 20px 48px -18px rgba(45,52,63,.45)',
+    padding: 6,
+    zIndex: 50,
+  },
+  ddHead: {
+    padding: '8px 10px 6px',
+    fontSize: 12,
+    fontWeight: 800,
+    letterSpacing: 0.4,
+    textTransform: 'uppercase',
+    color: T.sub,
+  },
+  ddEmpty: { padding: '14px 10px', fontSize: 13.5, color: T.sub },
+  ddNotif: {
+    display: 'flex',
+    gap: 10,
+    padding: '9px 10px',
+    borderRadius: 9,
+    alignItems: 'flex-start',
+  },
+  ddDot: {
+    width: 8,
+    height: 8,
+    borderRadius: '50%',
+    marginTop: 5,
+    flexShrink: 0,
+  },
+  ddNotifTitle: {
+    fontSize: 13.5,
+    fontWeight: 600,
+    color: T.text,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    maxWidth: 220,
+  },
+  ddNotifSub: { fontSize: 12, color: T.sub, marginTop: 2 },
+  ddProfile: {
+    display: 'flex',
+    gap: 12,
+    alignItems: 'center',
+    padding: '8px 10px',
+  },
+  ddAvatar: {
+    width: 40,
+    height: 40,
+    borderRadius: '50%',
+    background: rgba('#f15a29', 0.15),
+    color: T.accent,
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 15,
+    fontWeight: 800,
+    flexShrink: 0,
+  },
+  ddName: {
+    fontSize: 14.5,
+    fontWeight: 700,
+    color: T.text,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+  },
+  ddSub: { fontSize: 12, color: T.sub, marginTop: 2 },
+  ddSep: { height: 1, background: T.border, margin: '6px 4px' },
+  ddItem: {
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    gap: 10,
+    padding: '9px 10px',
+    border: 'none',
+    background: 'transparent',
+    borderRadius: 9,
+    cursor: 'pointer',
+    fontSize: 13.5,
+    fontWeight: 600,
+    color: T.text,
+    textAlign: 'left',
+    fontFamily: 'inherit',
+  },
+  ddItemIcon: { fontSize: 14, width: 18, textAlign: 'center' },
   appMenu: {
     border: 'none',
     background: 'transparent',

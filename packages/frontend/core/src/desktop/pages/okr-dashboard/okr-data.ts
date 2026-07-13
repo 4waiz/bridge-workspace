@@ -129,6 +129,24 @@ export function statusFromProgress(
   return 'off_track';
 }
 
+/**
+ * Team-level status. Starts from the average-progress status, then downgrades:
+ * a team shouldn't read "On Track" when 2 or more of its objectives are at risk
+ * (or worse) — the healthy average hides the shaky ones, so surface it.
+ */
+export function rollupStatus(progresses: number[]): Status {
+  if (progresses.length === 0) return 'on_track';
+  const avg = Math.round(
+    progresses.reduce((s, p) => s + p, 0) / progresses.length
+  );
+  let status = statusFromProgress(avg);
+  const risky = progresses.filter(
+    p => statusFromProgress(p) !== 'on_track'
+  ).length;
+  if (risky >= 2 && status === 'on_track') status = 'at_risk';
+  return status;
+}
+
 export function clampProgress(n: number): number {
   if (Number.isNaN(n)) return 0;
   return Math.max(0, Math.min(100, Math.round(n)));
@@ -177,16 +195,15 @@ export async function fetchDashboardModel(): Promise<DashboardModel> {
       const objs = (byTeam.get(team.id) ?? [])
         .slice()
         .sort((a, b) => a.position - b.position);
-      const progress = objs.length
-        ? Math.round(
-            objs.reduce((s, o) => s + (o.progress ?? 0), 0) / objs.length
-          )
+      const progresses = objs.map(o => o.progress ?? 0);
+      const progress = progresses.length
+        ? Math.round(progresses.reduce((s, p) => s + p, 0) / progresses.length)
         : 0;
       return {
         team,
         objectives: objs,
         progress,
-        status: statusFromProgress(progress),
+        status: rollupStatus(progresses),
       };
     });
 

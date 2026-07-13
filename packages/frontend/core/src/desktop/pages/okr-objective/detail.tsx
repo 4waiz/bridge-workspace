@@ -115,6 +115,17 @@ export function OkrObjectiveDetail() {
     return () => window.removeEventListener('keydown', onKey);
   }, [navigate]);
 
+  // The objective detail is authored to fit at 0.6x so 100% browser zoom shows
+  // the whole page compactly. Restore the app default (1.5x) on close.
+  useEffect(() => {
+    const el = document.documentElement;
+    const prev = el.style.zoom;
+    el.style.zoom = '0.6';
+    return () => {
+      el.style.zoom = prev || '1.5';
+    };
+  }, []);
+
   const progress = data ? clamp(data.objective.progress ?? 0) : 0;
   const status = statusFromProgress(progress);
   const color = STATUS_COLOR[status];

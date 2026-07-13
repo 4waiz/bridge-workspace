@@ -214,12 +214,12 @@ export function OkrDashboard() {
     return () => window.removeEventListener('keydown', onKey);
   }, [navigate]);
 
-  // The dashboard is a TV/wall view — show it a notch larger than the rest of
-  // the app (whole app runs at 1.5x; here 1.75x). Restore on close.
+  // The dashboard is a dense, full-viewport view — it is authored to fit at
+  // 0.7875x so 100% browser zoom shows the whole board at once. Restore on close.
   useEffect(() => {
     const el = document.documentElement;
     const prev = el.style.zoom;
-    el.style.zoom = '1.75';
+    el.style.zoom = '0.7875';
     return () => {
       el.style.zoom = prev || '1.5';
     };
