@@ -1,18 +1,21 @@
-# Cloudflare Pages configuration for BRIDGE Flow.
-# Deployed to: https://bridge-flow.pages.dev
+# Cloudflare Workers (static assets) config for BRIDGE Flow.
 #
-# This project is deployed via direct upload (no Git connection), so the build
-# runs locally / in CI and the resulting `dist` is uploaded with:
-#   wrangler pages deploy packages/frontend/apps/web/dist
+# Deployed via Workers Builds (GitHub) on the bridgeae.com account:
+#   Build command:  bash scripts/cf-pages-build.sh
+#   Deploy command: npx wrangler deploy
 #
-# Build steps (run before deploying):
-#   HUSKY=0 corepack yarn install --mode=skip-build
-#   HUSKY=0 corepack yarn workspace @bridgeflow/templates build
-#   HUSKY=0 PUBLIC_PATH=/ corepack yarn bridgeflow web build
+# The build produces packages/frontend/apps/web/dist (the web app only, with the
+# oversized Typst wasm + sourcemaps stripped). This Worker serves that folder as
+# static assets with SPA fallback, so no Worker script (`main`) is needed.
 #
-# SPA routing is handled by packages/frontend/core/public/_redirects, which the
-# bundler copies into the output directory.
+# Build env vars to set in the project (skip the heavy Rust postinstall + husky):
+#   YARN_ENABLE_SCRIPTS = false
+#   HUSKY               = 0
 
-compatibility_date     = "2026-06-29"
-name                   = "bridge-flow"
-pages_build_output_dir = "packages/frontend/apps/web/dist"
+compatibility_date = "2026-06-29"
+name               = "bridge-workspace"
+
+[assets]
+directory = "./packages/frontend/apps/web/dist"
+# serve index.html (200) for any unmatched route — required for a client-side SPA
+not_found_handling = "single-page-application"
