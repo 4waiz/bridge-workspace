@@ -38,5 +38,10 @@ find "$DIST" -name '*.map' -type f -delete
 # The Typst compiler wasm is ~28 MB and exceeds Cloudflare's 25 MiB/file limit,
 # which would reject the whole deploy. Dropping it only disables Typst export.
 find "$DIST" -name 'typst_ts_web_compiler_bg*.wasm' -type f -delete
+# Workers Assets does SPA routing via `not_found_handling` in wrangler.toml and
+# REJECTS the bundler's `_redirects` catch-all (`/* /index.html 200`) as an
+# infinite loop (error 100324), because it also auto-strips `.html`//index`.
+# Removing it from the output only (source stays) fixes the deploy step.
+find "$DIST" -name '_redirects' -type f -delete
 
 echo "==> Done. Output ready in $DIST"
