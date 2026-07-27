@@ -163,7 +163,7 @@ declare
   },
   {
     "key": "ai-analytics",
-    "owner": "Olaff pane",
+    "owner": "Sohel Shaikh",
     "objectives": [
       {
         "title": "Scale generative AI across operations",
@@ -185,15 +185,15 @@ declare
         "initiatives": [
           {
             "description": "Use-case intake + build squad",
-            "owner": "Olaff pane"
+            "owner": "Sohel Shaikh"
           },
           {
             "description": "Enablement workshops",
-            "owner": "Olaff pane"
+            "owner": "Sohel Shaikh"
           },
           {
             "description": "Automate top-10 workflows",
-            "owner": "Olaff pane"
+            "owner": "Sohel Shaikh"
           }
         ]
       },
@@ -217,15 +217,15 @@ declare
         "initiatives": [
           {
             "description": "Streaming ingestion platform",
-            "owner": "Olaff pane"
+            "owner": "Sohel Shaikh"
           },
           {
             "description": "Pipeline monitoring + alerts",
-            "owner": "Olaff pane"
+            "owner": "Sohel Shaikh"
           },
           {
             "description": "On-call runbooks",
-            "owner": "Olaff pane"
+            "owner": "Sohel Shaikh"
           }
         ]
       },
@@ -249,15 +249,15 @@ declare
         "initiatives": [
           {
             "description": "Role-based learning paths",
-            "owner": "Olaff pane"
+            "owner": "Sohel Shaikh"
           },
           {
             "description": "Internal certification track",
-            "owner": "Olaff pane"
+            "owner": "Sohel Shaikh"
           },
           {
             "description": "Champion network",
-            "owner": "Olaff pane"
+            "owner": "Sohel Shaikh"
           }
         ]
       }
@@ -265,7 +265,7 @@ declare
   },
   {
     "key": "opex",
-    "owner": "Ahtesham",
+    "owner": "Marco Rodriguez",
     "objectives": [
       {
         "title": "Reduce recurring operating costs",
@@ -287,15 +287,15 @@ declare
         "initiatives": [
           {
             "description": "Zero-based budgeting review",
-            "owner": "Ahtesham"
+            "owner": "Marco Rodriguez"
           },
           {
             "description": "Renegotiate top vendors",
-            "owner": "Ahtesham"
+            "owner": "Marco Rodriguez"
           },
           {
             "description": "Root-cause + poka-yoke",
-            "owner": "Ahtesham"
+            "owner": "Marco Rodriguez"
           }
         ]
       },
@@ -319,15 +319,15 @@ declare
         "initiatives": [
           {
             "description": "SLA dashboards + escalation",
-            "owner": "Ahtesham"
+            "owner": "Marco Rodriguez"
           },
           {
             "description": "Remove non-value steps",
-            "owner": "Ahtesham"
+            "owner": "Marco Rodriguez"
           },
           {
             "description": "Standard work + checklists",
-            "owner": "Ahtesham"
+            "owner": "Marco Rodriguez"
           }
         ]
       },
@@ -351,15 +351,15 @@ declare
         "initiatives": [
           {
             "description": "Process-mapping sprints",
-            "owner": "Ahtesham"
+            "owner": "Marco Rodriguez"
           },
           {
             "description": "Assign process owners",
-            "owner": "Ahtesham"
+            "owner": "Marco Rodriguez"
           },
           {
             "description": "Automation backlog",
-            "owner": "Ahtesham"
+            "owner": "Marco Rodriguez"
           }
         ]
       }
@@ -367,7 +367,7 @@ declare
   },
   {
     "key": "industry-5",
-    "owner": "Sohel shaikh",
+    "owner": "Sohel Shaikh",
     "objectives": [
       {
         "title": "Pilot advanced manufacturing",
@@ -389,15 +389,15 @@ declare
         "initiatives": [
           {
             "description": "Digital-twin pilot line",
-            "owner": "Sohel shaikh"
+            "owner": "Sohel Shaikh"
           },
           {
             "description": "Sensor + gateway rollout",
-            "owner": "Sohel shaikh"
+            "owner": "Sohel Shaikh"
           },
           {
             "description": "Predictive maintenance",
-            "owner": "Sohel shaikh"
+            "owner": "Sohel Shaikh"
           }
         ]
       },
@@ -421,15 +421,15 @@ declare
         "initiatives": [
           {
             "description": "Phased procurement",
-            "owner": "Sohel shaikh"
+            "owner": "Sohel Shaikh"
           },
           {
             "description": "Stage-gate governance",
-            "owner": "Sohel shaikh"
+            "owner": "Sohel Shaikh"
           },
           {
             "description": "Monthly cost control",
-            "owner": "Sohel shaikh"
+            "owner": "Sohel Shaikh"
           }
         ]
       },
@@ -453,15 +453,15 @@ declare
         "initiatives": [
           {
             "description": "Skills academy",
-            "owner": "Sohel shaikh"
+            "owner": "Sohel Shaikh"
           },
           {
             "description": "Rotation program",
-            "owner": "Sohel shaikh"
+            "owner": "Sohel Shaikh"
           },
           {
             "description": "Vendor-led certification",
-            "owner": "Sohel shaikh"
+            "owner": "Sohel Shaikh"
           }
         ]
       }
@@ -469,7 +469,7 @@ declare
   },
   {
     "key": "business-operation",
-    "owner": "Aurelia Alhajji",
+    "owner": "Mateus Rocha",
     "objectives": [
       {
         "title": "Improve operational predictability",
@@ -491,15 +491,15 @@ declare
         "initiatives": [
           {
             "description": "Rolling forecast + S&OP",
-            "owner": "Aurelia Alhajji"
+            "owner": "Mateus Rocha"
           },
           {
             "description": "Capacity planning",
-            "owner": "Aurelia Alhajji"
+            "owner": "Mateus Rocha"
           },
           {
             "description": "Weekly ops review",
-            "owner": "Aurelia Alhajji"
+            "owner": "Mateus Rocha"
           }
         ]
       },
@@ -523,15 +523,15 @@ declare
         "initiatives": [
           {
             "description": "Digital approval workflows",
-            "owner": "Aurelia Alhajji"
+            "owner": "Mateus Rocha"
           },
           {
             "description": "Rules-based routing",
-            "owner": "Aurelia Alhajji"
+            "owner": "Mateus Rocha"
           },
           {
             "description": "Escalation reminders",
-            "owner": "Aurelia Alhajji"
+            "owner": "Mateus Rocha"
           }
         ]
       },
@@ -555,15 +555,15 @@ declare
         "initiatives": [
           {
             "description": "Service-catalogue + SLAs",
-            "owner": "Aurelia Alhajji"
+            "owner": "Mateus Rocha"
           },
           {
             "description": "Knowledge base",
-            "owner": "Aurelia Alhajji"
+            "owner": "Mateus Rocha"
           },
           {
             "description": "Feedback loops",
-            "owner": "Aurelia Alhajji"
+            "owner": "Mateus Rocha"
           }
         ]
       }
@@ -571,7 +571,7 @@ declare
   },
   {
     "key": "lean-six-sigma",
-    "owner": "Marco Rodregiuez",
+    "owner": "Marco Rodriguez",
     "objectives": [
       {
         "title": "Deliver improvement projects",
@@ -593,15 +593,15 @@ declare
         "initiatives": [
           {
             "description": "Project pipeline governance",
-            "owner": "Marco Rodregiuez"
+            "owner": "Marco Rodriguez"
           },
           {
             "description": "90-day control audits",
-            "owner": "Marco Rodregiuez"
+            "owner": "Marco Rodriguez"
           },
           {
             "description": "Kaizen events",
-            "owner": "Marco Rodregiuez"
+            "owner": "Marco Rodriguez"
           }
         ]
       },
@@ -625,15 +625,15 @@ declare
         "initiatives": [
           {
             "description": "GB training cohorts",
-            "owner": "Marco Rodregiuez"
+            "owner": "Marco Rodriguez"
           },
           {
             "description": "BB mentoring",
-            "owner": "Marco Rodregiuez"
+            "owner": "Marco Rodriguez"
           },
           {
             "description": "Belt placement plan",
-            "owner": "Marco Rodregiuez"
+            "owner": "Marco Rodriguez"
           }
         ]
       },
@@ -657,15 +657,15 @@ declare
         "initiatives": [
           {
             "description": "Finance validation gate",
-            "owner": "Marco Rodregiuez"
+            "owner": "Marco Rodriguez"
           },
           {
             "description": "Benefit-tracking template",
-            "owner": "Marco Rodregiuez"
+            "owner": "Marco Rodriguez"
           },
           {
             "description": "COPQ dashboard",
-            "owner": "Marco Rodregiuez"
+            "owner": "Marco Rodriguez"
           }
         ]
       }

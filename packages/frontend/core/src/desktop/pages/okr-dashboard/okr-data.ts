@@ -158,6 +158,7 @@ export interface TeamRollup {
   objectives: Objective[]; // sorted by position
   progress: number; // avg of objectives, 0..100
   status: Status;
+  owner: string | null; // team leader, from the team's OKR row
 }
 export interface DashboardModel {
   teams: TeamRollup[];
@@ -173,13 +174,27 @@ export async function fetchDashboardModel(): Promise<DashboardModel> {
   const [teamsRes, objsRes, okrsRes] = await Promise.all([
     sb.from('teams').select('*').order('sort_order'),
     sb.from('objectives').select('*').order('position'),
-    sb.from('okrs').select('area').limit(1),
+    sb.from('okrs').select('team_id, owner, area, quarter, year'),
   ]);
   const err = teamsRes.error || objsRes.error || okrsRes.error;
   if (err) throw err;
 
   const teams: Team[] = teamsRes.data ?? [];
   const objectives: Objective[] = objsRes.data ?? [];
+
+  // One OKR row per team per quarter; the owner on it is the team leader.
+  // Prefer the live quarter, but fall back to whatever exists so a board seeded
+  // for another period still shows leaders and the area heading.
+  const okrRows: any[] = okrsRes.data ?? [];
+  const current = okrRows.filter(
+    o => o.quarter === CURRENT_QUARTER && o.year === CURRENT_YEAR
+  );
+  const source = current.length ? current : okrRows;
+  const ownerByTeam = new Map<string, string>();
+  for (const o of source) {
+    const owner = typeof o.owner === 'string' ? o.owner.trim() : '';
+    if (o.team_id && owner) ownerByTeam.set(o.team_id, owner);
+  }
 
   const byTeam = new Map<string, Objective[]>();
   for (const o of objectives) {
@@ -204,6 +219,7 @@ export async function fetchDashboardModel(): Promise<DashboardModel> {
         objectives: objs,
         progress,
         status: rollupStatus(progresses),
+        owner: ownerByTeam.get(team.id) ?? null,
       };
     });
 
@@ -222,7 +238,7 @@ export async function fetchDashboardModel(): Promise<DashboardModel> {
     teams: rollups,
     overall,
     counts,
-    area: okrsRes.data?.[0]?.area ?? null,
+    area: source.find(o => o.area)?.area ?? null,
   };
 }
 

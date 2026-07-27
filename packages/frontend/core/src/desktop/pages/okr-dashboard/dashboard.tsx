@@ -14,10 +14,13 @@ import {
   type DashboardModel,
   fetchDashboardModel,
   type Objective,
+  quarterExpectedPct,
   type Status,
   STATUS_COLOR,
   STATUS_LABEL,
+  statusFromProgress,
   subscribeDashboard,
+  type Team,
   type TeamRollup,
 } from './okr-data';
 
@@ -41,6 +44,10 @@ function rgba(hex: string, a: number): string {
 }
 
 const ORDER: Status[] = ['on_track', 'at_risk', 'off_track'];
+
+function pct(n: number | null | undefined): number {
+  return Math.max(0, Math.min(100, Math.round(n ?? 0)));
+}
 
 // ---- status badge ---------------------------------------------------------
 function Badge({ status, progress }: { status: Status; progress: number }) {
@@ -111,7 +118,7 @@ function TeamCard({
   rollup: TeamRollup;
   onOpen: (id: string) => void;
 }) {
-  const { team, objectives, progress, status } = rollup;
+  const { team, objectives, progress, status, owner } = rollup;
   const color = STATUS_COLOR[status];
   return (
     <div style={{ ...S.card, borderColor: T.border }}>
@@ -130,6 +137,11 @@ function TeamCard({
           No objectives yet - edit this team&apos;s OKR.
         </div>
       )}
+      {/* Sits on the card's bottom edge (marginTop:auto) so the leader line
+          stays aligned across cards of differing objective counts. */}
+      <div style={{ ...S.leader, borderColor: T.border, color: T.sub }}>
+        Team leader: <span style={S.leaderName}>{owner || '—'}</span>
+      </div>
     </div>
   );
 }
@@ -173,6 +185,120 @@ function Donut({ counts }: { counts: Record<Status, number> }) {
         return seg;
       })}
     </svg>
+  );
+}
+
+// ---- pace vs plan ---------------------------------------------------------
+function PaceBar({
+  label,
+  value,
+  color,
+}: {
+  label: string;
+  value: number;
+  color: string;
+}) {
+  return (
+    <div style={{ marginTop: 14 }}>
+      <div style={S.objTop}>
+        <span style={S.objTitle}>{label}</span>
+        <span style={S.objPct}>{value}%</span>
+      </div>
+      <div style={{ ...S.track, background: T.track }}>
+        <div
+          style={{
+            width: `${value}%`,
+            height: '100%',
+            borderRadius: 5,
+            background: color,
+            transition: 'width .4s ease',
+          }}
+        />
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Overall progress against how far into the quarter we actually are. Status on
+ * this board is pace-based, so this is the number that explains every badge:
+ * 63% reads as On Track in month one and At Risk in month three.
+ */
+function PaceCard({
+  overall,
+  expected,
+}: {
+  overall: number;
+  expected: number;
+}) {
+  const delta = overall - expected;
+  const ahead = delta >= 0;
+  const color = STATUS_COLOR[statusFromProgress(overall, expected)];
+  return (
+    <div style={{ ...S.card, borderColor: T.border }}>
+      <div style={{ ...S.overviewTitle, color: T.sub }}>PACE VS PLAN</div>
+      <div style={{ ...S.kpiBig, color }}>
+        {ahead ? '+' : '−'}
+        {Math.abs(delta)} pts
+      </div>
+      <div style={{ ...S.kpiCaption, color: T.sub }}>
+        {ahead ? 'ahead of quarter pace' : 'behind quarter pace'}
+      </div>
+      <PaceBar label="Actual progress" value={overall} color={color} />
+      <PaceBar label="Expected by today" value={expected} color={T.sub} />
+    </div>
+  );
+}
+
+// ---- needs attention ------------------------------------------------------
+type Behind = { obj: Objective; team: Team; value: number };
+
+/**
+ * The objectives furthest behind pace, worst first. Everything here is already
+ * on the board somewhere, but spread across seven cards — this is the one place
+ * that answers "what do we talk about first" without scanning all of them.
+ */
+function AttentionCard({
+  items,
+  expected,
+  onOpen,
+}: {
+  items: Behind[];
+  expected: number;
+  onOpen: (id: string) => void;
+}) {
+  return (
+    <div style={{ ...S.card, borderColor: T.border }}>
+      <div style={{ ...S.overviewTitle, color: T.sub }}>NEEDS ATTENTION</div>
+      {items.length ? (
+        items.map(({ obj, team, value }) => {
+          const c = STATUS_COLOR[statusFromProgress(value, expected)];
+          return (
+            <button
+              key={obj.id}
+              type="button"
+              onClick={() => onOpen(obj.id)}
+              title="Open objective details"
+              style={S.objRowBtn}
+            >
+              <div style={S.objTop}>
+                <span style={S.objTitle}>
+                  {obj.title || 'Untitled objective'}
+                </span>
+                <span style={{ ...S.objPct, color: c }}>{value}%</span>
+              </div>
+              <div style={{ ...S.attnTeam, color: T.sub }}>
+                {team.name} · {expected - value} pts behind
+              </div>
+            </button>
+          );
+        })
+      ) : (
+        <div style={S.emptyCard}>
+          Every objective is on or ahead of pace for {CURRENT_QUARTER}.
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -225,6 +351,17 @@ export function OkrDashboard() {
   );
 
   const counts = model?.counts ?? { on_track: 0, at_risk: 0, off_track: 0 };
+
+  // Pace benchmark for the live quarter, and the objectives trailing it worst.
+  // Recomputed on every render so the board stays honest as the quarter runs on
+  // — it re-renders whenever the realtime subscription fires.
+  const expected = quarterExpectedPct();
+  const behind: Behind[] = (model?.teams ?? [])
+    .flatMap(r => r.objectives.map(obj => ({ obj, team: r.team })))
+    .map(x => ({ ...x, value: pct(x.obj.progress) }))
+    .filter(x => x.value < expected)
+    .sort((a, b) => a.value - b.value)
+    .slice(0, 5);
 
   return (
     <div style={{ ...S.root, background: T.bg, color: T.text }}>
@@ -330,6 +467,13 @@ export function OkrDashboard() {
               </div>
             </div>
           </div>
+
+          <PaceCard overall={model.overall} expected={expected} />
+          <AttentionCard
+            items={behind}
+            expected={expected}
+            onOpen={openObjective}
+          />
         </div>
       )}
     </div>
@@ -343,7 +487,12 @@ const S: Record<string, CSSProperties> = {
     inset: 0,
     zIndex: 9999,
     overflowY: 'auto',
-    padding: '28px 32px 40px',
+    padding: '28px 32px 32px',
+    // Column layout so the card grid can claim the leftover height instead of
+    // leaving a band of empty background under the last row — this board lives
+    // on a wall-mounted screen, where that gap is the whole bottom third.
+    display: 'flex',
+    flexDirection: 'column',
     fontFamily:
       'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
   },
@@ -395,13 +544,28 @@ const S: Record<string, CSSProperties> = {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
     gap: 18,
+    // Rows never shrink below their content, but share any spare height, so a
+    // short last row stretches to the bottom edge rather than leaving a gap.
+    gridAutoRows: 'minmax(min-content, 1fr)',
+    flex: 1,
+    minHeight: 0,
   },
   card: {
     background: T.card,
     border: '1px solid',
     borderRadius: 16,
     padding: 20,
+    // Column so a card can push its footer to the bottom of the stretched row.
+    display: 'flex',
+    flexDirection: 'column',
   },
+  leader: {
+    marginTop: 'auto',
+    paddingTop: 12,
+    borderTop: '1px solid',
+    fontSize: 12.5,
+  },
+  leaderName: { fontWeight: 700, color: T.text },
   cardHead: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -445,6 +609,9 @@ const S: Record<string, CSSProperties> = {
     marginBottom: 8,
   },
   overviewBody: { display: 'flex', alignItems: 'center', gap: 16 },
+  kpiBig: { fontSize: 34, fontWeight: 800, lineHeight: 1.05, marginTop: 4 },
+  kpiCaption: { fontSize: 12.5, fontWeight: 600, marginTop: 2 },
+  attnTeam: { fontSize: 12, marginTop: 5 },
   legendRow: {
     display: 'flex',
     alignItems: 'center',
