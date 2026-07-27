@@ -11,9 +11,11 @@ export const APP_ZOOM = '1';
 // The OKR views are much denser than the rest of the app — each is laid out to
 // fill one viewport — so they carry their own scale and restore APP_ZOOM when
 // they unmount. The editor and objective views sit 1.1x above their old
-// baselines, which is what 110% browser zoom used to give; the dashboard is a
-// further 10% down from that so the whole board fits without scrolling.
-export const OKR_DASHBOARD_ZOOM = '0.779';
+// baselines, which is what 110% browser zoom used to give. The dashboard has
+// come down two 10% steps from there (0.866 → 0.779 → 0.701): it is the only
+// view shown on a wall-mounted screen, where the whole board has to read at a
+// glance without scrolling.
+export const OKR_DASHBOARD_ZOOM = '0.701';
 export const OKR_EDITOR_ZOOM = '1.32';
 export const OKR_OBJECTIVE_ZOOM = '0.66';
 
