@@ -8,6 +8,7 @@ import {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { OKR_EDITOR_ZOOM, usePageZoom } from '../../../utils/app-zoom';
 import {
   clampProgress,
   CURRENT_QUARTER,
@@ -136,16 +137,9 @@ export function OkrEditor() {
     };
   }, [hdrMenu]);
 
-  // The editor is authored to fit at 1.2x so 100% browser zoom shows it the way
-  // the team prefers. Restore the app default (1.5x) on close.
-  useEffect(() => {
-    const el = document.documentElement;
-    const prev = el.style.zoom;
-    el.style.zoom = '1.2';
-    return () => {
-      el.style.zoom = prev || '1.5';
-    };
-  }, []);
+  // The editor carries its own scale so 100% browser zoom shows it the way the
+  // team prefers. The app default is restored on close.
+  usePageZoom(OKR_EDITOR_ZOOM);
 
   // Background: load DB teams (for ids + import matching) + my team preselect.
   useEffect(() => {

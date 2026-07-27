@@ -7,6 +7,7 @@ import {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { OKR_DASHBOARD_ZOOM, usePageZoom } from '../../../utils/app-zoom';
 import {
   CURRENT_QUARTER,
   CURRENT_YEAR,
@@ -214,16 +215,9 @@ export function OkrDashboard() {
     return () => window.removeEventListener('keydown', onKey);
   }, [navigate]);
 
-  // The dashboard is a dense, full-viewport view — it is authored to fit at
-  // 0.7875x so 100% browser zoom shows the whole board at once. Restore on close.
-  useEffect(() => {
-    const el = document.documentElement;
-    const prev = el.style.zoom;
-    el.style.zoom = '0.7875';
-    return () => {
-      el.style.zoom = prev || '1.5';
-    };
-  }, []);
+  // The dashboard is a dense, full-viewport view — it carries its own scale so
+  // 100% browser zoom shows the whole board at once. Restored on close.
+  usePageZoom(OKR_DASHBOARD_ZOOM);
 
   const openObjective = useCallback(
     (id: string) => navigate(`/okr-objective/${id}`),

@@ -1,16 +1,12 @@
 import './setup';
 
 import { Telemetry } from '@bridgeflow/core/components/telemetry';
+import { APP_ZOOM } from '@bridgeflow/core/utils/app-zoom';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import { App } from './app';
 import { AuthGate } from './auth/auth-gate';
-
-// BRIDGE Flow runs the whole app at 1.5x so 100% browser zoom looks like the
-// team's preferred 150%. The OKR dashboard route bumps this to 1.75x while it
-// is open and restores it to APP_ZOOM on unmount.
-export const APP_ZOOM = '1.5';
 
 function mountApp() {
   document.documentElement.style.zoom = APP_ZOOM;

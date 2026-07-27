@@ -1,6 +1,7 @@
 import { type CSSProperties, type ReactNode, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { OKR_OBJECTIVE_ZOOM, usePageZoom } from '../../../utils/app-zoom';
 import {
   fetchObjectiveDetail,
   type ObjectiveDetail,
@@ -115,16 +116,9 @@ export function OkrObjectiveDetail() {
     return () => window.removeEventListener('keydown', onKey);
   }, [navigate]);
 
-  // The objective detail is authored to fit at 0.6x so 100% browser zoom shows
-  // the whole page compactly. Restore the app default (1.5x) on close.
-  useEffect(() => {
-    const el = document.documentElement;
-    const prev = el.style.zoom;
-    el.style.zoom = '0.6';
-    return () => {
-      el.style.zoom = prev || '1.5';
-    };
-  }, []);
+  // The objective detail carries its own scale so 100% browser zoom shows the
+  // whole page compactly. The app default is restored on close.
+  usePageZoom(OKR_OBJECTIVE_ZOOM);
 
   const progress = data ? clamp(data.objective.progress ?? 0) : 0;
   const status = statusFromProgress(progress);
