@@ -163,7 +163,7 @@ declare
   },
   {
     "key": "ai-analytics",
-    "owner": "Sohel Shaikh",
+    "owner": "Olaf Penne",
     "objectives": [
       {
         "title": "Scale generative AI across operations",
@@ -185,15 +185,15 @@ declare
         "initiatives": [
           {
             "description": "Use-case intake + build squad",
-            "owner": "Sohel Shaikh"
+            "owner": "Olaf Penne"
           },
           {
             "description": "Enablement workshops",
-            "owner": "Sohel Shaikh"
+            "owner": "Olaf Penne"
           },
           {
             "description": "Automate top-10 workflows",
-            "owner": "Sohel Shaikh"
+            "owner": "Olaf Penne"
           }
         ]
       },
@@ -217,15 +217,15 @@ declare
         "initiatives": [
           {
             "description": "Streaming ingestion platform",
-            "owner": "Sohel Shaikh"
+            "owner": "Olaf Penne"
           },
           {
             "description": "Pipeline monitoring + alerts",
-            "owner": "Sohel Shaikh"
+            "owner": "Olaf Penne"
           },
           {
             "description": "On-call runbooks",
-            "owner": "Sohel Shaikh"
+            "owner": "Olaf Penne"
           }
         ]
       },
@@ -249,15 +249,15 @@ declare
         "initiatives": [
           {
             "description": "Role-based learning paths",
-            "owner": "Sohel Shaikh"
+            "owner": "Olaf Penne"
           },
           {
             "description": "Internal certification track",
-            "owner": "Sohel Shaikh"
+            "owner": "Olaf Penne"
           },
           {
             "description": "Champion network",
-            "owner": "Sohel Shaikh"
+            "owner": "Olaf Penne"
           }
         ]
       }
@@ -265,7 +265,7 @@ declare
   },
   {
     "key": "opex",
-    "owner": "Marco Rodriguez",
+    "owner": "Ahtesham Akhtar",
     "objectives": [
       {
         "title": "Reduce recurring operating costs",
@@ -287,15 +287,15 @@ declare
         "initiatives": [
           {
             "description": "Zero-based budgeting review",
-            "owner": "Marco Rodriguez"
+            "owner": "Ahtesham Akhtar"
           },
           {
             "description": "Renegotiate top vendors",
-            "owner": "Marco Rodriguez"
+            "owner": "Ahtesham Akhtar"
           },
           {
             "description": "Root-cause + poka-yoke",
-            "owner": "Marco Rodriguez"
+            "owner": "Ahtesham Akhtar"
           }
         ]
       },
@@ -319,15 +319,15 @@ declare
         "initiatives": [
           {
             "description": "SLA dashboards + escalation",
-            "owner": "Marco Rodriguez"
+            "owner": "Ahtesham Akhtar"
           },
           {
             "description": "Remove non-value steps",
-            "owner": "Marco Rodriguez"
+            "owner": "Ahtesham Akhtar"
           },
           {
             "description": "Standard work + checklists",
-            "owner": "Marco Rodriguez"
+            "owner": "Ahtesham Akhtar"
           }
         ]
       },
@@ -351,15 +351,15 @@ declare
         "initiatives": [
           {
             "description": "Process-mapping sprints",
-            "owner": "Marco Rodriguez"
+            "owner": "Ahtesham Akhtar"
           },
           {
             "description": "Assign process owners",
-            "owner": "Marco Rodriguez"
+            "owner": "Ahtesham Akhtar"
           },
           {
             "description": "Automation backlog",
-            "owner": "Marco Rodriguez"
+            "owner": "Ahtesham Akhtar"
           }
         ]
       }
@@ -469,7 +469,7 @@ declare
   },
   {
     "key": "business-operation",
-    "owner": "Mateus Rocha",
+    "owner": "Aurelia Alhajali",
     "objectives": [
       {
         "title": "Improve operational predictability",
@@ -491,15 +491,15 @@ declare
         "initiatives": [
           {
             "description": "Rolling forecast + S&OP",
-            "owner": "Mateus Rocha"
+            "owner": "Aurelia Alhajali"
           },
           {
             "description": "Capacity planning",
-            "owner": "Mateus Rocha"
+            "owner": "Aurelia Alhajali"
           },
           {
             "description": "Weekly ops review",
-            "owner": "Mateus Rocha"
+            "owner": "Aurelia Alhajali"
           }
         ]
       },
@@ -523,15 +523,15 @@ declare
         "initiatives": [
           {
             "description": "Digital approval workflows",
-            "owner": "Mateus Rocha"
+            "owner": "Aurelia Alhajali"
           },
           {
             "description": "Rules-based routing",
-            "owner": "Mateus Rocha"
+            "owner": "Aurelia Alhajali"
           },
           {
             "description": "Escalation reminders",
-            "owner": "Mateus Rocha"
+            "owner": "Aurelia Alhajali"
           }
         ]
       },
@@ -555,15 +555,15 @@ declare
         "initiatives": [
           {
             "description": "Service-catalogue + SLAs",
-            "owner": "Mateus Rocha"
+            "owner": "Aurelia Alhajali"
           },
           {
             "description": "Knowledge base",
-            "owner": "Mateus Rocha"
+            "owner": "Aurelia Alhajali"
           },
           {
             "description": "Feedback loops",
-            "owner": "Mateus Rocha"
+            "owner": "Aurelia Alhajali"
           }
         ]
       }
