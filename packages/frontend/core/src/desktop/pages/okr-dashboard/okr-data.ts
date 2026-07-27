@@ -263,6 +263,53 @@ export async function getTeams(): Promise<Team[]> {
   return res.data ?? [];
 }
 
+/** A signed-up person, with the team they belong to resolved for display. */
+export interface Member {
+  id: string;
+  full_name: string | null;
+  is_admin: boolean;
+  created_at: string | null;
+  team_id: string | null;
+  team_name: string | null;
+  team_accent: string | null;
+}
+
+/**
+ * Everyone who has signed in at least once, newest last.
+ *
+ * `profiles` rows are keyed by auth.users.id and are readable by any signed-in
+ * user (the profiles_read policy). Emails live in auth.users, which the anon
+ * key cannot reach, so a member is identified by name and team here.
+ */
+export async function fetchMembers(): Promise<Member[]> {
+  const sb = getSupabase();
+  if (!sb) return [];
+
+  const [profiles, teams] = await Promise.all([
+    sb.from('profiles').select('*').order('created_at'),
+    sb.from('teams').select('*'),
+  ]);
+  if (profiles.error) throw profiles.error;
+  if (teams.error) throw teams.error;
+
+  const byId = new Map<string, Team>(
+    (teams.data ?? []).map((t: Team) => [t.id, t])
+  );
+
+  return (profiles.data ?? []).map((p: any): Member => {
+    const team = p.team_id ? byId.get(p.team_id) : undefined;
+    return {
+      id: p.id,
+      full_name: p.full_name ?? null,
+      is_admin: !!p.is_admin,
+      created_at: p.created_at ?? null,
+      team_id: p.team_id ?? null,
+      team_name: team?.name ?? null,
+      team_accent: team?.accent ?? null,
+    };
+  });
+}
+
 async function currentUserId(): Promise<string | null> {
   const sb = getSupabase();
   if (!sb) return null;

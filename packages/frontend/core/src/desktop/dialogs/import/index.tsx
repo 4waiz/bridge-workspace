@@ -1,3 +1,21 @@
+import { openFilesWith } from '@blocksuite/bridgeflow/shared/utils';
+import type { Workspace } from '@blocksuite/bridgeflow/store';
+import {
+  DocxTransformer,
+  HtmlTransformer,
+  MarkdownTransformer,
+  NotionHtmlTransformer,
+  ZipTransformer,
+} from '@blocksuite/bridgeflow/widgets/linked-doc';
+import {
+  ExportToHtmlIcon,
+  ExportToMarkdownIcon,
+  FileIcon,
+  HelpIcon,
+  PageIcon,
+  SaveIcon,
+  ZipIcon,
+} from '@blocksuite/icons/rc';
 import { Button, IconButton, IconType, Modal } from '@bridgeflow/component';
 import { getStoreManager } from '@bridgeflow/core/blocksuite/manager/store';
 import { useAsyncCallback } from '@bridgeflow/core/components/hooks/bridgeflow-async-hooks';
@@ -18,25 +36,6 @@ import {
 import { DebugLogger } from '@bridgeflow/debug';
 import { useI18n } from '@bridgeflow/i18n';
 import track from '@bridgeflow/track';
-import { openFilesWith } from '@blocksuite/bridgeflow/shared/utils';
-import type { Workspace } from '@blocksuite/bridgeflow/store';
-import {
-  DocxTransformer,
-  HtmlTransformer,
-  MarkdownTransformer,
-  NotionHtmlTransformer,
-  ZipTransformer,
-} from '@blocksuite/bridgeflow/widgets/linked-doc';
-import {
-  ExportToHtmlIcon,
-  ExportToMarkdownIcon,
-  FileIcon,
-  HelpIcon,
-  NotionIcon,
-  PageIcon,
-  SaveIcon,
-  ZipIcon,
-} from '@blocksuite/icons/rc';
 import { useService } from '@kanban-studios/infra';
 import { cssVar } from '@toeverything/theme';
 import { cssVarV2 } from '@toeverything/theme/v2';
@@ -252,17 +251,6 @@ const importOptions = [
     suffixTooltip: 'com.bridgeflow.import.html-files.tooltip',
     testId: 'editor-option-menu-import-html',
     type: 'html' as ImportType,
-  },
-  {
-    key: 'notion',
-    label: 'com.bridgeflow.import.notion',
-    prefixIcon: <NotionIcon color={cssVar('black')} width={20} height={20} />,
-    suffixIcon: (
-      <HelpIcon color={cssVarV2('icon/primary')} width={20} height={20} />
-    ),
-    suffixTooltip: 'com.bridgeflow.import.notion.tooltip',
-    testId: 'editor-option-menu-import-notion',
-    type: 'notion' as ImportType,
   },
   {
     key: 'docx',
@@ -575,18 +563,6 @@ const ImportOptions = ({
           )
         )}
       </div>
-      <div className={style.importModalTip}>
-        {t['com.bridgeflow.import.modal.tip']()}{' '}
-        <a
-          className={style.link}
-          href={BUILD_CONFIG.discordUrl}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Discord
-        </a>
-        .
-      </div>
     </>
   );
 };
@@ -613,16 +589,7 @@ const SuccessStatus = ({ onComplete }: { onComplete: () => void }) => {
         {t['com.bridgeflow.import.status.success.title']()}
       </div>
       <p className={style.importStatusContent}>
-        {t['com.bridgeflow.import.status.success.message']()}{' '}
-        <a
-          className={style.link}
-          href={BUILD_CONFIG.discordUrl}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Discord
-        </a>
-        .
+        {t['com.bridgeflow.import.status.success.message']()}
       </p>
       <div className={style.importModalButtonContainer}>
         <Button onClick={onComplete} variant="primary">

@@ -1,5 +1,5 @@
-import { BrandLogo } from '@bridgeflow/component/brand';
 import { Scrollable } from '@bridgeflow/component';
+import { BrandLogo } from '@bridgeflow/component/brand';
 import { Avatar } from '@bridgeflow/component/ui/avatar';
 import { UserPlanButton } from '@bridgeflow/core/components/bridgeflow/auth/user-plan-button';
 import { useCatchEventCallback } from '@bridgeflow/core/components/hooks/use-catch-event-hook';
@@ -98,7 +98,10 @@ export const SignInButton = () => {
         <div className="name" title={t['com.bridgeflow.settings.sign']()}>
           {t['com.bridgeflow.settings.sign']()}
         </div>
-        <div className="email" title={t['com.bridgeflow.setting.sign.message']()}>
+        <div
+          className="email"
+          title={t['com.bridgeflow.setting.sign.message']()}
+        >
           {t['com.bridgeflow.setting.sign.message']()}
         </div>
       </div>
@@ -215,7 +218,6 @@ export const SettingSidebar = ({
         {t['com.bridgeflow.settingSidebar.title']()}
       </div>
 
-      {loginStatus === 'unauthenticated' ? <SignInButton /> : null}
       {loginStatus === 'authenticated' ? (
         <Suspense>
           <UserInfo

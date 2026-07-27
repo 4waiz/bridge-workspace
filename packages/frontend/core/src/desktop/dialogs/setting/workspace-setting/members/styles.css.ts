@@ -35,6 +35,82 @@ export const localMembersPanel = style({
   flexDirection: 'column',
 });
 
+// ---- Member directory (local workspace: real accounts from Supabase) ------
+
+export const directoryList = style({
+  display: 'flex',
+  flexDirection: 'column',
+  borderRadius: '12px',
+  border: `1px solid ${cssVarV2('layer/insideBorder/border')}`,
+  overflow: 'hidden',
+});
+
+export const directoryRow = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '12px',
+  padding: '12px 16px',
+  selectors: {
+    '&:not(:last-child)': {
+      borderBottom: `1px solid ${cssVarV2('layer/insideBorder/border')}`,
+    },
+  },
+});
+
+export const directoryAvatar = style({
+  flex: '0 0 auto',
+  width: '32px',
+  height: '32px',
+  borderRadius: '50%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: '#fff',
+  fontSize: cssVar('fontXs'),
+  fontWeight: 600,
+  letterSpacing: '0.02em',
+});
+
+export const directoryName = style({
+  flex: 1,
+  minWidth: 0,
+  display: 'flex',
+  alignItems: 'center',
+  gap: '8px',
+});
+
+export const directoryNameText = style({
+  fontSize: cssVar('fontSm'),
+  fontWeight: 500,
+  color: cssVarV2('text/primary'),
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+});
+
+export const directoryAdmin = style({
+  flex: '0 0 auto',
+  padding: '1px 7px',
+  borderRadius: '999px',
+  fontSize: cssVar('fontXs'),
+  color: cssVarV2('text/emphasis'),
+  border: `1px solid ${cssVarV2('layer/insideBorder/border')}`,
+});
+
+export const directoryTeam = style({
+  flex: '0 0 auto',
+  fontSize: cssVar('fontXs'),
+  color: cssVarV2('text/secondary'),
+});
+
+export const directoryEmpty = style({
+  padding: '16px',
+  borderRadius: '12px',
+  border: `1px solid ${cssVarV2('layer/insideBorder/border')}`,
+  fontSize: cssVar('fontSm'),
+  color: cssVarV2('text/secondary'),
+});
+
 export const goUpgradeWrapper = style({
   display: 'inline-flex',
   alignItems: 'center',

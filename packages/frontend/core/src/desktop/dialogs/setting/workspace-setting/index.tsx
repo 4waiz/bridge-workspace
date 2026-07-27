@@ -1,30 +1,23 @@
+import {
+  CollaborationIcon,
+  PaymentIcon,
+  PropertyIcon,
+  SettingsIcon,
+} from '@blocksuite/icons/rc';
 import { useWorkspaceInfo } from '@bridgeflow/core/components/hooks/use-workspace-info';
 import { ServerService } from '@bridgeflow/core/modules/cloud';
 import type { SettingTab } from '@bridgeflow/core/modules/dialogs/constant';
 import { WorkspaceService } from '@bridgeflow/core/modules/workspace';
-import { EmbeddingSettings } from '@bridgeflow/core/modules/workspace-indexer-embedding';
 import { ServerDeploymentType } from '@bridgeflow/graphql';
 import { useI18n } from '@bridgeflow/i18n';
-import {
-  AiEmbeddingIcon,
-  CollaborationIcon,
-  IntegrationsIcon,
-  PaymentIcon,
-  PropertyIcon,
-  SaveIcon,
-  SettingsIcon,
-} from '@blocksuite/icons/rc';
 import { useLiveData, useService } from '@kanban-studios/infra';
 import { useMemo } from 'react';
 
 import type { SettingSidebarItem, SettingState } from '../types';
 import { WorkspaceSettingBilling } from './billing';
-import { IntegrationSetting } from './integration';
-import { WorkspaceSettingLicense } from './license';
 import { MembersPanel } from './members';
 import { WorkspaceSettingDetail } from './preference';
 import { WorkspaceSettingProperties } from './properties';
-import { WorkspaceSettingStorage } from './storage';
 
 export const WorkspaceSetting = ({
   activeTab,
@@ -49,14 +42,6 @@ export const WorkspaceSetting = ({
       );
     case 'workspace:billing':
       return <WorkspaceSettingBilling />;
-    case 'workspace:storage':
-      return <WorkspaceSettingStorage onCloseSetting={onCloseSetting} />;
-    case 'workspace:license':
-      return <WorkspaceSettingLicense onCloseSetting={onCloseSetting} />;
-    case 'workspace:integrations':
-      return <IntegrationSetting />;
-    case 'workspace:embedding':
-      return <EmbeddingSettings />;
     default:
       return null;
   }
@@ -77,7 +62,6 @@ export const useWorkspaceSettingList = (): SettingSidebarItem[] => {
 
   const showBilling =
     !isSelfhosted && information?.isTeam && information?.isOwner;
-  const showLicense = information?.isOwner && isSelfhosted;
   const items = useMemo<SettingSidebarItem[]>(() => {
     return [
       {
@@ -98,41 +82,14 @@ export const useWorkspaceSettingList = (): SettingSidebarItem[] => {
         icon: <CollaborationIcon />,
         testId: 'workspace-setting:members',
       },
-      {
-        key: 'workspace:integrations',
-        title: t['com.bridgeflow.integration.integrations'](),
-        icon: <IntegrationsIcon />,
-        testId: 'workspace-setting:integrations',
-      },
-      {
-        key: 'workspace:storage',
-        title: t['Storage'](),
-        icon: <SaveIcon />,
-        testId: 'workspace-setting:storage',
-      },
-      {
-        key: 'workspace:embedding',
-        title:
-          t[
-            'com.bridgeflow.settings.workspace.indexer-embedding.embedding.title'
-          ](),
-        icon: <AiEmbeddingIcon />,
-        testId: 'workspace-setting:embedding',
-      },
       showBilling && {
         key: 'workspace:billing' as SettingTab,
         title: t['com.bridgeflow.settings.workspace.billing'](),
         icon: <PaymentIcon />,
         testId: 'workspace-setting:billing',
       },
-      showLicense && {
-        key: 'workspace:license' as SettingTab,
-        title: t['com.bridgeflow.settings.workspace.license'](),
-        icon: <PaymentIcon />,
-        testId: 'workspace-setting:license',
-      },
     ].filter((item): item is SettingSidebarItem => !!item);
-  }, [showBilling, showLicense, t]);
+  }, [showBilling, t]);
 
   return items;
 };

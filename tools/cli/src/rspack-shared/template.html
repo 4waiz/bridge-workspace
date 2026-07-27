@@ -64,20 +64,27 @@
         place-items: center;
         overflow: hidden;
         background:
-          radial-gradient(circle at top left, rgba(255, 122, 45, 0.12), transparent 30%),
-          radial-gradient(circle at bottom right, rgba(66, 72, 82, 0.1), transparent 28%),
+          radial-gradient(
+            circle at top left,
+            rgba(255, 122, 45, 0.12),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at bottom right,
+            rgba(66, 72, 82, 0.1),
+            transparent 28%
+          ),
           linear-gradient(180deg, #faf7f3 0%, #f4efe8 100%);
         color: #22262d;
+        /* The screen never moves — it only fades out. */
         transition:
           opacity 420ms ease,
-          visibility 420ms ease,
-          transform 420ms ease;
+          visibility 420ms ease;
       }
 
       #bridge-welcome-screen.is-hiding {
         opacity: 0;
         visibility: hidden;
-        transform: scale(1.015);
       }
 
       .bridge-welcome__panel {
@@ -93,7 +100,8 @@
         justify-content: center;
         gap: 10px;
         margin-bottom: clamp(22px, 2.8vw, 38px);
-        font-family: 'BridgeWelcomeSans', 'Segoe UI Variable Display', sans-serif;
+        font-family:
+          'BridgeWelcomeSans', 'Segoe UI Variable Display', sans-serif;
         font-size: clamp(1.5rem, 2.4vw, 2.3rem);
         font-weight: 700;
         letter-spacing: 0.01em;
@@ -140,7 +148,8 @@
 
       .bridge-welcome__headline {
         display: inline-block;
-        font-family: 'BridgeWelcomeSans', 'Segoe UI Variable Display', sans-serif;
+        font-family:
+          'BridgeWelcomeSans', 'Segoe UI Variable Display', sans-serif;
         font-size: clamp(1.8rem, 3.7vw, 3.6rem);
         line-height: 0.92;
         letter-spacing: -0.08em;
@@ -275,12 +284,6 @@
           width: min(84vw, 320px);
         }
       }
-
-      @media (prefers-reduced-motion: reduce) {
-        #bridge-welcome-screen {
-          transition: none;
-        }
-      }
     </style>
     <% } %>
   </head>
@@ -291,29 +294,40 @@
       <div class="bridge-welcome__panel">
         <div class="bridge-welcome__brand">
           <img src="/imgs/bridge-logo.png" alt="" aria-hidden="true" />
-          <span><span class="bridge-welcome__brand-name">BRIDGE</span> <span class="bridge-welcome__brand-accent">Flow</span></span>
+          <span
+            ><span class="bridge-welcome__brand-name">BRIDGE</span>
+            <span class="bridge-welcome__brand-accent">Flow</span></span
+          >
         </div>
         <div class="bridge-welcome__line">
           <span class="bridge-welcome__accent" aria-hidden="true"></span>
           <span class="bridge-welcome__headline">Write,</span>
-          <span class="bridge-welcome__headline bridge-welcome__headline--script">Draw,</span>
+          <span
+            class="bridge-welcome__headline bridge-welcome__headline--script"
+            >Draw,</span
+          >
           <span class="bridge-welcome__check" aria-hidden="true"></span>
           <span class="bridge-welcome__headline">Plan,</span>
         </div>
         <div class="bridge-welcome__line">
           <span class="bridge-welcome__headline">All at Once.</span>
           <span class="bridge-welcome__headline"
-            >With <span class="bridge-welcome__headline--accent">AI.</span></span
+            >With
+            <span class="bridge-welcome__headline--accent">AI.</span></span
           >
         </div>
         <p class="bridge-welcome__copy">
-          BRIDGE Flow is the AI Innovation Canvas — docs, whiteboards,
-          boards and databases on one infinite surface.
+          BRIDGE Flow is the AI Innovation Canvas — docs, whiteboards, boards
+          and databases on one infinite surface.
         </p>
         <p class="bridge-welcome__copy">
           Build, plan and execute visually, with AI alongside you.
         </p>
-        <button type="button" id="bridge-welcome-cta" class="bridge-welcome__cta">
+        <button
+          type="button"
+          id="bridge-welcome-cta"
+          class="bridge-welcome__cta"
+        >
           Get Started
         </button>
       </div>
@@ -328,8 +342,8 @@
 
         let hidden = false;
 
-        // Dismiss the welcome screen: fade it out and remove it, which stops
-        // its animation and reveals the app mounted in #app behind it.
+        // Dismiss the welcome screen: fade it out, then remove it once the
+        // fade has run so the app mounted in #app behind it is revealed.
         const hide = () => {
           if (hidden) {
             return;

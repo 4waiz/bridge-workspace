@@ -1,7 +1,4 @@
-import {
-  BRAND_CREATOR_NAME,
-  BRAND_SITE_URL,
-} from '@bridgeflow/component/brand';
+import { ArrowRightSmallIcon } from '@blocksuite/icons/rc';
 import { Switch } from '@bridgeflow/component';
 import {
   SettingHeader,
@@ -12,7 +9,6 @@ import { useAppUpdater } from '@bridgeflow/core/components/hooks/use-app-updater
 import { UrlService } from '@bridgeflow/core/modules/url';
 import { appIconMap, appNames } from '@bridgeflow/core/utils/channel';
 import { useI18n } from '@bridgeflow/i18n';
-import { ArrowRightSmallIcon, OpenInNewIcon } from '@blocksuite/icons/rc';
 import { useServices } from '@kanban-studios/infra';
 import { useCallback } from 'react';
 
@@ -62,7 +58,9 @@ export const AboutBridgeFlow = () => {
         subtitle={t['com.bridgeflow.aboutBridgeFlow.subtitle']()}
         data-testid="about-title"
       />
-      <SettingWrapper title={t['com.bridgeflow.aboutBridgeFlow.version.title']()}>
+      <SettingWrapper
+        title={t['com.bridgeflow.aboutBridgeFlow.version.title']()}
+      >
         <SettingRow
           name={appName}
           desc={BUILD_CONFIG.appVersion}
@@ -79,7 +77,9 @@ export const AboutBridgeFlow = () => {
             <UpdateCheckSection />
             <SettingRow
               name={t['com.bridgeflow.aboutBridgeFlow.autoCheckUpdate.title']()}
-              desc={t['com.bridgeflow.aboutBridgeFlow.autoCheckUpdate.description']()}
+              desc={t[
+                'com.bridgeflow.aboutBridgeFlow.autoCheckUpdate.description'
+              ]()}
             >
               <Switch
                 checked={appSettings.autoCheckUpdate}
@@ -87,7 +87,9 @@ export const AboutBridgeFlow = () => {
               />
             </SettingRow>
             <SettingRow
-              name={t['com.bridgeflow.aboutBridgeFlow.autoDownloadUpdate.title']()}
+              name={t[
+                'com.bridgeflow.aboutBridgeFlow.autoDownloadUpdate.title'
+              ]()}
               desc={t[
                 'com.bridgeflow.aboutBridgeFlow.autoDownloadUpdate.description'
               ]()}
@@ -119,37 +121,10 @@ export const AboutBridgeFlow = () => {
           />
         </SettingRow>
       </SettingWrapper>
-      <SettingWrapper title={t['com.bridgeflow.aboutBridgeFlow.contact.title']()}>
-        <a
-          className={styles.link}
-          rel="noreferrer"
-          href={BRAND_SITE_URL}
-          target="_blank"
-        >
-          {t['com.bridgeflow.aboutBridgeFlow.contact.website']()}
-          <OpenInNewIcon className="icon" />
-        </a>
-        <a
-          className={styles.link}
-          rel="noreferrer"
-          href={BRAND_SITE_URL}
-          target="_blank"
-        >
-          {BRAND_CREATOR_NAME}
-          <OpenInNewIcon className="icon" />
-        </a>
-        <a
-          className={styles.link}
-          rel="noreferrer"
-          href={BRAND_SITE_URL}
-          target="_blank"
-        >
-          {t['com.bridgeflow.aboutBridgeFlow.contact.community']()}
-          <OpenInNewIcon className="icon" />
-        </a>
-      </SettingWrapper>
       {relatedLinks.length ? (
-        <SettingWrapper title={t['com.bridgeflow.aboutBridgeFlow.community.title']()}>
+        <SettingWrapper
+          title={t['com.bridgeflow.aboutBridgeFlow.community.title']()}
+        >
           <div className={styles.communityWrapper}>
             {relatedLinks.map(({ icon, title, link }) => {
               return (
@@ -168,26 +143,6 @@ export const AboutBridgeFlow = () => {
           </div>
         </SettingWrapper>
       ) : null}
-      <SettingWrapper title={t['com.bridgeflow.aboutBridgeFlow.legal.title']()}>
-        <a
-          className={styles.link}
-          rel="noreferrer"
-          href={BRAND_SITE_URL}
-          target="_blank"
-        >
-          {t['com.bridgeflow.aboutBridgeFlow.legal.privacy']()}
-          <OpenInNewIcon className="icon" />
-        </a>
-        <a
-          className={styles.link}
-          rel="noreferrer"
-          href={BRAND_SITE_URL}
-          target="_blank"
-        >
-          {t['com.bridgeflow.aboutBridgeFlow.legal.tos']()}
-          <OpenInNewIcon className="icon" />
-        </a>
-      </SettingWrapper>
     </>
   );
 };

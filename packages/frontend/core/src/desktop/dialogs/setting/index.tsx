@@ -15,8 +15,6 @@ import type {
 import { GlobalContextService } from '@bridgeflow/core/modules/global-context';
 import { createIsland, type Island } from '@bridgeflow/core/utils/island';
 import { ServerDeploymentType } from '@bridgeflow/graphql';
-import { Trans } from '@bridgeflow/i18n';
-import { ContactWithUsIcon } from '@blocksuite/icons/rc';
 import { FrameworkScope, useLiveData, useService } from '@kanban-studios/infra';
 import { debounce } from 'lodash-es';
 import {
@@ -32,9 +30,7 @@ import { flushSync } from 'react-dom';
 
 import { AccountSetting } from './account-setting';
 import { GeneralSetting } from './general-setting';
-import { IssueFeedbackModal } from './issue-feedback-modal';
 import { SettingSidebar } from './setting-sidebar';
-import { StarBridgeFlowModal } from './star-bridgeflow-modal';
 import * as style from './style.css';
 import {
   SubPageContext,
@@ -140,17 +136,6 @@ const SettingModalInner = ({
     },
     [setSettingState]
   );
-  const [openIssueFeedbackModal, setOpenIssueFeedbackModal] = useState(false);
-  const [openStarBridgeFlowModal, setOpenStarBridgeFlowModal] = useState(false);
-
-  const handleOpenIssueFeedbackModal = useCallback(() => {
-    setOpenIssueFeedbackModal(true);
-  }, [setOpenIssueFeedbackModal]);
-
-  const handleOpenStarBridgeFlowModal = useCallback(() => {
-    setOpenStarBridgeFlowModal(true);
-  }, [setOpenStarBridgeFlowModal]);
-
   const addSubPageIsland = useCallback(() => {
     const island = createIsland();
     setSubPageIslands(prev => [...prev, island]);
@@ -227,34 +212,6 @@ const SettingModalInner = ({
                   ) : null}
                 </Suspense>
               </div>
-              <div className={style.footer}>
-                <ContactWithUsIcon fontSize={16} />
-                <Trans
-                  i18nKey={'com.bridgeflow.settings.suggestion-2'}
-                  components={{
-                    1: (
-                      <span
-                        className={style.link}
-                        onClick={handleOpenStarBridgeFlowModal}
-                      />
-                    ),
-                    2: (
-                      <span
-                        className={style.link}
-                        onClick={handleOpenIssueFeedbackModal}
-                      />
-                    ),
-                  }}
-                />
-              </div>
-              <StarBridgeFlowModal
-                open={openStarBridgeFlowModal}
-                setOpen={setOpenStarBridgeFlowModal}
-              />
-              <IssueFeedbackModal
-                open={openIssueFeedbackModal}
-                setOpen={setOpenIssueFeedbackModal}
-              />
             </div>
             <Scrollable.Scrollbar />
           </Scrollable.Viewport>

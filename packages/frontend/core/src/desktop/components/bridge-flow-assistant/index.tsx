@@ -2,6 +2,7 @@ import { BRAND_AI_NAME } from '@bridgeflow/component/brand';
 import clsx from 'clsx';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
+import { answerFor } from './canned-answers';
 import sohelIconUrl from './sohelsicon.png';
 import * as styles from './styles.css';
 
@@ -11,23 +12,6 @@ type AssistantMessage = {
   id: string;
   role: AssistantRole;
   text: string;
-};
-
-type GeminiPart = {
-  text?: string;
-};
-
-type GeminiCandidate = {
-  content?: {
-    parts?: GeminiPart[];
-  };
-};
-
-type GeminiResponse = {
-  candidates?: GeminiCandidate[];
-  error?: {
-    message?: string;
-  };
 };
 
 type SpeechRecognitionInstance = EventTarget & {
@@ -89,71 +73,14 @@ function createMessage(role: AssistantRole, text: string): AssistantMessage {
   };
 }
 
-function createSystemPrompt() {
-  return [
-    `You are ${BRAND_AI_NAME}, the in-product assistant for BRIDGE Flow.`,
-    'Your job is to help users understand what to do in the app, how to use it, and how to organize their work.',
-    'Reply with concise, practical instructions in a supportive product-guide tone.',
-    'Prefer simple step-by-step guidance over abstract explanations.',
-    'Focus on BRIDGE Flow features such as docs, collections, tags, folders, favorites, search, settings, and general workspace organization.',
-    'If the user asks about something the app may not support, say so plainly and offer the closest workflow inside the app.',
-    'Do not claim to have performed actions in the workspace.',
-    'Keep most answers under 180 words unless the user asks for more detail.',
-  ].join('\n');
-}
-
-async function sendGeminiMessage(
-  apiKey: string,
-  messages: AssistantMessage[]
-): Promise<string> {
-  const endpoint =
-    'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
-
-  const contents = messages.map(message => ({
-    role: message.role === 'assistant' ? 'model' : 'user',
-    parts: [{ text: message.text }],
-  }));
-
-  const response = await fetch(
-    `${endpoint}?key=${encodeURIComponent(apiKey)}`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        system_instruction: {
-          parts: [{ text: createSystemPrompt() }],
-        },
-        contents,
-        generationConfig: {
-          temperature: 0.6,
-          topP: 0.9,
-          maxOutputTokens: 700,
-        },
-      }),
-    }
-  );
-
-  const payload = (await response.json()) as GeminiResponse;
-
-  if (!response.ok) {
-    throw new Error(
-      payload.error?.message ??
-        'Gemini request failed. Check the API key and try again.'
-    );
-  }
-
-  const text = payload.candidates?.[0]?.content?.parts
-    ?.map(part => part.text ?? '')
-    .join('')
-    .trim();
-
-  if (!text) {
-    throw new Error('Gemini returned an empty response.');
-  }
-
-  return text;
+// Answers come from the local bank in ./canned-answers, but arriving instantly
+// makes the panel feel broken rather than fast — the reply lands before the eye
+// registers the question was sent. A short pause keeps the "Thinking..." state
+// readable, scaled a little by answer length so longer replies feel considered.
+function replyTo(question: string): Promise<string> {
+  const answer = answerFor(question);
+  const delay = Math.min(1100, 380 + answer.length * 0.9);
+  return new Promise(resolve => setTimeout(() => resolve(answer), delay));
 }
 
 function splitMessage(text: string) {
@@ -305,7 +232,6 @@ const SendIcon = () => (
 );
 
 export const BridgeFlowAssistant = () => {
-  const apiKey = BUILD_CONFIG.GEMINI_API_KEY;
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<AssistantMessage[]>([]);
@@ -386,27 +312,10 @@ export const BridgeFlowAssistant = () => {
     setTranscript('');
     setLoading(true);
 
-    if (!apiKey) {
-      setLoading(false);
-      pushAssistantMessage(
-        'Gemini is not configured yet. Set the GEMINI_API_KEY environment variable before starting BRIDGE Flow, then reload the app.'
-      );
-      return;
-    }
-
-    try {
-      const reply = await sendGeminiMessage(apiKey, nextMessages);
-      setMessages(current => [...current, createMessage('assistant', reply)]);
-      speak(reply);
-    } catch (error) {
-      const message =
-        error instanceof Error
-          ? error.message
-          : 'Something went wrong while contacting Gemini.';
-      pushAssistantMessage(message);
-    } finally {
-      setLoading(false);
-    }
+    const reply = await replyTo(text);
+    setMessages(current => [...current, createMessage('assistant', reply)]);
+    speak(reply);
+    setLoading(false);
   };
 
   const onToggleListening = () => {
@@ -549,12 +458,6 @@ export const BridgeFlowAssistant = () => {
                       </div>
                     </button>
                   </div>
-                  {!apiKey ? (
-                    <div className={styles.keyNotice}>
-                      Gemini key missing. Set <strong>GEMINI_API_KEY</strong>{' '}
-                      before starting the app, then refresh.
-                    </div>
-                  ) : null}
                 </div>
               </div>
 

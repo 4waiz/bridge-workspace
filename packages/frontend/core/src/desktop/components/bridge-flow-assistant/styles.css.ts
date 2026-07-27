@@ -273,23 +273,6 @@ globalStyle(
   }
 );
 
-export const keyNotice = style({
-  padding: '10px 12px',
-  borderRadius: 12,
-  border: '1px solid rgba(255, 86, 34, 0.14)',
-  background: 'rgba(255, 86, 34, 0.05)',
-  fontSize: 12,
-  lineHeight: 1.45,
-  color: '#697076',
-});
-
-globalStyle(
-  `html[data-theme='dark'] ${keyNotice}, [data-theme='dark'] ${keyNotice}`,
-  {
-    color: 'rgba(255, 255, 255, 0.68)',
-  }
-);
-
 export const chipRow = style({
   display: 'flex',
   flexWrap: 'wrap',
