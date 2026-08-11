@@ -11,11 +11,11 @@
 -- ---------- The 7 BRIDGE XPI teams (matches bridge_xpi_okrs.xlsx) -----
 insert into public.teams (key, name, accent, sort_order) values
   ('agile', 'Agile', '#4c6ef5', 1),
-  ('ai-analytics', 'AI & Analytics', '#9b5de5', 2),
+  ('lean-six-sigma', 'Lean Six Sigma & Special Projects', '#14b8a6', 2),
   ('opex', 'Opex', '#2eb85c', 3),
   ('industry-5', 'Industry 5.0', '#f15a29', 4),
-  ('business-operation', 'Business Operation', '#f5a623', 5),
-  ('lean-six-sigma', 'Lean Six Sigma & Special Projects', '#14b8a6', 6),
+  ('ai-analytics', 'AI & Analytics', '#9b5de5', 5),
+  ('business-operation', 'Business Operation', '#f5a623', 6),
   ('external-engagement', 'External Engagement', '#ec4899', 7)
 on conflict (key) do update
   set name = excluded.name, accent = excluded.accent, sort_order = excluded.sort_order;
@@ -37,7 +37,7 @@ begin
   end loop;
 end $$;
 
-delete from public.teams where key not in ('agile', 'ai-analytics', 'opex', 'industry-5', 'business-operation', 'lean-six-sigma', 'external-engagement');
+delete from public.teams where key not in ('agile', 'lean-six-sigma', 'opex', 'industry-5', 'ai-analytics', 'business-operation', 'external-engagement');
 
 -- ---------- Backfill profiles for users created before the trigger ---
 insert into public.profiles (id, full_name)
@@ -265,7 +265,7 @@ declare
   },
   {
     "key": "opex",
-    "owner": "Ahtesham Akhtar",
+    "owner": "Ahtesham Siddiqui",
     "objectives": [
       {
         "title": "Reduce recurring operating costs",
@@ -287,15 +287,15 @@ declare
         "initiatives": [
           {
             "description": "Zero-based budgeting review",
-            "owner": "Ahtesham Akhtar"
+            "owner": "Ahtesham Siddiqui"
           },
           {
             "description": "Renegotiate top vendors",
-            "owner": "Ahtesham Akhtar"
+            "owner": "Ahtesham Siddiqui"
           },
           {
             "description": "Root-cause + poka-yoke",
-            "owner": "Ahtesham Akhtar"
+            "owner": "Ahtesham Siddiqui"
           }
         ]
       },
@@ -319,15 +319,15 @@ declare
         "initiatives": [
           {
             "description": "SLA dashboards + escalation",
-            "owner": "Ahtesham Akhtar"
+            "owner": "Ahtesham Siddiqui"
           },
           {
             "description": "Remove non-value steps",
-            "owner": "Ahtesham Akhtar"
+            "owner": "Ahtesham Siddiqui"
           },
           {
             "description": "Standard work + checklists",
-            "owner": "Ahtesham Akhtar"
+            "owner": "Ahtesham Siddiqui"
           }
         ]
       },
@@ -351,15 +351,15 @@ declare
         "initiatives": [
           {
             "description": "Process-mapping sprints",
-            "owner": "Ahtesham Akhtar"
+            "owner": "Ahtesham Siddiqui"
           },
           {
             "description": "Assign process owners",
-            "owner": "Ahtesham Akhtar"
+            "owner": "Ahtesham Siddiqui"
           },
           {
             "description": "Automation backlog",
-            "owner": "Ahtesham Akhtar"
+            "owner": "Ahtesham Siddiqui"
           }
         ]
       }

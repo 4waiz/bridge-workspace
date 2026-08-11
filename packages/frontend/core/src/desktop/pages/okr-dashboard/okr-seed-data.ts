@@ -22,17 +22,19 @@ export interface SeedTeam {
   name: string;
   accent: string;
 }
+// Array order IS the display order: build-okr-template.ts writes each team's
+// index as teams.sort_order, and the dashboard sorts on that column.
 export const OKR_TEAMS: SeedTeam[] = [
   { key: 'agile', name: 'Agile', accent: '#4c6ef5' },
-  { key: 'ai-analytics', name: 'AI & Analytics', accent: '#9b5de5' },
-  { key: 'opex', name: 'Opex', accent: '#2eb85c' },
-  { key: 'industry-5', name: 'Industry 5.0', accent: '#f15a29' },
-  { key: 'business-operation', name: 'Business Operation', accent: '#f5a623' },
   {
     key: 'lean-six-sigma',
     name: 'Lean Six Sigma & Special Projects',
     accent: '#14b8a6',
   },
+  { key: 'opex', name: 'Opex', accent: '#2eb85c' },
+  { key: 'industry-5', name: 'Industry 5.0', accent: '#f15a29' },
+  { key: 'ai-analytics', name: 'AI & Analytics', accent: '#9b5de5' },
+  { key: 'business-operation', name: 'Business Operation', accent: '#f5a623' },
   {
     key: 'external-engagement',
     name: 'External Engagement',
@@ -204,7 +206,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
   },
   {
     key: 'ai-analytics',
-    owner: 'Olaff pane',
+    owner: 'Olaf Penne',
     objectives: [
       {
         title: 'Scale generative AI across operations',
@@ -216,7 +218,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             15,
             9,
             'Use-case intake + build squad',
-            'Olaff pane'
+            'Olaf Penne'
           ),
           kr(
             'Monthly active AI-tool users',
@@ -225,7 +227,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             300,
             165,
             'Enablement workshops',
-            'Olaff pane'
+            'Olaf Penne'
           ),
           kr(
             'Manual hours saved per month',
@@ -234,7 +236,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             800,
             420,
             'Automate top-10 workflows',
-            'Olaff pane'
+            'Olaf Penne'
           ),
         ],
       },
@@ -248,7 +250,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             12,
             6,
             'Streaming ingestion platform',
-            'Olaff pane'
+            'Olaf Penne'
           ),
           kr(
             'Data-freshness SLA met',
@@ -257,7 +259,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             98,
             82,
             'Pipeline monitoring + alerts',
-            'Olaff pane'
+            'Olaf Penne'
           ),
           kr(
             'Pipeline incident MTTR',
@@ -266,7 +268,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             2,
             4,
             'On-call runbooks',
-            'Olaff pane'
+            'Olaf Penne'
           ),
         ],
       },
@@ -280,7 +282,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             80,
             46,
             'Role-based learning paths',
-            'Olaff pane'
+            'Olaf Penne'
           ),
           kr(
             'Certified prompt/BI practitioners',
@@ -289,7 +291,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             30,
             15,
             'Internal certification track',
-            'Olaff pane'
+            'Olaf Penne'
           ),
           kr(
             'Teams with an AI champion',
@@ -298,7 +300,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             100,
             58,
             'Champion network',
-            'Olaff pane'
+            'Olaf Penne'
           ),
         ],
       },
@@ -306,7 +308,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
   },
   {
     key: 'opex',
-    owner: 'Ahtesham',
+    owner: 'Ahtesham Siddiqui',
     objectives: [
       {
         title: 'Reduce recurring operating costs',
@@ -318,7 +320,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             1200,
             980,
             'Zero-based budgeting review',
-            'Ahtesham'
+            'Ahtesham Siddiqui'
           ),
           kr(
             'Vendor spend under contract',
@@ -327,7 +329,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             95,
             90,
             'Renegotiate top vendors',
-            'Ahtesham'
+            'Ahtesham Siddiqui'
           ),
           kr(
             'Waste incidents (rework)',
@@ -336,7 +338,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             60,
             88,
             'Root-cause + poka-yoke',
-            'Ahtesham'
+            'Ahtesham Siddiqui'
           ),
         ],
       },
@@ -350,7 +352,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             98,
             94,
             'SLA dashboards + escalation',
-            'Ahtesham'
+            'Ahtesham Siddiqui'
           ),
           kr(
             'Average cycle time',
@@ -359,7 +361,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             3,
             4,
             'Remove non-value steps',
-            'Ahtesham'
+            'Ahtesham Siddiqui'
           ),
           kr(
             'First-time-right rate',
@@ -368,7 +370,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             97,
             92,
             'Standard work + checklists',
-            'Ahtesham'
+            'Ahtesham Siddiqui'
           ),
         ],
       },
@@ -382,7 +384,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             100,
             88,
             'Process-mapping sprints',
-            'Ahtesham'
+            'Ahtesham Siddiqui'
           ),
           kr(
             'Processes with owner + KPI',
@@ -391,7 +393,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             100,
             84,
             'Assign process owners',
-            'Ahtesham'
+            'Ahtesham Siddiqui'
           ),
           kr(
             'Automation opportunities shipped',
@@ -400,7 +402,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             20,
             15,
             'Automation backlog',
-            'Ahtesham'
+            'Ahtesham Siddiqui'
           ),
         ],
       },
@@ -408,7 +410,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
   },
   {
     key: 'industry-5',
-    owner: 'Sohel shaikh',
+    owner: 'Sohel Shaikh',
     objectives: [
       {
         title: 'Pilot advanced manufacturing',
@@ -420,7 +422,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             4,
             1,
             'Digital-twin pilot line',
-            'Sohel shaikh'
+            'Sohel Shaikh'
           ),
           kr(
             'Connected assets (IoT)',
@@ -429,7 +431,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             150,
             38,
             'Sensor + gateway rollout',
-            'Sohel shaikh'
+            'Sohel Shaikh'
           ),
           kr(
             'Pilot OEE improvement',
@@ -438,7 +440,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             12,
             4,
             'Predictive maintenance',
-            'Sohel shaikh'
+            'Sohel Shaikh'
           ),
         ],
       },
@@ -452,7 +454,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             100,
             42,
             'Phased procurement',
-            'Sohel shaikh'
+            'Sohel Shaikh'
           ),
           kr(
             'Milestones delivered on time',
@@ -461,7 +463,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             95,
             55,
             'Stage-gate governance',
-            'Sohel shaikh'
+            'Sohel Shaikh'
           ),
           kr(
             'Budget variance',
@@ -470,7 +472,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             5,
             12,
             'Monthly cost control',
-            'Sohel shaikh'
+            'Sohel Shaikh'
           ),
         ],
       },
@@ -484,7 +486,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             120,
             46,
             'Skills academy',
-            'Sohel shaikh'
+            'Sohel Shaikh'
           ),
           kr(
             'Cross-skilled operators',
@@ -493,7 +495,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             70,
             34,
             'Rotation program',
-            'Sohel shaikh'
+            'Sohel Shaikh'
           ),
           kr(
             'Certified on new equipment',
@@ -502,7 +504,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             60,
             22,
             'Vendor-led certification',
-            'Sohel shaikh'
+            'Sohel Shaikh'
           ),
         ],
       },
@@ -510,7 +512,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
   },
   {
     key: 'business-operation',
-    owner: 'Aurelia Alhajji',
+    owner: 'Aurelia Alhajali',
     objectives: [
       {
         title: 'Improve operational predictability',
@@ -522,7 +524,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             95,
             88,
             'Rolling forecast + S&OP',
-            'Aurelia Alhajji'
+            'Aurelia Alhajali'
           ),
           kr(
             'On-time delivery',
@@ -531,7 +533,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             98,
             94,
             'Capacity planning',
-            'Aurelia Alhajji'
+            'Aurelia Alhajali'
           ),
           kr(
             'Plan-vs-actual variance',
@@ -540,7 +542,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             6,
             9,
             'Weekly ops review',
-            'Aurelia Alhajji'
+            'Aurelia Alhajali'
           ),
         ],
       },
@@ -554,7 +556,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             1,
             2,
             'Digital approval workflows',
-            'Aurelia Alhajji'
+            'Aurelia Alhajali'
           ),
           kr(
             'Requests auto-routed',
@@ -563,7 +565,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             90,
             72,
             'Rules-based routing',
-            'Aurelia Alhajji'
+            'Aurelia Alhajali'
           ),
           kr(
             'Approvals within SLA',
@@ -572,7 +574,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             97,
             90,
             'Escalation reminders',
-            'Aurelia Alhajji'
+            'Aurelia Alhajali'
           ),
         ],
       },
@@ -586,7 +588,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             60,
             48,
             'Service-catalogue + SLAs',
-            'Aurelia Alhajji'
+            'Aurelia Alhajali'
           ),
           kr(
             'Tickets resolved first contact',
@@ -595,7 +597,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             90,
             78,
             'Knowledge base',
-            'Aurelia Alhajji'
+            'Aurelia Alhajali'
           ),
           kr(
             'Quarterly satisfaction survey',
@@ -604,7 +606,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             4.5,
             4.0,
             'Feedback loops',
-            'Aurelia Alhajji'
+            'Aurelia Alhajali'
           ),
         ],
       },
@@ -612,7 +614,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
   },
   {
     key: 'lean-six-sigma',
-    owner: 'Marco Rodregiuez',
+    owner: 'Marco Rodriguez',
     objectives: [
       {
         title: 'Deliver improvement projects',
@@ -624,7 +626,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             18,
             10,
             'Project pipeline governance',
-            'Marco Rodregiuez'
+            'Marco Rodriguez'
           ),
           kr(
             'Projects with sustained gains',
@@ -633,7 +635,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             90,
             62,
             '90-day control audits',
-            'Marco Rodregiuez'
+            'Marco Rodriguez'
           ),
           kr(
             'Average project cycle time',
@@ -642,7 +644,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             8,
             11,
             'Kaizen events',
-            'Marco Rodregiuez'
+            'Marco Rodriguez'
           ),
         ],
       },
@@ -656,7 +658,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             40,
             24,
             'GB training cohorts',
-            'Marco Rodregiuez'
+            'Marco Rodriguez'
           ),
           kr(
             'Black Belts certified',
@@ -665,7 +667,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             8,
             4,
             'BB mentoring',
-            'Marco Rodregiuez'
+            'Marco Rodriguez'
           ),
           kr(
             'Departments with a trained Belt',
@@ -674,7 +676,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             100,
             66,
             'Belt placement plan',
-            'Marco Rodregiuez'
+            'Marco Rodriguez'
           ),
         ],
       },
@@ -688,7 +690,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             900,
             500,
             'Finance validation gate',
-            'Marco Rodregiuez'
+            'Marco Rodriguez'
           ),
           kr(
             'Projects with hard savings',
@@ -697,7 +699,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             80,
             55,
             'Benefit-tracking template',
-            'Marco Rodregiuez'
+            'Marco Rodriguez'
           ),
           kr(
             'Cost-of-poor-quality reduced',
@@ -706,7 +708,7 @@ export const OKR_DEMO: SeedTeamOkr[] = [
             4,
             8,
             'COPQ dashboard',
-            'Marco Rodregiuez'
+            'Marco Rodriguez'
           ),
         ],
       },
