@@ -8,6 +8,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 import { OKR_DASHBOARD_ZOOM, usePageZoom } from '../../../utils/app-zoom';
+import { BusinessOpsOverlay } from './business-ops-overlay';
 import {
   CURRENT_QUARTER,
   CURRENT_YEAR,
@@ -365,6 +366,8 @@ export function OkrDashboard() {
 
   return (
     <div style={{ ...S.root, background: T.bg, color: T.text }}>
+      <BusinessOpsOverlay />
+
       <button style={S.close} onClick={() => navigate(-1)} title="Close (Esc)">
         ✕
       </button>

@@ -31,6 +31,7 @@ interface SupabaseLike {
         body: Blob | ArrayBuffer | Uint8Array,
         opts?: { upsert?: boolean; contentType?: string }
       ) => Promise<{ data: any; error: any }>;
+      getPublicUrl: (path: string) => { data: { publicUrl: string } };
     };
   };
 }

@@ -34,6 +34,7 @@ import {
 } from '../okr-dashboard/okr-data';
 import { demoForTeam, OKR_TEAMS } from '../okr-dashboard/okr-seed-data';
 import type { ParsedWorkbook } from '../okr-dashboard/xlsx-lite';
+import { BusinessOpsPanel } from './business-ops-panel';
 
 // Light UI palette (matches the OKR editor design).
 const T = {
@@ -639,6 +640,9 @@ export function OkrEditor() {
                 />
               </div>
             </div>
+
+            {/* Business Ops slide shown full-screen on the wall board */}
+            <BusinessOpsPanel />
 
             {/* summary stat row */}
             <div style={S.statRow}>
