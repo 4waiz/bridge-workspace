@@ -2,8 +2,8 @@
 -- BRIDGE Flow - Business Ops Dashboard: the full-screen overlay image
 -- Run AFTER 0003_owner_names.sql. Idempotent.
 --
--- The OKR dashboard runs unattended on a wall screen and alternates every 30
--- seconds between the OKR board and one full-screen image. That image is
+-- The OKR dashboard runs unattended on a wall screen and alternates every few
+-- minutes between the OKR board and one full-screen image. That image is
 -- swapped from the OKR editor ("Business Ops Dashboard" panel), so it has to
 -- live server-side rather than in the bundle: the file goes to Storage and the
 -- row below points at whichever upload is current.

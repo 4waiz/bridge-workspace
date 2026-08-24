@@ -36,6 +36,9 @@ import { demoForTeam, OKR_TEAMS } from '../okr-dashboard/okr-seed-data';
 import type { ParsedWorkbook } from '../okr-dashboard/xlsx-lite';
 import { BusinessOpsPanel } from './business-ops-panel';
 
+/** How long the editor waits after the last edit before saving. */
+const AUTOSAVE_IDLE_MS = 60_000;
+
 // Light UI palette (matches the OKR editor design).
 const T = {
   bg: '#f3f4f6',
@@ -246,12 +249,19 @@ export function OkrEditor() {
     [dirty, save, navigate]
   );
 
-  // Auto-save: persist 2s after the last edit.
+  // Auto-save: persist AUTOSAVE_IDLE_MS after the last edit.
+  //
+  // A save rewrites the team's objectives, and every write fans out over
+  // realtime to each open dashboard, which then refetches. On a wall screen
+  // that is open all day, a short debounce turns one editing session into a
+  // steady stream of writes and refetches, so the idle window is deliberately
+  // long. Work is not at risk from it: navigating away saves first
+  // (guardedLeave) and closing the tab dirty raises the beforeunload prompt.
   useEffect(() => {
     if (phase !== 'edit' || !dirty || !teamId || saving) return;
     const timer = setTimeout(() => {
       save().catch(() => {});
-    }, 2000);
+    }, AUTOSAVE_IDLE_MS);
     return () => clearTimeout(timer);
   }, [phase, dirty, teamId, saving, save]);
 

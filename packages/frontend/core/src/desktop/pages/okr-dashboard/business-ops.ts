@@ -24,7 +24,7 @@ export const BUSINESS_OPS_DEFAULT_URL = '/okr/business-ops-default.jpeg';
  * How long the board shows, and how long the image shows. The cycle is one
  * period of OKRs then one period of image, so a full loop is twice this.
  */
-export const OVERLAY_PERIOD_MS = 30_000;
+export const OVERLAY_PERIOD_MS = 5 * 60_000;
 
 /**
  * Gate on the editor panel. This is a deterrent, not a security boundary — it

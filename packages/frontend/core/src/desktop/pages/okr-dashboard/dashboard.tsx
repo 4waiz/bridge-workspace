@@ -46,6 +46,9 @@ function rgba(hex: string, a: number): string {
 
 const ORDER: Status[] = ['on_track', 'at_risk', 'off_track'];
 
+/** How long realtime row events settle before the board refetches. */
+const REFETCH_DEBOUNCE_MS = 3_000;
+
 function pct(n: number | null | undefined): number {
   return Math.max(0, Math.min(100, Math.round(n ?? 0)));
 }
@@ -325,8 +328,12 @@ export function OkrDashboard() {
   useEffect(() => {
     load().catch(() => {});
     const unsub = subscribeDashboard(() => {
+      // A single save rewrites every objective on a team, so one edit arrives
+      // as a burst of row events. Waiting for the burst to settle collapses it
+      // into one refetch instead of several full dashboard reads — this screen
+      // is open all day, so those add up.
       if (debounce.current) clearTimeout(debounce.current);
-      debounce.current = setTimeout(() => void load(), 250);
+      debounce.current = setTimeout(() => void load(), REFETCH_DEBOUNCE_MS);
     });
     return () => {
       if (debounce.current) clearTimeout(debounce.current);

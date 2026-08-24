@@ -97,7 +97,12 @@ export function BusinessOpsPanel() {
     }
   }, []);
 
-  const seconds = Math.round(OVERLAY_PERIOD_MS / 1000);
+  // Read as "5 minutes" / "30 seconds" rather than a raw second count.
+  const secs = Math.round(OVERLAY_PERIOD_MS / 1000);
+  const period =
+    secs >= 60
+      ? `${secs / 60} minute${secs === 60 ? '' : 's'}`
+      : `${secs} seconds`;
 
   return (
     <div style={S.panel}>
@@ -139,9 +144,9 @@ export function BusinessOpsPanel() {
       ) : (
         <>
           <div style={S.blurb}>
-            The board shows the OKRs for {seconds} seconds, then this image for{' '}
-            {seconds} seconds, and repeats. Uploading here replaces the image
-            everywhere — no redeploy, no reload.
+            The board shows the OKRs for {period}, then this image for {period},
+            and repeats. Uploading here replaces the image everywhere — no
+            redeploy, no reload.
           </div>
 
           {url ? (
