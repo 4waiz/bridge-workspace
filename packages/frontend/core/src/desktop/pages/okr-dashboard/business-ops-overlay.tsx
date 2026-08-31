@@ -1,7 +1,6 @@
 import { type CSSProperties, useEffect, useState } from 'react';
 
 import {
-  BUSINESS_OPS_DEFAULT_URL,
   fetchOverlayUrl,
   OVERLAY_PERIOD_MS,
   subscribeOverlay,
@@ -12,7 +11,7 @@ import {
  * one period of this, forever. Mounted by the dashboard and otherwise inert.
  */
 export function BusinessOpsOverlay() {
-  const [url, setUrl] = useState<string>(BUSINESS_OPS_DEFAULT_URL);
+  const [url, setUrl] = useState<string | null>(null);
   const [visible, setVisible] = useState(false);
 
   // Current image, re-read whenever someone uploads a replacement. The screen
@@ -48,9 +47,12 @@ export function BusinessOpsOverlay() {
   // Warm the cache before the first reveal — the element below is always in the
   // DOM, but a freshly-uploaded URL would otherwise pop in mid-fade.
   useEffect(() => {
+    if (!url) return;
     const img = new Image();
     img.src = url;
   }, [url]);
+
+  if (!url) return null;
 
   return (
     <div

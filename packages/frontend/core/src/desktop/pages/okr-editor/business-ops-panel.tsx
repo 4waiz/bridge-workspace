@@ -10,6 +10,7 @@ import {
   BUSINESS_OPS_PASSPHRASE,
   fetchOverlayUrl,
   OVERLAY_PERIOD_MS,
+  removeOverlayImage,
   uploadOverlayImage,
 } from '../okr-dashboard/business-ops';
 
@@ -45,7 +46,7 @@ export function BusinessOpsPanel() {
   });
   const [entry, setEntry] = useState('');
   const [wrong, setWrong] = useState(false);
-  const [url, setUrl] = useState<string | null>(null);
+  const [url, setUrl] = useState<string | null | undefined>(undefined);
   const [busy, setBusy] = useState(false);
   const [note, setNote] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -65,7 +66,7 @@ export function BusinessOpsPanel() {
   }, [unlocked]);
 
   const submit = useCallback(() => {
-    if (entry === BUSINESS_OPS_PASSPHRASE) {
+    if (entry.trim() === BUSINESS_OPS_PASSPHRASE) {
       setUnlocked(true);
       setWrong(false);
       setEntry('');
@@ -90,6 +91,21 @@ export function BusinessOpsPanel() {
       const next = await uploadOverlayImage(file);
       setUrl(next);
       setNote('Uploaded. Every open dashboard picks it up within seconds.');
+    } catch (err: any) {
+      setError(err?.message ?? String(err));
+    } finally {
+      setBusy(false);
+    }
+  }, []);
+
+  const onRemove = useCallback(async () => {
+    setBusy(true);
+    setError(null);
+    setNote(null);
+    try {
+      await removeOverlayImage();
+      setUrl(null);
+      setNote('Removed. The wall board will show only OKRs.');
     } catch (err: any) {
       setError(err?.message ?? String(err));
     } finally {
@@ -151,8 +167,10 @@ export function BusinessOpsPanel() {
 
           {url ? (
             <img src={url} alt="Current Business Ops slide" style={S.preview} />
+          ) : url === undefined ? (
+            <div style={S.emptyPreview}>Loading the current image...</div>
           ) : (
-            <div style={S.blurb}>Loading the current image…</div>
+            <div style={S.emptyPreview}>No image selected.</div>
           )}
 
           <div style={S.row}>
@@ -163,6 +181,14 @@ export function BusinessOpsPanel() {
               type="button"
             >
               {busy ? 'Uploading…' : 'Upload new image'}
+            </button>
+            <button
+              style={{ ...S.secondaryBtn, opacity: busy || !url ? 0.55 : 1 }}
+              onClick={() => void onRemove()}
+              disabled={busy || !url}
+              type="button"
+            >
+              Remove image
             </button>
             <input
               ref={fileInput}
@@ -220,6 +246,16 @@ const S: Record<string, CSSProperties> = {
     fontWeight: 700,
     cursor: 'pointer',
   },
+  secondaryBtn: {
+    padding: '9px 16px',
+    borderRadius: 10,
+    border: `1px solid ${T.border}`,
+    background: T.card,
+    color: T.text,
+    fontSize: 14,
+    fontWeight: 700,
+    cursor: 'pointer',
+  },
   preview: {
     display: 'block',
     width: '100%',
@@ -228,6 +264,18 @@ const S: Record<string, CSSProperties> = {
     borderRadius: 10,
     border: `1px solid ${T.border}`,
     background: T.card,
+    marginBottom: 12,
+  },
+  emptyPreview: {
+    display: 'grid',
+    placeItems: 'center',
+    width: '100%',
+    minHeight: 120,
+    borderRadius: 10,
+    border: `1px dashed ${T.border}`,
+    background: T.card,
+    color: T.sub,
+    fontSize: 13,
     marginBottom: 12,
   },
   note: { marginTop: 10, fontSize: 13, color: '#2eb85c' },

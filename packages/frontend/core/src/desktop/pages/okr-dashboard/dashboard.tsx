@@ -53,6 +53,13 @@ function pct(n: number | null | undefined): number {
   return Math.max(0, Math.min(100, Math.round(n ?? 0)));
 }
 
+function dashboardErrorHint(error: string): string {
+  if (/jwt issued at future/i.test(error)) {
+    return 'Set this screen PC to automatic date/time, then sign out and sign in again.';
+  }
+  return 'Run supabase/migrations/0001_okr_dashboard.sql + supabase/seed.sql, and make sure you are signed in.';
+}
+
 // ---- status badge ---------------------------------------------------------
 function Badge({ status, progress }: { status: Status; progress: number }) {
   const c = STATUS_COLOR[status];
@@ -436,8 +443,7 @@ export function OkrDashboard() {
           <b>Couldn’t load dashboard data.</b>
           <div style={{ marginTop: 6, color: T.sub }}>{error}</div>
           <div style={{ marginTop: 10, fontSize: 12, color: T.sub }}>
-            Run <code>supabase/migrations/0001_okr_dashboard.sql</code> +{' '}
-            <code>supabase/seed.sql</code>, and make sure you’re signed in.
+            {dashboardErrorHint(error)}
           </div>
         </div>
       ) : !model ? (

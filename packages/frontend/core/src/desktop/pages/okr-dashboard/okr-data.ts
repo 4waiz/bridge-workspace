@@ -22,7 +22,10 @@ interface SupabaseLike {
   from: (table: string) => any;
   channel: (name: string) => any;
   removeChannel: (channel: any) => void;
-  auth: { getUser: () => Promise<{ data: { user: { id: string } | null } }> };
+  auth: {
+    getUser: () => Promise<{ data: { user: { id: string } | null } }>;
+    refreshSession?: () => Promise<{ error: any }>;
+  };
   storage?: {
     from: (bucket: string) => {
       download: (path: string) => Promise<{ data: Blob | null; error: any }>;
@@ -38,6 +41,11 @@ interface SupabaseLike {
 
 export function getSupabase(): SupabaseLike | null {
   return (globalThis as any).__bridgeSupabase ?? null;
+}
+
+function isJwtIssuedInFutureError(err: any): boolean {
+  const msg = String(err?.message ?? err ?? '');
+  return /jwt issued at future/i.test(msg);
 }
 
 // Current OKR period. Kept in one place so dashboard + editor stay in sync.
@@ -172,12 +180,21 @@ export async function fetchDashboardModel(): Promise<DashboardModel> {
   const sb = getSupabase();
   if (!sb) throw new Error('Not signed in - Supabase client unavailable.');
 
-  const [teamsRes, objsRes, okrsRes] = await Promise.all([
-    sb.from('teams').select('*').order('sort_order'),
-    sb.from('objectives').select('*').order('position'),
-    sb.from('okrs').select('team_id, owner, area, quarter, year'),
-  ]);
-  const err = teamsRes.error || objsRes.error || okrsRes.error;
+  const loadRows = () =>
+    Promise.all([
+      sb.from('teams').select('*').order('sort_order'),
+      sb.from('objectives').select('*').order('position'),
+      sb.from('okrs').select('team_id, owner, area, quarter, year'),
+    ]);
+  let [teamsRes, objsRes, okrsRes] = await loadRows();
+  let err = teamsRes.error || objsRes.error || okrsRes.error;
+  if (err && isJwtIssuedInFutureError(err) && sb.auth.refreshSession) {
+    const refresh = await sb.auth.refreshSession();
+    if (!refresh.error) {
+      [teamsRes, objsRes, okrsRes] = await loadRows();
+      err = teamsRes.error || objsRes.error || okrsRes.error;
+    }
+  }
   if (err) throw err;
 
   const teams: Team[] = teamsRes.data ?? [];

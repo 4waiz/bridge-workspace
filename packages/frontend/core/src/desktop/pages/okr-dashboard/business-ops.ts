@@ -36,10 +36,10 @@ export const BUSINESS_OPS_PASSPHRASE = 'babu123';
 
 const MAX_BYTES = 10 * 1024 * 1024; // 10 MB
 
-/** Public URL of the current overlay image, or the bundled default. */
-export async function fetchOverlayUrl(): Promise<string> {
+/** Public URL of the current overlay image, or null when the overlay is off. */
+export async function fetchOverlayUrl(): Promise<string | null> {
   const sb = getSupabase();
-  if (!sb?.storage) return BUSINESS_OPS_DEFAULT_URL;
+  if (!sb?.storage) return null;
 
   try {
     const res = await sb
@@ -48,12 +48,12 @@ export async function fetchOverlayUrl(): Promise<string> {
       .eq('id', BUSINESS_OPS_ROW_ID)
       .maybeSingle();
     const path: string | null = res.data?.image_path ?? null;
-    if (!path) return BUSINESS_OPS_DEFAULT_URL;
+    if (!path) return null;
 
     const { data } = sb.storage.from(BUSINESS_OPS_BUCKET).getPublicUrl(path);
-    return data?.publicUrl || BUSINESS_OPS_DEFAULT_URL;
+    return data?.publicUrl || null;
   } catch {
-    return BUSINESS_OPS_DEFAULT_URL;
+    return null;
   }
 }
 
@@ -97,6 +97,24 @@ export async function uploadOverlayImage(file: File): Promise<string> {
 
   const { data } = sb.storage.from(BUSINESS_OPS_BUCKET).getPublicUrl(path);
   return data?.publicUrl || BUSINESS_OPS_DEFAULT_URL;
+}
+
+/** Clear the current overlay image so the wall board shows only OKRs. */
+export async function removeOverlayImage(): Promise<void> {
+  const sb = getSupabase();
+  if (!sb) throw new Error('Supabase is unavailable.');
+
+  const { data: user } = await sb.auth.getUser();
+  const row = await sb.from(BUSINESS_OPS_TABLE).upsert(
+    {
+      id: BUSINESS_OPS_ROW_ID,
+      image_path: null,
+      updated_at: new Date().toISOString(),
+      updated_by: user.user?.id ?? null,
+    },
+    { onConflict: 'id' }
+  );
+  if (row.error) throw row.error;
 }
 
 /** Live updates for the overlay row. Returns an unsubscribe fn. */
