@@ -143,7 +143,7 @@ export const article1: Array<OnboardingBlockOption> = [
           McGranaghan. Local-first software: you own your data, in spite of the
           cloud. 2019 ACM SIGPLAN International Symposium on New Ideas, New
           Paradigms, and Reflections on Programming and Software (Onward!),
-          October 2019, pages 154–178.{' '}
+          October 2019, pages 154-178.{' '}
           <a className={link}>doi:10.1145/3359591.3359737</a>
         </p>
 
@@ -252,7 +252,7 @@ export const article1: Array<OnboardingBlockOption> = [
           When you have put a lot of creative energy and effort into making
           something, you tend to have a deep emotional attachment to it. If you
           do creative work, this probably seems familiar. (When we say “creative
-          work,” we mean not just visual art, or music, or poetry — many other
+          work,” we mean not just visual art, or music, or poetry - many other
           activities, such as explaining a technical topic, implementing an
           intricate algorithm, designing a user interface, or figuring out how
           to lead a team towards some goal are also creative efforts.)

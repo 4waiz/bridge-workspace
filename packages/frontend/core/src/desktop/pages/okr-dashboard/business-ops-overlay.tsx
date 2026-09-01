@@ -44,7 +44,7 @@ export function BusinessOpsOverlay() {
     return () => clearInterval(timer);
   }, []);
 
-  // Warm the cache before the first reveal — the element below is always in the
+  // Warm the cache before the first reveal - the element below is always in the
   // DOM, but a freshly-uploaded URL would otherwise pop in mid-fade.
   useEffect(() => {
     if (!url) return;

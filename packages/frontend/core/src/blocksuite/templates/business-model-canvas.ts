@@ -2,7 +2,7 @@ import { BOLD, createCanvasKit, REG, SEMI, type TemplateBuilder } from './kit';
 
 /**
  * Builds the "Business Model Canvas" board onto a freshly-created edgeless
- * surface — the canonical Osterwalder nine-block grid rendered as real,
+ * surface - the canonical Osterwalder nine-block grid rendered as real,
  * editable canvas elements so users can overwrite the example prompts.
  *
  * Visual language matches the OKR board: black header bar, white cards with
@@ -144,7 +144,7 @@ export const buildBusinessModelCanvasBoard: TemplateBuilder = (
   const gut = 8;
   const outerW = 292;
   const centreW = 320;
-  const halfH = (topH - gut) / 2; // 231 — split-column half height
+  const halfH = (topH - gut) / 2; // 231 - split-column half height
 
   const col1X = 40;
   const col2X = col1X + outerW + gut; // 340
@@ -153,14 +153,14 @@ export const buildBusinessModelCanvasBoard: TemplateBuilder = (
   const col5X = col4X + outerW + gut; // 1268
   // col5 ends at 1268 + 292 = 1560 ✓
 
-  // COL1 — KEY PARTNERS (full height)
+  // COL1 - KEY PARTNERS (full height)
   drawBlock('01', 'KEY PARTNERS', col1X, topY, outerW, topH, [
     'Strategic suppliers & alliances',
     'Key vendors we rely on',
     'Partners who de-risk delivery',
   ]);
 
-  // COL2 — KEY ACTIVITIES (top) + KEY RESOURCES (bottom)
+  // COL2 - KEY ACTIVITIES (top) + KEY RESOURCES (bottom)
   drawBlock('02', 'KEY ACTIVITIES', col2X, topY, outerW, halfH, [
     'Core work that creates value',
     'Production / delivery / support',
@@ -170,7 +170,7 @@ export const buildBusinessModelCanvasBoard: TemplateBuilder = (
     'Physical & financial assets',
   ]);
 
-  // COL3 — VALUE PROPOSITIONS (full height, HERO)
+  // COL3 - VALUE PROPOSITIONS (full height, HERO)
   drawBlock(
     '04',
     'VALUE PROPOSITIONS',
@@ -187,7 +187,7 @@ export const buildBusinessModelCanvasBoard: TemplateBuilder = (
     true
   );
 
-  // COL4 — CUSTOMER RELATIONSHIPS (top) + CHANNELS (bottom)
+  // COL4 - CUSTOMER RELATIONSHIPS (top) + CHANNELS (bottom)
   drawBlock('05', 'CUSTOMER RELATIONSHIPS', col4X, topY, outerW, halfH, [
     'How we win & keep customers',
     'Self-serve, assisted or community',
@@ -197,7 +197,7 @@ export const buildBusinessModelCanvasBoard: TemplateBuilder = (
     'Sales, web & partner routes',
   ]);
 
-  // COL5 — CUSTOMER SEGMENTS (full height)
+  // COL5 - CUSTOMER SEGMENTS (full height)
   drawBlock('07', 'CUSTOMER SEGMENTS', col5X, topY, outerW, topH, [
     'Who we create value for',
     'Primary segment & niche',
@@ -210,7 +210,7 @@ export const buildBusinessModelCanvasBoard: TemplateBuilder = (
   const botH = 150;
   const botW = (1520 - gut) / 2; // 756
   const botLX = 40;
-  const botRX = botLX + botW + gut; // 804 — ends at 1560 ✓
+  const botRX = botLX + botW + gut; // 804 - ends at 1560 ✓
 
   drawBlock('08', 'COST STRUCTURE', botLX, botY, botW, botH, [
     'Biggest fixed & variable costs',

@@ -6,12 +6,15 @@ import { supabase } from './supabase-client';
 const OPEN_EVENT = 'bridge-open-profile';
 
 function initials(label: string) {
-  const parts = label.trim().split(/[\s@._-]+/).filter(Boolean);
+  const parts = label
+    .trim()
+    .split(/[\s@._-]+/)
+    .filter(Boolean);
   return ((parts[0]?.[0] ?? '') + (parts[1]?.[0] ?? '')).toUpperCase() || 'U';
 }
 
 function fmtDate(iso?: string) {
-  if (!iso) return '—';
+  if (!iso) return '-';
   try {
     return new Date(iso).toLocaleDateString(undefined, {
       year: 'numeric',
@@ -19,7 +22,7 @@ function fmtDate(iso?: string) {
       day: 'numeric',
     });
   } catch {
-    return '—';
+    return '-';
   }
 }
 
@@ -32,14 +35,17 @@ export function BridgeProfile() {
 
   useEffect(() => {
     const onOpen = () => {
-      supabase.auth.getUser().then(({ data }) => {
-        setUser(data.user);
-        setName(
-          (data.user?.user_metadata?.name as string) ??
-            (data.user?.user_metadata?.full_name as string) ??
-            ''
-        );
-      });
+      supabase.auth
+        .getUser()
+        .then(({ data }) => {
+          setUser(data.user);
+          setName(
+            (data.user?.user_metadata?.name as string) ??
+              (data.user?.user_metadata?.full_name as string) ??
+              ''
+          );
+        })
+        .catch(() => {});
       setSavedMsg(null);
       setOpen(true);
     };
@@ -50,7 +56,8 @@ export function BridgeProfile() {
   if (!open) return null;
 
   const email = user?.email ?? '';
-  const display = name || (user?.user_metadata?.name as string) || email || 'Account';
+  const display =
+    name || (user?.user_metadata?.name as string) || email || 'Account';
   const avatarUrl =
     (user?.user_metadata?.avatar_url as string) ||
     (user?.user_metadata?.picture as string) ||
@@ -82,21 +89,27 @@ export function BridgeProfile() {
     <div className="bfp-overlay" onClick={() => setOpen(false)}>
       <style>{STYLES}</style>
       <div className="bfp-card" onClick={e => e.stopPropagation()}>
-        <button className="bfp-close" onClick={() => setOpen(false)} aria-label="Close">
-          ×
+        <button
+          className="bfp-close"
+          onClick={() => setOpen(false)}
+          aria-label="Close"
+        >
+          x
         </button>
 
         <div className="bfp-header">
           {avatarUrl ? (
             <img className="bfp-avatar" src={avatarUrl} alt={display} />
           ) : (
-            <div className="bfp-avatar bfp-avatar-fallback">{initials(display)}</div>
+            <div className="bfp-avatar bfp-avatar-fallback">
+              {initials(display)}
+            </div>
           )}
           <div className="bfp-id">
             <div className="bfp-name">{display}</div>
             <div className="bfp-email">
               {email}
-              {verified && <span className="bfp-verified">✓ Verified</span>}
+              {verified && <span className="bfp-verified">âœ“ Verified</span>}
             </div>
           </div>
         </div>
@@ -110,8 +123,12 @@ export function BridgeProfile() {
               placeholder="Add your name"
               onChange={e => setName(e.target.value)}
             />
-            <button className="bfp-save" onClick={save} disabled={saving}>
-              {saving ? 'Saving…' : 'Save'}
+            <button
+              className="bfp-save"
+              onClick={() => void save()}
+              disabled={saving}
+            >
+              {saving ? 'Savingâ€¦' : 'Save'}
             </button>
           </div>
           {savedMsg && <div className="bfp-msg">{savedMsg}</div>}
@@ -120,7 +137,7 @@ export function BridgeProfile() {
         <div className="bfp-meta">
           <div className="bfp-meta-row">
             <span>Email</span>
-            <b>{email || '—'}</b>
+            <b>{email || '-'}</b>
           </div>
           <div className="bfp-meta-row">
             <span>Status</span>
@@ -136,11 +153,11 @@ export function BridgeProfile() {
           </div>
           <div className="bfp-meta-row">
             <span>User ID</span>
-            <b className="bfp-mono">{user?.id ?? '—'}</b>
+            <b className="bfp-mono">{user?.id ?? '-'}</b>
           </div>
         </div>
 
-        <button className="bfp-logout" onClick={logout}>
+        <button className="bfp-logout" onClick={() => void logout()}>
           Log out
         </button>
       </div>

@@ -137,8 +137,8 @@ const paperBriefs = {
         <p className={text}>
           “With all the time you spend watching TV,” he tells me, “you could
           have written a novel by now.” It’s hard to disagree with the sentiment
-          — writing a novel is undoubtedly a better use of time than watching TV
-          — but what about the hidden ...
+          - writing a novel is undoubtedly a better use of time than watching TV
+          - but what about the hidden ...
         </p>
       </article>
     </div>

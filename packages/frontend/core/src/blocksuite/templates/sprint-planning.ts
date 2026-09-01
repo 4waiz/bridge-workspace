@@ -54,7 +54,7 @@ export const buildSprintPlanningBoard: TemplateBuilder = (doc, surfaceId) => {
     shape({ x: fx, y: 92, w: fw, h: 2, fill: ACCENT });
   };
   field(1130, 200, 'SPRINT:  __');
-  field(1360, 200, 'DATES:  __ – __');
+  field(1360, 200, 'DATES:  __ - __');
 
   // ===================== SPRINT GOAL BANNER ==============================
   const goalY = 175;

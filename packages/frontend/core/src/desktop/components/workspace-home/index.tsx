@@ -636,7 +636,7 @@ export const WorkspaceHome = memo(function WorkspaceHome() {
               {workspaceName || 'BRIDGE Flow'}
             </h1>
             <p className={styles.welcomeSubtitle}>
-              Write, draw, plan and build — together on one infinite canvas.
+              Write, draw, plan and build - together on one infinite canvas.
             </p>
           </div>
           <div className={styles.welcomeActions}>

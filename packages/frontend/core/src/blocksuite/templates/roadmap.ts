@@ -301,7 +301,7 @@ export const buildRoadmapBoard: TemplateBuilder = (doc, surfaceId) => {
       x: mx - 70,
       y: axisY + 16,
       w: 140,
-      text: `${m.name} — ${m.date}`,
+      text: `${m.name} - ${m.date}`,
       color: C.INK,
       size: 12,
       weight: SEMI,

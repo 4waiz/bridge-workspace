@@ -7,8 +7,8 @@ import * as Y from 'yjs';
  *
  * Every template builder ("Product Strategy", "Business Model Canvas", …) draws
  * real, editable edgeless elements straight onto a freshly-created surface via
- * `surface.addElement`. To keep the whole template family visually consistent —
- * same palette, same type scale, same card language as the OKR board — the low
+ * `surface.addElement`. To keep the whole template family visually consistent -
+ * same palette, same type scale, same card language as the OKR board - the low
  * level primitives live here instead of being re-invented per file.
  *
  * Usage (from `initDocFromProps`' `onStoreLoad` hook):

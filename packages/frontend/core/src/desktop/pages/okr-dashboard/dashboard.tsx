@@ -151,7 +151,7 @@ function TeamCard({
       {/* Sits on the card's bottom edge (marginTop:auto) so the leader line
           stays aligned across cards of differing objective counts. */}
       <div style={{ ...S.leader, borderColor: T.border, color: T.sub }}>
-        Team leader: <span style={S.leaderName}>{owner || '—'}</span>
+        Team leader: <span style={S.leaderName}>{owner || '-'}</span>
       </div>
     </div>
   );
@@ -249,7 +249,7 @@ function PaceCard({
     <div style={{ ...S.card, borderColor: T.border }}>
       <div style={{ ...S.overviewTitle, color: T.sub }}>PACE VS PLAN</div>
       <div style={{ ...S.kpiBig, color }}>
-        {ahead ? '+' : '−'}
+        {ahead ? '+' : '-'}
         {Math.abs(delta)} pts
       </div>
       <div style={{ ...S.kpiCaption, color: T.sub }}>
@@ -266,7 +266,7 @@ type Behind = { obj: Objective; team: Team; value: number };
 
 /**
  * The objectives furthest behind pace, worst first. Everything here is already
- * on the board somewhere, but spread across seven cards — this is the one place
+ * on the board somewhere, but spread across seven cards - this is the one place
  * that answers "what do we talk about first" without scanning all of them.
  */
 function AttentionCard({
@@ -337,7 +337,7 @@ export function OkrDashboard() {
     const unsub = subscribeDashboard(() => {
       // A single save rewrites every objective on a team, so one edit arrives
       // as a burst of row events. Waiting for the burst to settle collapses it
-      // into one refetch instead of several full dashboard reads — this screen
+      // into one refetch instead of several full dashboard reads - this screen
       // is open all day, so those add up.
       if (debounce.current) clearTimeout(debounce.current);
       debounce.current = setTimeout(() => void load(), REFETCH_DEBOUNCE_MS);
@@ -356,7 +356,7 @@ export function OkrDashboard() {
     return () => window.removeEventListener('keydown', onKey);
   }, [navigate]);
 
-  // The dashboard is a dense, full-viewport view — it carries its own scale so
+  // The dashboard is a dense, full-viewport view - it carries its own scale so
   // 100% browser zoom shows the whole board at once. Restored on close.
   usePageZoom(OKR_DASHBOARD_ZOOM);
 
@@ -369,7 +369,7 @@ export function OkrDashboard() {
 
   // Pace benchmark for the live quarter, and the objectives trailing it worst.
   // Recomputed on every render so the board stays honest as the quarter runs on
-  // — it re-renders whenever the realtime subscription fires.
+  // - it re-renders whenever the realtime subscription fires.
   const expected = quarterExpectedPct();
   const behind: Behind[] = (model?.teams ?? [])
     .flatMap(r => r.objectives.map(obj => ({ obj, team: r.team })))
@@ -505,7 +505,7 @@ const S: Record<string, CSSProperties> = {
     overflowY: 'auto',
     padding: '28px 32px 32px',
     // Column layout so the card grid can claim the leftover height instead of
-    // leaving a band of empty background under the last row — this board lives
+    // leaving a band of empty background under the last row - this board lives
     // on a wall-mounted screen, where that gap is the whole bottom third.
     display: 'flex',
     flexDirection: 'column',

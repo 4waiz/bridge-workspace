@@ -71,9 +71,9 @@ export const article2: Array<OnboardingBlockOption> = [
           those 25 minutes, bringing your thoughts back to the task if you find
           them wandering. At the end of the 25 minutes, give yourself a
           five-minutes break and do not indulge in anything where you have to
-          focus on (no checking e-mails, for example – but making a cup of tea
+          focus on (no checking e-mails, for example - but making a cup of tea
           is just fine). Repeat the Pomodoro/break three or four times, and
-          then, take a 30-minutes break – or wrap your studies up for the day!
+          then, take a 30-minutes break - or wrap your studies up for the day!
         </p>
         <img
           className="illustration"
@@ -93,11 +93,11 @@ export const article2: Array<OnboardingBlockOption> = [
         <h2>How can students remember more and forget less?</h2>
         <p>
           We all wish we had much better memories, but, if you remember too
-          perfectly, it makes it harder to revisit and update your learning – to
+          perfectly, it makes it harder to revisit and update your learning - to
           be more flexible on the face of new information, or to change and
           adapt if you’ve got something wrong. If you want to remember more,
           retrieval practice with spaced repetition, that is, spacing your
-          retrieval practice out over a number of days – is your best bet.
+          retrieval practice out over a number of days - is your best bet.
           Researchers sug-gest that you should retrieve the information when you
           are about to forget it, which is a tricky bit of timing to figure out.
         </p>
@@ -106,10 +106,10 @@ export const article2: Array<OnboardingBlockOption> = [
           It can be hard to write a textbook for a class; so, most professors
           use professional textbooks to supplement their teachings. Similarly,
           it can be hard to create high-quality video materials. I believe
-          online teaching will continue to become more common post-COVID – the
+          online teaching will continue to become more common post-COVID - the
           genie is out of the bottle as, now, students realise that online
           learning can be more convenient than face-to-face classes. But,
-          students still like their teachers – real professors, who they can
+          students still like their teachers - real professors, who they can
           interact with. So, real face-to-face instructors will always have a
           place.
         </p>
@@ -129,10 +129,10 @@ export const article2: Array<OnboardingBlockOption> = [
         <p>
           There are some excellent learning materials available on YouTube, but,
           students may have to spend a lot of time wading through the dreck to
-          find what they are looking for. Students – and all of us – need to be
+          find what they are looking for. Students - and all of us - need to be
           a little wary of spending too much time on social media. It can be the
           equivalent of parking yourself in front of the television and
-          indulging in hours of mindless entertainment – except that social
+          indulging in hours of mindless entertainment - except that social
           media can also be an echo chamber that can push us to unwittingly
           become more extreme in our beliefs.
         </p>

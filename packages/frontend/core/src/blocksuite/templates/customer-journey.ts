@@ -15,7 +15,7 @@ import {
  * stage columns (Awareness → Advocacy) crossed with rows for actions,
  * touchpoints, an emotion curve, pain points and opportunities.
  *
- * All content is generic, editable placeholder text — a starting point users
+ * All content is generic, editable placeholder text - a starting point users
  * overwrite with their own persona, channels and insights.
  */
 export const buildCustomerJourneyBoard: TemplateBuilder = (doc, surfaceId) => {
@@ -120,7 +120,7 @@ export const buildCustomerJourneyBoard: TemplateBuilder = (doc, surfaceId) => {
     x: labelX + 92,
     y: personaY + 36,
     w: labelW - 108,
-    text: 'Alex — Ops Manager',
+    text: 'Alex - Ops Manager',
     color: C.INK,
     size: 15,
     weight: BOLD,
@@ -235,7 +235,7 @@ export const buildCustomerJourneyBoard: TemplateBuilder = (doc, surfaceId) => {
       align: 'center',
     });
 
-  // ===================== ROW 1 — DOING / ACTIONS =========================
+  // ===================== ROW 1 - DOING / ACTIONS =========================
   const r1Y = 305;
   const r1H = 90;
   rowLabel('01', 'DOING / ACTIONS', r1Y, r1H);
@@ -260,7 +260,7 @@ export const buildCustomerJourneyBoard: TemplateBuilder = (doc, surfaceId) => {
     });
   });
 
-  // ===================== ROW 2 — TOUCHPOINTS =============================
+  // ===================== ROW 2 - TOUCHPOINTS =============================
   const r2Y = r1Y + r1H; // 395
   const r2H = 80;
   rowLabel('02', 'TOUCHPOINTS', r2Y, r2H);
@@ -289,7 +289,7 @@ export const buildCustomerJourneyBoard: TemplateBuilder = (doc, surfaceId) => {
     });
   });
 
-  // ===================== ROW 3 — EMOTION (curve) =========================
+  // ===================== ROW 3 - EMOTION (curve) =========================
   const r3Y = r2Y + r2H; // 475
   const r3H = 120;
   rowLabel('03', 'EMOTION', r3Y, r3H);
@@ -332,7 +332,7 @@ export const buildCustomerJourneyBoard: TemplateBuilder = (doc, surfaceId) => {
     });
   });
 
-  // ===================== ROW 4 — PAIN POINTS ============================
+  // ===================== ROW 4 - PAIN POINTS ============================
   const r4Y = r3Y + r3H; // 595
   const r4H = 90;
   rowLabel('04', 'PAIN POINTS', r4Y, r4H);
@@ -366,7 +366,7 @@ export const buildCustomerJourneyBoard: TemplateBuilder = (doc, surfaceId) => {
     });
   });
 
-  // ===================== ROW 5 — OPPORTUNITIES ==========================
+  // ===================== ROW 5 - OPPORTUNITIES ==========================
   const r5Y = r4Y + r4H; // 685
   const r5H = 90;
   rowLabel('05', 'OPPORTUNITIES', r5Y, r5H);

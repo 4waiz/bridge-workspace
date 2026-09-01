@@ -17,9 +17,9 @@ export const article0: Array<OnboardingBlockOption> = [
         <p>
           “With all the time you spend watching TV,” he tells me, “you could
           have written a novel by now.” It’s hard to disagree with the sentiment
-          — writing a novel is undoubtedly a better use of time than watching TV
-          — but what about the hidden assumption? Such comments imply that time
-          is “fungible” — that time spent watching TV can just as easily be
+          - writing a novel is undoubtedly a better use of time than watching TV
+          - but what about the hidden assumption? Such comments imply that time
+          is “fungible” - that time spent watching TV can just as easily be
           spent writing a novel. And sadly, that’s just not the case.
         </p>
         <p>
@@ -168,7 +168,7 @@ export const article0: Array<OnboardingBlockOption> = [
         <h2>Make a list</h2>
         <p>
           Coming up with a bunch of different things to work on shouldn’t be
-          hard — most people have tons of stuff they want to get done. But if
+          hard - most people have tons of stuff they want to get done. But if
           you try to keep it all in your head it quickly gets overwhelming. The
           psychic pressure of having to remember all of it can make you crazy.
           The solution is again simple: write it down.

@@ -43,7 +43,7 @@ function initials(name: string) {
 /**
  * The real member directory: everyone who has signed in, read from the Supabase
  * `profiles` table alongside the team they belong to. This workspace is local
- * (the cloud sync is disabled), so the cloud invite flow does not apply —
+ * (the cloud sync is disabled), so the cloud invite flow does not apply -
  * accounts are created by signing up, and this lists who has.
  */
 const DirectoryMembersPanel = () => {

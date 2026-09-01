@@ -173,7 +173,7 @@ async function exportHandler({
       return;
     }
     case 'pdf-canvas': {
-      // Canvas-based PDF export — renders the edgeless board (or page) to a
+      // Canvas-based PDF export - renders the edgeless board (or page) to a
       // PDF via the surface ExportManager. This is the path used for boards
       // such as the OKR template where the layout lives on the canvas.
       await editorRoot?.std.get(ExportManager).exportPdf();

@@ -8,8 +8,8 @@ import { useEffect } from 'react';
 // 100% browser zoom now shows what used to require zooming out to 67%.
 export const APP_ZOOM = '1';
 
-// The OKR views are much denser than the rest of the app — each is laid out to
-// fill one viewport — so they carry their own scale and restore APP_ZOOM when
+// The OKR views are much denser than the rest of the app - each is laid out to
+// fill one viewport - so they carry their own scale and restore APP_ZOOM when
 // they unmount. The editor and objective views sit 1.1x above their old
 // baselines, which is what 110% browser zoom used to give. The dashboard has
 // come down two 10% steps from there (0.866 → 0.779 → 0.701): it is the only

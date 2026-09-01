@@ -8,7 +8,7 @@ type Mode = 'signin' | 'signup';
 const FEATURES = [
   'AI-powered canvas for notes, docs & whiteboards',
   'Real-time collaboration across your workspace',
-  'Your ideas, organised — folders, tags & collections',
+  'Your ideas, organised - folders, tags & collections',
 ];
 
 export function BridgeAuthPage() {

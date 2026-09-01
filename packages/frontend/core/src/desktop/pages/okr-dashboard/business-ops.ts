@@ -1,5 +1,5 @@
 /**
- * Business Ops Dashboard — the full-screen image the OKR board alternates with.
+ * Business Ops Dashboard - the full-screen image the OKR board alternates with.
  *
  * The board runs unattended on a wall screen, so the image cannot live in the
  * bundle: swapping it would mean a redeploy. Instead the file goes to the
@@ -16,7 +16,7 @@ export const BUSINESS_OPS_ROW_ID = 'current';
 
 /**
  * Shipped with the app so the wall screen has something to show before anyone
- * has uploaded — and if Storage is unreachable.
+ * has uploaded - and if Storage is unreachable.
  */
 export const BUSINESS_OPS_DEFAULT_URL = '/okr/business-ops-default.jpeg';
 
@@ -27,7 +27,7 @@ export const BUSINESS_OPS_DEFAULT_URL = '/okr/business-ops-default.jpeg';
 export const OVERLAY_PERIOD_MS = 5 * 60_000;
 
 /**
- * Gate on the editor panel. This is a deterrent, not a security boundary — it
+ * Gate on the editor panel. This is a deterrent, not a security boundary - it
  * ships in the client bundle and anyone can read it there. What actually keeps
  * strangers out is Supabase auth: the upload needs a signed-in session, per the
  * RLS policies in migration 0004.
@@ -69,7 +69,7 @@ export async function uploadOverlayImage(file: File): Promise<string> {
     throw new Error('That file is not an image.');
   }
   if (file.size > MAX_BYTES) {
-    throw new Error('Image is larger than 10 MB — please use a smaller file.');
+    throw new Error('Image is larger than 10 MB - please use a smaller file.');
   }
 
   const ext = (file.name.split('.').pop() || 'jpg')

@@ -97,7 +97,7 @@ export const buildWorkshopCanvasBoard: TemplateBuilder = (doc, surfaceId) => {
   const objectives = [
     'Align on the problem we are solving together',
     'Generate a wide set of candidate directions',
-    'Leave with 2–3 committed next actions',
+    'Leave with 2-3 committed next actions',
   ];
   objectives.forEach((line, i) => {
     text({
@@ -132,7 +132,7 @@ export const buildWorkshopCanvasBoard: TemplateBuilder = (doc, surfaceId) => {
   });
   const rules = [
     'One conversation at a time',
-    'Defer judgement — capture every idea',
+    'Defer judgement - capture every idea',
     'Build on ideas, do not tear them down',
   ];
   rules.forEach((line, i) => {
@@ -359,8 +359,8 @@ export const buildWorkshopCanvasBoard: TemplateBuilder = (doc, surfaceId) => {
     weight: BOLD,
   });
   const parked = [
-    'Budget question — take offline with finance',
-    'Tooling migration — separate deep-dive session',
+    'Budget question - take offline with finance',
+    'Tooling migration - separate deep-dive session',
   ];
   parked.forEach((line, i) => {
     text({

@@ -25,7 +25,7 @@ export const CsvFormatGuidance: FC<CsvFormatGuidanceProps> = ({
           {[
             `Username (optional): any text.`,
             `Email (required): e.g., user@example.com.`,
-            `Password (optional): ${passwordLimits.minLength}–${passwordLimits.maxLength} characters.`,
+            `Password (optional): ${passwordLimits.minLength}-${passwordLimits.maxLength} characters.`,
           ].map((text, index) => (
             <li
               key={`guidance-${index}`}

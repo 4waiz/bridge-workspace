@@ -98,7 +98,7 @@ export const STATUS_DESC: Record<Status, string> = {
 };
 
 /**
- * Fraction (0..100) of the current quarter that has elapsed — i.e. where a
+ * Fraction (0..100) of the current quarter that has elapsed - i.e. where a
  * team "should" be if they progressed linearly. Month 1 ≈ 33%, month 2 ≈ 66%,
  * end of quarter ≈ 100%. This is the pace benchmark that status is judged
  * against, so early in the quarter the bar is low and late it is high.
@@ -141,7 +141,7 @@ export function statusFromProgress(
 /**
  * Team-level status. Starts from the average-progress status, then downgrades:
  * a team shouldn't read "On Track" when 2 or more of its objectives are at risk
- * (or worse) — the healthy average hides the shaky ones, so surface it.
+ * (or worse) - the healthy average hides the shaky ones, so surface it.
  */
 export function rollupStatus(progresses: number[]): Status {
   if (progresses.length === 0) return 'on_track';
@@ -575,7 +575,7 @@ export async function buildTemplateBlob(): Promise<Blob> {
 
 /**
  * Get the downloadable template. Tries, in order:
- *   1. the committed static file under /okr/ — the fully-styled, demo-filled
+ *   1. the committed static file under /okr/ - the fully-styled, demo-filled
  *      design (navy headers, pink status banding, formulas). This is the copy
  *      the team wants, so it wins over everything else.
  *   2. Supabase Storage (an admin-uploaded copy, if any)

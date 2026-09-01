@@ -1,3 +1,5 @@
+import type { DocSnapshot, Store } from '@blocksuite/bridgeflow/store';
+import { DoneIcon, FilterIcon, MoreHorizontalIcon } from '@blocksuite/icons/rc';
 import {
   Avatar,
   IconButton,
@@ -23,8 +25,6 @@ import { toDocSearchParams } from '@bridgeflow/core/modules/navigation';
 import { WorkbenchService } from '@bridgeflow/core/modules/workbench';
 import { copyTextToClipboard } from '@bridgeflow/core/utils/clipboard';
 import { i18nTime, useI18n } from '@bridgeflow/i18n';
-import type { DocSnapshot, Store } from '@blocksuite/bridgeflow/store';
-import { DoneIcon, FilterIcon, MoreHorizontalIcon } from '@blocksuite/icons/rc';
 import {
   useLiveData,
   useService,
@@ -93,7 +93,7 @@ const SortFilterButton = ({
 };
 
 // ---------------------------------------------------------------------------
-// ActionMenu – reusable dropdown for comment / reply rows
+// ActionMenu - reusable dropdown for comment / reply rows
 // ---------------------------------------------------------------------------
 
 const ActionMenu = ({
@@ -815,7 +815,8 @@ const ReplyItem = ({
   const handleDelete = useAsyncCallback(async () => {
     openConfirmModal({
       title: t['com.bridgeflow.comment.reply.delete.confirm.title'](),
-      description: t['com.bridgeflow.comment.reply.delete.confirm.description'](),
+      description:
+        t['com.bridgeflow.comment.reply.delete.confirm.description'](),
       confirmText: t['Delete'](),
       cancelText: t['Cancel'](),
       confirmButtonOptions: {

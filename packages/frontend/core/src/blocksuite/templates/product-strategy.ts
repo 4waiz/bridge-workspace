@@ -5,14 +5,14 @@ import { BOLD, createCanvasKit, REG, SEMI, type TemplateBuilder } from './kit';
  *
  * Visual sibling of the OKR board: black header bar, white cards with thin line
  * borders, black number chips + orange accent bars for sections and small
- * chips. Content is a reusable template — real field labels with light, generic
+ * chips. Content is a reusable template - real field labels with light, generic
  * example placeholders users overwrite.
  *
  * Layout (top to bottom):
- *   1) Vision banner          — one-line product vision.
- *   2) Strategic pillars      — 4 pillar columns with why-it-matters + bullets.
- *   3) Strategic bets         — 3 bet cards (bet / hypothesis / success metric).
- *   4) Footer                 — north-star metric card + non-goals card.
+ *   1) Vision banner          - one-line product vision.
+ *   2) Strategic pillars      - 4 pillar columns with why-it-matters + bullets.
+ *   3) Strategic bets         - 3 bet cards (bet / hypothesis / success metric).
+ *   4) Footer                 - north-star metric card + non-goals card.
  */
 export const buildProductStrategyBoard: TemplateBuilder = (doc, surfaceId) => {
   const kit = createCanvasKit(doc, surfaceId);
@@ -85,7 +85,7 @@ export const buildProductStrategyBoard: TemplateBuilder = (doc, surfaceId) => {
     x: visX + 24,
     y: visY + 40,
     w: visW - 48,
-    text: 'Become the default canvas where teams plan, decide and build — together.',
+    text: 'Become the default canvas where teams plan, decide and build - together.',
     color: C.INK,
     size: 18,
     weight: SEMI,

@@ -21,26 +21,51 @@ export interface SeedTeam {
   key: string;
   name: string;
   accent: string;
+  /**
+   * Name of this team's own tab in the Excel workbook. Every team lead gets
+   * exactly ONE tab and edits only that one - the upload importer matches on
+   * the Team column, so the tab name is purely how a person finds their sheet.
+   * Excel caps sheet names at 31 chars and forbids : \ / ? * [ ], which is why
+   * the longer team names are abbreviated here.
+   */
+  tab: string;
 }
 // Array order IS the display order: build-okr-template.ts writes each team's
-// index as teams.sort_order, and the dashboard sorts on that column.
+// index as teams.sort_order, and the dashboard sorts on that column. It is
+// also the left-to-right tab order in the workbook.
 export const OKR_TEAMS: SeedTeam[] = [
-  { key: 'agile', name: 'Agile', accent: '#4c6ef5' },
+  { key: 'agile', name: 'Agile', accent: '#4c6ef5', tab: 'Agile' },
   {
     key: 'lean-six-sigma',
     name: 'Lean Six Sigma & Special Projects',
     accent: '#14b8a6',
+    tab: 'Six Sigma',
   },
-  { key: 'opex', name: 'Opex', accent: '#2eb85c' },
-  { key: 'industry-5', name: 'Industry 5.0', accent: '#f15a29' },
-  { key: 'ai-analytics', name: 'AI & Analytics', accent: '#9b5de5' },
-  { key: 'business-operation', name: 'Business Operation', accent: '#f5a623' },
+  { key: 'opex', name: 'Opex', accent: '#2eb85c', tab: 'Opex' },
+  { key: 'industry-5', name: 'Industry 5.0', accent: '#f15a29', tab: 'I5.0' },
+  { key: 'ai-analytics', name: 'AI & Analytics', accent: '#9b5de5', tab: 'AI' },
+  {
+    key: 'business-operation',
+    name: 'Business Operation',
+    accent: '#f5a623',
+    tab: 'Business Ops',
+  },
   {
     key: 'external-engagement',
     name: 'External Engagement',
     accent: '#ec4899',
+    tab: 'External Engagement',
   },
 ];
+
+/** The team whose Excel tab is `tab` (case/space tolerant), or null. */
+export function teamForTab(tab: string): SeedTeam | null {
+  const n = tab.toLowerCase().replace(/[^a-z0-9]/g, '');
+  return (
+    OKR_TEAMS.find(t => t.tab.toLowerCase().replace(/[^a-z0-9]/g, '') === n) ??
+    null
+  );
+}
 
 // ---- Demo content ----------------------------------------------------------
 export interface SeedKeyResult {

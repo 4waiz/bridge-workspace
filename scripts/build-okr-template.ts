@@ -3,27 +3,42 @@
  * (okr-seed-data.ts):
  *
  *   1. packages/frontend/core/public/okr/bridge_xpi_okrs_template.xlsx
- *      - the demo-populated Download template (served at /okr/... by Pages,
- *        and uploaded to Supabase Storage by the app).
+ *      - the Download template (served at /okr/... by Pages, and uploaded to
+ *        Supabase Storage by the app). Instructions + Dashboard + ONE TAB PER
+ *        TEAM LEAD, so each person edits only their own sheet.
  *   2. supabase/seed.sql
  *      - reseeds the 7-team roster + demo objectives / key results /
  *        initiatives so the DB matches the app + template.
  *
  * Run:  node_modules/.bin/tsx scripts/build-okr-template.ts
  */
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+import JSZip from 'jszip';
 
 import {
   objectiveProgress,
   OKR_DEMO,
   OKR_QUARTER,
+  OKR_QUARTER_LABEL,
   OKR_TEAMS,
   OKR_YEAR,
+  type SeedTeam,
   type SeedTeamOkr,
 } from '../packages/frontend/core/src/desktop/pages/okr-dashboard/okr-seed-data';
-import { buildOkrWorkbook } from '../packages/frontend/core/src/desktop/pages/okr-dashboard/xlsx-lite';
+import {
+  type CellValue,
+  DASHBOARD_COLS,
+  DASHBOARD_HEADER,
+  dashboardCaption,
+  dashboardValues,
+  instructionsLines,
+  OKR_COLUMNS,
+  TEAM_SHEET_COLS,
+  teamSheetValues,
+} from '../packages/frontend/core/src/desktop/pages/okr-dashboard/xlsx-lite';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
@@ -52,31 +67,361 @@ function dedupInitiatives(obj: SeedTeamOkr['objectives'][number]) {
   return out;
 }
 
-// ---- 1. the .xlsx template ----
-// NOTE: the committed public/okr/bridge_xpi_okrs_template.xlsx is now
-// HAND-MAINTAINED — it carries full styling (navy headers, status banding) and
-// LIVE formulas (TODAY()-based pace helper OKRs!R1, per-row Progress/Status,
-// Dashboard rollup) that buildOkrWorkbook() does not reproduce. Regenerating it
-// here would silently downgrade it to a plain, static-status workbook, so we no
-// longer overwrite it. buildOkrWorkbook() is still the in-browser download
-// fallback + the upload parser's round-trip. Set REGEN_XLSX=1 to force a
-// (plain) rebuild if you ever intend to replace the styled artifact.
+// ===========================================================================
+// 1. the .xlsx template
+// ===========================================================================
+//
+// The LAYOUT (which value and which formula goes in which cell) comes from
+// xlsx-lite.ts, shared with the in-browser fallback download so the two can
+// never disagree. What lives here is the PRESENTATION: styles.xml + theme1.xml
+// were lifted from the hand-designed workbook the team signed off on and are
+// committed under scripts/okr-template-assets/, and the style indices below
+// point into that stylesheet.
+
+/** cellXfs indices inside scripts/okr-template-assets/styles.xml. */
+const S = {
+  instrTitle: 4,
+  instrHead: 6,
+  instrBody: 5,
+  dashTitle: 3,
+  dashCaption: 2,
+  dashHeader: 7,
+  dashTeam: 8,
+  dashStatus: 9,
+  dashPct: 10,
+  dashObjective: 11,
+  dashTip: 1,
+  teamHeader: 12,
+  teamCell: 13,
+  teamPct: 14,
+  teamStatus: 15,
+  teamOwner: 16,
+} as const;
+
+/** dxf indices inside that same stylesheet (red / amber / green fills). */
+const DXF = {
+  teamOffTrack: 0,
+  teamAtRisk: 1,
+  teamOnTrack: 2,
+  dashOffTrack: 3,
+  dashAtRisk: 4,
+  dashOnTrack: 5,
+} as const;
+
+function esc(s: string): string {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function colLetter(n: number): string {
+  let s = '';
+  while (n > 0) {
+    const m = (n - 1) % 26;
+    s = String.fromCharCode(65 + m) + s;
+    n = Math.floor((n - 1) / 26);
+  }
+  return s;
+}
+
+/** One styled cell. */
+function cell(ref: string, value: CellValue, style: number): string {
+  const s = ` s="${style}"`;
+  if (value && typeof value === 'object' && 'f' in value) {
+    // No cached <v>; the workbook sets fullCalcOnLoad so every reader computes
+    // these on open.
+    return `<c r="${ref}"${s}><f>${esc(value.f)}</f></c>`;
+  }
+  if (value === null || value === undefined || value === '') {
+    return `<c r="${ref}"${s}/>`;
+  }
+  if (typeof value === 'number' && Number.isFinite(value)) {
+    return `<c r="${ref}"${s}><v>${value}</v></c>`;
+  }
+  return `<c r="${ref}"${s} t="inlineStr"><is><t xml:space="preserve">${esc(
+    String(value)
+  )}</t></is></c>`;
+}
+
+/** One row; `styles` is per-column, falling back to its last entry. */
+function row(
+  index: number,
+  values: CellValue[],
+  styles: number[],
+  attrs = ''
+): string {
+  const cells = values
+    .map((v, i) =>
+      cell(
+        `${colLetter(i + 1)}${index}`,
+        v,
+        styles[i] ?? styles[styles.length - 1] ?? 0
+      )
+    )
+    .join('');
+  return `<row r="${index}"${attrs}>${cells}</row>`;
+}
+
+function colsXml(cols: { min: number; max: number; width: number }[]): string {
+  return `<cols>${cols
+    .map(
+      c =>
+        `<col min="${c.min}" max="${c.max}" width="${c.width}" customWidth="1"/>`
+    )
+    .join('')}</cols>`;
+}
+
+/**
+ * A worksheet part. `tail` carries the post-sheetData elements and MUST already
+ * be in schema order: mergeCells, conditionalFormatting, dataValidations,
+ * pageMargins.
+ */
+function worksheet(
+  body: string,
+  opts: { cols?: string; freeze?: number; gridlines?: boolean; tail?: string }
+): string {
+  const view = `<sheetView${opts.gridlines === false ? ' showGridLines="0"' : ''} workbookViewId="0">${
+    opts.freeze
+      ? `<pane ySplit="${opts.freeze}" topLeftCell="A${opts.freeze + 1}" activePane="bottomLeft" state="frozen"/><selection pane="bottomLeft"/>`
+      : ''
+  }</sheetView>`;
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews>${view}</sheetViews><sheetFormatPr defaultColWidth="8.6328125" defaultRowHeight="14.5"/>${
+    opts.cols ?? ''
+  }<sheetData>${body}</sheetData>${opts.tail ?? ''}<pageMargins left="0.75" right="0.75" top="1" bottom="1" header="0.51" footer="0.51"/></worksheet>`;
+}
+
+function instructionsSheet(demo: SeedTeamOkr[], teams: SeedTeam[]): string {
+  const styleFor = {
+    title: S.instrTitle,
+    head: S.instrHead,
+    body: S.instrBody,
+  };
+  const body = instructionsLines(demo, teams)
+    .map((line, i) => row(i + 1, [line.text], [styleFor[line.kind]]))
+    .join('');
+  return worksheet(body, {
+    cols: colsXml([{ min: 1, max: 1, width: 110 }]),
+    gridlines: false,
+  });
+}
+
+function dashboardSheet(demo: SeedTeamOkr[], teams: SeedTeam[]): string {
+  const rows: string[] = [];
+  rows.push(
+    row(
+      1,
+      [`BRIDGE XPI - OKRs ${OKR_QUARTER_LABEL}`],
+      [S.dashTitle],
+      ' ht="39.75" customHeight="1"'
+    )
+  );
+  rows.push(
+    row(2, [{ f: dashboardCaption(teams) }], [S.dashCaption], ' ht="15.5"')
+  );
+  rows.push(row(4, [...DASHBOARD_HEADER], [S.dashHeader]));
+
+  const teamStyles = [
+    S.dashTeam,
+    S.dashStatus,
+    S.dashPct,
+    S.dashObjective,
+    S.dashPct,
+    S.dashObjective,
+    S.dashPct,
+    S.dashObjective,
+    S.dashPct,
+  ];
+  const first = 5;
+  teams.forEach((team, i) => {
+    const okr = demo.find(d => d.key === team.key);
+    const rowCount = teamSheetValues(team, okr).length;
+    rows.push(
+      row(
+        first + i,
+        dashboardValues(team, rowCount),
+        teamStyles,
+        ' ht="30" customHeight="1"'
+      )
+    );
+  });
+
+  const last = first + teams.length - 1;
+  const tipRow = last + 2;
+  rows.push(
+    row(
+      tipRow,
+      [
+        'TV tip: open the Dashboard tab in Excel Online, press F11 (full screen) and hide the ribbon (View > Show). ' +
+          'Leave it open all day - it recalculates as each lead updates their own tab.',
+      ],
+      [S.dashTip]
+    )
+  );
+
+  const bar = (col: string) =>
+    `<conditionalFormatting sqref="${col}${first}:${col}${last}"><cfRule type="dataBar" priority="5"><dataBar><cfvo type="num" val="0"/><cfvo type="num" val="1"/><color rgb="FF1F77B4"/></dataBar></cfRule></conditionalFormatting>`;
+
+  const tail =
+    `<mergeCells count="3"><mergeCell ref="A1:J1"/><mergeCell ref="A2:J2"/><mergeCell ref="A${tipRow}:J${tipRow}"/></mergeCells>` +
+    `<conditionalFormatting sqref="B${first}:B${last}">` +
+    `<cfRule type="expression" dxfId="${DXF.dashOnTrack}" priority="2"><formula>$B${first}="On Track"</formula></cfRule>` +
+    `<cfRule type="expression" dxfId="${DXF.dashAtRisk}" priority="3"><formula>$B${first}="At Risk"</formula></cfRule>` +
+    `<cfRule type="expression" dxfId="${DXF.dashOffTrack}" priority="4"><formula>$B${first}="Off Track"</formula></cfRule>` +
+    `</conditionalFormatting>` +
+    ['C', 'E', 'G', 'I'].map(bar).join('');
+
+  return worksheet(rows.join(''), {
+    cols: colsXml(DASHBOARD_COLS),
+    freeze: 4,
+    gridlines: false,
+    tail,
+  });
+}
+
+function teamSheet(team: SeedTeam, okr: SeedTeamOkr | undefined): string {
+  const values = teamSheetValues(team, okr);
+  const dataStyles = [
+    S.teamCell, // A Team
+    S.teamCell, // B Quarter
+    S.teamCell, // C Objective #
+    S.teamCell, // D Objective Description
+    S.teamCell, // E KR #
+    S.teamCell, // F KR Description
+    S.teamCell, // G Unit
+    S.teamCell, // H Baseline
+    S.teamCell, // I Target
+    S.teamCell, // J Current Value
+    S.teamPct, // K Progress (%)
+    S.teamStatus, // L Status
+    S.teamCell, // M Initiatives
+    S.teamOwner, // N Owner
+    S.teamCell, // O Comments
+  ];
+  const rows = [row(1, [...OKR_COLUMNS], [S.teamHeader])];
+  values.forEach((v, i) => rows.push(row(i + 2, v, dataStyles)));
+
+  const last = Math.max(2, values.length + 1);
+  // Column A is locked to this team's own name: a one-entry dropdown. Nobody
+  // can retype their tab into another department, which is what keeps "upload
+  // only your own sheet" true even before the app checks it.
+  const tail =
+    `<conditionalFormatting sqref="L2:L${last}">` +
+    `<cfRule type="expression" dxfId="${DXF.teamOnTrack}" priority="2"><formula>$L2="On Track"</formula></cfRule>` +
+    `<cfRule type="expression" dxfId="${DXF.teamAtRisk}" priority="3"><formula>$L2="At Risk"</formula></cfRule>` +
+    `<cfRule type="expression" dxfId="${DXF.teamOffTrack}" priority="4"><formula>$L2="Off Track"</formula></cfRule>` +
+    `</conditionalFormatting>` +
+    // errorTitle is capped at 32 chars by the format, error at 255 - go over
+    // and Excel offers to "repair" the file on open.
+    `<dataValidations count="1"><dataValidation type="list" allowBlank="1" showInputMessage="1" showErrorMessage="1" errorTitle="This tab belongs to one team" error="Leave the Team column as ${esc(
+      team.name
+    )} and edit only this tab - it is the sheet that gets imported for you." sqref="A2:A${last}"><formula1>"${esc(
+      team.name
+    )}"</formula1></dataValidation></dataValidations>`;
+
+  return worksheet(rows.join(''), {
+    cols: colsXml(TEAM_SHEET_COLS),
+    freeze: 1,
+    tail,
+  });
+}
+
+async function buildStyledWorkbook(
+  demo: SeedTeamOkr[],
+  teams: SeedTeam[]
+): Promise<Uint8Array> {
+  const assets = resolve(HERE, 'okr-template-assets');
+  const stylesXml = readFileSync(resolve(assets, 'styles.xml'), 'utf-8');
+  const themeXml = readFileSync(resolve(assets, 'theme1.xml'), 'utf-8');
+
+  const tabs = ['Instructions', 'Dashboard', ...teams.map(t => t.tab)];
+  const n = tabs.length;
+  const nums = Array.from({ length: n }, (_, i) => i + 1);
+  const themeRid = n + 1;
+  const stylesRid = n + 2;
+
+  const zip = new JSZip();
+
+  zip.file(
+    '[Content_Types].xml',
+    `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>${nums
+      .map(
+        i =>
+          `<Override PartName="/xl/worksheets/sheet${i}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`
+      )
+      .join(
+        ''
+      )}<Override PartName="/xl/theme/theme1.xml" ContentType="application/vnd.openxmlformats-officedocument.theme+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>`
+  );
+
+  zip.file(
+    '_rels/.rels',
+    `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`
+  );
+
+  zip.file(
+    'xl/workbook.xml',
+    `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><bookViews><workbookView xWindow="0" yWindow="0" windowWidth="25600" windowHeight="15500" activeTab="1"/></bookViews><sheets>${tabs
+      .map(
+        (name, i) =>
+          `<sheet name="${esc(name)}" sheetId="${i + 1}" r:id="rId${i + 1}"/>`
+      )
+      .join(
+        ''
+      )}</sheets><calcPr calcId="191029" fullCalcOnLoad="1"/></workbook>`
+  );
+
+  zip.file(
+    'xl/_rels/workbook.xml.rels',
+    `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${nums
+      .map(
+        i =>
+          `<Relationship Id="rId${i}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i}.xml"/>`
+      )
+      .join(
+        ''
+      )}<Relationship Id="rId${themeRid}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme" Target="theme/theme1.xml"/><Relationship Id="rId${stylesRid}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`
+  );
+
+  zip.file('xl/styles.xml', stylesXml);
+  zip.file('xl/theme/theme1.xml', themeXml);
+  zip.file('xl/worksheets/sheet1.xml', instructionsSheet(demo, teams));
+  zip.file('xl/worksheets/sheet2.xml', dashboardSheet(demo, teams));
+  teams.forEach((team, i) => {
+    zip.file(
+      `xl/worksheets/sheet${i + 3}.xml`,
+      teamSheet(
+        team,
+        demo.find(d => d.key === team.key)
+      )
+    );
+  });
+
+  return zip.generateAsync({ type: 'uint8array', compression: 'DEFLATE' });
+}
+
 async function writeTemplate() {
   const out = resolve(
     ROOT,
     'packages/frontend/core/public/okr/bridge_xpi_okrs_template.xlsx'
   );
-  if (process.env.REGEN_XLSX !== '1') {
-    console.log(`skipped ${out} (hand-maintained; set REGEN_XLSX=1 to force)`);
-    return;
-  }
-  const bytes = await buildOkrWorkbook(OKR_DEMO, OKR_TEAMS);
+  const bytes = await buildStyledWorkbook(OKR_DEMO, OKR_TEAMS);
   mkdirSync(dirname(out), { recursive: true });
   writeFileSync(out, bytes);
-  console.log(`wrote ${out} (${bytes.length} bytes)`);
+  console.log(
+    `wrote ${out} (${bytes.length} bytes, ${OKR_TEAMS.length + 2} sheets)`
+  );
 }
 
-// ---- 2. supabase/seed.sql ----
+// ===========================================================================
+// 2. supabase/seed.sql
+// ===========================================================================
 function buildSeedSql(): string {
   const rosterValues = OKR_TEAMS.map(
     (t, i) =>

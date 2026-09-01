@@ -74,7 +74,7 @@ function createMessage(role: AssistantRole, text: string): AssistantMessage {
 }
 
 // Answers come from the local bank in ./canned-answers, but arriving instantly
-// makes the panel feel broken rather than fast — the reply lands before the eye
+// makes the panel feel broken rather than fast - the reply lands before the eye
 // registers the question was sent. A short pause keeps the "Thinking..." state
 // readable, scaled a little by answer length so longer replies feel considered.
 function replyTo(question: string): Promise<string> {

@@ -128,7 +128,7 @@ export function JournalPageHeader({ page, workspace }: PageHeaderProps) {
 // Entry point to the live Operational Excellence rollup dashboard.
 // Sits immediately to the left of the Share button.
 function OeDashboardButton() {
-  // app-level navigate — the header lives inside the workbench's nested router
+  // app-level navigate - the header lives inside the workbench's nested router
   const navigate = useContext(NavigateContext);
   return (
     <button

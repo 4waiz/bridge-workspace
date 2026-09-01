@@ -1,5 +1,8 @@
 import { CodeBlockPreviewExtension } from '@blocksuite/bridgeflow/blocks/code';
-import { SignalWatcher, WithDisposable } from '@blocksuite/bridgeflow/global/lit';
+import {
+  SignalWatcher,
+  WithDisposable,
+} from '@blocksuite/bridgeflow/global/lit';
 import type { CodeBlockModel } from '@blocksuite/bridgeflow/model';
 import { unsafeCSSVarV2 } from '@blocksuite/bridgeflow/shared/theme';
 import { ShadowlessElement } from '@blocksuite/std';
@@ -235,7 +238,7 @@ ${this.errorMessage}</pre
               @click=${this._zoomOut}
               title="Zoom out"
             >
-              −
+              -
             </button>
             <button
               class="typst-control-button"

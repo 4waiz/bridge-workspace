@@ -288,14 +288,14 @@ export function OkrEditor() {
       const blob = await getTemplateBlob();
       triggerDownload(blob, 'bridge_xpi_okrs_template.xlsx');
       setToast(
-        'Template downloaded - fill the OKRs tab, then Upload & import.'
+        `Template downloaded - fill in your own "${teamName}" tab, then Upload & import.`
       );
     } catch (e: any) {
       setError(e?.message ?? String(e));
     } finally {
       setBusy(false);
     }
-  }, []);
+  }, [teamName]);
 
   const onPickFile = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -314,25 +314,41 @@ export function OkrEditor() {
           );
           return;
         }
-        // Each department only imports its own OKR — show/apply just this team.
+        // The workbook holds one tab per team lead. You import YOUR tab and
+        // nothing else: everyone else's rows are dropped here, and the DB's
+        // row-level security refuses them anyway if this gets past us.
         const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
-        const mine = parsed.teams.filter(
-          pt => norm(pt.teamName) === norm(teamName)
-        );
+        const mine = parsed.teams.filter(pt => {
+          if (teamId) {
+            const hit = matchTeam(pt.teamName, teamsRef.current);
+            if (hit) return hit.id === teamId;
+          }
+          return norm(pt.teamName) === norm(teamName);
+        });
         if (!mine.length) {
           setError(
-            `No rows for your team (${teamName}) were found in that file. Make sure the "Team" column says "${teamName}".`
+            `That workbook has no rows for your team (${teamName}). It has these tabs: ${parsed.sheetNames.join(
+              ', '
+            )}. Open your own tab and check the Team column says "${teamName}".`
           );
           return;
         }
+        const ignored = parsed.teams.length - mine.length;
         setPreview({ ...parsed, teams: mine });
+        if (ignored > 0) {
+          setToast(
+            `Reading your "${mine[0].sheetName}" tab - ${ignored} other team${
+              ignored === 1 ? '' : 's'
+            } in the file ${ignored === 1 ? 'was' : 'were'} ignored.`
+          );
+        }
       } catch (err: any) {
         setError(err?.message ?? String(err));
       } finally {
         setBusy(false);
       }
     },
-    [teamName]
+    [teamName, teamId]
   );
 
   const applyImport = useCallback(async () => {
@@ -359,13 +375,17 @@ export function OkrEditor() {
         }
       }
       const ok = results.filter(r => r.outcome === 'imported').length;
-      setToast(`Imported ${ok} team${ok === 1 ? '' : 's'} into the dashboard.`);
+      setToast(
+        ok
+          ? `${teamName} pushed to the dashboard.`
+          : 'Nothing was imported - see the result below.'
+      );
     } catch (e: any) {
       setError(e?.message ?? String(e));
     } finally {
       setImporting(false);
     }
-  }, [preview, teamId]);
+  }, [preview, teamId, teamName]);
 
   // auto-dismiss toast
   useEffect(() => {
@@ -620,8 +640,9 @@ export function OkrEditor() {
                   <span style={S.toolbarIcon}>▦</span> EXCEL SYNC
                 </div>
                 <span style={{ color: T.sub, fontSize: 13 }}>
-                  Import updates across the whole dashboard, or edit the sliders
-                  below by hand.
+                  The workbook has a tab per team. Fill in your own{' '}
+                  <strong>{teamName}</strong> tab and push it here, or edit the
+                  sliders below by hand.
                 </span>
               </div>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -629,7 +650,7 @@ export function OkrEditor() {
                   style={{ ...S.downloadBtn, opacity: busy ? 0.6 : 1 }}
                   onClick={() => void onDownload()}
                   disabled={busy}
-                  title="Download the Excel template (demo data pre-filled)"
+                  title={`Download the Excel workbook - one tab per team, yours is "${teamName}"`}
                 >
                   Download template
                 </button>
@@ -637,7 +658,7 @@ export function OkrEditor() {
                   style={{ ...S.uploadBtn, opacity: busy ? 0.6 : 1 }}
                   onClick={() => fileInput.current?.click()}
                   disabled={busy}
-                  title="Upload a filled-in Excel to import into the dashboard"
+                  title={`Upload the filled-in workbook - only your "${teamName}" tab is imported`}
                 >
                   Upload &amp; import
                 </button>
@@ -763,7 +784,7 @@ export function OkrEditor() {
                     <span style={S.objBadge}>{i + 1}</span>
                     <input
                       style={S.objTitleInput}
-                      placeholder={`Objective ${i + 1} — what do we want to achieve?`}
+                      placeholder={`Objective ${i + 1} - what do we want to achieve?`}
                       value={o.title}
                       onChange={e => patchObj(i, { title: e.target.value })}
                     />
@@ -961,9 +982,10 @@ function ImportPreview({
               Preview import
             </h2>
             <p style={{ margin: '4px 0 0', color: T.sub, fontSize: 13 }}>
-              {preview.teams.length} team
-              {preview.teams.length === 1 ? '' : 's'} · {totalObjs} objectives ·{' '}
-              {totalKrs} key results
+              {preview.teams.length === 1 && preview.teams[0].sheetName
+                ? `From your "${preview.teams[0].sheetName}" tab`
+                : `${preview.teams.length} teams`}{' '}
+              · {totalObjs} objectives · {totalKrs} key results
             </p>
           </div>
           <button style={S.kebab} onClick={onClose} title="Close">
@@ -972,6 +994,18 @@ function ImportPreview({
         </div>
 
         <div style={S.modalBody}>
+          {preview.warnings.map(w => (
+            <p
+              key={w}
+              style={{
+                margin: '0 0 10px',
+                fontSize: 12.5,
+                color: STATUS_COLOR.at_risk,
+              }}
+            >
+              {w}
+            </p>
+          ))}
           {preview.teams.map(pt => {
             const match = matchTeam(pt.teamName, teams);
             const res = resultFor(pt.teamName);
@@ -1044,7 +1078,7 @@ function ImportPreview({
           <span style={{ color: T.sub, fontSize: 12.5, flex: 1 }}>
             {results
               ? 'Import finished - if your team can’t be written you need the admin policy (0002 migration).'
-              : 'Applies your team’s OKR to the dashboard.'}
+              : 'Pushes your own tab to the dashboard. No other team is touched.'}
           </span>
           <button style={S.ghostBtn} onClick={onClose}>
             {results ? 'Done' : 'Cancel'}
@@ -1055,7 +1089,7 @@ function ImportPreview({
               disabled={importing}
               onClick={onApply}
             >
-              {importing ? 'Importing…' : 'Apply to dashboard'}
+              {importing ? 'Pushing…' : 'Push to dashboard'}
             </button>
           ) : null}
         </div>

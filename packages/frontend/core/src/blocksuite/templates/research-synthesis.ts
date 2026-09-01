@@ -14,7 +14,7 @@ import {
  * Visual language mirrors the OKR board (black header bar, white cards with thin
  * line borders, black number chips + accent title bars, small chips). The accent
  * hue here is BLUE. The board tells the synthesis story left-to-right across
- * three lanes — OBSERVATIONS -> THEMES -> INSIGHTS — with a research-question /
+ * three lanes - OBSERVATIONS -> THEMES -> INSIGHTS - with a research-question /
  * method footer. Every element is a real, editable canvas element so users can
  * overwrite the light example placeholder content with their own study.
  */
