@@ -46,6 +46,13 @@ import { BusinessOpsPanel } from './business-ops-panel';
 /** How long the editor waits after the last edit before saving. */
 const AUTOSAVE_IDLE_MS = 60_000;
 
+/**
+ * Pseudo-department for the "All departments" mode: upload ONE workbook that
+ * carries every team's tab and push the lot in a single import. Not a real
+ * team, so it never reaches the database as a team key.
+ */
+const ALL_KEY = '__all__';
+
 // Light UI palette (matches the OKR editor design).
 const T = {
   bg: '#f3f4f6',
@@ -101,7 +108,7 @@ export function OkrEditor() {
   const teamsRef = useRef<Team[]>([]);
   const teamsPromise = useRef<Promise<Team[]> | null>(null);
 
-  const [phase, setPhase] = useState<'pick' | 'edit'>('pick');
+  const [phase, setPhase] = useState<'pick' | 'edit' | 'all'>('pick');
   const [pick, setPick] = useState<string>(OKR_TEAMS[0]?.key ?? '');
   const [teamId, setTeamId] = useState<string | null>(null);
   const [teamName, setTeamName] = useState<string>('');
@@ -214,6 +221,12 @@ export function OkrEditor() {
   const chooseTeam = useCallback(
     async (key: string) => {
       setError(null);
+      // "All departments" has no OKR of its own to load - it is purely the
+      // org-wide import screen.
+      if (key === ALL_KEY) {
+        setPhase('all');
+        return;
+      }
       setBusy(true);
       try {
         const dbTeam = await resolveDbTeam(key);
@@ -332,17 +345,25 @@ export function OkrEditor() {
         live = false;
       }
       triggerDownload(blob, 'bridge_xpi_okrs.xlsx');
-      setToast(
-        live
-          ? `Downloaded with the dashboard's current numbers - your tab is "${teamName}".`
-          : `Template downloaded - fill in your own "${teamName}" tab, then Upload & import.`
-      );
+      if (phase === 'all') {
+        setToast(
+          live
+            ? `Downloaded with every department's current numbers - ${OKR_TEAMS.length} tabs.`
+            : `Template downloaded - ${OKR_TEAMS.length} department tabs.`
+        );
+      } else {
+        setToast(
+          live
+            ? `Downloaded with the dashboard's current numbers - your tab is "${teamName}".`
+            : `Template downloaded - fill in your own "${teamName}" tab, then Upload & import.`
+        );
+      }
     } catch (e: any) {
       setError(e?.message ?? String(e));
     } finally {
       setBusy(false);
     }
-  }, [teamName]);
+  }, [teamName, phase]);
 
   const onPickFile = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -361,6 +382,20 @@ export function OkrEditor() {
           );
           return;
         }
+        // "All departments" imports the whole workbook; a single department
+        // imports only its own tab.
+        if (phase === 'all') {
+          setPreview(parsed);
+          setToast(
+            `Read ${parsed.teams.length} department${
+              parsed.teams.length === 1 ? '' : 's'
+            } from ${parsed.sheetNames.length} tab${
+              parsed.sheetNames.length === 1 ? '' : 's'
+            }.`
+          );
+          return;
+        }
+
         // The workbook holds one tab per team lead. You import YOUR tab and
         // nothing else: everyone else's rows are dropped here, and the DB's
         // row-level security refuses them anyway if this gets past us.
@@ -395,7 +430,7 @@ export function OkrEditor() {
         setBusy(false);
       }
     },
-    [teamName, teamId]
+    [teamName, teamId, phase]
   );
 
   const applyImport = useCallback(async () => {
@@ -406,7 +441,7 @@ export function OkrEditor() {
       const results = await importParsedWorkbook(preview, teamsRef.current);
       setImportResults(results);
       // refresh the currently-open team from the DB so the editor reflects it
-      if (teamId) {
+      if (teamId && phase === 'edit') {
         try {
           const data = await fetchTeamOkr(teamId);
           setMeta(prev => ({ ...data.meta, owner: prev.owner }));
@@ -424,7 +459,9 @@ export function OkrEditor() {
       const ok = results.filter(r => r.outcome === 'imported').length;
       setToast(
         ok
-          ? `${teamName} pushed to the dashboard.`
+          ? phase === 'all'
+            ? `${ok} department${ok === 1 ? '' : 's'} pushed to the dashboard.`
+            : `${teamName} pushed to the dashboard.`
           : 'Nothing was imported - see the result below.'
       );
     } catch (e: any) {
@@ -432,7 +469,7 @@ export function OkrEditor() {
     } finally {
       setImporting(false);
     }
-  }, [preview, teamId, teamName]);
+  }, [preview, teamId, teamName, phase]);
 
   // auto-dismiss toast
   useEffect(() => {
@@ -526,6 +563,35 @@ export function OkrEditor() {
                   </button>
                 );
               })}
+
+              <div style={S.pickDivider}>
+                <span style={S.pickDividerText}>or</span>
+              </div>
+
+              <button
+                onClick={() => setPick(ALL_KEY)}
+                style={{
+                  ...S.pickItem,
+                  borderColor: pick === ALL_KEY ? T.accent : T.border,
+                  background: pick === ALL_KEY ? rgba('#f15a29', 0.08) : '#fff',
+                }}
+              >
+                <span
+                  style={{
+                    ...S.radio,
+                    borderColor: pick === ALL_KEY ? T.accent : T.sub,
+                  }}
+                >
+                  {pick === ALL_KEY ? <span style={S.radioDot} /> : null}
+                </span>
+                <span style={S.allDot}>◎</span>
+                <span>
+                  All departments
+                  <span style={{ ...S.allItemSub, color: T.sub }}>
+                    upload one workbook, update every team
+                  </span>
+                </span>
+              </button>
             </div>
 
             {error ? <div style={S.err}>{error}</div> : null}
@@ -544,6 +610,88 @@ export function OkrEditor() {
             </div>
           </div>
         </div>
+      ) : phase === 'all' ? (
+        <>
+          <div style={S.appbar}>
+            <div style={S.appbarLeft}>
+              <button
+                style={S.appMenu}
+                onClick={() => setPhase('pick')}
+                title="Change department"
+              >
+                ☰
+              </button>
+              <span style={S.appMark}>◎</span>
+              <span style={S.appTitle}>OKRs</span>
+            </div>
+          </div>
+
+          <div style={S.allWrap}>
+            <div style={S.allCard}>
+              <h1 style={S.allTitle}>All departments</h1>
+              <p style={{ ...S.pickSub, color: T.sub }}>
+                Upload one workbook holding every team&apos;s tab and push all{' '}
+                {OKR_TEAMS.length} departments in a single import. Each tab is
+                matched to its department by the <strong>Team</strong> column,
+                so tab order and tab names don&apos;t matter.
+              </p>
+
+              <ol style={S.allSteps}>
+                <li>
+                  Download the workbook - it comes filled with the
+                  dashboard&apos;s current numbers, one tab per department.
+                </li>
+                <li>
+                  Each lead fills in their own tab, or you collect the returned
+                  tabs into this one file.
+                </li>
+                <li>
+                  Upload it here and check the preview - every department that
+                  matched is listed with its objectives.
+                </li>
+                <li>
+                  Push to write them all to the dashboard at once. Progress
+                  stays driven by Current / Target.
+                </li>
+              </ol>
+
+              <div style={S.allNote}>
+                Writing departments other than your own needs an admin profile (
+                <code>profiles.is_admin = true</code>, migration 0002). Without
+                it the database accepts only your own department and the rest
+                come back as <em>skipped</em>.
+              </div>
+
+              {error ? <div style={S.err}>{error}</div> : null}
+
+              <div style={S.allActions}>
+                <button
+                  style={{ ...S.downloadBtn, opacity: busy ? 0.6 : 1 }}
+                  onClick={() => void onDownload()}
+                  disabled={busy}
+                  title="Download every department's tab, filled with the dashboard's current numbers"
+                >
+                  Download workbook
+                </button>
+                <button
+                  style={{ ...S.uploadBtn, opacity: busy ? 0.6 : 1 }}
+                  onClick={() => fileInput.current?.click()}
+                  disabled={busy}
+                  title="Upload the full workbook and import every department"
+                >
+                  Upload &amp; import all
+                </button>
+                <input
+                  ref={fileInput}
+                  type="file"
+                  accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                  style={{ display: 'none' }}
+                  onChange={e => void onPickFile(e)}
+                />
+              </div>
+            </div>
+          </div>
+        </>
       ) : (
         <>
           {/* top app bar */}
@@ -1777,6 +1925,80 @@ const S: Record<string, CSSProperties> = {
     borderRadius: 9,
     whiteSpace: 'nowrap',
     flexShrink: 0,
+  },
+  pickDivider: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '4px 0',
+  },
+  pickDividerText: {
+    fontSize: 12,
+    letterSpacing: 1,
+    textTransform: 'uppercase',
+    color: '#9aa3b2',
+    fontWeight: 700,
+  },
+  allDot: {
+    width: 10,
+    height: 10,
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 13,
+    color: '#f15a29',
+    flexShrink: 0,
+  },
+  allItemSub: {
+    display: 'block',
+    fontSize: 12,
+    fontWeight: 500,
+    marginTop: 2,
+  },
+  allWrap: {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: '32px 20px 60px',
+  },
+  allCard: {
+    width: '100%',
+    maxWidth: 760,
+    background: '#fff',
+    border: `1px solid ${T.border}`,
+    borderRadius: 16,
+    padding: 28,
+    boxShadow: '0 6px 26px rgba(20,24,34,.07)',
+  },
+  allTitle: {
+    margin: '0 0 6px',
+    fontSize: 24,
+    fontWeight: 800,
+  },
+  allSteps: {
+    margin: '18px 0 0',
+    paddingLeft: 20,
+    fontSize: 13.5,
+    lineHeight: 1.75,
+    color: T.text,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 4,
+  },
+  allNote: {
+    marginTop: 18,
+    padding: '12px 14px',
+    borderRadius: 10,
+    fontSize: 12.5,
+    lineHeight: 1.6,
+    color: '#7a5b12',
+    background: 'rgba(245,166,35,.12)',
+    border: '1px solid rgba(245,166,35,.4)',
+  },
+  allActions: {
+    display: 'flex',
+    gap: 12,
+    flexWrap: 'wrap',
+    marginTop: 22,
   },
   krBlock: {
     marginTop: 14,
