@@ -132,97 +132,65 @@ export const OKR_DEMO: SeedTeamOkr[] = [
     owner: 'Mateus Rocha',
     objectives: [
       {
-        title: 'Speed up value delivery',
+        title: 'Start to make BRIDGE the hub for Agile (MAGA)',
         keyResults: [
           kr(
-            'Reduce lead time for changes',
-            'days',
-            12,
-            4,
-            13,
-            'Trunk-based development + CI gates',
-            'Mateus Rocha'
-          ),
-          kr(
-            'Increase deployment frequency',
-            '/week',
-            2,
-            10,
-            8,
-            'Automate the release pipeline',
-            'Mateus Rocha'
-          ),
-          kr(
-            'Cut sprint carry-over',
-            '%',
-            40,
-            10,
-            18,
-            'WIP limits on every board',
-            'Mateus Rocha'
-          ),
-        ],
-      },
-      {
-        title: 'Reduce technical debt',
-        keyResults: [
-          kr(
-            'Raise unit-test coverage',
-            '%',
-            55,
-            85,
-            78,
-            'Coverage gate at 80%',
-            'Mateus Rocha'
-          ),
-          kr(
-            'Close critical code-smell issues',
+            'Build strategic partnerships',
             'count',
-            120,
-            20,
-            44,
-            'Weekly refactor day',
+            0,
+            2,
+            2,
+            'Finalize the agreement PMI & Management',
             'Mateus Rocha'
           ),
           kr(
-            'Reduce CI build time',
-            'min',
-            22,
-            8,
-            12,
-            'Cache + parallel jobs',
+            'Launch 1 new trainings',
+            'count',
+            0,
+            1,
+            1,
+            'CEO 4.0',
+            'Mateus Rocha'
+          ),
+          kr(
+            'Deliver Internal Hackathon',
+            'count',
+            0,
+            1,
+            1,
+            'Hackathon (Internal or External)',
             'Mateus Rocha'
           ),
         ],
       },
       {
-        title: 'Grow agile-culture adoption',
+        title: 'Accelerate the adoption of EDGE 3.0 across the organization.',
         keyResults: [
           kr(
-            'Teams running healthy retros',
-            '%',
-            40,
-            90,
-            74,
-            'Retro coaching program',
+            'Form 20 agile champions',
+            'count',
+            0,
+            20,
+            20,
+            'Delivery the Agile Champion Bootcamp',
             'Mateus Rocha'
           ),
           kr(
-            'Backlog refinement cadence met',
-            '%',
-            50,
-            95,
-            80,
-            'Refinement templates',
+            'Complete the EDGE 3.0 process pilot',
+            'count',
+            0,
+            1,
+            1,
+            'EDGE 3.0 Pilot',
             'Mateus Rocha'
           ),
           kr(
-            'Agile-maturity survey score',
-            '/5',
-            2.5,
-            4.5,
-            3.9,
-            'Quarterly maturity assessment',
+            'Approve jira from the cluster president',
+            'count',
+            0,
+            1,
+            1,
+            'EDGE 3.0 Pilot',
             'Mateus Rocha'
           ),
         ],

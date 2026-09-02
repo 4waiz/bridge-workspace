@@ -150,13 +150,18 @@ export function sheetRef(tab: string): string {
 }
 
 /**
- * Column K - KR progress. Deliberately the exact twin of krProgress() in
- * okr-seed-data.ts: Current / Target, clamped to 0..1. MEDIAN(0, x, 1) is the
- * shortest clamp in Excel; a zero Target divides by zero and IFERROR catches
- * it. If you change one of the two, change the other.
+ * Column K - KR progress: Current Value (J) / Target (I).
+ *
+ * Deliberately NOT clamped: a KR that beats its target must read 110% or 125%
+ * in the workbook rather than a flat 100%. Note this is looser than
+ * krProgress() in okr-seed-data.ts, which still clamps to 0..100 because the
+ * DB column and the dashboard rollup expect that range - so a KR above target
+ * shows >100% in Excel but 100% once imported.
+ *
+ * A zero Target divides by zero and IFERROR catches it.
  */
 export function progressFormula(row: number): string {
-  return `IFERROR(MEDIAN(0,J${row}/I${row},1),0)`;
+  return `IFERROR(J${row}/I${row},0)`;
 }
 
 /**

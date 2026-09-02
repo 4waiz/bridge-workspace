@@ -611,9 +611,17 @@ const S: Record<string, CSSProperties> = {
   },
   objTitle: {
     fontSize: 14,
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
+    // Objective titles run long ("Establish Advanced Technology Lab
+    // Demonstration, Innovation PoC, Usecases"). Wrap onto as many lines as
+    // it takes rather than clipping with an ellipsis - the board is read from
+    // across the room, so a hidden half-title is worse than a taller card.
+    // flex:1 + minWidth:0 lets the title shrink inside the flex row so the
+    // percentage on the right keeps its space.
+    flex: 1,
+    minWidth: 0,
+    whiteSpace: 'normal',
+    overflowWrap: 'break-word',
+    lineHeight: 1.3,
   },
   objPct: { fontSize: 14, fontWeight: 700, flexShrink: 0 },
   track: { height: 9, borderRadius: 5, overflow: 'hidden' },

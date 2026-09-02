@@ -10,10 +10,13 @@ import { useNavigate } from 'react-router-dom';
 
 import { OKR_EDITOR_ZOOM, usePageZoom } from '../../../utils/app-zoom';
 import {
+  buildLiveWorkbookBlob,
   clampProgress,
   CURRENT_QUARTER,
   CURRENT_YEAR,
+  derivedObjectiveProgress,
   editableFromParsed,
+  type EditableKeyResult,
   type EditableObjective,
   fetchTeamOkr,
   getMyTeamId,
@@ -32,7 +35,11 @@ import {
   type Team,
   type TeamImportResult,
 } from '../okr-dashboard/okr-data';
-import { demoForTeam, OKR_TEAMS } from '../okr-dashboard/okr-seed-data';
+import {
+  demoForTeam,
+  krProgress,
+  OKR_TEAMS,
+} from '../okr-dashboard/okr-seed-data';
 import type { ParsedWorkbook } from '../okr-dashboard/xlsx-lite';
 import { BusinessOpsPanel } from './business-ops-panel';
 
@@ -271,8 +278,37 @@ export function OkrEditor() {
     );
     setDirty(true);
   };
+  /**
+   * Edit one Key Result's numbers. The objective's progress is RECOMPUTED from
+   * its KRs here rather than typed, which is what keeps the dashboard and the
+   * workbook's =Current/Target formulas showing the same figure.
+   */
+  const patchKr = (
+    oi: number,
+    ki: number,
+    patch: Partial<EditableKeyResult>
+  ) => {
+    setObjectives(prev =>
+      prev.map((o, idx) => {
+        if (idx !== oi) return o;
+        const keyResults = o.keyResults.map((k, kidx) =>
+          kidx === ki ? { ...k, ...patch } : k
+        );
+        return {
+          ...o,
+          keyResults,
+          progress: derivedObjectiveProgress(keyResults) ?? o.progress,
+        };
+      })
+    );
+    setDirty(true);
+  };
+
   const addObj = () => {
-    setObjectives(prev => [...prev, { title: '', progress: 0 }]);
+    setObjectives(prev => [
+      ...prev,
+      { title: '', progress: 0, keyResults: [], initiatives: [] },
+    ]);
     setDirty(true);
   };
   const removeObj = (i: number) => {
@@ -285,10 +321,21 @@ export function OkrEditor() {
     setBusy(true);
     setError(null);
     try {
-      const blob = await getTemplateBlob();
-      triggerDownload(blob, 'bridge_xpi_okrs_template.xlsx');
+      // Export what is in the database right now, so the workbook mirrors the
+      // dashboard. Falls back to the shipped template if the DB is unreachable.
+      let blob: Blob;
+      let live = true;
+      try {
+        blob = await buildLiveWorkbookBlob();
+      } catch {
+        blob = await getTemplateBlob();
+        live = false;
+      }
+      triggerDownload(blob, 'bridge_xpi_okrs.xlsx');
       setToast(
-        `Template downloaded - fill in your own "${teamName}" tab, then Upload & import.`
+        live
+          ? `Downloaded with the dashboard's current numbers - your tab is "${teamName}".`
+          : `Template downloaded - fill in your own "${teamName}" tab, then Upload & import.`
       );
     } catch (e: any) {
       setError(e?.message ?? String(e));
@@ -778,6 +825,10 @@ export function OkrEditor() {
             {objectives.map((o, i) => {
               const st = statusFromProgress(o.progress);
               const c = STATUS_COLOR[st];
+              // Progress is derived (and therefore read-only) as soon as the
+              // objective has KRs carrying numbers. Objectives without them
+              // keep the old free slider.
+              const derived = derivedObjectiveProgress(o.keyResults) !== null;
               return (
                 <div key={i} style={S.objCard}>
                   <div style={S.objTopRow}>
@@ -838,12 +889,23 @@ export function OkrEditor() {
                           min={0}
                           max={100}
                           value={o.progress}
+                          disabled={derived}
+                          title={
+                            derived
+                              ? 'Calculated from the Key Results below - edit a Current Value instead'
+                              : undefined
+                          }
                           onChange={e =>
                             patchObj(i, {
                               progress: clampProgress(Number(e.target.value)),
                             })
                           }
-                          style={{ ['--okr-c' as string]: c } as CSSProperties}
+                          style={
+                            {
+                              ['--okr-c' as string]: c,
+                              cursor: derived ? 'not-allowed' : 'pointer',
+                            } as CSSProperties
+                          }
                         />
                       </div>
                       <div style={S.sliderEnds}>
@@ -857,6 +919,7 @@ export function OkrEditor() {
                         min={0}
                         max={100}
                         value={o.progress}
+                        readOnly={derived}
                         onChange={e =>
                           patchObj(i, {
                             progress: clampProgress(Number(e.target.value)),
@@ -877,6 +940,44 @@ export function OkrEditor() {
                       ● {STATUS_LABEL[st]}
                     </span>
                   </div>
+
+                  {o.keyResults.length ? (
+                    <div style={S.krBlock}>
+                      <div style={S.krHead}>
+                        KEY RESULTS
+                        <span style={S.krHint}>
+                          progress is calculated from Current / Target
+                        </span>
+                      </div>
+                      {o.keyResults.map((k, ki) => {
+                        const kp = krProgress(k);
+                        const kc = STATUS_COLOR[statusFromProgress(kp)];
+                        return (
+                          <div key={ki} style={S.krRow}>
+                            <span style={S.krDesc}>
+                              {k.description || `Key result ${ki + 1}`}
+                            </span>
+                            <input
+                              type="number"
+                              value={k.current}
+                              onChange={e =>
+                                patchKr(i, ki, {
+                                  current: Number(e.target.value),
+                                })
+                              }
+                              style={S.krInput}
+                              title="Current Value - this is what the Excel formula divides by Target"
+                            />
+                            <span style={S.krOf}>
+                              / {k.target}
+                              {k.unit ? ` ${k.unit}` : ''}
+                            </span>
+                            <span style={{ ...S.krPct, color: kc }}>{kp}%</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : null}
                 </div>
               );
             })}
@@ -1675,6 +1776,68 @@ const S: Record<string, CSSProperties> = {
     padding: '7px 12px',
     borderRadius: 9,
     whiteSpace: 'nowrap',
+    flexShrink: 0,
+  },
+  krBlock: {
+    marginTop: 14,
+    paddingTop: 12,
+    borderTop: `1px dashed ${T.border}`,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 8,
+  },
+  krHead: {
+    fontSize: 11,
+    fontWeight: 800,
+    letterSpacing: 1.2,
+    color: T.sub,
+    display: 'flex',
+    alignItems: 'baseline',
+    gap: 10,
+    flexWrap: 'wrap',
+  },
+  krHint: {
+    fontSize: 11.5,
+    fontWeight: 500,
+    letterSpacing: 0,
+    opacity: 0.75,
+  },
+  krRow: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 10,
+    fontSize: 13.5,
+  },
+  krDesc: {
+    flex: 1,
+    minWidth: 0,
+    whiteSpace: 'normal',
+    overflowWrap: 'break-word',
+    lineHeight: 1.35,
+  },
+  krInput: {
+    width: 72,
+    padding: '6px 8px',
+    borderRadius: 8,
+    border: `1px solid ${T.border}`,
+    background: T.card,
+    color: T.text,
+    fontSize: 13.5,
+    fontWeight: 700,
+    textAlign: 'right',
+    flexShrink: 0,
+  },
+  krOf: {
+    color: T.sub,
+    fontSize: 12.5,
+    minWidth: 78,
+    flexShrink: 0,
+  },
+  krPct: {
+    fontSize: 13.5,
+    fontWeight: 800,
+    width: 46,
+    textAlign: 'right',
     flexShrink: 0,
   },
   addBtn: {

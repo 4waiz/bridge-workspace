@@ -8,7 +8,12 @@
  * @bridgeflow/core cannot import the web app, so we read that shared singleton
  * here - one client, one auth session, app-wide.
  */
-import { OKR_DEMO, OKR_TEAMS } from './okr-seed-data';
+import {
+  objectiveProgress,
+  OKR_DEMO,
+  OKR_TEAMS,
+  type SeedTeamOkr,
+} from './okr-seed-data';
 import {
   buildOkrWorkbook,
   type ParsedObjective,
@@ -382,9 +387,66 @@ export interface OkrMeta {
   owner: string;
   focus_note: string;
 }
+export interface EditableKeyResult {
+  description: string;
+  unit: string;
+  baseline: number;
+  target: number;
+  current: number;
+}
 export interface EditableObjective {
   title: string;
   progress: number;
+  /**
+   * The KRs behind this objective. When any of them carries a Target, the
+   * objective's progress is DERIVED from them (mean of Current/Target) rather
+   * than typed - that is what keeps the dashboard and the Excel workbook
+   * showing the same number. Objectives with no numeric KRs keep whatever
+   * progress was stored, so data that predates migration 0003 is not wiped.
+   */
+  keyResults: EditableKeyResult[];
+  /** Initiative descriptions, positional - one per KR row in the workbook. */
+  initiatives: string[];
+}
+
+/**
+ * Recover the numbers from a legacy `target_text` such as
+ * "Target 20 count · now 8 count (baseline 0 count)".
+ * Used only against a DB that has not run migration 0003 yet.
+ */
+export function parseTargetText(text: string | null): {
+  unit: string;
+  baseline: number;
+  target: number;
+  current: number;
+} {
+  const t = text ?? '';
+  const num = (re: RegExp): number => {
+    const m = re.exec(t);
+    return m ? Number(m[1]) : 0;
+  };
+  const unitMatch = /Target\s+-?[\d.]+\s*([^·(]*)/.exec(t);
+  return {
+    unit: (unitMatch?.[1] ?? '').trim(),
+    target: num(/Target\s+(-?[\d.]+)/),
+    current: num(/now\s+(-?[\d.]+)/),
+    baseline: num(/baseline\s+(-?[\d.]+)/),
+  };
+}
+
+/** Objective progress from its KRs (mean of Current/Target), or null. */
+export function derivedObjectiveProgress(
+  krs: { target: number; current: number }[]
+): number | null {
+  const scored = krs.filter(k => k.target !== 0 || k.current !== 0);
+  if (!scored.length) return null;
+  return objectiveProgress({
+    keyResults: scored.map(k => ({
+      baseline: 0,
+      target: k.target,
+      current: k.current,
+    })),
+  });
 }
 
 /** Load a team's current-period OKR + objectives for the editor. */
@@ -414,17 +476,79 @@ export async function fetchTeamOkr(
   if (okr) {
     const objRes = await sb
       .from('objectives')
-      .select('title,progress,position')
+      .select('id,title,progress,position')
       .eq('okr_id', okr.id)
       .order('position');
     if (objRes.error) throw objRes.error;
-    objectives = (objRes.data ?? []).map((o: any) => ({
-      title: o.title ?? '',
-      progress: clampProgress(Number(o.progress)),
-    }));
+    const objRows = objRes.data ?? [];
+
+    // Pull the KR numbers. A DB that has not run migration 0003 has no
+    // unit/baseline/target/current columns, so fall back to the old
+    // target_text and recover the numbers from it.
+    const ids = objRows.map((o: any) => o.id);
+    const byObjective = new Map<string, EditableKeyResult[]>();
+    if (ids.length) {
+      let rows: any[] = [];
+      const full = await sb
+        .from('key_results')
+        .select(
+          'objective_id,description,unit,baseline,target,current,position'
+        )
+        .in('objective_id', ids)
+        .order('position');
+      if (full.error) {
+        const legacy = await sb
+          .from('key_results')
+          .select('objective_id,description,target_text,position')
+          .in('objective_id', ids)
+          .order('position');
+        rows = (legacy.data ?? []).map((k: any) => ({
+          ...k,
+          ...parseTargetText(k.target_text),
+        }));
+      } else {
+        rows = full.data ?? [];
+      }
+      for (const k of rows) {
+        const list = byObjective.get(k.objective_id) ?? [];
+        list.push({
+          description: k.description ?? '',
+          unit: k.unit ?? '',
+          baseline: Number(k.baseline ?? 0),
+          target: Number(k.target ?? 0),
+          current: Number(k.current ?? 0),
+        });
+        byObjective.set(k.objective_id, list);
+      }
+    }
+
+    const initByObjective = new Map<string, string[]>();
+    if (ids.length) {
+      const initRes = await sb
+        .from('initiatives')
+        .select('objective_id,description,position')
+        .in('objective_id', ids)
+        .order('position');
+      for (const it of initRes.data ?? []) {
+        const list = initByObjective.get(it.objective_id) ?? [];
+        list.push(it.description ?? '');
+        initByObjective.set(it.objective_id, list);
+      }
+    }
+
+    objectives = objRows.map((o: any) => {
+      const keyResults = byObjective.get(o.id) ?? [];
+      const derived = derivedObjectiveProgress(keyResults);
+      return {
+        title: o.title ?? '',
+        progress: derived ?? clampProgress(Number(o.progress)),
+        keyResults,
+        initiatives: initByObjective.get(o.id) ?? [],
+      };
+    });
   }
   if (!objectives.length) {
-    objectives = [{ title: '', progress: 0 }];
+    objectives = [{ title: '', progress: 0, keyResults: [], initiatives: [] }];
   }
   return { meta, objectives };
 }
@@ -605,6 +729,68 @@ export async function getTemplateBlob(): Promise<Blob> {
   return buildTemplateBlob();
 }
 
+/**
+ * Build the workbook from what is CURRENTLY in the database, so a download
+ * mirrors the live dashboard instead of the seed data frozen at build time.
+ * This is the other half of the round trip: the editor writes KR numbers to
+ * Postgres, and these numbers come straight back out into the Excel cells that
+ * the =Current/Target formulas read.
+ *
+ * A team with nothing stored yet falls back to its seed content rather than
+ * exporting an empty tab.
+ */
+export async function buildLiveWorkbookBlob(): Promise<Blob> {
+  const dbTeams = await getTeams().catch(() => [] as Team[]);
+  const live: SeedTeamOkr[] = [];
+
+  for (const team of OKR_TEAMS) {
+    const seed = OKR_DEMO.find(d => d.key === team.key);
+    const db = dbTeams.find(t => t.key === team.key);
+    let objectives: EditableObjective[] = [];
+    let owner = '';
+
+    if (db) {
+      try {
+        const data = await fetchTeamOkr(db.id);
+        objectives = data.objectives.filter(o => o.title.trim().length > 0);
+        owner = data.meta.owner ?? '';
+      } catch {
+        /* fall through to the seed copy */
+      }
+    }
+
+    // Nothing usable stored for this team - keep the seed tab.
+    const hasNumbers = objectives.some(o =>
+      o.keyResults.some(k => k.target !== 0 || k.current !== 0)
+    );
+    if (!hasNumbers) {
+      if (seed) live.push(seed);
+      continue;
+    }
+
+    const teamOwner = owner || seed?.owner || '';
+    live.push({
+      key: team.key,
+      owner: teamOwner,
+      objectives: objectives.map(o => ({
+        title: o.title,
+        keyResults: o.keyResults.map((k, i) => ({
+          description: k.description,
+          unit: k.unit,
+          baseline: k.baseline,
+          target: k.target,
+          current: k.current,
+          initiative: o.initiatives[i] ?? o.initiatives[0] ?? '',
+          owner: teamOwner,
+        })),
+      })),
+    });
+  }
+
+  const bytes = await buildOkrWorkbook(live, OKR_TEAMS);
+  return new Blob([bytes as unknown as BlobPart], { type: XLSX_MIME });
+}
+
 /** Upload the current demo template to Supabase Storage (admin helper). */
 export async function uploadTemplateToStorage(): Promise<void> {
   const sb = getSupabase();
@@ -672,6 +858,10 @@ export function matchTeam(excelName: string, dbTeams: Team[]): Team | null {
 export interface FullKeyResult {
   description: string;
   target_text: string;
+  unit: string;
+  baseline: number;
+  target: number;
+  current: number;
 }
 export interface FullInitiative {
   description: string;
@@ -713,6 +903,10 @@ export function parsedToFullObjective(obj: ParsedObjective): FullObjective {
       .map(kr => ({
         description: kr.description,
         target_text: targetText(kr),
+        unit: kr.unit,
+        baseline: kr.baseline,
+        target: kr.target,
+        current: kr.current,
       })),
     initiatives,
   };
@@ -784,6 +978,10 @@ export async function saveFullOkr(
         position: ki + 1,
         description: kr.description,
         target_text: kr.target_text,
+        unit: kr.unit ?? '',
+        baseline: kr.baseline ?? 0,
+        target: kr.target ?? 0,
+        current: kr.current ?? 0,
       });
     });
     o.initiatives.forEach((it, ii) => {
@@ -880,5 +1078,13 @@ export function editableFromParsed(
   return pt.objectives.map(o => ({
     title: o.title || `Objective ${o.number}`,
     progress: clampProgress(o.progress),
+    keyResults: o.keyResults.map(k => ({
+      description: k.description,
+      unit: k.unit,
+      baseline: k.baseline,
+      target: k.target,
+      current: k.current,
+    })),
+    initiatives: o.keyResults.map(k => k.initiative),
   }));
 }

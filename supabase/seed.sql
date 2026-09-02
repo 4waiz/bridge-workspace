@@ -64,97 +64,61 @@ declare
     "owner": "Mateus Rocha",
     "objectives": [
       {
-        "title": "Speed up value delivery",
-        "progress": 93,
+        "title": "Start to make BRIDGE the hub for Agile (MAGA)",
+        "progress": 100,
         "key_results": [
           {
-            "description": "Reduce lead time for changes",
-            "target_text": "Target 4 days · now 13 days (baseline 12 days)"
+            "description": "Build strategic partnerships",
+            "target_text": "Target 2 count · now 2 count (baseline 0 count)"
           },
           {
-            "description": "Increase deployment frequency",
-            "target_text": "Target 10 /week · now 8 /week (baseline 2 /week)"
+            "description": "Launch 1 new trainings",
+            "target_text": "Target 1 count · now 1 count (baseline 0 count)"
           },
           {
-            "description": "Cut sprint carry-over",
-            "target_text": "Target 10 % · now 18 % (baseline 40 %)"
+            "description": "Deliver Internal Hackathon",
+            "target_text": "Target 1 count · now 1 count (baseline 0 count)"
           }
         ],
         "initiatives": [
           {
-            "description": "Trunk-based development + CI gates",
+            "description": "Finalize the agreement PMI & Management",
             "owner": "Mateus Rocha"
           },
           {
-            "description": "Automate the release pipeline",
+            "description": "CEO 4.0",
             "owner": "Mateus Rocha"
           },
           {
-            "description": "WIP limits on every board",
+            "description": "Hackathon (Internal or External)",
             "owner": "Mateus Rocha"
           }
         ]
       },
       {
-        "title": "Reduce technical debt",
-        "progress": 97,
+        "title": "Accelerate the adoption of EDGE 3.0 across the organization.",
+        "progress": 100,
         "key_results": [
           {
-            "description": "Raise unit-test coverage",
-            "target_text": "Target 85 % · now 78 % (baseline 55 %)"
+            "description": "Form 20 agile champions",
+            "target_text": "Target 20 count · now 20 count (baseline 0 count)"
           },
           {
-            "description": "Close critical code-smell issues",
-            "target_text": "Target 20 count · now 44 count (baseline 120 count)"
+            "description": "Complete the EDGE 3.0 process pilot",
+            "target_text": "Target 1 count · now 1 count (baseline 0 count)"
           },
           {
-            "description": "Reduce CI build time",
-            "target_text": "Target 8 min · now 12 min (baseline 22 min)"
+            "description": "Approve jira from the cluster president",
+            "target_text": "Target 1 count · now 1 count (baseline 0 count)"
           }
         ],
         "initiatives": [
           {
-            "description": "Coverage gate at 80%",
+            "description": "Delivery the Agile Champion Bootcamp",
             "owner": "Mateus Rocha"
           },
           {
-            "description": "Weekly refactor day",
-            "owner": "Mateus Rocha"
-          },
-          {
-            "description": "Cache + parallel jobs",
-            "owner": "Mateus Rocha"
-          }
-        ]
-      },
-      {
-        "title": "Grow agile-culture adoption",
-        "progress": 84,
-        "key_results": [
-          {
-            "description": "Teams running healthy retros",
-            "target_text": "Target 90 % · now 74 % (baseline 40 %)"
-          },
-          {
-            "description": "Backlog refinement cadence met",
-            "target_text": "Target 95 % · now 80 % (baseline 50 %)"
-          },
-          {
-            "description": "Agile-maturity survey score",
-            "target_text": "Target 4.5 /5 · now 3.9 /5 (baseline 2.5 /5)"
-          }
-        ],
-        "initiatives": [
-          {
-            "description": "Retro coaching program",
-            "owner": "Mateus Rocha"
-          },
-          {
-            "description": "Refinement templates",
-            "owner": "Mateus Rocha"
-          },
-          {
-            "description": "Quarterly maturity assessment",
+            "description": "EDGE 3.0 Pilot",
             "owner": "Mateus Rocha"
           }
         ]
