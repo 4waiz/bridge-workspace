@@ -7,7 +7,7 @@ import {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { OKR_DASHBOARD_ZOOM, usePageZoom } from '../../../utils/app-zoom';
+import { OKR_DASHBOARD_ZOOM, useFitPageZoom } from '../../../utils/app-zoom';
 import { BusinessOpsOverlay } from './business-ops-overlay';
 import {
   CURRENT_QUARTER,
@@ -320,6 +320,7 @@ export function OkrDashboard() {
   const [error, setError] = useState<string | null>(null);
   const [updatedAt, setUpdatedAt] = useState<Date | null>(null);
   const debounce = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   const load = useCallback(async () => {
     try {
@@ -358,7 +359,10 @@ export function OkrDashboard() {
 
   // The dashboard is a dense, full-viewport view - it carries its own scale so
   // 100% browser zoom shows the whole board at once. Restored on close.
-  usePageZoom(OKR_DASHBOARD_ZOOM);
+  // The scale is a starting point, not a fixed value: the board shrinks from
+  // here until every card fits, because on a wall-mounted screen anything below
+  // the fold is never seen. Re-runs whenever the data changes.
+  useFitPageZoom(OKR_DASHBOARD_ZOOM, rootRef, model);
 
   const openObjective = useCallback(
     (id: string) => navigate(`/okr-objective/${id}`),
@@ -379,7 +383,7 @@ export function OkrDashboard() {
     .slice(0, 5);
 
   return (
-    <div style={{ ...S.root, background: T.bg, color: T.text }}>
+    <div ref={rootRef} style={{ ...S.root, background: T.bg, color: T.text }}>
       <BusinessOpsOverlay />
 
       <button style={S.close} onClick={() => navigate(-1)} title="Close (Esc)">
