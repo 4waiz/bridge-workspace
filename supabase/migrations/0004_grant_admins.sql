@@ -23,7 +23,8 @@ select
 from auth.users u
 where lower(u.email) in (
   'dana.alteneiji@edgegroup.ae',
-  'sohel.shaikh@edgegroup.ae'
+  'sohel.shaikh@edgegroup.ae',
+  'mateus.rocha@edgegroup.ae'
 )
 on conflict (id) do update set is_admin = true;
 

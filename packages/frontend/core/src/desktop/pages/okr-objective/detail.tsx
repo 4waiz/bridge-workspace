@@ -4,6 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { OKR_OBJECTIVE_ZOOM, usePageZoom } from '../../../utils/app-zoom';
 import {
   fetchObjectiveDetail,
+  type KeyResult,
+  krNumbers,
   type ObjectiveDetail,
   STATUS_COLOR,
   STATUS_DESC,
@@ -26,6 +28,47 @@ function rgba(hex: string, a: number): string {
 }
 
 const clamp = (n: number) => Math.max(0, Math.min(100, Math.round(n)));
+
+/**
+ * A Key Result's progress drawn as a bar, matching the objective rows above.
+ * Percentage is Current / Target - the same figure the Excel workbook computes
+ * with =Current/Target - so target 2 / current 1 reads 50%.
+ *
+ * The number is NOT capped, so beating a target reads 125%; only the bar's
+ * width is clamped, since it cannot draw past its track.
+ */
+function KrBar({ kr }: { kr: KeyResult }) {
+  const n = krNumbers(kr);
+  if (!n.target && !n.current) return null;
+
+  const raw = n.target ? (n.current / n.target) * 100 : n.current > 0 ? 100 : 0;
+  const pct = Math.round(raw);
+  const c = STATUS_COLOR[statusFromProgress(clamp(raw))];
+  const unit = n.unit ? ` ${n.unit}` : '';
+
+  return (
+    <div style={{ marginTop: 12 }}>
+      <div style={S.objTop}>
+        <span style={{ fontSize: 12.5, color: T.sub }}>
+          {n.current} / {n.target}
+          {unit}
+        </span>
+        <span style={{ fontWeight: 800, color: c }}>{pct}%</span>
+      </div>
+      <div style={{ ...S.track, background: T.track }}>
+        <div
+          style={{
+            width: `${clamp(raw)}%`,
+            height: '100%',
+            borderRadius: 5,
+            background: c,
+            boxShadow: `0 0 8px ${rgba(c, 0.5)}`,
+          }}
+        />
+      </div>
+    </div>
+  );
+}
 
 // ---- radial gauge ---------------------------------------------------------
 function Gauge({ value, color }: { value: number; color: string }) {
@@ -259,17 +302,7 @@ export function OkrObjectiveDetail() {
                     }}
                   >
                     <div style={{ fontSize: 14 }}>{kr.description}</div>
-                    {kr.target_text ? (
-                      <div
-                        style={{
-                          marginTop: 10,
-                          fontWeight: 800,
-                          color: accent,
-                        }}
-                      >
-                        {kr.target_text}
-                      </div>
-                    ) : null}
+                    <KrBar kr={kr} />
                   </div>
                 ))}
               </div>

@@ -561,6 +561,35 @@ export interface KeyResult {
   position: number;
   description: string | null;
   target_text: string | null;
+  // Added by migration 0003. Optional because a database that has not run it
+  // yet returns rows without these columns.
+  unit?: string | null;
+  baseline?: number | null;
+  target?: number | null;
+  current?: number | null;
+}
+
+/**
+ * The four numbers behind a Key Result. Prefers the real columns from
+ * migration 0003 and falls back to parsing the legacy rendered `target_text`,
+ * so the UI shows a real bar either way.
+ */
+export function krNumbers(kr: {
+  target_text: string | null;
+  unit?: string | null;
+  baseline?: number | null;
+  target?: number | null;
+  current?: number | null;
+}): { unit: string; baseline: number; target: number; current: number } {
+  if (kr.target != null || kr.current != null) {
+    return {
+      unit: kr.unit ?? '',
+      baseline: Number(kr.baseline ?? 0),
+      target: Number(kr.target ?? 0),
+      current: Number(kr.current ?? 0),
+    };
+  }
+  return parseTargetText(kr.target_text);
 }
 export interface Initiative {
   id: string;
