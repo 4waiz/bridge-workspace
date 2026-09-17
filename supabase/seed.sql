@@ -4,7 +4,7 @@
 -- hand-edit; change the TS source and re-run the script.
 -- Run AFTER 0001_okr_dashboard.sql and 0002_okr_import_admin.sql. Idempotent.
 -- Progress here = mean of each objective's KR progress. Live status is derived
--- app-side from fixed bands (50%+ On Track, 20-49% At Risk, below 20% Off
+-- app-side from fixed bands (50%+ On Track, 10-49% At Risk, below 10% Off
 -- Track), so the stored progress below is the only source of truth; status is
 -- computed on read.
 -- =====================================================================

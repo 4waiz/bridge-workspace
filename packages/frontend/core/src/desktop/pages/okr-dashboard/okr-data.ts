@@ -128,8 +128,8 @@ export function quarterExpectedPct(
  * Status is a fixed band on progress (ON_TRACK_FROM / AT_RISK_FROM in
  * okr-seed-data.ts, shared with the Excel Status formulas):
  *   - 50% and up  → On Track
- *   - 20% to 49%  → At Risk
- *   - below 20%   → Off Track
+ *   - 10% to 49%  → At Risk
+ *   - below 10%   → Off Track
  * It used to be judged against quarter pace, which turned nearly the whole
  * board red late in a quarter - by mid-September anything under 61% read Off
  * Track. Pace is still shown on the dashboard, but only as its own figure.

@@ -116,7 +116,7 @@ export function objectiveProgress(obj: {
  *   below AT_RISK_FROM          -> Off Track (red)
  */
 export const ON_TRACK_FROM = 50;
-export const AT_RISK_FROM = 20;
+export const AT_RISK_FROM = 10;
 
 // short helper so the data table stays readable
 const kr = (
