@@ -19,12 +19,14 @@ import { fileURLToPath } from 'node:url';
 import JSZip from 'jszip';
 
 import {
+  AT_RISK_FROM,
   objectiveProgress,
   OKR_DEMO,
   OKR_QUARTER,
   OKR_QUARTER_LABEL,
   OKR_TEAMS,
   OKR_YEAR,
+  ON_TRACK_FROM,
   type SeedTeam,
   type SeedTeamOkr,
 } from '../packages/frontend/core/src/desktop/pages/okr-dashboard/okr-seed-data';
@@ -241,7 +243,7 @@ function dashboardSheet(demo: SeedTeamOkr[], teams: SeedTeam[]): string {
     rows.push(
       row(
         first + i,
-        dashboardValues(team, rowCount),
+        dashboardValues(team, rowCount, first + i),
         teamStyles,
         ' ht="30" customHeight="1"'
       )
@@ -450,8 +452,9 @@ function buildSeedSql(): string {
 -- hand-edit; change the TS source and re-run the script.
 -- Run AFTER 0001_okr_dashboard.sql and 0002_okr_import_admin.sql. Idempotent.
 -- Progress here = mean of each objective's KR progress. Live status is derived
--- app-side and is PACE-based (progress vs quarter elapsed), so the stored
--- progress below is the only source of truth; status is computed on read.
+-- app-side from fixed bands (${ON_TRACK_FROM}%+ On Track, ${AT_RISK_FROM}-${ON_TRACK_FROM - 1}% At Risk, below ${AT_RISK_FROM}% Off
+-- Track), so the stored progress below is the only source of truth; status is
+-- computed on read.
 -- =====================================================================
 
 -- ---------- The 7 BRIDGE XPI teams (matches bridge_xpi_okrs.xlsx) -----

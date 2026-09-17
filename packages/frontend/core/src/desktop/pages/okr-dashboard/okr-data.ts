@@ -9,9 +9,11 @@
  * here - one client, one auth session, app-wide.
  */
 import {
+  AT_RISK_FROM,
   objectiveProgress,
   OKR_DEMO,
   OKR_TEAMS,
+  ON_TRACK_FROM,
   type SeedTeamOkr,
 } from './okr-seed-data';
 import {
@@ -105,8 +107,8 @@ export const STATUS_DESC: Record<Status, string> = {
 /**
  * Fraction (0..100) of the current quarter that has elapsed - i.e. where a
  * team "should" be if they progressed linearly. Month 1 ≈ 33%, month 2 ≈ 66%,
- * end of quarter ≈ 100%. This is the pace benchmark that status is judged
- * against, so early in the quarter the bar is low and late it is high.
+ * end of quarter ≈ 100%. Feeds the dashboard's PACE VS PLAN figures only;
+ * status does not depend on it (see statusFromProgress).
  */
 export function quarterExpectedPct(
   quarter: string = CURRENT_QUARTER,
@@ -122,43 +124,37 @@ export function quarterExpectedPct(
   return Math.max(0, Math.min(100, Math.round(frac * 100)));
 }
 
-/** How far behind pace (in progress points) still counts as "at risk". */
-export const PACE_AT_RISK_BAND = 25;
-
 /**
- * Status is PACE-BASED, not a fixed threshold: compare actual progress against
- * how far into the quarter we are (`expected`).
- *   - on or ahead of pace (incl. target met/exceeded) → On Track
- *   - up to PACE_AT_RISK_BAND points behind pace       → At Risk
- *   - further behind                                   → Off Track
- * So 33% in month 1 is On Track, but 90% in the last month (expected ~100%)
- * is At Risk. Defaults `expected` to the live quarter pace.
+ * Status is a fixed band on progress (ON_TRACK_FROM / AT_RISK_FROM in
+ * okr-seed-data.ts, shared with the Excel Status formulas):
+ *   - 50% and up  → On Track
+ *   - 20% to 49%  → At Risk
+ *   - below 20%   → Off Track
+ * It used to be judged against quarter pace, which turned nearly the whole
+ * board red late in a quarter - by mid-September anything under 61% read Off
+ * Track. Pace is still shown on the dashboard, but only as its own figure.
+ *
+ * Rounded first so the colour always agrees with the whole-number percentage
+ * printed beside it (49.6 is shown as 50%, so it is green).
  */
-export function statusFromProgress(
-  progress: number,
-  expected: number = quarterExpectedPct()
-): Status {
-  if (progress >= expected) return 'on_track';
-  if (progress >= expected - PACE_AT_RISK_BAND) return 'at_risk';
+export function statusFromProgress(progress: number): Status {
+  const p = Math.round(progress);
+  if (p >= ON_TRACK_FROM) return 'on_track';
+  if (p >= AT_RISK_FROM) return 'at_risk';
   return 'off_track';
 }
 
 /**
- * Team-level status. Starts from the average-progress status, then downgrades:
- * a team shouldn't read "On Track" when 2 or more of its objectives are at risk
- * (or worse) - the healthy average hides the shaky ones, so surface it.
+ * Team-level status: the band of the team's average progress, i.e. the same
+ * percentage its badge prints. There is deliberately no downgrade for weak
+ * objectives - a badge reading "At Risk · 55%" contradicts its own number, and
+ * each objective's bar already carries its own colour.
  */
 export function rollupStatus(progresses: number[]): Status {
   if (progresses.length === 0) return 'on_track';
-  const avg = Math.round(
+  return statusFromProgress(
     progresses.reduce((s, p) => s + p, 0) / progresses.length
   );
-  let status = statusFromProgress(avg);
-  const risky = progresses.filter(
-    p => statusFromProgress(p) !== 'on_track'
-  ).length;
-  if (risky >= 2 && status === 'on_track') status = 'at_risk';
-  return status;
 }
 
 export function clampProgress(n: number): number {

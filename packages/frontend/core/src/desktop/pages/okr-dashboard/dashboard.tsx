@@ -83,17 +83,18 @@ function Badge({ status, progress }: { status: Status; progress: number }) {
   );
 }
 
-// ---- one objective row (bar coloured by the TEAM status, per the mockup) --
+// ---- one objective row ----------------------------------------------------
+// The bar takes the colour of its OWN progress, not the team's: a 90% objective
+// on a team averaging 40% is still green.
 function ObjectiveRow({
   obj,
-  color,
   onOpen,
 }: {
   obj: Objective;
-  color: string;
   onOpen: (id: string) => void;
 }) {
   const pct = Math.max(0, Math.min(100, Math.round(obj.progress ?? 0)));
+  const color = STATUS_COLOR[statusFromProgress(pct)];
   return (
     <button
       type="button"
@@ -130,7 +131,6 @@ function TeamCard({
   onOpen: (id: string) => void;
 }) {
   const { team, objectives, progress, status, owner } = rollup;
-  const color = STATUS_COLOR[status];
   return (
     <div style={{ ...S.card, borderColor: T.border }}>
       <div style={S.cardHead}>
@@ -140,9 +140,7 @@ function TeamCard({
         ) : null}
       </div>
       {objectives.length ? (
-        objectives.map(o => (
-          <ObjectiveRow key={o.id} obj={o} color={color} onOpen={onOpen} />
-        ))
+        objectives.map(o => <ObjectiveRow key={o.id} obj={o} onOpen={onOpen} />)
       ) : (
         <div style={S.emptyCard}>
           No objectives yet - edit this team&apos;s OKR.
@@ -231,9 +229,9 @@ function PaceBar({
 }
 
 /**
- * Overall progress against how far into the quarter we actually are. Status on
- * this board is pace-based, so this is the number that explains every badge:
- * 63% reads as On Track in month one and At Risk in month three.
+ * Overall progress against how far into the quarter we actually are. Context
+ * only - it does not set any status. The headline takes the colour of overall
+ * progress, like every other number on the board.
  */
 function PaceCard({
   overall,
@@ -244,7 +242,7 @@ function PaceCard({
 }) {
   const delta = overall - expected;
   const ahead = delta >= 0;
-  const color = STATUS_COLOR[statusFromProgress(overall, expected)];
+  const color = STATUS_COLOR[statusFromProgress(overall)];
   return (
     <div style={{ ...S.card, borderColor: T.border }}>
       <div style={{ ...S.overviewTitle, color: T.sub }}>PACE VS PLAN</div>
@@ -262,19 +260,20 @@ function PaceCard({
 }
 
 // ---- needs attention ------------------------------------------------------
-type Behind = { obj: Objective; team: Team; value: number };
+type Attention = { obj: Objective; team: Team; value: number };
 
 /**
- * The objectives furthest behind pace, worst first. Everything here is already
- * on the board somewhere, but spread across seven cards - this is the one place
- * that answers "what do we talk about first" without scanning all of them.
+ * The objectives that are not On Track, lowest progress first. Everything here
+ * is already on the board somewhere, but spread across seven cards - this is
+ * the one place that answers "what do we talk about first" without scanning
+ * all of them.
  */
 function AttentionCard({
   items,
   expected,
   onOpen,
 }: {
-  items: Behind[];
+  items: Attention[];
   expected: number;
   onOpen: (id: string) => void;
 }) {
@@ -283,7 +282,10 @@ function AttentionCard({
       <div style={{ ...S.overviewTitle, color: T.sub }}>NEEDS ATTENTION</div>
       {items.length ? (
         items.map(({ obj, team, value }) => {
-          const c = STATUS_COLOR[statusFromProgress(value, expected)];
+          const c = STATUS_COLOR[statusFromProgress(value)];
+          // Early in a quarter an objective can be below On Track and still
+          // on pace - say so rather than printing a negative gap.
+          const gap = expected - value;
           return (
             <button
               key={obj.id}
@@ -299,14 +301,14 @@ function AttentionCard({
                 <span style={{ ...S.objPct, color: c }}>{value}%</span>
               </div>
               <div style={{ ...S.attnTeam, color: T.sub }}>
-                {team.name} · {expected - value} pts behind
+                {team.name} · {gap > 0 ? `${gap} pts behind` : 'on pace'}
               </div>
             </button>
           );
         })
       ) : (
         <div style={S.emptyCard}>
-          Every objective is on or ahead of pace for {CURRENT_QUARTER}.
+          Every objective is on track for {CURRENT_QUARTER}.
         </div>
       )}
     </div>
@@ -371,14 +373,14 @@ export function OkrDashboard() {
 
   const counts = model?.counts ?? { on_track: 0, at_risk: 0, off_track: 0 };
 
-  // Pace benchmark for the live quarter, and the objectives trailing it worst.
-  // Recomputed on every render so the board stays honest as the quarter runs on
-  // - it re-renders whenever the realtime subscription fires.
+  // Pace benchmark for the live quarter, and the weakest objectives that are
+  // not On Track. Recomputed on every render so the pace figures stay honest as
+  // the quarter runs on - it re-renders whenever the realtime subscription fires.
   const expected = quarterExpectedPct();
-  const behind: Behind[] = (model?.teams ?? [])
+  const attention: Attention[] = (model?.teams ?? [])
     .flatMap(r => r.objectives.map(obj => ({ obj, team: r.team })))
     .map(x => ({ ...x, value: pct(x.obj.progress) }))
-    .filter(x => x.value < expected)
+    .filter(x => statusFromProgress(x.value) !== 'on_track')
     .sort((a, b) => a.value - b.value)
     .slice(0, 5);
 
@@ -490,7 +492,7 @@ export function OkrDashboard() {
 
           <PaceCard overall={model.overall} expected={expected} />
           <AttentionCard
-            items={behind}
+            items={attention}
             expected={expected}
             onOpen={openObjective}
           />

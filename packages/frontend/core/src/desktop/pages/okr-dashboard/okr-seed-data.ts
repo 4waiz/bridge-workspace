@@ -107,6 +107,17 @@ export function objectiveProgress(obj: {
   return Math.round(sum / obj.keyResults.length);
 }
 
+/**
+ * Status bands, in progress %. The one place the red / yellow / green cut-offs
+ * live: the app's statusFromProgress() and the Excel Status formulas are both
+ * built from these, so a number reads the same colour everywhere.
+ *   ON_TRACK_FROM and up        -> On Track  (green)
+ *   AT_RISK_FROM up to that     -> At Risk   (yellow)
+ *   below AT_RISK_FROM          -> Off Track (red)
+ */
+export const ON_TRACK_FROM = 50;
+export const AT_RISK_FROM = 20;
+
 // short helper so the data table stays readable
 const kr = (
   description: string,
