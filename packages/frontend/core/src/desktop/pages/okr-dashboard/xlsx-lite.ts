@@ -17,12 +17,10 @@
 import JSZip from 'jszip';
 
 import {
-  AT_RISK_FROM,
   krProgress,
   objectiveProgress,
   OKR_QUARTER_LABEL,
   OKR_TEAMS,
-  ON_TRACK_FROM,
   type SeedTeam,
   type SeedTeamOkr,
   teamForTab,
@@ -167,49 +165,25 @@ export function progressFormula(row: number): string {
 }
 
 /**
- * The status band of a progress cell holding a fraction (0.5 = 50%) - the
- * Excel twin of statusFromProgress() in okr-data.ts, built from the same
- * ON_TRACK_FROM / AT_RISK_FROM. Rounded to whole percent first, exactly as the
- * "0%" cell format displays it, so a cell showing 50% never reads At Risk.
+ * Column L - KR status. Off Track when the KR has not been measured yet, or
+ * when Current has moved the wrong way from Baseline; otherwise On Track.
  */
-export function statusOf(cell: string): string {
-  const p = `ROUND(${cell},2)`;
-  return `IF(${p}>=${ON_TRACK_FROM / 100},"On Track",IF(${p}>=${AT_RISK_FROM / 100},"At Risk","Off Track"))`;
-}
-
-/** Column L - KR status: the band of this row's Progress (%). */
 export function statusFormula(row: number): string {
-  return statusOf(`K${row}`);
+  return `IF(OR(AND(J${row}=0,I${row}<>0),(J${row}-H${row})*(I${row}-H${row})<0),"Off Track","On Track")`;
 }
 
-/**
- * The Dashboard's rollup formulas for one team's tab (rows `first`..`last`).
- *
- * These mirror the app rather than averaging column K directly, so the tab
- * agrees with the wall board: each KR is capped to 0..100% (K itself is not,
- * so over-target KRs can read 125% on the team tab), an objective is the mean
- * of its KRs, and the team is the mean of its objectives - an objective with
- * one KR weighs as much as one with three. A plain AVERAGE of K let a single
- * 240% KR lift Industry 5.0 from 47% to 63%.
- */
+/** The Dashboard's rollup formulas for one team's tab (rows `first`..`last`). */
 export function dashboardFormulas(tab: string, first: number, last: number) {
   const ref = sheetRef(tab);
+  const L = `${ref}$L$${first}:$L$${last}`;
   const K = `${ref}$K$${first}:$K$${last}`;
   const C = `${ref}$C$${first}:$C$${last}`;
   const D = `${ref}$D$${first}:$D$${last}`;
-  // K capped to 0..1, element-wise inside SUMPRODUCT (MEDIAN/MIN would
-  // collapse the whole range to one number).
-  const capped = `((${K}>=1)+(${K}>0)*(${K}<1)*${K})`;
-  // Each row weighted 1 / (KRs in its objective), so summing gives objectives;
-  // C&"" keeps a blank Objective # from dividing by zero.
-  const perObjective = `COUNTIF(${C},${C}&"")`;
   return {
-    /** Team status: the band of the Overall Progress cell on `dashRow`. */
-    status: (dashRow: number) => statusOf(`$C$${dashRow}`),
-    overall: `IFERROR(SUMPRODUCT((${C}<>"")*${capped}/${perObjective})/SUMPRODUCT((${C}<>"")/${perObjective}),0)`,
+    status: `IF(COUNTIF(${L},"Off Track")>0,"Off Track",IF(COUNTIF(${L},"At Risk")>0,"At Risk","On Track"))`,
+    overall: `IFERROR(AVERAGE(${K}),0)`,
     objTitle: (n: number) => `IFERROR(INDEX(${D},MATCH(${n},${C},0)),"")`,
-    objPct: (n: number) =>
-      `IFERROR(SUMPRODUCT((${C}=${n})*${capped})/COUNTIF(${C},${n}),0)`,
+    objPct: (n: number) => `IFERROR(AVERAGEIF(${C},${n},${K}),0)`,
   };
 }
 
@@ -294,23 +268,15 @@ export function instructionsLines(
     { text: '', kind: 'body' },
     { text: 'How Progress and Status are calculated', kind: 'head' },
     {
-      text: 'Progress (%) = Current Value / Target (e.g. 3 of 4 = 75%). Beating the Target can read over 100%.',
+      text: 'Progress (%) = Current Value / Target, capped at 100%. (e.g. 3 of 4 = 75%)',
       kind: 'body',
     },
     {
-      text: `Green  - On Track:   ${ON_TRACK_FROM}% or more`,
+      text: 'Green  - On Track:   Current is progressing toward, at, or beyond the Target',
       kind: 'body',
     },
     {
-      text: `Yellow - At Risk:    ${AT_RISK_FROM}% to ${ON_TRACK_FROM - 1}%`,
-      kind: 'body',
-    },
-    {
-      text: `Red    - Off Track:  below ${AT_RISK_FROM}%`,
-      kind: 'body',
-    },
-    {
-      text: 'Dashboard tab: each KR counts at most 100%, an objective is the average of its KRs, and a team is the average of its objectives - the same numbers and colours as the BRIDGE Flow dashboard.',
+      text: 'Red    - Off Track:  Current is worse than the Baseline, or not measured yet (0)',
       kind: 'body',
     },
     { text: '', kind: 'body' },
@@ -361,20 +327,12 @@ export function teamSheetValues(
   return out;
 }
 
-/**
- * The Dashboard's 9 cells for one team, given how many rows its tab holds and
- * which Dashboard row the cells land on (the Status cell reads that row's
- * Overall Progress).
- */
-export function dashboardValues(
-  team: SeedTeam,
-  rowCount: number,
-  dashRow: number
-): CellValue[] {
+/** The Dashboard's 9 cells for one team, given how many rows its tab holds. */
+export function dashboardValues(team: SeedTeam, rowCount: number): CellValue[] {
   const f = dashboardFormulas(team.tab, 2, Math.max(2, rowCount + 1));
   return [
     team.name,
-    { f: f.status(dashRow) },
+    { f: f.status },
     { f: f.overall },
     { f: f.objTitle(1) },
     { f: f.objPct(1) },
@@ -419,9 +377,8 @@ function dashboardRows(demo: SeedTeamOkr[], teams: SeedTeam[]): string[] {
   for (const team of teams) {
     const okr = demo.find(x => x.key === team.key);
     rows.push(
-      rowXml(r, dashboardValues(team, teamSheetValues(team, okr).length, r))
+      rowXml(r++, dashboardValues(team, teamSheetValues(team, okr).length))
     );
-    r++;
   }
   return rows;
 }
