@@ -370,6 +370,27 @@ export async function getMyTeamId(): Promise<string | null> {
   return res.data?.team_id ?? null;
 }
 
+/**
+ * Whether the signed-in user may write departments other than their own.
+ *
+ * This is the same flag the database checks (`public.is_admin()` behind the
+ * RLS write policies), read up front so the "All departments" screen can say
+ * so BEFORE a workbook is uploaded, instead of the import coming back with a
+ * permission error against every team but one.
+ */
+export async function amIOkrAdmin(): Promise<boolean> {
+  const sb = getSupabase();
+  const uid = await currentUserId();
+  if (!sb || !uid) return false;
+  const res = await sb
+    .from('profiles')
+    .select('is_admin')
+    .eq('id', uid)
+    .maybeSingle();
+  if (res.error) return false;
+  return !!res.data?.is_admin;
+}
+
 /** Assign the signed-in user to a team (the department picker uses this so
  *  RLS lets them edit that team's OKR). */
 export async function setMyTeam(teamId: string): Promise<void> {
@@ -1111,7 +1132,7 @@ export async function importParsedWorkbook(
         outcome: 'error',
         objectiveCount: objectives.length,
         message: rls
-          ? 'No permission to write this team (needs admin - see 0002 migration)'
+          ? 'Not allowed to write this department - your account can only import its own team. Ask for org-wide import access.'
           : raw,
       });
     }

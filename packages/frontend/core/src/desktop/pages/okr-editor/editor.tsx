@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { OKR_EDITOR_ZOOM, usePageZoom } from '../../../utils/app-zoom';
 import {
+  amIOkrAdmin,
   buildLiveWorkbookBlob,
   clampProgress,
   CURRENT_QUARTER,
@@ -126,6 +127,9 @@ export function OkrEditor() {
 
   // Excel import/preview state
   const fileInput = useRef<HTMLInputElement>(null);
+  // Whether this account may write departments other than its own (the same
+  // flag the database's RLS policies check). null until it has been read.
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const [preview, setPreview] = useState<ParsedWorkbook | null>(null);
   const [importing, setImporting] = useState(false);
   const [importResults, setImportResults] = useState<TeamImportResult[] | null>(
@@ -174,6 +178,9 @@ export function OkrEditor() {
         if (mine) setPick(mine.key);
       })
       .catch(() => {});
+    amIOkrAdmin()
+      .then(setIsAdmin)
+      .catch(() => setIsAdmin(false));
   }, []);
 
   // warn on tab close with unsaved edits
@@ -655,12 +662,24 @@ export function OkrEditor() {
                 </li>
               </ol>
 
-              <div style={S.allNote}>
-                Writing departments other than your own needs an admin profile (
-                <code>profiles.is_admin = true</code>, migration 0002). Without
-                it the database accepts only your own department and the rest
-                come back as <em>skipped</em>.
-              </div>
+              {/* Say up front whether this account can write every department.
+                  Finding out afterwards means a workbook that imported one tab
+                  and failed the other six. */}
+              {isAdmin === null ? (
+                <div style={S.allNote}>Checking your import access…</div>
+              ) : isAdmin ? (
+                <div style={S.allOk}>
+                  Your account has org-wide import access - all{' '}
+                  {OKR_TEAMS.length} departments in the workbook will be
+                  written.
+                </div>
+              ) : (
+                <div style={S.allNote}>
+                  Your account can only write its own department, so the other
+                  departments in the workbook will come back as failed. Ask the
+                  OKR owner for org-wide import access before uploading.
+                </div>
+              )}
 
               {error ? <div style={S.err}>{error}</div> : null}
 
@@ -1993,6 +2012,16 @@ const S: Record<string, CSSProperties> = {
     color: '#7a5b12',
     background: 'rgba(245,166,35,.12)',
     border: '1px solid rgba(245,166,35,.4)',
+  },
+  allOk: {
+    marginTop: 18,
+    padding: '12px 14px',
+    borderRadius: 10,
+    fontSize: 12.5,
+    lineHeight: 1.6,
+    color: '#1d6c3c',
+    background: 'rgba(46,184,92,.12)',
+    border: '1px solid rgba(46,184,92,.4)',
   },
   allActions: {
     display: 'flex',
