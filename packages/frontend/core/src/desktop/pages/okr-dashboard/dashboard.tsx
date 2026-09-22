@@ -1,5 +1,7 @@
 import {
+  Children,
   type CSSProperties,
+  type ReactNode,
   useCallback,
   useEffect,
   useRef,
@@ -313,6 +315,73 @@ function AttentionCard({
   );
 }
 
+/**
+ * How many columns the board is laid out in.
+ *
+ * `auto-fill` picks the column count from the card width alone, which is what
+ * left two dead cells in the bottom-right corner: 10 cards over 6 columns is
+ * 6 + 4. Choosing the count from how many cards there actually are keeps the
+ * rows full - 10 cards read as 5 + 5. Ties break towards fewer rows, since a
+ * taller card is easier to read from across the room.
+ */
+export function gridColumns(count: number): number {
+  if (count <= 4) return Math.max(1, count);
+  let best = 4;
+  let bestScore = Infinity;
+  for (let cols = 4; cols <= 6; cols++) {
+    const rows = Math.ceil(count / cols);
+    const score = (cols * rows - count) * 10 + rows;
+    if (score < bestScore) {
+      bestScore = score;
+      best = cols;
+    }
+  }
+  return best;
+}
+
+/**
+ * Column span per card, so a last row that does not divide evenly stretches to
+ * the right-hand edge instead of leaving holes. Every card spans 1 except the
+ * trailing partial row, which shares the columns between its cards.
+ */
+export function columnSpans(count: number, cols: number): number[] {
+  const spans: number[] = Array.from({ length: count }, () => 1);
+  const rest = count % cols;
+  if (rest === 0) return spans;
+  const base = Math.floor(cols / rest);
+  const extra = cols % rest;
+  for (let i = 0; i < rest; i++) {
+    spans[count - rest + i] = base + (i < extra ? 1 : 0);
+  }
+  return spans;
+}
+
+/**
+ * The card grid. Lays its children out over a column count derived from how
+ * many there are, and stretches the last row across the full width, so the
+ * board never shows an empty cell.
+ */
+function BoardGrid({ children }: { children: ReactNode }) {
+  const cards = Children.toArray(children);
+  const cols = gridColumns(cards.length);
+  const spans = columnSpans(cards.length, cols);
+  return (
+    <div
+      style={{
+        ...S.grid,
+        gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+      }}
+    >
+      {cards.map((card, i) => (
+        // The wrapper carries the span; the card inside fills it.
+        <div key={i} style={{ ...S.cell, gridColumn: `span ${spans[i]}` }}>
+          {card}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ---- page -----------------------------------------------------------------
 export function OkrDashboard() {
   const navigate = useNavigate();
@@ -453,7 +522,7 @@ export function OkrDashboard() {
       ) : !model ? (
         <div style={{ ...S.loading, color: T.sub }}>Loading OKRs…</div>
       ) : (
-        <div style={S.grid}>
+        <BoardGrid>
           {model.teams.map(r => (
             <TeamCard key={r.team.id} rollup={r} onOpen={openObjective} />
           ))}
@@ -494,7 +563,7 @@ export function OkrDashboard() {
             expected={expected}
             onOpen={openObjective}
           />
-        </div>
+        </BoardGrid>
       )}
     </div>
   );
@@ -562,7 +631,7 @@ const S: Record<string, CSSProperties> = {
   summaryLabel: { fontSize: 11.5, marginTop: 2, fontWeight: 600 },
   grid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+    // gridTemplateColumns is set per render - see BoardGrid.
     gap: 18,
     // Rows never shrink below their content, but share any spare height, so a
     // short last row stretches to the bottom edge rather than leaving a gap.
@@ -570,11 +639,17 @@ const S: Record<string, CSSProperties> = {
     flex: 1,
     minHeight: 0,
   },
+  // The grid item, one per card: it owns the column span so the card itself
+  // stays a plain card wherever it is used.
+  cell: { display: 'flex', minWidth: 0 },
   card: {
     background: T.card,
     border: '1px solid',
     borderRadius: 16,
     padding: 20,
+    // Fill the cell, whether that cell spans one column or several.
+    flex: 1,
+    minWidth: 0,
     // Column so a card can push its footer to the bottom of the stretched row.
     display: 'flex',
     flexDirection: 'column',

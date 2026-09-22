@@ -662,49 +662,26 @@ export async function fetchObjectiveDetail(
   };
 }
 
-/** Persist a team's OKR (upsert the OKR row, replace its objectives). */
+/**
+ * Persist a team's OKR from the editor.
+ *
+ * Saving replaces the team's objectives, and that cascades their key results
+ * and initiatives away - so everything the editor holds has to be written back
+ * here, not just the objective titles. Delegates to `saveFullOkr` so the editor
+ * and the Excel import write exactly the same rows; anything left out would be
+ * gone for good, which is what used to empty the objective drill-down after the
+ * first save.
+ */
 export async function saveTeamOkr(
   teamId: string,
   meta: OkrMeta,
   objectives: EditableObjective[]
 ): Promise<void> {
-  const sb = getSupabase();
-  if (!sb) throw new Error('Not signed in.');
-
-  const okrRes = await sb
-    .from('okrs')
-    .upsert(
-      {
-        team_id: teamId,
-        quarter: CURRENT_QUARTER,
-        year: CURRENT_YEAR,
-        area: meta.area,
-        owner: meta.owner,
-        focus_note: meta.focus_note,
-      },
-      { onConflict: 'team_id,quarter,year' }
-    )
-    .select('id')
-    .single();
-  if (okrRes.error) throw okrRes.error;
-  const okrId = okrRes.data.id as string;
-
-  const del = await sb.from('objectives').delete().eq('okr_id', okrId);
-  if (del.error) throw del.error;
-
-  const rows = objectives
-    .filter(o => o.title.trim().length > 0)
-    .map((o, i) => ({
-      okr_id: okrId,
-      team_id: teamId,
-      position: i + 1,
-      title: o.title.trim(),
-      progress: clampProgress(o.progress),
-    }));
-  if (rows.length) {
-    const ins = await sb.from('objectives').insert(rows);
-    if (ins.error) throw ins.error;
-  }
+  await saveFullOkr(
+    teamId,
+    meta,
+    objectives.map(o => editableToFullObjective(o, meta.owner))
+  );
 }
 
 // ===========================================================================
@@ -937,6 +914,49 @@ export function parsedToFullObjective(obj: ParsedObjective): FullObjective {
         target: kr.target,
         current: kr.current,
       })),
+    initiatives,
+  };
+}
+
+/**
+ * Turn an objective as the editor holds it into the DB-shaped full objective.
+ *
+ * `target_text` is rendered here from the numbers so a database that predates
+ * migration 0003 (no unit/baseline/target/current columns to read back) still
+ * shows a real Key Result bar. Initiatives are positional strings in the
+ * editor, so they pick up the team leader as their owner.
+ */
+export function editableToFullObjective(
+  o: EditableObjective,
+  owner: string
+): FullObjective {
+  const keyResults: FullKeyResult[] = o.keyResults
+    .filter(k => k.description.trim().length > 0)
+    .map(k => ({
+      description: k.description.trim(),
+      target_text: targetText(k),
+      unit: k.unit,
+      baseline: k.baseline,
+      target: k.target,
+      current: k.current,
+    }));
+
+  const seen = new Set<string>();
+  const initiatives: FullInitiative[] = [];
+  for (const raw of o.initiatives) {
+    const desc = (raw ?? '').trim();
+    if (!desc || seen.has(desc.toLowerCase())) continue;
+    seen.add(desc.toLowerCase());
+    initiatives.push({ description: desc, owner });
+  }
+
+  // Numeric KRs drive the objective's progress (same rule as the workbook and
+  // the editor); objectives without them keep the typed figure.
+  const derived = derivedObjectiveProgress(keyResults);
+  return {
+    title: o.title,
+    progress: clampProgress(derived ?? o.progress),
+    keyResults,
     initiatives,
   };
 }

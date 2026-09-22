@@ -289,8 +289,11 @@ export function OkrObjectiveDetail() {
             })}
           </Section>
 
-          {data.keyResults.length ? (
-            <Section title="Key Results">
+          {/* Key Results always get a section: an objective with none stored is
+              a gap worth showing, not something to hide - silently rendering
+              nothing reads as a broken drill-down. */}
+          <Section title="Key Results">
+            {data.keyResults.length ? (
               <div style={S.cardsGrid}>
                 {data.keyResults.map(kr => (
                   <div
@@ -306,8 +309,21 @@ export function OkrObjectiveDetail() {
                   </div>
                 ))}
               </div>
-            </Section>
-          ) : null}
+            ) : (
+              <div
+                style={{
+                  ...S.miniCard,
+                  background: T.card,
+                  borderColor: T.border,
+                  color: T.sub,
+                  fontSize: 13.5,
+                }}
+              >
+                No Key Results stored for this objective yet. Add them in the
+                OKR editor, or import the team&apos;s Excel workbook.
+              </div>
+            )}
+          </Section>
 
           {data.initiatives.length ? (
             <Section title="Initiatives">
