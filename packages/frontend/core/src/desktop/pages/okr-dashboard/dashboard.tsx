@@ -1,6 +1,7 @@
 import {
   Children,
   type CSSProperties,
+  type PointerEvent as ReactPointerEvent,
   type ReactNode,
   useCallback,
   useEffect,
@@ -11,13 +12,16 @@ import { useNavigate } from 'react-router-dom';
 
 import { OKR_DASHBOARD_ZOOM, useFitPageZoom } from '../../../utils/app-zoom';
 import { BusinessOpsOverlay } from './business-ops-overlay';
+import { BoardBackdrop3D, StatusDonut3D, useSurfaceTone } from './okr-3d';
 import {
   CURRENT_QUARTER,
   CURRENT_YEAR,
   type DashboardModel,
   fetchDashboardModel,
   type Objective,
+  quarterDay,
   quarterExpectedPct,
+  quarterOf,
   type Status,
   STATUS_COLOR,
   STATUS_LABEL,
@@ -36,7 +40,20 @@ const T = {
   text: 'var(--affine-text-primary-color, #e8eaed)',
   sub: 'var(--affine-text-secondary-color, #9aa3b2)',
   track: 'var(--affine-hover-color, rgba(255,255,255,0.07))',
+  // The card colour, part see-through, so the 3D scene glows behind the glass:
+  // dense where the text is, clearer further down where a card is empty.
+  glass:
+    'color-mix(in srgb, var(--affine-background-overlay-panel-color, #14171c) 86%, transparent)',
+  glassDeep:
+    'color-mix(in srgb, var(--affine-background-overlay-panel-color, #14171c) 52%, transparent)',
 };
+
+/** Light from above on a rounded surface: a highlight up top, shade beneath. */
+const GLOSS =
+  'linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.12) 40%, rgba(255,255,255,0) 55%, rgba(0,0,0,0.22) 100%)';
+
+/** Most a card leans under the mouse, in degrees. */
+const TILT_DEG = 3.5;
 
 function rgba(hex: string, a: number): string {
   const h = hex.replace('#', '');
@@ -50,6 +67,9 @@ const ORDER: Status[] = ['on_track', 'at_risk', 'off_track'];
 
 /** How long realtime row events settle before the board refetches. */
 const REFETCH_DEBOUNCE_MS = 3_000;
+
+/** How often the board checks whether the pace benchmark has moved. */
+const PACE_CHECK_MS = 60_000;
 
 function pct(n: number | null | undefined): number {
   return Math.max(0, Math.min(100, Math.round(n ?? 0)));
@@ -76,12 +96,105 @@ function Badge({ status, progress }: { status: Status; progress: number }) {
         fontSize: 12.5,
         fontWeight: 700,
         color: c,
-        background: rgba(c, 0.14),
-        border: `1px solid ${rgba(c, 0.45)}`,
+        // A raised pill: lit from above, casting its own colour below.
+        background: `linear-gradient(180deg, ${rgba(c, 0.26)} 0%, ${rgba(c, 0.1)} 100%)`,
+        border: `1px solid ${rgba(c, 0.5)}`,
+        boxShadow: `inset 0 1px 0 rgba(255,255,255,0.14), 0 6px 16px -6px ${rgba(c, 0.65)}`,
+        textShadow: `0 0 12px ${rgba(c, 0.45)}`,
       }}
     >
       {STATUS_LABEL[status]} · {progress}%
     </span>
+  );
+}
+
+// ---- progress tube ----------------------------------------------------------
+/**
+ * A progress bar drawn as a lit glass tube sunk into a groove. `color` may be
+ * a CSS var (the "expected" bar uses the theme's secondary text colour), in
+ * which case it simply goes without the glow.
+ */
+function Tube({ value, color }: { value: number; color: string }) {
+  const hex = color.startsWith('#');
+  return (
+    <div style={{ ...S.track, background: T.track }}>
+      <div
+        style={{
+          ...S.tubeFill,
+          width: `${value}%`,
+          background: `${GLOSS}, ${color}`,
+          boxShadow: hex
+            ? `0 0 10px ${rgba(color, 0.55)}, 0 0 2px ${rgba(color, 0.9)}`
+            : 'none',
+        }}
+      />
+    </div>
+  );
+}
+
+// ---- glass card -------------------------------------------------------------
+/**
+ * Every panel on the board: frosted glass over the 3D scene, with a rim of
+ * `accent` light along its top edge. Under a mouse it leans towards the
+ * pointer and catches a highlight; the wall screen has no pointer, so there it
+ * simply sits still.
+ */
+function GlassCard({
+  accent,
+  index,
+  children,
+}: {
+  accent?: string;
+  /** Position on the board - staggers the entrance. */
+  index: number;
+  children: ReactNode;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Straight to the DOM: re-rendering the card on every mouse move would be
+  // pointless work for a purely visual effect.
+  const onPointerMove = (e: ReactPointerEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (!el || e.pointerType !== 'mouse') return;
+    const r = el.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width;
+    const y = (e.clientY - r.top) / r.height;
+    el.style.transform = `perspective(1100px) rotateX(${(0.5 - y) * TILT_DEG * 2}deg) rotateY(${(x - 0.5) * TILT_DEG * 2}deg)`;
+    el.style.setProperty('--glare-x', `${x * 100}%`);
+    el.style.setProperty('--glare-y', `${y * 100}%`);
+    el.style.setProperty('--glare-o', '1');
+  };
+  const onPointerLeave = () => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.transform = '';
+    el.style.setProperty('--glare-o', '0');
+  };
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        ...S.card,
+        borderColor: T.border,
+        animationDelay: `${index * 45}ms`,
+      }}
+      onPointerMove={onPointerMove}
+      onPointerLeave={onPointerLeave}
+    >
+      <div aria-hidden="true" style={S.glare} />
+      {accent ? (
+        <div
+          aria-hidden="true"
+          style={{
+            ...S.rim,
+            background: `linear-gradient(90deg, transparent, ${accent}, transparent)`,
+            boxShadow: `0 0 14px ${rgba(accent, 0.8)}`,
+          }}
+        />
+      ) : null}
+      {children}
+    </div>
   );
 }
 
@@ -107,18 +220,7 @@ function ObjectiveRow({
         <span style={S.objTitle}>{obj.title || 'Untitled objective'}</span>
         <span style={S.objPct}>{pct}%</span>
       </div>
-      <div style={{ ...S.track, background: T.track }}>
-        <div
-          style={{
-            width: `${pct}%`,
-            height: '100%',
-            borderRadius: 5,
-            background: color,
-            boxShadow: `0 0 8px ${rgba(color, 0.55)}`,
-            transition: 'width .4s ease',
-          }}
-        />
-      </div>
+      <Tube value={pct} color={color} />
     </button>
   );
 }
@@ -126,15 +228,17 @@ function ObjectiveRow({
 // ---- team card ------------------------------------------------------------
 function TeamCard({
   rollup,
+  index,
   onOpen,
 }: {
   rollup: TeamRollup;
+  index: number;
   onOpen: (id: string) => void;
 }) {
   const { team, objectives, progress, status, owner } = rollup;
   const color = STATUS_COLOR[status];
   return (
-    <div style={{ ...S.card, borderColor: T.border }}>
+    <GlassCard accent={objectives.length ? color : undefined} index={index}>
       <div style={S.cardHead}>
         <h2 style={S.teamName}>{team.name}</h2>
         {objectives.length ? (
@@ -155,7 +259,7 @@ function TeamCard({
       <div style={{ ...S.leader, borderColor: T.border, color: T.sub }}>
         Team leader: <span style={S.leaderName}>{owner || '-'}</span>
       </div>
-    </div>
+    </GlassCard>
   );
 }
 
@@ -217,17 +321,7 @@ function PaceBar({
         <span style={S.objTitle}>{label}</span>
         <span style={S.objPct}>{value}%</span>
       </div>
-      <div style={{ ...S.track, background: T.track }}>
-        <div
-          style={{
-            width: `${value}%`,
-            height: '100%',
-            borderRadius: 5,
-            background: color,
-            transition: 'width .4s ease',
-          }}
-        />
-      </div>
+      <Tube value={value} color={color} />
     </div>
   );
 }
@@ -240,26 +334,36 @@ function PaceBar({
 function PaceCard({
   overall,
   expected,
+  index,
 }: {
   overall: number;
   expected: number;
+  index: number;
 }) {
   const delta = overall - expected;
   const ahead = delta >= 0;
   const color = STATUS_COLOR[statusFromProgress(overall, expected)];
+  const { day, days } = quarterDay();
   return (
-    <div style={{ ...S.card, borderColor: T.border }}>
+    <GlassCard accent={color} index={index}>
       <div style={{ ...S.overviewTitle, color: T.sub }}>PACE VS PLAN</div>
-      <div style={{ ...S.kpiBig, color }}>
+      <div
+        style={{
+          ...S.kpiBig,
+          color,
+          textShadow: `0 0 22px ${rgba(color, 0.4)}`,
+        }}
+      >
         {ahead ? '+' : '-'}
         {Math.abs(delta)} pts
       </div>
       <div style={{ ...S.kpiCaption, color: T.sub }}>
-        {ahead ? 'ahead of quarter pace' : 'behind quarter pace'}
+        {ahead ? 'ahead of' : 'behind'} {CURRENT_QUARTER} pace · day {day} of{' '}
+        {days}
       </div>
       <PaceBar label="Actual progress" value={overall} color={color} />
       <PaceBar label="Expected by today" value={expected} color={T.sub} />
-    </div>
+    </GlassCard>
   );
 }
 
@@ -274,14 +378,21 @@ type Behind = { obj: Objective; team: Team; value: number };
 function AttentionCard({
   items,
   expected,
+  index,
   onOpen,
 }: {
   items: Behind[];
   expected: number;
+  index: number;
   onOpen: (id: string) => void;
 }) {
+  // Lit by the worst item on the list - or green when the list is empty.
+  const accent =
+    STATUS_COLOR[
+      items.length ? statusFromProgress(items[0].value, expected) : 'on_track'
+    ];
   return (
-    <div style={{ ...S.card, borderColor: T.border }}>
+    <GlassCard accent={accent} index={index}>
       <div style={{ ...S.overviewTitle, color: T.sub }}>NEEDS ATTENTION</div>
       {items.length ? (
         items.map(({ obj, team, value }) => {
@@ -311,7 +422,7 @@ function AttentionCard({
           Every objective is on or ahead of pace for {CURRENT_QUARTER}.
         </div>
       )}
-    </div>
+    </GlassCard>
   );
 }
 
@@ -390,6 +501,10 @@ export function OkrDashboard() {
   const [updatedAt, setUpdatedAt] = useState<Date | null>(null);
   const debounce = useRef<ReturnType<typeof setTimeout> | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
+  // The 3D layer is lit to suit the theme, and rests while the Business Ops
+  // slide covers the board.
+  const tone = useSurfaceTone(rootRef);
+  const [slideShown, setSlideShown] = useState(false);
 
   const load = useCallback(async () => {
     try {
@@ -416,6 +531,28 @@ export function OkrDashboard() {
       if (debounce.current) clearTimeout(debounce.current);
       unsub();
     };
+  }, [load]);
+
+  // The pace benchmark creeps up about a point a day. Re-read the board when it
+  // moves, so the badges (scored when the data is fetched) and the pace card
+  // (scored on render) are always judged against the same number. The period
+  // itself is fixed when the app loads, so once the calendar moves into the
+  // next quarter the wall screen reloads to pick it up.
+  useEffect(() => {
+    let shown = quarterExpectedPct();
+    const timer = setInterval(() => {
+      const now = quarterOf();
+      if (now.quarter !== CURRENT_QUARTER || now.year !== CURRENT_YEAR) {
+        window.location.reload();
+        return;
+      }
+      const next = quarterExpectedPct();
+      if (next !== shown) {
+        shown = next;
+        void load();
+      }
+    }, PACE_CHECK_MS);
+    return () => clearInterval(timer);
   }, [load]);
 
   useEffect(() => {
@@ -452,8 +589,12 @@ export function OkrDashboard() {
     .slice(0, 5);
 
   return (
-    <div ref={rootRef} style={{ ...S.root, background: T.bg, color: T.text }}>
-      <BusinessOpsOverlay />
+    <div
+      ref={rootRef}
+      style={{ ...S.root, backgroundColor: T.bg, color: T.text }}
+    >
+      <BoardBackdrop3D dark={tone.dark} bg={tone.bg} paused={slideShown} />
+      <BusinessOpsOverlay onShownChange={setSlideShown} />
 
       <button style={S.close} onClick={() => navigate(-1)} title="Close (Esc)">
         ✕
@@ -479,8 +620,10 @@ export function OkrDashboard() {
           <div
             style={{
               ...S.summaryCell,
-              background: T.card,
+              background: `linear-gradient(160deg, ${T.glass} 0%, ${T.glassDeep} 100%)`,
               borderColor: T.border,
+              boxShadow:
+                'inset 0 1px 0 rgba(255,255,255,0.1), 0 16px 32px -18px rgba(0,0,0,0.7)',
             }}
           >
             <div style={S.summaryBig}>{model?.overall ?? 0}%</div>
@@ -493,11 +636,19 @@ export function OkrDashboard() {
               key={k}
               style={{
                 ...S.summaryCell,
-                background: rgba(STATUS_COLOR[k], 0.1),
-                borderColor: rgba(STATUS_COLOR[k], 0.45),
+                // Raised tiles, each glowing in its own status colour.
+                background: `linear-gradient(160deg, ${rgba(STATUS_COLOR[k], 0.24)} 0%, ${rgba(STATUS_COLOR[k], 0.07)} 100%)`,
+                borderColor: rgba(STATUS_COLOR[k], 0.5),
+                boxShadow: `inset 0 1px 0 rgba(255,255,255,0.12), 0 16px 32px -18px ${rgba(STATUS_COLOR[k], 0.9)}`,
               }}
             >
-              <div style={{ ...S.summaryBig, color: STATUS_COLOR[k] }}>
+              <div
+                style={{
+                  ...S.summaryBig,
+                  color: STATUS_COLOR[k],
+                  textShadow: `0 0 18px ${rgba(STATUS_COLOR[k], 0.5)}`,
+                }}
+              >
                 {counts[k]}
               </div>
               <div style={{ ...S.summaryLabel, color: STATUS_COLOR[k] }}>
@@ -523,17 +674,27 @@ export function OkrDashboard() {
         <div style={{ ...S.loading, color: T.sub }}>Loading OKRs…</div>
       ) : (
         <BoardGrid>
-          {model.teams.map(r => (
-            <TeamCard key={r.team.id} rollup={r} onOpen={openObjective} />
+          {model.teams.map((r, i) => (
+            <TeamCard
+              key={r.team.id}
+              rollup={r}
+              index={i}
+              onOpen={openObjective}
+            />
           ))}
 
           {/* STATUS OVERVIEW cell */}
-          <div style={{ ...S.card, borderColor: T.border }}>
+          <GlassCard index={model.teams.length}>
             <div style={{ ...S.overviewTitle, color: T.sub }}>
               STATUS OVERVIEW
             </div>
             <div style={S.overviewBody}>
-              <Donut counts={counts} />
+              <StatusDonut3D
+                counts={counts}
+                dark={tone.dark}
+                paused={slideShown}
+                fallback={<Donut counts={counts} />}
+              />
               <div style={{ flex: 1 }}>
                 {ORDER.map(k => (
                   <div key={k} style={S.legendRow}>
@@ -542,7 +703,9 @@ export function OkrDashboard() {
                         width: 11,
                         height: 11,
                         borderRadius: '50%',
-                        background: STATUS_COLOR[k],
+                        // A little lit sphere, to match the 3D donut.
+                        background: `radial-gradient(circle at 35% 30%, rgba(255,255,255,0.75), ${STATUS_COLOR[k]} 45%, ${rgba(STATUS_COLOR[k], 0.8)} 100%)`,
+                        boxShadow: `0 0 8px ${rgba(STATUS_COLOR[k], 0.6)}`,
                       }}
                     />
                     <span style={{ flex: 1, fontSize: 13 }}>
@@ -555,12 +718,17 @@ export function OkrDashboard() {
                 ))}
               </div>
             </div>
-          </div>
+          </GlassCard>
 
-          <PaceCard overall={model.overall} expected={expected} />
+          <PaceCard
+            overall={model.overall}
+            expected={expected}
+            index={model.teams.length + 1}
+          />
           <AttentionCard
             items={behind}
             expected={expected}
+            index={model.teams.length + 2}
             onOpen={openObjective}
           />
         </BoardGrid>
@@ -584,6 +752,10 @@ const S: Record<string, CSSProperties> = {
     flexDirection: 'column',
     fontFamily:
       'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    // Faint brand light in the corners, under the 3D scene - and the depth the
+    // board keeps if that scene never loads.
+    backgroundImage:
+      'radial-gradient(1200px 640px at 12% -12%, rgba(241,90,41,0.12), transparent 60%), radial-gradient(1100px 760px at 102% 112%, rgba(76,110,245,0.12), transparent 62%)',
   },
   close: {
     position: 'fixed',
@@ -594,7 +766,10 @@ const S: Record<string, CSSProperties> = {
     height: 34,
     borderRadius: 8,
     border: `1px solid ${T.border}`,
-    background: 'transparent',
+    background: T.glass,
+    backdropFilter: 'blur(10px)',
+    WebkitBackdropFilter: 'blur(10px)',
+    boxShadow: '0 8px 20px -10px rgba(0,0,0,0.6)',
     color: 'inherit',
     fontSize: 15,
     cursor: 'pointer',
@@ -626,6 +801,8 @@ const S: Record<string, CSSProperties> = {
     borderRadius: 12,
     border: '1px solid',
     textAlign: 'center',
+    backdropFilter: 'blur(12px) saturate(140%)',
+    WebkitBackdropFilter: 'blur(12px) saturate(140%)',
   },
   summaryBig: { fontSize: 26, fontWeight: 800, lineHeight: 1.1 },
   summaryLabel: { fontSize: 11.5, marginTop: 2, fontWeight: 600 },
@@ -643,16 +820,51 @@ const S: Record<string, CSSProperties> = {
   // stays a plain card wherever it is used.
   cell: { display: 'flex', minWidth: 0 },
   card: {
-    background: T.card,
+    // Frosted glass: the 3D scene shows through, blurred, so it adds depth
+    // without ever sitting sharp behind the text - which is why the glass
+    // stays dense over the top third, where the objectives are.
+    background: `linear-gradient(180deg, ${T.glass} 0%, ${T.glass} 34%, ${T.glassDeep} 100%)`,
+    backdropFilter: 'blur(4px) saturate(120%)',
+    WebkitBackdropFilter: 'blur(4px) saturate(120%)',
     border: '1px solid',
     borderRadius: 16,
     padding: 20,
+    // Lit edge on top, soft contact shadow below - the card floats.
+    boxShadow:
+      'inset 0 1px 0 rgba(255,255,255,0.07), 0 2px 6px rgba(0,0,0,0.12), 0 26px 50px -28px rgba(0,0,0,0.65)',
+    position: 'relative',
+    transition: 'transform .35s ease',
+    // Rises into place on first paint. `backwards`, not `both`: a held final
+    // frame would pin the transform and stop the hover tilt.
+    animationName: 'okrrise',
+    animationDuration: '.7s',
+    animationTimingFunction: 'cubic-bezier(.2,.8,.2,1)',
+    animationFillMode: 'backwards',
     // Fill the cell, whether that cell spans one column or several.
     flex: 1,
     minWidth: 0,
     // Column so a card can push its footer to the bottom of the stretched row.
     display: 'flex',
     flexDirection: 'column',
+  },
+  glare: {
+    position: 'absolute',
+    inset: 0,
+    borderRadius: 'inherit',
+    pointerEvents: 'none',
+    background:
+      'radial-gradient(380px circle at var(--glare-x, 50%) var(--glare-y, 0%), rgba(255,255,255,0.08), transparent 45%)',
+    opacity: 'var(--glare-o, 0)',
+    transition: 'opacity .3s ease',
+  },
+  rim: {
+    position: 'absolute',
+    top: -1,
+    left: 18,
+    right: 18,
+    height: 2,
+    borderRadius: 2,
+    pointerEvents: 'none',
   },
   leader: {
     marginTop: 'auto',
@@ -703,7 +915,15 @@ const S: Record<string, CSSProperties> = {
     lineHeight: 1.3,
   },
   objPct: { fontSize: 14, fontWeight: 700, flexShrink: 0 },
-  track: { height: 9, borderRadius: 5, overflow: 'hidden' },
+  // A groove the tube sits in.
+  track: {
+    height: 9,
+    borderRadius: 5,
+    overflow: 'hidden',
+    boxShadow:
+      'inset 0 1px 2px rgba(0,0,0,0.35), inset 0 -1px 0 rgba(255,255,255,0.05)',
+  },
+  tubeFill: { height: '100%', borderRadius: 5, transition: 'width .4s ease' },
   emptyCard: { fontSize: 13, opacity: 0.6, padding: '12px 0' },
   overviewTitle: {
     fontSize: 13,

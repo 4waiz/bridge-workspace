@@ -5,6 +5,10 @@ const KEYFRAMES = `@keyframes okrpulse {
   0%   { box-shadow: 0 0 0 0 rgba(46,184,92,0.6); }
   70%  { box-shadow: 0 0 0 8px rgba(46,184,92,0); }
   100% { box-shadow: 0 0 0 0 rgba(46,184,92,0); }
+}
+@keyframes okrrise {
+  from { opacity: 0; transform: perspective(1100px) rotateX(9deg) translateY(14px); }
+  to   { opacity: 1; transform: none; }
 }`;
 
 /**

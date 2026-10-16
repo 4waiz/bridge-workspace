@@ -11,7 +11,9 @@
 import {
   objectiveProgress,
   OKR_DEMO,
+  OKR_QUARTER,
   OKR_TEAMS,
+  OKR_YEAR,
   type SeedTeamOkr,
 } from './okr-seed-data';
 import {
@@ -53,9 +55,12 @@ function isJwtIssuedInFutureError(err: any): boolean {
   return /jwt issued at future/i.test(msg);
 }
 
-// Current OKR period. Kept in one place so dashboard + editor stay in sync.
-export const CURRENT_QUARTER = 'Q3';
-export const CURRENT_YEAR = 2026;
+// Current OKR period: the calendar quarter the app was loaded in (quarterOf).
+// Kept in one place so the dashboard, the editor and the Excel template all
+// agree on it.
+export const CURRENT_QUARTER = OKR_QUARTER;
+export const CURRENT_YEAR = OKR_YEAR;
+export { quarterOf } from './okr-seed-data';
 
 // ---- Domain types ---------------------------------------------------------
 export interface Team {
@@ -120,6 +125,55 @@ export function quarterExpectedPct(
   if (end <= start) return 0;
   const frac = (now.getTime() - start) / (end - start);
   return Math.max(0, Math.min(100, Math.round(frac * 100)));
+}
+
+/** Which day of the quarter `now` is (1-based), and how many days it has. */
+export function quarterDay(
+  quarter: string = CURRENT_QUARTER,
+  year: number = CURRENT_YEAR,
+  now: Date = new Date()
+): { day: number; days: number } {
+  const q = parseInt(quarter.replace(/\D/g, ''), 10) || 1;
+  const start = new Date(year, (q - 1) * 3, 1).getTime();
+  const end = new Date(year, (q - 1) * 3 + 3, 1).getTime();
+  const DAY_MS = 86_400_000;
+  const days = Math.round((end - start) / DAY_MS);
+  const day = Math.floor((now.getTime() - start) / DAY_MS) + 1;
+  return { day: Math.max(1, Math.min(days, day)), days };
+}
+
+/** Orders OKR periods: Q4 2026 sorts after Q3 2026 and before Q1 2027. */
+function periodIndex(quarter: string, year: number): number {
+  const q = parseInt(String(quarter).replace(/\D/g, ''), 10) || 1;
+  return year * 4 + (q - 1);
+}
+
+/**
+ * The OKR a team is working to right now, out of all of that team's OKR rows:
+ * the current quarter's once it exists, otherwise the most recent earlier one,
+ * carried forward as it stands.
+ *
+ * A new quarter therefore restarts the pace clock without wiping the board -
+ * objectives keep the progress they have until the team updates them, and the
+ * first save writes the current quarter's own copy while the old quarter stays
+ * in the database as history. A quarter set up ahead of time is not live yet.
+ */
+export function activeOkr<T extends { quarter: string; year: number }>(
+  rows: T[],
+  quarter: string = CURRENT_QUARTER,
+  year: number = CURRENT_YEAR
+): T | null {
+  const now = periodIndex(quarter, year);
+  let best: T | null = null;
+  let bestIndex = -Infinity;
+  for (const row of rows) {
+    const index = periodIndex(row.quarter, row.year);
+    if (index <= now && index > bestIndex) {
+      best = row;
+      bestIndex = index;
+    }
+  }
+  return best;
 }
 
 /** How far behind pace (in progress points) still counts as "at risk". */
@@ -189,7 +243,7 @@ export async function fetchDashboardModel(): Promise<DashboardModel> {
     Promise.all([
       sb.from('teams').select('*').order('sort_order'),
       sb.from('objectives').select('*').order('position'),
-      sb.from('okrs').select('team_id, owner, area, quarter, year'),
+      sb.from('okrs').select('id, team_id, owner, area, quarter, year'),
     ]);
   let [teamsRes, objsRes, okrsRes] = await loadRows();
   let err = teamsRes.error || objsRes.error || okrsRes.error;
@@ -203,18 +257,24 @@ export async function fetchDashboardModel(): Promise<DashboardModel> {
   if (err) throw err;
 
   const teams: Team[] = teamsRes.data ?? [];
-  const objectives: Objective[] = objsRes.data ?? [];
 
-  // One OKR row per team per quarter; the owner on it is the team leader.
-  // Prefer the live quarter, but fall back to whatever exists so a board seeded
-  // for another period still shows leaders and the area heading.
-  const okrRows: any[] = okrsRes.data ?? [];
-  const current = okrRows.filter(
-    o => o.quarter === CURRENT_QUARTER && o.year === CURRENT_YEAR
+  // One OKR row per team per quarter; the owner on it is the team leader. Each
+  // team shows the OKR it is working to now (activeOkr) - this quarter's once
+  // it has one, until then last quarter's, progress and all. Objectives of any
+  // other quarter are history, so they stay off the board.
+  const okrRows: Pick<
+    Okr,
+    'id' | 'team_id' | 'owner' | 'area' | 'quarter' | 'year'
+  >[] = okrsRes.data ?? [];
+  const active = teams
+    .map(t => activeOkr(okrRows.filter(o => o.team_id === t.id)))
+    .filter(o => o !== null);
+  const activeIds = new Set(active.map(o => o.id));
+  const objectives: Objective[] = (objsRes.data ?? []).filter((o: Objective) =>
+    activeIds.has(o.okr_id)
   );
-  const source = current.length ? current : okrRows;
   const ownerByTeam = new Map<string, string>();
-  for (const o of source) {
+  for (const o of active) {
     const owner = typeof o.owner === 'string' ? o.owner.trim() : '';
     if (o.team_id && owner) ownerByTeam.set(o.team_id, owner);
   }
@@ -261,7 +321,7 @@ export async function fetchDashboardModel(): Promise<DashboardModel> {
     teams: rollups,
     overall,
     counts,
-    area: source.find(o => o.area)?.area ?? null,
+    area: active.find(o => o.area)?.area ?? null,
   };
 }
 
@@ -470,23 +530,22 @@ export function derivedObjectiveProgress(
   });
 }
 
-/** Load a team's current-period OKR + objectives for the editor. */
+/**
+ * Load a team's OKR + objectives for the editor: the one the dashboard shows
+ * for it (activeOkr), so a new quarter opens on the objectives and numbers
+ * already on the board rather than on a blank form. Saving always writes the
+ * current quarter.
+ */
 export async function fetchTeamOkr(
   teamId: string
 ): Promise<{ meta: OkrMeta; objectives: EditableObjective[] }> {
   const sb = getSupabase();
   if (!sb) throw new Error('Not signed in.');
 
-  const okrRes = await sb
-    .from('okrs')
-    .select('*')
-    .eq('team_id', teamId)
-    .eq('quarter', CURRENT_QUARTER)
-    .eq('year', CURRENT_YEAR)
-    .maybeSingle();
+  const okrRes = await sb.from('okrs').select('*').eq('team_id', teamId);
   if (okrRes.error) throw okrRes.error;
 
-  const okr: Okr | null = okrRes.data ?? null;
+  const okr: Okr | null = activeOkr<Okr>(okrRes.data ?? []);
   const meta: OkrMeta = {
     area: okr?.area ?? 'Excellence Department',
     owner: okr?.owner ?? '',
@@ -647,10 +706,12 @@ export async function fetchObjectiveDetail(
 
   const [teamRes, sibRes, krRes, initRes] = await Promise.all([
     sb.from('teams').select('*').eq('id', objective.team_id).maybeSingle(),
+    // Siblings share the OKR - same team AND quarter - so another quarter's
+    // objectives never leak into this one's list or team average.
     sb
       .from('objectives')
       .select('*')
-      .eq('team_id', objective.team_id)
+      .eq('okr_id', objective.okr_id)
       .order('position'),
     sb
       .from('key_results')

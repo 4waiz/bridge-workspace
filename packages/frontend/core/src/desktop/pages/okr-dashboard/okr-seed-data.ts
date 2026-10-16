@@ -12,9 +12,28 @@
  * the whole system stays consistent.
  */
 
-export const OKR_QUARTER = 'Q3';
-export const OKR_YEAR = 2026;
-export const OKR_QUARTER_LABEL = `${OKR_QUARTER} ${OKR_YEAR}`; // "Q3 2026"
+/**
+ * The calendar quarter `date` falls in: Q1 is Jan-Mar ... Q4 is Oct-Dec.
+ *
+ * The OKR period is read off the clock rather than typed in. A typed-in quarter
+ * goes stale on the 1st of the next month, and from then on every pace-based
+ * status is judged against a quarter that has already ended - Q3 on the 16th
+ * of October expects 100% done.
+ */
+export function quarterOf(date: Date = new Date()): {
+  quarter: string;
+  year: number;
+} {
+  return {
+    quarter: `Q${Math.floor(date.getMonth() / 3) + 1}`,
+    year: date.getFullYear(),
+  };
+}
+
+const PERIOD = quarterOf();
+export const OKR_QUARTER = PERIOD.quarter;
+export const OKR_YEAR = PERIOD.year;
+export const OKR_QUARTER_LABEL = `${OKR_QUARTER} ${OKR_YEAR}`; // e.g. "Q4 2026"
 
 // ---- Roster (order + names + accents match bridge_xpi_okrs.xlsx) -----------
 export interface SeedTeam {

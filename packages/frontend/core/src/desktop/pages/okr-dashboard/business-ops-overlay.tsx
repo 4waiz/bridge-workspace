@@ -9,10 +9,24 @@ import {
 /**
  * The Business Ops slide the wall board alternates with: one period of OKRs,
  * one period of this, forever. Mounted by the dashboard and otherwise inert.
+ *
+ * `onShownChange` reports when the slide actually covers the board, so the
+ * board can stop animating what nobody can see.
  */
-export function BusinessOpsOverlay() {
+export function BusinessOpsOverlay({
+  onShownChange,
+}: {
+  onShownChange?: (shown: boolean) => void;
+} = {}) {
   const [url, setUrl] = useState<string | null>(null);
   const [visible, setVisible] = useState(false);
+
+  // The timer flips `visible` even before an image exists; only an image on
+  // screen hides the board.
+  const shown = visible && !!url;
+  useEffect(() => {
+    onShownChange?.(shown);
+  }, [shown, onShownChange]);
 
   // Current image, re-read whenever someone uploads a replacement. The screen
   // is unattended, so this is the only way a new picture ever reaches it.
