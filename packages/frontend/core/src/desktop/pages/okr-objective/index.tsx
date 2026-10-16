@@ -1,3 +1,4 @@
+import { OKR_KEYFRAMES } from '../okr-dashboard/okr-glass';
 import { OkrObjectiveDetail } from './detail';
 
 /**
@@ -5,5 +6,11 @@ import { OkrObjectiveDetail } from './detail';
  * (progress gauge, status, team comparison, key results & initiatives).
  */
 export const Component = () => {
-  return <OkrObjectiveDetail />;
+  return (
+    <>
+      {/* keyframes can't live in an inline style object - inject once here. */}
+      <style>{OKR_KEYFRAMES}</style>
+      <OkrObjectiveDetail />
+    </>
+  );
 };

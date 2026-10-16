@@ -1,15 +1,15 @@
 /**
- * The OKR board's 3D layer (three.js): a slow-moving scene behind the cards and
- * a 3D status donut.
+ * The OKR pages' 3D layer (three.js): a slow field of light behind the glass
+ * panels, the dashboard's 3D status donut, and the objective page's 3D gauge.
  *
- * Everything here is decoration on top of a board that already works without
- * it. three.js is loaded on demand, after the board has painted, and every
+ * Everything here is decoration on top of pages that already work without
+ * it. three.js is loaded on demand, after the page has painted, and every
  * failure - no WebGL, a lost GPU context, a chunk that will not download -
- * leaves the flat board exactly as it was.
+ * leaves the flat page exactly as it was.
  *
- * The board runs all day on a wall-mounted screen, so both scenes are capped
- * at 30 frames a second, draw nothing while the Business Ops slide covers them
- * or the tab is hidden, and hold still for prefers-reduced-motion.
+ * The board runs all day on a wall-mounted screen, so every scene is capped
+ * at 30 frames a second, draws nothing while the Business Ops slide covers it
+ * or the tab is hidden, and holds still for prefers-reduced-motion.
  */
 import {
   type CSSProperties,
@@ -332,7 +332,6 @@ const FIELD_FRAG = /* glsl */ `
 
 const createBackdrop: SceneFactory<BackdropData> = ({
   THREE,
-  RoomEnvironment,
   renderer,
   data,
   still,
@@ -343,19 +342,6 @@ const createBackdrop: SceneFactory<BackdropData> = ({
   scene.fog = new THREE.FogExp2(new THREE.Color(data.bg), 0.011);
   const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 220);
   camera.position.set(0, 0, 18);
-
-  const env = studioEnvironment(THREE, RoomEnvironment, renderer);
-  scene.environment = env;
-  scene.add(new THREE.AmbientLight(0xffffff, dark ? 0.35 : 0.9));
-  const sun = new THREE.DirectionalLight(0xffffff, dark ? 1.4 : 1.8);
-  sun.position.set(6, 10, 12);
-  // Fill from the viewer's side, so the faces turned towards the room read.
-  const fill = new THREE.DirectionalLight(0xffffff, dark ? 0.9 : 0.6);
-  fill.position.set(0, 4, 20);
-  scene.add(sun, fill);
-  const warm = new THREE.PointLight(0xf15a29, dark ? 160 : 90, 60, 1.6);
-  const cool = new THREE.PointLight(0x4c6ef5, dark ? 160 : 90, 60, 1.6);
-  scene.add(warm, cool);
 
   const glow = radialTexture(THREE, [
     [0, 'rgba(255,255,255,1)'],
@@ -441,125 +427,7 @@ const createBackdrop: SceneFactory<BackdropData> = ({
   field.position.y = -7.5;
   scene.add(field);
 
-  // 3. Floating forms - glossy, slowly turning. Nearly all of the scene sits
-  // behind the cards, so the forms are placed where a card has no text: low
-  // down, under the objectives, where the glass is clearest - one per card in
-  // a checkerboard, never directly behind the lines being read. The knot turns
-  // in the empty strip of the header, between the title and the totals.
-  const forms: {
-    group: THREE_NS.Group;
-    spin: THREE_NS.Vector3;
-    /** Laid out for a 16:9 screen; stretched to the real aspect on resize. */
-    x: number;
-    y: number;
-    phase: number;
-    bob: number;
-  }[] = [];
-  const addForm = (
-    geometry: THREE_NS.BufferGeometry,
-    color: string,
-    [x, y, z]: [number, number, number],
-    scale: number,
-    faceted: boolean,
-    bob = 0.45
-  ) => {
-    const group = new THREE.Group();
-    group.add(
-      new THREE.Mesh(
-        geometry,
-        new THREE.MeshPhysicalMaterial({
-          color,
-          // A little light of their own, so they glow on a dark board
-          // instead of going muddy away from the lights.
-          emissive: color,
-          emissiveIntensity: dark ? 0.12 : 0.04,
-          metalness: 0.25,
-          roughness: 0.16,
-          clearcoat: 1,
-          clearcoatRoughness: 0.08,
-          iridescence: 0.55,
-          iridescenceIOR: 1.35,
-          envMapIntensity: dark ? 1.4 : 1,
-          flatShading: faceted,
-        })
-      )
-    );
-    if (faceted) {
-      const edges = new THREE.LineSegments(
-        new THREE.EdgesGeometry(geometry, 1),
-        new THREE.LineBasicMaterial({
-          color: dark ? 0xffffff : 0x1b1f27,
-          transparent: true,
-          opacity: dark ? 0.35 : 0.2,
-        })
-      );
-      edges.scale.setScalar(1.003);
-      group.add(edges);
-    }
-    group.position.set(x, y, z);
-    group.scale.setScalar(scale);
-    group.rotation.set(Math.random() * 3, Math.random() * 3, 0);
-    scene.add(group);
-    forms.push({
-      group,
-      spin: new THREE.Vector3(
-        0.05 + Math.random() * 0.15,
-        0.1 + Math.random() * 0.2,
-        Math.random() * 0.08
-      ),
-      x,
-      y,
-      phase: Math.random() * Math.PI * 2,
-      bob,
-    });
-  };
-  // World positions for the five-column wall layout on a 16:9 screen; z -12
-  // puts a form about 140 px across at 1080p.
-  addForm(
-    new THREE.TorusKnotGeometry(1.5, 0.42, 200, 24),
-    '#f15a29',
-    [-0.6, 8.6, -7],
-    0.34,
-    false,
-    0.1
-  );
-  addForm(
-    new THREE.IcosahedronGeometry(1.6, 0),
-    '#4c6ef5',
-    [-16.1, 2.6, -12],
-    0.95,
-    true
-  );
-  addForm(
-    new THREE.TorusGeometry(1.4, 0.4, 32, 96),
-    '#14b8a6',
-    [0, 2.1, -12],
-    0.9,
-    false
-  );
-  addForm(
-    new THREE.OctahedronGeometry(1.6, 0),
-    '#9b5de5',
-    [16.1, 3, -12],
-    0.95,
-    true
-  );
-  addForm(
-    new THREE.DodecahedronGeometry(1.5, 0),
-    '#ec4899',
-    [-8.1, -7.7, -12],
-    0.9,
-    true
-  );
-  addForm(
-    new THREE.IcosahedronGeometry(1.5, 0),
-    '#f5a623',
-    [8.1, -7.7, -12],
-    0.85,
-    true
-  );
-
-  // 4. Dust on dark boards; on light ones it only reads as dirt.
+  // 3. Dust on dark boards; on light ones it only reads as dirt.
   let stars: THREE_NS.Points | null = null;
   if (dark) {
     const STARS = 900;
@@ -599,29 +467,15 @@ const createBackdrop: SceneFactory<BackdropData> = ({
       const ease = Math.min(1, dt * 2);
       pointer.x += (pointer.tx - pointer.x) * ease;
       pointer.y += (pointer.ty - pointer.y) * ease;
-      // A gentle drift - enough for parallax, small enough that the knot stays
-      // in its strip of the header.
-      camera.position.x = Math.sin(t * 0.05) * 0.9 + pointer.x * 0.8;
-      camera.position.y = Math.cos(t * 0.037) * 0.2 - pointer.y * 0.3;
+      camera.position.x = Math.sin(t * 0.05) * 1.6 + pointer.x * 1.2;
+      camera.position.y = Math.cos(t * 0.037) * 0.6 - pointer.y * 0.6;
       camera.lookAt(0, 0, -8);
 
       fieldMat.uniforms.uTime.value = t;
-      for (const f of forms) {
-        f.group.rotation.x += f.spin.x * dt;
-        f.group.rotation.y += f.spin.y * dt;
-        f.group.rotation.z += f.spin.z * dt;
-        f.group.position.y = f.y + Math.sin(t * 0.4 + f.phase) * f.bob;
-      }
       for (const o of orbs) {
         o.sprite.position.x = o.x + Math.sin(t * 0.06 + o.phase) * 3;
         o.sprite.position.y = o.y + Math.cos(t * 0.05 + o.phase) * 2;
       }
-      warm.position.set(Math.sin(t * 0.21) * 14, 6 + Math.cos(t * 0.17) * 3, 4);
-      cool.position.set(
-        Math.cos(t * 0.19) * 14,
-        -4 + Math.sin(t * 0.23) * 3,
-        2
-      );
       if (stars) stars.rotation.y = t * 0.01;
 
       renderer.render(scene, camera);
@@ -630,9 +484,6 @@ const createBackdrop: SceneFactory<BackdropData> = ({
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       fieldMat.uniforms.uPixelRatio.value = renderer.getPixelRatio();
-      // The board's columns stretch with the screen, so the forms do too.
-      const stretch = camera.aspect / (16 / 9);
-      for (const f of forms) f.group.position.x = f.x * stretch;
     },
     update() {
       // Colours are baked in at build time; a theme change rebuilds the scene.
@@ -642,15 +493,14 @@ const createBackdrop: SceneFactory<BackdropData> = ({
       disposeTree(scene);
       glow.dispose();
       dot.dispose();
-      env.dispose();
     },
   };
 };
 
 /**
- * The scene behind the board. A fixed canvas at z-index -1 inside the
- * dashboard's own stacking context: above the page background, below every
- * card, and out of the flow so the fit-to-screen measurement never sees it.
+ * The scene behind an OKR page. A fixed canvas at z-index -1 inside the page's
+ * own stacking context: above the page background, below every panel, and out
+ * of the flow so the dashboard's fit-to-screen measurement never sees it.
  */
 export function BoardBackdrop3D({
   dark,
@@ -879,7 +729,253 @@ export function StatusDonut3D({
   });
   const ready = state === 'ready';
   return (
-    <div style={S.donutBox}>
+    <div style={{ ...S.box, width: 140, height: 140 }}>
+      <div style={{ ...S.layer, opacity: ready ? 0 : 1 }}>{fallback}</div>
+      {state === 'failed' ? null : (
+        <canvas
+          key={buildKey}
+          ref={ref}
+          aria-hidden="true"
+          style={{ ...S.layer, opacity: ready ? 1 : 0 }}
+        />
+      )}
+    </div>
+  );
+}
+
+// ---- the objective gauge --------------------------------------------------
+interface GaugeData {
+  /** Progress, 0..100. */
+  value: number;
+  color: string;
+  dark: boolean;
+}
+
+const GAUGE_RADIUS = 1;
+const GAUGE_TUBE = 0.1;
+// Leaned back just enough to read as a solid ring, while the number in its
+// middle stays square-on and easy to read.
+const GAUGE_TILT = -0.3;
+const GAUGE_FILL_S = 1.1; // how long the ring takes to fill to its value
+const TWELVE_O_CLOCK = Math.PI / 2;
+
+const createGauge: SceneFactory<GaugeData> = ({
+  THREE,
+  RoomEnvironment,
+  renderer,
+  data,
+  still,
+}) => {
+  const { dark } = data;
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 50);
+  camera.position.set(0, 0, 4.7);
+
+  const env = studioEnvironment(THREE, RoomEnvironment, renderer);
+  scene.environment = env;
+  scene.add(new THREE.AmbientLight(0xffffff, 0.45));
+  const key = new THREE.DirectionalLight(0xffffff, 2.2);
+  key.position.set(2.5, 3.5, 5);
+  const rim = new THREE.DirectionalLight(0xffffff, 1);
+  rim.position.set(-4, -2, -3);
+  scene.add(key, rim);
+
+  const tilt = new THREE.Group();
+  tilt.rotation.x = GAUGE_TILT;
+  scene.add(tilt);
+
+  // The groove the progress runs in.
+  const track = new THREE.Mesh(
+    new THREE.TorusGeometry(GAUGE_RADIUS, GAUGE_TUBE * 0.7, 16, 160),
+    new THREE.MeshPhysicalMaterial({
+      color: dark ? '#2b3038' : '#dfe2e7',
+      roughness: 0.55,
+      metalness: 0.05,
+      clearcoat: 0.4,
+    })
+  );
+  track.position.z = -0.04;
+  tilt.add(track);
+
+  // A soft ring of shadow behind, so the gauge stands off the panel. Like the
+  // donut's, it fades out well inside the canvas.
+  const shadowTex = radialTexture(THREE, [
+    [0, 'rgba(0,0,0,0)'],
+    [0.55, 'rgba(0,0,0,0)'],
+    [0.74, 'rgba(0,0,0,0.8)'],
+    [0.84, 'rgba(0,0,0,0.25)'],
+    [0.92, 'rgba(0,0,0,0)'],
+    [1, 'rgba(0,0,0,0)'],
+  ]);
+  const shadow = new THREE.Mesh(
+    new THREE.PlaneGeometry(2.6, 2.6),
+    new THREE.MeshBasicMaterial({
+      map: shadowTex,
+      transparent: true,
+      opacity: dark ? 0.55 : 0.2,
+      depthWrite: false,
+    })
+  );
+  shadow.position.set(0, -0.1, -0.3);
+  tilt.add(shadow);
+
+  // The progress: a lit tube from 12 o'clock, clockwise, with a round tail
+  // where it starts and a glowing bead where it has got to.
+  const arcMat = new THREE.MeshPhysicalMaterial({
+    color: data.color,
+    emissive: data.color,
+    emissiveIntensity: dark ? 0.15 : 0.05,
+    roughness: 0.22,
+    metalness: 0.1,
+    clearcoat: 1,
+    clearcoatRoughness: 0.1,
+  });
+  const arc = new THREE.Mesh(new THREE.BufferGeometry(), arcMat);
+  const tail = new THREE.Mesh(
+    new THREE.SphereGeometry(GAUGE_TUBE, 24, 16),
+    arcMat
+  );
+  tail.position.set(0, GAUGE_RADIUS, 0);
+  const beadMat = new THREE.MeshPhysicalMaterial({
+    color: data.color,
+    emissive: data.color,
+    emissiveIntensity: dark ? 0.6 : 0.3,
+    roughness: 0.15,
+    clearcoat: 1,
+  });
+  const bead = new THREE.Mesh(
+    new THREE.SphereGeometry(GAUGE_TUBE * 1.45, 32, 20),
+    beadMat
+  );
+  const glowTex = radialTexture(
+    THREE,
+    [
+      [0, 'rgba(255,255,255,1)'],
+      [0.3, 'rgba(255,255,255,0.4)'],
+      [1, 'rgba(255,255,255,0)'],
+    ],
+    64
+  );
+  const glowOpacity = dark ? 0.9 : 0.5;
+  const glowMat = new THREE.SpriteMaterial({
+    map: glowTex,
+    color: data.color,
+    transparent: true,
+    opacity: glowOpacity,
+    depthWrite: false,
+    blending: dark ? THREE.AdditiveBlending : THREE.NormalBlending,
+  });
+  const glow = new THREE.Sprite(glowMat);
+  glow.scale.setScalar(0.8);
+  tilt.add(arc, tail, bead, glow);
+
+  const fraction = (value: number) => Math.max(0, Math.min(1, value / 100));
+  let shown = 0;
+  let from = 0;
+  let to = fraction(data.value);
+  let fillFrom = -1; // when the current fill started; -1 = next frame
+  let filling = true;
+
+  const draw = (f: number) => {
+    shown = f;
+    const visible = f > 0.002;
+    arc.visible = tail.visible = bead.visible = glow.visible = visible;
+    if (!visible) return;
+    const sweep = f * Math.PI * 2;
+    arc.geometry.dispose();
+    arc.geometry = new THREE.TorusGeometry(
+      GAUGE_RADIUS,
+      GAUGE_TUBE,
+      20,
+      Math.max(8, Math.ceil(180 * f)),
+      sweep
+    );
+    // A torus arc runs anticlockwise from 3 o'clock. Turned to end at 12, it
+    // reads as running clockwise from 12 - the way the flat gauge fills.
+    const tip = TWELVE_O_CLOCK - sweep;
+    arc.rotation.z = tip;
+    bead.position.set(
+      Math.cos(tip) * GAUGE_RADIUS,
+      Math.sin(tip) * GAUGE_RADIUS,
+      0
+    );
+    glow.position.set(bead.position.x, bead.position.y, 0.06);
+  };
+
+  return {
+    frame(t) {
+      if (filling) {
+        if (fillFrom < 0) fillFrom = t;
+        const g = still ? 1 : Math.min(1, (t - fillFrom) / GAUGE_FILL_S);
+        draw(from + (to - from) * (1 - Math.pow(1 - g, 3)));
+        if (g >= 1) filling = false;
+      }
+      if (!still) {
+        tilt.rotation.x = GAUGE_TILT + Math.sin(t * 0.6) * 0.04;
+        tilt.rotation.y = Math.sin(t * 0.45) * 0.08;
+        glowMat.opacity = glowOpacity * (0.8 + 0.2 * Math.sin(t * 2.2));
+      }
+      renderer.render(scene, camera);
+    },
+    resize(w, h) {
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    },
+    update(next) {
+      arcMat.color.set(next.color);
+      arcMat.emissive.set(next.color);
+      beadMat.color.set(next.color);
+      beadMat.emissive.set(next.color);
+      glowMat.color.set(next.color);
+      const target = fraction(next.value);
+      if (target !== to) {
+        from = shown;
+        to = target;
+        fillFrom = -1;
+        filling = true;
+      }
+    },
+    dispose() {
+      disposeTree(scene);
+      shadowTex.dispose();
+      glowTex.dispose();
+      env.dispose();
+    },
+  };
+};
+
+/**
+ * An objective's progress as a lit 3D ring - same footprint as the flat
+ * gauge, which shows until this one is ready and stays if it never is. The
+ * number in the middle is the caller's to lay over the top as plain text, so
+ * it stays crisp.
+ */
+export function ProgressGauge3D({
+  value,
+  color,
+  dark,
+  size = 180,
+  fallback,
+}: {
+  value: number;
+  color: string;
+  dark: boolean;
+  size?: number;
+  fallback: ReactNode;
+}) {
+  const ref = useRef<HTMLCanvasElement>(null);
+  const data = useMemo(() => ({ value, color, dark }), [value, color, dark]);
+  const buildKey = dark ? 'dark' : 'light';
+  const state = useThreeScene(ref, createGauge, {
+    data,
+    paused: false,
+    fps: 30,
+    maxPixelRatio: 2,
+    buildKey,
+  });
+  const ready = state === 'ready';
+  return (
+    <div style={{ ...S.box, width: size, height: size }}>
       <div style={{ ...S.layer, opacity: ready ? 0 : 1 }}>{fallback}</div>
       {state === 'failed' ? null : (
         <canvas
@@ -937,7 +1033,7 @@ const S: Record<string, CSSProperties> = {
     pointerEvents: 'none',
     transition: 'opacity 1.2s ease',
   },
-  donutBox: { position: 'relative', width: 140, height: 140, flexShrink: 0 },
+  box: { position: 'relative', flexShrink: 0 },
   layer: {
     position: 'absolute',
     inset: 0,

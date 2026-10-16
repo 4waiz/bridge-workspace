@@ -1,7 +1,14 @@
-import { type CSSProperties, type ReactNode, useEffect, useState } from 'react';
+import {
+  type CSSProperties,
+  type ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { OKR_OBJECTIVE_ZOOM, usePageZoom } from '../../../utils/app-zoom';
+import { ProgressGauge3D, useSurfaceTone } from '../okr-dashboard/okr-3d';
 import {
   fetchObjectiveDetail,
   type KeyResult,
@@ -12,6 +19,15 @@ import {
   STATUS_LABEL,
   statusFromProgress,
 } from '../okr-dashboard/okr-data';
+import {
+  Glare,
+  GLASS,
+  GLASS_DEEP,
+  Rim,
+  riseIn,
+  Tube,
+  useTilt,
+} from '../okr-dashboard/okr-glass';
 
 const T = {
   bg: 'var(--affine-background-primary-color, #0b0d10)',
@@ -20,6 +36,8 @@ const T = {
   text: 'var(--affine-text-primary-color, #e8eaed)',
   sub: 'var(--affine-text-secondary-color, #9aa3b2)',
   track: 'var(--affine-hover-color, rgba(255,255,255,0.07))',
+  glass: GLASS,
+  glassDeep: GLASS_DEEP,
 };
 
 function rgba(hex: string, a: number): string {
@@ -30,18 +48,25 @@ function rgba(hex: string, a: number): string {
 const clamp = (n: number) => Math.max(0, Math.min(100, Math.round(n)));
 
 /**
- * A Key Result's progress drawn as a bar, matching the objective rows above.
- * Percentage is Current / Target - the same figure the Excel workbook computes
- * with =Current/Target - so target 2 / current 1 reads 50%.
- *
- * The number is NOT capped, so beating a target reads 125%; only the bar's
- * width is clamped, since it cannot draw past its track.
+ * A Key Result's progress, Current / Target - the same figure the Excel
+ * workbook computes with =Current/Target, so target 2 / current 1 reads 50%.
+ * Not capped: beating a target reads 125%. Null when the KR has no numbers.
  */
-function KrBar({ kr }: { kr: KeyResult }) {
+function krPercent(kr: KeyResult): number | null {
   const n = krNumbers(kr);
   if (!n.target && !n.current) return null;
+  return n.target ? (n.current / n.target) * 100 : n.current > 0 ? 100 : 0;
+}
 
-  const raw = n.target ? (n.current / n.target) * 100 : n.current > 0 ? 100 : 0;
+/**
+ * A Key Result's progress drawn as a bar, matching the objective rows above.
+ * Only the bar's width is clamped, since it cannot draw past its track.
+ */
+function KrBar({ kr }: { kr: KeyResult }) {
+  const raw = krPercent(kr);
+  if (raw === null) return null;
+
+  const n = krNumbers(kr);
   const pct = Math.round(raw);
   const c = STATUS_COLOR[statusFromProgress(clamp(raw))];
   const unit = n.unit ? ` ${n.unit}` : '';
@@ -55,33 +80,22 @@ function KrBar({ kr }: { kr: KeyResult }) {
         </span>
         <span style={{ fontWeight: 800, color: c }}>{pct}%</span>
       </div>
-      <div style={{ ...S.track, background: T.track }}>
-        <div
-          style={{
-            width: `${clamp(raw)}%`,
-            height: '100%',
-            borderRadius: 5,
-            background: c,
-            boxShadow: `0 0 8px ${rgba(c, 0.5)}`,
-          }}
-        />
-      </div>
+      <Tube value={clamp(raw)} color={c} height={10} />
     </div>
   );
 }
 
 // ---- radial gauge ---------------------------------------------------------
-function Gauge({ value, color }: { value: number; color: string }) {
+/** The flat ring: what shows until the 3D gauge is ready, or instead of it. */
+function GaugeRing({ value, color }: { value: number; color: string }) {
   const r = 76;
   const cx = 90;
   const cy = 90;
   const sw = 16;
   const circ = 2 * Math.PI * r;
-  const pct = clamp(value);
-  const dash = (pct / 100) * circ;
-  const st = statusFromProgress(pct);
+  const dash = (value / 100) * circ;
   return (
-    <svg width={180} height={180} viewBox="0 0 180 180">
+    <svg width={180} height={180} viewBox="0 0 180 180" aria-hidden="true">
       <circle
         cx={cx}
         cy={cy}
@@ -101,27 +115,75 @@ function Gauge({ value, color }: { value: number; color: string }) {
         strokeDasharray={`${dash} ${circ - dash}`}
         transform={`rotate(-90 ${cx} ${cy})`}
       />
-      <text
-        x={cx}
-        y={cy - 2}
-        textAnchor="middle"
-        fontSize="40"
-        fontWeight="800"
-        fill="currentColor"
-      >
-        {pct}%
-      </text>
-      <text
-        x={cx}
-        y={cy + 24}
-        textAnchor="middle"
-        fontSize="13"
-        fontWeight="700"
-        fill={color}
-      >
-        {STATUS_LABEL[st]}
-      </text>
     </svg>
+  );
+}
+
+/**
+ * The objective's progress as a 3D ring, with the number laid over it as
+ * plain text so it stays crisp at any scale.
+ */
+function Gauge({
+  value,
+  color,
+  dark,
+}: {
+  value: number;
+  color: string;
+  dark: boolean;
+}) {
+  const pct = clamp(value);
+  const st = statusFromProgress(pct);
+  return (
+    <div style={S.gauge}>
+      <ProgressGauge3D
+        value={pct}
+        color={color}
+        dark={dark}
+        fallback={<GaugeRing value={pct} color={color} />}
+      />
+      <div style={S.gaugeLabel}>
+        <div
+          style={{
+            ...S.gaugePct,
+            textShadow: `0 2px 16px ${rgba(color, 0.3)}`,
+          }}
+        >
+          {pct}%
+        </div>
+        <div style={{ ...S.gaugeStatus, color }}>{STATUS_LABEL[st]}</div>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * A frosted panel over the 3D scene, lit along its top edge by `accent`.
+ * Under a mouse it leans towards the pointer and catches a highlight.
+ */
+function GlassPanel({
+  accent,
+  index,
+  style,
+  children,
+}: {
+  accent?: string;
+  /** Position on the page - staggers the entrance. */
+  index: number;
+  style?: CSSProperties;
+  children: ReactNode;
+}) {
+  const tilt = useTilt<HTMLDivElement>(2.5);
+  return (
+    <div
+      {...tilt}
+      // borderColor after `style`: a `border` shorthand in it would reset it.
+      style={{ ...S.glass, ...style, borderColor: T.border, ...riseIn(index) }}
+    >
+      <Glare />
+      {accent ? <Rim color={accent} /> : null}
+      {children}
+    </div>
   );
 }
 
@@ -140,6 +202,9 @@ export function OkrObjectiveDetail() {
   const { objectiveId } = useParams();
   const [data, setData] = useState<ObjectiveDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+  // The 3D gauge is lit to suit the theme, the same as the dashboard's donut.
+  const tone = useSurfaceTone(rootRef);
 
   useEffect(() => {
     if (!objectiveId) return;
@@ -170,7 +235,7 @@ export function OkrObjectiveDetail() {
   const delta = data ? progress - data.teamProgress : 0;
 
   return (
-    <div style={{ ...S.root, background: T.bg, color: T.text }}>
+    <div ref={rootRef} style={{ ...S.root, background: T.bg, color: T.text }}>
       <button style={S.close} onClick={() => navigate(-1)} title="Back (Esc)">
         ✕
       </button>
@@ -199,28 +264,27 @@ export function OkrObjectiveDetail() {
 
           {/* gauge + status */}
           <div style={S.topGrid}>
-            <div
-              style={{
-                ...S.panel,
-                background: T.card,
-                borderColor: T.border,
-                display: 'grid',
-                placeItems: 'center',
-              }}
+            <GlassPanel
+              accent={color}
+              index={0}
+              style={{ ...S.panel, display: 'grid', placeItems: 'center' }}
             >
-              <Gauge value={progress} color={color} />
-            </div>
-            <div
-              style={{
-                ...S.panel,
-                background: T.card,
-                borderColor: T.border,
-                flex: 1,
-              }}
+              <Gauge value={progress} color={color} dark={tone.dark} />
+            </GlassPanel>
+            <GlassPanel
+              accent={color}
+              index={1}
+              style={{ ...S.panel, flex: 1 }}
             >
               <div style={{ ...S.kicker, color: T.sub }}>STATUS</div>
               <div
-                style={{ fontSize: 24, fontWeight: 800, color, marginTop: 4 }}
+                style={{
+                  fontSize: 24,
+                  fontWeight: 800,
+                  color,
+                  marginTop: 4,
+                  textShadow: `0 0 18px ${rgba(color, 0.35)}`,
+                }}
               >
                 {STATUS_LABEL[status]}
               </div>
@@ -241,7 +305,7 @@ export function OkrObjectiveDetail() {
                   ? `+${delta} pts above team average`
                   : `${delta} pts below team average`}
               </div>
-            </div>
+            </GlassPanel>
           </div>
 
           {/* siblings comparison */}
@@ -266,24 +330,15 @@ export function OkrObjectiveDetail() {
                     </span>
                     <span style={{ fontWeight: 700 }}>{pct}%</span>
                   </div>
-                  <div
-                    style={{
-                      ...S.track,
-                      background: T.track,
+                  <Tube
+                    value={pct}
+                    color={c}
+                    height={10}
+                    trackStyle={{
                       outline: me ? `2px solid ${rgba(c, 0.6)}` : 'none',
                       outlineOffset: 1,
                     }}
-                  >
-                    <div
-                      style={{
-                        width: `${pct}%`,
-                        height: '100%',
-                        borderRadius: 5,
-                        background: c,
-                        boxShadow: `0 0 8px ${rgba(c, 0.5)}`,
-                      }}
-                    />
-                  </div>
+                  />
                 </div>
               );
             })}
@@ -295,47 +350,44 @@ export function OkrObjectiveDetail() {
           <Section title="Key Results">
             {data.keyResults.length ? (
               <div style={S.cardsGrid}>
-                {data.keyResults.map(kr => (
-                  <div
-                    key={kr.id}
-                    style={{
-                      ...S.miniCard,
-                      background: T.card,
-                      borderColor: T.border,
-                    }}
-                  >
-                    <div style={{ fontSize: 14 }}>{kr.description}</div>
-                    <KrBar kr={kr} />
-                  </div>
-                ))}
+                {data.keyResults.map((kr, i) => {
+                  const raw = krPercent(kr);
+                  return (
+                    <GlassPanel
+                      key={kr.id}
+                      index={2 + i}
+                      accent={
+                        raw === null
+                          ? undefined
+                          : STATUS_COLOR[statusFromProgress(clamp(raw))]
+                      }
+                      style={S.miniCard}
+                    >
+                      <div style={{ fontSize: 14 }}>{kr.description}</div>
+                      <KrBar kr={kr} />
+                    </GlassPanel>
+                  );
+                })}
               </div>
             ) : (
-              <div
-                style={{
-                  ...S.miniCard,
-                  background: T.card,
-                  borderColor: T.border,
-                  color: T.sub,
-                  fontSize: 13.5,
-                }}
+              <GlassPanel
+                index={2}
+                style={{ ...S.miniCard, color: T.sub, fontSize: 13.5 }}
               >
                 No Key Results stored for this objective yet. Add them in the
                 OKR editor, or import the team&apos;s Excel workbook.
-              </div>
+              </GlassPanel>
             )}
           </Section>
 
           {data.initiatives.length ? (
             <Section title="Initiatives">
               <div style={S.cardsGrid}>
-                {data.initiatives.map(it => (
-                  <div
+                {data.initiatives.map((it, i) => (
+                  <GlassPanel
                     key={it.id}
-                    style={{
-                      ...S.miniCard,
-                      background: T.card,
-                      borderColor: T.border,
-                    }}
+                    index={2 + data.keyResults.length + i}
+                    style={S.miniCard}
                   >
                     <div style={{ fontSize: 14 }}>{it.description}</div>
                     {it.owner ? (
@@ -345,7 +397,7 @@ export function OkrObjectiveDetail() {
                         Owner: {it.owner}
                       </div>
                     ) : null}
-                  </div>
+                  </GlassPanel>
                 ))}
               </div>
             </Section>
@@ -377,16 +429,7 @@ function Bar({
         <span style={{ fontSize: 13 }}>{label}</span>
         <span style={{ fontWeight: 700, fontSize: 13 }}>{pct}%</span>
       </div>
-      <div style={{ ...S.track, background: T.track }}>
-        <div
-          style={{
-            width: `${pct}%`,
-            height: '100%',
-            borderRadius: 5,
-            background: color,
-          }}
-        />
-      </div>
+      <Tube value={pct} color={color} height={10} />
     </div>
   );
 }
@@ -412,7 +455,10 @@ const S: Record<string, CSSProperties> = {
     height: 34,
     borderRadius: 8,
     border: `1px solid ${T.border}`,
-    background: 'transparent',
+    background: T.glass,
+    backdropFilter: 'blur(10px)',
+    WebkitBackdropFilter: 'blur(10px)',
+    boxShadow: '0 8px 20px -10px rgba(0,0,0,0.6)',
     color: 'inherit',
     fontSize: 15,
     cursor: 'pointer',
@@ -442,12 +488,35 @@ const S: Record<string, CSSProperties> = {
     letterSpacing: -0.3,
   },
   topGrid: { display: 'flex', gap: 18, flexWrap: 'wrap' },
+  // Glass under every panel, the dashboard's look: a lit top edge and a soft
+  // shadow below lift it off the page.
+  glass: {
+    background: `linear-gradient(160deg, ${T.glass} 0%, ${T.glassDeep} 100%)`,
+    backdropFilter: 'blur(8px) saturate(120%)',
+    WebkitBackdropFilter: 'blur(8px) saturate(120%)',
+    boxShadow:
+      'inset 0 1px 0 rgba(255,255,255,0.07), 0 2px 6px rgba(0,0,0,0.1), 0 22px 44px -26px rgba(0,0,0,0.55)',
+    position: 'relative',
+    transition: 'transform .35s ease',
+  },
   panel: {
     border: '1px solid',
     borderRadius: 16,
     padding: 22,
     minWidth: 220,
   },
+  gauge: { position: 'relative', width: 180, height: 180 },
+  gaugeLabel: {
+    position: 'absolute',
+    inset: 0,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    pointerEvents: 'none',
+  },
+  gaugePct: { fontSize: 40, fontWeight: 800, lineHeight: 1 },
+  gaugeStatus: { fontSize: 13, fontWeight: 700, marginTop: 8 },
   kicker: { fontSize: 12, fontWeight: 800, letterSpacing: 1.5 },
   sectionTitle: {
     fontSize: 13,
@@ -469,7 +538,6 @@ const S: Record<string, CSSProperties> = {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
   },
-  track: { height: 10, borderRadius: 5, overflow: 'hidden' },
   cardsGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
@@ -478,9 +546,13 @@ const S: Record<string, CSSProperties> = {
   miniCard: { border: '1px solid', borderRadius: 12, padding: 16 },
   editLink: {
     marginTop: 26,
-    background: 'transparent',
+    background: T.glass,
+    backdropFilter: 'blur(10px)',
+    WebkitBackdropFilter: 'blur(10px)',
     border: `1px solid ${T.border}`,
     borderRadius: 10,
+    boxShadow:
+      'inset 0 1px 0 rgba(255,255,255,0.08), 0 10px 24px -14px rgba(0,0,0,0.55)',
     color: 'inherit',
     padding: '10px 16px',
     fontSize: 14,

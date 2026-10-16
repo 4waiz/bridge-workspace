@@ -1,7 +1,6 @@
 import {
   Children,
   type CSSProperties,
-  type PointerEvent as ReactPointerEvent,
   type ReactNode,
   useCallback,
   useEffect,
@@ -13,6 +12,15 @@ import { useNavigate } from 'react-router-dom';
 import { OKR_DASHBOARD_ZOOM, useFitPageZoom } from '../../../utils/app-zoom';
 import { BusinessOpsOverlay } from './business-ops-overlay';
 import { BoardBackdrop3D, StatusDonut3D, useSurfaceTone } from './okr-3d';
+import {
+  Glare,
+  GLASS,
+  GLASS_DEEP,
+  Rim,
+  riseIn,
+  Tube,
+  useTilt,
+} from './okr-glass';
 import {
   CURRENT_QUARTER,
   CURRENT_YEAR,
@@ -40,20 +48,9 @@ const T = {
   text: 'var(--affine-text-primary-color, #e8eaed)',
   sub: 'var(--affine-text-secondary-color, #9aa3b2)',
   track: 'var(--affine-hover-color, rgba(255,255,255,0.07))',
-  // The card colour, part see-through, so the 3D scene glows behind the glass:
-  // dense where the text is, clearer further down where a card is empty.
-  glass:
-    'color-mix(in srgb, var(--affine-background-overlay-panel-color, #14171c) 86%, transparent)',
-  glassDeep:
-    'color-mix(in srgb, var(--affine-background-overlay-panel-color, #14171c) 52%, transparent)',
+  glass: GLASS,
+  glassDeep: GLASS_DEEP,
 };
-
-/** Light from above on a rounded surface: a highlight up top, shade beneath. */
-const GLOSS =
-  'linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.12) 40%, rgba(255,255,255,0) 55%, rgba(0,0,0,0.22) 100%)';
-
-/** Most a card leans under the mouse, in degrees. */
-const TILT_DEG = 3.5;
 
 function rgba(hex: string, a: number): string {
   const h = hex.replace('#', '');
@@ -108,30 +105,6 @@ function Badge({ status, progress }: { status: Status; progress: number }) {
   );
 }
 
-// ---- progress tube ----------------------------------------------------------
-/**
- * A progress bar drawn as a lit glass tube sunk into a groove. `color` may be
- * a CSS var (the "expected" bar uses the theme's secondary text colour), in
- * which case it simply goes without the glow.
- */
-function Tube({ value, color }: { value: number; color: string }) {
-  const hex = color.startsWith('#');
-  return (
-    <div style={{ ...S.track, background: T.track }}>
-      <div
-        style={{
-          ...S.tubeFill,
-          width: `${value}%`,
-          background: `${GLOSS}, ${color}`,
-          boxShadow: hex
-            ? `0 0 10px ${rgba(color, 0.55)}, 0 0 2px ${rgba(color, 0.9)}`
-            : 'none',
-        }}
-      />
-    </div>
-  );
-}
-
 // ---- glass card -------------------------------------------------------------
 /**
  * Every panel on the board: frosted glass over the 3D scene, with a rim of
@@ -149,50 +122,14 @@ function GlassCard({
   index: number;
   children: ReactNode;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  // Straight to the DOM: re-rendering the card on every mouse move would be
-  // pointless work for a purely visual effect.
-  const onPointerMove = (e: ReactPointerEvent<HTMLDivElement>) => {
-    const el = ref.current;
-    if (!el || e.pointerType !== 'mouse') return;
-    const r = el.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width;
-    const y = (e.clientY - r.top) / r.height;
-    el.style.transform = `perspective(1100px) rotateX(${(0.5 - y) * TILT_DEG * 2}deg) rotateY(${(x - 0.5) * TILT_DEG * 2}deg)`;
-    el.style.setProperty('--glare-x', `${x * 100}%`);
-    el.style.setProperty('--glare-y', `${y * 100}%`);
-    el.style.setProperty('--glare-o', '1');
-  };
-  const onPointerLeave = () => {
-    const el = ref.current;
-    if (!el) return;
-    el.style.transform = '';
-    el.style.setProperty('--glare-o', '0');
-  };
-
+  const tilt = useTilt<HTMLDivElement>();
   return (
     <div
-      ref={ref}
-      style={{
-        ...S.card,
-        borderColor: T.border,
-        animationDelay: `${index * 45}ms`,
-      }}
-      onPointerMove={onPointerMove}
-      onPointerLeave={onPointerLeave}
+      {...tilt}
+      style={{ ...S.card, borderColor: T.border, ...riseIn(index) }}
     >
-      <div aria-hidden="true" style={S.glare} />
-      {accent ? (
-        <div
-          aria-hidden="true"
-          style={{
-            ...S.rim,
-            background: `linear-gradient(90deg, transparent, ${accent}, transparent)`,
-            boxShadow: `0 0 14px ${rgba(accent, 0.8)}`,
-          }}
-        />
-      ) : null}
+      <Glare />
+      {accent ? <Rim color={accent} /> : null}
       {children}
     </div>
   );
@@ -820,12 +757,12 @@ const S: Record<string, CSSProperties> = {
   // stays a plain card wherever it is used.
   cell: { display: 'flex', minWidth: 0 },
   card: {
-    // Frosted glass: the 3D scene shows through, blurred, so it adds depth
-    // without ever sitting sharp behind the text - which is why the glass
-    // stays dense over the top third, where the objectives are.
+    // Frosted glass: the scene's light shows through, blurred, so it adds
+    // depth without ever sitting sharp behind the text - which is why the
+    // glass stays dense over the top third, where the objectives are.
     background: `linear-gradient(180deg, ${T.glass} 0%, ${T.glass} 34%, ${T.glassDeep} 100%)`,
-    backdropFilter: 'blur(4px) saturate(120%)',
-    WebkitBackdropFilter: 'blur(4px) saturate(120%)',
+    backdropFilter: 'blur(8px) saturate(120%)',
+    WebkitBackdropFilter: 'blur(8px) saturate(120%)',
     border: '1px solid',
     borderRadius: 16,
     padding: 20,
@@ -834,37 +771,12 @@ const S: Record<string, CSSProperties> = {
       'inset 0 1px 0 rgba(255,255,255,0.07), 0 2px 6px rgba(0,0,0,0.12), 0 26px 50px -28px rgba(0,0,0,0.65)',
     position: 'relative',
     transition: 'transform .35s ease',
-    // Rises into place on first paint. `backwards`, not `both`: a held final
-    // frame would pin the transform and stop the hover tilt.
-    animationName: 'okrrise',
-    animationDuration: '.7s',
-    animationTimingFunction: 'cubic-bezier(.2,.8,.2,1)',
-    animationFillMode: 'backwards',
     // Fill the cell, whether that cell spans one column or several.
     flex: 1,
     minWidth: 0,
     // Column so a card can push its footer to the bottom of the stretched row.
     display: 'flex',
     flexDirection: 'column',
-  },
-  glare: {
-    position: 'absolute',
-    inset: 0,
-    borderRadius: 'inherit',
-    pointerEvents: 'none',
-    background:
-      'radial-gradient(380px circle at var(--glare-x, 50%) var(--glare-y, 0%), rgba(255,255,255,0.08), transparent 45%)',
-    opacity: 'var(--glare-o, 0)',
-    transition: 'opacity .3s ease',
-  },
-  rim: {
-    position: 'absolute',
-    top: -1,
-    left: 18,
-    right: 18,
-    height: 2,
-    borderRadius: 2,
-    pointerEvents: 'none',
   },
   leader: {
     marginTop: 'auto',
@@ -915,15 +827,6 @@ const S: Record<string, CSSProperties> = {
     lineHeight: 1.3,
   },
   objPct: { fontSize: 14, fontWeight: 700, flexShrink: 0 },
-  // A groove the tube sits in.
-  track: {
-    height: 9,
-    borderRadius: 5,
-    overflow: 'hidden',
-    boxShadow:
-      'inset 0 1px 2px rgba(0,0,0,0.35), inset 0 -1px 0 rgba(255,255,255,0.05)',
-  },
-  tubeFill: { height: '100%', borderRadius: 5, transition: 'width .4s ease' },
   emptyCard: { fontSize: 13, opacity: 0.6, padding: '12px 0' },
   overviewTitle: {
     fontSize: 13,
